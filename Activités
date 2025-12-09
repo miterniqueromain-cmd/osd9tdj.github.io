@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos activités – O.S.D.9.T.D.J.</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --or: #ffd700;
+            --or-fonce: #d6a728;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Lato', Arial, sans-serif;
+            color: #fdf7e5;
+            text-align: center;
+            min-height: 100vh;
+            background: radial-gradient(circle at top,
+                                        #191919,
+                                        #050506 70%);
+        }
+
+        .container {
+            min-height: 100vh;
+            box-sizing: border-box;
+            padding: 35px 15px 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-box {
+            padding: 20px;
+            border-radius: 20px;
+            background: radial-gradient(circle at top,
+                                        rgba(255, 215, 0, 0.25),
+                                        rgba(0, 0, 0, 0.95));
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--or-fonce);
+            margin-bottom: 25px;
+        }
+
+        .logo-img {
+            max-width: 90vw;
+            width: 520px;
+            height: auto;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            margin: 5px 0 15px;
+        }
+
+        p {
+            max-width: 700px;
+            margin: 6px auto;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        em {
+            font-family: 'Cinzel', serif;
+        }
+
+        .back-link {
+            margin-top: 25px;
+            text-decoration: none;
+            color: #fdf7e5;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: 1px solid var(--or-fonce);
+            background: transparent;
+            transition: background 0.2s ease, color 0.2s ease;
+            font-family: 'Cinzel', serif;
+        }
+
+        .back-link:hover {
+            background: var(--or-fonce);
+            color: #1a1205;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="logo-box">
+        <img src="logo-ix.PNG"
+             alt="Emblème de l’Ordre Sacré des Neuf Templiers de Jérusalem"
+             class="logo-img">
+    </div>
+
+    <h1>Nos activités</h1>
+
+    <p>Cette section «&nbsp;Nos activités&nbsp;» est actuellement en construction.</p>
+    <p>Elle sera mise en ligne très prochainement, dès que notre espace dédié sera ouvert auprès de notre établissement bancaire.</p>
+    <p>Nous vous remercions sincèrement pour votre patience et votre confiance.</p>
+    <p><em>In Veritate et Honore.</em></p>
+
+    <a href="index.html" class="back-link">← Retour à la page d’accueil</a>
+</div>
+</body>
+</html>
