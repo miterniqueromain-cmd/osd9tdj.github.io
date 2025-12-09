@@ -5,39 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ordre Sacré des Neuf Templiers de Jérusalem</title>
 
+    <meta name="description"
+          content="Site officiel de l’O.S.D.9.T.D.J. – Ordre Sacré des Neuf Templiers de Jérusalem.">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
     <style>
-        /* --- Fond général --- */
+        :root {
+            --or: #ffd700;
+            --clair: #fdf7e5;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background: url('drapeau-osd9tdj.jpg.PNG') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
+            font-family: 'Lato', Arial, sans-serif;
+            color: #ffffff;
             text-align: center;
+            min-height: 100vh;
+            background: #000000;
         }
 
-        /* --- Voile sombre pour la lisibilité --- */
+        /* Fond drapeau */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: url("drapeau-osd9tdj.PNG") no-repeat center center fixed;
+            background-size: cover;
+            z-index: -2;
+        }
+
         .overlay {
-            background: rgba(0, 0, 0, 0.55);
             min-height: 100vh;
-            padding: 30px 15px;
+            padding: 30px 15px 20px;
+            box-sizing: border-box;
+            background: radial-gradient(circle at top,
+                                        rgba(0, 0, 0, 0.25),
+                                        rgba(0, 0, 0, 0.85));
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
         }
 
-        /* --- Bloc prestige du blason --- */
+        /* Onglets */
+        .tabs {
+            margin-top: 15px;
+            margin-bottom: 25px;
+            display: inline-flex;
+            border-radius: 999px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 215, 0, 0.6);
+            backdrop-filter: blur(6px);
+        }
+
+        .tab {
+            padding: 10px 18px;
+            text-decoration: none;
+            color: var(--clair);
+            font-size: 0.95rem;
+            font-weight: 700;
+            font-family: 'Cinzel', serif;
+            background: rgba(0, 0, 0, 0.45);
+            transition: background 0.2s ease, color 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .tab + .tab {
+            border-left: 1px solid rgba(255, 215, 0, 0.4);
+        }
+
+        .tab:hover {
+            background: rgba(255, 215, 0, 0.20);
+            color: #ffffff;
+        }
+
+        /* Blason */
         .blason-box {
             display: inline-block;
             padding: 18px;
-            margin-bottom: 25px;
-            background: radial-gradient(circle at top, rgba(255, 215, 0, 0.35), rgba(0, 0, 0, 0.8));
-            border: 2px solid #ffd700;
+            margin-top: 25px;
+            margin-bottom: 18px;
+            background: radial-gradient(circle at top,
+                                        rgba(255, 215, 0, 0.35),
+                                        rgba(0, 0, 0, 0.95));
+            border: 2px solid var(--or);
             border-radius: 18px;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 28px rgba(0, 0, 0, 0.8);
         }
 
         .blason-img {
@@ -47,91 +102,71 @@
             display: block;
         }
 
-        /* --- Titres et textes --- */
         h1 {
-            font-size: 1.9em;
-            margin: 0 0 10px 0;
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            margin: 10px 0 6px;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
         }
 
-        h2 {
-            font-size: 1.2em;
-            font-weight: normal;
-            margin: 0 0 18px 0;
+        .subtitle {
+            font-size: 1rem;
+            margin: 0 0 15px;
+            opacity: 0.95;
         }
 
-        p {
-            margin: 6px 0;
-            font-size: 1em;
-        }
-
-        /* --- Email de contact --- */
-        .email {
-            margin-top: 12px;
-            margin-bottom: 25px;
-        }
-
-        .email a {
-            color: #ffd700;
-            font-weight: bold;
-            font-size: 1.15em;
-            text-decoration: none;
-        }
-
-        .email a:hover {
-            text-decoration: underline;
-        }
-
-        /* --- Footer --- */
         .footer {
-            margin-top: 35px;
-            font-size: 0.85em;
+            margin-top: auto;
+            padding-top: 15px;
+            font-size: 0.8rem;
             opacity: 0.9;
         }
 
-        /* --- Adaptation mobile --- */
+        .footer .legal-line {
+            font-size: 0.7rem;
+            opacity: 0.85;
+        }
+
         @media (max-width: 480px) {
             h1 {
-                font-size: 1.6em;
+                font-size: 1.6rem;
             }
-
-            h2 {
-                font-size: 1.05em;
+            .subtitle {
+                font-size: 0.95rem;
             }
-
-            p {
-                font-size: 0.95em;
+            .tab {
+                padding: 8px 12px;
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="overlay">
+<div class="overlay">
 
-        <!-- Bloc blason prestige -->
-        <div class="blason-box">
-            <img src="blason-osd9tdj.png.PNG"
-                 alt="Blason de l’Ordre Sacré des Neuf Templiers de Jérusalem"
-                 class="blason-img">
-        </div>
+    <!-- Onglets -->
+    <nav class="tabs">
+        <a href="activites.html" class="tab">Nos activités</a>
+        <a href="quinoussommes.html" class="tab">Qui nous sommes</a>
+    </nav>
 
-        <!-- Titres -->
-        <h1>Ordre Sacré des Neuf Templiers de Jérusalem</h1>
-        <h2>Association loi 1901 – Site officiel en construction</h2>
-
-        <!-- Texte d’annonce -->
-        <p>Le site de l’O.S.D.9.T.D.J. sera prochainement en ligne.</p>
-
-        <!-- Email de contact -->
-        <p class="email">
-            Contact :
-            <a href="mailto:contact@osd9tdj.org">contact@osd9tdj.org</a>
-        </p>
-
-        <!-- Footer -->
-        <div class="footer">
-            © OSD9TDJ – Tous droits réservés
-        </div>
+    <!-- Blason -->
+    <div class="blason-box">
+        <img src="blason-osd9tdj.PNG"
+             alt="Blason de l’Ordre Sacré des Neuf Templiers de Jérusalem"
+             class="blason-img">
     </div>
+
+    <h1>Ordre Sacré des Neuf Templiers de Jérusalem</h1>
+    <p class="subtitle">Site officiel de l’O.S.D.9.T.D.J.</p>
+
+    <div class="footer">
+        © OSD9TDJ – Tous droits réservés<br>
+        <span class="legal-line">
+            SIREN&nbsp;: 939&nbsp;461&nbsp;133 &nbsp;•&nbsp; Code APE&nbsp;: 94.99Z
+        </span>
+    </div>
+</div>
 </body>
 </html>
