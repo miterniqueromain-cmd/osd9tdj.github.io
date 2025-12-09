@@ -2,13 +2,13 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
     <title>Ordre Sacré des Neuf Templiers de Jérusalem</title>
 
     <meta name="description"
           content="Site officiel de l’O.S.D.9.T.D.J. – Ordre Sacré des Neuf Templiers de Jérusalem.">
 
-    <!-- Google Fonts -->
+    <!-- Polices Google -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
     <style>
@@ -24,7 +24,6 @@
             color: #ffffff;
             text-align: center;
             min-height: 100vh;
-            background: #000000;
         }
 
         /* Fond drapeau */
@@ -37,6 +36,7 @@
             z-index: -2;
         }
 
+        /* Voile de lisibilité */
         .overlay {
             min-height: 100vh;
             padding: 30px 15px 20px;
@@ -49,7 +49,7 @@
             align-items: center;
         }
 
-        /* Onglets */
+        /* Menu onglets */
         .tabs {
             margin-top: 15px;
             margin-bottom: 25px;
@@ -81,7 +81,7 @@
             color: #ffffff;
         }
 
-        /* Blason */
+        /* Blason central */
         .blason-box {
             display: inline-block;
             padding: 18px;
@@ -99,7 +99,6 @@
             width: 340px;
             max-width: 85vw;
             height: auto;
-            display: block;
         }
 
         h1 {
@@ -115,29 +114,30 @@
             opacity: 0.95;
         }
 
+        /* Pied de page */
         .footer {
             margin-top: auto;
             padding-top: 15px;
             font-size: 0.8rem;
             opacity: 0.9;
+            line-height: 1.35rem;
         }
 
-        .footer .legal-line {
-            font-size: 0.7rem;
-            opacity: 0.85;
+        .legal-line {
+            font-size: 0.75rem;
+            opacity: 0.9;
+        }
+
+        /* Empêche le lien SIREN d’être bleu */
+        .legal-line a {
+            color: #ffffff !important;
+            text-decoration: none !important;
         }
 
         @media (max-width: 480px) {
-            h1 {
-                font-size: 1.6rem;
-            }
-            .subtitle {
-                font-size: 0.95rem;
-            }
-            .tab {
-                padding: 8px 12px;
-                font-size: 0.85rem;
-            }
+            h1 { font-size: 1.6rem; }
+            .subtitle { font-size: 0.95rem; }
+            .tab { padding: 8px 12px; font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -145,13 +145,14 @@
 <body>
 <div class="overlay">
 
-    <!-- Onglets -->
+    <!-- MENU -->
     <nav class="tabs">
         <a href="activites.html" class="tab">Nos activités</a>
         <a href="quinoussommes.html" class="tab">Qui nous sommes</a>
+        <a href="mentions.html" class="tab">Mentions légales</a>
     </nav>
 
-    <!-- Blason -->
+    <!-- BLASON -->
     <div class="blason-box">
         <img src="blason-osd9tdj.PNG"
              alt="Blason de l’Ordre Sacré des Neuf Templiers de Jérusalem"
@@ -161,12 +162,34 @@
     <h1>Ordre Sacré des Neuf Templiers de Jérusalem</h1>
     <p class="subtitle">Site officiel de l’O.S.D.9.T.D.J.</p>
 
+    <!-- BAS DE PAGE -->
     <div class="footer">
-        © OSD9TDJ – Tous droits réservés<br>
+        © OSD9TDJ – Tous droits réservés<br><br>
+
         <span class="legal-line">
-            SIREN&nbsp;: 939&nbsp;461&nbsp;133 &nbsp;•&nbsp; Code APE&nbsp;: 94.99Z
+
+            <strong>SIREN :</strong>
+            <a href="https://www.societe.com/societe/939461133" target="_blank">
+                939&nbsp;461&nbsp;133
+            </a><br>
+
+            <strong>SIRET (siège) :</strong>
+            939&nbsp;461&nbsp;133&nbsp;00034<br>
+
+            <strong>Code APE :</strong>
+            94.99Z – Autres organisations fonctionnant par adhésion volontaire<br>
+
+            <strong>N° RNA :</strong>
+            W744007354<br>
+
+            <strong>Zone d’activité :</strong>
+            France & Suisse<br>
+
+            <strong>Association déclarée :</strong>
+            depuis le 15 novembre 2024
         </span>
     </div>
+
 </div>
 </body>
 </html>
