@@ -209,6 +209,28 @@
       opacity: 0.85;
     }
 
+    /* Liens de navigation (accueil / statuts) */
+    .nav-links {
+      text-align: center;
+      margin: 6px 0 10px;
+    }
+    .nav-link {
+      display: inline-block;
+      margin: 0 6px 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--or);
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      color: var(--clair);
+      text-decoration: none;
+      background: rgba(0,0,0,0.6);
+    }
+    .nav-link:hover {
+      background: var(--or);
+      color: #000;
+    }
+
     @media (max-width: 600px) {
       h1 { font-size: 1.5rem; }
       h2 { font-size: 1.1rem; }
@@ -230,6 +252,12 @@
       Ordre Sacré des Neuf Templiers de Jérusalem – <strong>O.S.D.9.T.D.J.</strong><br>
       Association loi 1901 – RNA : W744007354 – « <span class="important">Per Crucem, Veritas</span> »
     </p>
+
+    <!-- Liens retour accueil / statuts -->
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">← Retour à l’accueil</a>
+      <a href="statuts.html" class="nav-link">Consulter les statuts</a>
+    </div>
 
     <h2>I – Préambule</h2>
     <p>
@@ -364,7 +392,7 @@
         <p>
           L’O.S.D.9.T.D.J. est une association laïque et indépendante. Les membres sont libres
           d’appartenir, à titre personnel, à des fraternités maçonniques, rosicruciennes,
-          martinistes, gnostiques, à des groupes culturels ou à des Églises/diocèses/parois­ses,
+          martinistes, gnostiques, à des groupes culturels ou à des Églises/diocèses/paroisses,
           à condition que cette appartenance soit compatible avec leurs engagements et qu’elle
           respecte l’indépendance de l’Ordre.
         </p>
@@ -597,6 +625,86 @@
             compris après toute démission ou radiation.
           </label>
         </div>
+      </fieldset>
+
+      <!-- XI bis – Commanderie / Représentation locale -->
+      <fieldset>
+        <legend>XI bis – Projet de Commanderie / Représentation locale (facultatif)</legend>
+
+        <p>
+          Cette section ne concerne <strong>que les postulants</strong> résidant dans une région ou un pays
+          où l’O.S.D.9.T.D.J. n’est pas encore représenté. Elle permet d’exprimer une demande
+          officielle pour ouvrir, après validation, une <strong>Commanderie rattachée</strong> ou une
+          <strong>Représentation locale</strong>, conformément aux statuts de l’Ordre.
+        </p>
+
+        <p>
+          Toute Commanderie ou Représentation locale fonctionne :
+        </p>
+        <ul style="margin-top:4px;margin-bottom:4px;">
+          <li>sous l’autorité du Grand Maître et du Conseil directeur ;</li>
+          <li>dans le respect strict des statuts, décisions, emblèmes et doctrines de l’Ordre ;</li>
+          <li>avec la possibilité d’assurer une <strong>gestion locale d’activités sociales, culturelles
+              et caritatives</strong> (dans le cadre défini par l’Ordre) ;</li>
+          <li>avec la possibilité, si nécessaire, que l’Ordre autorise ou soutienne l’ouverture d’une
+              <strong>structure juridique adaptée au pays</strong> (association, fondation ou équivalent),
+              afin de se conformer au droit local ;</li>
+          <li>avec la possibilité d’un <strong>compte bancaire local</strong> dédié aux activités autorisées ;</li>
+          <li>sans jamais revendiquer d’autonomie symbolique, doctrinale ou hiérarchique.</li>
+        </ul>
+
+        <h3>Demande d’ouverture (facultatif)</h3>
+
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Projet_Commanderie">
+            Je souhaite proposer l’ouverture d’une Commanderie / Représentation locale dans ma région
+            ou mon pays, si l’Ordre n’y est pas encore présent.
+          </label>
+        </div>
+
+        <label for="command_lieu">
+          Région / ville / pays envisagés :
+        </label>
+        <input type="text" id="command_lieu" name="Commanderie_Lieu">
+
+        <label for="command_effectif">
+          Combien de personnes (en dehors de vous) souhaitent se rattacher à cette future Commanderie
+          ou Représentation locale&nbsp;? (L’Ordre n’ouvre pas de Commanderie pour une seule personne) :
+        </label>
+        <input type="text" id="command_effectif" name="Commanderie_Effectif_envisagé">
+
+        <label for="command_justification">
+          Pourquoi souhaitez-vous ouvrir une Commanderie (motivations, utilité locale, compétences,
+          disponibilité, réseau, etc.) :
+        </label>
+        <textarea id="command_justification" name="Commanderie_Justification"></textarea>
+
+        <p>
+          Le membre porteur du projet peut, si la demande est jugée sérieuse, suivre une partie du
+          <strong>cursus de formation par visioconférence</strong>, avant de développer progressivement
+          une équipe locale sous l’autorité de l’Ordre.
+        </p>
+
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Commanderie_Statuts">
+            Je comprends que toute structure locale doit respecter <strong>strictement</strong> les statuts,
+            décisions, blasons, sceaux et règles de l’O.S.D.9.T.D.J., et que les personnes qui se
+            rattachent à cette Commanderie s’engagent à suivre le <strong>cursus de l’Ordre</strong>
+            (formation, discipline, participation).
+          </label>
+        </div>
+
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Commanderie_Validation">
+            Je comprends que cette demande <strong>ne donne aucun droit automatique</strong> : seule la
+            validation du Grand Maître et du Conseil des Sages peut autoriser l’ouverture et fixer
+            les modalités pratiques.
+          </label>
+        </div>
+
       </fieldset>
 
       <fieldset>
