@@ -1,180 +1,186 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ordre Sacré des Neuf Templiers de Jérusalem – Site officiel</title>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-width=1.0">
+ <title>Ordre Sacré des Neuf Templiers de Jérusalem</title>
+ <meta name="description"
+       content="Site officiel de l’O.S.D.9.T.D.J. – Ordre Sacré des Neuf Templiers de Jérusalem.">
 
-  <!-- Polices -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+ <!-- Polices Google -->
+ <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --or: #d6a728;
-      --clair: #fdf7e5;
-    }
+ <style>
+ :root {
+   --or: #ffd700;
+   --clair: #fdf7e5;
+ }
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Lato', Arial, sans-serif;
-      color: var(--clair);
-      min-height: 100vh;
-      /* Fond : image + dégradé sombre */
-      background:
-        radial-gradient(circle at top, #222222, #000000 70%);
-    }
+ body {
+   margin: 0;
+   padding: 0;
+   font-family: 'Lato', Arial, sans-serif;
+   color: #ffffff;
+   text-align: center;
+   min-height: 100vh;
+ }
 
-    .overlay {
-      min-height: 100vh;
-      box-sizing: border-box;
-      padding: 20px 15px 25px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      background: radial-gradient(circle at top,
-        rgba(0, 0, 0, 0.75),
-        rgba(0, 0, 0, 0.95));
-    }
+ /* Fond drapeau */
+ body::before {
+   content: "";
+   position: fixed;
+   inset: 0;
+   background: url("drapeau-osd9tdj.PNG") no-repeat center center fixed;
+   background-size: cover;
+   z-index: -2;
+ }
 
-    /* Menu onglets */
-    .tabs {
-      margin-top: 15px;
-      margin-bottom: 25px;
-      display: inline-flex;
-      border-radius: 999px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 215, 0, 0.6);
-      backdrop-filter: blur(6px);
-    }
+ /* Voile de lisibilité */
+ .overlay {
+   min-height: 100vh;
+   padding: 30px 15px 20px;
+   box-sizing: border-box;
+   background: radial-gradient(circle at top,
+     rgba(0, 0, 0, 0.25),
+     rgba(0, 0, 0, 0.85));
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+ }
 
-    .tab {
-      padding: 10px 18px;
-      text-decoration: none;
-      color: var(--clair);
-      font-size: 0.95rem;
-      font-weight: 700;
-      font-family: 'Cinzel', serif;
-      background: rgba(0, 0, 0, 0.45);
-      transition: background 0.2s ease, color 0.2s ease;
-      white-space: nowrap;
-    }
+ /* Menu onglets */
+ .tabs {
+   margin-top: 15px;
+   margin-bottom: 25px;
+   display: inline-flex;
+   border-radius: 999px;
+   overflow: hidden;
+   border: 1px solid rgba(255, 215, 0, 0.6);
+   backdrop-filter: blur(6px);
+ }
 
-    .tab + .tab {
-      border-left: 1px solid rgba(255, 215, 0, 0.4);
-    }
+ .tab {
+   padding: 10px 18px;
+   text-decoration: none;
+   color: var(--clair);
+   font-size: 0.95rem;
+   font-weight: 700;
+   font-family: 'Cinzel', serif;
+   background: rgba(0, 0, 0, 0.45);
+   transition: background 0.2s ease, color 0.2s ease;
+   white-space: nowrap;
+ }
 
-    .tab:hover {
-      background: rgba(255, 215, 0, 0.20);
-      color: #ffffff;
-    }
+ .tab + .tab {
+   border-left: 1px solid rgba(255, 215, 0, 0.4);
+ }
 
-    /* Blason central */
-    .blason-box {
-      display: inline-block;
-      padding: 18px;
-      margin-top: 25px;
-      margin-bottom: 18px;
-      background: radial-gradient(circle at top,
-        rgba(255, 215, 0, 0.35),
-        rgba(0, 0, 0, 0.95));
-      border: 2px solid var(--or);
-      border-radius: 18px;
-      box-shadow: 0 0 28px rgba(0, 0, 0, 0.8);
-    }
+ .tab:hover {
+   background: rgba(255, 215, 0, 0.20);
+   color: #ffffff;
+ }
 
-    .blason-img {
-      width: 340px;
-      max-width: 85vw;
-      height: auto;
-    }
+ /* Blason central */
+ .blason-box {
+   display: inline-block;
+   padding: 18px;
+   margin-top: 25px;
+   margin-bottom: 18px;
+   background: radial-gradient(circle at top,
+     rgba(255, 215, 0, 0.35),
+     rgba(0, 0, 0, 0.95));
+   border: 2px solid var(--or);
+   border-radius: 18px;
+   box-shadow: 0 0 28px rgba(0, 0, 0, 0.8);
+ }
 
-    h1 {
-      font-family: 'Cinzel', serif;
-      font-size: 2rem;
-      margin: 10px 0 6px;
-      text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
-    }
+ .blason-img {
+   width: 340px;
+   max-width: 85vw;
+   height: auto;
+ }
 
-    .subtitle {
-      font-size: 1rem;
-      margin: 0 0 15px;
-      opacity: 0.95;
-    }
+ h1 {
+   font-family: 'Cinzel', serif;
+   font-size: 2rem;
+   margin: 10px 0 6px;
+   text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+ }
 
-    /* Pied de page */
-    .footer {
-      margin-top: auto;
-      padding-top: 15px;
-      font-size: 0.8rem;
-      opacity: 0.9;
-      line-height: 1.35rem;
-    }
+ .subtitle {
+   font-size: 1rem;
+   margin: 0 0 15px;
+   opacity: 0.95;
+ }
 
-    .legal-line {
-      font-size: 0.75rem;
-      opacity: 0.9;
-    }
+ /* Pied de page */
+ .footer {
+   margin-top: auto;
+   padding-top: 15px;
+   font-size: 0.8rem;
+   opacity: 0.9;
+   line-height: 1.35rem;
+ }
 
-    /* Empêche le lien SIREN d’être bleu */
-    .legal-line a {
-      color: #ffffff !important;
-      text-decoration: none !important;
-    }
+ .legal-line {
+   font-size: 0.75rem;
+   opacity: 0.9;
+ }
 
-    @media (max-width: 480px) {
-      h1 { font-size: 1.6rem; }
-      .subtitle { font-size: 0.95rem; }
-      .tab { padding: 8px 12px; font-size: 0.85rem; }
-    }
-  </style>
+ /* Empêche le lien SIREN d’être bleu */
+ .legal-line a {
+   color: #ffffff !important;
+   text-decoration: none !important;
+ }
+
+ @media (max-width: 480px) {
+   h1 { font-size: 1.6rem; }
+   .subtitle { font-size: 0.95rem; }
+   .tab { padding: 8px 12px; font-size: 0.85rem; }
+ }
+ </style>
 </head>
 <body>
-  <div class="overlay">
+<div class="overlay">
 
-    <!-- MENU -->
-    <nav class="tabs">
-      <a href="activites.html" class="tab">Nos activités</a>
-      <a href="quinoussommes.html" class="tab">Qui nous sommes</a>
-      <a href="mentions.html" class="tab">Mentions légales</a>
-    </nav>
+  <!-- MENU -->
+  <nav class="tabs">
+    <a href="activites.html" class="tab">Nos activités</a>
+    <a href="quinoussommes.html" class="tab">Qui nous sommes</a>
+    <a href="mentions.html" class="tab">Mentions légales</a>
+  </nav>
 
-    <!-- BLASON -->
-    <div class="blason-box">
-      <img src="blason-osd9tdj.PNG"
-           alt="Blason de l’Ordre Sacré des Neuf Templiers de Jérusalem"
-           class="blason-img">
-    </div>
-
-    <h1>Ordre Sacré des Neuf Templiers de Jérusalem</h1>
-    <p class="subtitle">Site officiel de l’O.S.D.9.T.D.J.</p>
-
-    <!-- BAS DE PAGE -->
-    <div class="footer">
-      © OSD9TDJ – Tous droits réservés<br><br>
-      <span class="legal-line">
-        <strong>SIREN :</strong>
-        <a href="https://avis-situation-sirene.insee.fr/" target="_blank">
-          939&nbsp;461&nbsp;133
-        </a><br>
-        <strong>SIRET (siège) :</strong>
-        939&nbsp;461&nbsp;133&nbsp;00034<br>
-        <strong>Code APE :</strong>
-        94.99Z<br>
-        <strong>N° RNA :</strong>
-        W744007354<br>
-        <strong>Nature :</strong>
-        Organisation à vocation internationale<br>
-        <strong>Champ :</strong>
-        Économie sociale et solidaire (ESS)<br>
-        <strong>Vérification administrative :</strong>
-        <a href="https://avis-situation-sirene.insee.fr/" target="_blank">
-          INSEE – Avis de situation
-        </a>
-      </span>
-    </div>
-
+  <!-- BLASON -->
+  <div class="blason-box">
+    <img src="blason-osd9tdj.PNG"
+         alt="Blason de l’Ordre Sacré des Neuf Templiers de Jérusalem"
+         class="blason-img">
   </div>
+
+  <h1>Ordre Sacré des Neuf Templiers de Jérusalem</h1>
+  <p class="subtitle">Site officiel de l’O.S.D.9.T.D.J.</p>
+
+  <!-- BAS DE PAGE -->
+  <div class="footer">
+    © OSD9TDJ – Tous droits réservés<br><br>
+    <span class="legal-line">
+      <strong>SIREN :</strong>
+      <a href="https://www.societe.com/societe/939461133" target="_blank">
+        939&nbsp;461&nbsp;133
+      </a><br>
+      <strong>SIRET (siège) :</strong>
+      939&nbsp;461&nbsp;133&nbsp;00034<br>
+      <strong>Code APE :</strong>
+      94.99Z<br>
+      <strong>N° RNA :</strong>
+      W744007354<br>
+      <strong>Nature :</strong>
+      Organisation à vocation internationale<br>
+      <strong>Champ :</strong>
+      Économie sociale et solidaire (ESS)
+    </span>
+  </div>
+
+</div>
 </body>
 </html>
