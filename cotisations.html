@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Cotisations – O.S.D.9.T.D.J.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --or: #d6a728;
+      --clair: #f5f2ea;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Lato', Arial, sans-serif;
+      color: var(--clair);
+      text-align: center;
+      background: radial-gradient(circle at top, #3a2513, #120702 70%);
+      overflow-x: hidden;
+    }
+
+    /* Image Chevalier en haut */
+    .chevalier-box {
+      margin: 20px auto 25px;
+      padding: 8px;
+      border: 3px solid var(--or);
+      border-radius: 18px;
+      background: rgba(0,0,0,0.6);
+      display: inline-block;
+      box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    }
+    .chevalier-box img {
+      width: 360px;
+      max-width: 90vw;
+      border-radius: 12px;
+      display: block;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 18px 40px;
+      text-align: center;
+    }
+
+    h1, h2 {
+      font-family: 'Cinzel', serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+    h2 {
+      font-size: 1.2rem;
+      color: var(--or);
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.55;
+      max-width: 780px;
+      margin: 8px auto;
+      text-align: justify;
+    }
+
+    /* Bloc montants */
+    .cotis-box {
+      margin: 24px auto;
+      max-width: 620px;
+      background: rgba(0,0,0,0.6);
+      border: 2px solid var(--or);
+      border-radius: 16px;
+      padding: 18px 20px 20px;
+      text-align: left;
+    }
+    .cotis-box h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--or);
+      margin-top: 0;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .cotis-box ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 1.05rem;
+    }
+    .cotis-box li {
+      padding: 6px 0;
+      border-bottom: 1px dashed rgba(255,255,255,0.25);
+    }
+    .cotis-box li:last-child {
+      border-bottom: none;
+    }
+
+    .note {
+      border-left: 3px solid var(--or);
+      padding-left: 10px;
+      margin-top: 10px;
+      font-size: 0.95rem;
+      opacity: 0.95;
+    }
+
+    .button-row {
+      margin-top: 26px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 9px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-family: 'Cinzel', serif;
+      font-weight: bold;
+      border: 1px solid var(--or);
+      color: var(--clair);
+      background: transparent;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .btn:hover {
+      background: var(--or);
+      color: #120702;
+    }
+
+    .footer {
+      margin-top: 28px;
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Image du chevalier -->
+  <div class="chevalier-box">
+    <img src="Chevalier.jpg" alt="Chevalier de l’O.S.D.9.T.D.J.">
+  </div>
+
+  <div class="container">
+
+    <h1>Cotisations officielles</h1>
+    <h2>Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J.</h2>
+
+    <p>
+      Les cotisations permettent à l’Ordre de vivre concrètement&nbsp;: organisation des activités,
+      logistique des manifestations, soutien aux projets culturels, fraternels et caritatifs.
+      Elles sont fixées et révisées par l’Assemblée Générale, conformément à nos statuts.
+    </p>
+
+    <div class="cotis-box">
+      <h3>Montants pour l’année 2026</h3>
+      <ul>
+        <li><strong>200&nbsp;€</strong> – Cotisation annuelle <strong>Adhérent</strong></li>
+        <li><strong>60&nbsp;€</strong> – Cotisation annuelle <strong>Accompagnant</strong> (conjoint, famille, proches)</li>
+        <li><strong>1&nbsp;500&nbsp;€ et plus</strong> – <strong>Membre bienfaiteur</strong> (soutien majeur à l’Ordre)</li>
+      </ul>
+    </div>
+
+    <p>
+      Le paiement de la cotisation est obligatoire pour valider l’adhésion et exercer les droits
+      prévus par les statuts. Aucun remboursement ne peut être effectué sans décision expresse
+      du Bureau, dans le respect des règles de bonne gestion.
+    </p>
+
+    <p class="note">
+      Les membres bienfaiteurs contribuent à la réalisation de projets précis
+      (tenues, matériel pédagogique, actions sociales, aides logistiques, événements culturels, etc.)
+      et permettent d’assurer la stabilité à long terme de l’O.S.D.9.T.D.J.
+    </p>
+
+    <div class="button-row">
+      <a class="btn" href="adhesion.html">→ Formulaire d’adhésion</a>
+      <a class="btn" href="index.html">← Retour à l’accueil</a>
+    </div>
+
+    <div class="footer">
+      © O.S.D.9.T.D.J. – Cotisations 2026
+    </div>
+
+  </div>
+
+</body>
+</html>
