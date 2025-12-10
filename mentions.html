@@ -20,18 +20,17 @@
       color: var(--clair);
       text-align: center;
       min-height: 100vh;
-      background: radial-gradient(circle at top, #3a3a3a, #050505 70%);
+      background:
+        radial-gradient(circle at top, #1b1b1b, #020202 70%);
       position: relative;
       overflow-x: hidden;
     }
 
-    /* SATOR en léger fond */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background: url("sator.PNG") center center / 70% no-repeat;
-      opacity: 0.06;
+      background: none;
       z-index: -1;
     }
 
@@ -44,16 +43,15 @@
       align-items: center;
     }
 
-    /* Bloc du sceau officiel */
     .sceau-box {
       margin-top: 5px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       padding: 18px;
       border-radius: 24px;
       background: radial-gradient(
         circle at top,
-        rgba(255, 255, 255, 0.10),
-        rgba(0, 0, 0, 0.95)
+        rgba(255, 255, 255, 0.06),
+        rgba(0, 0, 0, 0.96)
       );
       box-shadow: 0 0 35px rgba(0, 0, 0, 0.85);
       border: 2px solid rgba(214, 167, 40, 0.9);
@@ -70,7 +68,9 @@
     h1 {
       font-family: 'Cinzel', serif;
       font-size: 1.9rem;
-      margin: 10px 0 5px;
+      margin: 10px 0 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
     h2 {
@@ -124,10 +124,44 @@
       opacity: 0.85;
     }
 
+    .ip-alert {
+      max-width: 950px;
+      margin: 0 auto 18px;
+      padding: 14px 14px 12px;
+      border-radius: 14px;
+      border: 2px solid var(--or);
+      background: linear-gradient(
+        to bottom,
+        rgba(18, 7, 2, 0.96),
+        rgba(0, 0, 0, 0.96)
+      );
+      box-shadow: 0 0 18px rgba(0,0,0,0.75);
+      text-align: left;
+    }
+    .ip-alert-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.02rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--or);
+      margin: 0 0 6px;
+    }
+    .ip-alert p {
+      margin: 4px 0;
+      font-size: 0.96rem;
+      line-height: 1.5;
+    }
+    .ip-strong {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
     @media (max-width: 600px) {
       h1 { font-size: 1.6rem; }
       h2 { font-size: 1.05rem; }
       p  { font-size: 0.95rem; }
+      .ip-alert-title { font-size: 0.96rem; }
     }
   </style>
 </head>
@@ -141,6 +175,36 @@
   </div>
 
   <h1>Mentions légales</h1>
+
+  <!-- AVERTISSEMENT PROTECTION ÉCRITS / LOGOS + RESSEMBLANCE FORTUITE -->
+  <div class="ip-alert">
+    <div class="ip-alert-title">AVERTISSEMENT – PROTECTION DES ÉCRITS, LOGOS ET SYMBOLES</div>
+    <p>
+      L’ensemble des contenus publiés ou diffusés par l’Ordre Sacré des Neuf Templiers de
+      Jérusalem (O.S.D.9.T.D.J.) – <strong>textes, cours, documents PDF, images, blasons,
+      sceaux, logos, insignes, dessins, diagrammes, mises en page et architecture du site</strong> –
+      constitue une œuvre de l’esprit protégée par le Code de la propriété intellectuelle.
+    </p>
+    <p>
+      Toute reproduction, imitation, modification, diffusion ou réutilisation, y compris
+      partielle, sur un site internet, une page de réseau social, une vidéo, un document
+      imprimé ou au sein d’un autre groupe, est <strong>strictement interdite sans autorisation
+      écrite</strong> du représentant légal de l’O.S.D.9.T.D.J.
+    </p>
+    <p class="ip-strong">
+      TOUTE RESSEMBLANCE OU SIMILARITÉ VISUELLE OU NOMINALE AVEC D’AUTRES GROUPES,
+      ORDRES OU ASSOCIATIONS EST PUREMENT FORTUITE OU RELÈVE DU PATRIMOINE
+      HISTORIQUE COMMUN ET NE CONSTITUE NI RECONNAISSANCE, NI FILIATION, NI
+      LÉGITIMATION DE CES STRUCTURES.
+    </p>
+    <p>
+      Toute usurpation du nom de l’Ordre, de ses titres, de ses qualités, de ses logos ou de
+      ses blasons pour créer ou légitimer un autre groupe, obédience, ordre ou association
+      constitue une faute grave et une contrefaçon susceptible de poursuites civiles et
+      pénales. En France, la contrefaçon peut être punie jusqu’à
+      <strong>3&nbsp;ans d’emprisonnement</strong> et <strong>300&nbsp;000&nbsp;€ d’amende</strong>.
+    </p>
+  </div>
 
   <!-- IDENTITÉ JURIDIQUE -->
   <h2>Identité juridique</h2>
@@ -203,25 +267,47 @@
     sous réserve du respect de ses valeurs et de son autonomie institutionnelle.
   </p>
 
+  <!-- INDÉPENDANCE / NON-CONFUSION -->
+  <h2>Indépendance et non-confusion avec d’autres ordres</h2>
+  <p>
+    L’O.S.D.9.T.D.J. est une structure autonome, indépendante et entièrement distincte
+    de tous les autres ordres, obédiences, associations ou mouvements se réclamant de
+    la tradition templière ou chevaleresque, quels que soient leurs sigles ou dénominations.
+  </p>
+  <p>
+    Le fait que certains groupes utilisent des noms, abréviations, croix ou
+    symboles proches de ceux de l’histoire templière tient au patrimoine commun de
+    la chrétienté et de l’héraldique médiévale. Il n’en résulte <strong>aucune filiation,
+    reconnaissance ni solidarité de fait</strong> entre ces groupes et l’O.S.D.9.T.D.J.
+  </p>
+  <p>
+    Toute personne ou structure prétendant agir « au nom » de l’O.S.D.9.T.D.J., sans
+    mandat écrit du Grand Maître et du Conseil directeur, agit sans droit et peut faire
+    l’objet de démentis publics et, si nécessaire, d’actions judiciaires.
+  </p>
+
   <!-- PROPRIÉTÉ INTELLECTUELLE -->
-  <h2>Propriété intellectuelle – Blasons, sceaux et logos</h2>
+  <h2>Propriété intellectuelle – Blasons, sceaux, logos et contenus</h2>
   <p>
     Le blason officiel de l’Ordre, le sceau officiel de l’O.S.D.9.T.D.J., les logos,
-    emblèmes, armoiries, symboles, images et documents de l’Ordre sont des œuvres
-    originales protégées par le Code de la propriété intellectuelle et par
+    emblèmes, armoiries, symboles, images, illustrations, ainsi que l’ensemble des
+    textes, cours, supports pédagogiques, fichiers numériques et contenus du site
+    sont des œuvres originales protégées par le Code de la propriété intellectuelle et par
     les conventions internationales, notamment la Convention de Berne.
   </p>
   <p>
-    Ces éléments ont fait l’objet de dépôts officiels attestant
-    leur antériorité et leur propriété exclusive par l’Ordre.
-    Toute reproduction, imitation, modification, diffusion ou usage — même partiel —
-    sans autorisation écrite du représentant légal constitue une contrefaçon.
+    Ces éléments ont fait l’objet de dépôts et de preuves d’antériorité attestant
+    leur propriété exclusive par l’Ordre. Toute reproduction, imitation, modification,
+    diffusion ou usage — même partiel — sans autorisation écrite du représentant légal
+    constitue une contrefaçon.
   </p>
   <p>
     La contrefaçon expose son auteur à des <strong>sanctions civiles et pénales</strong>,
     pouvant aller jusqu’à <strong>3 ans d’emprisonnement</strong> et
     <strong>300&nbsp;000&nbsp;€ d’amende</strong> en France, ainsi qu’à des poursuites
-    internationales conformément aux traités en vigueur.
+    internationales conformément aux traités en vigueur. L’Ordre se réserve le droit
+    d’agir en justice contre tout usage abusif ou frauduleux de ses noms, titres,
+    abréviations, blasons, sceaux, symboles ou contenus écrits.
   </p>
 
   <!-- PRINCIPES ÉTHIQUES -->
