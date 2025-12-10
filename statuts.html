@@ -1,375 +1,296 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Statuts – Ordre Sacré des Neuf Templiers de Jérusalem</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Version publique de référence des statuts de l’Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.), association loi 1901 à vocation internationale.">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --fond: #120702;
-      --or: #d2a55b;
-      --clair: #f5f2ea;
-      --rouge: #b33232;
-    }
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: 'Lato', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #261208 0, #0b0300 55%, #000 100%);
-      color: var(--clair);
-      text-align: center;
-    }
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 28px 16px 34px;
-    }
-    .sceau-box {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 8px;
-    }
-    .sceau-box img {
-      display: block;
-      max-width: 80vw;
-      width: 360px;
-      height: auto;
-      background: #000;
-    }
-    h1 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.9rem;
-      margin: 10px 0 5px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-    h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.15rem;
-      margin: 20px 0 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      color: var(--or);
-    }
-    h3 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.02rem;
-      margin: 16px 0 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      color: var(--or);
-    }
-    p {
-      max-width: 900px;
-      margin: 6px auto;
-      font-size: 1rem;
-      line-height: 1.55;
-      text-align: justify;
-    }
-    ul {
-      max-width: 900px;
-      margin: 8px auto;
-      text-align: left;
-      line-height: 1.5;
-      padding-left: 18px;
-      font-size: 0.98rem;
-    }
-    li {
-      margin-bottom: 4px;
-    }
-    strong {
-      color: var(--clair);
-    }
-    .note {
-      font-size: 0.9rem;
-      opacity: 0.9;
-      border-left: 3px solid var(--or);
-      padding-left: 10px;
-      margin-top: 10px;
-    }
-    .article-ref {
-      font-family: 'Cinzel', serif;
-      font-weight: 600;
-      color: var(--or);
-    }
-    .back-link {
-      display: inline-block;
-      margin-top: 24px;
-      text-decoration: none;
-      color: var(--clair);
-      font-size: 0.95rem;
-      padding: 8px 16px;
-      border-radius: 999px;
-      border: 1px solid var(--or);
-      font-family: 'Cinzel', serif;
-    }
-    .back-link:hover {
-      background: var(--or);
-      color: #120702;
-    }
-    .footer {
-      margin-top: 22px;
-      font-size: 0.78rem;
-      opacity: 0.85;
-    }
-    @media (max-width: 600px) {
-      h1 { font-size: 1.6rem; }
-      h2 { font-size: 1.05rem; }
-      p  { font-size: 0.95rem; }
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Statuts – Ordre Sacré des Neuf Templiers de Jérusalem</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --or: #d6a728;
+  --clair: #f5f2ea;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', Arial, sans-serif;
+  color: var(--clair);
+  background: #000;
+  text-align: center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Sceau watermark */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("sceau-osd9tdj.PNG") center center / 55% no-repeat;
+  opacity: 0.08;
+  z-index: -2;
+}
+
+/* Dégradé noir */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.75), rgba(0,0,0,0.95));
+  z-index: -1;
+}
+
+/* Drapeau encadré or */
+.drapeau-box {
+  margin: 20px auto 25px;
+  padding: 6px;
+  border: 3px solid var(--or);
+  border-radius: 14px;
+  display: inline-block;
+  background: rgba(0,0,0,0.6);
+}
+.drapeau-box img {
+  width: 330px;
+  max-width: 85vw;
+  border-radius: 10px;
+  display: block;
+}
+
+.container {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 10px 20px 40px;
+}
+
+h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  color: var(--or);
+  margin-top: 28px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  color: var(--or);
+  margin-top: 20px;
+}
+p, ul {
+  text-align: justify;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+ul { padding-left: 20px; }
+.note {
+  border-left: 3px solid var(--or);
+  padding-left: 10px;
+  opacity: 0.95;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 8px 18px;
+  border: 1px solid var(--or);
+  border-radius: 999px;
+  color: var(--clair);
+  font-family: 'Cinzel', serif;
+  text-decoration: none;
+  background: rgba(0,0,0,0.55);
+}
+.back-link:hover {
+  background: var(--or);
+  color: #000;
+}
+
+.footer {
+  margin-top: 20px;
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+</style>
 </head>
+
 <body>
-<div class="container">
-  <div class="sceau-box">
-    <img src="sceau-osd9tdj.PNG" alt="Sceau officiel O.S.D.9.T.D.J.">
-  </div>
 
-  <h1>Statuts de l’O.S.D.9.T.D.J.</h1>
-
-  <h2>Version publique de référence</h2>
-  <p>
-    L’Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.) est une
-    association laïque, culturelle et fraternelle régie par la loi du 1<sup>er</sup> juillet 1901.
-    Elle est déclarée en préfecture, immatriculée sous le n° SIREN
-    <strong>939&nbsp;461&nbsp;133</strong>, et publiée au JOAFE conformément à la réglementation en vigueur.
-  </p>
-  <p class="note">
-    Par respect de la vie privée des dirigeants et des membres, les
-    <strong>noms, coordonnées personnelles et signatures manuscrites</strong> figurant sur la
-    version déposée en préfecture ne sont volontairement pas reproduits sur ce site.
-    Seule la présente synthèse des dispositions statutaires est publiée en ligne.
-  </p>
-  <p class="note">
-    Conformément au document officiel, <strong>seules les dispositions statutaires
-    numérotées</strong> (articles) font foi devant l’administration et les tiers. Les développements
-    historiques et symboliques ont une valeur pédagogique, non normative.
-  </p>
-
-  <!-- PRÉAMBULE / ESS / ESPRIT GÉNÉRAL -->
-  <h2>Préambule – Esprit général de l’Ordre</h2>
-  <p>
-    L’Ordre Sacré des Neuf Templiers de Jérusalem se définit comme une
-    <strong>chevalerie culturelle, historique, éducative et caritative</strong>, héritière de l’esprit
-    originel des Neuf premiers Templiers, sans revendiquer aucune filiation canonique
-    ni nobiliaire. Son but est de <strong>servir, protéger, étudier</strong> : transmettre les valeurs
-    chevaleresques, approfondir la mémoire templière et soutenir des actions
-    d’entraide et de solidarité.
-  </p>
-  <p>
-    L’association <strong>adhère aux principes de l’Économie Sociale et Solidaire (ESS)</strong> :
-    gouvernance transparente et collégiale, gestion désintéressée, lucrativité limitée
-    et réinvestissement des excédents dans l’objet social. Elle peut, si elle le souhaite,
-    solliciter l’agrément ESUS, sans que cela soit obligatoire.
-  </p>
-  <p>
-    Dans un esprit de dialogue et d’enrichissement mutuel, l’Ordre accueille avec
-    respect les membres :
-  </p>
-  <ul>
-    <li>des <strong>ordres officiels</strong> et des structures caritatives ou éducatives reconnues ;</li>
-    <li>des <strong>traditions culturelles, maçonniques, rosicruciennes, martinistes</strong> ou analogues ;</li>
-    <li>de diverses <strong>confessions religieuses</strong>, diocèses, paroisses, communautés,</li>
-  </ul>
-  <p>
-    chacun restant libre de ses appartenances extérieures. Aucune filiation, aucun
-    rite ni brevet étranger n’est revendiqué : les rencontres se font sur le terrain
-    culturel, historique et fraternel, dans le respect de la <strong>laïcité, de l’indépendance</strong>
-    de l’Ordre et des autorités de chaque pays.
-  </p>
-
-  <!-- EXTRAIT DU CODE STATUTAIRE -->
-  <h2>Code statutaire – Extraits des principaux articles</h2>
-
-  <h3><span class="article-ref">Article&nbsp;1 – Dénomination</span></h3>
-  <p>
-    Il est fondé entre les adhérents aux présents statuts une association régie par la
-    loi du 1<sup>er</sup> juillet 1901, ayant pour titre :
-    <strong>Ordre Sacré des Neuf Templiers de Jérusalem</strong>
-    (Ordo Sacrum Novem Templariorum Hierosolymae).
-    Le sigle statutaire utilisé est <strong>O.S.D.9.T.D.J.</strong>
-  </p>
-
-  <h3><span class="article-ref">Article&nbsp;2 – Objet</span></h3>
-  <p>
-    L’association inscrit son action dans une <strong>démarche d’intérêt général</strong>. Elle a pour
-    objet principal la transmission des valeurs chevaleresques, l’étude de l’histoire
-    et de la mémoire templière, la promotion de la culture citoyenne, de la paix et
-    de la fraternité, ainsi que l’organisation d’actions culturelles, éducatives,
-    historiques et caritatives à destination de tous.
-  </p>
-
-  <h3><span class="article-ref">Article&nbsp;3 – Siège social</span></h3>
-  <p>
-    Le siège social est fixé en <strong>Haute-Savoie (74) – France</strong>.  
-    L’adresse exacte est déterminée et modifiée par le Conseil directeur, puis
-    ratifiée par la prochaine Assemblée générale. Chaque modification fait l’objet
-    des formalités légales (déclaration en préfecture et publication au JOAFE).
-  </p>
-  <p>
-    Le siège peut être fixé au domicile du Grand Maître (Président) ou dans des
-    locaux prêtés/loués, sans que les données personnelles du dirigeant ne soient
-    utilisées à des fins de contact institutionnel. Une boîte postale dédiée est
-    privilégiée pour les envois recommandés.
-  </p>
-
-  <h3><span class="article-ref">Article&nbsp;4 – Durée</span></h3>
-  <p>
-    La durée de l’association est <strong>illimitée</strong>.
-  </p>
-
-  <h3><span class="article-ref">Article&nbsp;5 – Membres</span></h3>
-  <p>
-    L’association se compose notamment de :
-  </p>
-  <ul>
-    <li><strong>Membres actifs</strong> : participent régulièrement aux activités et s’acquittent de la cotisation ;</li>
-    <li><strong>Membres d’honneur</strong> : distingués pour services rendus, dispensés de cotisation ;</li>
-    <li><strong>Membres bienfaiteurs</strong> : personnes ou entités apportant un soutien financier ou matériel.</li>
-  </ul>
-
-  <h3><span class="article-ref">Article&nbsp;6 – Admission et adhésion</span></h3>
-  <p>
-    L’admission des membres est prononcée par le <strong>Grand Maître (Président)</strong>, après avis
-    conforme d’au moins <strong>deux Commandeurs de région</strong> (Prieurs / Vice-Présidents). Toute
-    personne physique ou morale partageant les valeurs de l’association peut
-    présenter une demande écrite.
-  </p>
-  <p>
-    L’adhésion implique l’acceptation pleine et entière des <strong>statuts</strong> et du
-    <strong>règlement intérieur</strong>.
-  </p>
-
-  <h3><span class="article-ref">Article&nbsp;7 – Radiation et procédures</span></h3>
-  <p>
-    La qualité de membre se perd par démission, décès ou radiation prononcée par le
-    Conseil directeur. Tout membre faisant l’objet d’une sanction (avertissement,
-    suspension, exclusion) bénéficie d’une <strong>procédure contradictoire</strong> : notification
-    écrite des griefs, délai minimal pour répondre, possibilité d’être assisté par un
-    autre membre et recours interne devant le Magistère élargi (Bureau + Neuf Sages).
-    La cotisation annuelle reste acquise à l’association.
-  </p>
-
-  <h3><span class="article-ref">Article&nbsp;8 à 11 – Ressources, familles, exonérations, mineurs</span></h3>
-  <p>
-    Les ressources de l’association comprennent notamment les cotisations,
-    dons manuels et contributions diverses, dans le respect de la gestion désintéressée.
-    Des dispositions spécifiques prévoient :
-  </p>
-  <ul>
-    <li>des <strong>cotisations adaptées</strong> aux familles et accompagnants ;</li>
-    <li>des <strong>exonérations possibles</strong> pour les dirigeants et les membres rendant des services réguliers ;</li>
-    <li>un cadre strictement <strong>historique, culturel et éducatif pour les mineurs</strong>, avec
-        autorisation parentale, encadrement renforcé et exclusion de tout culte
-        ou contenu ésotérique.</li>
-  </ul>
-
-  <h3><span class="article-ref">Articles&nbsp;11 bis à 11 sexies – Premier Grand Maître et garanties</span></h3>
-  <p>
-    Les statuts reconnaissent un <strong>Premier Grand Maître (Fondateur)</strong>, porteur
-    permanent de ce titre honorifique, garant de l’intégrité du projet et des
-    statuts. Il dispose d’un <strong>droit moral</strong> sur l’intégrité des statuts et emblèmes,
-    sans responsabilité civile ou pénale automatique.
-  </p>
-  <p>
-    Les <strong>Anciens Grands Maîtres</strong> bénéficient d’une voix consultative permanente
-    sur les questions touchant à l’identité, aux emblèmes et aux statuts fondamentaux.
-    Une clause de <strong>sauvegarde exceptionnelle</strong> permet, en cas de manquement
-    grave, de saisir une Assemblée générale extraordinaire pour statuer sur la
-    destitution éventuelle du Grand Maître en exercice ou des Neuf Sages.
-  </p>
-
-  <h3><span class="article-ref">Article&nbsp;12 – Neutralité</span></h3>
-  <p>
-    L’association est <strong>neutre sur les plans politique et religieux</strong>.  
-    Elle respecte toutes les traditions, sans en revendiquer la filiation ni le monopole.
-  </p>
-
-  <h3><span class="article-ref">Article&nbsp;12 bis – Non-confusion et indépendance</span></h3>
-  <p>
-    L’Ordre affirme son <strong>indépendance pleine et entière</strong> vis-à-vis de toute
-    organisation utilisant les dénominations « Ordre du Temple de Jérusalem »,
-    « OSMTJ », « OSMTH », « OTJ » ou tout autre signe voisin.
-  </p>
-  <p>
-    Pour éviter toute confusion, l’association utilise exclusivement le sigle
-    <strong>O.S.D.9.T.D.J</strong> et la dénomination intégrale « Ordre Sacré des Neuf Templiers
-    de Jérusalem » dans ses actes et communications. L’usage d’autres sigles ou
-    abréviations est interdit et constitue une faute grave passible de sanctions
-    pouvant aller jusqu’à l’exclusion immédiate.
-  </p>
-
-  <h3><span class="article-ref">Article&nbsp;13 – Dimension internationale et coopérations</span></h3>
-  <p>
-    L’association a vocation à développer ses activités dans différents pays et peut
-    créer des structures ou représentations à l’étranger, dans le respect des lois
-    locales. L’association française demeure cependant <strong>l’autorité centrale et
-    souveraine</strong>, à laquelle les structures étrangères se rattachent.
-  </p>
-  <p>
-    L’Ordre peut conclure des <strong>pactes de fraternité et de coopération</strong> avec d’autres
-    ordres ou associations partageant ses valeurs, y compris des groupes culturels,
-    initiatiques ou cultuels (Églises, diocèses, loges, ordres fraternels, etc.),
-    partout dans le monde, dès lors qu’ils respectent l’indépendance, la laïcité
-    et les valeurs de l’O.S.D.9.T.D.J.
-  </p>
-  <p>
-    Ces partenariats n’emportent ni fusion, ni absorption, ni mandat de
-    représentation : chaque entité demeure seule responsable de ses actes. Les
-    membres sont libres d’appartenir à ces structures extérieures, et peuvent
-    rayonner en notre sein comme un <strong>noyau de dialogue et de culture</strong>, dans le
-    respect des statuts de leur propre organisation et de nos principes d’indépendance.
-  </p>
-
-  <h3><span class="article-ref">Article&nbsp;14 – Règlement intérieur</span></h3>
-  <p>
-    Un <strong>règlement intérieur</strong> est établi par le Conseil directeur et approuvé en
-    Assemblée générale. Il précise les modalités pratiques d’application des statuts
-    (fonctionnement interne, discipline, actions pédagogiques et caritatives, etc.).
-  </p>
-
-  <h3><span class="article-ref">Article&nbsp;15 et suivants – Exercices sociaux et finances</span></h3>
-  <p>
-    Les statuts prévoient une gestion financière <strong>rigoureuse, transparente et
-    désintéressée</strong> : comptes centrés, comptes régionaux, double signature pour les
-    mouvements bancaires, contrôle par le Trésorier et les Neuf Sages, interdiction
-    de toute caisse occulte ou mouvement sur compte personnel.
-  </p>
-  <p>
-    Toute convention avec une partie liée (dirigeant, structure partenaire, société
-    liée) fait l’objet d’une procédure spécifique et d’un vote à la majorité qualifiée
-    en Assemblée générale, dans le respect du droit des associations et des règles
-    de l’ESS.
-  </p>
-
-  <h3><span class="article-ref">Articles&nbsp;16 et suivants – Dissolution, continuité et clauses juridiques</span></h3>
-  <p>
-    En cas de dissolution, un ou plusieurs liquidateurs sont désignés et l’actif net
-    est dévolu à une œuvre caritative ou culturelle conformément à la loi. Les
-    statuts prévoient également des dispositions de <strong>continuité minimale</strong> en cas
-    de baisse d’effectifs (mise en veille), ainsi que des clauses de sauvegarde
-    juridique et de conformité au droit français et européen (liberté d’association,
-    non-confusion avec les autorités publiques, décorations officielles, titres
-    réglementés, etc.).
-  </p>
-
-  <h2>Version intégrale</h2>
-  <p class="note">
-    La version intégrale des statuts (articles détaillés, annexes juridiques et
-    développements historiques et symboliques) est tenue à disposition des membres
-    et des autorités compétentes sur simple demande, et figure dans le dossier
-    officiellement déposé en préfecture et publié au JOAFE.  
-    La présente page web n’en est qu’une <strong>présentation publique de référence</strong>.
-  </p>
-
-  <a href="index.html" class="back-link">← Retour à l’accueil</a>
-  <div class="footer">
-    © O.S.D.9.T.D.J. – Tous droits réservés
-  </div>
+<!-- Drapeau en haut -->
+<div class="drapeau-box">
+  <img src="drapeau-osd9tdj.PNG" alt="Drapeau O.S.D.9.T.D.J.">
 </div>
+
+<div class="container">
+
+<h1>Statuts de l’O.S.D.9.T.D.J.</h1>
+
+<h2>Version publique de référence</h2>
+
+<p>
+L’Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.) est une
+association laïque, culturelle et fraternelle régie par la loi du 1er juillet 1901.
+Elle est déclarée en préfecture, immatriculée sous le n° SIREN <strong>939 461 133</strong>,
+et publiée au JOAFE conformément à la réglementation en vigueur.
+</p>
+
+<p class="note">
+Par respect de la vie privée des dirigeants et des membres, les noms, adresses et
+signatures manuscrites figurant sur la version préfectorale ne sont pas reproduits
+sur ce site. Seul le contenu institutionnel est présenté ici.
+</p>
+
+<p class="note">
+La version complète déposée en préfecture fait foi devant la loi.  
+La présente version est la publication officielle destinée au public.
+</p>
+
+<!-- ================= TON TEXTE INTÉGRAL ===================== -->
+
+<h2>Préambule – Esprit général de l’Ordre</h2>
+<p>
+L’Ordre Sacré des Neuf Templiers de Jérusalem se définit comme une chevalerie
+culturelle, historique, éducative et caritative, héritière de l’esprit des Neuf
+premiers Templiers, sans revendiquer aucune filiation canonique, nobiliaire,
+ni continuation d’un ordre ancien dissous. Son action est orientée vers le service,
+la transmission, l’étude et l’entraide.
+</p>
+<p>
+L’association adhère aux principes de l’Économie Sociale et Solidaire (ESS) :
+gouvernance responsable, gestion désintéressée et réinvestissement des moyens
+dans l’objet social.
+</p>
+<p>
+L’Ordre accueille des personnes issues de toutes origines culturelles, spirituelles
+ou fraternelles, incluant — lorsque cela est conforme aux règles de leurs
+institutions — des membres appartenant à des obédiences maçonniques,
+rosicruciennes, martinistes, gnostiques, ou à des structures ecclésiales
+(diocèses, paroisses, communautés), dans le respect absolu de la laïcité de
+l’association et de son indépendance.
+</p>
+
+<h2>Article 1 – Dénomination</h2>
+<p>
+Il est fondé une association régie par la loi du 1er juillet 1901 ayant pour titre :
+<strong>Ordre Sacré des Neuf Templiers de Jérusalem</strong>  
+(Ordo Sacrum Novem Templariorum Hierosolymae).  
+Sigle statutaire : <strong>O.S.D.9.T.D.J.</strong>
+</p>
+
+<h2>Article 2 – Objet</h2>
+<p>
+L’association a pour objet l’étude, la transmission et la valorisation de l’héritage
+chevaleresque et templier, l’organisation d’activités culturelles, éducatives,
+historiques et caritatives, ainsi que la promotion de la fraternité, de la paix et
+de l’entraide.
+</p>
+
+<h2>Article 3 – Siège social</h2>
+<p>
+Le siège social est fixé en Haute-Savoie (74), France.  
+L’adresse exacte est déterminée par le Conseil directeur et déclarée en
+préfecture.
+</p>
+
+<h2>Article 4 – Durée</h2>
+<p>
+La durée de l’association est illimitée.
+</p>
+
+<h2>Article 5 – Membres</h2>
+<p>
+L’association se compose de membres actifs, membres d’honneur et membres
+bienfaiteurs.
+</p>
+
+<h2>Article 6 – Admission</h2>
+<p>
+L’admission est prononcée par le Grand Maître (Président), après avis conforme
+d’au moins deux Commandeurs. L’adhésion implique l’acceptation des statuts
+et du règlement intérieur.
+</p>
+
+<h2>Article 7 – Radiation</h2>
+<p>
+La radiation peut résulter de démission, décès, ou décision du Conseil directeur,
+dans le respect d’une procédure contradictoire. Les cotisations restent acquises.
+</p>
+
+<h2>Articles 8 à 11 – Ressources, famille, exonérations, mineurs</h2>
+<p>
+Les ressources proviennent des cotisations, dons manuels et diverses activités
+conformes à la loi. Des aménagements sont prévus pour les familles et les
+personnes contribuant régulièrement au fonctionnement.  
+Les mineurs ne participent qu’à des activités éducatives, culturelles ou
+historiques, sous encadrement et autorisation parentale.
+</p>
+
+<h2>Articles 11 bis à 11 sexies – Premier Grand Maître et garanties</h2>
+<p>
+Le Premier Grand Maître (Fondateur) conserve un droit moral sur l’intégrité des
+statuts et des emblèmes. Les anciens Grands Maîtres disposent d’une voix
+consultative. Des clauses de sauvegarde permettent, en cas de manquement
+grave, de convoquer une Assemblée générale extraordinaire.
+</p>
+
+<h2>Article 12 – Neutralité</h2>
+<p>
+L’association est neutre politiquement et religieusement.  
+Elle ne revendique aucune filiation initiatique ni succession d’un ordre ancien.
+</p>
+
+<h2>Article 12 bis – Non-confusion et indépendance</h2>
+<p>
+L’association affirme son indépendance vis-à-vis des groupes utilisant les
+dénominations « OSMTJ », « OSMTH », « OTJ », ou similaires.  
+Elle utilise exclusivement le sigle <strong>O.S.D.9.T.D.J.</strong>
+</p>
+
+<h2>Article 13 – Dimension internationale et coopérations</h2>
+<p>
+L’association peut établir des représentations à l’étranger et coopérer avec des
+groupes culturels, fraternels, spirituels ou caritatifs dans le respect de sa
+laïcité, de son indépendance et des lois locales.  
+Ces coopérations ne créent ni fusion ni mandat de représentation.
+</p>
+
+<h2>Article 14 – Règlement intérieur</h2>
+<p>
+Un règlement intérieur précise les modalités pratiques d’application des statuts
+et est adopté par l’Assemblée générale.
+</p>
+
+<h2>Article 15 – Finances</h2>
+<p>
+La gestion financière est transparente, contrôlée et désintéressée : double
+signature bancaire, comptes distincts, interdiction de toute caisse occulte,
+conformité avec les règles de l’ESS.
+</p>
+
+<h2>Articles 16 et suivants – Dissolution</h2>
+<p>
+En cas de dissolution, l’actif est dévolu à une structure reconnue d’utilité
+publique ou caritative, conformément à la loi.
+</p>
+
+<h2>Version intégrale</h2>
+<p class="note">
+La version complète des statuts est disponible sur demande pour les membres
+et pour les autorités habilitées.  
+Cette page constitue la version publique officielle.
+</p>
+
+<a href="index.html" class="back-link">← Retour à l’accueil</a>
+
+<div class="footer">© O.S.D.9.T.D.J. – Tous droits réservés</div>
+
+</div>
+
 </body>
 </html>
