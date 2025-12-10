@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Commanderies & représentations – O.S.D.9.T.D.J.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --or: #d6a728;
+      --clair: #f5f2ea;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Lato', Arial, sans-serif;
+      color: var(--clair);
+      background: #000;
+      text-align: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Fond discret */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.05), transparent 60%),
+                  linear-gradient(to bottom, #050505, #000000);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(0,0,0,0.2), rgba(0,0,0,0.95));
+      z-index: -1;
+    }
+
+    /* NAV BAR */
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 10px 0 5px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(214,167,40,0.85);
+      color: var(--clair);
+      background: rgba(0,0,0,0.7);
+    }
+
+    .nav a:hover {
+      background: var(--or);
+      color: #000;
+    }
+
+    /* SATOR doré en cercle étincelant */
+    .sator-box {
+      margin: 10px auto 18px;
+      padding: 10px;
+      border-radius: 50%;
+      border: 3px solid var(--or);
+      box-shadow:
+        0 0 10px rgba(214,167,40,0.6),
+        0 0 30px rgba(214,167,40,0.35);
+      background: radial-gradient(circle at top, rgba(214,167,40,0.25), rgba(0,0,0,0.95));
+      width: 260px;
+      height: 260px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sator-box img {
+      max-width: 88%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto 40px;
+      padding: 10px 16px 40px;
+      text-align: left;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cinzel', serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.7rem;
+      margin: 8px 0 4px;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      color: var(--or);
+      margin-top: 26px;
+      margin-bottom: 8px;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      color: var(--or);
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.55;
+      margin: 6px 0;
+      text-align: justify;
+    }
+
+    ul {
+      margin: 4px 0 8px;
+      padding-left: 20px;
+      line-height: 1.5;
+    }
+
+    .note {
+      border-left: 3px solid var(--or);
+      padding-left: 10px;
+      margin: 10px 0;
+      font-size: 0.95rem;
+      opacity: 0.95;
+    }
+
+    .cta-box {
+      text-align: center;
+      margin: 18px 0 6px;
+    }
+
+    .cta {
+      display: inline-block;
+      margin: 4px 6px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 2px solid var(--or);
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--clair);
+      background: rgba(0,0,0,0.7);
+    }
+
+    .cta:hover {
+      background: var(--or);
+      color: #000;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.5rem; }
+      h2 { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <a href="index.html">Accueil</a>
+    <a href="statuts.html">Statuts</a>
+    <a href="adhesion.html">Formulaire d’adhésion</a>
+  </nav>
+
+  <!-- SATOR DORÉ -->
+  <div class="sator-box">
+    <img src="sator.PNG" alt="SATOR de l’O.S.D.9.T.D.J.">
+  </div>
+
+  <div class="container">
+
+    <h1>Commanderies & représentations locales</h1>
+    <p style="text-align:center;font-style:italic;margin-top:0;">
+      Ordre Sacré des Neuf Templiers de Jérusalem – <strong>O.S.D.9.T.D.J.</strong><br>
+      Association loi 1901 – RNA : W744007354 – « <span style="color:var(--or);font-weight:700;">Per Crucem, Veritas</span> »
+    </p>
+
+    <h2>1 – Principe général</h2>
+    <p>
+      Lorsqu’aucune représentation de l’Ordre n’est encore présente sur une région ou un pays,
+      il est possible, sous conditions, de créer une <strong>Commanderie rattachée</strong> à
+      l’association mère. Cette structure agit dans un cadre strictement <strong>laïque, culturel,
+      historique et caritatif</strong>, conformément aux statuts déposés en préfecture.
+    </p>
+    <p>
+      L’objectif d’une Commanderie est de faire rayonner localement l’esprit de l’O.S.D.9.T.D.J.,
+      sans jamais se présenter comme un ordre indépendant ni modifier les emblèmes, les textes
+      ou la doctrine officielle.
+    </p>
+
+    <h2>2 – Activités sociales et rayonnement local</h2>
+    <p>
+      Chaque Commanderie peut organiser, sur son territoire&nbsp;:
+    </p>
+    <ul>
+      <li>des manifestations culturelles, conférences, expositions et rencontres publiques&nbsp;;</li>
+      <li>des buvettes, stands et points de restauration lors de manifestations autorisées&nbsp;;</li>
+      <li>des actions sociales ou caritatives (collectes, aides ponctuelles, visites, etc.)&nbsp;;</li>
+      <li>des temps d’étude, de formation et de fraternité entre membres, en présentiel ou en visio.</li>
+    </ul>
+    <p class="note">
+      Toutes ces activités doivent rester conformes aux lois du pays concerné, aux statuts
+      de l’O.S.D.9.T.D.J. et aux décisions du Grand Maître et du Conseil des Sages.
+    </p>
+
+    <h2>3 – Compte bancaire local et gestion financière</h2>
+    <p>
+      Conformément aux dispositions financières des statuts, une Commanderie peut disposer
+      d’un <strong>compte bancaire local</strong> pour gérer ses activités sociales et culturelles.
+      Ce compte est :
+    </p>
+    <ul>
+      <li>ouvert au nom de la structure autorisée (association locale ou représentation) ;</li>
+      <li>placé sous la responsabilité du <strong>Commandeur</strong> et, le cas échéant, d’un trésorier local ;</li>
+      <li>sous le contrôle permanent du <strong>Grand Maître</strong> et du Conseil directeur, qui peuvent demander à tout moment les relevés et justificatifs ;</li>
+      <li>réservé aux cotisations, dons et recettes d’activités liées à l’Ordre.</li>
+    </ul>
+    <p>
+      Les moyens financiers sont utilisés sur place pour les projets sociaux, caritatifs et
+      culturels, mais restent rattachés à l’O.S.D.9.T.D.J. dans son ensemble.
+    </p>
+
+    <h2>4 – Structure juridique adaptée au pays</h2>
+    <p>
+      Dans certains pays, la loi peut exiger la création d’une <strong>structure juridique locale</strong>
+      (association, fondation ou équivalent) pour mener des activités régulières. Dans ce cas,
+      l’O.S.D.9.T.D.J. peut autoriser, par décision du Grand Maître et du Conseil des Sages,
+      l’ouverture d’une association-sœur ou d’une structure adaptée.
+    </p>
+    <p>
+      Les statuts de cette structure locale doivent être:
+    </p>
+    <ul>
+      <li>compatibles avec les statuts de l’O.S.D.9.T.D.J. ;</li>
+      <li>approuvés par l’Ordre avant dépôt ;</li>
+      <li>clairement rattachés à l’Ordre Sacré des Neuf Templiers de Jérusalem.</li>
+    </ul>
+
+    <h2>5 – Conditions pour ouvrir une Commanderie</h2>
+    <p>
+      Une Commanderie ne s’ouvre pas pour une seule personne. Elle suppose :
+    </p>
+    <ul>
+      <li>que le secteur ou le pays ne soit pas déjà couvert par une représentation existante ;</li>
+      <li>l’existence d’un <strong>petit groupe</strong> de personnes souhaitant se rattacher à l’Ordre
+          (et non un seul membre isolé) ;</li>
+      <li>un membre motivé prêt à assumer la charge de Commandeur, dans l’esprit du service ;</li>
+      <li>l’acceptation intégrale des statuts, du règlement intérieur et de la charte morale ;</li>
+      <li>la validation expresse du <strong>Grand Maître</strong>, après avis du Conseil directeur / Conseil des Sages.</li>
+    </ul>
+
+    <h2>6 – Formation et cursus de l’Ordre</h2>
+    <p>
+      Le membre qui souhaite ouvrir une Commanderie commence comme tout le monde :
+      il remplit le <strong>formulaire officiel d’adhésion</strong>, est admis comme Novice, puis suit le
+      <strong>cursus de formation</strong> de l’Ordre.
+    </p>
+    <p>
+      Cette formation peut se faire :
+    </p>
+    <ul>
+      <li>en présentiel lors des rencontres de l’Ordre ;</li>
+      <li>par <strong>visioconférence</strong> pour les frères et sœurs éloignés géographiquement ;</li>
+      <li>au moyen des documents et cours transmis par le Grand Maître et le Conseil directeur.</li>
+    </ul>
+    <p>
+      Les personnes qui se rattachent à cette future Commanderie s’engagent elles aussi
+      à <strong>suivre le cursus de l’Ordre</strong>, à respecter le Muliduve, à répondre aux convocations
+      et à participer réellement à la vie de l’association.
+    </p>
+
+    <div class="cta-box">
+      <a class="cta" href="adhesion.html">Remplir le formulaire d’adhésion</a>
+      <a class="cta" href="statuts.html">Lire les statuts complets</a>
+    </div>
+
+    <h2>7 – Rappel important</h2>
+    <p class="note">
+      Toute Commanderie, même dotée d’un compte bancaire propre ou d’une structure locale,
+      reste <strong>pleinement rattachée</strong> à l’O.S.D.9.T.D.J. Elle ne peut en aucun cas modifier
+      les emblèmes, la doctrine, les textes ou le nom de l’Ordre sans accord écrit du Grand
+      Maître et du Conseil des Sages.
+    </p>
+
+    <div class="cta-box">
+      <a class="cta" href="index.html">← Retour à l’accueil</a>
+    </div>
+
+    <div class="footer">
+      © O.S.D.9.T.D.J. – Tous droits réservés
+    </div>
+
+  </div>
+
+</body>
+</html>
