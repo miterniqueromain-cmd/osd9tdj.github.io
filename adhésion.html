@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulaire d’adhésion – O.S.D.9.T.D.J.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --or: #d6a728;
+      --clair: #f5f2ea;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Lato', Arial, sans-serif;
+      color: var(--clair);
+      background: #000;
+      text-align: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Fond décoratif (arabesques) */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("decor.PNG") center top / 110% no-repeat;
+      opacity: 0.18;
+      z-index: -2;
+    }
+
+    /* Dégradé noir par-dessus */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(0,0,0,0.2), rgba(0,0,0,0.95)),
+                  linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.98));
+      z-index: -1;
+    }
+
+    /* Drapeau encadré or en haut */
+    .drapeau-box {
+      margin: 18px auto 20px;
+      padding: 6px;
+      border: 3px solid var(--or);
+      border-radius: 14px;
+      display: inline-block;
+      background: rgba(0,0,0,0.7);
+    }
+    .drapeau-box img {
+      width: 320px;
+      max-width: 85vw;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto 40px;
+      padding: 10px 16px 40px;
+      text-align: left;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cinzel', serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin: 5px 0 10px;
+    }
+    h2 {
+      font-size: 1.2rem;
+      color: var(--or);
+      margin-top: 28px;
+      margin-bottom: 10px;
+    }
+    h3 {
+      font-size: 1.05rem;
+      color: var(--or);
+      margin-top: 20px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.55;
+      margin: 6px 0;
+      text-align: justify;
+    }
+
+    .note {
+      border-left: 3px solid var(--or);
+      padding-left: 10px;
+      margin: 10px 0;
+      font-size: 0.95rem;
+      opacity: 0.95;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    fieldset {
+      border: 1px solid rgba(214,167,40,0.6);
+      border-radius: 10px;
+      padding: 12px 14px 16px;
+      margin-bottom: 18px;
+      background: rgba(0,0,0,0.65);
+    }
+    legend {
+      padding: 0 10px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      color: var(--or);
+      text-transform: uppercase;
+    }
+
+    label {
+      display: block;
+      margin: 4px 0 2px;
+      font-size: 0.95rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    textarea {
+      width: 100%;
+      padding: 7px 9px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.22);
+      background: rgba(12,12,12,0.85);
+      color: var(--clair);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .inline > div {
+      flex: 1 1 180px;
+    }
+
+    .check-group {
+      margin: 4px 0;
+      font-size: 0.92rem;
+      line-height: 1.4;
+    }
+    .check-group input {
+      margin-right: 6px;
+    }
+
+    .section-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .important {
+      color: var(--or);
+      font-weight: 700;
+    }
+
+    .submit-zone {
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    button[type="submit"] {
+      padding: 10px 26px;
+      border-radius: 999px;
+      border: 2px solid var(--or);
+      background: rgba(0,0,0,0.7);
+      color: var(--clair);
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover {
+      background: var(--or);
+      color: #000;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.5rem; }
+      h2 { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Drapeau -->
+  <div class="drapeau-box">
+    <img src="drapeau-osd9tdj.PNG" alt="Drapeau O.S.D.9.T.D.J.">
+  </div>
+
+  <div class="container">
+
+    <h1>Formulaire officiel de demande d’adhésion</h1>
+    <p style="text-align:center;font-style:italic;margin-top:0;">
+      Ordre Sacré des Neuf Templiers de Jérusalem – <strong>O.S.D.9.T.D.J.</strong><br>
+      Association loi 1901 – RNA : W744007354 – « <span class="important">Per Crucem, Veritas</span> »
+    </p>
+
+    <h2>I – Préambule</h2>
+    <p>
+      L’admission au sein de l’Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)
+      constitue un engagement <strong>solennel, volontaire et réfléchi</strong>. L’Ordre est une
+      association culturelle, laïque et non religieuse, régie par la loi du 1<sup>er</sup> juillet 1901
+      et par ses statuts déposés en préfecture.
+    </p>
+    <p class="note">
+      <span class="important">La lecture intégrale des statuts et du règlement intérieur est
+      OBLIGATOIRE</span> avant toute demande d’adhésion. Toute demande suppose cette lecture préalable.
+    </p>
+    <p>
+      Toute personne admise débute au rang de <strong>Novice</strong> pour une durée minimale d’un an,
+      comprenant :
+    </p>
+    <ul style="margin-top:4px;margin-bottom:6px;">
+      <li>l’étude culturelle, historique et symbolique de l’Ordre et de ses sources ;</li>
+      <li>la participation aux activités éducatives, caritatives et de représentation ;</li>
+      <li>la discipline morale et fraternelle au sein du groupe ;</li>
+      <li>la compréhension progressive du corpus doctrinal de l’O.S.D.9.T.D.J.</li>
+    </ul>
+    <p>
+      L’admission n’est jamais automatique. Elle relève de la décision du <strong>Grand Maître
+      (Président)</strong>, assisté d’au moins <strong>deux Commandeurs</strong>, après étude du dossier
+      et entretien.
+    </p>
+
+    <!-- FORMULAIRE -->
+    <form action="mailto:contact@osd9tdj.org" method="post" enctype="text/plain">
+
+      <fieldset>
+        <legend>II – Identité du postulant</legend>
+
+        <div class="inline">
+          <div>
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="Nom" required>
+          </div>
+          <div>
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="Prénom" required>
+          </div>
+        </div>
+
+        <label for="nom_usage">Nom d’usage (facultatif) :</label>
+        <input type="text" id="nom_usage" name="Nom_d_usage">
+
+        <div class="inline">
+          <div>
+            <label for="naissance">Date de naissance :</label>
+            <input type="date" id="naissance" name="Date_de_naissance" required>
+          </div>
+          <div>
+            <label for="lieu">Lieu de naissance :</label>
+            <input type="text" id="lieu" name="Lieu_de_naissance" required>
+          </div>
+        </div>
+
+        <div class="inline">
+          <div>
+            <label for="nationalite">Nationalité :</label>
+            <input type="text" id="nationalite" name="Nationalité" required>
+          </div>
+        </div>
+
+        <label for="adresse">Adresse complète :</label>
+        <textarea id="adresse" name="Adresse" required></textarea>
+
+        <div class="inline">
+          <div>
+            <label for="telephone">Téléphone :</label>
+            <input type="tel" id="telephone" name="Téléphone" required>
+          </div>
+          <div>
+            <label for="email">E-mail :</label>
+            <input type="email" id="email" name="Email" required>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>III – Pièces obligatoires à fournir</legend>
+        <p>
+          Les pièces suivantes doivent être envoyées <strong>en pièce jointe</strong> au même e-mail que
+          ce formulaire ou remises lors de la convocation :
+        </p>
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Piece_CNI" required>
+            Copie recto-verso d’une pièce d’identité officielle (CNI ou passeport)
+          </label>
+        </div>
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Piece_photo" required>
+            Photographie récente en couleur (format identité)
+          </label>
+        </div>
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Piece_domicile" required>
+            Justificatif de domicile de moins de 3 mois
+          </label>
+        </div>
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Piece_casier" required>
+            Je m’engage à fournir, sur demande, un extrait de casier judiciaire
+            (bulletin n°3) et je déclare sur l’honneur ne pas avoir de condamnation
+            incompatible avec les valeurs de l’Ordre.
+          </label>
+        </div>
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Piece_cv_lettre">
+            Facultatif : Lettre de motivation détaillée et/ou CV joint
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>IV – Présentation du postulant</legend>
+
+        <label for="profession">Profession / situation actuelle :</label>
+        <input type="text" id="profession" name="Profession">
+
+        <label for="competences">Compétences particulières (métiers, langues, bénévolat, logistique, etc.) :</label>
+        <textarea id="competences" name="Compétences_particulières"></textarea>
+
+        <h3>Appartenance à d’autres groupes, églises ou ordres</h3>
+        <p>
+          L’O.S.D.9.T.D.J. est une association laïque et indépendante. Les membres sont libres
+          d’appartenir, à titre personnel, à des fraternités maçonniques, rosicruciennes,
+          martinistes, gnostiques, à des groupes culturels ou à des Églises/diocèses/parois­ses,
+          à condition que cette appartenance soit compatible avec leurs engagements et qu’elle
+          respecte l’indépendance de l’Ordre.
+        </p>
+
+        <div class="check-group">
+          <span class="section-title">Êtes-vous actuellement membre d’une autre association, ordre, obédience ou Église&nbsp;?</span><br>
+          <label><input type="radio" name="Autres_groupes_actuel" value="Oui"> Oui</label>
+          <label><input type="radio" name="Autres_groupes_actuel" value="Non" checked> Non</label>
+        </div>
+
+        <label for="details_autres">
+          Si oui, préciser le ou les groupes, obédiences ou communautés (ex. : loge maçonnique,
+          ordre rosicrucien, fraternité martiniste, diocèse, communauté, etc.) et, le cas
+          échéant, préciser si votre responsable est informé et favorable :
+        </label>
+        <textarea id="details_autres" name="Détails_autres_groupes"></textarea>
+
+        <label for="anciens_groupes">
+          Avez-vous déjà appartenu à d’autres groupes, ordres ou associations similaires&nbsp;?
+          Si oui, lesquels, et pour quelles raisons les avez-vous quittés (réponse sur l’honneur) :
+        </label>
+        <textarea id="anciens_groupes" name="Anciens_groupes_et_raisons"></textarea>
+
+        <label for="motivations">Motivations principales pour rejoindre l’O.S.D.9.T.D.J. (parcours de vie, attentes, sens de votre démarche) :</label>
+        <textarea id="motivations" name="Motivations" required></textarea>
+      </fieldset>
+
+      <fieldset>
+        <legend>V – Engagement de présence, de participation et de réponse</legend>
+        <p>
+          L’Ordre repose sur la présence réelle des membres. Un postulant qui ne répond pas aux
+          convocations ou ne participe jamais à la vie de l’association ne peut pas devenir
+          Chevalier actif.
+        </p>
+
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Engagement_reponse" required>
+            Je m’engage à <strong>répondre systématiquement</strong> aux convocations, messages ou
+            sondages (au minimum par « oui », « non » ou « empêché ») sur les canaux officiels
+            de l’Ordre.
+          </label>
+        </div>
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Engagement_presence" required>
+            Je m’engage, dans la mesure de mes possibilités, à être présent aux réunions,
+            rencontres, assemblées générales, cours et activités annoncées, et à prévenir en cas
+            d’absence.
+          </label>
+        </div>
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Engagement_buvette" required>
+            Je m’engage à participer, lorsque cela m’est demandé et possible, aux actions
+            concrètes de l’association (buvette, logistique, montage/démontage, stands, actions
+            caritatives, manifestations culturelles, etc.).
+          </label>
+        </div>
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Engagement_image" required>
+            Je comprends que mon comportement, y compris sur les réseaux sociaux et en public,
+            ne devra jamais porter atteinte à l’image de l’O.S.D.9.T.D.J.
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>VI – Les Neuf Colonnes – Principes fondamentaux</legend>
+        <p>
+          Je reconnais comme fondements de l’Ordre les Neuf Colonnes suivantes :
+        </p>
+        <ol style="margin-top:4px;margin-bottom:4px;">
+          <li>Confiance</li>
+          <li>Fraternité</li>
+          <li>Loyauté</li>
+          <li>Justice</li>
+          <li>Force morale</li>
+          <li>Prudence</li>
+          <li>Vision</li>
+          <li>Devoir</li>
+          <li>Bienveillance</li>
+        </ol>
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Engagement_neuf_colonnes" required>
+            Je déclare m’engager à vivre et honorer ces Neuf Colonnes en toute circonstance,
+            au sein de l’Ordre et dans ma vie personnelle.
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>VII – Cotisation et références aux statuts</legend>
+        <p>
+          Je reconnais que :
+        </p>
+        <ul style="margin-top:4px;margin-bottom:4px;">
+          <li>le montant de la cotisation annuelle n’est pas fixé par ce formulaire ;</li>
+          <li>il est déterminé et révisé exclusivement par l’Assemblée Générale, selon les statuts ;</li>
+          <li>le paiement de la cotisation est obligatoire pour valider l’adhésion ;</li>
+          <li>aucun remboursement ne peut avoir lieu sans décision du Bureau ;</li>
+          <li>le non-paiement peut entraîner suspension ou radiation conformément aux statuts.</li>
+        </ul>
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Accept_cotisation" required>
+            Je confirme avoir compris ces règles financières et les accepter.
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>VIII – Engagement du Novice</legend>
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Novice_lecture_statuts" required>
+            Je déclare avoir lu et compris l’intégralité des <strong>statuts</strong> de l’Ordre
+            et de son <strong>règlement intérieur</strong> (lecture obligatoire avant l’envoi de ce formulaire).
+          </label>
+        </div>
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Novice_nature_ordre" required>
+            Je reconnais que l’O.S.D.9.T.D.J. est une association culturelle, laïque, non
+            politique et non religieuse, et ne constitue ni une Église, ni une secte.
+          </label>
+        </div>
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Novice_duree" required>
+            J’accepte la période d’une année minimum au rang de Novice, sans garantie
+            d’admission définitive.
+          </label>
+        </div>
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Novice_symboles" required>
+            Je m’engage à ne pas utiliser les symboles, blasons, sceaux ou le nom de l’Ordre
+            en public (réseaux sociaux, événements, documents) sans accord préalable du
+            Grand Maître ou du Conseil directeur.
+          </label>
+        </div>
+        <div class="check-group">
+          <label>
+            <input type="checkbox" name="Novice_obéissance" required>
+            Je m’engage à respecter les décisions du Grand Maître, du Conseil directeur et du
+            Conseil des Sages, dans le cadre des statuts.
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>IX – Engagement de confidentialité, de respect et de restitution</legend>
+        <p class="note" style="margin-top:0;">
+          Le texte ci-dessous reprend l’<strong>Engagement de confidentialité</strong> interne de
+          l’Ordre. En cochant les cases et en signant ce formulaire, vous le validez
+          numériquement.
+        </p>
+
+        <p><span class="section-title">Article 1 – Objet du présent engagement</span><br>
+          Je reconnais que tous les textes, symboles, documents, images, schémas,
+          enseignements, correspondances et créations produits par le Grand Maître ou par le
+          Conseil directeur de l’O.S.D.9.T.D.J. sont des œuvres protégées par le Code de la
+          propriété intellectuelle (articles L.111-1 à L.335-2). Ils ne peuvent être ni copiés,
+          ni partagés, ni transmis sans autorisation écrite préalable. Ces écrits constituent le
+          <strong>corpus doctrinal et culturel interne</strong> de l’Ordre, conformément aux articles 2, 3 et 5
+          de ses statuts officiels.
+        </p>
+
+        <p><span class="section-title">Article 2 – Confidentialité et usage interne</span><br>
+          Tout membre, quel que soit son grade ou sa fonction :
+        </p>
+        <ul style="margin-top:4px;margin-bottom:4px;">
+          <li>s’engage à ne pas reproduire, diffuser, transmettre ou publier tout ou partie des
+              documents internes (textes, plans, graphiques, vidéos, messages, etc.), y compris
+              sur internet ou réseaux sociaux ;</li>
+          <li>reconnaît que ces documents lui sont remis à titre strictement personnel et
+              temporaire, pour <strong>étude interne</strong> ;</li>
+          <li>s’engage à préserver le secret des travaux, échanges et recherches afin de garantir
+              la sérénité et la sécurité morale de l’Ordre.</li>
+        </ul>
+
+        <p><span class="section-title">Article 3 – Restitution des documents</span><br>
+          Les exemplaires des textes, livrets ou fascicules remis pendant les réunions demeurent
+          la propriété de l’Ordre. Chaque membre s’engage :
+        </p>
+        <ul style="margin-top:4px;margin-bottom:4px;">
+          <li>à ne pas conserver ni reproduire ces documents après étude ;</li>
+          <li>à les restituer au Grand Maître ou au secrétaire lors de la séance suivante ;</li>
+          <li>à ne pas en produire de copies numériques ou papier, sous peine d’exclusion.</li>
+        </ul>
+
+        <p><span class="section-title">Article 4 – Références statutaires</span><br>
+          Je reconnais que ces obligations découlent directement des statuts de l’Ordre, en
+          particulier de l’article qui impose la confidentialité des travaux, communications et
+          documents internes, toute divulgation non autorisée constituant une faute grave
+          susceptible d’exclusion.
+        </p>
+
+        <p><span class="section-title">Article 5 – Sanctions en cas de violation</span><br>
+          Toute reproduction, diffusion, transmission ou non-restitution d’un écrit du Grand Maître
+          ou d’un document interne, sans accord écrit du Conseil directeur, constitue une
+          <strong>faute grave</strong> entraînant :
+        </p>
+        <ul style="margin-top:4px;margin-bottom:4px;">
+          <li>la suspension immédiate du membre ;</li>
+          <li>une procédure d’exclusion définitive, sans possibilité de réintégration ;</li>
+          <li>le cas échéant, des poursuites civiles conformément au Code de la propriété
+              intellectuelle.</li>
+        </ul>
+        <p>
+          L’Ordre ne peut collaborer ni maintenir de lien avec un <em>transfuge</em>, c’est-à-dire un
+          membre ayant quitté l’Ordre tout en conservant, copiant ou diffusant ses textes,
+          symboles ou doctrines. Toute coopération avec de telles personnes est strictement
+          interdite.
+        </p>
+
+        <p><span class="section-title">Article 6 – Validation de l’engagement</span></p>
+        <div class="check-group">
+          <label><input type="checkbox" name="Confid_lecture" required>
+            Je déclare avoir lu intégralement cet engagement de confidentialité.
+          </label>
+        </div>
+        <div class="check-group">
+          <label><input type="checkbox" name="Confid_non_reproduction" required>
+            Je m’engage à respecter la confidentialité, la restitution et la non-reproduction des
+            écrits et travaux du Grand Maître et du Conseil directeur de l’O.S.D.9.T.D.J., y
+            compris après toute démission ou radiation.
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>X – Données personnelles (RGPD)</legend>
+        <p>
+          Les informations recueillies à partir de ce formulaire sont enregistrées par
+          <strong>l’O.S.D.9.T.D.J. – Conseil directeur</strong>. Elles sont utilisées exclusivement pour :
+        </p>
+        <ul style="margin-top:4px;margin-bottom:4px;">
+          <li>l’étude de votre demande d’adhésion ;</li>
+          <li>la gestion des listes de membres, convocations et cotisations ;</li>
+          <li>la communication interne de l’association.</li>
+        </ul>
+        <p>
+          Elles ne sont transmises à aucun tiers, sont conservées de manière sécurisée et peuvent
+          être rectifiées ou supprimées sur simple demande écrite conformément au RGPD. En cas
+          de refus définitif d’adhésion, les documents peuvent être détruits sur demande.
+        </p>
+
+        <div class="check-group">
+          <label><input type="checkbox" name="RGPD_consentement" required>
+            J’autorise l’O.S.D.9.T.D.J. à traiter les données indiquées dans ce formulaire pour
+            l’étude de ma demande et la gestion éventuelle de mon adhésion.
+          </label>
+        </div>
+        <div class="check-group">
+          <label><input type="checkbox" name="RGPD_contact" required>
+            J’accepte d’être contacté(e) par l’Ordre (e-mail, téléphone, messagerie) pour les
+            convocations, informations et activités internes.
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>XI – Formule solennelle et validation</legend>
+        <p>
+          « Au nom de ma parole, devant les traditions que l’Ordre perpétue et devant les
+          témoins de mon engagement, je promets d’avancer avec droiture, fidélité et courage.
+          Que ce chemin soit pour moi un chemin d’étude, de service et d’élévation intérieure. »
+        </p>
+
+        <div class="check-group">
+          <label><input type="checkbox" name="Accept_formule" required>
+            Je fais mienne cette formule solennelle et je demande respectueusement à être
+            reçu(e) comme Novice au sein de l’O.S.D.9.T.D.J., sous réserve de la décision du
+            Grand Maître assisté de deux Commandeurs.
+          </label>
+        </div>
+
+        <div class="inline" style="margin-top:8px;">
+          <div>
+            <label for="lieu_signature">Fait à :</label>
+            <input type="text" id="lieu_signature" name="Lieu_signature">
+          </div>
+          <div>
+            <label for="date_signature">Le :</label>
+            <input type="date" id="date_signature" name="Date_signature">
+          </div>
+        </div>
+
+        <label for="signature_manu">
+          Signature (taper votre nom et la mention « Lu et approuvé, bon pour engagement ») :
+        </label>
+        <textarea id="signature_manu" name="Signature_numérique" required></textarea>
+      </fieldset>
+
+      <div class="submit-zone">
+        <button type="submit">Envoyer ma demande d’adhésion</button>
+      </div>
+
+    </form>
+
+    <div class="footer">
+      © O.S.D.9.T.D.J. – Formulaire officiel d’adhésion. Version publique, sans indication des noms et signatures des dirigeants.
+    </div>
+
+  </div>
+
+</body>
+</html>
