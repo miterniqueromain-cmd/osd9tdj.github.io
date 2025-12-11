@@ -226,7 +226,7 @@
       opacity: 0.85;
     }
 
-    /* Liens de navigation (accueil / statuts) */
+    /* Liens de navigation (accueil / statuts / être rappelé) */
     .nav-links {
       text-align: center;
       margin: 6px 0 10px;
@@ -270,10 +270,11 @@
       Association loi 1901 – RNA : W744007354 – « <span class="important">Per Crucem, Veritas</span> »
     </p>
 
-    <!-- Liens retour accueil / statuts -->
+    <!-- Liens retour accueil / statuts / être rappelé -->
     <div class="nav-links">
       <a href="index.html" class="nav-link">← Retour à l’accueil</a>
       <a href="statuts.html" class="nav-link">Consulter les statuts</a>
+      <a href="contact.html" class="nav-link">📞 Être rappelé</a>
     </div>
 
     <h2>I – Préambule</h2>
@@ -448,6 +449,24 @@
           Si oui, lesquels, et pour quelles raisons les avez-vous quittés (réponse sur l’honneur) :
         </label>
         <textarea id="anciens_groupes" name="Anciens_groupes_et_raisons"></textarea>
+
+        <h3>Parrainage et origine de votre démarche</h3>
+
+        <div class="check-group">
+          <span class="section-title">Êtes-vous parrainé(e) par un membre déjà admis au sein de l’Ordre&nbsp;?</span><br>
+          <label><input type="radio" name="Parrainage" value="Oui"> Oui</label>
+          <label><input type="radio" name="Parrainage" value="Non" checked> Non</label>
+        </div>
+
+        <label for="nom_parrain">
+          Si oui, merci d’indiquer le nom et le prénom du membre qui vous parraine :
+        </label>
+        <input type="text" id="nom_parrain" name="Nom_du_parrain">
+
+        <label for="origine_ordre">
+          Comment avez-vous connu l’O.S.D.9.T.D.J.&nbsp;? (site internet, réseaux sociaux, autre groupe, membre de l’Ordre, évènement, article, etc.) :
+        </label>
+        <textarea id="origine_ordre" name="Origine_Ordre"></textarea>
 
         <label for="motivations">Motivations principales pour rejoindre l’O.S.D.9.T.D.J. (parcours de vie, attentes, sens de votre démarche) :</label>
         <textarea id="motivations" name="Motivations" required></textarea>
