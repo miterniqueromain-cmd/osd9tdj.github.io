@@ -1,0 +1,21 @@
+{
+  "name": "Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J.",
+  "short_name": "OSD9TDJ",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#d6a728",
+  "description": "Organisation culturelle et internationale fondée sur l’héritage historique et chevaleresque des Neuf Templiers de Jérusalem.",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
