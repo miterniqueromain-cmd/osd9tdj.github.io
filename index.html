@@ -1,152 +1,153 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-width=1.0">
- <title>Ordre Sacré des Neuf Templiers de Jérusalem</title>
- <meta name="description"
-       content="Site officiel de l’O.S.D.9.T.D.J. – Ordre Sacré des Neuf Templiers de Jérusalem.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ordre Sacré des Neuf Templiers de Jérusalem</title>
+  <meta name="description"
+        content="Site officiel de l’O.S.D.9.T.D.J. – Ordre Sacré des Neuf Templiers de Jérusalem.">
 
- <!-- Polices Google -->
- <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- Polices Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
- <style>
- :root {
-   --or: #ffd700;
-   --clair: #fdf7e5;
- }
+  <style>
+  :root {
+    --or: #ffd700;
+    --clair: #fdf7e5;
+  }
 
- body {
-   margin: 0;
-   padding: 0;
-   font-family: 'Lato', Arial, sans-serif;
-   color: #ffffff;
-   text-align: center;
-   min-height: 100vh;
- }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', Arial, sans-serif;
+    color: #ffffff;
+    text-align: center;
+    min-height: 100vh;
+  }
 
- /* Fond drapeau */
- body::before {
-   content: "";
-   position: fixed;
-   inset: 0;
-   background: url("drapeau-osd9tdj.PNG") no-repeat center center fixed;
-   background-size: cover;
-   z-index: -2;
- }
+  /* Fond drapeau */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url("drapeau-osd9tdj.PNG") no-repeat center center fixed;
+    background-size: cover;
+    z-index: -2;
+  }
 
- /* Voile de lisibilité */
- .overlay {
-   min-height: 100vh;
-   padding: 30px 15px 20px;
-   box-sizing: border-box;
-   background: radial-gradient(circle at top,
-     rgba(0, 0, 0, 0.25),
-     rgba(0, 0, 0, 0.85));
-   display: flex;
-   flex-direction: column;
-   align-items: center;
- }
+  /* Voile de lisibilité */
+  .overlay {
+    min-height: 100vh;
+    padding: 30px 15px 20px;
+    box-sizing: border-box;
+    background: radial-gradient(circle at top,
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.85));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
- /* Menu onglets */
- .tabs {
-   margin-top: 15px;
-   margin-bottom: 25px;
-   display: inline-flex;
-   border-radius: 999px;
-   overflow: hidden;
-   border: 1px solid rgba(255, 215, 0, 0.6);
-   backdrop-filter: blur(6px);
- }
+  /* Menu onglets */
+  .tabs {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    display: inline-flex;
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 215, 0, 0.6);
+    backdrop-filter: blur(6px);
+  }
 
- .tab {
-   padding: 10px 18px;
-   text-decoration: none;
-   color: var(--clair);
-   font-size: 0.95rem;
-   font-weight: 700;
-   font-family: 'Cinzel', serif;
-   background: rgba(0, 0, 0, 0.45);
-   transition: background 0.2s ease, color 0.2s ease;
-   white-space: nowrap;
- }
+  .tab {
+    padding: 10px 18px;
+    text-decoration: none;
+    color: var(--clair);
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Cinzel', serif;
+    background: rgba(0, 0, 0, 0.45);
+    transition: background 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+  }
 
- .tab + .tab {
-   border-left: 1px solid rgba(255, 215, 0, 0.4);
- }
+  .tab + .tab {
+    border-left: 1px solid rgba(255, 215, 0, 0.4);
+  }
 
- .tab:hover {
-   background: rgba(255, 215, 0, 0.20);
-   color: #ffffff;
- }
+  .tab:hover {
+    background: rgba(255, 215, 0, 0.20);
+    color: #ffffff;
+  }
 
- /* Blason central */
- .blason-box {
-   display: inline-block;
-   padding: 18px;
-   margin-top: 25px;
-   margin-bottom: 18px;
-   background: radial-gradient(circle at top,
-     rgba(255, 215, 0, 0.35),
-     rgba(0, 0, 0, 0.95));
-   border: 2px solid var(--or);
-   border-radius: 18px;
-   box-shadow: 0 0 28px rgba(0, 0, 0, 0.8);
- }
+  /* Blason central */
+  .blason-box {
+    display: inline-block;
+    padding: 18px;
+    margin-top: 25px;
+    margin-bottom: 18px;
+    background: radial-gradient(circle at top,
+      rgba(255, 215, 0, 0.35),
+      rgba(0, 0, 0, 0.95));
+    border: 2px solid var(--or);
+    border-radius: 18px;
+    box-shadow: 0 0 28px rgba(0, 0, 0, 0.8);
+  }
 
- .blason-img {
-   width: 340px;
-   max-width: 85vw;
-   height: auto;
- }
+  .blason-img {
+    width: 340px;
+    max-width: 85vw;
+    height: auto;
+  }
 
- h1 {
-   font-family: 'Cinzel', serif;
-   font-size: 2rem;
-   margin: 10px 0 6px;
-   text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
- }
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    margin: 10px 0 6px;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+  }
 
- .subtitle {
-   font-size: 1rem;
-   margin: 0 0 15px;
-   opacity: 0.95;
- }
+  .subtitle {
+    font-size: 1rem;
+    margin: 0 0 15px;
+    opacity: 0.95;
+  }
 
- /* Pied de page */
- .footer {
-   margin-top: auto;
-   padding-top: 15px;
-   font-size: 0.8rem;
-   opacity: 0.9;
-   line-height: 1.35rem;
- }
+  /* Pied de page */
+  .footer {
+    margin-top: auto;
+    padding-top: 15px;
+    font-size: 0.8rem;
+    opacity: 0.9;
+    line-height: 1.35rem;
+  }
 
- .legal-line {
-   font-size: 0.75rem;
-   opacity: 0.9;
- }
+  .legal-line {
+    font-size: 0.75rem;
+    opacity: 0.9;
+  }
 
- /* Empêche le lien SIREN d’être bleu */
- .legal-line a {
-   color: #ffffff !important;
-   text-decoration: none !important;
- }
+  /* Empêche le lien SIREN d’être bleu */
+  .legal-line a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+  }
 
- @media (max-width: 480px) {
-   h1 { font-size: 1.6rem; }
-   .subtitle { font-size: 0.95rem; }
-   .tab { padding: 8px 12px; font-size: 0.85rem; }
- }
- </style>
+  @media (max-width: 480px) {
+    h1 { font-size: 1.6rem; }
+    .subtitle { font-size: 0.95rem; }
+    .tab { padding: 8px 12px; font-size: 0.85rem; }
+  }
+  </style>
 </head>
 <body>
 <div class="overlay">
 
   <!-- MENU -->
   <nav class="tabs">
-    <a href="activites.html" class="tab">Nos activités</a>
+    <a href="activites.html" class="tab">Nos évènements</a>
     <a href="quinoussommes.html" class="tab">Qui nous sommes</a>
+    <a href="boutique.html" class="tab">🛒 Boutique en ligne</a>
     <a href="mentions.html" class="tab">Mentions légales</a>
   </nav>
 
@@ -176,8 +177,6 @@
       W744007354<br>
       <strong>Nature :</strong>
       Organisation à vocation internationale<br>
-     
-     
     </span>
   </div>
 
