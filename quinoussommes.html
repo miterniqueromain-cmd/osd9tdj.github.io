@@ -72,55 +72,65 @@
       font-weight: 700;
     }
 
+    /* Liens-boutons 3D dans le texte */
     a.inline-link {
-      color: var(--or);
+      display: inline-block;
+      padding: 2px 12px;
+      margin: 0 2px;
+      border-radius: 999px;
+      border: 1px solid var(--or);
+      background: linear-gradient(180deg, #ffe9a0, #b88619);
+      color: #120702;
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
       font-weight: 700;
       text-decoration: none;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+      transform: translateY(0);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
     }
 
     a.inline-link:hover {
-      text-decoration: underline;
+      background: linear-gradient(180deg, #fff1b8, #d6a728);
+      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.7);
+      transform: translateY(-1px);
     }
 
-    .button-row {
+    /* Boutons du bas */
+    .bottom-buttons {
       margin-top: 30px;
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
       gap: 12px;
+      justify-content: center;
     }
 
-    .btn {
+    .btn-bottom {
       display: inline-block;
-      padding: 9px 18px;
+      padding: 9px 20px;
       border-radius: 999px;
       text-decoration: none;
       font-size: 0.95rem;
       font-weight: bold;
       border: 1px solid var(--or);
       color: var(--clair);
-      background: transparent;
+      background: rgba(0, 0, 0, 0.4);
       font-family: 'Cinzel', serif;
-      transition: background 0.2s ease, color 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.7);
+      transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .btn:hover {
+    .btn-bottom:hover {
       background: var(--or);
       color: #120702;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.8);
     }
 
-    .footer-link {
-      margin-top: 40px;
-      font-size: 0.9rem;
-    }
-
-    .footer-link a {
-      color: var(--clair);
-      text-decoration: none;
-    }
-
-    .footer-link a:hover {
-      text-decoration: underline;
+    @media (max-width: 600px) {
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.05rem; }
+      p  { font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -198,9 +208,9 @@
   <p>
     L’Ordre est <strong>mixte</strong>, ouvert aux femmes et aux hommes, et respecte strictement
     la neutralité politique et la laïcité prévues dans nos
-    <a href="statuts.html" class="inline-link">statuts</a>. Celles et ceux qui se reconnaissent
+    <a href="statuts.html" class="inline-link">Statuts</a>. Celles et ceux qui se reconnaissent
     dans ces valeurs peuvent entamer le cheminement de Novice via le
-    <a href="adhesion.html" class="inline-link">formulaire d’adhésion</a>.
+    <a href="adhesion.html" class="inline-link">Formulaire d’adhésion</a>.
   </p>
 
   <p>
@@ -216,15 +226,10 @@
     <a href="cotisations.html" class="inline-link">Infos cotisations</a>.
   </p>
 
-  <div class="button-row">
-    <a class="btn" href="statuts.html">Statuts</a>
-    <a class="btn" href="adhesion.html">Devenir membre</a>
-    <a class="btn" href="commanderie.html">Commanderie</a>
-    <a class="btn" href="cotisations.html">Cotisations</a>
-  </div>
-
-  <div class="footer-link">
-    <a href="index.html">← Retour à la page d’accueil</a>
+  <!-- Boutons du bas -->
+  <div class="bottom-buttons">
+    <a class="btn-bottom" href="contact.html">Être rappelé par un membre</a>
+    <a class="btn-bottom" href="index.html">← Retour à la page d’accueil</a>
   </div>
 
 </div>
