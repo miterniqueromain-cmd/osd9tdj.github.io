@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://osd9tdj.org/</loc>
+    <priority>1.00</priority>
+  </url>
+
+  <url>
+    <loc>https://osd9tdj.org/index.html</loc>
+    <priority>1.00</priority>
+  </url>
+
+  <url>
+    <loc>https://osd9tdj.org/activites.html</loc>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://osd9tdj.org/contact.html</loc>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://osd9tdj.org/adhesion.html</loc>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://osd9tdj.org/statuts.html</loc>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://osd9tdj.org/quinoussommes.html</loc>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://osd9tdj.org/cotisations.html</loc>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://osd9tdj.org/boutique.html</loc>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Ajout automatique futur si nouvelles pages -->
+</urlset>
