@@ -30,6 +30,7 @@
    flex-direction: column;
    align-items: center;
  }
+
  .image-box {
    margin-top: 10px;
    margin-bottom: 20px;
@@ -44,6 +45,7 @@
    width: 520px;
    height: auto;
  }
+
  h1 {
    font-family: 'Cinzel', serif;
    font-size: 1.9rem;
@@ -63,16 +65,28 @@
    line-height: 1.45;
    text-align: justify;
  }
- strong {
-   font-weight: 700;
+
+ strong { font-weight: 700; }
+
+ /* --- Boutons organisés en sections --- */
+ .section-title {
+   margin-top: 28px;
+   margin-bottom: 10px;
+   font-family: 'Cinzel', serif;
+   font-size: 1.15rem;
+   color: var(--or);
+   text-transform: uppercase;
+   letter-spacing: 1px;
  }
+
  .button-row {
-   margin-top: 22px;
    display: flex;
    flex-wrap: wrap;
    justify-content: center;
    gap: 12px;
+   margin-bottom: 5px;
  }
+
  .btn {
    display: inline-block;
    padding: 9px 18px;
@@ -90,6 +104,7 @@
    background: var(--or);
    color: #120702;
  }
+
  .footer-link {
    margin-top: auto;
    padding-top: 25px;
@@ -136,20 +151,30 @@
 
  <p>
  Si vous vous reconnaissez dans ces valeurs et que vous souhaitez nous rejoindre
- ou développer une présence de l’Ordre dans votre région, n’hésitez pas à nous
- contacter pour tout renseignement complémentaire.
+ ou développer une présence de l’Ordre dans votre région, vous trouverez ci-dessous
+ l’ensemble des informations utiles.
  </p>
 
+ <!-- SECTION : Informations officielles -->
+ <div class="section-title">Informations officielles</div>
  <div class="button-row">
-   <a class="btn" href="mailto:contact@osd9tdj.org">Nous contacter : contact@osd9tdj.org</a>
-   <a class="btn" href="statuts.html">Consulter nos statuts</a>
-   <a class="btn" href="adhesion.html">Formulaire d’adhésion en ligne</a>
+   <a class="btn" href="statuts.html">Nos statuts</a>
    <a class="btn" href="commanderie.html">Ouvrir une commanderie</a>
    <a class="btn" href="cotisations.html">Infos cotisations</a>
  </div>
 
- <div class="footer-link">
-   <a href="index.html">← Retour à la page d’accueil</a>
+ <!-- SECTION : Rejoindre l'Ordre -->
+ <div class="section-title">Rejoindre l’Ordre</div>
+ <div class="button-row">
+   <a class="btn" href="adhesion.html">Formulaire d’adhésion</a>
+   <a class="btn" href="contact.html">📞 Être rappelé</a>
+   <a class="btn" href="contact.html">Formulaire de contact</a>
+ </div>
+
+ <!-- SECTION : Divers -->
+ <div class="section-title">Navigation</div>
+ <div class="button-row">
+   <a class="btn" href="index.html">← Retour à l’accueil</a>
  </div>
 
 </div>
