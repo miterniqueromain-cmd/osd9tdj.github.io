@@ -45,6 +45,7 @@
     align-items: center;
   }
 
+  /* Menu identique */
   .tabs {
     margin-top: 15px;
     margin-bottom: 25px;
@@ -109,6 +110,32 @@
     padding: 8px 14px;
   }
 
+  /* Boutons bas de page */
+  .btn-bottom {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    text-decoration: none;
+    color: #fdf7e5;
+    font-size: 0.95rem;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--or);
+    background: rgba(0,0,0,0.6);
+    font-family: 'Cinzel', serif;
+    transition: 0.2s;
+  }
+
+  .btn:hover {
+    background: var(--or);
+    color: #000;
+  }
+
   .footer {
     margin-top: auto;
     padding-top: 20px;
@@ -122,10 +149,11 @@
   }
   </style>
 </head>
+
 <body>
 <div class="overlay">
 
-  <!-- MENU identique à l’index -->
+  <!-- MENU -->
   <nav class="tabs">
     <a href="index.html" class="tab">Accueil</a>
     <a href="activites.html" class="tab">Nos évènements</a>
@@ -136,25 +164,38 @@
 
   <div class="card">
     <h1>🛒 Boutique en ligne O.S.D.9.T.D.J.</h1>
+
     <p>
-      Notre boutique en ligne est actuellement
-      <strong>en cours de création</strong> en partenariat avec notre établissement bancaire.
+      Notre boutique en ligne est actuellement <strong>en cours de création</strong> en partenariat avec notre établissement bancaire.
       Elle permettra, à terme, de régler en toute sécurité :
     </p>
-    <ul style="text-align:left;display:inline-block;margin:8px 0 4px 0;padding-left:18px;">
+
+    <ul style="text-align:left;display:inline-block;margin:8px 0;padding-left:18px;">
       <li>les cotisations annuelles ;</li>
-      <li>les dons éventuels ;</li>
-      <li>certains supports culturels ou symboliques de l’Ordre.</li>
+      <li>les dons ou contributions volontaires ;</li>
+      <li>les galas, banquets, cérémonies et repas fraternels ;</li>
+      <li>les évènements futurs (rencontres, sorties, voyages culturels) ;</li>
+      <li>les ouvrages, livrets, supports pédagogiques et documents officiels ;</li>
+      <li>les tickets-repas lors de nos rassemblements ;</li>
+      <li>tout règlement lié aux activités culturelles et chevaleresques de l’Ordre.</li>
     </ul>
+
     <p>
       Dès que l’espace de paiement sécurisé sera activé, un lien direct depuis cette page
-      sera mis à disposition des membres et des postulants.
+      sera mis à disposition des membres et postulants.
     </p>
 
     <p style="margin-top:14px;margin-bottom:6px;">
       Plateforme en cours de mise en place avec notre partenaire bancaire&nbsp;:
     </p>
+
     <img src="banque.jpg" alt="Partenaire bancaire" class="bank-logo">
+  </div>
+
+  <!-- BOUTONS BAS DE PAGE -->
+  <div class="btn-bottom">
+    <a href="contact.html" class="btn">📞 Être rappelé</a>
+    <a href="index.html" class="btn">← Retour à l’accueil</a>
   </div>
 
   <div class="footer">
