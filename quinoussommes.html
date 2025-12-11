@@ -1,181 +1,185 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Qui nous sommes – O.S.D.9.T.D.J.</title>
- <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qui nous sommes – O.S.D.9.T.D.J.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
- <style>
- :root {
-   --or: #d6a728;
-   --clair: #f8e8c8;
- }
- body {
-   margin: 0;
-   padding: 0;
-   font-family: 'Lato', Arial, sans-serif;
-   color: var(--clair);
-   text-align: center;
-   min-height: 100vh;
-   background: radial-gradient(circle at top,
-     #3a2513,
-     #120702 70%);
- }
- .container {
-   min-height: 100vh;
-   box-sizing: border-box;
-   padding: 30px 15px 30px;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
- }
+  <style>
+    :root {
+      --or: #d6a728;
+      --clair: #f8e8c8;
+    }
 
- .image-box {
-   margin-top: 10px;
-   margin-bottom: 20px;
-   border-radius: 18px;
-   overflow: hidden;
-   box-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
-   border: 2px solid rgba(214, 167, 40, 0.9);
- }
- .image-box img {
-   display: block;
-   max-width: 90vw;
-   width: 520px;
-   height: auto;
- }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Lato', Arial, sans-serif;
+      color: var(--clair);
+      text-align: center;
+      min-height: 100vh;
+      background: radial-gradient(circle at top,
+        #3a2513,
+        #120702 70%);
+    }
 
- h1 {
-   font-family: 'Cinzel', serif;
-   font-size: 1.9rem;
-   margin: 10px 0 5px;
- }
- h2 {
-   font-family: 'Cinzel', serif;
-   font-size: 1.2rem;
-   margin: 0 0 15px;
-   font-weight: normal;
-   opacity: 0.9;
- }
- p {
-   max-width: 800px;
-   margin: 6px auto;
-   font-size: 1rem;
-   line-height: 1.45;
-   text-align: justify;
- }
+    .container {
+      min-height: 100vh;
+      box-sizing: border-box;
+      padding: 30px 15px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
- strong { font-weight: 700; }
+    .image-box {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
+      border: 2px solid rgba(214, 167, 40, 0.9);
+    }
 
- /* --- Boutons organisés en sections --- */
- .section-title {
-   margin-top: 28px;
-   margin-bottom: 10px;
-   font-family: 'Cinzel', serif;
-   font-size: 1.15rem;
-   color: var(--or);
-   text-transform: uppercase;
-   letter-spacing: 1px;
- }
+    .image-box img {
+      display: block;
+      max-width: 90vw;
+      width: 520px;
+      height: auto;
+    }
 
- .button-row {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-   gap: 12px;
-   margin-bottom: 5px;
- }
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.9rem;
+      margin: 10px 0 5px;
+    }
 
- .btn {
-   display: inline-block;
-   padding: 9px 18px;
-   border-radius: 999px;
-   text-decoration: none;
-   font-size: 0.95rem;
-   font-weight: bold;
-   border: 1px solid var(--or);
-   color: var(--clair);
-   background: transparent;
-   transition: background 0.2s ease, color 0.2s ease;
-   font-family: 'Cinzel', serif;
- }
- .btn:hover {
-   background: var(--or);
-   color: #120702;
- }
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      margin: 0 0 15px;
+      font-weight: normal;
+      opacity: 0.9;
+    }
 
- .footer-link {
-   margin-top: auto;
-   padding-top: 25px;
-   font-size: 0.9rem;
- }
- .footer-link a {
-   color: var(--clair);
-   text-decoration: none;
- }
- .footer-link a:hover {
-   text-decoration: underline;
- }
- </style>
+    p {
+      max-width: 800px;
+      margin: 6px auto;
+      font-size: 1rem;
+      line-height: 1.45;
+      text-align: justify;
+    }
+
+    strong {
+      font-weight: 700;
+    }
+
+    /* Liens dans le texte */
+    .text-link {
+      color: var(--or);
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .text-link:hover {
+      text-decoration: underline;
+      color: #ffe8a3;
+    }
+
+    /* Boutons du bas */
+    .button-row {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 9px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: bold;
+      border: 1px solid var(--or);
+      color: var(--clair);
+      background: transparent;
+      transition: background 0.2s ease, color 0.2s ease;
+      font-family: 'Cinzel', serif;
+    }
+
+    .btn:hover {
+      background: var(--or);
+      color: #120702;
+    }
+  </style>
 </head>
 
 <body>
 <div class="container">
 
- <div class="image-box">
-   <img src="templiers-ix.PNG" alt="Ordre Sacré des IX Templiers de Jérusalem">
- </div>
+  <div class="image-box">
+    <img src="templiers-ix.PNG" alt="Ordre Sacré des IX Templiers de Jérusalem">
+  </div>
 
- <h1>ORDRE SACRÉ DES IX TEMPLIERS DE JÉRUSALEM</h1>
- <h2>Qui nous sommes</h2>
+  <h1>ORDRE SACRÉ DES IX TEMPLIERS DE JÉRUSALEM</h1>
+  <h2>Qui nous sommes</h2>
 
- <p>
- Association laïque, culturelle et fraternelle, nous faisons vivre aujourd’hui l’héritage
- templier en alliant étude, transmission et service.
- </p>
+  <p>
+    Association laïque, culturelle et fraternelle, l’Ordre Sacré des Neuf Templiers de Jérusalem fait vivre aujourd’hui
+    un héritage templier réinterprété dans le cadre de la loi de 1901&nbsp;: étude, transmission et service au cœur d’une même démarche.
+    Notre fonctionnement, notre objet et notre cadre juridique sont détaillés dans nos
+    <a href="statuts.html" class="text-link">statuts officiels</a>.
+  </p>
 
- <p>
- Guidés par les principes fondateurs de notre Ordre, nous œuvrons pour la connaissance,
- la mémoire historique, l’entraide et le respect de la dignité humaine, dans la
- neutralité politique et religieuse prévue par nos statuts.
- </p>
+  <p>
+    Fidèles à nos principes, nous travaillons à la connaissance de l’histoire templière, à la mémoire des traditions
+    chevaleresques et à l’entraide concrète entre membres.  
+    L’Ordre développe également des actions de soutien, de présence et de service auprès de personnes vulnérables,
+    chaque fois que cela est possible pour nos frères et sœurs.  
+    <strong>Servir là où d’autres détournent le regard</strong>&nbsp;: telle est l’une des lignes de force de notre engagement.
+    Les modalités de participation matérielle à la vie de l’Ordre (fonctionnement, contribution annuelle, organisation)
+    sont précisées sur la page <a href="cotisations.html" class="text-link">Cotisations</a>.
+  </p>
 
- <p>
- <strong>L’Ordre est mixte :</strong> il est ouvert aux femmes et aux hommes, sans distinction
- d’origine, de parcours ou de sensibilité, dès lors que sont respectés la laïcité,
- l’indépendance et les valeurs inscrites dans nos statuts.
- </p>
+  <p>
+    <strong>L’Ordre est mixte :</strong> il est ouvert aux femmes et aux hommes, quels que soient leur origine, leur parcours ou leur sensibilité,
+    dès lors qu’ils respectent la laïcité, l’indépendance et les valeurs qui structurent notre travail.
+  </p>
 
- <p><strong>Être Templier, c’est choisir l’honneur, la discipline et la fraternité.</strong></p>
+  <p>
+    <strong>Être Templier aujourd’hui, c’est choisir l’honneur, la discipline et la fraternité</strong>&nbsp;:
+    assumer une ligne de conduite, tenir sa parole, se rendre disponible pour les autres et accepter un chemin
+    d’exigence intérieure plutôt qu’un simple “club” ou réseau.
+  </p>
 
- <p>
- Si vous vous reconnaissez dans ces valeurs et que vous souhaitez nous rejoindre
- ou développer une présence de l’Ordre dans votre région, vous trouverez ci-dessous
- l’ensemble des informations utiles.
- </p>
+  <p>
+    Si vous vous reconnaissez dans ces principes et souhaitez aller plus loin, vous pouvez déposer une demande via le
+    <a href="adhesion.html" class="text-link">formulaire d’adhésion en ligne</a>, qui ouvre un temps de rencontre,
+    d’échanges et de discernement mutuel.
+  </p>
 
- <!-- SECTION : Informations officielles -->
- <div class="section-title">Informations officielles</div>
- <div class="button-row">
-   <a class="btn" href="statuts.html">Nos statuts</a>
-   <a class="btn" href="commanderie.html">Ouvrir une commanderie</a>
-   <a class="btn" href="cotisations.html">Infos cotisations</a>
- </div>
+  <p>
+    Si vous ne savez pas encore si une présence de l’Ordre existe dans votre région, ou si vous avez des questions
+    précises (rythme des réunions, type d’activités, vie fraternelle, compatibilité avec d’autres engagements),
+    vous pouvez <a href="contact.html" class="text-link">demander à être rappelé par un membre</a>
+    afin d’obtenir une réponse personnalisée.
+  </p>
 
- <!-- SECTION : Rejoindre l'Ordre -->
- <div class="section-title">Rejoindre l’Ordre</div>
- <div class="button-row">
-   <a class="btn" href="adhesion.html">Formulaire d’adhésion</a>
-   <a class="btn" href="contact.html">📞 Être rappelé</a>
-   <a class="btn" href="contact.html">Formulaire de contact</a>
- </div>
+  <p>
+    Dans les territoires où l’Ordre n’est pas encore implanté, il est possible, pour des personnes qui se reconnaissent
+    profondément dans cette démarche, de proposer l’ouverture d’une Commanderie locale ou d’une représentation rattachée.
+    Les conditions, étapes et responsabilités liées à ce type de projet sont présentées sur la page
+    <a href="commanderie.html" class="text-link">Ouvrir une commanderie</a>.
+  </p>
 
- <!-- SECTION : Divers -->
- <div class="section-title">Navigation</div>
- <div class="button-row">
-   <a class="btn" href="index.html">← Retour à l’accueil</a>
- </div>
+  <!-- Boutons principaux -->
+  <div class="button-row">
+    <a class="btn" href="contact.html">📞 Être rappelé</a>
+    <a class="btn" href="index.html">← Retour à la page d’accueil</a>
+  </div>
 
 </div>
 </body>
