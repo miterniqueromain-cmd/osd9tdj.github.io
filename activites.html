@@ -32,7 +32,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
         }
 
         .logo-box {
@@ -64,6 +64,32 @@
             margin: 6px auto;
             font-size: 1rem;
             line-height: 1.4;
+        }
+
+        /* Section future events */
+        .events-section {
+            margin-top: 35px;
+            padding: 20px;
+            width: 100%;
+            max-width: 800px;
+            border: 1px solid rgba(214, 167, 40, 0.4);
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(4px);
+        }
+
+        .events-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--or);
+            margin-bottom: 10px;
+        }
+
+        .events-placeholder {
+            opacity: 0.85;
+            font-size: 0.95rem;
+            font-style: italic;
+            margin-bottom: 8px;
         }
 
         em {
@@ -100,10 +126,18 @@
 
     <h1>Nos activités</h1>
 
-    <p>Cette section «&nbsp;Nos activités&nbsp;» est actuellement en construction.</p>
-    <p>Elle sera mise en ligne très prochainement.</p>
-    <p>Nous vous remercions sincèrement pour votre patience et votre confiance.</p>
+    <p>Aucun évènement n’est programmé pour le moment.</p>
+    <p>Nous vous invitons à revenir consulter cette page régulièrement&nbsp;: nos évènements culturels, fraternels et chevaleresques y seront annoncés.</p>
     <p><em>In Veritate et Honore.</em></p>
+
+    <!-- SECTION POUR LES FUTURS ÉVÈNEMENTS -->
+    <div class="events-section">
+        <div class="events-title">Évènements à venir</div>
+
+        <!-- Texte temporaire -->
+        <p class="events-placeholder">Les prochains évènements officiels de l’O.S.D.9.T.D.J. apparaîtront ici automatiquement.</p>
+        <p class="events-placeholder">Cette section est prête à recevoir le calendrier futur de l’Ordre.</p>
+    </div>
 
     <a href="index.html" class="back-link">← Retour à la page d’accueil</a>
 </div>
