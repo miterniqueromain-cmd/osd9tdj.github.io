@@ -18,16 +18,13 @@
       font-family: 'Lato', Arial, sans-serif;
       color: var(--clair);
       text-align: center;
-      min-height: 100vh;
-      background: radial-gradient(circle at top,
-        #3a2513,
-        #120702 70%);
+      background: radial-gradient(circle at top, #3a2513, #120702 70%);
     }
 
     .container {
       min-height: 100vh;
       box-sizing: border-box;
-      padding: 30px 15px 30px;
+      padding: 30px 15px 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -35,7 +32,7 @@
 
     .image-box {
       margin-top: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       border-radius: 18px;
       overflow: hidden;
       box-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
@@ -58,16 +55,16 @@
     h2 {
       font-family: 'Cinzel', serif;
       font-size: 1.2rem;
-      margin: 0 0 15px;
+      margin-bottom: 20px;
       font-weight: normal;
       opacity: 0.9;
     }
 
     p {
       max-width: 800px;
-      margin: 6px auto;
+      margin: 16px auto;
       font-size: 1rem;
-      line-height: 1.45;
+      line-height: 1.55;
       text-align: justify;
     }
 
@@ -75,29 +72,22 @@
       font-weight: 700;
     }
 
-    /* Liens dans le texte – visibles et harmonieux */
-    .text-link {
+    a.inline-link {
       color: var(--or);
       font-weight: 700;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-thickness: 1.5px;
-      text-decoration-color: rgba(214, 167, 40, 0.9);
+      text-decoration: none;
     }
 
-    .text-link:hover {
+    a.inline-link:hover {
       text-decoration: underline;
-      text-decoration-thickness: 2px;
-      color: #ffe8a3;
-      background: rgba(214, 167, 40, 0.10);
-      border-radius: 3px;
     }
 
-    /* Bouton du bas */
     .button-row {
-      margin-top: 24px;
+      margin-top: 30px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
+      gap: 12px;
     }
 
     .btn {
@@ -110,13 +100,27 @@
       border: 1px solid var(--or);
       color: var(--clair);
       background: transparent;
-      transition: background 0.2s ease, color 0.2s ease;
       font-family: 'Cinzel', serif;
+      transition: background 0.2s ease, color 0.2s ease;
     }
 
     .btn:hover {
       background: var(--or);
       color: #120702;
+    }
+
+    .footer-link {
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+
+    .footer-link a {
+      color: var(--clair);
+      text-decoration: none;
+    }
+
+    .footer-link a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -132,64 +136,95 @@
   <h2>Qui nous sommes</h2>
 
   <p>
-    Association laïque, culturelle et fraternelle, l’Ordre Sacré des Neuf Templiers de Jérusalem fait vivre aujourd’hui
-    une démarche fondée sur l’étude, la transmission et le service. Notre approche est strictement historique et culturelle :
-    nous travaillons à partir de sources reconnues et de recherches menées avec rigueur. Comme précisé dans nos
-    <a href="statuts.html" class="text-link">statuts officiels</a>, l’Ordre se réfère à la chevalerie originelle des neuf premiers compagnons
-    réunis autour d’Hugues de Payns, dont l’action conduisit plus tard à la création de l’Ordre du Temple et marqua durablement
-    l’Europe médiévale.
+    L’Ordre Sacré des IX Templiers de Jérusalem est une association laïque et culturelle.
+    Nous nous référons à l’héritage des <strong>neuf premiers compagnons</strong> rassemblés autour
+    d’Hugues de Payns, avant la fondation officielle de l’Ordre du Temple qui marqua
+    profondément le Moyen Âge.
   </p>
 
   <p>
-    Nos travaux portent sur l’histoire réelle du Temple, les textes anciens, les sources médiévales et la manière dont l’image
-    du Templier a évolué au fil des siècles. Nous nous intéressons aussi aux récits et aux traditions apparus plus tard dans la
-    culture européenne et dans l’imaginaire collectif. Cette approche permet de distinguer l’héritage historique de ce que le
-    temps a ajouté, dans un esprit exclusivement documentaire et pédagogique.
+    Notre démarche est d’abord une démarche de <strong>connaissance et d’étude</strong> :
+    comprendre ce que fut réellement la chevalerie templière, travailler à partir de sources
+    sérieuses, distinguer l’histoire des récits ajoutés au fil des siècles, et réfléchir à ce
+    que ces principes peuvent encore inspirer aujourd’hui.
   </p>
 
   <p>
-    Nos études ne se limitent pas aux faits : nous nous intéressons aussi à ce qui animait les premiers Templiers dans leur
-    conduite, leur sens du devoir, leur rapport à l’engagement et à l’effort. Comprendre cet esprit intérieur, cette discipline
-    personnelle et cette façon d’avancer malgré les épreuves nous aide à réfléchir à notre propre manière de vivre aujourd’hui.
-    Cet héritage moral – simple, exigeant et profondément humain – nous essayons de l’appliquer dans nos vies quotidiennes et de
-    le transmettre à ceux qui rejoignent l’Ordre, dans un cadre fraternel et respectueux.
+    Nous nous intéressons aussi à ce qu’était « l’intérieur » d’un Templier : sa conduite,
+    sa discipline, son sens du devoir et du service. Les frères de l’Ordre n’affichaient pas
+    tout ; ils savaient faire silence en eux, garder la maîtrise de leurs émotions et rester
+    fermes dans l’épreuve. C’est cette exigence intérieure, discrète mais réelle, qui nous
+    inspire et que nous cherchons à transmettre.
   </p>
 
   <p>
-    Notre démarche inclut aussi une réflexion vivante sur ce que peut signifier « être templier » aujourd’hui. Nous étudions
-    et nous mettons en pratique les valeurs essentielles qui animaient les premiers compagnons d’Hugues de Payns, en cherchant
-    à comprendre comment ces principes peuvent encore inspirer une conduite juste, disciplinée et fraternelle au XXIᵉ siècle.
-    Pour nous, devenir un templier moderne commence par des actes simples : servir autour de soi, soutenir les personnes
-    vulnérables, agir avec rectitude et apporter un impact positif dans la vie quotidienne de ceux que nous croisons. C’est
-    dans cette mise en pratique humble et concrète que se construit, pas à pas, l’esprit templier que nous nous efforçons
-    de transmettre.
+    On disait que, dans leurs regards, se lisait une détermination sans détour : ils avançaient
+    « vainqueurs ou morts », non par orgueil, mais parce qu’ils avaient accepté de se tenir
+    en première ligne pour protéger ceux qui n’avaient pas de défense. À leur époque, ils
+    faisaient le vide autour d’eux pour sécuriser la route du pèlerin.
   </p>
 
   <p>
-    <strong>L’Ordre est mixte</strong> et accueille femmes et hommes sans distinction d’origine ni de parcours, dans le respect de la laïcité
-    et des valeurs qui structurent notre travail. Être Templier aujourd’hui, c’est choisir une ligne de conduite claire, une parole
-    tenue et un engagement lucide, loin des effets de mode.
+    Aujourd’hui, les batailles ne sont plus les mêmes, mais les détresses existent toujours.
+    Nous apprenons à <strong>faire le vide en nous</strong> pour mieux voir, écouter et soutenir :
+    notre engagement se traduit par une présence concrète auprès des personnes vulnérables,
+    par l’entraide au sein de l’Ordre et par des actions simples, utiles, menées avec constance.
+    La victoire que nous recherchons n’est plus celle des armes, mais celle du service sincère.
   </p>
 
   <p>
-    Si cette démarche résonne avec vos aspirations, vous pouvez présenter une demande via le
-    <a href="adhesion.html" class="text-link">formulaire d’adhésion en ligne</a>, qui ouvre une période de rencontre et d’échanges.
+    Se retrouver régulièrement pour étudier, réfléchir, échanger et préparer des projets
+    d’entraide fait naître une véritable fraternité. À force de marcher ensemble, de porter
+    des projets communs et de se soutenir dans les difficultés, des liens solides se tissent
+    entre les membres. Cette fraternité n’est pas théorique : elle se vit dans l’écoute, la
+    présence et l’action.
   </p>
 
   <p>
-    Si vous souhaitez d’abord poser des questions précises, connaître la présence éventuelle de l’Ordre dans votre région ou être orienté
-    sur nos activités, vous pouvez <a href="contact.html" class="text-link">demander à être rappelé</a> par un membre.
+    Bien que les symboles et l’iconographie templière fassent partie de notre identité
+    culturelle, nous ne sommes pas un « ordre de manteaux » ni un cercle centré sur les titres
+    ou les décorations. Nous ne sommes pas non plus des Hospitaliers&nbsp;: leur vocation
+    historique était autre. Nous nous inspirons surtout de l’esprit des Templiers des origines :
+    des hommes de terrain, de travail, de vigilance et de service.
   </p>
 
   <p>
-    Dans les zones où l’Ordre n’est pas encore implanté, il est possible, pour des membres engagés et sérieux, de proposer l’ouverture
-    d’une Commanderie rattachée. Les conditions, étapes et responsabilités liées à un tel projet sont présentées sur la page
-    <a href="commanderie.html" class="text-link">Ouvrir une commanderie</a>. Les modalités pratiques de participation et de contribution à la vie de l’Ordre
-    sont détaillées sur la page <a href="cotisations.html" class="text-link">Cotisations</a>.
+    Notre ligne est simple : <strong>servir là où d’autres ne vont plus</strong>. Avant de parler
+    de grands projets, nous commençons par agir là où nous sommes : familles, voisins, amis,
+    personnes isolées ou en difficulté. Ce sont ces actions discrètes, mais répétées, qui
+    donnent du sens à notre engagement.
+  </p>
+
+  <p>
+    L’Ordre est <strong>mixte</strong>, ouvert aux femmes et aux hommes, et respecte strictement
+    la neutralité politique et la laïcité prévues dans nos
+    <a href="statuts.html" class="inline-link">statuts</a>. Celles et ceux qui se reconnaissent
+    dans ces valeurs peuvent entamer le cheminement de Novice via le
+    <a href="adhesion.html" class="inline-link">formulaire d’adhésion</a>.
+  </p>
+
+  <p>
+    Si l’Ordre n’est pas encore présent dans votre région, il est possible d’envisager une
+    implantation locale sous forme de Commanderie rattachée. Les conditions et étapes sont
+    détaillées ici&nbsp;:
+    <a href="commanderie.html" class="inline-link">Ouvrir une Commanderie</a>.
+  </p>
+
+  <p>
+    Les cotisations, fixées par l’Assemblée Générale, servent uniquement à soutenir nos actions,
+    nos rencontres et l’organisation de l’Ordre. Pour en savoir plus&nbsp;:
+    <a href="cotisations.html" class="inline-link">Infos cotisations</a>.
   </p>
 
   <div class="button-row">
-    <a class="btn" href="index.html">← Retour à la page d’accueil</a>
+    <a class="btn" href="statuts.html">Statuts</a>
+    <a class="btn" href="adhesion.html">Devenir membre</a>
+    <a class="btn" href="commanderie.html">Commanderie</a>
+    <a class="btn" href="cotisations.html">Cotisations</a>
+  </div>
+
+  <div class="footer-link">
+    <a href="index.html">← Retour à la page d’accueil</a>
   </div>
 
 </div>
