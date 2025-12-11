@@ -202,6 +202,23 @@
       color: #000;
     }
 
+    .btn-mail {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--or);
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      color: var(--clair);
+      text-decoration: none;
+      background: rgba(0,0,0,0.7);
+    }
+    .btn-mail:hover {
+      background: var(--or);
+      color: #000;
+    }
+
     .footer {
       text-align: center;
       margin-top: 20px;
@@ -286,10 +303,9 @@
       et entretien.
     </p>
 
-    <!-- FORMULAIRE – VERSION FORMSPREE -->
+    <!-- FORMULAIRE – VERSION FORMSPREE (sans upload direct) -->
     <form action="https://formspree.io/f/xwpgwkld"
           method="POST"
-          enctype="multipart/form-data"
           accept-charset="UTF-8">
 
       <!-- Sujet du mail reçu -->
@@ -348,29 +364,38 @@
 
       <fieldset>
         <legend>III – Pièces obligatoires à fournir</legend>
+
         <p>
-          Les pièces suivantes doivent être <strong>téléversées via ce formulaire</strong> ou, en cas de
-          difficulté technique, envoyées en réponse à l’e-mail de confirmation :
+          Les pièces suivantes sont indispensables à l’étude de votre demande&nbsp;:
+        </p>
+        <ul style="margin-top:4px;margin-bottom:4px;">
+          <li>Copie recto-verso d’une pièce d’identité officielle (CNI ou passeport) ;</li>
+          <li>Justificatif de domicile de moins de 3 mois ;</li>
+          <li>Photographie récente en couleur (format identité).</li>
+        </ul>
+
+        <p class="note">
+          Pour des raisons de sécurité et de confidentialité, ces pièces doivent être envoyées
+          <strong>par e-mail séparé</strong>, en pièces jointes, après l’envoi de ce formulaire.
         </p>
 
-        <div class="check-group">
-          <label>
-            <input type="checkbox" name="Piece_CNI" required>
-            Copie recto-verso d’une pièce d’identité officielle (CNI ou passeport)
-          </label>
-        </div>
-        <div class="check-group">
-          <label>
-            <input type="checkbox" name="Piece_photo" required>
-            Photographie récente en couleur (format identité)
-          </label>
-        </div>
-        <div class="check-group">
-          <label>
-            <input type="checkbox" name="Piece_domicile" required>
-            Justificatif de domicile de moins de 3 mois
-          </label>
-        </div>
+        <p style="text-align:center;margin-top:10px;">
+          Merci d’envoyer vos pièces justificatives à :<br>
+          <strong>contact@osd9tdj.org</strong>
+        </p>
+
+        <p style="text-align:center;margin-top:6px;margin-bottom:6px;">
+          <a class="btn-mail"
+             href="mailto:contact@osd9tdj.org?subject=Pi%C3%A8ces%20justificatives%20pour%20ma%20demande%20d%E2%80%99adh%C3%A9sion&body=Merci%20de%20joindre%20%C3%A0%20cet%20e-mail%20votre%20CNI%20ou%20passeport,%20votre%20justificatif%20de%20domicile%20et%20votre%20photo%20d%E2%80%99identit%C3%A9.">
+            ➤ Envoyer mes pièces justificatives par e-mail
+          </a>
+        </p>
+
+        <p>
+          Votre dossier ne sera étudié qu’à réception de ces éléments, accompagnant
+          le présent formulaire.
+        </p>
+
         <div class="check-group">
           <label>
             <input type="checkbox" name="Piece_casier" required>
@@ -382,22 +407,9 @@
         <div class="check-group">
           <label>
             <input type="checkbox" name="Piece_cv_lettre">
-            Facultatif : Lettre de motivation détaillée et/ou CV joint
+            Facultatif : Lettre de motivation détaillée et/ou CV (à joindre également par e-mail séparé).
           </label>
         </div>
-
-        <!-- CHARGEMENT DES FICHIERS -->
-        <hr style="margin:10px 0; opacity:0.4;">
-
-        <label for="pj_cni">Joindre votre pièce d’identité (CNI ou passeport) :</label>
-        <input type="file" id="pj_cni" name="PJ_CNI" required>
-
-        <label for="pj_domicile">Joindre votre justificatif de domicile :</label>
-        <input type="file" id="pj_domicile" name="PJ_Domicile" required>
-
-        <label for="pj_photo">Joindre votre photo d’identité (couleur) :</label>
-        <input type="file" id="pj_photo" name="PJ_Photo" required>
-
       </fieldset>
 
       <fieldset>
@@ -525,6 +537,13 @@
             Je confirme avoir compris ces règles financières et les accepter.
           </label>
         </div>
+
+        <p class="note">
+          La cotisation annuelle devra être réglée, une fois votre dossier accepté, sur la
+          <strong>boutique en ligne officielle</strong> de l’O.S.D.9.T.D.J.  
+          En cas de refus d’adhésion après étude de votre dossier, la cotisation versée sera
+          <strong>intégralement remboursée</strong>.
+        </p>
       </fieldset>
 
       <fieldset>
