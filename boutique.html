@@ -2,11 +2,31 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Boutique en ligne – O.S.D.9.T.D.J.</title>
-  <meta name="description"
-        content="Boutique en ligne de l’Ordre Sacré des Neuf Templiers de Jérusalem – en cours de mise en place avec notre partenaire bancaire.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- SEO -->
+  <meta name="description" content="Boutique en ligne officielle de l’Ordre Sacré des Neuf Templiers de Jérusalem – cotisations, dons, évènements et supports pédagogiques (mise en place avec notre partenaire bancaire).">
+  <meta name="keywords" content="Templiers, OSD9TDJ, boutique templière, cotisation, dons, chevalerie moderne, paiement sécurisé, Ordre Sacré des Neuf Templiers de Jérusalem">
+  <link rel="canonical" href="https://osd9tdj.org/boutique.html">
+
+  <!-- OpenGraph -->
+  <meta property="og:title" content="Boutique en ligne – O.S.D.9.T.D.J.">
+  <meta property="og:description" content="Boutique officielle de l’Ordre Sacré des Neuf Templiers de Jérusalem : cotisations, dons, évènements et documents de l’Ordre.">
+  <meta property="og:image" content="https://osd9tdj.org/blason-osd9tdj.PNG">
+  <meta property="og:url" content="https://osd9tdj.org/boutique.html">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Boutique en ligne – O.S.D.9.T.D.J.">
+  <meta name="twitter:description" content="Paiements sécurisés : cotisations, dons, évènements et supports pédagogiques de l’Ordre.">
+  <meta name="twitter:image" content="https://osd9tdj.org/blason-osd9tdj.PNG">
+
+  <!-- WATERMARK INVISIBLE (protection / preuve d’antériorité) -->
+  <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-BOUTIQUE-PROTECTION-TEMPLIERS">
+
+  <!-- Polices -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -22,8 +42,10 @@
     color: #ffffff;
     text-align: center;
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
+  /* Fond drapeau + voile sombre */
   body::before {
     content: "";
     position: fixed;
@@ -33,19 +55,24 @@
     z-index: -2;
   }
 
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.9));
+    z-index: -1;
+  }
+
   .overlay {
     min-height: 100vh;
     padding: 30px 15px 20px;
     box-sizing: border-box;
-    background: radial-gradient(circle at top,
-      rgba(0, 0, 0, 0.25),
-      rgba(0, 0, 0, 0.9));
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  /* Menu identique */
+  /* Menu */
   .tabs {
     margin-top: 15px;
     margin-bottom: 25px;
@@ -121,7 +148,7 @@
 
   .btn {
     text-decoration: none;
-    color: #fdf7e5;
+    color: var(--clair);
     font-size: 0.95rem;
     padding: 8px 16px;
     border-radius: 999px;
@@ -167,16 +194,16 @@
 
     <p>
       Notre boutique en ligne est actuellement <strong>en cours de création</strong> en partenariat avec notre établissement bancaire.
-      Elle permettra, à terme, de régler en toute sécurité :
+      Elle permettra, à terme, de régler en toute sécurité&nbsp;:
     </p>
 
     <ul style="text-align:left;display:inline-block;margin:8px 0;padding-left:18px;">
-      <li>les cotisations annuelles ;</li>
-      <li>les dons ou contributions volontaires ;</li>
-      <li>les galas, banquets, cérémonies et repas fraternels ;</li>
-      <li>les évènements futurs (rencontres, sorties, voyages culturels) ;</li>
-      <li>les ouvrages, livrets, supports pédagogiques et documents officiels ;</li>
-      <li>les tickets-repas lors de nos rassemblements ;</li>
+      <li>les cotisations annuelles&nbsp;;</li>
+      <li>les dons ou contributions volontaires&nbsp;;</li>
+      <li>les galas, banquets, cérémonies et repas fraternels&nbsp;;</li>
+      <li>les évènements futurs (rencontres, sorties, voyages culturels)&nbsp;;</li>
+      <li>les ouvrages, livrets, supports pédagogiques et documents officiels&nbsp;;</li>
+      <li>les tickets-repas lors de nos rassemblements&nbsp;;</li>
       <li>tout règlement lié aux activités culturelles et chevaleresques de l’Ordre.</li>
     </ul>
 
@@ -194,7 +221,7 @@
 
   <!-- BOUTONS BAS DE PAGE -->
   <div class="btn-bottom">
-    <a href="contact.html" class="btn">📞 Être rappelé</a>
+    <a href="contact.html" class="btn">📞 Être appelé par un membre / 📇 Contact</a>
     <a href="index.html" class="btn">← Retour à l’accueil</a>
   </div>
 
