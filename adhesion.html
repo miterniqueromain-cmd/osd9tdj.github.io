@@ -286,8 +286,14 @@
       et entretien.
     </p>
 
-    <!-- FORMULAIRE -->
-    <form action="mailto:contact@osd9tdj.org" method="post" enctype="text/plain">
+    <!-- FORMULAIRE – VERSION FORMSPREE -->
+    <form action="https://formspree.io/f/xwpgwkld"
+          method="POST"
+          enctype="multipart/form-data"
+          accept-charset="UTF-8">
+
+      <!-- Sujet du mail reçu -->
+      <input type="hidden" name="_subject" value="Demande d’adhésion – O.S.D.9.T.D.J.">
 
       <fieldset>
         <legend>II – Identité du postulant</legend>
@@ -334,7 +340,8 @@
           </div>
           <div>
             <label for="email">E-mail :</label>
-            <input type="email" id="email" name="Email" required>
+            <!-- _replyto pour que la réponse parte au postulant -->
+            <input type="email" id="email" name="_replyto" required>
           </div>
         </div>
       </fieldset>
@@ -342,9 +349,10 @@
       <fieldset>
         <legend>III – Pièces obligatoires à fournir</legend>
         <p>
-          Les pièces suivantes doivent être envoyées <strong>en pièce jointe</strong> au même e-mail que
-          ce formulaire ou remises lors de la convocation :
+          Les pièces suivantes doivent être <strong>téléversées via ce formulaire</strong> ou, en cas de
+          difficulté technique, envoyées en réponse à l’e-mail de confirmation :
         </p>
+
         <div class="check-group">
           <label>
             <input type="checkbox" name="Piece_CNI" required>
@@ -377,6 +385,19 @@
             Facultatif : Lettre de motivation détaillée et/ou CV joint
           </label>
         </div>
+
+        <!-- CHARGEMENT DES FICHIERS -->
+        <hr style="margin:10px 0; opacity:0.4;">
+
+        <label for="pj_cni">Joindre votre pièce d’identité (CNI ou passeport) :</label>
+        <input type="file" id="pj_cni" name="PJ_CNI" required>
+
+        <label for="pj_domicile">Joindre votre justificatif de domicile :</label>
+        <input type="file" id="pj_domicile" name="PJ_Domicile" required>
+
+        <label for="pj_photo">Joindre votre photo d’identité (couleur) :</label>
+        <input type="file" id="pj_photo" name="PJ_Photo" required>
+
       </fieldset>
 
       <fieldset>
