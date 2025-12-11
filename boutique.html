@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boutique en ligne – O.S.D.9.T.D.J.</title>
+  <meta name="description"
+        content="Boutique en ligne de l’Ordre Sacré des Neuf Templiers de Jérusalem – en cours de mise en place avec notre partenaire bancaire.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+  :root {
+    --or: #ffd700;
+    --clair: #fdf7e5;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', Arial, sans-serif;
+    color: #ffffff;
+    text-align: center;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url("drapeau-osd9tdj.PNG") no-repeat center center fixed;
+    background-size: cover;
+    z-index: -2;
+  }
+
+  .overlay {
+    min-height: 100vh;
+    padding: 30px 15px 20px;
+    box-sizing: border-box;
+    background: radial-gradient(circle at top,
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.9));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tabs {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    display: inline-flex;
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 215, 0, 0.6);
+    backdrop-filter: blur(6px);
+  }
+
+  .tab {
+    padding: 10px 18px;
+    text-decoration: none;
+    color: var(--clair);
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Cinzel', serif;
+    background: rgba(0, 0, 0, 0.45);
+    transition: background 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .tab + .tab {
+    border-left: 1px solid rgba(255, 215, 0, 0.4);
+  }
+
+  .tab:hover {
+    background: rgba(255, 215, 0, 0.20);
+    color: #ffffff;
+  }
+
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.7rem;
+    margin: 20px 0 10px;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+  }
+
+  p {
+    max-width: 700px;
+    margin: 8px auto;
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+
+  .card {
+    margin-top: 25px;
+    padding: 18px 20px 22px;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 16px;
+    border: 2px solid var(--or);
+    box-shadow: 0 0 26px rgba(0, 0, 0, 0.8);
+  }
+
+  .bank-logo {
+    margin-top: 10px;
+    width: 260px;
+    max-width: 80vw;
+    height: auto;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 8px 14px;
+  }
+
+  .footer {
+    margin-top: auto;
+    padding-top: 20px;
+    font-size: 0.8rem;
+    opacity: 0.9;
+  }
+
+  @media (max-width: 480px) {
+    h1 { font-size: 1.5rem; }
+    .tab { padding: 8px 12px; font-size: 0.85rem; }
+  }
+  </style>
+</head>
+<body>
+<div class="overlay">
+
+  <!-- MENU identique à l’index -->
+  <nav class="tabs">
+    <a href="index.html" class="tab">Accueil</a>
+    <a href="activites.html" class="tab">Nos évènements</a>
+    <a href="quinoussommes.html" class="tab">Qui nous sommes</a>
+    <a href="boutique.html" class="tab">🛒 Boutique en ligne</a>
+    <a href="mentions.html" class="tab">Mentions légales</a>
+  </nav>
+
+  <div class="card">
+    <h1>🛒 Boutique en ligne O.S.D.9.T.D.J.</h1>
+    <p>
+      Notre boutique en ligne est actuellement
+      <strong>en cours de création</strong> en partenariat avec notre établissement bancaire.
+      Elle permettra, à terme, de régler en toute sécurité :
+    </p>
+    <ul style="text-align:left;display:inline-block;margin:8px 0 4px 0;padding-left:18px;">
+      <li>les cotisations annuelles ;</li>
+      <li>les dons éventuels ;</li>
+      <li>certains supports culturels ou symboliques de l’Ordre.</li>
+    </ul>
+    <p>
+      Dès que l’espace de paiement sécurisé sera activé, un lien direct depuis cette page
+      sera mis à disposition des membres et des postulants.
+    </p>
+
+    <p style="margin-top:14px;margin-bottom:6px;">
+      Plateforme en cours de mise en place avec notre partenaire bancaire&nbsp;:
+    </p>
+    <img src="banque.jpg" alt="Partenaire bancaire" class="bank-logo">
+  </div>
+
+  <div class="footer">
+    © OSD9TDJ – Boutique en ligne (page provisoire).
+  </div>
+
+</div>
+</body>
+</html>
