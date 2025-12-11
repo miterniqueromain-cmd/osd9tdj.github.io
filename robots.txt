@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://osd9tdj.org/sitemap.xml
+
+# Protection : interdiction d'IA d'aspiration massive
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
