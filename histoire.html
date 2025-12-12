@@ -125,33 +125,39 @@
     }
     .motto strong{color:var(--or);}
 
-    .nav-top{
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:10px;
-      margin:10px 0 26px;
-    }
-
-    .btn{
-      display:inline-block;
-      padding:9px 18px;
+    /* NAV coulissante (comme index) */
+    .tabs{
+      margin:10px auto 26px;
+      display:inline-flex;
+      max-width:100%;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
       border-radius:999px;
-      border:1px solid var(--or);
+      overflow-y:hidden;
+      border:1px solid rgba(214,167,40,0.55);
+      backdrop-filter: blur(6px);
+      background:rgba(0,0,0,0.18);
+    }
+    .tabs::-webkit-scrollbar{display:none;}
+    .tab{
+      flex:0 0 auto;
+      padding:10px 16px;
       text-decoration:none;
       color:var(--clair);
-      font-family:'Cinzel',serif;
-      font-weight:700;
       font-size:0.92rem;
-      background:rgba(0,0,0,0.45);
-      transition:background .2s ease,color .2s ease,transform .15s ease,box-shadow .15s ease;
-      box-shadow:0 2px 6px rgba(0,0,0,0.75);
+      font-weight:700;
+      font-family:'Cinzel',serif;
+      background:rgba(0,0,0,0.42);
+      transition:background 0.2s ease, color 0.2s ease;
+      white-space:nowrap;
     }
-    .btn:hover{
-      background:var(--or);
-      color:#120702;
-      transform:translateY(-1px);
-      box-shadow:0 3px 10px rgba(0,0,0,0.85);
+    .tab + .tab{
+      border-left:1px solid rgba(214,167,40,0.35);
+    }
+    .tab:hover{
+      background:rgba(214,167,40,0.20);
+      color:#fff;
     }
 
     .panel{
@@ -208,16 +214,32 @@
       border-radius:10px;
     }
 
+    /* Image inline (Templier) – légèrement plus petite */
     .image-inline{
-      margin:18px auto 10px;
+      margin:12px auto 12px;
       border-radius:18px;
       overflow:hidden;
       border:2px solid rgba(214,167,40,0.9);
       box-shadow:0 0 35px rgba(0,0,0,0.92);
-      max-width:900px;
+      max-width:720px;
       background:rgba(0,0,0,0.35);
     }
-    .image-inline img{width:100%;display:block;height:auto;}
+    .image-inline img{
+      width:100%;
+      display:block;
+      height:auto;
+    }
+
+    /* lien discret dans le texte */
+    .tiny-link{
+      font-size:0.85em;
+      opacity:0.85;
+      margin-left:6px;
+    }
+    .tiny-link a{
+      color:var(--clair);
+      text-decoration:underline;
+    }
 
     .footer{
       margin-top:26px;
@@ -234,6 +256,7 @@
       p{font-size:0.95rem;}
       h2{font-size:1.12rem;}
       h3{font-size:1.02rem;}
+      .tab{padding:9px 14px;font-size:0.86rem;}
     }
   </style>
 </head>
@@ -250,16 +273,16 @@
     <div class="subtitle">Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</div>
     <div class="motto">« <strong>Per Crucem, Veritas</strong> »</div>
 
-    <!-- Navigation -->
-    <div class="nav-top">
-      <a class="btn" href="index.html">🏠 Accueil</a>
-      <a class="btn" href="quinoussommes.html">← Qui nous sommes</a>
-      <a class="btn" href="statuts.html">Statuts</a>
-      <a class="btn" href="adhesion.html">Adhésion</a>
-      <a class="btn" href="contact.html">📞 Contact</a>
-      <a class="btn" href="mentions.html">Informations officielles</a>
-      <a class="btn" href="cookies.html">Cookies</a>
-    </div>
+    <!-- Navigation (coulissante) -->
+    <nav class="tabs" aria-label="Navigation histoire">
+      <a class="tab" href="index.html">🏠 Accueil</a>
+      <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
+      <a class="tab" href="statuts.html">Statuts</a>
+      <a class="tab" href="adhesion.html">Adhésion</a>
+      <a class="tab" href="contact.html">📞 Contact</a>
+      <a class="tab" href="mentions.html">Informations officielles</a>
+      <a class="tab" href="cookies.html">Cookies</a>
+    </nav>
 
     <div class="panel">
 
@@ -344,7 +367,7 @@
         <li>rattachée et affiliée, à cette date, à l’Ordre d’origine (maison-mère située en Italie) et au prieuré suisse.</li>
       </ul>
 
-      <p><em>(Correction intégrée : la structure ne disposait pas alors de sa propre orientation spirituelle.)</em></p>
+      <!-- suppression du texte entre parenthèses demandé -->
 
       <div class="sep"></div>
 
@@ -432,19 +455,33 @@
 
       <h2>II. Histoire présente et future : continuité, ouverture et discernement</h2>
 
-      <p>L’Ordre Sacré des Neuf Templiers de Jérusalem est une association laïque, culturelle et indépendante, régie par la loi de 1901.<br>
-      Il n’a ni vocation religieuse, ni prétention à une succession apostolique.</p>
-
-      <p>Il reconnaît toutefois que l’histoire templière fut profondément marquée par une dimension spirituelle, exprimée notamment à travers la fidélité à Notre-Dame, comprise historiquement comme principe de sagesse, de droiture et de protection, tel qu’il était perçu par les Templiers médiévaux.</p>
-
-      <p>Dans cette perspective, l’Ordre reconnaît l’existence de structures religieuses distinctes, relevant d’un autre cadre juridique (notamment la loi de 1905), qui portent un héritage spirituel templier dans leur propre tradition.</p>
-
-      <!-- Image Templier (au moment Hélios / futur) -->
+      <!-- Image Templier EN TÊTE de paragraphe (comme demandé) -->
       <div class="image-inline">
         <img src="templier.jpeg" alt="Templier – continuité et avenir">
       </div>
 
-      <p>À ce titre, Hélios est mentionnée comme Église de christianisme primitif, de fondation anté-chalcédonienne, et conservatrice de l’Église apostolique templière dans sa véritable filiation, depuis le pape Benoît XIII, Pedro de Luna.</p>
+      <p>
+        L’Ordre Sacré des Neuf Templiers de Jérusalem est une association laïque, culturelle et indépendante, régie par la loi de 1901.<br>
+        Il n’a ni vocation religieuse, ni prétention à une succession apostolique.
+      </p>
+
+      <p>
+        Il reconnaît toutefois que l’histoire templière fut profondément marquée par une dimension spirituelle, exprimée notamment à travers la fidélité à Notre-Dame, comprise historiquement comme principe de sagesse, de droiture et de protection, tel qu’il était perçu par les Templiers médiévaux.
+      </p>
+
+      <p>
+        Dans cette perspective, l’Ordre reconnaît l’existence de structures religieuses distinctes, relevant d’un autre cadre juridique (notamment la loi de 1905), qui portent un héritage spirituel templier dans leur propre tradition.
+      </p>
+
+      <p>
+        Cette ouverture s’inscrit sans confusion : l’O.S.D.9.T.D.J. demeure indépendant et strictement associatif.
+        Des relations amicales et respectueuses subsistent avec certaines structures issues de cette histoire, notamment avec l’ancien Ordre de Notre-Dame de Sion, aujourd’hui toujours actif
+        <span class="tiny-link">(<a href="https://ocnss.org" target="_blank" rel="noopener noreferrer">plus d’infos : cliquer ici</a>)</span>.
+      </p>
+
+      <p>
+        À ce titre, Hélios est mentionnée comme Église de christianisme primitif, de fondation anté-chalcédonienne, et conservatrice de l’Église apostolique templière dans sa véritable filiation, depuis le pape Benoît XIII, Pedro de Luna.
+      </p>
 
       <p>Cette mention :</p>
       <ul>
@@ -453,19 +490,21 @@
         <li>s’inscrit dans une démarche de respect, de clarté historique et de non-confusion.</li>
       </ul>
 
-      <p>L’Ordre Sacré des Neuf Templiers de Jérusalem demeure un espace ouvert, où chaque membre reste libre de son chemin personnel, dans le respect du cadre associatif, de l’indépendance de l’Ordre et de la fraternité.</p>
+      <p>
+        L’Ordre Sacré des Neuf Templiers de Jérusalem demeure un espace ouvert, où chaque membre reste libre de son chemin personnel, dans le respect du cadre associatif, de l’indépendance de l’Ordre et de la fraternité.
+      </p>
 
     </div>
 
-    <!-- Bas de page -->
-    <div class="nav-top" style="margin-top:26px;">
-      <a class="btn" href="index.html">🏠 Accueil</a>
-      <a class="btn" href="quinoussommes.html">← Qui nous sommes</a>
-      <a class="btn" href="statuts.html">Statuts</a>
-      <a class="btn" href="mentions.html">Informations officielles</a>
-      <a class="btn" href="cookies.html">Cookies</a>
-      <a class="btn" href="contact.html">📞 Contact</a>
-    </div>
+    <!-- Bas de page : navigation coulissante -->
+    <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
+      <a class="tab" href="index.html">🏠 Accueil</a>
+      <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
+      <a class="tab" href="statuts.html">Statuts</a>
+      <a class="tab" href="mentions.html">Informations officielles</a>
+      <a class="tab" href="cookies.html">Cookies</a>
+      <a class="tab" href="contact.html">📞 Contact</a>
+    </nav>
 
     <div class="footer">
       © O.S.D.9.T.D.J. – Tous droits réservés •
