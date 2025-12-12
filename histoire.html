@@ -94,13 +94,13 @@
       background:rgba(0,0,0,0.35);
     }
 
-    /* ✅ Réduction de la hauteur perçue : on limite la hauteur et on “crop” légèrement le haut (ciel) */
+    /* ✅ On garde la même hauteur, mais on coupe PAR LE HAUT (donc on ancre en bas) */
     .hero img{
       display:block;
       width:100%;
-      height:320px;              /* ajuste si besoin (ex: 260/300/340) */
+      height:320px;
       object-fit:cover;
-      object-position:center 62%; /* descend un peu l’image => moins de ciel */
+      object-position:center bottom; /* ✅ ancre sur le bas => le haut est rogné */
     }
 
     .title{
@@ -262,8 +262,8 @@
       h3{font-size:1.02rem;}
       .tab{padding:9px 14px;font-size:0.86rem;}
       .hero img{
-        height:220px;            /* ✅ plus petit sur mobile */
-        object-position:center 60%;
+        height:220px;
+        object-position:center bottom; /* ✅ idem mobile : coupe le haut */
       }
     }
   </style>
@@ -366,8 +366,6 @@
         <li>rattachée et affiliée, à cette date, à l’Ordre d’origine (maison-mère située en Italie) et au prieuré suisse.</li>
       </ul>
 
-      <!-- (Texte entre parenthèses supprimé comme demandé) -->
-
       <div class="sep"></div>
 
       <h3>6. Pourquoi le nom « Terres de Savoie »</h3>
@@ -460,8 +458,6 @@ Les membres ayant choisi de poursuivre leur engagement au sein de l’O.S.D.9.T.
 
       <h2>II. Histoire présente et future : continuité, ouverture et discernement</h2>
 
-      <!-- Image Templier : en tête de paragraphe + fichier corrigé (templier.jpg)
-           + fallback automatique si jamais le fichier est en .jpeg -->
       <div class="image-inline">
         <img src="templier.jpg"
              alt="Templier – continuité et avenir"
@@ -502,7 +498,6 @@ Les membres ayant choisi de poursuivre leur engagement au sein de l’O.S.D.9.T.
 
     </div>
 
-    <!-- Bas de page : navigation coulissante (✅ seulement 3 liens) -->
     <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
       <a class="tab" href="index.html">🏠 Accueil</a>
       <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
