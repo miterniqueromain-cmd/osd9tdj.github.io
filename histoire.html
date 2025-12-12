@@ -67,7 +67,6 @@
       overflow-x:hidden;
     }
 
-    /* léger voile décoratif */
     body::before{
       content:"";
       position:fixed;
@@ -214,14 +213,14 @@
       border-radius:10px;
     }
 
-    /* Image inline (Templier) – légèrement plus petite */
+    /* Image inline (Templier) – un peu plus petite + légèrement au-dessus du texte */
     .image-inline{
-      margin:12px auto 12px;
+      margin:10px auto 12px;
       border-radius:18px;
       overflow:hidden;
       border:2px solid rgba(214,167,40,0.9);
       box-shadow:0 0 35px rgba(0,0,0,0.92);
-      max-width:720px;
+      max-width:700px;
       background:rgba(0,0,0,0.35);
     }
     .image-inline img{
@@ -235,6 +234,7 @@
       font-size:0.85em;
       opacity:0.85;
       margin-left:6px;
+      white-space:nowrap;
     }
     .tiny-link a{
       color:var(--clair);
@@ -367,7 +367,7 @@
         <li>rattachée et affiliée, à cette date, à l’Ordre d’origine (maison-mère située en Italie) et au prieuré suisse.</li>
       </ul>
 
-      <!-- suppression du texte entre parenthèses demandé -->
+      <!-- (Texte entre parenthèses supprimé comme demandé) -->
 
       <div class="sep"></div>
 
@@ -400,7 +400,10 @@
         </p>
       </div>
 
-      <p>Cette évolution vise la transparence, sans intention de rupture.</p>
+      <p>
+        Cette évolution vise la transparence, sans intention de rupture.
+        <span class="tiny-link">(<a href="https://ocnss.org" target="_blank" rel="noopener noreferrer">plus d’infos : cliquer ici</a>)</span>
+      </p>
 
       <div class="sep"></div>
 
@@ -455,9 +458,12 @@
 
       <h2>II. Histoire présente et future : continuité, ouverture et discernement</h2>
 
-      <!-- Image Templier EN TÊTE de paragraphe (comme demandé) -->
+      <!-- Image Templier : en tête de paragraphe + fichier corrigé (templier.jpg)
+           + fallback automatique si jamais le fichier est en .jpeg -->
       <div class="image-inline">
-        <img src="templier.jpeg" alt="Templier – continuité et avenir">
+        <img src="templier.jpg"
+             alt="Templier – continuité et avenir"
+             onerror="this.onerror=null; this.src='templier.jpeg';">
       </div>
 
       <p>
@@ -475,8 +481,6 @@
 
       <p>
         Cette ouverture s’inscrit sans confusion : l’O.S.D.9.T.D.J. demeure indépendant et strictement associatif.
-        Des relations amicales et respectueuses subsistent avec certaines structures issues de cette histoire, notamment avec l’ancien Ordre de Notre-Dame de Sion, aujourd’hui toujours actif
-        <span class="tiny-link">(<a href="https://ocnss.org" target="_blank" rel="noopener noreferrer">plus d’infos : cliquer ici</a>)</span>.
       </p>
 
       <p>
