@@ -44,6 +44,7 @@
       overflow-x: hidden;
     }
 
+    /* Image Chevalier en haut */
     .chevalier-box {
       margin: 20px auto 25px;
       padding: 8px;
@@ -54,7 +55,7 @@
       box-shadow: 0 0 30px rgba(0,0,0,0.8);
     }
     .chevalier-box img {
-      width: 330px;
+      width: 330px; /* ✅ réduit un tout petit peu (avant 360) */
       max-width: 90vw;
       border-radius: 12px;
       display: block;
@@ -72,8 +73,16 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
-    h1 { font-size: 1.8rem; margin-bottom: 5px; }
-    h2 { font-size: 1.2rem; color: var(--or); margin-top: 18px; }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+    }
+    h2 {
+      font-size: 1.2rem;
+      color: var(--or);
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
 
     p {
       font-size: 1rem;
@@ -83,19 +92,36 @@
       text-align: justify;
     }
 
-    .inline-link a{
-      color: var(--clair);
-      text-decoration: underline;
-    }
-
+    /* Bloc montants */
     .cotis-box {
       margin: 24px auto;
       max-width: 620px;
       background: rgba(0,0,0,0.6);
       border: 2px solid var(--or);
       border-radius: 16px;
-      padding: 18px 20px;
+      padding: 18px 20px 20px;
       text-align: left;
+    }
+    .cotis-box h3 {
+      font-family: 'Cinzel', serif;
+      color: var(--or);
+      margin-top: 0;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .cotis-box ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      font-size: 1.05rem;
+    }
+    .cotis-box li {
+      padding: 6px 0;
+      border-bottom: 1px dashed rgba(255,255,255,0.25);
+    }
+    .cotis-box li:last-child {
+      border-bottom: none;
     }
 
     .note {
@@ -103,6 +129,7 @@
       padding-left: 10px;
       margin-top: 10px;
       font-size: 0.95rem;
+      opacity: 0.95;
     }
 
     .button-row {
@@ -113,27 +140,65 @@
       gap: 12px;
     }
     .btn {
+      display: inline-block;
       padding: 9px 18px;
       border-radius: 999px;
       text-decoration: none;
+      font-size: 0.95rem;
       font-family: 'Cinzel', serif;
+      font-weight: bold;
       border: 1px solid var(--or);
       color: var(--clair);
+      background: transparent;
+      transition: background 0.2s ease, color 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn:hover {
+      background: var(--or);
+      color: #120702;
     }
 
+    /* lien discret dans le texte */
+    .inline-link a{
+      color: var(--clair);
+      text-decoration: underline;
+      opacity: 0.95;
+    }
+    .inline-link a:hover{ opacity: 1; }
+
+    /* Menu déroulant (swipe) en bas */
     .tabs{
       margin:18px auto 8px;
       display:inline-flex;
+      max-width:100%;
       overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
       border-radius:999px;
+      overflow-y:hidden;
       border:1px solid rgba(214,167,40,0.55);
+      backdrop-filter: blur(6px);
       background:rgba(0,0,0,0.18);
     }
+    .tabs::-webkit-scrollbar{display:none;}
     .tab{
+      flex:0 0 auto;
       padding:10px 16px;
       text-decoration:none;
       color:var(--clair);
+      font-size:0.92rem;
+      font-weight:700;
       font-family:'Cinzel',serif;
+      background:rgba(0,0,0,0.42);
+      transition:background 0.2s ease, color 0.2s ease;
+      white-space:nowrap;
+    }
+    .tab + .tab{
+      border-left:1px solid rgba(214,167,40,0.35);
+    }
+    .tab:hover{
+      background:rgba(214,167,40,0.20);
+      color:#fff;
     }
 
     .footer {
@@ -141,12 +206,27 @@
       font-size: 0.85rem;
       opacity: 0.85;
     }
-    .footer a { color: var(--clair); text-decoration: none; }
+    .footer a{
+      color: var(--clair);
+      text-decoration: none;
+      opacity: 0.92;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.5rem; }
+      h2 { font-size: 1.1rem; }
+      .tab{padding:9px 14px;font-size:0.86rem;}
+    }
   </style>
+
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 
 <body>
 
+  <!-- Image du chevalier -->
   <div class="chevalier-box">
     <img src="Chevalier.jpg" alt="Chevalier de l’O.S.D.9.T.D.J.">
   </div>
@@ -156,25 +236,47 @@
     <h1>Cotisations officielles</h1>
     <h2>Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J.</h2>
 
-    <p>Les cotisations permettent à l’Ordre de vivre concrètement…</p>
-
     <p>
-      Le paiement peut également se faire via
-      <span class="inline-link"><a href="boutique.html">la boutique en ligne</a></span>.
+      Les cotisations permettent à l’Ordre de vivre concrètement&nbsp;: organisation des activités,
+      logistique des manifestations, soutien aux projets culturels, fraternels et caritatifs.
+      Elles sont fixées et révisées par l’Assemblée Générale, conformément à nos statuts.
     </p>
 
-    <!-- ✅ Bouton conservé (non doublon) -->
+    <div class="cotis-box">
+      <h3>Montants pour l’année 2026</h3>
+      <ul>
+        <li><strong>200&nbsp;€</strong> – Cotisation annuelle <strong>Adhérent</strong></li>
+        <li><strong>60&nbsp;€</strong> – Cotisation annuelle <strong>Accompagnant</strong> (conjoint, famille, proches)</li>
+        <li><strong>1&nbsp;500&nbsp;€ et plus</strong> – <strong>Membre bienfaiteur</strong> (soutien majeur à l’Ordre)</li>
+      </ul>
+    </div>
+
+    <p>
+      Le paiement de la cotisation est obligatoire pour valider l’adhésion et exercer les droits
+      prévus par les statuts. Aucun remboursement ne peut être effectué sans décision expresse
+      du Bureau, dans le respect des règles de bonne gestion.
+      <span class="inline-link">Le paiement peut également se faire via <a href="boutique.html">la boutique en ligne</a>.</span>
+    </p>
+
+    <p class="note">
+      Les membres bienfaiteurs contribuent à la réalisation de projets précis
+      (tenues, matériel pédagogique, actions sociales, aides logistiques, événements culturels, etc.)
+      et permettent d’assurer la stabilité à long terme de l’O.S.D.9.T.D.J.
+    </p>
+
+    <!-- ✅ Boutons : on garde seulement “Formulaire d’adhésion” (pas doublon) -->
     <div class="button-row">
       <a class="btn" href="adhesion.html">→ Formulaire d’adhésion</a>
     </div>
 
-    <!-- Menu déroulant bas -->
-    <nav class="tabs">
+    <!-- Menu déroulant bas : Accueil / Qui nous sommes / Contact -->
+    <nav class="tabs" aria-label="Navigation bas de page">
       <a class="tab" href="index.html">🏠 Accueil</a>
       <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
       <a class="tab" href="contact.html">📞 Contact</a>
     </nav>
 
+    <!-- Footer : copyright + Mentions légales + Cookies -->
     <div class="footer">
       © O.S.D.9.T.D.J. – Cotisations 2026 •
       <a href="mentions.html">Mentions légales</a> •
