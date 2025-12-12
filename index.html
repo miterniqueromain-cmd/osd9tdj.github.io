@@ -79,13 +79,11 @@
     border: 1px solid rgba(255, 215, 0, 0.6);
     backdrop-filter: blur(6px);
 
-    /* ✅ AJOUTS MOBILE/TABLETTE : empêche le débordement et autorise le swipe horizontal */
     max-width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  /* ✅ (discret) masque la scrollbar sur Chrome/Safari tout en gardant le swipe */
   .tabs::-webkit-scrollbar {
     display: none;
   }
@@ -100,8 +98,6 @@
     background: rgba(0, 0, 0, 0.45);
     transition: background 0.2s ease, color 0.2s ease;
     white-space: nowrap;
-
-    /* ✅ AJOUT : évite que les onglets se compressent bizarrement */
     flex: 0 0 auto;
   }
 
@@ -161,10 +157,14 @@
     opacity: 0.9;
   }
 
-  /* Empêche le lien SIREN d’être bleu */
   .legal-line a {
     color: #ffffff !important;
     text-decoration: none !important;
+  }
+
+  .footer a {
+    color: #ffffff;
+    text-decoration: none;
   }
 
   @media (max-width: 480px) {
@@ -173,10 +173,12 @@
     .tab { padding: 8px 12px; font-size: 0.85rem; }
   }
   </style>
+
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
   <link rel="apple-touch-icon" href="icon-192.png">
 </head>
+
 <body>
 <div class="overlay">
 
@@ -186,7 +188,6 @@
     <a href="quinoussommes.html" class="tab">Qui nous sommes</a>
     <a href="boutique.html" class="tab">🛒 Boutique en ligne</a>
     <a href="contact.html" class="tab">📞 Être appelé / 📇 Contact</a>
-    <a href="mentions.html" class="tab">Informations officielles</a>
   </nav>
 
   <!-- BLASON -->
@@ -201,10 +202,13 @@
 
   <!-- BAS DE PAGE -->
   <div class="footer">
-    © OSD9TDJ – Tous droits réservés<br><br>
+    © OSD9TDJ – Tous droits réservés •
+    <a href="mentions.html">Mentions légales</a> •
+    <a href="cookies.html">Cookies</a><br><br>
+
     <span class="legal-line">
       <strong>SIREN :</strong>
-      <a href="https://www.societe.com/societe/939461133" target="_blank">
+      <a href="https://www.societe.com/societe/939461133" target="_blank" rel="noopener noreferrer">
         939&nbsp;461&nbsp;133
       </a><br>
       <strong>SIRET (siège) :</strong>
