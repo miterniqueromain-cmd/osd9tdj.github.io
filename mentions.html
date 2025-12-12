@@ -166,14 +166,6 @@
       color: #120702;
     }
 
-    .contact-buttons {
-      margin-top: 22px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
-
     .footer {
       margin-top: 22px;
       font-size: 0.78rem;
@@ -212,11 +204,49 @@
       letter-spacing: 0.06em;
     }
 
+    /* MENU “ONGLETS” coulissant (comme index) */
+    .tabs {
+      margin-top: 18px;
+      margin-bottom: 0;
+      display: flex;
+      gap: 0;
+      border-radius: 999px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid rgba(214, 167, 40, 0.6);
+      backdrop-filter: blur(6px);
+      max-width: 92vw;
+      scrollbar-width: none;
+    }
+    .tabs::-webkit-scrollbar { display: none; }
+
+    .tab {
+      padding: 10px 16px;
+      text-decoration: none;
+      color: var(--clair);
+      font-size: 0.92rem;
+      font-weight: 700;
+      font-family: 'Cinzel', serif;
+      background: rgba(0, 0, 0, 0.45);
+      transition: background 0.2s ease, color 0.2s ease;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+    .tab + .tab {
+      border-left: 1px solid rgba(214, 167, 40, 0.35);
+    }
+    .tab:hover {
+      background: rgba(214, 167, 40, 0.18);
+      color: #ffffff;
+    }
+
     @media (max-width: 600px) {
       h1 { font-size: 1.6rem; }
       h2 { font-size: 1.05rem; }
       p  { font-size: 0.95rem; }
       .ip-alert-title { font-size: 0.96rem; }
+      .tab { padding: 9px 12px; font-size: 0.85rem; }
     }
   </style>
 </head>
@@ -244,7 +274,7 @@
       <strong>strictement interdite sans autorisation écrite</strong>.
     </p>
     <p class="ip-strong">
-      TOUTE RESSEMBLANCE AVEC D’AUTRES GROUPES TEMPLIERS OU INITIATIQUES  
+      TOUTE RESSEMBLANCE AVEC D’AUTRES GROUPES TEMPLIERS OU INITIATIQUES
       EST FORTUITE ET NE VAUT NI FILIATION NI RECONNAISSANCE.
     </p>
     <p>
@@ -319,7 +349,7 @@
   <h2>3 – Indépendance et absence de filiation automatique</h2>
   <p>
     L’O.S.D.9.T.D.J. est pleinement <strong>indépendant</strong> de tout autre ordre, association,
-    fraternité, obédience, Église ou structure initiatique.  
+    fraternité, obédience, Église ou structure initiatique.
     Toute relation de courtoisie, de dialogue ou de coopération éventuelle ne crée :
   </p>
   <ul>
@@ -341,7 +371,7 @@
   <p>
     L’hébergement technique du site est assuré par un prestataire spécialisé (type
     plateforme d’hébergement web / pages statiques), et le nom de domaine
-    <strong>osd9tdj.org</strong> est géré par un registrar agréé.  
+    <strong>osd9tdj.org</strong> est géré par un registrar agréé.
     Les coordonnées des prestataires peuvent être communiquées aux autorités
     compétentes en cas de demande légale ou judiciaire.
   </p>
@@ -417,7 +447,7 @@
   <!-- 7 – Cookies et politique d’utilisation -->
   <h2>7 – Cookies et politique d’utilisation</h2>
   <p>
-    Le site de l’O.S.D.9.T.D.J. a été conçu de manière volontairement sobre afin de garantir une 
+    Le site de l’O.S.D.9.T.D.J. a été conçu de manière volontairement sobre afin de garantir une
     navigation respectueuse de la vie privée. À ce titre :
   </p>
 
@@ -429,20 +459,20 @@
   </ul>
 
   <p>
-    Le site peut cependant utiliser des <strong>cookies strictement nécessaires</strong> au fonctionnement 
-    technique de la plateforme (hébergement, sécurité, formulaire externe). Ces cookies ne 
+    Le site peut cependant utiliser des <strong>cookies strictement nécessaires</strong> au fonctionnement
+    technique de la plateforme (hébergement, sécurité, formulaire externe). Ces cookies ne
     permettent en aucun cas d’identifier personnellement le visiteur.
   </p>
 
   <p>
-    En cas d’intégration future d’outils statistiques anonymisés, ceux-ci respecteront 
-    scrupuleusement le RGPD (IP tronquée, absence de croisement des données, absence de suivi 
+    En cas d’intégration future d’outils statistiques anonymisés, ceux-ci respecteront
+    scrupuleusement le RGPD (IP tronquée, absence de croisement des données, absence de suivi
     publicitaire).
   </p>
 
   <p>
-    Le visiteur peut, s’il le souhaite, configurer son navigateur pour bloquer tout ou partie des 
-    cookies. Le site restera fonctionnel, à l’exception de certaines fonctionnalités nécessitant 
+    Le visiteur peut, s’il le souhaite, configurer son navigateur pour bloquer tout ou partie des
+    cookies. Le site restera fonctionnel, à l’exception de certaines fonctionnalités nécessitant
     un cookie technique temporaire.
   </p>
 
@@ -469,7 +499,7 @@
   <p>
     Pour ses activités, l’association veille à disposer d’une <strong>assurance de responsabilité civile</strong>,
     conformément aux exigences applicables, auprès d’un partenaire assureur.
-    <a href="assurance.html" class="back-link" style="margin-left:10px;">Voir la page Assurance</a>
+    Pour plus d’informations, <a href="assurance.html">suivre ce lien</a>.
   </p>
 
   <!-- 9 – Usurpation de qualité et fausses représentations -->
@@ -496,16 +526,20 @@
   <h2>10 – Droit applicable et juridiction</h2>
   <p>
     Le présent site, comme l’ensemble des activités déclarées de l’O.S.D.9.T.D.J.,
-    est régi par le <strong>droit français</strong>.  
+    est régi par le <strong>droit français</strong>.
     En cas de litige, et à défaut de solution amiable, les juridictions françaises
     territorialement compétentes pourront être saisies.
   </p>
 
-  <!-- BOUTONS BAS DE PAGE -->
-  <div class="contact-buttons">
-    <a href="contact.html" class="back-link">📞 Être appelé par un membre / 📇 Contact</a>
-    <a href="index.html" class="back-link">← Retour à l’accueil</a>
-  </div>
+  <!-- MENU BAS DE PAGE (coulissant) -->
+  <nav class="tabs" aria-label="Navigation">
+    <a href="index.html" class="tab">← Accueil</a>
+    <a href="contact.html" class="tab">📞 Contact</a>
+    <a href="quinoussommes.html" class="tab">Qui nous sommes</a>
+    <a href="activites.html" class="tab">Nos évènements</a>
+    <a href="adhesion.html" class="tab">Adhésion</a>
+    <a href="statuts.html" class="tab">Statuts</a>
+  </nav>
 
   <div class="footer">
     © O.S.D.9.T.D.J. – Tous droits réservés
