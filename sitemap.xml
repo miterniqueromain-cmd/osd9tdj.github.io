@@ -17,6 +17,16 @@
   </url>
 
   <url>
+    <loc>https://osd9tdj.org/histoire.html</loc>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://osd9tdj.org/quinoussommes.html</loc>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
     <loc>https://osd9tdj.org/contact.html</loc>
     <priority>0.85</priority>
   </url>
@@ -32,11 +42,6 @@
   </url>
 
   <url>
-    <loc>https://osd9tdj.org/quinoussommes.html</loc>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
     <loc>https://osd9tdj.org/cotisations.html</loc>
     <priority>0.80</priority>
   </url>
@@ -46,5 +51,14 @@
     <priority>0.70</priority>
   </url>
 
-  <!-- Ajout automatique futur si nouvelles pages -->
+  <url>
+    <loc>https://osd9tdj.org/assurance.html</loc>
+    <priority>0.50</priority>
+  </url>
+
+  <url>
+    <loc>https://osd9tdj.org/cookies.html</loc>
+    <priority>0.40</priority>
+  </url>
+
 </urlset>
