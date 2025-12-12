@@ -93,10 +93,14 @@
       box-shadow:0 0 40px rgba(0,0,0,0.92);
       background:rgba(0,0,0,0.35);
     }
+
+    /* ✅ Réduction de la hauteur perçue : on limite la hauteur et on “crop” légèrement le haut (ciel) */
     .hero img{
       display:block;
       width:100%;
-      height:auto;
+      height:320px;              /* ajuste si besoin (ex: 260/300/340) */
+      object-fit:cover;
+      object-position:center 62%; /* descend un peu l’image => moins de ciel */
     }
 
     .title{
@@ -257,6 +261,10 @@
       h2{font-size:1.12rem;}
       h3{font-size:1.02rem;}
       .tab{padding:9px 14px;font-size:0.86rem;}
+      .hero img{
+        height:220px;            /* ✅ plus petit sur mobile */
+        object-position:center 60%;
+      }
     }
   </style>
 </head>
@@ -273,16 +281,7 @@
     <div class="subtitle">Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</div>
     <div class="motto">« <strong>Per Crucem, Veritas</strong> »</div>
 
-    <!-- Navigation (coulissante) -->
-    <nav class="tabs" aria-label="Navigation histoire">
-      <a class="tab" href="index.html">🏠 Accueil</a>
-      <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
-      <a class="tab" href="statuts.html">Statuts</a>
-      <a class="tab" href="adhesion.html">Adhésion</a>
-      <a class="tab" href="contact.html">📞 Contact</a>
-      <a class="tab" href="mentions.html">Informations officielles</a>
-      <a class="tab" href="cookies.html">Cookies</a>
-    </nav>
+    <!-- ✅ Menu du haut supprimé -->
 
     <div class="panel">
 
@@ -503,13 +502,10 @@ Les membres ayant choisi de poursuivre leur engagement au sein de l’O.S.D.9.T.
 
     </div>
 
-    <!-- Bas de page : navigation coulissante -->
+    <!-- Bas de page : navigation coulissante (✅ seulement 3 liens) -->
     <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
       <a class="tab" href="index.html">🏠 Accueil</a>
       <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
-      <a class="tab" href="statuts.html">Statuts</a>
-      <a class="tab" href="mentions.html">Informations officielles</a>
-      <a class="tab" href="cookies.html">Cookies</a>
       <a class="tab" href="contact.html">📞 Contact</a>
     </nav>
 
