@@ -78,6 +78,16 @@
     overflow: hidden;
     border: 1px solid rgba(255, 215, 0, 0.6);
     backdrop-filter: blur(6px);
+
+    /* ✅ AJOUTS MOBILE/TABLETTE : empêche le débordement et autorise le swipe horizontal */
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* ✅ (discret) masque la scrollbar sur Chrome/Safari tout en gardant le swipe */
+  .tabs::-webkit-scrollbar {
+    display: none;
   }
 
   .tab {
@@ -90,6 +100,9 @@
     background: rgba(0, 0, 0, 0.45);
     transition: background 0.2s ease, color 0.2s ease;
     white-space: nowrap;
+
+    /* ✅ AJOUT : évite que les onglets se compressent bizarrement */
+    flex: 0 0 auto;
   }
 
   .tab + .tab {
@@ -161,8 +174,8 @@
   }
   </style>
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
-<link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 <body>
 <div class="overlay">
