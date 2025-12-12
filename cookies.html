@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Cookies – O.S.D.9.T.D.J.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <meta name="description" content="Page Cookies de l’Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.) : informations sur les cookies, traceurs, et paramètres de navigation.">
+  <meta name="keywords" content="OSD9TDJ, cookies, traceurs, RGPD, confidentialité, site officiel, O.S.D.9.T.D.J.">
+  <link rel="canonical" href="https://osd9tdj.org/cookies.html">
+
+  <!-- OpenGraph -->
+  <meta property="og:title" content="Cookies – O.S.D.9.T.D.J.">
+  <meta property="og:description" content="Informations sur les cookies et éléments techniques utilisés sur le site de l’O.S.D.9.T.D.J.">
+  <meta property="og:image" content="https://osd9tdj.org/sceau-osd9tdj.PNG">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://osd9tdj.org/cookies.html">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cookies – O.S.D.9.T.D.J.">
+  <meta name="twitter:description" content="Page officielle Cookies de l’Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.).">
+  <meta name="twitter:image" content="https://osd9tdj.org/sceau-osd9tdj.PNG">
+
+  <!-- WATERMARK INVISIBLE -->
+  <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-COOKIES">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --or: #d6a728;
+      --clair: #f5f0e6;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Lato', Arial, sans-serif;
+      color: var(--clair);
+      text-align: center;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1b1b1b, #020202 70%);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: none;
+      z-index: -1;
+    }
+
+    .container {
+      min-height: 100vh;
+      box-sizing: border-box;
+      padding: 30px 15px 35px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sceau-box {
+      margin-top: 5px;
+      margin-bottom: 18px;
+      padding: 18px;
+      border-radius: 24px;
+      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.96));
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.85);
+      border: 2px solid rgba(214, 167, 40, 0.9);
+    }
+
+    .sceau-box img {
+      display: block;
+      max-width: 80vw;
+      width: 360px;
+      height: auto;
+      background: #000;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.9rem;
+      margin: 10px 0 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      margin: 18px 0 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--or);
+    }
+
+    p {
+      max-width: 900px;
+      margin: 8px auto;
+      font-size: 1rem;
+      line-height: 1.55;
+      text-align: justify;
+    }
+
+    ul {
+      max-width: 900px;
+      margin: 8px auto;
+      text-align: left;
+      line-height: 1.45;
+      padding-left: 20px;
+    }
+
+    a {
+      color: var(--clair);
+      text-decoration: underline;
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: var(--clair);
+      font-size: 0.95rem;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--or);
+      font-family: 'Cinzel', serif;
+      transition: background 0.2s ease, color 0.2s ease;
+      display: inline-block;
+    }
+
+    .back-link:hover {
+      background: var(--or);
+      color: #120702;
+    }
+
+    .contact-buttons {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .footer {
+      margin-top: 22px;
+      font-size: 0.78rem;
+      opacity: 0.85;
+    }
+
+    .box {
+      max-width: 950px;
+      margin: 0 auto 18px;
+      padding: 14px 14px 12px;
+      border-radius: 14px;
+      border: 2px solid rgba(214, 167, 40, 0.7);
+      background: linear-gradient(to bottom, rgba(18, 7, 2, 0.96), rgba(0, 0, 0, 0.96));
+      box-shadow: 0 0 18px rgba(0,0,0,0.75);
+      text-align: left;
+    }
+
+    .box-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.02rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--or);
+      margin: 0 0 6px;
+    }
+
+    .note {
+      opacity: 0.92;
+      font-size: 0.96rem;
+    }
+
+    code {
+      background: rgba(255,255,255,0.07);
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.05rem; }
+      p  { font-size: 0.95rem; }
+      .box-title { font-size: 0.96rem; }
+    }
+  </style>
+
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+
+<body>
+<div class="container">
+
+  <!-- Sceau officiel -->
+  <div class="sceau-box">
+    <img src="sceau-osd9tdj.PNG" alt="Sceau officiel de l’O.S.D.9.T.D.J.">
+  </div>
+
+  <h1>Cookies</h1>
+
+  <div class="box">
+    <div class="box-title">Information générale</div>
+    <p class="note">
+      Cette page explique l’utilisation des <strong>cookies</strong> et éléments techniques sur le site
+      de l’<strong>Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</strong>.
+      Le site est conçu de manière <strong>sobre</strong>, et n’a pas vocation à effectuer un suivi commercial
+      des visiteurs.
+    </p>
+  </div>
+
+  <h2>1 – Qu’est-ce qu’un cookie ?</h2>
+  <p>
+    Un cookie est un petit fichier texte déposé sur votre appareil (ordinateur, tablette, téléphone)
+    lors de la consultation d’un site internet. Il permet notamment de mémoriser certaines informations
+    de navigation (par exemple la langue, une préférence d’affichage, ou le bon fonctionnement d’un service).
+  </p>
+
+  <h2>2 – Cookies susceptibles d’être utilisés sur ce site</h2>
+  <p>
+    Le site de l’O.S.D.9.T.D.J. peut utiliser uniquement des cookies et éléments techniques nécessaires :
+  </p>
+  <ul>
+    <li><strong>Cookies de fonctionnement</strong> liés à la navigation (chargement des pages, sécurité, stabilité).</li>
+    <li><strong>Éléments techniques</strong> fournis par des services tiers si vous y accédez (par exemple un formulaire externe).</li>
+    <li><strong>Statistiques globales</strong> : si un outil de mesure d’audience est activé, il est destiné à obtenir des données
+      <strong>agrégées</strong> (volume de visites, pages consultées), sans objectif publicitaire.</li>
+  </ul>
+
+  <h2>3 – Ce que nous ne faisons pas</h2>
+  <p>
+    Nous ne mettons pas en place de profilage commercial et nous ne vendons pas les données de navigation.
+    Le site n’a pas pour objectif d’afficher de la publicité ciblée.
+  </p>
+
+  <h2>4 – Gestion des cookies par votre navigateur</h2>
+  <p>
+    Vous pouvez à tout moment configurer votre navigateur pour :
+  </p>
+  <ul>
+    <li>accepter ou refuser les cookies ;</li>
+    <li>supprimer les cookies déjà enregistrés ;</li>
+    <li>être informé lors du dépôt d’un cookie.</li>
+  </ul>
+  <p>
+    La désactivation de certains cookies de fonctionnement peut toutefois altérer l’affichage ou la navigation.
+  </p>
+
+  <h2>5 – Liens utiles (à titre pratique)</h2>
+  <p>
+    Les procédures varient selon votre navigateur. En général, elles se trouvent dans les menus :
+    <code>Paramètres</code> / <code>Confidentialité</code> / <code>Cookies</code>.
+  </p>
+
+  <h2>6 – Contact</h2>
+  <p>
+    Pour toute question relative à cette page ou à la confidentialité, vous pouvez nous contacter via la page :
+    <a href="contact.html">Contact</a>.
+  </p>
+
+  <!-- BOUTONS BAS DE PAGE -->
+  <div class="contact-buttons">
+    <a href="contact.html" class="back-link">📞 Être appelé par un membre / 📇 Contact</a>
+    <a href="mentions.html" class="back-link">← Informations officielles</a>
+    <a href="index.html" class="back-link">← Retour à l’accueil</a>
+  </div>
+
+  <div class="footer">
+    © O.S.D.9.T.D.J. – Tous droits réservés
+  </div>
+
+</div>
+</body>
+</html>
