@@ -34,11 +34,6 @@
     :root {
       --or: #d6a728;
       --clair: #f8e8c8;
-      --fond1:#3a2513;
-      --fond2:#120702;
-      --panel: rgba(0,0,0,0.34);
-      --panel2: rgba(0,0,0,0.22);
-      --trait: rgba(214,167,40,0.40);
     }
 
     body {
@@ -47,28 +42,13 @@
       font-family: 'Lato', Arial, sans-serif;
       color: var(--clair);
       text-align: center;
-      background:
-        radial-gradient(circle at top, rgba(255,255,255,0.06), rgba(0,0,0,0) 35%),
-        radial-gradient(circle at top, var(--fond1), var(--fond2) 70%);
-      overflow-x: hidden;
-    }
-
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      background:
-        radial-gradient(circle at 10% 0%, rgba(214,167,40,0.08), transparent 35%),
-        radial-gradient(circle at 90% 0%, rgba(214,167,40,0.06), transparent 40%),
-        linear-gradient(to bottom, rgba(0,0,0,0.10), rgba(0,0,0,0.50));
-      pointer-events:none;
-      z-index:-1;
+      background: radial-gradient(circle at top, #3a2513, #120702 70%);
     }
 
     .container {
       min-height: 100vh;
       box-sizing: border-box;
-      padding: 28px 15px 44px;
+      padding: 30px 15px 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -76,12 +56,11 @@
 
     .image-box {
       margin-top: 10px;
-      margin-bottom: 18px;
+      margin-bottom: 25px;
       border-radius: 18px;
       overflow: hidden;
       box-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
       border: 2px solid rgba(214, 167, 40, 0.9);
-      background: rgba(0,0,0,0.25);
     }
 
     .image-box img {
@@ -94,103 +73,30 @@
     h1 {
       font-family: 'Cinzel', serif;
       font-size: 1.9rem;
-      margin: 8px 0 4px;
-      letter-spacing: 0.04em;
+      margin: 10px 0 5px;
     }
 
     h2 {
       font-family: 'Cinzel', serif;
       font-size: 1.2rem;
-      margin: 0 0 14px;
+      margin-bottom: 20px;
       font-weight: normal;
-      opacity: 0.92;
-    }
-
-    /* NAV coulissante (comme index / histoire) */
-    .tabs{
-      margin: 10px auto 18px;
-      display:inline-flex;
-      max-width:100%;
-      overflow-x:auto;
-      -webkit-overflow-scrolling:touch;
-      scrollbar-width:none;
-      border-radius:999px;
-      overflow-y:hidden;
-      border:1px solid rgba(214,167,40,0.55);
-      backdrop-filter: blur(6px);
-      background: rgba(0,0,0,0.18);
-    }
-    .tabs::-webkit-scrollbar{display:none;}
-    .tab{
-      flex:0 0 auto;
-      padding:10px 16px;
-      text-decoration:none;
-      color:var(--clair);
-      font-size:0.92rem;
-      font-weight:700;
-      font-family:'Cinzel',serif;
-      background: rgba(0,0,0,0.42);
-      transition: background 0.2s ease, color 0.2s ease;
-      white-space:nowrap;
-    }
-    .tab + .tab{
-      border-left:1px solid rgba(214,167,40,0.35);
-    }
-    .tab:hover{
-      background: rgba(214,167,40,0.20);
-      color:#fff;
-    }
-    .tab.current{
-      background: rgba(214,167,40,0.18);
-      color:#fff;
-    }
-
-    /* Conteneur de lecture (aère sans changer un mot) */
-    .reading-panel{
-      width: 100%;
-      max-width: 920px;
-      margin: 6px auto 0;
-      padding: 18px 16px 10px;
-      border-radius: 18px;
-      border: 1px solid var(--trait);
-      background: linear-gradient(to bottom, rgba(0,0,0,0.40), rgba(0,0,0,0.22));
-      box-shadow: 0 0 18px rgba(0,0,0,0.65);
-      text-align: left;
-    }
-
-    .para{
-      max-width: 860px;
-      margin: 14px auto;
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.30), rgba(0,0,0,0.16));
-      border: 1px solid rgba(214,167,40,0.18);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.35);
-      position: relative;
-    }
-
-    .para::before{
-      content:"";
-      position:absolute;
-      left:0;
-      top:10px;
-      bottom:10px;
-      width:3px;
-      border-radius: 10px;
-      background: linear-gradient(to bottom, rgba(214,167,40,0.85), rgba(214,167,40,0.10));
       opacity: 0.9;
     }
 
     p {
-      margin: 0;
+      max-width: 800px;
+      margin: 16px auto;
       font-size: 1rem;
-      line-height: 1.75;
+      line-height: 1.55;
       text-align: justify;
     }
 
-    strong { font-weight: 700; }
+    strong {
+      font-weight: 700;
+    }
 
-    /* Liens élégants dans le texte (inchangés) */
+    /* Liens élégants dans le texte (style "texte doré + flèche") */
     a.inline-link {
       position: relative;
       display: inline-block;
@@ -203,7 +109,14 @@
       text-decoration: none;
       cursor: pointer;
     }
-    a.inline-link::after { content: " ⟶"; font-size: 0.8rem; }
+
+    /* petite flèche après le texte */
+    a.inline-link::after {
+      content: " ⟶";
+      font-size: 0.8rem;
+    }
+
+    /* trait lumineux sous le lien */
     a.inline-link::before {
       content: "";
       position: absolute;
@@ -217,45 +130,78 @@
       transition: transform 0.18s ease-out;
       opacity: 0.85;
     }
-    a.inline-link:hover::before { transform: scaleX(1); }
-    a.inline-link:hover { color: #ffeeb5; }
 
-    /* Bouton histoire = GROS (séparé, avant le menu déroulant du bas) */
-    .btn-history{
-      display:inline-block;
-      margin: 22px auto 12px;
-      padding: 12px 26px;
-      border-radius: 999px;
-      border: 2px solid rgba(214,167,40,0.95);
-      background: radial-gradient(circle at top, rgba(214,167,40,0.18), rgba(0,0,0,0.45));
-      color: var(--clair);
-      font-family:'Cinzel',serif;
-      font-weight: 800;
-      text-decoration:none;
-      letter-spacing: 0.03em;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.65);
-      transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    a.inline-link:hover::before {
+      transform: scaleX(1);
     }
-    .btn-history:hover{
-      background: rgba(214,167,40,0.92);
+
+    a.inline-link:hover {
+      color: #ffeeb5;
+    }
+
+    /* Bouton "Notre histoire" centré + mis en valeur */
+    .big-history-wrap{
+      margin-top: 26px;
+      text-align: center;
+      width: 100%;
+    }
+    .big-history-btn{
+      display:inline-block;
+      padding:12px 26px;
+      border-radius:999px;
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      letter-spacing:0.04em;
+      text-decoration:none;
       color:#120702;
+      background:linear-gradient(to right, #f3d98b, #d6a728);
+      box-shadow:0 4px 10px rgba(0,0,0,0.8);
+    }
+    .big-history-btn:hover{
+      filter: brightness(1.05);
       transform: translateY(-1px);
     }
 
-    .footer-mini{
-      margin-top: 16px;
-      font-size: 0.82rem;
-      opacity: 0.85;
-      text-align:center;
+    /* Menu déroulant/coulissant (style index) */
+    .tabs{
+      margin: 14px auto 0;
+      display: inline-flex;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      border-radius: 999px;
+      overflow-y: hidden;
+      border: 1px solid rgba(214,167,40,0.55);
+      background: rgba(0,0,0,0.18);
+      backdrop-filter: blur(6px);
+    }
+    .tabs::-webkit-scrollbar{display:none;}
+    .tab{
+      flex:0 0 auto;
+      padding:10px 16px;
+      text-decoration:none;
+      color:var(--clair);
+      font-size:0.92rem;
+      font-weight:700;
+      font-family:'Cinzel',serif;
+      background:rgba(0,0,0,0.42);
+      transition: background 0.2s ease, color 0.2s ease;
+      white-space:nowrap;
+    }
+    .tab + .tab{
+      border-left:1px solid rgba(214,167,40,0.35);
+    }
+    .tab:hover{
+      background:rgba(214,167,40,0.20);
+      color:#fff;
     }
 
     @media (max-width: 600px) {
       h1 { font-size: 1.6rem; }
       h2 { font-size: 1.05rem; }
       p  { font-size: 0.95rem; }
-      .tab{ padding: 9px 14px; font-size: 0.86rem; }
-      .reading-panel{ padding: 16px 12px 8px; }
-      .para{ padding: 11px 12px; }
+      .tab{ padding:9px 14px; font-size:0.86rem; }
     }
   </style>
 
@@ -274,150 +220,99 @@
   <h1>ORDRE SACRÉ DES NEUF TEMPLIERS DE JÉRUSALEM</h1>
   <h2>Qui nous sommes</h2>
 
-  <!-- MENU DÉROULANT (coulissant) : toutes les pages (SANS histoire ici) -->
-  <nav class="tabs" aria-label="Navigation principale">
-    <a class="tab" href="index.html">🏠 Accueil</a>
-    <a class="tab" href="activites.html">Activités</a>
-    <a class="tab current" href="quinoussommes.html">Qui nous sommes</a>
-    <a class="tab" href="statuts.html">Statuts</a>
-    <a class="tab" href="adhesion.html">Adhésion</a>
-    <a class="tab" href="cotisations.html">Cotisations</a>
-    <a class="tab" href="commanderie.html">Commanderie</a>
-    <a class="tab" href="boutique.html">Boutique</a>
-    <a class="tab" href="assurance.html">Assurance</a>
-    <a class="tab" href="mentions.html">Informations officielles</a>
-    <a class="tab" href="cookies.html">Cookies</a>
-    <a class="tab" href="contact.html">📞 Contact</a>
-  </nav>
+  <p>
+    L’Ordre Sacré des Neuf Templiers de Jérusalem est une association laïque et culturelle.
+    Nous nous référons à l’héritage des <strong>neuf premiers compagnons</strong> rassemblés autour
+    d’Hugues de Payns, avant la fondation officielle de l’Ordre du Temple qui marqua
+    profondément le Moyen Âge.
+  </p>
 
-  <!-- TEXTE : strictement inchangé (mots identiques), seulement aéré / coloré -->
-  <div class="reading-panel">
+  <p>
+    Notre démarche est d’abord une démarche de <strong>connaissance et d’étude</strong> :
+    comprendre ce que fut réellement la chevalerie templière, travailler à partir de sources
+    sérieuses, distinguer l’histoire des récits ajoutés au fil des siècles, et réfléchir à ce
+    que ces principes peuvent encore inspirer aujourd’hui.
+  </p>
 
-    <div class="para">
-      <p>
-        L’Ordre Sacré des Neuf Templiers de Jérusalem est une association laïque et culturelle.
-        Nous nous référons à l’héritage des <strong>neuf premiers compagnons</strong> rassemblés autour
-        d’Hugues de Payns, avant la fondation officielle de l’Ordre du Temple qui marqua
-        profondément le Moyen Âge.
-      </p>
-    </div>
+  <p>
+    Nous nous intéressons aussi à ce qu’était « l’intérieur » d’un Templier : sa conduite,
+    sa discipline, son sens du devoir et du service. Les frères de l’Ordre n’affichaient pas
+    tout ; ils savaient faire silence en eux, garder la maîtrise de leurs émotions et rester
+    fermes dans l’épreuve. C’est cette exigence intérieure, discrète mais réelle, qui nous
+    inspire et que nous cherchons à transmettre.
+  </p>
 
-    <div class="para">
-      <p>
-        Notre démarche est d’abord une démarche de <strong>connaissance et d’étude</strong> :
-        comprendre ce que fut réellement la chevalerie templière, travailler à partir de sources
-        sérieuses, distinguer l’histoire des récits ajoutés au fil des siècles, et réfléchir à ce
-        que ces principes peuvent encore inspirer aujourd’hui.
-      </p>
-    </div>
+  <p>
+    On disait que, dans leurs regards, se lisait une détermination sans détour : ils avançaient
+    « vainqueurs ou morts », non par orgueil, mais parce qu’ils avaient accepté de se tenir
+    en première ligne pour protéger ceux qui n’avaient pas de défense. À leur époque, ils
+    faisaient le vide autour d’eux pour sécuriser la route du pèlerin.
+  </p>
 
-    <div class="para">
-      <p>
-        Nous nous intéressons aussi à ce qu’était « l’intérieur » d’un Templier : sa conduite,
-        sa discipline, son sens du devoir et du service. Les frères de l’Ordre n’affichaient pas
-        tout ; ils savaient faire silence en eux, garder la maîtrise de leurs émotions et rester
-        fermes dans l’épreuve. C’est cette exigence intérieure, discrète mais réelle, qui nous
-        inspire et que nous cherchons à transmettre.
-      </p>
-    </div>
+  <p>
+    Aujourd’hui, les batailles ne sont plus les mêmes, mais les détresses existent toujours.
+    Nous apprenons à <strong>faire le vide en nous</strong> pour mieux voir, écouter et soutenir :
+    notre engagement se traduit par une présence concrète auprès des personnes vulnérables,
+    par l’entraide au sein de l’Ordre et par des actions simples, utiles, menées avec constance.
+    La victoire que nous recherchons n’est plus celle des armes, mais celle du service sincère.
+  </p>
 
-    <div class="para">
-      <p>
-        On disait que, dans leurs regards, se lisait une détermination sans détour : ils avançaient
-        « vainqueurs ou morts », non par orgueil, mais parce qu’ils avaient accepté de se tenir
-        en première ligne pour protéger ceux qui n’avaient pas de défense. À leur époque, ils
-        faisaient le vide autour d’eux pour sécuriser la route du pèlerin.
-      </p>
-    </div>
+  <p>
+    Se retrouver régulièrement pour étudier, réfléchir, échanger et préparer des projets
+    d’entraide fait naître une véritable fraternité. À force de marcher ensemble, de porter
+    des projets communs et de se soutenir dans les difficultés, des liens solides se tissent
+    entre les membres. Cette fraternité n’est pas théorique : elle se vit dans l’écoute, la
+    présence et l’action.
+  </p>
 
-    <div class="para">
-      <p>
-        Aujourd’hui, les batailles ne sont plus les mêmes, mais les détresses existent toujours.
-        Nous apprenons à <strong>faire le vide en nous</strong> pour mieux voir, écouter et soutenir :
-        notre engagement se traduit par une présence concrète auprès des personnes vulnérables,
-        par l’entraide au sein de l’Ordre et par des actions simples, utiles, menées avec constance.
-        La victoire que nous recherchons n’est plus celle des armes, mais celle du service sincère.
-      </p>
-    </div>
+  <p>
+    Bien que les symboles et l’iconographie templière fassent partie de notre identité
+    culturelle, nous ne sommes pas un « ordre de manteaux » ni un cercle centré sur les titres
+    ou les décorations. Nous ne sommes pas non plus des Hospitaliers&nbsp;: leur vocation
+    historique était autre. Nous nous inspirons surtout de l’esprit des Templiers des origines :
+    des hommes de terrain, de travail, de vigilance et de service.
+  </p>
 
-    <div class="para">
-      <p>
-        Se retrouver régulièrement pour étudier, réfléchir, échanger et préparer des projets
-        d’entraide fait naître une véritable fraternité. À force de marcher ensemble, de porter
-        des projets communs et de se soutenir dans les difficultés, des liens solides se tissent
-        entre les membres. Cette fraternité n’est pas théorique : elle se vit dans l’écoute, la
-        présence et l’action.
-      </p>
-    </div>
+  <p>
+    Notre ligne est simple : <strong>servir là où d’autres ne vont plus</strong>. Avant de parler
+    de grands projets, nous commençons par agir là où nous sommes : familles, voisins, amis,
+    personnes isolées ou en difficulté. Ce sont ces actions discrètes, mais répétées, qui
+    donnent du sens à notre engagement.
+  </p>
 
-    <div class="para">
-      <p>
-        Bien que les symboles et l’iconographie templière fassent partie de notre identité
-        culturelle, nous ne sommes pas un « ordre de manteaux » ni un cercle centré sur les titres
-        ou les décorations. Nous ne sommes pas non plus des Hospitaliers&nbsp;: leur vocation
-        historique était autre. Nous nous inspirons surtout de l’esprit des Templiers des origines :
-        des hommes de terrain, de travail, de vigilance et de service.
-      </p>
-    </div>
+  <p>
+    L’Ordre est <strong>mixte</strong>, ouvert aux femmes et aux hommes, et respecte strictement
+    la neutralité politique et la laïcité prévues dans nos
+    <a href="statuts.html" class="inline-link">Statuts</a>. Celles et ceux qui se reconnaissent
+    dans ces valeurs peuvent entamer le cheminement de Novice via le
+    <a href="adhesion.html" class="inline-link">Formulaire d’adhésion</a>.
+  </p>
 
-    <div class="para">
-      <p>
-        Notre ligne est simple : <strong>servir là où d’autres ne vont plus</strong>. Avant de parler
-        de grands projets, nous commençons par agir là où nous sommes : familles, voisins, amis,
-        personnes isolées ou en difficulté. Ce sont ces actions discrètes, mais répétées, qui
-        donnent du sens à notre engagement.
-      </p>
-    </div>
+  <p>
+    Si l’Ordre n’est pas encore présent dans votre région, il est possible d’envisager une
+    implantation locale sous forme de Commanderie rattachée. Les conditions et étapes sont
+    détaillées ici&nbsp;:
+    <a href="commanderie.html" class="inline-link">Ouvrir une Commanderie</a>.
+  </p>
 
-    <div class="para">
-      <p>
-        L’Ordre est <strong>mixte</strong>, ouvert aux femmes et aux hommes, et respecte strictement
-        la neutralité politique et la laïcité prévues dans nos
-        <a href="statuts.html" class="inline-link">Statuts</a>. Celles et ceux qui se reconnaissent
-        dans ces valeurs peuvent entamer le cheminement de Novice via le
-        <a href="adhesion.html" class="inline-link">Formulaire d’adhésion</a>.
-      </p>
-    </div>
+  <p>
+    Les cotisations, fixées par l’Assemblée Générale, servent uniquement à soutenir nos actions,
+    nos rencontres et l’organisation de l’Ordre. Pour en savoir plus&nbsp;:
+    <a href="cotisations.html" class="inline-link">Infos cotisations</a>.
+  </p>
 
-    <div class="para">
-      <p>
-        Si l’Ordre n’est pas encore présent dans votre région, il est possible d’envisager une
-        implantation locale sous forme de Commanderie rattachée. Les conditions et étapes sont
-        détaillées ici&nbsp;:
-        <a href="commanderie.html" class="inline-link">Ouvrir une Commanderie</a>.
-      </p>
-    </div>
-
-    <div class="para">
-      <p>
-        Les cotisations, fixées par l’Assemblée Générale, servent uniquement à soutenir nos actions,
-        nos rencontres et l’organisation de l’Ordre. Pour en savoir plus&nbsp;:
-        <a href="cotisations.html" class="inline-link">Infos cotisations</a>.
-      </p>
-    </div>
-
-    <!-- BOUTON HISTOIRE : GROS, AU-DESSUS du menu déroulant du bas -->
-    <a class="btn-history" href="histoire.html">📜 Notre histoire</a>
-
-    <!-- MENU DÉROULANT DU BAS : toutes les pages (SANS histoire ici aussi) -->
-    <nav class="tabs" aria-label="Navigation bas de page" style="margin: 0 auto 10px;">
-      <a class="tab" href="index.html">🏠 Accueil</a>
-      <a class="tab" href="activites.html">Activités</a>
-      <a class="tab current" href="quinoussommes.html">Qui nous sommes</a>
-      <a class="tab" href="statuts.html">Statuts</a>
-      <a class="tab" href="adhesion.html">Adhésion</a>
-      <a class="tab" href="cotisations.html">Cotisations</a>
-      <a class="tab" href="commanderie.html">Commanderie</a>
-      <a class="tab" href="boutique.html">Boutique</a>
-      <a class="tab" href="assurance.html">Assurance</a>
-      <a class="tab" href="mentions.html">Informations officielles</a>
-      <a class="tab" href="cookies.html">Cookies</a>
-      <a class="tab" href="contact.html">📞 Contact</a>
-    </nav>
-
-    <div class="footer-mini">© O.S.D.9.T.D.J. – Tous droits réservés</div>
-
+  <!-- Bouton centré "Notre histoire" (gros) -->
+  <div class="big-history-wrap">
+    <a class="big-history-btn" href="histoire.html">📜 Notre histoire</a>
   </div>
+
+  <!-- Menu coulissant réduit (seulement 4 liens) -->
+  <nav class="tabs" aria-label="Navigation bas de page">
+    <a class="tab" href="index.html">🏠 Accueil</a>
+    <a class="tab" href="contact.html">📞 Contact</a>
+    <a class="tab" href="cookies.html">🍪 Cookies</a>
+    <a class="tab" href="mentions.html">⚖️ Mentions légales</a>
+  </nav>
 
 </div>
 </body>
