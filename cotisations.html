@@ -44,7 +44,7 @@
       overflow-x: hidden;
     }
 
-    /* Image Chevalier en haut */
+    /* Image Chevalier en haut (réduite légèrement) */
     .chevalier-box {
       margin: 20px auto 25px;
       padding: 8px;
@@ -55,7 +55,7 @@
       box-shadow: 0 0 30px rgba(0,0,0,0.8);
     }
     .chevalier-box img {
-      width: 360px;
+      width: 330px;
       max-width: 90vw;
       border-radius: 12px;
       display: block;
@@ -90,6 +90,16 @@
       max-width: 780px;
       margin: 8px auto;
       text-align: justify;
+    }
+
+    /* Lien discret dans le texte */
+    .inline-link a{
+      color: var(--clair);
+      text-decoration: underline;
+      opacity: 0.95;
+    }
+    .inline-link a:hover{
+      opacity: 1;
     }
 
     /* Bloc montants */
@@ -158,20 +168,62 @@
       color: #120702;
     }
 
+    /* Menu déroulant (swipe) en bas */
+    .tabs{
+      margin:18px auto 8px;
+      display:inline-flex;
+      max-width:100%;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      border-radius:999px;
+      overflow-y:hidden;
+      border:1px solid rgba(214,167,40,0.55);
+      backdrop-filter: blur(6px);
+      background:rgba(0,0,0,0.18);
+    }
+    .tabs::-webkit-scrollbar{display:none;}
+    .tab{
+      flex:0 0 auto;
+      padding:10px 16px;
+      text-decoration:none;
+      color:var(--clair);
+      font-size:0.92rem;
+      font-weight:700;
+      font-family:'Cinzel',serif;
+      background:rgba(0,0,0,0.42);
+      transition:background 0.2s ease, color 0.2s ease;
+      white-space:nowrap;
+    }
+    .tab + .tab{
+      border-left:1px solid rgba(214,167,40,0.35);
+    }
+    .tab:hover{
+      background:rgba(214,167,40,0.20);
+      color:#fff;
+    }
+
     .footer {
-      margin-top: 28px;
+      margin-top: 12px;
       font-size: 0.85rem;
       opacity: 0.85;
+    }
+    .footer a{
+      color: var(--clair);
+      text-decoration: none;
+      opacity: 0.92;
     }
 
     @media (max-width: 600px) {
       h1 { font-size: 1.5rem; }
       h2 { font-size: 1.1rem; }
+      .tab{padding:9px 14px;font-size:0.86rem;}
     }
   </style>
+
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
-<link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 
 <body>
@@ -205,6 +257,7 @@
       Le paiement de la cotisation est obligatoire pour valider l’adhésion et exercer les droits
       prévus par les statuts. Aucun remboursement ne peut être effectué sans décision expresse
       du Bureau, dans le respect des règles de bonne gestion.
+      <span class="inline-link">Le paiement peut également se faire via <a href="boutique.html">la boutique en ligne</a>.</span>
     </p>
 
     <p class="note">
@@ -213,15 +266,25 @@
       et permettent d’assurer la stabilité à long terme de l’O.S.D.9.T.D.J.
     </p>
 
+    <!-- Boutons : sans Boutique en ligne -->
     <div class="button-row">
       <a class="btn" href="adhesion.html">→ Formulaire d’adhésion</a>
-      <a class="btn" href="boutique.html">🛒 Boutique en ligne</a>
       <a class="btn" href="contact.html">📞 Être appelé par un membre / 📇 Contact</a>
       <a class="btn" href="index.html">← Retour à l’accueil</a>
     </div>
 
+    <!-- Menu déroulant bas : Accueil / Qui nous sommes / Contact -->
+    <nav class="tabs" aria-label="Navigation bas de page">
+      <a class="tab" href="index.html">🏠 Accueil</a>
+      <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
+      <a class="tab" href="contact.html">📞 Contact</a>
+    </nav>
+
+    <!-- Footer : copyright + Mentions légales + Cookies -->
     <div class="footer">
-      © O.S.D.9.T.D.J. – Cotisations 2026
+      © O.S.D.9.T.D.J. – Cotisations 2026 •
+      <a href="mentions.html">Mentions légales</a> •
+      <a href="cookies.html">Cookies</a>
     </div>
 
   </div>
