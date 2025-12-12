@@ -37,11 +37,13 @@
       --fond: #120702;
 
       /* doré adouci */
-      --or-line: rgba(214,167,40,0.42);
-      --or-line2: rgba(214,167,40,0.26);
-      --or-glow: rgba(214,167,40,0.12);
-      --card: rgba(0,0,0,0.22);
-      --card2: rgba(0,0,0,0.12);
+      --or-line: rgba(214,167,40,0.40);
+      --or-line2: rgba(214,167,40,0.24);
+      --or-glow: rgba(214,167,40,0.10);
+
+      /* fonds doux (moins lourds) */
+      --card: rgba(0,0,0,0.18);
+      --card2: rgba(0,0,0,0.10);
     }
 
     body {
@@ -56,7 +58,7 @@
     .container {
       min-height: 100vh;
       box-sizing: border-box;
-      padding: 30px 15px 40px;
+      padding: 30px 15px 44px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -64,7 +66,7 @@
 
     .image-box {
       margin-top: 10px;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
       border-radius: 18px;
       overflow: hidden;
       box-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
@@ -81,13 +83,13 @@
 
     h1 {
       font-family: 'Cinzel', serif;
-      font-size: 1.9rem;
-      margin: 10px 0 5px;
+      font-size: 1.95rem;
+      margin: 10px 0 6px;
     }
 
     h2 {
       font-family: 'Cinzel', serif;
-      font-size: 1.2rem;
+      font-size: 1.22rem;
       margin-bottom: 18px;
       font-weight: normal;
       opacity: 0.9;
@@ -95,69 +97,76 @@
 
     strong { font-weight: 700; }
 
-    /* 3 grands blocs lisibles (moins agressifs) */
+    /* BLOCS PLUS AÉRÉS + PLUS LISIBLE */
     .section-card{
       width: 100%;
-      max-width: 900px;
-      margin: 18px auto;
-      padding: 18px 18px;
+      max-width: 920px;
+      margin: 22px auto;              /* + d’espace entre rectangles */
+      padding: 22px 22px;             /* + d’air dans le rectangle */
       text-align: justify;
 
-      /* fond doux + léger relief */
       background: linear-gradient(180deg, var(--card), var(--card2));
-      border-radius: 18px;
-
-      /* bordure dorée discrète */
+      border-radius: 20px;
       border: 1px solid var(--or-line);
 
-      /* halo très léger, pas “flashy” */
+      /* ombre plus douce (moins “lourd”) */
       box-shadow:
-        0 10px 26px rgba(0,0,0,0.55),
-        0 0 0 1px rgba(0,0,0,0.18) inset;
+        0 8px 22px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(0,0,0,0.14) inset;
 
       position: relative;
       overflow: hidden;
     }
 
-    /* “jeu de couleurs” très subtil (pas mal aux yeux) */
+    /* jeu de couleurs très discret */
     .section-card::before{
       content:"";
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(circle at 18% 0%, var(--or-glow), transparent 60%),
-        radial-gradient(circle at 85% 110%, rgba(248,232,200,0.06), transparent 55%);
+        radial-gradient(circle at 18% 0%, var(--or-glow), transparent 62%),
+        radial-gradient(circle at 86% 115%, rgba(248,232,200,0.05), transparent 58%);
       pointer-events:none;
       opacity: 0.95;
     }
 
-    /* variante ultra légère pour alterner les 3 blocs */
     .section-card.alt{
-      background: linear-gradient(180deg, rgba(0,0,0,0.26), rgba(0,0,0,0.14));
+      background: linear-gradient(180deg, rgba(0,0,0,0.20), rgba(0,0,0,0.12));
       border-color: var(--or-line2);
     }
     .section-card.alt::before{
       background:
-        radial-gradient(circle at 80% 0%, var(--or-glow), transparent 62%),
-        radial-gradient(circle at 10% 120%, rgba(248,232,200,0.05), transparent 55%);
+        radial-gradient(circle at 82% 0%, var(--or-glow), transparent 64%),
+        radial-gradient(circle at 12% 120%, rgba(248,232,200,0.05), transparent 58%);
     }
 
+    /* TEXTE LÉGÈREMENT PLUS GROS + PLUS RESPIRANT */
     .section-card p{
       position: relative;
-      max-width: 860px;
-      margin: 14px auto;
-      font-size: 1rem;
-      line-height: 1.6;
+      max-width: 880px;
+      margin: 18px auto;              /* + d’espace entre paragraphes */
+      font-size: 1.08rem;             /* légèrement plus gros */
+      line-height: 1.72;              /* plus confortable */
+      letter-spacing: 0.01em;
     }
 
-    /* séparateur doux entre paragraphes (sauf le dernier) */
+    /* séparation entre paragraphes : plus simple, plus d’air */
     .soft-sep{
       position: relative;
+      height: 14px;                   /* espace visible (respiration) */
+      max-width: 820px;
+      margin: 6px auto 2px;
+    }
+    .soft-sep::after{
+      content:"";
+      position:absolute;
+      left: 10%;
+      right: 10%;
+      top: 50%;
       height: 1px;
-      max-width: 760px;
-      margin: 10px auto 6px;
-      background: linear-gradient(to right, transparent, rgba(214,167,40,0.35), transparent);
-      opacity: 0.85;
+      background: linear-gradient(to right, transparent, rgba(214,167,40,0.28), transparent);
+      opacity: 0.9;
+      transform: translateY(-50%);
     }
 
     /* Liens élégants dans le texte */
@@ -168,14 +177,14 @@
       margin: 0 2px;
       color: var(--or);
       font-family: 'Cinzel', serif;
-      font-size: 0.93rem;
+      font-size: 0.96rem;
       font-weight: 700;
       text-decoration: none;
       cursor: pointer;
     }
     a.inline-link::after {
       content: " ⟶";
-      font-size: 0.8rem;
+      font-size: 0.82rem;
     }
     a.inline-link::before {
       content: "";
@@ -188,14 +197,14 @@
       transform: scaleX(0);
       transform-origin: center;
       transition: transform 0.18s ease-out;
-      opacity: 0.75;
+      opacity: 0.70;
     }
     a.inline-link:hover::before { transform: scaleX(1); }
     a.inline-link:hover { color: #ffeeb5; }
 
     /* Bouton "Notre histoire" */
     .big-history-wrap{
-      margin-top: 20px;
+      margin-top: 22px;
       text-align: center;
       width: 100%;
     }
@@ -216,7 +225,7 @@
       transform: translateY(-1px);
     }
 
-    /* Menu déroulant (3 liens) */
+    /* Menu déroulant (2 liens) */
     .tabs{
       margin: 18px auto 0;
       display: inline-flex;
@@ -233,10 +242,10 @@
     .tabs::-webkit-scrollbar{display:none;}
     .tab{
       flex:0 0 auto;
-      padding:10px 16px;
+      padding:10px 18px;
       text-decoration:none;
       color:var(--clair);
-      font-size:0.92rem;
+      font-size:0.93rem;
       font-weight:700;
       font-family:'Cinzel',serif;
       background:rgba(0,0,0,0.42);
@@ -282,10 +291,19 @@
     @media (max-width: 600px) {
       h1 { font-size: 1.6rem; }
       h2 { font-size: 1.05rem; }
-      .section-card{ padding: 16px 14px; border-radius: 16px; }
-      .section-card p{ font-size: 0.95rem; }
-      .tab{ padding:9px 14px; font-size:0.86rem; }
+      .section-card{
+        padding: 18px 14px;
+        border-radius: 18px;
+        margin: 20px auto;
+      }
+      .section-card p{
+        font-size: 1.02rem;
+        line-height: 1.70;
+        margin: 16px auto;
+      }
+      .tab{ padding:9px 16px; font-size:0.86rem; }
       .image-box img{ width: 360px; max-width: 88vw; }
+      .soft-sep::after{ left: 6%; right: 6%; }
     }
   </style>
 
@@ -399,11 +417,10 @@
     <a class="big-history-btn" href="histoire.html">📜 Notre histoire</a>
   </div>
 
-  <!-- Menu coulissant réduit (seulement 3 liens) -->
+  <!-- Menu coulissant réduit (seulement 2 liens) -->
   <nav class="tabs" aria-label="Navigation bas de page">
     <a class="tab" href="index.html">🏠 Accueil</a>
     <a class="tab" href="contact.html">📞 Contact</a>
-    <a class="tab" href="etre-contacte.html">📩 Être contacté par un membre</a>
   </nav>
 
   <!-- Footer tout en bas : cookies + mentions en minuscules avec copyright -->
