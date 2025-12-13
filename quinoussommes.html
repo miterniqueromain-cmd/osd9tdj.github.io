@@ -288,6 +288,67 @@
     }
     .sep{ opacity:0.55; }
 
+    /* ✅ Signature nnDnn (ajout, même esprit que la précédente) */
+    .nndnn-banner{
+      margin:26px auto 6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+      flex-wrap:nowrap;
+      text-align:center;
+    }
+    .nndnn-banner img{
+      height:48px;
+      width:auto;
+      display:block;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.85));
+      opacity:0.96;
+    }
+    .nndnn-text{
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-weight:700;
+      letter-spacing:0.18em;
+      text-transform:none;
+      font-size:2.05rem;
+      line-height:1;
+      text-shadow:0 0 14px rgba(0,0,0,0.9);
+      white-space:nowrap;
+    }
+
+    /* ✅ Textes déroulants (sans modifier le texte) : BLOC 1 et BLOC 2 seulement */
+    details.section-card{
+      padding: 0;
+    }
+    details.section-card > summary{
+      list-style: none;
+      cursor: pointer;
+      padding: 22px 22px;
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      letter-spacing:0.04em;
+      color: var(--or);
+      text-transform: uppercase;
+      text-align: center;
+      position: relative;
+      user-select: none;
+    }
+    details.section-card > summary::-webkit-details-marker{ display:none; }
+    details.section-card > summary::after{
+      content:"▼";
+      margin-left:10px;
+      font-size:0.85rem;
+      opacity:0.9;
+    }
+    details.section-card[open] > summary::after{
+      content:"▲";
+    }
+    details.section-card .details-inner{
+      padding: 0 22px 12px;
+      position: relative;
+    }
+
     @media (max-width: 600px) {
       h1 { font-size: 1.6rem; }
       h2 { font-size: 1.05rem; }
@@ -304,6 +365,15 @@
       .tab{ padding:9px 16px; font-size:0.86rem; }
       .image-box img{ width: 360px; max-width: 88vw; }
       .soft-sep::after{ left: 6%; right: 6%; }
+
+      details.section-card > summary{
+        padding: 18px 14px;
+        font-size: 0.98rem;
+      }
+
+      .nndnn-banner{gap:10px;}
+      .nndnn-banner img{height:42px;}
+      .nndnn-text{font-size:1.55rem;}
     }
   </style>
 
@@ -323,65 +393,71 @@
   <h2>Qui nous sommes</h2>
 
   <!-- BLOC 1 (paragraphe 1 à 3) -->
-  <section class="section-card" aria-label="Présentation générale">
-    <p>
-      L’Ordre Sacré des Neuf Templiers de Jérusalem est une association laïque et culturelle.
-      Nous nous référons à l’héritage des <strong>neuf premiers compagnons</strong> rassemblés autour
-      d’Hugues de Payns, avant la fondation officielle de l’Ordre du Temple qui marqua
-      profondément le Moyen Âge.
-    </p>
-    <div class="soft-sep"></div>
-    <p>
-      Notre démarche est d’abord une démarche de <strong>connaissance et d’étude</strong> :
-      comprendre ce que fut réellement la chevalerie templière, travailler à partir de sources
-      sérieuses, distinguer l’histoire des récits ajoutés au fil des siècles, et réfléchir à ce
-      que ces principes peuvent encore inspirer aujourd’hui.
-    </p>
-    <div class="soft-sep"></div>
-    <p>
-      Nous nous intéressons aussi à ce qu’était « l’intérieur » d’un Templier : sa conduite,
-      sa discipline, son sens du devoir et du service. Les frères de l’Ordre n’affichaient pas
-      tout ; ils savaient faire silence en eux, garder la maîtrise de leurs émotions et rester
-      fermes dans l’épreuve. C’est cette exigence intérieure, discrète mais réelle, qui nous
-      inspire et que nous cherchons à transmettre.
-    </p>
-  </section>
+  <details class="section-card" aria-label="Présentation générale">
+    <summary>Présentation générale</summary>
+    <div class="details-inner">
+      <p>
+        L’Ordre Sacré des Neuf Templiers de Jérusalem est une association laïque et culturelle.
+        Nous nous référons à l’héritage des <strong>neuf premiers compagnons</strong> rassemblés autour
+        d’Hugues de Payns, avant la fondation officielle de l’Ordre du Temple qui marqua
+        profondément le Moyen Âge.
+      </p>
+      <div class="soft-sep"></div>
+      <p>
+        Notre démarche est d’abord une démarche de <strong>connaissance et d’étude</strong> :
+        comprendre ce que fut réellement la chevalerie templière, travailler à partir de sources
+        sérieuses, distinguer l’histoire des récits ajoutés au fil des siècles, et réfléchir à ce
+        que ces principes peuvent encore inspirer aujourd’hui.
+      </p>
+      <div class="soft-sep"></div>
+      <p>
+        Nous nous intéressons aussi à ce qu’était « l’intérieur » d’un Templier : sa conduite,
+        sa discipline, son sens du devoir et du service. Les frères de l’Ordre n’affichaient pas
+        tout ; ils savaient faire silence en eux, garder la maîtrise de leurs émotions et rester
+        fermes dans l’épreuve. C’est cette exigence intérieure, discrète mais réelle, qui nous
+        inspire et que nous cherchons à transmettre.
+      </p>
+    </div>
+  </details>
 
   <!-- BLOC 2 (paragraphe 4 à 7) -->
-  <section class="section-card alt" aria-label="Esprit de service et fraternité">
-    <p>
-      On disait que, dans leurs regards, se lisait une détermination sans détour : ils avançaient
-      « vainqueurs ou morts », non par orgueil, mais parce qu’ils avaient accepté de se tenir
-      en première ligne pour protéger ceux qui n’avaient pas de défense. À leur époque, ils
-      faisaient le vide autour d’eux pour sécuriser la route du pèlerin.
-    </p>
-    <div class="soft-sep"></div>
-    <p>
-      Aujourd’hui, les batailles ne sont plus les mêmes, mais les détresses existent toujours.
-      Nous apprenons à <strong>faire le vide en nous</strong> pour mieux voir, écouter et soutenir :
-      notre engagement se traduit par une présence concrète auprès des personnes vulnérables,
-      par l’entraide au sein de l’Ordre et par des actions simples, utiles, menées avec constance.
-      La victoire que nous recherchons n’est plus celle des armes, mais celle du service sincère.
-    </p>
-    <div class="soft-sep"></div>
-    <p>
-      Se retrouver régulièrement pour étudier, réfléchir, échanger et préparer des projets
-      d’entraide fait naître une véritable fraternité. À force de marcher ensemble, de porter
-      des projets communs et de se soutenir dans les difficultés, des liens solides se tissent
-      entre les membres. Cette fraternité n’est pas théorique : elle se vit dans l’écoute, la
-      présence et l’action.
-    </p>
-    <div class="soft-sep"></div>
-    <p>
-      Bien que les symboles et l’iconographie templière fassent partie de notre identité
-      culturelle, nous ne sommes pas un « ordre de manteaux » ni un cercle centré sur les titres
-      ou les décorations. Nous ne sommes pas non plus des Hospitaliers&nbsp;: leur vocation
-      historique était autre. Nous nous inspirons surtout de l’esprit des Templiers des origines :
-      des hommes de terrain, de travail, de vigilance et de service.
-    </p>
-  </section>
+  <details class="section-card alt" aria-label="Esprit de service et fraternité">
+    <summary>Esprit de service et fraternité</summary>
+    <div class="details-inner">
+      <p>
+        On disait que, dans leurs regards, se lisait une détermination sans détour : ils avançaient
+        « vainqueurs ou morts », non par orgueil, mais parce qu’ils avaient accepté de se tenir
+        en première ligne pour protéger ceux qui n’avaient pas de défense. À leur époque, ils
+        faisaient le vide autour d’eux pour sécuriser la route du pèlerin.
+      </p>
+      <div class="soft-sep"></div>
+      <p>
+        Aujourd’hui, les batailles ne sont plus les mêmes, mais les détresses existent toujours.
+        Nous apprenons à <strong>faire le vide en nous</strong> pour mieux voir, écouter et soutenir :
+        notre engagement se traduit par une présence concrète auprès des personnes vulnérables,
+        par l’entraide au sein de l’Ordre et par des actions simples, utiles, menées avec constance.
+        La victoire que nous recherchons n’est plus celle des armes, mais celle du service sincère.
+      </p>
+      <div class="soft-sep"></div>
+      <p>
+        Se retrouver régulièrement pour étudier, réfléchir, échanger et préparer des projets
+        d’entraide fait naître une véritable fraternité. À force de marcher ensemble, de porter
+        des projets communs et de se soutenir dans les difficultés, des liens solides se tissent
+        entre les membres. Cette fraternité n’est pas théorique : elle se vit dans l’écoute, la
+        présence et l’action.
+      </p>
+      <div class="soft-sep"></div>
+      <p>
+        Bien que les symboles et l’iconographie templière fassent partie de notre identité
+        culturelle, nous ne sommes pas un « ordre de manteaux » ni un cercle centré sur les titres
+        ou les décorations. Nous ne sommes pas non plus des Hospitaliers&nbsp;: leur vocation
+        historique était autre. Nous nous inspirons surtout de l’esprit des Templiers des origines :
+        des hommes de terrain, de travail, de vigilance et de service.
+      </p>
+    </div>
+  </details>
 
-  <!-- BLOC 3 (paragraphe 8 à 11) -->
+  <!-- BLOC 3 (paragraphe 8 à 11) — laissé tel quel (pas déroulant) -->
   <section class="section-card" aria-label="Ouverture, adhésion et fonctionnement">
     <p>
       Notre ligne est simple : <strong>servir là où d’autres ne vont plus</strong>. Avant de parler
@@ -411,6 +487,13 @@
       <a href="cotisations.html" class="inline-link">Infos cotisations</a>.
     </p>
   </section>
+
+  <!-- ✅ Signature nnDnn au même endroit (en bas, avant nav/footer) -->
+  <div class="nndnn-banner" aria-label="Signature templière nnDnn">
+    <img src="croix.epee.PNG" alt="Épée – symbole">
+    <div class="nndnn-text">nnDnn</div>
+    <img src="croix.epee.PNG" alt="Épée – symbole">
+  </div>
 
   <!-- Bouton centré "Notre histoire" (gros) -->
   <div class="big-history-wrap">
