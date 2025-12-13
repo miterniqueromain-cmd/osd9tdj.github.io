@@ -254,6 +254,34 @@
 
     .footer a{color:var(--clair);}
 
+    .nndnn-banner{
+      margin:26px auto 6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+      flex-wrap:nowrap;
+      text-align:center;
+    }
+    .nndnn-banner img{
+      height:74px;
+      width:auto;
+      display:block;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.85));
+      opacity:0.96;
+    }
+    .nndnn-text{
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-weight:700;
+      letter-spacing:0.18em;
+      text-transform:none;
+      font-size:2.05rem;
+      line-height:1;
+      text-shadow:0 0 14px rgba(0,0,0,0.9);
+      white-space:nowrap;
+    }
+
     @media (max-width: 600px){
       .title{font-size:1.55rem;}
       .subtitle{font-size:1rem;}
@@ -265,6 +293,9 @@
         height:220px;
         object-position:center bottom; /* ✅ idem mobile : coupe le haut */
       }
+      .nndnn-banner{gap:10px;}
+      .nndnn-banner img{height:58px;}
+      .nndnn-text{font-size:1.55rem;}
     }
   </style>
 </head>
@@ -481,9 +512,9 @@ Les membres ayant choisi de poursuivre leur engagement au sein de l’O.S.D.9.T.
         Cette ouverture s’inscrit sans confusion : l’O.S.D.9.T.D.J. demeure indépendant et strictement associatif.
       </p>
 
-      <p>
+      <p><strong>
         À ce titre, Hélios est mentionnée comme Église de christianisme primitif, de fondation anté-chalcédonienne, et conservatrice de l’Église apostolique templière dans sa véritable filiation, depuis le pape Benoît XIII, Pedro de Luna.
-      </p>
+      </strong></p>
 
       <p>Cette mention :</p>
       <ul>
@@ -496,6 +527,12 @@ Les membres ayant choisi de poursuivre leur engagement au sein de l’O.S.D.9.T.
         L’Ordre Sacré des Neuf Templiers de Jérusalem demeure un espace ouvert, où chaque membre reste libre de son chemin personnel, dans le respect du cadre associatif, de l’indépendance de l’Ordre et de la fraternité.
       </p>
 
+    </div>
+
+    <div class="nndnn-banner" aria-label="Signature templière nnDnn">
+      <img src="swords.png" alt="Épées en croix – symbole">
+      <div class="nndnn-text">nnDnn</div>
+      <img src="swords.png" alt="Épées en croix – symbole">
     </div>
 
     <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
