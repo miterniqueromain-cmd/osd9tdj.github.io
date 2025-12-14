@@ -149,7 +149,8 @@
     }
     .menu-panel a:last-child{ border-bottom:none; }
 
-    /* ================== TON CSS EXISTANT (inchangé) ================== */
+    /* ✅ (AJOUT MINIMAL) wrapper pour centrer UNIQUEMENT la nav du bas sur tablette/PC */
+    .tabs-center{ text-align:center; }
 
     /* NAV coulissante (bas seulement) */
     .tabs{
@@ -468,12 +469,16 @@
         Maître et du Conseil des Sages.
       </p>
 
-      <!-- ✅ Menu déroulant du bas : sans icônes -->
-      <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:18px;">
-        <a class="tab" href="index.html">Accueil</a>
-        <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
-        <a class="tab" href="contact.html">Contact</a>
-      </nav>
+      <!-- ✅ (MODIF UNIQUE) Wrapper centré pour la nav du bas -->
+      <div class="tabs-center">
+
+        <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:18px;">
+          <a class="tab" href="index.html">Accueil</a>
+          <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
+          <a class="tab" href="contact.html">Contact</a>
+        </nav>
+
+      </div>
 
       <!-- ✅ Footer conforme -->
       <div class="footer">
