@@ -34,21 +34,102 @@
             --clair: #fdf7e5;
         }
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
-        body {
-            margin: 0;
-            padding: 0;
+        /* ✅ CADRE FIXE + SCROLL DEDANS (comme les autres pages) */
+        html, body{
+            height:100%;
+            margin:0;
+            padding:0;
+            overflow:hidden;
             font-family: 'Lato', Arial, sans-serif;
             color: var(--clair);
             text-align: center;
-            min-height: 100vh;
-            background: radial-gradient(circle at top,
-                                        #191919,
-                                        #050506 70%);
+            background: radial-gradient(circle at top, #191919, #050506 70%);
         }
+
+        /* ✅ Cadre fixe doré */
+        .frame-fixed{
+            position: fixed;
+            inset: 14px;
+            border-radius: 22px;
+            border: 2px solid rgba(214,167,40,0.55);
+            box-shadow:
+              0 0 0 1px rgba(253,247,229,0.16) inset,
+              0 0 38px rgba(0,0,0,0.35);
+            pointer-events: none;
+            z-index: 40;
+        }
+
+        /* ✅ Zone scroll interne */
+        .viewport-scroll{
+            position: fixed;
+            inset: 22px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            z-index: 1;
+        }
+
+        /* ✅ Menu 3 points doré + menu déroulant (SANS icône) */
+        .top-menu{
+            position: fixed;
+            top: 26px;
+            right: 26px;
+            z-index: 60;
+            pointer-events: auto;
+        }
+        .top-menu details{ position: relative; }
+        .top-menu summary{
+            list-style: none;
+            cursor: pointer;
+            user-select: none;
+            width: 46px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 999px;
+            border: 1px solid rgba(214,167,40,0.55);
+            background: rgba(0,0,0,0.22);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+            font-family:'Cinzel',serif;
+            color: var(--or);
+            font-size: 22px;
+            line-height: 1;
+        }
+        .top-menu summary::-webkit-details-marker{ display:none; }
+
+        .menu-panel{
+            position: absolute;
+            right: 0;
+            margin-top: 10px;
+            width: 260px;
+            max-width: calc(100vw - 60px);
+            border-radius: 14px;
+            border: 1px solid rgba(214,167,40,0.45);
+            background: rgba(0,0,0,0.70);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+            overflow: hidden;
+        }
+        .menu-panel a{
+            display:block;
+            padding: 11px 12px;
+            text-decoration:none;
+            color: rgba(253,247,229,0.92);
+            font-family:'Cinzel',serif;
+            font-weight:700;
+            font-size: 0.92rem;
+            border-bottom: 1px solid rgba(214,167,40,0.18);
+            white-space: nowrap;
+        }
+        .menu-panel a:hover{
+            background: rgba(214,167,40,0.12);
+            color: #fff;
+        }
+        .menu-panel a:last-child{ border-bottom: none; }
+
+        /* ================== TON CSS EXISTANT (inchangé) ================== */
 
         .container {
             max-width: 980px;
@@ -204,6 +285,7 @@
             color: #000;
         }
 
+        /* ✅ Ancien bloc boutons bas conservé (mais on ne l'affiche plus) */
         .bottom-links {
             margin-top: auto;
             padding-top: 18px;
@@ -230,258 +312,361 @@
             color: #000;
         }
 
+        /* ✅ Menu déroulant bas (glissant) + centré PC/iPad */
+        .tabs{
+            margin:18px auto 8px;
+            display:inline-flex;
+            max-width:100%;
+            overflow-x:auto;
+            -webkit-overflow-scrolling:touch;
+            scrollbar-width:none;
+            border-radius:999px;
+            overflow-y:hidden;
+            border:1px solid rgba(214,167,40,0.55);
+            backdrop-filter: blur(6px);
+            background:rgba(0,0,0,0.18);
+        }
+        .tabs::-webkit-scrollbar{display:none;}
+        .tab{
+            flex:0 0 auto;
+            padding:10px 16px;
+            text-decoration:none;
+            color:var(--clair);
+            font-size:0.92rem;
+            font-weight:700;
+            font-family:'Cinzel',serif;
+            background:rgba(0,0,0,0.42);
+            transition:background 0.2s ease, color 0.2s ease;
+            white-space:nowrap;
+        }
+        .tab + .tab{
+            border-left:1px solid rgba(214,167,40,0.35);
+        }
+        .tab:hover{
+            background:rgba(214,167,40,0.20);
+            color:#fff;
+        }
+        .tabs-center{ text-align:center; }
+
+        /* ✅ Footer conforme */
+        .footer{
+            margin-top: 12px;
+            font-size: 0.85rem;
+            opacity: 0.85;
+        }
+        .footer a{
+            color: var(--clair);
+            text-decoration: underline;
+            opacity: 0.92;
+        }
+        .footer a:hover{ opacity: 1; }
+
         @media (max-width: 600px) {
             h1 { font-size: 1.6rem; }
+
+            .top-menu{ top:22px; right:22px; }
+            .menu-panel{ width:240px; }
+            .frame-fixed{ inset:12px; }
+            .viewport-scroll{ inset:20px; }
+            .tab{padding:9px 14px;font-size:0.86rem;}
         }
     </style>
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
-<link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
 </head>
+
 <body>
-<div class="container">
 
-    <div class="epee-box">
-        <img src="epee.PNG"
-             alt="Épée de l’Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J."
-             class="epee-img">
+<!-- ✅ Cadre fixe doré -->
+<div class="frame-fixed" aria-hidden="true"></div>
+
+<!-- ✅ Menu 3 points (doré) -->
+<div class="top-menu" aria-label="Menu du site">
+  <details>
+    <summary title="Menu">⋯</summary>
+    <div class="menu-panel" role="menu" aria-label="Navigation">
+      <a href="index.html">Accueil</a>
+      <a href="quinoussommes.html">Qui nous sommes</a>
+      <a href="histoire.html">Notre histoire</a>
+      <a href="activites.html">Activités</a>
+      <a href="adhesion.html">Adhésion</a>
+      <a href="commanderie.html">Commanderie</a>
+      <a href="cotisations.html">Cotisations</a>
+      <a href="assurance.html">Assurance</a>
+      <a href="boutique.html">Boutique</a>
+      <a href="statuts.html">Statuts</a>
+      <a href="contact.html">Contact</a>
+      <a href="mentions.html">Mentions légales</a>
+      <a href="cookies.html">Cookies</a>
     </div>
+  </details>
+</div>
 
-    <h1>Formulaire de contact</h1>
-    <p class="subtitle"><em>Je préfère être rappelé par un membre de l’O.S.D.9.T.D.J.</em></p>
+<!-- ✅ Tout scrolle dans le cadre -->
+<div class="viewport-scroll">
 
-    <p>
-        Ce formulaire est destiné à celles et ceux qui souhaitent être rappelés ou recontactés après avoir
-        consulté nos pages <strong>« Qui nous sommes »</strong>, <strong>« Évènements »</strong>,
-        le <strong>Formulaire d’adhésion</strong> ou la <strong>future boutique en ligne</strong>, ou qui
-        se posent des questions sur nos actions, la vie de l’Ordre, la présence éventuelle d’une
-        Commanderie dans leur région, ou sur des situations particulières (financières, relations avec d’autres groupes, etc.).
-        Votre demande sera transmise au Grand Maître, au trésorier ou à un membre mandaté,
-        selon le motif choisi.
-    </p>
+  <div class="container">
 
-    <p class="note">
-        <strong>Pièces jointes :</strong> si vous devez transmettre des documents (CV, courrier, dossier,
-        justificatifs, etc.), merci de les envoyer séparément à
-        <strong>contact@osd9tdj.org</strong> en rappelant votre nom et le motif de votre demande.
-    </p>
+      <div class="epee-box">
+          <img src="epee.PNG"
+               alt="Épée de l’Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J."
+               class="epee-img">
+      </div>
 
-    <!-- FORMULAIRE – ENVOI VIA FORMSPREE -->
-    <form action="https://formspree.io/f/xwpgwkld" method="POST">
-        <!-- sujet pour l’email reçu -->
-        <input type="hidden" name="_subject" value="Demande de contact / rappel – O.S.D.9.T.D.J.">
+      <h1>Formulaire de contact</h1>
+      <p class="subtitle"><em>Je préfère être rappelé par un membre de l’O.S.D.9.T.D.J.</em></p>
 
-        <!-- I – Coordonnées -->
-        <fieldset>
-            <legend>I – Coordonnées</legend>
+      <p>
+          Ce formulaire est destiné à celles et ceux qui souhaitent être rappelés ou recontactés après avoir
+          consulté nos pages <strong>« Qui nous sommes »</strong>, <strong>« Évènements »</strong>,
+          le <strong>Formulaire d’adhésion</strong> ou la <strong>future boutique en ligne</strong>, ou qui
+          se posent des questions sur nos actions, la vie de l’Ordre, la présence éventuelle d’une
+          Commanderie dans leur région, ou sur des situations particulières (financières, relations avec d’autres groupes, etc.).
+          Votre demande sera transmise au Grand Maître, au trésorier ou à un membre mandaté,
+          selon le motif choisi.
+      </p>
 
-            <div class="inline">
-                <div>
-                    <label for="nom">Nom :</label>
-                    <input type="text" id="nom" name="Nom" required>
-                </div>
-                <div>
-                    <label for="prenom">Prénom :</label>
-                    <input type="text" id="prenom" name="Prénom" required>
-                </div>
-            </div>
+      <p class="note">
+          <strong>Pièces jointes :</strong> si vous devez transmettre des documents (CV, courrier, dossier,
+          justificatifs, etc.), merci de les envoyer séparément à
+          <strong>contact@osd9tdj.org</strong> en rappelant votre nom et le motif de votre demande.
+      </p>
 
-            <div class="inline">
-                <div>
-                    <label for="telephone">Téléphone :</label>
-                    <input type="tel" id="telephone" name="Téléphone" required>
-                </div>
-                <div>
-                    <label for="email">E-mail :</label>
-                    <input type="email" id="email" name="Email" required>
-                </div>
-            </div>
+      <!-- FORMULAIRE – ENVOI VIA FORMSPREE -->
+      <form action="https://formspree.io/f/xwpgwkld" method="POST">
+          <!-- sujet pour l’email reçu -->
+          <input type="hidden" name="_subject" value="Demande de contact / rappel – O.S.D.9.T.D.J.">
 
-            <div class="inline">
-                <div>
-                    <label for="region">Ville / région / pays :</label>
-                    <input type="text" id="region" name="Région"
-                           placeholder="Ex. : Haute-Savoie, Lyon, Belgique, Québec…">
-                </div>
-                <div>
-                    <label for="origine">
-                        Depuis quelle page ou quel contact nous écrivez-vous ? (facultatif)
-                    </label>
-                    <select id="origine" name="Origine">
-                        <option value="" selected>– Choisir si vous le souhaitez –</option>
-                        <option value="Page Qui nous sommes">Page « Qui nous sommes »</option>
-                        <option value="Formulaire d’adhésion">Formulaire d’adhésion</option>
-                        <option value="Page Évènements">Page « Évènements »</option>
-                        <option value="Page Boutique en ligne">Page « Boutique en ligne »</option>
-                        <option value="Recommandation d’un membre">Recommandation d’un membre</option>
-                        <option value="Réseaux sociaux / internet">Réseaux sociaux / internet</option>
-                        <option value="Autre source">Autre source</option>
-                    </select>
-                </div>
-            </div>
-        </fieldset>
+          <!-- I – Coordonnées -->
+          <fieldset>
+              <legend>I – Coordonnées</legend>
 
-        <!-- II – Préférence de contact -->
-        <fieldset>
-            <legend>II – Préférence de contact</legend>
+              <div class="inline">
+                  <div>
+                      <label for="nom">Nom :</label>
+                      <input type="text" id="nom" name="Nom" required>
+                  </div>
+                  <div>
+                      <label for="prenom">Prénom :</label>
+                      <input type="text" id="prenom" name="Prénom" required>
+                  </div>
+              </div>
 
-            <label>Moyen de contact souhaité :</label>
-            <div class="radio-group">
-                <label>
-                    <input type="radio" name="Moyen_de_contact" value="Rappel téléphonique par un membre" checked>
-                    Rappel téléphonique par un membre
-                </label>
-                <label>
-                    <input type="radio" name="Moyen_de_contact" value="Réponse par e-mail">
-                    Réponse par e-mail
-                </label>
-                <label>
-                    <input type="radio" name="Moyen_de_contact" value="Message (SMS / WhatsApp / autre messagerie)">
-                    Message (SMS / WhatsApp / autre)
-                </label>
-            </div>
+              <div class="inline">
+                  <div>
+                      <label for="telephone">Téléphone :</label>
+                      <input type="tel" id="telephone" name="Téléphone" required>
+                  </div>
+                  <div>
+                      <label for="email">E-mail :</label>
+                      <input type="email" id="email" name="Email" required>
+                  </div>
+              </div>
 
-            <div class="inline">
-                <div>
-                    <label for="jour_heure">Jour / créneau horaire préféré :</label>
-                    <input type="text" id="jour_heure" name="Créneau_préféré"
-                           placeholder="Ex. : en soirée, entre 18h et 20h, sauf week-end">
-                </div>
-                <div>
-                    <label for="date_souhaitee">Date souhaitée (facultatif) :</label>
-                    <input type="date" id="date_souhaitee" name="Date_souhaitée">
-                </div>
-            </div>
-        </fieldset>
+              <div class="inline">
+                  <div>
+                      <label for="region">Ville / région / pays :</label>
+                      <input type="text" id="region" name="Région"
+                             placeholder="Ex. : Haute-Savoie, Lyon, Belgique, Québec…">
+                  </div>
+                  <div>
+                      <label for="origine">
+                          Depuis quelle page ou quel contact nous écrivez-vous ? (facultatif)
+                      </label>
+                      <select id="origine" name="Origine">
+                          <option value="" selected>– Choisir si vous le souhaitez –</option>
+                          <option value="Page Qui nous sommes">Page « Qui nous sommes »</option>
+                          <option value="Formulaire d’adhésion">Formulaire d’adhésion</option>
+                          <option value="Page Évènements">Page « Évènements »</option>
+                          <option value="Page Boutique en ligne">Page « Boutique en ligne »</option>
+                          <option value="Recommandation d’un membre">Recommandation d’un membre</option>
+                          <option value="Réseaux sociaux / internet">Réseaux sociaux / internet</option>
+                          <option value="Autre source">Autre source</option>
+                      </select>
+                  </div>
+              </div>
+          </fieldset>
 
-        <!-- III – Motif -->
-        <fieldset>
-            <legend>III – Motif de votre demande</legend>
+          <!-- II – Préférence de contact -->
+          <fieldset>
+              <legend>II – Préférence de contact</legend>
 
-            <p class="note">
-                Merci de choisir le motif qui se rapproche le plus de votre demande.  
-                Cela nous permet de transmettre votre message au bon interlocuteur
-                (Grand Maître, trésorier, membre délégué, etc.).  
-                Les situations sensibles (financières, conflits avec d’autres groupes, etc.)
-                sont traitées avec discrétion et confidentialité.
-            </p>
+              <label>Moyen de contact souhaité :</label>
+              <div class="radio-group">
+                  <label>
+                      <input type="radio" name="Moyen_de_contact" value="Rappel téléphonique par un membre" checked>
+                      Rappel téléphonique par un membre
+                  </label>
+                  <label>
+                      <input type="radio" name="Moyen_de_contact" value="Réponse par e-mail">
+                      Réponse par e-mail
+                  </label>
+                  <label>
+                      <input type="radio" name="Moyen_de_contact" value="Message (SMS / WhatsApp / autre messagerie)">
+                      Message (SMS / WhatsApp / autre)
+                  </label>
+              </div>
 
-            <label for="motif">Motif principal :</label>
-            <select id="motif" name="Motif" required>
-                <option value="" selected disabled>– Sélectionner un motif –</option>
+              <div class="inline">
+                  <div>
+                      <label for="jour_heure">Jour / créneau horaire préféré :</label>
+                      <input type="text" id="jour_heure" name="Créneau_préféré"
+                             placeholder="Ex. : en soirée, entre 18h et 20h, sauf week-end">
+                  </div>
+                  <div>
+                      <label for="date_souhaitee">Date souhaitée (facultatif) :</label>
+                      <input type="date" id="date_souhaitee" name="Date_souhaitée">
+                  </div>
+              </div>
+          </fieldset>
 
-                <!-- Questions générales / vie de l’Ordre -->
-                <option value="Questions générales (Qui nous sommes, à quoi sert l’Ordre, nos actions)">
-                    Questions générales (Qui nous sommes, à quoi sert l’Ordre, nos actions)
-                </option>
-                <option value="Questions sur la fréquence des réunions et la vie de l’Ordre">
-                    Questions sur la fréquence des réunions et la vie de l’Ordre
-                </option>
-                <option value="Savoir s’il existe une Commanderie ou représentation dans ma région">
-                    Savoir s’il existe une Commanderie ou représentation dans ma région
-                </option>
+          <!-- III – Motif -->
+          <fieldset>
+              <legend>III – Motif de votre demande</legend>
 
-                <!-- Adhésion -->
-                <option value="Demande d’adhésion / devenir membre">
-                    Demande d’adhésion / devenir membre
-                </option>
-                <option value="Suivi d’une demande d’adhésion déjà envoyée">
-                    Suivi d’une demande d’adhésion déjà envoyée
-                </option>
+              <p class="note">
+                  Merci de choisir le motif qui se rapproche le plus de votre demande.  
+                  Cela nous permet de transmettre votre message au bon interlocuteur
+                  (Grand Maître, trésorier, membre délégué, etc.).  
+                  Les situations sensibles (financières, conflits avec d’autres groupes, etc.)
+                  sont traitées avec discrétion et confidentialité.
+              </p>
 
-                <!-- Évènements -->
-                <option value="Questions sur un évènement (inscription, lieu, participation)">
-                    Questions sur un évènement (inscription, lieu, participation)
-                </option>
-                <option value="Organisation d’un évènement ou intervention de l’Ordre">
-                    Organisation d’un évènement ou intervention de l’Ordre
-                </option>
+              <label for="motif">Motif principal :</label>
+              <select id="motif" name="Motif" required>
+                  <option value="" selected disabled>– Sélectionner un motif –</option>
 
-                <!-- Boutique / commandes / paiements -->
-                <option value="Questions sur la boutique en ligne, les produits ou les modalités de paiement">
-                    Questions sur la boutique en ligne, les produits ou les modalités de paiement
-                </option>
-                <option value="Où en est ma commande (boutique en ligne) ?">
-                    Où en est ma commande (boutique en ligne) ?
-                </option>
-                <option value="Question sur un paiement en ligne, une commande ou un don">
-                    Question sur un paiement en ligne, une commande ou un don
-                </option>
+                  <!-- Questions générales / vie de l’Ordre -->
+                  <option value="Questions générales (Qui nous sommes, à quoi sert l’Ordre, nos actions)">
+                      Questions générales (Qui nous sommes, à quoi sert l’Ordre, nos actions)
+                  </option>
+                  <option value="Questions sur la fréquence des réunions et la vie de l’Ordre">
+                      Questions sur la fréquence des réunions et la vie de l’Ordre
+                  </option>
+                  <option value="Savoir s’il existe une Commanderie ou représentation dans ma région">
+                      Savoir s’il existe une Commanderie ou représentation dans ma région
+                  </option>
 
-                <!-- Cotisations / difficultés financières -->
-                <option value="Questions sur les cotisations, montants ou modes de règlement">
-                    Questions sur les cotisations, montants ou modes de règlement
-                </option>
-                <option value="Cotisation pour plusieurs membres (famille, foyer, groupe)">
-                    Cotisation pour plusieurs membres (famille, foyer, groupe)
-                </option>
-                <option value="Demande de paiement en plusieurs fois ou difficultés financières">
-                    Demande de paiement en plusieurs fois ou difficultés financières
-                </option>
+                  <!-- Adhésion -->
+                  <option value="Demande d’adhésion / devenir membre">
+                      Demande d’adhésion / devenir membre
+                  </option>
+                  <option value="Suivi d’une demande d’adhésion déjà envoyée">
+                      Suivi d’une demande d’adhésion déjà envoyée
+                  </option>
 
-                <!-- Juridique / relations avec d’autres groupes -->
-                <option value="Questions juridiques / statutaires (association, nom, image, droits)">
-                    Questions juridiques / statutaires (association, nom, image, droits)
-                </option>
-                <option value="Problème ou tension avec un autre groupe, ordre ou association (besoin d’éclairage ou de conseil)">
-                    Problème ou tension avec un autre groupe, ordre ou association (besoin d’éclairage ou de conseil)
-                </option>
+                  <!-- Évènements -->
+                  <option value="Questions sur un évènement (inscription, lieu, participation)">
+                      Questions sur un évènement (inscription, lieu, participation)
+                  </option>
+                  <option value="Organisation d’un évènement ou intervention de l’Ordre">
+                      Organisation d’un évènement ou intervention de l’Ordre
+                  </option>
 
-                <!-- Caritatif -->
-                <option value="Demande d’aide, d’orientation ou d’action caritative / sociale">
-                    Demande d’aide, d’orientation ou d’action caritative / sociale
-                </option>
+                  <!-- Boutique / commandes / paiements -->
+                  <option value="Questions sur la boutique en ligne, les produits ou les modalités de paiement">
+                      Questions sur la boutique en ligne, les produits ou les modalités de paiement
+                  </option>
+                  <option value="Où en est ma commande (boutique en ligne) ?">
+                      Où en est ma commande (boutique en ligne) ?
+                  </option>
+                  <option value="Question sur un paiement en ligne, une commande ou un don">
+                      Question sur un paiement en ligne, une commande ou un don
+                  </option>
 
-                <!-- Partenariats / recherches -->
-                <option value="Proposition de partenariat, collaboration ou mise en relation">
-                    Proposition de partenariat, collaboration ou mise en relation
-                </option>
-                <option value="Demande de recherche ou d’étude (travaux historiques, symboliques, universitaires)">
-                    Demande de recherche ou d’étude (travaux historiques, symboliques, universitaires)
-                </option>
+                  <!-- Cotisations / difficultés financières -->
+                  <option value="Questions sur les cotisations, montants ou modes de règlement">
+                      Questions sur les cotisations, montants ou modes de règlement
+                  </option>
+                  <option value="Cotisation pour plusieurs membres (famille, foyer, groupe)">
+                      Cotisation pour plusieurs membres (famille, foyer, groupe)
+                  </option>
+                  <option value="Demande de paiement en plusieurs fois ou difficultés financières">
+                      Demande de paiement en plusieurs fois ou difficultés financières
+                  </option>
 
-                <!-- Site / technique -->
-                <option value="Remarque, correction ou problème technique concernant le site internet">
-                    Remarque, correction ou problème technique concernant le site internet
-                </option>
+                  <!-- Juridique / relations avec d’autres groupes -->
+                  <option value="Questions juridiques / statutaires (association, nom, image, droits)">
+                      Questions juridiques / statutaires (association, nom, image, droits)
+                  </option>
+                  <option value="Problème ou tension avec un autre groupe, ordre ou association (besoin d’éclairage ou de conseil)">
+                      Problème ou tension avec un autre groupe, ordre ou association (besoin d’éclairage ou de conseil)
+                  </option>
 
-                <!-- Autre -->
-                <option value="Autre demande spécifique (préciser dans le message)">
-                    Autre demande spécifique (préciser dans le message)
-                </option>
-            </select>
+                  <!-- Caritatif -->
+                  <option value="Demande d’aide, d’orientation ou d’action caritative / sociale">
+                      Demande d’aide, d’orientation ou d’action caritative / sociale
+                  </option>
 
-            <label for="message">Votre message (précisions, contexte, questions) :</label>
-            <textarea id="message" name="Message" required></textarea>
-        </fieldset>
+                  <!-- Partenariats / recherches -->
+                  <option value="Proposition de partenariat, collaboration ou mise en relation">
+                      Proposition de partenariat, collaboration ou mise en relation
+                  </option>
+                  <option value="Demande de recherche ou d’étude (travaux historiques, symboliques, universitaires)">
+                      Demande de recherche ou d’étude (travaux historiques, symboliques, universitaires)
+                  </option>
 
-        <!-- IV – Consentement -->
-        <fieldset>
-            <legend>IV – Consentement</legend>
+                  <!-- Site / technique -->
+                  <option value="Remarque, correction ou problème technique concernant le site internet">
+                      Remarque, correction ou problème technique concernant le site internet
+                  </option>
 
-            <p class="note">
-                Les informations transmises via ce formulaire sont utilisées uniquement pour traiter
-                votre demande de contact et, le cas échéant, organiser un rappel par un membre de
-                l’O.S.D.9.T.D.J. Elles ne sont jamais cédées à des tiers et peuvent être rectifiées
-                ou supprimées sur simple demande, conformément au RGPD.
-            </p>
+                  <!-- Autre -->
+                  <option value="Autre demande spécifique (préciser dans le message)">
+                      Autre demande spécifique (préciser dans le message)
+                  </option>
+              </select>
 
-            <label style="font-size:0.9rem;text-align:left;">
-                <input type="checkbox" name="RGPD_consentement" required>
-                J’autorise l’O.S.D.9.T.D.J. à utiliser ces informations pour me recontacter dans le cadre de ma demande.
-            </label>
-        </fieldset>
+              <label for="message">Votre message (précisions, contexte, questions) :</label>
+              <textarea id="message" name="Message" required></textarea>
+          </fieldset>
 
-        <div class="submit-zone">
-            <button type="submit">Envoyer ma demande de contact</button>
-        </div>
-    </form>
+          <!-- IV – Consentement -->
+          <fieldset>
+              <legend>IV – Consentement</legend>
 
-    <div class="bottom-links">
-        <a href="index.html" class="nav-btn">← Retour à la page d’accueil</a>
-        <a href="boutique.html" class="nav-btn">🛒 Boutique en ligne</a>
-    </div>
+              <p class="note">
+                  Les informations transmises via ce formulaire sont utilisées uniquement pour traiter
+                  votre demande de contact et, le cas échéant, organiser un rappel par un membre de
+                  l’O.S.D.9.T.D.J. Elles ne sont jamais cédées à des tiers et peuvent être rectifiées
+                  ou supprimées sur simple demande, conformément au RGPD.
+              </p>
+
+              <label style="font-size:0.9rem;text-align:left;">
+                  <input type="checkbox" name="RGPD_consentement" required>
+                  J’autorise l’O.S.D.9.T.D.J. à utiliser ces informations pour me recontacter dans le cadre de ma demande.
+              </label>
+          </fieldset>
+
+          <div class="submit-zone">
+              <button type="submit">Envoyer ma demande de contact</button>
+          </div>
+      </form>
+
+      <!-- ✅ Menu déroulant bas (glissant) + centré PC/iPad -->
+      <div class="tabs-center">
+        <nav class="tabs" aria-label="Navigation bas de page">
+          <a class="tab" href="index.html">Accueil</a>
+          <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
+          <a class="tab" href="contact.html">Contact</a>
+        </nav>
+      </div>
+
+      <!-- ✅ Footer conforme -->
+      <div class="footer">
+        © O.S.D.9.T.D.J. Association Loi 1901 – Tous droits réservés •
+        <a href="mentions.html">mentions légales</a> •
+        <a href="cookies.html">cookies</a>
+      </div>
+
+      <div style="height:10px;"></div>
+
+      <!-- ✅ Ancien bloc boutons bas (doublon) supprimé -->
+
+  </div>
 
 </div>
+
 </body>
 </html>
