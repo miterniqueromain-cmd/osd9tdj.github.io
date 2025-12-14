@@ -45,13 +45,11 @@
       --card: rgba(0,0,0,0.18);
       --card2: rgba(0,0,0,0.10);
 
-      /* ✅ Cadre fixe */
-      --frame-pad: 18px;         /* espace intérieur (entre cadre et contenu) */
+      /* ✅ Cadre / Lys (DÉCORATIF, NON INTRUSIF) */
+      --frame-inset: 10px;
       --frame-radius: 22px;
-      --frame-w: 2px;            /* épaisseur cadre principal */
-      --frame-w2: 1px;           /* épaisseur cadre interne */
-      --lys-size: 26px;          /* taille des lys */
-      --lys-offset: 10px;        /* distance des lys depuis le bord interne */
+      --lys-size: 22px;
+      --lys-opacity: 0.30;
     }
 
     body {
@@ -61,125 +59,84 @@
       color: var(--clair);
       text-align: center;
       background: radial-gradient(circle at top, #3a2513, var(--fond) 70%);
-      overflow: hidden; /* ✅ tout défile dans le viewport interne */
+      overflow-x: hidden; /* ✅ normal, on ne bloque pas le scroll vertical */
     }
 
-    /* ✅ Zone scrollable : le contenu défile à l’intérieur du cadre */
-    .page-viewport{
-      position: fixed;
-      inset: 0;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      padding: calc(var(--frame-pad) + 10px);
-      box-sizing: border-box;
-      z-index: 1;
-    }
-
-    /* ✅ Cadre fixe + double cadre + lys aux angles */
-    .frame-overlay{
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    .frame-overlay::before{
+    /* ✅ Cadre FIXE mais derrière (ne casse pas ton rendu) */
+    body::after{
       content:"";
-      position:absolute;
-      inset: 10px;
+      position: fixed;
+      inset: var(--frame-inset);
       border-radius: var(--frame-radius);
-      border: var(--frame-w) solid rgba(214,167,40,0.72);
+      border: 2px solid rgba(214,167,40,0.55);
       box-shadow:
-        0 0 28px rgba(0,0,0,0.55),
-        0 0 0 1px rgba(0,0,0,0.35) inset;
+        0 0 0 1px rgba(248,232,200,0.22) inset,
+        0 0 36px rgba(0,0,0,0.22);
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .frame-overlay::after{
-      content:"";
-      position:absolute;
-      inset: 18px;
-      border-radius: calc(var(--frame-radius) - 6px);
-      border: var(--frame-w2) solid rgba(248,232,200,0.22);
-      box-shadow: 0 0 0 1px rgba(214,167,40,0.20) inset;
-    }
-
+    /* ✅ Lys fixes aux angles, derrière le contenu */
     .lys-corner{
-      position: absolute;
+      position: fixed;
       width: var(--lys-size);
       height: var(--lys-size);
       object-fit: contain;
-      opacity: 0.92;
-      filter: drop-shadow(0 0 10px rgba(0,0,0,0.75));
+      opacity: var(--lys-opacity);
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.55));
+      pointer-events: none;
+      z-index: 0;
     }
-
-    /* ✅ Les lys sont “à l’intérieur du cadre” (entre ::before et ::after) */
-    .lys-tl{ top: calc(18px + var(--lys-offset)); left:  calc(18px + var(--lys-offset)); }
-    .lys-tr{ top: calc(18px + var(--lys-offset)); right: calc(18px + var(--lys-offset)); }
-    .lys-bl{ bottom: calc(18px + var(--lys-offset)); left:  calc(18px + var(--lys-offset)); }
-    .lys-br{ bottom: calc(18px + var(--lys-offset)); right: calc(18px + var(--lys-offset)); }
+    .lys-tl{ top: calc(var(--frame-inset) + 10px); left: calc(var(--frame-inset) + 10px); }
+    .lys-tr{ top: calc(var(--frame-inset) + 10px); right: calc(var(--frame-inset) + 10px); }
+    .lys-bl{ bottom: calc(var(--frame-inset) + 10px); left: calc(var(--frame-inset) + 10px); }
+    .lys-br{ bottom: calc(var(--frame-inset) + 10px); right: calc(var(--frame-inset) + 10px); }
 
     /* ✅ Menu “points dorés” discret en haut (fixe) */
     .gold-menu{
       position: fixed;
-      top: 18px;
-      right: 18px;
-      z-index: 10000;
-      pointer-events: auto; /* cliquable */
+      top: 14px;
+      right: 14px;
+      z-index: 9999;
       font-family: 'Cinzel', serif;
     }
-
-    .gold-menu details{
-      position: relative;
-    }
-
+    .gold-menu details{ position: relative; }
     .gold-menu summary{
-      list-style: none;
-      cursor: pointer;
-      user-select: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      list-style:none;
+      cursor:pointer;
+      user-select:none;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       width: 44px;
       height: 34px;
       border-radius: 999px;
-      border: 1px solid rgba(214,167,40,0.55);
-      background: rgba(0,0,0,0.22);
+      border: 1px solid rgba(214,167,40,0.40);
+      background: rgba(0,0,0,0.18);
       backdrop-filter: blur(6px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.55);
-      color: rgba(214,167,40,0.95);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.35);
+      color: rgba(214,167,40,0.90);
       font-weight: 700;
       letter-spacing: 0.10em;
     }
-    .gold-menu summary::-webkit-details-marker{ display:none; }
-    .gold-menu summary span{
-      display:inline-block;
-      transform: translateY(-1px);
-      font-size: 1.25rem;
-      line-height: 1;
-    }
-
-    .gold-menu details[open] summary{
-      background: rgba(214,167,40,0.12);
-      border-color: rgba(214,167,40,0.85);
-    }
-
+    .gold-menu summary::-webkit-details-marker{display:none;}
+    .gold-menu summary span{font-size:1.25rem; transform: translateY(-1px);}
     .gold-menu .dropdown{
-      position: absolute;
+      position:absolute;
       top: 44px;
       right: 0;
       min-width: 240px;
       max-width: 78vw;
       padding: 10px;
       border-radius: 16px;
-      border: 1px solid rgba(214,167,40,0.55);
+      border: 1px solid rgba(214,167,40,0.45);
       background: rgba(0,0,0,0.55);
       backdrop-filter: blur(10px);
-      box-shadow: 0 14px 30px rgba(0,0,0,0.70);
+      box-shadow: 0 18px 38px rgba(0,0,0,0.55);
     }
-
     .gold-menu a{
-      display: block;
-      text-decoration: none;
+      display:block;
+      text-decoration:none;
       color: rgba(248,232,200,0.92);
       padding: 10px 12px;
       border-radius: 12px;
@@ -189,25 +146,12 @@
       border: 1px solid rgba(214,167,40,0.00);
     }
     .gold-menu a:hover{
-      background: rgba(214,167,40,0.16);
-      border-color: rgba(214,167,40,0.35);
+      background: rgba(214,167,40,0.14);
+      border-color: rgba(214,167,40,0.26);
       color: #fff;
     }
 
-    /* ✅ Safe-area (iPhone/iPad notch) */
-    @supports (padding: max(0px)) {
-      .page-viewport{
-        padding-top: max(calc(var(--frame-pad) + 10px), env(safe-area-inset-top));
-        padding-bottom: max(calc(var(--frame-pad) + 10px), env(safe-area-inset-bottom));
-        padding-left: max(calc(var(--frame-pad) + 10px), env(safe-area-inset-left));
-        padding-right: max(calc(var(--frame-pad) + 10px), env(safe-area-inset-right));
-      }
-      .gold-menu{
-        top: max(18px, env(safe-area-inset-top));
-        right: max(18px, env(safe-area-inset-right));
-      }
-    }
-
+    /* ✅ Contenu au-dessus du décor */
     .container {
       min-height: 100vh;
       box-sizing: border-box;
@@ -215,6 +159,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
+      z-index: 1;
     }
 
     .image-box {
@@ -254,15 +200,14 @@
     .section-card{
       width: 100%;
       max-width: 920px;
-      margin: 22px auto;              /* + d’espace entre rectangles */
-      padding: 22px 22px;             /* + d’air dans le rectangle */
+      margin: 22px auto;
+      padding: 22px 22px;
       text-align: justify;
 
       background: linear-gradient(180deg, var(--card), var(--card2));
       border-radius: 20px;
       border: 1px solid var(--or-line);
 
-      /* ombre plus douce (moins “lourd”) */
       box-shadow:
         0 8px 22px rgba(0,0,0,0.45),
         0 0 0 1px rgba(0,0,0,0.14) inset;
@@ -271,7 +216,6 @@
       overflow: hidden;
     }
 
-    /* jeu de couleurs très discret */
     .section-card::before{
       content:"";
       position:absolute;
@@ -293,20 +237,18 @@
         radial-gradient(circle at 12% 120%, rgba(248,232,200,0.05), transparent 58%);
     }
 
-    /* TEXTE LÉGÈREMENT PLUS GROS + PLUS RESPIRANT */
     .section-card p{
       position: relative;
       max-width: 880px;
-      margin: 18px auto;              /* + d’espace entre paragraphes */
-      font-size: 1.08rem;             /* légèrement plus gros */
-      line-height: 1.72;              /* plus confortable */
+      margin: 18px auto;
+      font-size: 1.08rem;
+      line-height: 1.72;
       letter-spacing: 0.01em;
     }
 
-    /* séparation entre paragraphes : plus simple, plus d’air */
     .soft-sep{
       position: relative;
-      height: 14px;                   /* espace visible (respiration) */
+      height: 14px;
       max-width: 820px;
       margin: 6px auto 2px;
     }
@@ -322,7 +264,6 @@
       transform: translateY(-50%);
     }
 
-    /* Liens élégants dans le texte */
     a.inline-link {
       position: relative;
       display: inline-block;
@@ -335,16 +276,11 @@
       text-decoration: none;
       cursor: pointer;
     }
-    a.inline-link::after {
-      content: " ⟶";
-      font-size: 0.82rem;
-    }
+    a.inline-link::after { content: " ⟶"; font-size: 0.82rem; }
     a.inline-link::before {
       content: "";
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      left: 0; right: 0; bottom: 0;
       height: 2px;
       background: linear-gradient(to right, #fff2b2, #d6a728);
       transform: scaleX(0);
@@ -355,7 +291,6 @@
     a.inline-link:hover::before { transform: scaleX(1); }
     a.inline-link:hover { color: #ffeeb5; }
 
-    /* Bouton "Notre histoire" */
     .big-history-wrap{
       margin-top: 22px;
       text-align: center;
@@ -378,7 +313,6 @@
       transform: translateY(-1px);
     }
 
-    /* Menu déroulant (2 liens) */
     .tabs{
       margin: 18px auto 0;
       display: inline-flex;
@@ -408,7 +342,6 @@
     .tab + .tab{ border-left:1px solid rgba(214,167,40,0.35); }
     .tab:hover{ background:rgba(214,167,40,0.20); color:#fff; }
 
-    /* Footer minuscule */
     .footer-min{
       margin-top: 26px;
       padding-top: 14px;
@@ -441,7 +374,7 @@
     }
     .sep{ opacity:0.55; }
 
-    /* ✅ Signature nnDnn (ajout, même esprit que la précédente) */
+    /* ✅ Signature nnDnn */
     .nndnn-banner{
       margin:26px auto 6px;
       display:flex;
@@ -470,10 +403,7 @@
       white-space:nowrap;
     }
 
-    /* ✅ Textes déroulants (sans modifier le texte) : BLOC 1 et BLOC 2 + BLOC 3 (2 paragraphes) */
-    details.section-card{
-      padding: 0;
-    }
+    details.section-card{ padding: 0; }
     details.section-card > summary{
       list-style: none;
       cursor: pointer;
@@ -494,13 +424,8 @@
       font-size:0.85rem;
       opacity:0.9;
     }
-    details.section-card[open] > summary::after{
-      content:"▲";
-    }
-    details.section-card .details-inner{
-      padding: 0 22px 12px;
-      position: relative;
-    }
+    details.section-card[open] > summary::after{ content:"▲"; }
+    details.section-card .details-inner{ padding: 0 22px 12px; position: relative; }
 
     @media (max-width: 600px) {
       h1 { font-size: 1.6rem; }
@@ -518,24 +443,13 @@
       .tab{ padding:9px 16px; font-size:0.86rem; }
       .image-box img{ width: 360px; max-width: 88vw; }
       .soft-sep::after{ left: 6%; right: 6%; }
-
-      details.section-card > summary{
-        padding: 18px 14px;
-        font-size: 0.98rem;
-      }
-
+      details.section-card > summary{ padding: 18px 14px; font-size: 0.98rem; }
       .nndnn-banner{gap:10px;}
       .nndnn-banner img{height:42px;}
       .nndnn-text{font-size:1.55rem;}
-
       :root{
-        --frame-pad: 14px;
-        --lys-size: 22px;
-        --lys-offset: 8px;
-      }
-      .gold-menu summary{
-        width: 42px;
-        height: 32px;
+        --lys-size: 20px;
+        --lys-opacity: 0.26;
       }
     }
   </style>
@@ -547,15 +461,13 @@
 
 <body>
 
-  <!-- ✅ Cadre fixe + lys -->
-  <div class="frame-overlay" aria-hidden="true">
-    <img class="lys-corner lys-tl" src="lys.PNG" alt="">
-    <img class="lys-corner lys-tr" src="lys.PNG" alt="">
-    <img class="lys-corner lys-bl" src="lys.PNG" alt="">
-    <img class="lys-corner lys-br" src="lys.PNG" alt="">
-  </div>
+  <!-- ✅ Lys fixes (décor) -->
+  <img class="lys-corner lys-tl" src="lys.PNG" alt="">
+  <img class="lys-corner lys-tr" src="lys.PNG" alt="">
+  <img class="lys-corner lys-bl" src="lys.PNG" alt="">
+  <img class="lys-corner lys-br" src="lys.PNG" alt="">
 
-  <!-- ✅ Menu discret “points dorés” (fixe) -->
+  <!-- ✅ Menu discret “points dorés” -->
   <nav class="gold-menu" aria-label="Menu principal">
     <details>
       <summary aria-label="Ouvrir le menu"><span>⋯</span></summary>
@@ -577,160 +489,156 @@
     </details>
   </nav>
 
-  <!-- ✅ Zone scrollable : tout défile “dans” le cadre -->
-  <div class="page-viewport">
-    <div class="container">
+  <div class="container">
 
-      <div class="image-box">
-        <img src="templiers-ix.PNG" alt="Ordre Sacré des Neuf Templiers de Jérusalem">
-      </div>
-
-      <h1>ORDRE SACRÉ DES NEUF TEMPLIERS DE JÉRUSALEM</h1>
-      <h2>Qui nous sommes</h2>
-
-      <!-- BLOC 1 (paragraphe 1 à 3) -->
-      <details class="section-card" aria-label="Présentation générale">
-        <summary>Présentation générale</summary>
-        <div class="details-inner">
-          <p>
-            L’Ordre Sacré des Neuf Templiers de Jérusalem est une association laïque et culturelle.
-            Nous nous référons à l’héritage des <strong>neuf premiers compagnons</strong> rassemblés autour
-            d’Hugues de Payns, avant la fondation officielle de l’Ordre du Temple qui marqua
-            profondément le Moyen Âge.
-          </p>
-          <div class="soft-sep"></div>
-          <p>
-            Notre démarche est d’abord une démarche de <strong>connaissance et d’étude</strong> :
-            comprendre ce que fut réellement la chevalerie templière, travailler à partir de sources
-            sérieuses, distinguer l’histoire des récits ajoutés au fil des siècles, et réfléchir à ce
-            que ces principes peuvent encore inspirer aujourd’hui.
-          </p>
-          <div class="soft-sep"></div>
-          <p>
-            Nous nous intéressons aussi à ce qu’était « l’intérieur » d’un Templier : sa conduite,
-            sa discipline, son sens du devoir et du service. Les frères de l’Ordre n’affichaient pas
-            tout ; ils savaient faire silence en eux, garder la maîtrise de leurs émotions et rester
-            fermes dans l’épreuve. C’est cette exigence intérieure, discrète mais réelle, qui nous
-            inspire et que nous cherchons à transmettre.
-          </p>
-        </div>
-      </details>
-
-      <!-- BLOC 2 (paragraphe 4 à 7) -->
-      <details class="section-card alt" aria-label="Esprit de service et fraternité">
-        <summary>Esprit de service et fraternité</summary>
-        <div class="details-inner">
-          <p>
-            On disait que, dans leurs regards, se lisait une détermination sans détour : ils avançaient
-            « vainqueurs ou morts », non par orgueil, mais parce qu’ils avaient accepté de se tenir
-            en première ligne pour protéger ceux qui n’avaient pas de défense. À leur époque, ils
-            faisaient le vide autour d’eux pour sécuriser la route du pèlerin.
-          </p>
-          <div class="soft-sep"></div>
-          <p>
-            Aujourd’hui, les batailles ne sont plus les mêmes, mais les détresses existent toujours.
-            Nous apprenons à <strong>faire le vide en nous</strong> pour mieux voir, écouter et soutenir :
-            notre engagement se traduit par une présence concrète auprès des personnes vulnérables,
-            par l’entraide au sein de l’Ordre et par des actions simples, utiles, menées avec constance.
-            La victoire que nous recherchons n’est plus celle des armes, mais celle du service sincère.
-          </p>
-          <div class="soft-sep"></div>
-          <p>
-            Se retrouver régulièrement pour étudier, réfléchir, échanger et préparer des projets
-            d’entraide fait naître une véritable fraternité. À force de marcher ensemble, de porter
-            des projets communs et de se soutenir dans les difficultés, des liens solides se tissent
-            entre les membres. Cette fraternité n’est pas théorique : elle se vit dans l’écoute, la
-            présence et l’action.
-          </p>
-        </div>
-      </details>
-
-      <!-- BLOC 3 DÉROULANT (2 paragraphes fusionnés) -->
-      <details class="section-card" aria-label="Engagement et esprit des origines">
-        <summary>Engagement et esprit des origines</summary>
-        <div class="details-inner">
-          <p>
-            Bien que les symboles et l’iconographie templière fassent partie de notre identité
-            culturelle, nous ne sommes pas un « ordre de manteaux » ni un cercle centré sur les titres
-            ou les décorations. Nous ne sommes pas non plus des Hospitaliers&nbsp;: leur vocation
-            historique était autre. Nous nous inspirons surtout de l’esprit des Templiers des origines :
-            des hommes de terrain, de travail, de vigilance et de service.
-          </p>
-          <div class="soft-sep"></div>
-          <p>
-            Dans cette continuité, l’Ordre reconnaît une dimension initiatique à son travail,
-            entendue comme un chemin de maturation personnelle et collective, inspiré de l’esprit
-            des Templiers des origines, et fondé sur l’exigence intérieure, le discernement et la
-            responsabilité. Cette démarche initiatique n’est ni religieuse, ni ésotérique au sens
-            occultiste, et ne revendique aucune filiation spirituelle ou sacrée. Elle s’inscrit
-            pleinement dans un cadre laïque, culturel et associatif, et vise avant tout à former
-            des personnes droites, lucides et engagées dans le service.
-          </p>
-          <div class="soft-sep"></div>
-          <p>
-            Notre ligne est simple : <strong>servir là où d’autres ne vont plus</strong>. Avant de parler
-            de grands projets, nous commençons par agir là où nous sommes : familles, voisins, amis,
-            personnes isolées ou en difficulté. Ce sont ces actions discrètes, mais répétées, qui
-            donnent du sens à notre engagement.
-          </p>
-        </div>
-      </details>
-
-      <!-- DERNIER BLOC NON DÉROULANT (à partir de "L’Ordre est mixte..." jusqu’à la fin) -->
-      <section class="section-card" aria-label="Ouverture, adhésion et fonctionnement">
-        <p>
-          L’Ordre est <strong>mixte</strong>, ouvert aux femmes et aux hommes, et respecte strictement
-          la neutralité politique et la laïcité prévues dans nos
-          <a href="statuts.html" class="inline-link">Statuts</a>. Celles et ceux qui se reconnaissent
-          dans ces valeurs peuvent entamer le cheminement de Novice via le
-          <a href="adhesion.html" class="inline-link">Formulaire d’adhésion</a>.
-        </p>
-        <div class="soft-sep"></div>
-        <p>
-          Si l’Ordre n’est pas encore présent dans votre région, il est possible d’envisager une
-          implantation locale sous forme de Commanderie rattachée. Les conditions et étapes sont
-          détaillées ici&nbsp;:
-          <a href="commanderie.html" class="inline-link">Ouvrir une Commanderie</a>.
-        </p>
-        <div class="soft-sep"></div>
-        <p>
-          Les cotisations, fixées par l’Assemblée Générale, servent uniquement à soutenir nos actions,
-          nos rencontres et l’organisation de l’Ordre. Pour en savoir plus&nbsp;:
-          <a href="cotisations.html" class="inline-link">Infos cotisations</a>.
-        </p>
-      </section>
-
-      <!-- ✅ Signature nnDnn au même endroit (en bas, avant nav/footer) -->
-      <div class="nndnn-banner" aria-label="Signature templière nnDnn">
-        <img src="croix.epee.PNG" alt="Épée – symbole">
-        <div class="nndnn-text">nnDnn</div>
-        <img src="croix.epee.PNG" alt="Épée – symbole">
-      </div>
-
-      <!-- Bouton centré "Notre histoire" (gros) -->
-      <div class="big-history-wrap">
-        <a class="big-history-btn" href="histoire.html">📜 Notre histoire</a>
-      </div>
-
-      <!-- Menu coulissant réduit (seulement 2 liens) -->
-      <nav class="tabs" aria-label="Navigation bas de page">
-        <a class="tab" href="index.html">🏠 Accueil</a>
-        <a class="tab" href="contact.html">📞 Contact</a>
-      </nav>
-
-      <!-- ✅ Footer uniformisé exactement pareil sur tes 3 pages -->
-      <footer class="footer-min" aria-label="Pied de page">
-        <div class="line">
-          <span>© OSD9TDJ Association Loi 1901. Tous droits réservés.</span>
-          <span class="sep">·</span>
-          <a href="cookies.html">cookies</a>
-          <span class="sep">·</span>
-          <a href="mentions.html">mentions légales</a>
-        </div>
-      </footer>
-
+    <div class="image-box">
+      <img src="templiers-ix.PNG" alt="Ordre Sacré des Neuf Templiers de Jérusalem">
     </div>
-  </div>
 
+    <h1>ORDRE SACRÉ DES NEUF TEMPLIERS DE JÉRUSALEM</h1>
+    <h2>Qui nous sommes</h2>
+
+    <!-- BLOC 1 -->
+    <details class="section-card" aria-label="Présentation générale">
+      <summary>Présentation générale</summary>
+      <div class="details-inner">
+        <p>
+          L’Ordre Sacré des Neuf Templiers de Jérusalem est une association laïque et culturelle.
+          Nous nous référons à l’héritage des <strong>neuf premiers compagnons</strong> rassemblés autour
+          d’Hugues de Payns, avant la fondation officielle de l’Ordre du Temple qui marqua
+          profondément le Moyen Âge.
+        </p>
+        <div class="soft-sep"></div>
+        <p>
+          Notre démarche est d’abord une démarche de <strong>connaissance et d’étude</strong> :
+          comprendre ce que fut réellement la chevalerie templière, travailler à partir de sources
+          sérieuses, distinguer l’histoire des récits ajoutés au fil des siècles, et réfléchir à ce
+          que ces principes peuvent encore inspirer aujourd’hui.
+        </p>
+        <div class="soft-sep"></div>
+        <p>
+          Nous nous intéressons aussi à ce qu’était « l’intérieur » d’un Templier : sa conduite,
+          sa discipline, son sens du devoir et du service. Les frères de l’Ordre n’affichaient pas
+          tout ; ils savaient faire silence en eux, garder la maîtrise de leurs émotions et rester
+          fermes dans l’épreuve. C’est cette exigence intérieure, discrète mais réelle, qui nous
+          inspire et que nous cherchons à transmettre.
+        </p>
+      </div>
+    </details>
+
+    <!-- BLOC 2 -->
+    <details class="section-card alt" aria-label="Esprit de service et fraternité">
+      <summary>Esprit de service et fraternité</summary>
+      <div class="details-inner">
+        <p>
+          On disait que, dans leurs regards, se lisait une détermination sans détour : ils avançaient
+          « vainqueurs ou morts », non par orgueil, mais parce qu’ils avaient accepté de se tenir
+          en première ligne pour protéger ceux qui n’avaient pas de défense. À leur époque, ils
+          faisaient le vide autour d’eux pour sécuriser la route du pèlerin.
+        </p>
+        <div class="soft-sep"></div>
+        <p>
+          Aujourd’hui, les batailles ne sont plus les mêmes, mais les détresses existent toujours.
+          Nous apprenons à <strong>faire le vide en nous</strong> pour mieux voir, écouter et soutenir :
+          notre engagement se traduit par une présence concrète auprès des personnes vulnérables,
+          par l’entraide au sein de l’Ordre et par des actions simples, utiles, menées avec constance.
+          La victoire que nous recherchons n’est plus celle des armes, mais celle du service sincère.
+        </p>
+        <div class="soft-sep"></div>
+        <p>
+          Se retrouver régulièrement pour étudier, réfléchir, échanger et préparer des projets
+          d’entraide fait naître une véritable fraternité. À force de marcher ensemble, de porter
+          des projets communs et de se soutenir dans les difficultés, des liens solides se tissent
+          entre les membres. Cette fraternité n’est pas théorique : elle se vit dans l’écoute, la
+          présence et l’action.
+        </p>
+      </div>
+    </details>
+
+    <!-- BLOC 3 -->
+    <details class="section-card" aria-label="Engagement et esprit des origines">
+      <summary>Engagement et esprit des origines</summary>
+      <div class="details-inner">
+        <p>
+          Bien que les symboles et l’iconographie templière fassent partie de notre identité
+          culturelle, nous ne sommes pas un « ordre de manteaux » ni un cercle centré sur les titres
+          ou les décorations. Nous ne sommes pas non plus des Hospitaliers&nbsp;: leur vocation
+          historique était autre. Nous nous inspirons surtout de l’esprit des Templiers des origines :
+          des hommes de terrain, de travail, de vigilance et de service.
+        </p>
+        <div class="soft-sep"></div>
+        <p>
+          Dans cette continuité, l’Ordre reconnaît une dimension initiatique à son travail,
+          entendue comme un chemin de maturation personnelle et collective, inspiré de l’esprit
+          des Templiers des origines, et fondé sur l’exigence intérieure, le discernement et la
+          responsabilité. Cette démarche initiatique n’est ni religieuse, ni ésotérique au sens
+          occultiste, et ne revendique aucune filiation spirituelle ou sacrée. Elle s’inscrit
+          pleinement dans un cadre laïque, culturel et associatif, et vise avant tout à former
+          des personnes droites, lucides et engagées dans le service.
+        </p>
+        <div class="soft-sep"></div>
+        <p>
+          Notre ligne est simple : <strong>servir là où d’autres ne vont plus</strong>. Avant de parler
+          de grands projets, nous commençons par agir là où nous sommes : familles, voisins, amis,
+          personnes isolées ou en difficulté. Ce sont ces actions discrètes, mais répétées, qui
+          donnent du sens à notre engagement.
+        </p>
+      </div>
+    </details>
+
+    <!-- DERNIER BLOC -->
+    <section class="section-card" aria-label="Ouverture, adhésion et fonctionnement">
+      <p>
+        L’Ordre est <strong>mixte</strong>, ouvert aux femmes et aux hommes, et respecte strictement
+        la neutralité politique et la laïcité prévues dans nos
+        <a href="statuts.html" class="inline-link">Statuts</a>. Celles et ceux qui se reconnaissent
+        dans ces valeurs peuvent entamer le cheminement de Novice via le
+        <a href="adhesion.html" class="inline-link">Formulaire d’adhésion</a>.
+      </p>
+      <div class="soft-sep"></div>
+      <p>
+        Si l’Ordre n’est pas encore présent dans votre région, il est possible d’envisager une
+        implantation locale sous forme de Commanderie rattachée. Les conditions et étapes sont
+        détaillées ici&nbsp;:
+        <a href="commanderie.html" class="inline-link">Ouvrir une Commanderie</a>.
+      </p>
+      <div class="soft-sep"></div>
+      <p>
+        Les cotisations, fixées par l’Assemblée Générale, servent uniquement à soutenir nos actions,
+        nos rencontres et l’organisation de l’Ordre. Pour en savoir plus&nbsp;:
+        <a href="cotisations.html" class="inline-link">Infos cotisations</a>.
+      </p>
+    </section>
+
+    <!-- Signature -->
+    <div class="nndnn-banner" aria-label="Signature templière nnDnn">
+      <img src="croix.epee.PNG" alt="Épée – symbole">
+      <div class="nndnn-text">nnDnn</div>
+      <img src="croix.epee.PNG" alt="Épée – symbole">
+    </div>
+
+    <!-- Bouton "Notre histoire" -->
+    <div class="big-history-wrap">
+      <a class="big-history-btn" href="histoire.html">📜 Notre histoire</a>
+    </div>
+
+    <!-- Menu bas -->
+    <nav class="tabs" aria-label="Navigation bas de page">
+      <a class="tab" href="index.html">🏠 Accueil</a>
+      <a class="tab" href="contact.html">📞 Contact</a>
+    </nav>
+
+    <!-- Footer uniformisé demandé -->
+    <footer class="footer-min" aria-label="Pied de page">
+      <div class="line">
+        <span>© OSD9TDJ Association Loi 1901. Tous droits réservés.</span>
+        <span class="sep">·</span>
+        <a href="cookies.html">cookies</a>
+        <span class="sep">·</span>
+        <a href="mentions.html">mentions légales</a>
+      </div>
+    </footer>
+
+  </div>
 </body>
 </html>
