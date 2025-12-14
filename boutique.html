@@ -6,384 +6,253 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO -->
-  <meta name="description" content="Boutique en ligne officielle de l’Ordre Sacré des Neuf Templiers de Jérusalem – cotisations, dons, évènements et supports pédagogiques (mise en place avec notre partenaire bancaire).">
-  <meta name="keywords" content="Templiers, OSD9TDJ, boutique templière, cotisation, dons, chevalerie moderne, paiement sécurisé, Ordre Sacré des Neuf Templiers de Jérusalem">
+  <meta name="description" content="Boutique en ligne officielle de l’Ordre Sacré des Neuf Templiers de Jérusalem – cotisations, dons, évènements et supports pédagogiques.">
+  <meta name="keywords" content="OSD9TDJ, boutique, cotisations, dons, Templiers">
   <link rel="canonical" href="https://osd9tdj.org/boutique.html">
 
-  <!-- OpenGraph -->
-  <meta property="og:title" content="Boutique en ligne – O.S.D.9.T.D.J.">
-  <meta property="og:description" content="Boutique officielle de l’Ordre Sacré des Neuf Templiers de Jérusalem : cotisations, dons, évènements et documents de l’Ordre.">
-  <meta property="og:image" content="https://osd9tdj.org/blason-osd9tdj.PNG">
-  <meta property="og:url" content="https://osd9tdj.org/boutique.html">
-  <meta property="og:type" content="website">
+  <!-- WATERMARK -->
+  <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-BOUTIQUE">
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Boutique en ligne – O.S.D.9.T.D.J.">
-  <meta name="twitter:description" content="Paiements sécurisés : cotisations, dons, évènements et supports pédagogiques de l’Ordre.">
-  <meta name="twitter:image" content="https://osd9tdj.org/blason-osd9tdj.PNG">
-
-  <!-- WATERMARK INVISIBLE (protection / preuve d’antériorité) -->
-  <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-BOUTIQUE-PROTECTION-TEMPLIERS">
-
-  <!-- Polices -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
-  <style>
-  :root{
-    --or:#ffd700;
-    --clair:#fdf7e5;
+<style>
+:root{
+  --or:#ffd700;
+  --clair:#fdf7e5;
+  --or-line:rgba(255,215,0,0.55);
+}
 
-    /* cadre doré */
-    --or-line: rgba(255,215,0,0.55);
-  }
+html,body{
+  height:100%;
+  margin:0;
+  overflow:hidden;
+  font-family:'Lato',Arial,sans-serif;
+  color:#fff;
+}
 
-  /* ✅ CADRE FIXE + SCROLL DEDANS */
-  html, body{
-    height:100%;
-    margin:0;
-    padding:0;
-    overflow:hidden;
-    font-family:'Lato', Arial, sans-serif;
-    color:#ffffff;
-    text-align:center;
-  }
+/* Fond */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("drapeau-osd9tdj.PNG") no-repeat center center fixed;
+  background-size:cover;
+  z-index:-2;
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top, rgba(0,0,0,0.25), rgba(0,0,0,0.9));
+  z-index:-1;
+}
 
-  /* Fond drapeau + voile sombre */
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:url("drapeau-osd9tdj.PNG") no-repeat center center fixed;
-    background-size:cover;
-    z-index:-2;
-  }
+/* Cadre fixe */
+.frame-fixed{
+  position:fixed;
+  inset:14px;
+  border-radius:22px;
+  border:2px solid var(--or-line);
+  box-shadow:0 0 38px rgba(0,0,0,0.45);
+  pointer-events:none;
+  z-index:40;
+}
 
-  body::after{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:radial-gradient(circle at top, rgba(0,0,0,0.25), rgba(0,0,0,0.9));
-    z-index:-1;
-  }
+/* Scroll interne */
+.viewport{
+  position:fixed;
+  inset:22px;
+  overflow-y:auto;
+  padding:30px 15px 40px;
+}
 
-  /* cadre doré fixe */
-  .frame-fixed{
-    position:fixed;
-    inset:14px;
-    border-radius:22px;
-    border:2px solid var(--or-line);
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,0.08) inset,
-      0 0 38px rgba(0,0,0,0.40);
-    pointer-events:none;
-    z-index:40;
-  }
+/* Menu 3 points */
+.top-menu{
+  position:fixed;
+  top:26px;
+  right:26px;
+  z-index:60;
+}
+.top-menu summary{
+  list-style:none;
+  cursor:pointer;
+  width:44px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  border:1px solid var(--or-line);
+  background:rgba(0,0,0,0.3);
+  color:var(--or);
+  font-size:22px;
+}
+.top-menu summary::-webkit-details-marker{display:none;}
 
-  /* contenu qui défile dedans */
-  .viewport-scroll{
-    position:fixed;
-    inset:22px;
-    overflow-y:auto;
-    overflow-x:hidden;
-    -webkit-overflow-scrolling:touch;
-    z-index:1;
-    padding:30px 15px 44px;
-    box-sizing:border-box;
-  }
+.menu-panel{
+  position:absolute;
+  right:0;
+  margin-top:10px;
+  width:260px;
+  background:rgba(0,0,0,0.75);
+  border:1px solid var(--or-line);
+  border-radius:14px;
+  overflow:hidden;
+}
+.menu-panel a{
+  display:block;
+  padding:11px 14px;
+  text-decoration:none;
+  color:var(--clair);
+  font-family:'Cinzel',serif;
+  font-size:0.92rem;
+  border-bottom:1px solid rgba(255,215,0,0.18);
+}
+.menu-panel a:hover{background:rgba(255,215,0,0.12);}
+.menu-panel a:last-child{border-bottom:none;}
 
-  /* ✅ menu 3 points */
-  .top-menu{
-    position:fixed;
-    top:26px;
-    right:26px;
-    z-index:60;
-    pointer-events:auto;
-  }
-  .top-menu details{ position:relative; }
-  .top-menu summary{
-    list-style:none;
-    cursor:pointer;
-    user-select:none;
-    width:46px;
-    height:34px;
-    display:grid;
-    place-items:center;
-    border-radius:999px;
-    border:1px solid rgba(255,215,0,0.55);
-    background:rgba(0,0,0,0.22);
-    backdrop-filter:blur(6px);
-    box-shadow:0 6px 16px rgba(0,0,0,0.35);
-    font-family:'Cinzel',serif;
-    color:var(--or);
-    font-size:22px;
-    line-height:1;
-  }
-  .top-menu summary::-webkit-details-marker{ display:none; }
+/* Contenu */
+.container{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
 
-  .menu-panel{
-    position:absolute;
-    right:0;
-    margin-top:10px;
-    width:260px;
-    max-width:calc(100vw - 60px);
-    border-radius:14px;
-    border:1px solid rgba(255,215,0,0.45);
-    background:rgba(0,0,0,0.70);
-    box-shadow:0 18px 40px rgba(0,0,0,0.55);
-    overflow:hidden;
-  }
-  .menu-panel a{
-    display:block;
-    padding:11px 12px;
-    text-decoration:none;
-    color:rgba(253,247,229,0.92);
-    font-family:'Cinzel',serif;
-    font-weight:700;
-    font-size:0.92rem;
-    border-bottom:1px solid rgba(255,215,0,0.18);
-  }
-  .menu-panel a:hover{
-    background:rgba(255,215,0,0.12);
-    color:#fff;
-  }
-  .menu-panel a:last-child{ border-bottom:none; }
+h1{
+  font-family:'Cinzel',serif;
+  font-size:1.7rem;
+  margin:20px 0 10px;
+}
 
-  /* contenu */
-  .overlay{
-    min-height:auto;
-    box-sizing:border-box;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-  }
+p{
+  max-width:720px;
+  line-height:1.6;
+  margin:8px auto;
+}
 
-  /* Menu (barre onglets d’origine conservée) */
-  .tabs{
-    margin-top:15px;
-    margin-bottom:25px;
-    display:inline-flex;
-    border-radius:999px;
-    overflow:hidden;
-    border:1px solid rgba(255,215,0,0.6);
-    backdrop-filter:blur(6px);
-    max-width:100%;
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-  }
-  .tabs::-webkit-scrollbar{ display:none; }
+.card{
+  margin-top:25px;
+  padding:18px 22px;
+  background:rgba(0,0,0,0.75);
+  border-radius:16px;
+  border:2px solid var(--or);
+}
 
-  .tab{
-    padding:10px 18px;
-    text-decoration:none;
-    color:var(--clair);
-    font-size:0.95rem;
-    font-weight:700;
-    font-family:'Cinzel',serif;
-    background:rgba(0,0,0,0.45);
-    transition:background 0.2s ease, color 0.2s ease;
-    white-space:nowrap;
-    flex:0 0 auto;
-  }
-  .tab + .tab{ border-left:1px solid rgba(255,215,0,0.4); }
-  .tab:hover{ background:rgba(255,215,0,0.20); color:#ffffff; }
+.bank-logo{
+  margin-top:10px;
+  width:260px;
+  background:#fff;
+  border-radius:10px;
+  padding:8px 14px;
+}
 
-  h1{
-    font-family:'Cinzel',serif;
-    font-size:1.7rem;
-    margin:20px 0 10px;
-    text-shadow:0 0 8px rgba(0,0,0,0.7);
-  }
+/* Bouton déroulant bas */
+.bottom-menu{
+  margin-top:24px;
+}
+.bottom-menu summary{
+  cursor:pointer;
+  padding:9px 18px;
+  border-radius:999px;
+  border:1px solid var(--or);
+  font-family:'Cinzel',serif;
+  background:rgba(0,0,0,0.6);
+}
+.bottom-menu summary::-webkit-details-marker{display:none;}
 
-  p{
-    max-width:700px;
-    margin:8px auto;
-    line-height:1.6;
-    font-size:1rem;
-  }
+.bottom-panel{
+  margin-top:10px;
+  background:rgba(0,0,0,0.75);
+  border:1px solid var(--or);
+  border-radius:14px;
+}
+.bottom-panel a{
+  display:block;
+  padding:10px 14px;
+  text-decoration:none;
+  color:var(--clair);
+  border-bottom:1px solid rgba(255,215,0,0.2);
+}
+.bottom-panel a:last-child{border-bottom:none;}
 
-  .card{
-    margin-top:25px;
-    padding:18px 20px 22px;
-    background:rgba(0,0,0,0.75);
-    border-radius:16px;
-    border:2px solid var(--or);
-    box-shadow:0 0 26px rgba(0,0,0,0.8);
-  }
-
-  .bank-logo{
-    margin-top:10px;
-    width:260px;
-    max-width:80vw;
-    height:auto;
-    background:#ffffff;
-    border-radius:10px;
-    padding:8px 14px;
-  }
-
-  /* Boutons bas de page */
-  .btn-bottom{
-    margin-top:20px;
-    display:flex;
-    gap:12px;
-    justify-content:center;
-    flex-wrap:wrap;
-  }
-
-  .btn{
-    text-decoration:none;
-    color:var(--clair);
-    font-size:0.95rem;
-    padding:8px 16px;
-    border-radius:999px;
-    border:1px solid var(--or);
-    background:rgba(0,0,0,0.6);
-    font-family:'Cinzel',serif;
-    transition:0.2s;
-  }
-  .btn:hover{
-    background:var(--or);
-    color:#000;
-  }
-
-  /* footer “valide” standardisé */
-  .footer-min{
-    margin-top:26px;
-    padding-top:14px;
-    width:100%;
-    max-width:980px;
-    border-top:1px solid rgba(255,215,0,0.22);
-    opacity:0.92;
-  }
-  .footer-min .line{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    align-items:center;
-    justify-content:center;
-    font-size:0.78rem;
-    color:rgba(253,247,229,0.88);
-  }
-  .footer-min a{
-    font-size:0.72rem;
-    text-transform:lowercase;
-    letter-spacing:0.02em;
-    color:rgba(253,247,229,0.80);
-    text-decoration:none;
-    border-bottom:1px dotted rgba(255,215,0,0.55);
-    padding-bottom:1px;
-  }
-  .footer-min a:hover{
-    color:#fff;
-    border-bottom-color:rgba(255,215,0,0.95);
-  }
-  .sep{ opacity:0.55; }
-
-  @media (max-width:480px){
-    h1{ font-size:1.5rem; }
-    .tab{ padding:8px 12px; font-size:0.85rem; }
-    .top-menu{ top:22px; right:22px; }
-    .menu-panel{ width:240px; }
-    .frame-fixed{ inset:12px; }
-    .viewport-scroll{ inset:20px; }
-  }
-  </style>
-
-  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
-  <link rel="apple-touch-icon" href="icon-192.png">
+/* Footer */
+.footer{
+  margin-top:26px;
+  padding-top:14px;
+  border-top:1px solid rgba(255,215,0,0.25);
+  font-size:0.78rem;
+  text-align:center;
+}
+.footer a{
+  color:var(--clair);
+  text-decoration:none;
+  border-bottom:1px dotted rgba(255,215,0,0.55);
+}
+</style>
 </head>
 
 <body>
 
-  <!-- ✅ Cadre fixe doré -->
-  <div class="frame-fixed" aria-hidden="true"></div>
+<div class="frame-fixed"></div>
 
-  <!-- ✅ Menu 3 points avec toutes les pages -->
-  <div class="top-menu" aria-label="Menu du site">
-    <details>
-      <summary title="Menu">⋯</summary>
-      <div class="menu-panel" role="menu" aria-label="Navigation">
-        <a href="index.html"> Accueil</a>
-        <a href="quinoussommes.html"> Qui nous sommes</a>
-        <a href="histoire.html"> Notre histoire</a>
-        <a href="activites.html"> Activités</a>
-        <a href="adhesion.html"> Adhésion</a>
-        <a href="commanderie.html"> Commanderie</a>
-        <a href="cotisations.html"> Cotisations</a>
-        <a href="assurance.html"> Assurance</a>
-        <a href="boutique.html"> Boutique</a>
-        <a href="statuts.html"> Statuts</a>
-        <a href="contact.html"> 📞 Contact</a>
-        <a href="mentions.html"> Informations officielles</a>
-        <a href="cookies.html"> Cookies</a>
-      </div>
-    </details>
-  </div>
-
-  <!-- ✅ Tout défile dedans -->
-  <div class="viewport-scroll">
-    <div class="overlay">
-
-      <!-- MENU (barre d’origine conservée) -->
-      <nav class="tabs">
-        <a href="index.html" class="tab">Accueil</a>
-        <a href="activites.html" class="tab">Nos évènements</a>
-        <a href="quinoussommes.html" class="tab">Qui nous sommes</a>
-        <a href="boutique.html" class="tab">🛒 Boutique en ligne</a>
-        <a href="mentions.html" class="tab">Mentions légales</a>
-      </nav>
-
-      <div class="card">
-        <h1>🛒 Boutique en ligne O.S.D.9.T.D.J.</h1>
-
-        <p>
-          Notre boutique en ligne est actuellement <strong>en cours de création</strong> en partenariat avec notre établissement bancaire.
-          Elle permettra, à terme, de régler en toute sécurité&nbsp;:
-        </p>
-
-        <ul style="text-align:left;display:inline-block;margin:8px 0;padding-left:18px;">
-          <li>les cotisations annuelles&nbsp;;</li>
-          <li>les dons ou contributions volontaires&nbsp;;</li>
-          <li>les galas, banquets, cérémonies et repas fraternels&nbsp;;</li>
-          <li>les évènements futurs (rencontres, sorties, voyages culturels)&nbsp;;</li>
-          <li>les ouvrages, livrets, supports pédagogiques et documents officiels&nbsp;;</li>
-          <li>les tickets-repas lors de nos rassemblements&nbsp;;</li>
-          <li>tout règlement lié aux activités culturelles et chevaleresques de l’Ordre.</li>
-        </ul>
-
-        <p>
-          Dès que l’espace de paiement sécurisé sera activé, un lien direct depuis cette page
-          sera mis à disposition des membres et postulants.
-        </p>
-
-        <p style="margin-top:14px;margin-bottom:6px;">
-          Plateforme en cours de mise en place avec notre partenaire bancaire&nbsp;:
-        </p>
-
-        <img src="banque.jpg" alt="Partenaire bancaire" class="bank-logo">
-      </div>
-
-      <!-- BOUTONS BAS DE PAGE (conservés) -->
-      <div class="btn-bottom">
-        <a href="contact.html" class="btn">📞 Contact</a>
-        <a href="index.html" class="btn">← Retour à l’accueil</a>
-      </div>
-
-      <!-- Footer standardisé “valide” -->
-      <footer class="footer-min" aria-label="Pied de page">
-        <div class="line">
-          <span>© OSD9TDJ Association Loi 1901, Tous droits réservés</span>
-          <span class="sep">·</span>
-          <a href="cookies.html">cookies</a>
-          <span class="sep">·</span>
-          <a href="mentions.html">mentions légales</a>
-        </div>
-      </footer>
-
+<!-- MENU HAUT -->
+<div class="top-menu">
+  <details>
+    <summary>⋯</summary>
+    <div class="menu-panel">
+      <a href="index.html">Accueil</a>
+      <a href="quinoussommes.html">Qui nous sommes</a>
+      <a href="histoire.html">Notre histoire</a>
+      <a href="activites.html">Activités</a>
+      <a href="adhesion.html">Adhésion</a>
+      <a href="assurance.html">Assurance</a>
+      <a href="boutique.html">Boutique</a>
+      <a href="statuts.html">Statuts</a>
+      <a href="contact.html">Contact</a>
+      <a href="mentions.html">Informations officielles</a>
+      <a href="cookies.html">Cookies</a>
     </div>
+  </details>
+</div>
+
+<!-- CONTENU -->
+<div class="viewport">
+<div class="container">
+
+  <div class="card">
+    <h1>Boutique en ligne O.S.D.9.T.D.J.</h1>
+
+    <p>Notre boutique en ligne est actuellement <strong>en cours de création</strong> en partenariat avec notre établissement bancaire.</p>
+
+    <ul style="text-align:left;display:inline-block;">
+      <li>les cotisations annuelles ;</li>
+      <li>les dons ou contributions volontaires ;</li>
+      <li>les galas, banquets et évènements ;</li>
+      <li>les supports pédagogiques et documents officiels ;</li>
+      <li>les règlements liés aux activités culturelles de l’Ordre.</li>
+    </ul>
+
+    <p>Un lien de paiement sécurisé sera ajouté dès activation officielle.</p>
+
+    <img src="banque.jpg" class="bank-logo" alt="Partenaire bancaire">
   </div>
+
+  <!-- MENU BAS -->
+  <details class="bottom-menu">
+    <summary>Navigation</summary>
+    <div class="bottom-panel">
+      <a href="contact.html">Contact</a>
+      <a href="index.html">Retour à l’accueil</a>
+    </div>
+  </details>
+
+  <footer class="footer">
+    © OSD9TDJ Association Loi 1901, Tous droits réservés ·
+    <a href="cookies.html">cookies</a> ·
+    <a href="mentions.html">mentions légales</a>
+  </footer>
+
+</div>
+</div>
 
 </body>
 </html>
