@@ -45,10 +45,11 @@
       --card: rgba(0,0,0,0.18);
       --card2: rgba(0,0,0,0.10);
 
+      /* ✅ Cadre + lys */
       --frame-inset: 10px;
       --frame-radius: 22px;
       --lys-size: 22px;
-      --lys-opacity: 0.32;
+      --lys-opacity: 0.40; /* plus visible */
     }
 
     body {
@@ -61,92 +62,57 @@
       overflow-x: hidden;
     }
 
-    /* Cadre FIXE décoratif (derrière) */
+    /* ✅ Cadre fixe (double) */
     body::after{
       content:"";
       position: fixed;
       inset: var(--frame-inset);
       border-radius: var(--frame-radius);
-      border: 2px solid rgba(214,167,40,0.55);
+      border: 2px solid rgba(214,167,40,0.56);
       box-shadow:
-        0 0 0 1px rgba(248,232,200,0.22) inset,
-        0 0 36px rgba(0,0,0,0.22);
+        0 0 0 1px rgba(248,232,200,0.24) inset,
+        0 0 36px rgba(0,0,0,0.18);
       pointer-events: none;
       z-index: 0;
     }
+    body::before{
+      content:"";
+      position: fixed;
+      inset: calc(var(--frame-inset) + 7px);
+      border-radius: calc(var(--frame-radius) - 6px);
+      border: 1px solid rgba(214,167,40,0.22);
+      pointer-events:none;
+      z-index: 0;
+    }
 
-    /* ✅ Lys FIXES visibles (z-index sûr) */
+    /* ✅ 4 lys FIXES — au-dessus du cadre */
     .lys-corner{
       position: fixed;
       width: var(--lys-size);
       height: var(--lys-size);
       object-fit: contain;
       opacity: var(--lys-opacity);
-      filter: drop-shadow(0 0 10px rgba(0,0,0,0.45));
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.55));
       pointer-events: none;
-      z-index: 2; /* ✅ au-dessus du cadre, mais sous le menu */
+      z-index: 2;
     }
-    .lys-tl{ top: calc(var(--frame-inset) + 12px); left: calc(var(--frame-inset) + 12px); }
-    .lys-tr{ top: calc(var(--frame-inset) + 12px); right: calc(var(--frame-inset) + 12px); }
-    .lys-bl{ bottom: calc(var(--frame-inset) + 12px); left: calc(var(--frame-inset) + 12px); }
-    .lys-br{ bottom: calc(var(--frame-inset) + 12px); right: calc(var(--frame-inset) + 12px); }
 
-    /* Menu ⋯ discret */
-    .gold-menu{
-      position: fixed;
-      top: 14px;
-      right: 14px;
-      z-index: 9999;
-      font-family: 'Cinzel', serif;
+    /* ✅ safe-area iPhone (encoches) */
+    .lys-tl{
+      top: calc(var(--frame-inset) + 12px + env(safe-area-inset-top));
+      left: calc(var(--frame-inset) + 12px + env(safe-area-inset-left));
     }
-    .gold-menu summary{
-      list-style:none;
-      cursor:pointer;
-      user-select:none;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width: 44px;
-      height: 34px;
-      border-radius: 999px;
-      border: 1px solid rgba(214,167,40,0.40);
-      background: rgba(0,0,0,0.18);
-      backdrop-filter: blur(6px);
-      box-shadow: 0 10px 26px rgba(0,0,0,0.35);
-      color: rgba(214,167,40,0.90);
-      font-weight: 700;
-      letter-spacing: 0.10em;
+    .lys-tr{
+      top: calc(var(--frame-inset) + 12px + env(safe-area-inset-top));
+      right: calc(var(--frame-inset) + 12px + env(safe-area-inset-right));
     }
-    .gold-menu summary::-webkit-details-marker{display:none;}
-    .gold-menu summary span{font-size:1.25rem; transform: translateY(-1px);}
-    .gold-menu .dropdown{
-      position:absolute;
-      top: 44px;
-      right: 0;
-      min-width: 240px;
-      max-width: 78vw;
-      padding: 10px;
-      border-radius: 16px;
-      border: 1px solid rgba(214,167,40,0.45);
-      background: rgba(0,0,0,0.55);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 18px 38px rgba(0,0,0,0.55);
+    .lys-bl{
+      bottom: calc(var(--frame-inset) + 12px + env(safe-area-inset-bottom));
+      left: calc(var(--frame-inset) + 12px + env(safe-area-inset-left));
     }
-    .gold-menu a{
-      display:block;
-      text-decoration:none;
-      color: rgba(248,232,200,0.92);
-      padding: 10px 12px;
-      border-radius: 12px;
-      font-size: 0.90rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      border: 1px solid rgba(214,167,40,0.00);
-    }
-    .gold-menu a:hover{
-      background: rgba(214,167,40,0.14);
-      border-color: rgba(214,167,40,0.26);
-      color: #fff;
+    .lys-br{
+      bottom: calc(var(--frame-inset) + 12px + env(safe-area-inset-bottom));
+      right: calc(var(--frame-inset) + 12px + env(safe-area-inset-right));
     }
 
     .container {
@@ -157,7 +123,7 @@
       flex-direction: column;
       align-items: center;
       position: relative;
-      z-index: 3; /* ✅ contenu au-dessus des lys/cadre */
+      z-index: 3; /* ✅ contenu toujours au-dessus */
     }
 
     .image-box {
@@ -168,6 +134,7 @@
       box-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
       border: 2px solid rgba(214, 167, 40, 0.85);
     }
+
     .image-box img {
       display: block;
       max-width: 84vw;
@@ -180,6 +147,7 @@
       font-size: 1.95rem;
       margin: 10px 0 6px;
     }
+
     h2 {
       font-family: 'Cinzel', serif;
       font-size: 1.22rem;
@@ -187,6 +155,7 @@
       font-weight: normal;
       opacity: 0.9;
     }
+
     strong { font-weight: 700; }
 
     .section-card{
@@ -195,15 +164,19 @@
       margin: 22px auto;
       padding: 22px 22px;
       text-align: justify;
+
       background: linear-gradient(180deg, var(--card), var(--card2));
       border-radius: 20px;
       border: 1px solid var(--or-line);
+
       box-shadow:
         0 8px 22px rgba(0,0,0,0.45),
         0 0 0 1px rgba(0,0,0,0.14) inset;
+
       position: relative;
       overflow: hidden;
     }
+
     .section-card::before{
       content:"";
       position:absolute;
@@ -214,6 +187,7 @@
       pointer-events:none;
       opacity: 0.95;
     }
+
     .section-card.alt{
       background: linear-gradient(180deg, rgba(0,0,0,0.20), rgba(0,0,0,0.12));
       border-color: var(--or-line2);
@@ -263,11 +237,16 @@
       text-decoration: none;
       cursor: pointer;
     }
-    a.inline-link::after { content: " ⟶"; font-size: 0.82rem; }
+    a.inline-link::after {
+      content: " ⟶";
+      font-size: 0.82rem;
+    }
     a.inline-link::before {
       content: "";
       position: absolute;
-      left: 0; right: 0; bottom: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       height: 2px;
       background: linear-gradient(to right, #fff2b2, #d6a728);
       transform: scaleX(0);
@@ -329,6 +308,7 @@
     .tab + .tab{ border-left:1px solid rgba(214,167,40,0.35); }
     .tab:hover{ background:rgba(214,167,40,0.20); color:#fff; }
 
+    /* Footer minuscule */
     .footer-min{
       margin-top: 26px;
       padding-top: 14px;
@@ -345,6 +325,7 @@
       justify-content:center;
       font-size:0.78rem;
       color: rgba(248,232,200,0.85);
+      text-align:center;
     }
     .footer-min a{
       font-size:0.72rem;
@@ -429,11 +410,14 @@
       .tab{ padding:9px 16px; font-size:0.86rem; }
       .image-box img{ width: 360px; max-width: 88vw; }
       .soft-sep::after{ left: 6%; right: 6%; }
+
       details.section-card > summary{ padding: 18px 14px; font-size: 0.98rem; }
       .nndnn-banner{gap:10px;}
       .nndnn-banner img{height:42px;}
       .nndnn-text{font-size:1.55rem;}
-      :root{ --lys-size: 20px; --lys-opacity: 0.28; }
+
+      /* ✅ lys un poil plus petit sur mobile */
+      :root{ --lys-size: 18px; --lys-opacity: 0.42; }
     }
   </style>
 
@@ -444,33 +428,11 @@
 
 <body>
 
-  <!-- ✅ Lys (BON NOM + anti-cache) -->
-  <img class="lys-corner lys-tl" src="./lys.PNG?v=1" alt="">
-  <img class="lys-corner lys-tr" src="./lys.PNG?v=1" alt="">
-  <img class="lys-corner lys-bl" src="./lys.PNG?v=1" alt="">
-  <img class="lys-corner lys-br" src="./lys.PNG?v=1" alt="">
-
-  <!-- Menu ⋯ -->
-  <nav class="gold-menu" aria-label="Menu principal">
-    <details>
-      <summary aria-label="Ouvrir le menu"><span>⋯</span></summary>
-      <div class="dropdown" role="menu" aria-label="Navigation">
-        <a href="index.html">🏠 Accueil</a>
-        <a href="quinoussommes.html">👥 Qui nous sommes</a>
-        <a href="histoire.html">📜 Notre histoire</a>
-        <a href="activites.html">📌 Activités</a>
-        <a href="adhesion.html">📝 Adhésion</a>
-        <a href="cotisations.html">💶 Cotisations</a>
-        <a href="commanderie.html">🏰 Commanderie</a>
-        <a href="boutique.html">🛍️ Boutique</a>
-        <a href="assurance.html">🛡️ Assurance</a>
-        <a href="contact.html">📞 Contact</a>
-        <a href="statuts.html">📄 Statuts</a>
-        <a href="mentions.html">⚖️ Mentions légales</a>
-        <a href="cookies.html">🍪 Cookies</a>
-      </div>
-    </details>
-  </nav>
+  <!-- ✅ 4 fleurs de lys (IMPORTANT : nom exact + anti-cache) -->
+  <img class="lys-corner lys-tl" src="./lys.PNG?v=20251214" alt="">
+  <img class="lys-corner lys-tr" src="./lys.PNG?v=20251214" alt="">
+  <img class="lys-corner lys-bl" src="./lys.PNG?v=20251214" alt="">
+  <img class="lys-corner lys-br" src="./lys.PNG?v=20251214" alt="">
 
   <div class="container">
 
@@ -593,7 +555,7 @@
       </p>
     </section>
 
-    <!-- Signature -->
+    <!-- ✅ Signature nnDnn -->
     <div class="nndnn-banner" aria-label="Signature templière nnDnn">
       <img src="croix.epee.PNG" alt="Épée – symbole">
       <div class="nndnn-text">nnDnn</div>
@@ -609,10 +571,10 @@
       <a class="tab" href="contact.html">📞 Contact</a>
     </nav>
 
-    <!-- Footer uniformisé demandé -->
+    <!-- ✅ Footer EXACT demandé -->
     <footer class="footer-min" aria-label="Pied de page">
       <div class="line">
-        <span>© OSD9TDJ Association Loi 1901. Tous droits réservés.</span>
+        <span>© OSD9TDJ Association Loi 1901, tous droits réservés</span>
         <span class="sep">·</span>
         <a href="cookies.html">cookies</a>
         <span class="sep">·</span>
