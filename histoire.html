@@ -390,6 +390,28 @@
       .frame-fixed{ inset: 12px; }
       .viewport-scroll{ inset: 20px; }
     }
+
+    /* ================== ✅ SEULS AJOUTS (TABLETTE/PC) ==================
+       1) HERO moins “dégueulasse” sur grands écrans
+       2) TABS (boutons du bas) centrés sur tablette/PC
+       ================================================================ */
+
+    /* ✅ Centrage des tabs sur tablette/PC (sans toucher au mobile) */
+    @media (min-width: 700px){
+      .tabs{
+        display:flex;          /* au lieu de inline-flex, uniquement ici */
+        width:100%;            /* prend la largeur du wrap -> centrage réel */
+        justify-content:center;
+      }
+    }
+
+    /* ✅ Hero plus propre sur tablette/PC (recadrage + hauteur adaptée) */
+    @media (min-width: 900px){
+      .hero img{
+        height:420px;                 /* plus confortable sur tablette/PC */
+        object-position:center 60%;   /* recadrage plus harmonieux */
+      }
+    }
   </style>
 </head>
 
@@ -510,7 +532,7 @@
 
         <div class="quote-box">
           <p style="margin:0; text-align:center; font-family:'Cinzel',serif; letter-spacing:0.02em;">
-            <strong>Prieuré de l’Ordre Chevaleresque des Templiers des Terres de Savoie (OCNDS)</strong>
+            <strong>Prieuré de l’Ordre Chevaleresque Templiers des Terres de Savoie (OCNDS)</strong>
           </p>
         </div>
 
