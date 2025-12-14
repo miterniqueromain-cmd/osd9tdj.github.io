@@ -34,28 +34,111 @@
     :root {
       --or: #d6a728;
       --clair: #f5f0e6;
+      --or-line: rgba(214,167,40,0.55);
     }
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Lato', Arial, sans-serif;
-      color: var(--clair);
-      text-align: center;
-      min-height: 100vh;
+    /* ✅ CADRE FIXE + SCROLL DEDANS (comme mentions) */
+    html, body{
+      height:100%;
+      margin:0;
+      padding:0;
+      overflow:hidden;
+      font-family:'Lato', Arial, sans-serif;
+      color:var(--clair);
+      text-align:center;
       background: radial-gradient(circle at top, #1b1b1b, #020202 70%);
+      position:relative;
     }
 
-    .container {
-      min-height: 100vh;
+    .frame-fixed{
+      position: fixed;
+      inset: 14px;
+      border-radius: 22px;
+      border: 2px solid var(--or-line);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.08) inset,
+        0 0 38px rgba(0,0,0,0.40);
+      pointer-events: none;
+      z-index: 40;
+    }
+
+    .viewport-scroll{
+      position: fixed;
+      inset: 22px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+      padding: 30px 15px 44px;
       box-sizing: border-box;
-      padding: 30px 15px 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
 
-    .image-box {
+    /* ✅ Menu 3 points (haut) */
+    .top-menu{
+      position: fixed;
+      top: 26px;
+      right: 26px;
+      z-index: 60;
+      pointer-events: auto;
+    }
+    .top-menu details{ position: relative; }
+    .top-menu summary{
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      width: 46px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(214,167,40,0.55);
+      background: rgba(0,0,0,0.22);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+      font-family:'Cinzel',serif;
+      color: var(--or);
+      font-size: 22px;
+      line-height: 1;
+    }
+    .top-menu summary::-webkit-details-marker{ display:none; }
+
+    .menu-panel{
+      position: absolute;
+      right: 0;
+      margin-top: 10px;
+      width: 260px;
+      max-width: calc(100vw - 60px);
+      border-radius: 14px;
+      border: 1px solid rgba(214,167,40,0.45);
+      background: rgba(0,0,0,0.70);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+      overflow: hidden;
+    }
+    .menu-panel a{
+      display:block;
+      padding: 11px 12px;
+      text-decoration:none;
+      color: rgba(245,240,230,0.92);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(214,167,40,0.18);
+    }
+    .menu-panel a:hover{
+      background: rgba(214,167,40,0.12);
+      color:#fff;
+    }
+    .menu-panel a:last-child{ border-bottom:none; }
+
+    .container{
+      min-height:auto;
+      box-sizing:border-box;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .image-box{
       margin-top: 10px;
       margin-bottom: 25px;
       border-radius: 18px;
@@ -65,90 +148,139 @@
       background: #000;
     }
 
-    .image-box img {
-      display: block;
-      max-width: 80vw;
-      width: 360px;
-      height: auto;
+    .image-box img{
+      display:block;
+      max-width:80vw;
+      width:360px;
+      height:auto;
     }
 
-    h1 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.9rem;
-      margin: 10px 0 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
+    h1{
+      font-family:'Cinzel',serif;
+      font-size:1.9rem;
+      margin:10px 0 14px;
+      text-transform:uppercase;
+      letter-spacing:0.06em;
     }
 
-    p {
-      max-width: 850px;
-      margin: 14px auto;
-      font-size: 1rem;
-      line-height: 1.55;
-      text-align: justify;
+    p{
+      max-width:850px;
+      margin:14px auto;
+      font-size:1rem;
+      line-height:1.55;
+      text-align:justify;
     }
 
-    .box {
-      max-width: 900px;
-      margin: 20px auto;
-      padding: 18px 18px 16px;
-      border-radius: 16px;
-      border: 2px solid var(--or);
+    .box{
+      max-width:900px;
+      margin:20px auto;
+      padding:18px 18px 16px;
+      border-radius:16px;
+      border:2px solid var(--or);
       background: linear-gradient(to bottom, rgba(18, 7, 2, 0.96), rgba(0, 0, 0, 0.96));
-      box-shadow: 0 0 18px rgba(0,0,0,0.75);
-      text-align: left;
+      box-shadow:0 0 18px rgba(0,0,0,0.75);
+      text-align:left;
     }
 
-    .box-title {
-      font-family: 'Cinzel', serif;
-      font-size: 1.05rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--or);
-      margin-bottom: 8px;
+    .box-title{
+      font-family:'Cinzel',serif;
+      font-size:1.05rem;
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+      color:var(--or);
+      margin-bottom:8px;
     }
 
-    .important {
-      color: var(--or);
-      font-weight: 700;
+    .important{
+      color:var(--or);
+      font-weight:700;
     }
 
-    .buttons {
-      margin-top: 30px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
+    ul{
+      max-width:850px;
+      margin:10px 0 0 18px;
+      padding-left:16px;
+      line-height:1.55;
+      text-align:left;
     }
 
-    .btn {
-      display: inline-block;
-      padding: 9px 22px;
-      border-radius: 999px;
-      border: 1px solid var(--or);
-      font-family: 'Cinzel', serif;
-      font-size: 0.95rem;
-      color: var(--clair);
-      text-decoration: none;
-      background: rgba(0,0,0,0.6);
-      transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    /* ✅ Boutons en “coulissant” comme index */
+    .tabs{
+      margin-top: 18px;
+      display:inline-flex;
+      border-radius:999px;
+      overflow:hidden;
+      border:1px solid rgba(214,167,40,0.6);
+      backdrop-filter: blur(6px);
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      background: rgba(0,0,0,0.18);
+    }
+    .tabs::-webkit-scrollbar{ display:none; }
+
+    .tab{
+      padding:10px 16px;
+      text-decoration:none;
+      color:var(--clair);
+      font-size:0.92rem;
+      font-weight:700;
+      font-family:'Cinzel',serif;
+      background: rgba(0,0,0,0.45);
+      transition: background 0.2s ease, color 0.2s ease;
+      white-space:nowrap;
+      flex:0 0 auto;
+    }
+    .tab + .tab{
+      border-left:1px solid rgba(214,167,40,0.35);
+    }
+    .tab:hover{
+      background: rgba(214,167,40,0.18);
+      color:#fff;
     }
 
-    .btn:hover {
-      background: var(--or);
-      color: #120702;
-      transform: translateY(-1px);
+    /* footer complet comme vu */
+    .footer-min{
+      margin-top: 26px;
+      padding-top: 14px;
+      width: 100%;
+      max-width: 980px;
+      border-top: 1px solid rgba(214,167,40,0.22);
+      opacity: 0.92;
     }
-
-    .footer {
-      margin-top: 22px;
-      font-size: 0.78rem;
-      opacity: 0.85;
+    .footer-min .line{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      font-size:0.78rem;
+      color: rgba(245,240,230,0.85);
     }
+    .footer-min a{
+      font-size:0.72rem;
+      text-transform: lowercase;
+      letter-spacing: 0.02em;
+      color: rgba(245,240,230,0.78);
+      text-decoration:none;
+      border-bottom: 1px dotted rgba(214,167,40,0.55);
+      padding-bottom: 1px;
+    }
+    .footer-min a:hover{
+      color:#fff;
+      border-bottom-color: rgba(214,167,40,0.95);
+    }
+    .sep{ opacity:0.55; }
 
-    @media (max-width: 600px) {
-      h1 { font-size: 1.6rem; }
-      p  { font-size: 0.95rem; }
+    @media (max-width: 600px){
+      h1{ font-size:1.6rem; }
+      p{ font-size:0.95rem; }
+      .tab{ padding:9px 12px; font-size:0.85rem; }
+      .top-menu{ top:22px; right:22px; }
+      .menu-panel{ width:240px; }
+      .frame-fixed{ inset:12px; }
+      .viewport-scroll{ inset:20px; }
     }
   </style>
 
@@ -158,68 +290,105 @@
 </head>
 
 <body>
-<div class="container">
 
-  <!-- Logo assurance -->
-  <div class="image-box">
-    <img src="assurance.jpg" alt="Assurance de l’O.S.D.9.T.D.J.">
+  <!-- ✅ Cadre fixe doré -->
+  <div class="frame-fixed" aria-hidden="true"></div>
+
+  <!-- ✅ Menu 3 points avec toutes les pages -->
+  <div class="top-menu" aria-label="Menu du site">
+    <details>
+      <summary title="Menu">⋯</summary>
+      <div class="menu-panel" role="menu" aria-label="Navigation">
+        <a href="index.html"> Accueil</a>
+        <a href="quinoussommes.html"> Qui nous sommes</a>
+        <a href="histoire.html"> Notre histoire</a>
+        <a href="activites.html"> Activités</a>
+        <a href="adhesion.html"> Adhésion</a>
+        <a href="commanderie.html"> Commanderie</a>
+        <a href="cotisations.html"> Cotisations</a>
+        <a href="assurance.html"> Assurance</a>
+        <a href="boutique.html"> Boutique</a>
+        <a href="statuts.html"> Statuts</a>
+        <a href="contact.html"> Contact</a>
+        <a href="mentions.html"> Informations officielles</a>
+        <a href="cookies.html"> Cookies</a>
+      </div>
+    </details>
   </div>
 
-  <h1>Assurance de l’Association</h1>
+  <!-- ✅ Tout défile dedans -->
+  <div class="viewport-scroll">
+    <div class="container">
 
-  <div class="box">
-    <div class="box-title">Page en cours de constitution</div>
+      <!-- Logo assurance -->
+      <div class="image-box">
+        <img src="assurance.jpg" alt="Assurance de l’O.S.D.9.T.D.J.">
+      </div>
 
-    <p>
-      Cette page est dédiée aux informations relatives à l’<strong>assurance</strong> et à la
-      <strong>responsabilité civile</strong> de l’Ordre Sacré des Neuf Templiers de Jérusalem
-      (<strong>O.S.D.9.T.D.J.</strong>).
-    </p>
+      <h1>Assurance de l’Association</h1>
 
-    <p>
-      À ce jour, les conditions définitives d’assurance de l’association sont
-      <strong>en cours d’étude</strong> et feront l’objet d’une validation avec notre
-      <strong>partenaire assureur Allianz</strong>.
-    </p>
+      <div class="box">
+        <div class="box-title">Page en cours de constitution</div>
 
-    <p>
-      La mise en place formelle du contrat de <span class="important">responsabilité civile associative</span>
-      est prévue <strong>au début de l’année 2026</strong>, conformément à l’évolution des activités,
-      des effectifs et des événements organisés par l’Ordre.
-    </p>
+        <p>
+          Cette page est dédiée aux informations relatives à l’<strong>assurance</strong> et à la
+          <strong>responsabilité civile</strong> de l’Ordre Sacré des Neuf Templiers de Jérusalem
+          (<strong>O.S.D.9.T.D.J.</strong>).
+        </p>
 
-    <p>
-      Dès la signature du contrat, cette page sera complétée par :
-    </p>
-    <ul>
-      <li>les références officielles du contrat d’assurance ;</li>
-      <li>la nature des garanties couvertes ;</li>
-      <li>le périmètre de responsabilité de l’association et de ses membres ;</li>
-      <li>les conditions d’application lors des activités et manifestations.</li>
-    </ul>
+        <p>
+          À ce jour, les conditions définitives d’assurance de l’association sont
+          <strong>en cours d’étude</strong> et feront l’objet d’une validation avec notre
+          <strong>partenaire assureur Allianz</strong>.
+        </p>
 
-    <p>
-      Les documents contractuels pourront être consultés directement sur cette page
-      une fois le contrat finalisé.
-    </p>
+        <p>
+          La mise en place formelle du contrat de <span class="important">responsabilité civile associative</span>
+          est prévue <strong>au début de l’année 2026</strong>, conformément à l’évolution des activités,
+          des effectifs et des événements organisés par l’Ordre.
+        </p>
 
-    <p>
-      <strong>Nous invitons donc les visiteurs et membres à revenir consulter cette page ultérieurement</strong>,
-      à compter de la mise à jour prévue en 2026.
-    </p>
+        <p>
+          Dès la signature du contrat, cette page sera complétée par :
+        </p>
+        <ul>
+          <li>les références officielles du contrat d’assurance ;</li>
+          <li>la nature des garanties couvertes ;</li>
+          <li>le périmètre de responsabilité de l’association et de ses membres ;</li>
+          <li>les conditions d’application lors des activités et manifestations.</li>
+        </ul>
+
+        <p>
+          Les documents contractuels pourront être consultés directement sur cette page
+          une fois le contrat finalisé.
+        </p>
+
+        <p>
+          <strong>Nous invitons donc les visiteurs et membres à revenir consulter cette page ultérieurement</strong>,
+          à compter de la mise à jour prévue en 2026.
+        </p>
+      </div>
+
+      <!-- ✅ Boutons gardés, mais en coulissant comme index -->
+      <nav class="tabs" aria-label="Navigation">
+        <a href="contact.html" class="tab">📞 Contact</a>
+        <a href="mentions.html" class="tab">Informations officielles</a>
+        <a href="index.html" class="tab">← Retour à l’accueil</a>
+      </nav>
+
+      <!-- Footer standardisé -->
+      <footer class="footer-min" aria-label="Pied de page">
+        <div class="line">
+          <span>© OSD9TDJ Association Loi 1901, Tous droits réservés</span>
+          <span class="sep">·</span>
+          <a href="cookies.html">cookies</a>
+          <span class="sep">·</span>
+          <a href="mentions.html">mentions légales</a>
+        </div>
+      </footer>
+
+    </div>
   </div>
 
-  <!-- Boutons -->
-  <div class="buttons">
-    <a href="contact.html" class="btn">📞 Être appelé par un membre / 📇 Contact</a>
-    <a href="mentions.html" class="btn">Informations officielles</a>
-    <a href="index.html" class="btn">← Retour à l’accueil</a>
-  </div>
-
-  <div class="footer">
-    © O.S.D.9.T.D.J. – Tous droits réservés
-  </div>
-
-</div>
 </body>
 </html>
