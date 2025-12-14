@@ -12,14 +12,14 @@
         content="Ordre Sacré des Neuf Templiers de Jérusalem, OSD9TDJ, Templiers, chevalerie moderne, association culturelle, ordre templier, Per Crucem Veritas">
   <link rel="canonical" href="https://osd9tdj.org/index.html">
 
-  <!-- Open Graph / Réseaux sociaux -->
+  <!-- Open Graph -->
   <meta property="og:title" content="Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J.">
   <meta property="og:description" content="Site officiel de l’Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J., association culturelle et chevaleresque à vocation internationale.">
   <meta property="og:image" content="https://osd9tdj.org/blason-osd9tdj.PNG">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://osd9tdj.org/index.html">
 
-  <!-- Twitter Card -->
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J.">
   <meta name="twitter:description" content="Site officiel de l’Ordre Sacré des Neuf Templiers de Jérusalem.">
@@ -28,7 +28,7 @@
   <!-- WATERMARK INVISIBLE -->
   <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-INDEX-OFFICIAL-HOMEPAGE">
 
-  <!-- Polices Google -->
+  <!-- Polices -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -37,19 +37,17 @@
     --clair: #fdf7e5;
   }
 
-  /* ✅ CADRE FIXE + SCROLL DEDANS */
   html, body{
     height:100%;
     margin:0;
     padding:0;
-    overflow:hidden; /* pas de scroll body */
+    overflow:hidden;
     font-family:'Lato', Arial, sans-serif;
     color:#ffffff;
     text-align:center;
     min-height:100vh;
   }
 
-  /* Fond drapeau */
   body::before {
     content: "";
     position: fixed;
@@ -59,7 +57,7 @@
     z-index: -2;
   }
 
-  /* ✅ Cadre fixe + 4 fleurs de lys */
+  /* ✅ Cadre fixe doré (SANS lys) */
   .frame-fixed{
     position:fixed;
     inset:14px;
@@ -72,21 +70,6 @@
     z-index:40;
   }
 
-  .lys{
-    position:absolute;
-    font-family:'Cinzel',serif;
-    font-weight:700;
-    font-size:18px;
-    color:var(--or);
-    opacity:0.55;
-    text-shadow:0 0 12px rgba(0,0,0,0.65);
-  }
-  .lys.tl{top:10px;left:12px;}
-  .lys.tr{top:10px;right:12px;}
-  .lys.bl{bottom:10px;left:12px;}
-  .lys.br{bottom:10px;right:12px;}
-
-  /* ✅ Zone qui défile à l'intérieur du cadre */
   .viewport-scroll{
     position:fixed;
     inset:22px;
@@ -96,19 +79,16 @@
     z-index:1;
   }
 
-  /* ✅ Menu 3 points (tout le menu déroulant) */
+  /* Menu 3 points */
   .top-menu{
     position:fixed;
     top:26px;
     right:26px;
     z-index:60;
-    pointer-events:auto;
   }
-  .top-menu details{ position:relative; }
   .top-menu summary{
     list-style:none;
     cursor:pointer;
-    user-select:none;
     width:46px;
     height:34px;
     display:grid;
@@ -117,25 +97,21 @@
     border:1px solid rgba(255,215,0,0.55);
     background:rgba(0,0,0,0.22);
     backdrop-filter: blur(6px);
-    box-shadow:0 6px 16px rgba(0,0,0,0.35);
     font-family:'Cinzel',serif;
     color:var(--or);
     font-size:22px;
-    line-height:1;
   }
-  .top-menu summary::-webkit-details-marker{ display:none; }
+  .top-menu summary::-webkit-details-marker{display:none;}
 
   .menu-panel{
     position:absolute;
     right:0;
     margin-top:10px;
     width:260px;
-    max-width:calc(100vw - 60px);
     border-radius:14px;
     border:1px solid rgba(255,215,0,0.45);
     background:rgba(0,0,0,0.70);
     box-shadow:0 18px 40px rgba(0,0,0,0.55);
-    overflow:hidden;
   }
   .menu-panel a{
     display:block;
@@ -147,183 +123,69 @@
     font-size:0.92rem;
     border-bottom:1px solid rgba(255,215,0,0.18);
   }
-  .menu-panel a:hover{
-    background:rgba(255,215,0,0.12);
-    color:#fff;
-  }
-  .menu-panel a:last-child{ border-bottom:none; }
+  .menu-panel a:hover{background:rgba(255,215,0,0.12);}
+  .menu-panel a:last-child{border-bottom:none;}
 
-  /* Voile de lisibilité (inchangé) */
-  .overlay {
-    min-height: 100vh;
-    padding: 30px 15px 20px;
-    box-sizing: border-box;
-    background: radial-gradient(circle at top,
-      rgba(0, 0, 0, 0.25),
-      rgba(0, 0, 0, 0.85));
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .overlay{
+    min-height:100vh;
+    padding:30px 15px 20px;
+    background:radial-gradient(circle at top, rgba(0,0,0,0.25), rgba(0,0,0,0.85));
+    display:flex;
+    flex-direction:column;
+    align-items:center;
   }
 
-  /* Menu onglets (inchangé) */
-  .tabs {
-    margin-top: 15px;
-    margin-bottom: 25px;
-    display: inline-flex;
-    border-radius: 999px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 215, 0, 0.6);
-    backdrop-filter: blur(6px);
-
-    max-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+  .tabs{
+    margin:15px 0 25px;
+    display:inline-flex;
+    border-radius:999px;
+    border:1px solid rgba(255,215,0,0.6);
+    overflow-x:auto;
   }
-  .tabs::-webkit-scrollbar { display: none; }
+  .tab{
+    padding:10px 18px;
+    text-decoration:none;
+    color:var(--clair);
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    background:rgba(0,0,0,0.45);
+    white-space:nowrap;
+  }
+  .tab + .tab{border-left:1px solid rgba(255,215,0,0.4);}
 
-  .tab {
-    padding: 10px 18px;
-    text-decoration: none;
-    color: var(--clair);
-    font-size: 0.95rem;
-    font-weight: 700;
-    font-family: 'Cinzel', serif;
-    background: rgba(0, 0, 0, 0.45);
-    transition: background 0.2s ease, color 0.2s ease;
-    white-space: nowrap;
-    flex: 0 0 auto;
+  .blason-box{
+    padding:18px;
+    margin:25px 0 18px;
+    border:2px solid var(--or);
+    border-radius:18px;
+    background:radial-gradient(circle at top, rgba(255,215,0,0.35), rgba(0,0,0,0.95));
   }
 
-  .tab + .tab { border-left: 1px solid rgba(255, 215, 0, 0.4); }
+  .blason-img{width:340px;max-width:85vw;}
 
-  .tab:hover {
-    background: rgba(255, 215, 0, 0.20);
-    color: #ffffff;
-  }
+  h1{font-family:'Cinzel',serif;font-size:2rem;margin:10px 0 6px;}
+  .subtitle{font-size:1rem;margin-bottom:15px;}
 
-  /* Blason central (inchangé) */
-  .blason-box {
-    display: inline-block;
-    padding: 18px;
-    margin-top: 25px;
-    margin-bottom: 18px;
-    background: radial-gradient(circle at top,
-      rgba(255, 215, 0, 0.35),
-      rgba(0, 0, 0, 0.95));
-    border: 2px solid var(--or);
-    border-radius: 18px;
-    box-shadow: 0 0 28px rgba(0, 0, 0, 0.8);
-  }
-
-  .blason-img {
-    width: 340px;
-    max-width: 85vw;
-    height: auto;
-  }
-
-  h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 2rem;
-    margin: 10px 0 6px;
-    text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
-  }
-
-  .subtitle {
-    font-size: 1rem;
-    margin: 0 0 15px;
-    opacity: 0.95;
-  }
-
-  /* ✅ Signature nnDnn (comme les autres pages) */
   .nndnn-banner{
-    margin: 18px auto 10px;
     display:flex;
     align-items:center;
-    justify-content:center;
     gap:16px;
-    flex-wrap:nowrap;
-    text-align:center;
+    margin:18px 0 10px;
   }
-  .nndnn-banner img{
-    height:48px;
-    width:auto;
-    display:block;
-    filter: drop-shadow(0 0 10px rgba(0,0,0,0.85));
-    opacity:0.96;
-  }
+  .nndnn-banner img{height:48px;}
   .nndnn-text{
     font-family:'Cinzel',serif;
     color:var(--or);
-    font-weight:700;
-    letter-spacing:0.18em;
-    text-transform:none;
     font-size:2.05rem;
-    line-height:1;
-    text-shadow:0 0 14px rgba(0,0,0,0.9);
-    white-space:nowrap;
+    letter-spacing:0.18em;
   }
 
-  /* ✅ Pied de page : ligne copyright complète */
-  .footer {
-    margin-top: auto;
-    padding-top: 15px;
-    font-size: 0.8rem;
-    opacity: 0.92;
-    line-height: 1.35rem;
-    width:100%;
-    max-width: 980px;
-    border-top: 1px solid rgba(255,215,0,0.22);
-  }
-
-  .footer .line{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    align-items:center;
-    justify-content:center;
-    font-size:0.78rem;
-    color: rgba(253,247,229,0.88);
-  }
-
-  .footer a{
-    color: rgba(253,247,229,0.85) !important;
-    text-decoration:none !important;
-    border-bottom: 1px dotted rgba(255,215,0,0.55);
-    padding-bottom: 1px;
-    font-size:0.72rem;
-    letter-spacing:0.02em;
-    text-transform: lowercase;
-  }
-  .footer a:hover{
-    color:#fff !important;
-    border-bottom-color: rgba(255,215,0,0.95);
-  }
-  .sep{ opacity:0.55; }
-
-  .legal-line {
-    margin-top: 14px;
-    font-size: 0.75rem;
-    opacity: 0.92;
-    line-height: 1.35rem;
-    text-align:center;
-  }
-  .legal-line a{
-    color:#ffffff !important;
-    border-bottom: 1px dotted rgba(255,215,0,0.55);
-  }
-
-  @media (max-width: 480px) {
-    h1 { font-size: 1.6rem; }
-    .subtitle { font-size: 0.95rem; }
-    .tab { padding: 8px 12px; font-size: 0.85rem; }
-    .top-menu{ top:22px; right:22px; }
-    .menu-panel{ width:240px; }
-    .frame-fixed{ inset:12px; }
-    .viewport-scroll{ inset:20px; }
-    .nndnn-banner{ gap:10px; }
-    .nndnn-banner img{ height:42px; }
-    .nndnn-text{ font-size:1.55rem; }
+  .footer{
+    margin-top:auto;
+    padding-top:15px;
+    font-size:0.8rem;
+    border-top:1px solid rgba(255,215,0,0.22);
+    max-width:980px;
   }
   </style>
 
@@ -334,35 +196,28 @@
 
 <body>
 
+  <!-- Cadre fixe doré (sans lys) -->
+  <div class="frame-fixed" aria-hidden="true"></div>
 
-
-  <!-- ✅ Menu 3 points (tout le site) -->
-  <div class="top-menu" aria-label="Menu du site">
+  <!-- Menu 3 points -->
+  <div class="top-menu">
     <details>
-      <summary title="Menu">⋯</summary>
-      <div class="menu-panel" role="menu" aria-label="Navigation">
+      <summary>⋯</summary>
+      <div class="menu-panel">
         <a href="index.html"> Accueil</a>
         <a href="quinoussommes.html"> Qui nous sommes</a>
         <a href="histoire.html"> Notre histoire</a>
         <a href="activites.html"> Activités</a>
         <a href="adhesion.html"> Adhésion</a>
-        <a href="commanderie.html"> Commanderie</a>
-        <a href="cotisations.html"> Cotisations</a>
-        <a href="assurance.html"> Assurance</a>
         <a href="boutique.html"> Boutique</a>
-        <a href="statuts.html"> Statuts</a>
         <a href="contact.html"> Contact</a>
-        <a href="mentions.html"> Mentions légales</a>
-        <a href="cookies.html"> Cookies</a>
       </div>
     </details>
   </div>
 
-  <!-- ✅ Tout défile dedans -->
   <div class="viewport-scroll">
     <div class="overlay">
 
-      <!-- MENU (ONGLETS) : inchangé sauf le bouton Contact -->
       <nav class="tabs">
         <a href="activites.html" class="tab">Nos évènements</a>
         <a href="quinoussommes.html" class="tab">Qui nous sommes</a>
@@ -370,47 +225,21 @@
         <a href="contact.html" class="tab">📞 Contact</a>
       </nav>
 
-      <!-- BLASON -->
       <div class="blason-box">
-        <img src="blason-osd9tdj.PNG"
-             alt="Blason de l’Ordre Sacré des Neuf Templiers de Jérusalem"
-             class="blason-img">
+        <img src="blason-osd9tdj.PNG" class="blason-img" alt="Blason OSD9TDJ">
       </div>
 
       <h1>Ordre Sacré des Neuf Templiers de Jérusalem</h1>
       <p class="subtitle">Site officiel de l’O.S.D.9.T.D.J.</p>
 
-      <!-- ✅ Signature nnDnn -->
-      <div class="nndnn-banner" aria-label="Signature templière nnDnn">
-        <img src="croix.epee.PNG" alt="Épée – symbole">
+      <div class="nndnn-banner">
+        <img src="croix.epee.PNG" alt="">
         <div class="nndnn-text">nnDnn</div>
-        <img src="croix.epee.PNG" alt="Épée – symbole">
+        <img src="croix.epee.PNG" alt="">
       </div>
 
-      <!-- BAS DE PAGE -->
       <div class="footer">
-        <div class="line">
-          <span>© OSD9TDJ Association Loi 1901, Tous droits réservés</span>
-          <span class="sep">·</span>
-          <a href="cookies.html">cookies</a>
-          <span class="sep">·</span>
-          <a href="mentions.html">mentions légales</a>
-        </div>
-
-        <div class="legal-line">
-          <strong>SIREN :</strong>
-          <a href="https://www.societe.com/societe/939461133" target="_blank" rel="noopener noreferrer">
-            939&nbsp;461&nbsp;133
-          </a><br>
-          <strong>SIRET (siège) :</strong>
-          939&nbsp;461&nbsp;133&nbsp;00034<br>
-          <strong>Code APE :</strong>
-          94.99Z<br>
-          <strong>N° RNA :</strong>
-          W744007354<br>
-          <strong>Nature :</strong>
-          Organisation à vocation internationale<br>
-        </div>
+        © OSD9TDJ Association Loi 1901 — Tous droits réservés
       </div>
 
     </div>
