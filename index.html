@@ -235,6 +235,35 @@
     opacity: 0.95;
   }
 
+  /* ✅ Signature nnDnn (comme les autres pages) */
+  .nndnn-banner{
+    margin: 18px auto 10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    flex-wrap:nowrap;
+    text-align:center;
+  }
+  .nndnn-banner img{
+    height:48px;
+    width:auto;
+    display:block;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.85));
+    opacity:0.96;
+  }
+  .nndnn-text{
+    font-family:'Cinzel',serif;
+    color:var(--or);
+    font-weight:700;
+    letter-spacing:0.18em;
+    text-transform:none;
+    font-size:2.05rem;
+    line-height:1;
+    text-shadow:0 0 14px rgba(0,0,0,0.9);
+    white-space:nowrap;
+  }
+
   /* ✅ Pied de page : ligne copyright complète */
   .footer {
     margin-top: auto;
@@ -292,6 +321,9 @@
     .menu-panel{ width:240px; }
     .frame-fixed{ inset:12px; }
     .viewport-scroll{ inset:20px; }
+    .nndnn-banner{ gap:10px; }
+    .nndnn-banner img{ height:42px; }
+    .nndnn-text{ font-size:1.55rem; }
   }
   </style>
 
@@ -315,19 +347,19 @@
     <details>
       <summary title="Menu">⋯</summary>
       <div class="menu-panel" role="menu" aria-label="Navigation">
-        <a href="index.html">🏠 Accueil</a>
-        <a href="quinoussommes.html">👥 Qui nous sommes</a>
-        <a href="histoire.html">📜 Notre histoire</a>
-        <a href="activites.html">📌 Activités</a>
-        <a href="adhesion.html">📝 Adhésion</a>
-        <a href="commanderie.html">🏰 Commanderie</a>
-        <a href="cotisations.html">💶 Cotisations</a>
-        <a href="assurance.html">🛡️ Assurance</a>
-        <a href="boutique.html">🛒 Boutique</a>
-        <a href="statuts.html">📄 Statuts</a>
-        <a href="contact.html">📞 Contact</a>
-        <a href="mentions.html">⚖️ Mentions légales</a>
-        <a href="cookies.html">🍪 Cookies</a>
+        <a href="index.html"> Accueil</a>
+        <a href="quinoussommes.html"> Qui nous sommes</a>
+        <a href="histoire.html"> Notre histoire</a>
+        <a href="activites.html"> Activités</a>
+        <a href="adhesion.html"> Adhésion</a>
+        <a href="commanderie.html"> Commanderie</a>
+        <a href="cotisations.html"> Cotisations</a>
+        <a href="assurance.html"> Assurance</a>
+        <a href="boutique.html"> Boutique</a>
+        <a href="statuts.html"> Statuts</a>
+        <a href="contact.html"> Contact</a>
+        <a href="mentions.html"> Mentions légales</a>
+        <a href="cookies.html"> Cookies</a>
       </div>
     </details>
   </div>
@@ -353,6 +385,13 @@
 
       <h1>Ordre Sacré des Neuf Templiers de Jérusalem</h1>
       <p class="subtitle">Site officiel de l’O.S.D.9.T.D.J.</p>
+
+      <!-- ✅ Signature nnDnn -->
+      <div class="nndnn-banner" aria-label="Signature templière nnDnn">
+        <img src="croix.epee.PNG" alt="Épée – symbole">
+        <div class="nndnn-text">nnDnn</div>
+        <img src="croix.epee.PNG" alt="Épée – symbole">
+      </div>
 
       <!-- BAS DE PAGE -->
       <div class="footer">
