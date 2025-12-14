@@ -45,11 +45,10 @@
       --card: rgba(0,0,0,0.18);
       --card2: rgba(0,0,0,0.10);
 
-      /* ✅ Cadre / Lys (DÉCORATIF, NON INTRUSIF) */
       --frame-inset: 10px;
       --frame-radius: 22px;
       --lys-size: 22px;
-      --lys-opacity: 0.30;
+      --lys-opacity: 0.32;
     }
 
     body {
@@ -59,10 +58,10 @@
       color: var(--clair);
       text-align: center;
       background: radial-gradient(circle at top, #3a2513, var(--fond) 70%);
-      overflow-x: hidden; /* ✅ normal, on ne bloque pas le scroll vertical */
+      overflow-x: hidden;
     }
 
-    /* ✅ Cadre FIXE mais derrière (ne casse pas ton rendu) */
+    /* Cadre FIXE décoratif (derrière) */
     body::after{
       content:"";
       position: fixed;
@@ -76,23 +75,23 @@
       z-index: 0;
     }
 
-    /* ✅ Lys fixes aux angles, derrière le contenu */
+    /* ✅ Lys FIXES visibles (z-index sûr) */
     .lys-corner{
       position: fixed;
       width: var(--lys-size);
       height: var(--lys-size);
       object-fit: contain;
       opacity: var(--lys-opacity);
-      filter: drop-shadow(0 0 10px rgba(0,0,0,0.55));
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.45));
       pointer-events: none;
-      z-index: 0;
+      z-index: 2; /* ✅ au-dessus du cadre, mais sous le menu */
     }
-    .lys-tl{ top: calc(var(--frame-inset) + 10px); left: calc(var(--frame-inset) + 10px); }
-    .lys-tr{ top: calc(var(--frame-inset) + 10px); right: calc(var(--frame-inset) + 10px); }
-    .lys-bl{ bottom: calc(var(--frame-inset) + 10px); left: calc(var(--frame-inset) + 10px); }
-    .lys-br{ bottom: calc(var(--frame-inset) + 10px); right: calc(var(--frame-inset) + 10px); }
+    .lys-tl{ top: calc(var(--frame-inset) + 12px); left: calc(var(--frame-inset) + 12px); }
+    .lys-tr{ top: calc(var(--frame-inset) + 12px); right: calc(var(--frame-inset) + 12px); }
+    .lys-bl{ bottom: calc(var(--frame-inset) + 12px); left: calc(var(--frame-inset) + 12px); }
+    .lys-br{ bottom: calc(var(--frame-inset) + 12px); right: calc(var(--frame-inset) + 12px); }
 
-    /* ✅ Menu “points dorés” discret en haut (fixe) */
+    /* Menu ⋯ discret */
     .gold-menu{
       position: fixed;
       top: 14px;
@@ -100,7 +99,6 @@
       z-index: 9999;
       font-family: 'Cinzel', serif;
     }
-    .gold-menu details{ position: relative; }
     .gold-menu summary{
       list-style:none;
       cursor:pointer;
@@ -151,7 +149,6 @@
       color: #fff;
     }
 
-    /* ✅ Contenu au-dessus du décor */
     .container {
       min-height: 100vh;
       box-sizing: border-box;
@@ -160,7 +157,7 @@
       flex-direction: column;
       align-items: center;
       position: relative;
-      z-index: 1;
+      z-index: 3; /* ✅ contenu au-dessus des lys/cadre */
     }
 
     .image-box {
@@ -171,8 +168,6 @@
       box-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
       border: 2px solid rgba(214, 167, 40, 0.85);
     }
-
-    /* IMAGE RÉDUITE */
     .image-box img {
       display: block;
       max-width: 84vw;
@@ -185,7 +180,6 @@
       font-size: 1.95rem;
       margin: 10px 0 6px;
     }
-
     h2 {
       font-family: 'Cinzel', serif;
       font-size: 1.22rem;
@@ -193,29 +187,23 @@
       font-weight: normal;
       opacity: 0.9;
     }
-
     strong { font-weight: 700; }
 
-    /* BLOCS PLUS AÉRÉS + PLUS LISIBLE */
     .section-card{
       width: 100%;
       max-width: 920px;
       margin: 22px auto;
       padding: 22px 22px;
       text-align: justify;
-
       background: linear-gradient(180deg, var(--card), var(--card2));
       border-radius: 20px;
       border: 1px solid var(--or-line);
-
       box-shadow:
         0 8px 22px rgba(0,0,0,0.45),
         0 0 0 1px rgba(0,0,0,0.14) inset;
-
       position: relative;
       overflow: hidden;
     }
-
     .section-card::before{
       content:"";
       position:absolute;
@@ -226,7 +214,6 @@
       pointer-events:none;
       opacity: 0.95;
     }
-
     .section-card.alt{
       background: linear-gradient(180deg, rgba(0,0,0,0.20), rgba(0,0,0,0.12));
       border-color: var(--or-line2);
@@ -374,7 +361,6 @@
     }
     .sep{ opacity:0.55; }
 
-    /* ✅ Signature nnDnn */
     .nndnn-banner{
       margin:26px auto 6px;
       display:flex;
@@ -447,10 +433,7 @@
       .nndnn-banner{gap:10px;}
       .nndnn-banner img{height:42px;}
       .nndnn-text{font-size:1.55rem;}
-      :root{
-        --lys-size: 20px;
-        --lys-opacity: 0.26;
-      }
+      :root{ --lys-size: 20px; --lys-opacity: 0.28; }
     }
   </style>
 
@@ -461,13 +444,13 @@
 
 <body>
 
-  <!-- ✅ Lys fixes (décor) -->
-  <img class="lys-corner lys-tl" src="lys.PNG" alt="">
-  <img class="lys-corner lys-tr" src="lys.PNG" alt="">
-  <img class="lys-corner lys-bl" src="lys.PNG" alt="">
-  <img class="lys-corner lys-br" src="lys.PNG" alt="">
+  <!-- ✅ Lys (BON NOM + anti-cache) -->
+  <img class="lys-corner lys-tl" src="./lys.PNG?v=1" alt="">
+  <img class="lys-corner lys-tr" src="./lys.PNG?v=1" alt="">
+  <img class="lys-corner lys-bl" src="./lys.PNG?v=1" alt="">
+  <img class="lys-corner lys-br" src="./lys.PNG?v=1" alt="">
 
-  <!-- ✅ Menu discret “points dorés” -->
+  <!-- Menu ⋯ -->
   <nav class="gold-menu" aria-label="Menu principal">
     <details>
       <summary aria-label="Ouvrir le menu"><span>⋯</span></summary>
@@ -617,12 +600,10 @@
       <img src="croix.epee.PNG" alt="Épée – symbole">
     </div>
 
-    <!-- Bouton "Notre histoire" -->
     <div class="big-history-wrap">
       <a class="big-history-btn" href="histoire.html">📜 Notre histoire</a>
     </div>
 
-    <!-- Menu bas -->
     <nav class="tabs" aria-label="Navigation bas de page">
       <a class="tab" href="index.html">🏠 Accueil</a>
       <a class="tab" href="contact.html">📞 Contact</a>
