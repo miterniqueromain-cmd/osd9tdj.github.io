@@ -32,18 +32,26 @@
     :root {
       --or: #d6a728;
       --clair: #f5f0e6;
+
+      --or-line: rgba(214,167,40,0.55);
+
+      /* encadrés argentés très fins */
+      --silver-border: rgba(220,220,220,0.24);
+      --silver-bg: rgba(255,255,255,0.04);
     }
 
-    body {
-      margin: 0;
-      padding: 0;
+    /* ✅ CADRE FIXE + SCROLL DEDANS */
+    html, body{
+      height:100%;
+      margin:0;
+      padding:0;
+      overflow:hidden;
       font-family: 'Lato', Arial, sans-serif;
       color: var(--clair);
       text-align: center;
       min-height: 100vh;
       background: radial-gradient(circle at top, #1b1b1b, #020202 70%);
       position: relative;
-      overflow-x: hidden;
     }
 
     body::before {
@@ -54,10 +62,91 @@
       z-index: -1;
     }
 
-    .container {
-      min-height: 100vh;
+    .frame-fixed{
+      position: fixed;
+      inset: 14px;
+      border-radius: 22px;
+      border: 2px solid var(--or-line);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.08) inset,
+        0 0 38px rgba(0,0,0,0.40);
+      pointer-events: none;
+      z-index: 40;
+    }
+
+    .viewport-scroll{
+      position: fixed;
+      inset: 22px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+      padding: 30px 15px 44px;
       box-sizing: border-box;
-      padding: 30px 15px 35px;
+    }
+
+    /* ✅ menu 3 points (TOUTES PAGES) */
+    .top-menu{
+      position: fixed;
+      top: 26px;
+      right: 26px;
+      z-index: 60;
+      pointer-events: auto;
+    }
+    .top-menu details{
+      position: relative;
+    }
+    .top-menu summary{
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      width: 46px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(214,167,40,0.55);
+      background: rgba(0,0,0,0.22);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+      font-family:'Cinzel',serif;
+      color: var(--or);
+      font-size: 22px;
+      line-height: 1;
+    }
+    .top-menu summary::-webkit-details-marker{ display:none; }
+
+    .menu-panel{
+      position: absolute;
+      right: 0;
+      margin-top: 10px;
+      width: 260px;
+      max-width: calc(100vw - 60px);
+      border-radius: 14px;
+      border: 1px solid rgba(214,167,40,0.45);
+      background: rgba(0,0,0,0.70);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+      overflow: hidden;
+    }
+    .menu-panel a{
+      display:block;
+      padding: 11px 12px;
+      text-decoration:none;
+      color: rgba(245,240,230,0.92);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(214,167,40,0.18);
+    }
+    .menu-panel a:hover{
+      background: rgba(214,167,40,0.12);
+      color: #fff;
+    }
+    .menu-panel a:last-child{ border-bottom: none; }
+
+    .container {
+      min-height: auto;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -119,36 +208,37 @@
       text-decoration: underline;
     }
 
-    .back-link {
-      text-decoration: none;
-      color: var(--clair);
-      font-size: 0.95rem;
-      padding: 8px 16px;
-      border-radius: 999px;
-      border: 1px solid var(--or);
-      font-family: 'Cinzel', serif;
-      transition: background 0.2s ease, color 0.2s ease;
-      display: inline-block;
+    .footer-min{
+      margin-top: 26px;
+      padding-top: 14px;
+      width: 100%;
+      max-width: 980px;
+      border-top: 1px solid rgba(214,167,40,0.22);
+      opacity: 0.92;
     }
-
-    .back-link:hover {
-      background: var(--or);
-      color: #120702;
+    .footer-min .line{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      font-size:0.78rem;
+      color: rgba(245,240,230,0.85);
     }
-
-    .contact-buttons {
-      margin-top: 22px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
+    .footer-min a{
+      font-size:0.72rem;
+      text-transform: lowercase;
+      letter-spacing: 0.02em;
+      color: rgba(245,240,230,0.78);
+      text-decoration:none;
+      border-bottom: 1px dotted rgba(214,167,40,0.55);
+      padding-bottom: 1px;
     }
-
-    .footer {
-      margin-top: 22px;
-      font-size: 0.78rem;
-      opacity: 0.85;
+    .footer-min a:hover{
+      color:#fff;
+      border-bottom-color: rgba(214,167,40,0.95);
     }
+    .sep{ opacity:0.55; }
 
     .box {
       max-width: 950px;
@@ -181,11 +271,32 @@
       border-radius: 6px;
     }
 
+    /* ✅ Encadrés argentés très fins (aération sans changer les mots) */
+    .silver-box{
+      width: 100%;
+      max-width: 950px;
+      margin: 10px auto;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--silver-border);
+      background: var(--silver-bg);
+      box-shadow: 0 0 14px rgba(0,0,0,0.55);
+      text-align: left;
+    }
+    .silver-box p, .silver-box ul{
+      margin: 0;
+    }
+
     @media (max-width: 600px) {
       h1 { font-size: 1.6rem; }
       h2 { font-size: 1.05rem; }
       p  { font-size: 0.95rem; }
       .box-title { font-size: 0.96rem; }
+      .top-menu{ top:22px; right:22px; }
+      .menu-panel{ width: 240px; }
+      .frame-fixed{ inset: 12px; }
+      .viewport-scroll{ inset: 20px; }
+      .silver-box{ padding: 11px 12px; }
     }
   </style>
 
@@ -195,85 +306,133 @@
 </head>
 
 <body>
-<div class="container">
 
-  <!-- Sceau officiel -->
-  <div class="sceau-box">
-    <img src="sceau-osd9tdj.PNG" alt="Sceau officiel de l’O.S.D.9.T.D.J.">
+  <!-- ✅ Cadre fixe doré -->
+  <div class="frame-fixed" aria-hidden="true"></div>
+
+  <!-- ✅ Menu 3 points avec toutes les pages -->
+  <div class="top-menu" aria-label="Menu du site">
+    <details>
+      <summary title="Menu">⋯</summary>
+      <div class="menu-panel" role="menu" aria-label="Navigation">
+        <a href="index.html"> Accueil</a>
+        <a href="quinoussommes.html"> Qui nous sommes</a>
+        <a href="histoire.html"> Notre histoire</a>
+        <a href="activites.html"> Activités</a>
+        <a href="adhesion.html"> Adhésion</a>
+        <a href="commanderie.html"> Commanderie</a>
+        <a href="cotisations.html"> Cotisations</a>
+        <a href="assurance.html"> Assurance</a>
+        <a href="boutique.html"> Boutique</a>
+        <a href="statuts.html"> Statuts</a>
+        <a href="contact.html"> Contact</a>
+        <a href="mentions.html"> Informations officielles</a>
+        <a href="cookies.html"> Cookies</a>
+      </div>
+    </details>
   </div>
 
-  <h1>Cookies</h1>
+  <!-- ✅ Tout défile dedans -->
+  <div class="viewport-scroll">
+    <div class="container">
 
-  <div class="box">
-    <div class="box-title">Information générale</div>
-    <p class="note">
-      Cette page explique l’utilisation des <strong>cookies</strong> et éléments techniques sur le site
-      de l’<strong>Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</strong>.
-      Le site est conçu de manière <strong>sobre</strong>, et n’a pas vocation à effectuer un suivi commercial
-      des visiteurs.
-    </p>
+      <!-- Sceau officiel -->
+      <div class="sceau-box">
+        <img src="sceau-osd9tdj.PNG" alt="Sceau officiel de l’O.S.D.9.T.D.J.">
+      </div>
+
+      <h1>Cookies</h1>
+
+      <div class="box">
+        <div class="box-title">Information générale</div>
+        <p class="note">
+          Cette page explique l’utilisation des <strong>cookies</strong> et éléments techniques sur le site
+          de l’<strong>Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</strong>.
+          Le site est conçu de manière <strong>sobre</strong>, et n’a pas vocation à effectuer un suivi commercial
+          des visiteurs.
+        </p>
+      </div>
+
+      <h2>1 – Qu’est-ce qu’un cookie ?</h2>
+      <div class="silver-box">
+        <p>
+          Un cookie est un petit fichier texte déposé sur votre appareil (ordinateur, tablette, téléphone)
+          lors de la consultation d’un site internet. Il permet notamment de mémoriser certaines informations
+          de navigation (par exemple la langue, une préférence d’affichage, ou le bon fonctionnement d’un service).
+        </p>
+      </div>
+
+      <h2>2 – Cookies susceptibles d’être utilisés sur ce site</h2>
+      <div class="silver-box">
+        <p>
+          Le site de l’O.S.D.9.T.D.J. peut utiliser uniquement des cookies et éléments techniques nécessaires :
+        </p>
+      </div>
+      <div class="silver-box">
+        <ul>
+          <li><strong>Cookies de fonctionnement</strong> liés à la navigation (chargement des pages, sécurité, stabilité).</li>
+          <li><strong>Éléments techniques</strong> fournis par des services tiers si vous y accédez (par exemple un formulaire externe).</li>
+          <li><strong>Statistiques globales</strong> : si un outil de mesure d’audience est activé, il est destiné à obtenir des données
+            <strong>agrégées</strong> (volume de visites, pages consultées), sans objectif publicitaire.</li>
+        </ul>
+      </div>
+
+      <h2>3 – Ce que nous ne faisons pas</h2>
+      <div class="silver-box">
+        <p>
+          Nous ne mettons pas en place de profilage commercial et nous ne vendons pas les données de navigation.
+          Le site n’a pas pour objectif d’afficher de la publicité ciblée.
+        </p>
+      </div>
+
+      <h2>4 – Gestion des cookies par votre navigateur</h2>
+      <div class="silver-box">
+        <p>
+          Vous pouvez à tout moment configurer votre navigateur pour :
+        </p>
+      </div>
+      <div class="silver-box">
+        <ul>
+          <li>accepter ou refuser les cookies ;</li>
+          <li>supprimer les cookies déjà enregistrés ;</li>
+          <li>être informé lors du dépôt d’un cookie.</li>
+        </ul>
+      </div>
+      <div class="silver-box">
+        <p>
+          La désactivation de certains cookies de fonctionnement peut toutefois altérer l’affichage ou la navigation.
+        </p>
+      </div>
+
+      <h2>5 – Liens utiles (à titre pratique)</h2>
+      <div class="silver-box">
+        <p>
+          Les procédures varient selon votre navigateur. En général, elles se trouvent dans les menus :
+          <code>Paramètres</code> / <code>Confidentialité</code> / <code>Cookies</code>.
+        </p>
+      </div>
+
+      <h2>6 – Contact</h2>
+      <div class="silver-box">
+        <p>
+          Pour toute question relative à cette page ou à la confidentialité, vous pouvez nous contacter via la page :
+          <a href="contact.html">Contact</a>.
+        </p>
+      </div>
+
+      <!-- Footer standardisé -->
+      <footer class="footer-min" aria-label="Pied de page">
+        <div class="line">
+          <span>© OSD9TDJ Association Loi 1901, Tous droits réservés</span>
+          <span class="sep">·</span>
+          <a href="cookies.html">cookies</a>
+          <span class="sep">·</span>
+          <a href="mentions.html">mentions légales</a>
+        </div>
+      </footer>
+
+    </div>
   </div>
 
-  <h2>1 – Qu’est-ce qu’un cookie ?</h2>
-  <p>
-    Un cookie est un petit fichier texte déposé sur votre appareil (ordinateur, tablette, téléphone)
-    lors de la consultation d’un site internet. Il permet notamment de mémoriser certaines informations
-    de navigation (par exemple la langue, une préférence d’affichage, ou le bon fonctionnement d’un service).
-  </p>
-
-  <h2>2 – Cookies susceptibles d’être utilisés sur ce site</h2>
-  <p>
-    Le site de l’O.S.D.9.T.D.J. peut utiliser uniquement des cookies et éléments techniques nécessaires :
-  </p>
-  <ul>
-    <li><strong>Cookies de fonctionnement</strong> liés à la navigation (chargement des pages, sécurité, stabilité).</li>
-    <li><strong>Éléments techniques</strong> fournis par des services tiers si vous y accédez (par exemple un formulaire externe).</li>
-    <li><strong>Statistiques globales</strong> : si un outil de mesure d’audience est activé, il est destiné à obtenir des données
-      <strong>agrégées</strong> (volume de visites, pages consultées), sans objectif publicitaire.</li>
-  </ul>
-
-  <h2>3 – Ce que nous ne faisons pas</h2>
-  <p>
-    Nous ne mettons pas en place de profilage commercial et nous ne vendons pas les données de navigation.
-    Le site n’a pas pour objectif d’afficher de la publicité ciblée.
-  </p>
-
-  <h2>4 – Gestion des cookies par votre navigateur</h2>
-  <p>
-    Vous pouvez à tout moment configurer votre navigateur pour :
-  </p>
-  <ul>
-    <li>accepter ou refuser les cookies ;</li>
-    <li>supprimer les cookies déjà enregistrés ;</li>
-    <li>être informé lors du dépôt d’un cookie.</li>
-  </ul>
-  <p>
-    La désactivation de certains cookies de fonctionnement peut toutefois altérer l’affichage ou la navigation.
-  </p>
-
-  <h2>5 – Liens utiles (à titre pratique)</h2>
-  <p>
-    Les procédures varient selon votre navigateur. En général, elles se trouvent dans les menus :
-    <code>Paramètres</code> / <code>Confidentialité</code> / <code>Cookies</code>.
-  </p>
-
-  <h2>6 – Contact</h2>
-  <p>
-    Pour toute question relative à cette page ou à la confidentialité, vous pouvez nous contacter via la page :
-    <a href="contact.html">Contact</a>.
-  </p>
-
-  <!-- BOUTONS BAS DE PAGE -->
-  <div class="contact-buttons">
-    <a href="contact.html" class="back-link">📞 Être appelé par un membre / 📇 Contact</a>
-    <a href="mentions.html" class="back-link">← Informations officielles</a>
-    <a href="index.html" class="back-link">← Retour à l’accueil</a>
-  </div>
-
-  <div class="footer">
-    © O.S.D.9.T.D.J. – Tous droits réservés
-  </div>
-
-</div>
 </body>
 </html>
