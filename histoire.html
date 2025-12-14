@@ -56,15 +56,17 @@
 
     *{box-sizing:border-box;}
 
-    body{
+    /* ✅ CADRE FIXE + SCROLL DEDANS (body ne scrolle plus) */
+    html, body{
+      height:100%;
       margin:0;
       padding:0;
+      overflow:hidden; /* ✅ important */
       font-family:'Lato',Arial,sans-serif;
       color:var(--clair);
       background:
         radial-gradient(circle at top, rgba(255,255,255,0.06), rgba(0,0,0,0) 35%),
         radial-gradient(circle at top, var(--fond1), var(--fond2) 72%);
-      overflow-x:hidden;
     }
 
     body::before{
@@ -78,6 +80,102 @@
       pointer-events:none;
       z-index:-1;
     }
+
+    /* ✅ Cadre fixe */
+    .frame-fixed{
+      position: fixed;
+      inset: 14px;
+      border-radius: 22px;
+      border: 2px solid rgba(214,167,40,0.55);
+      box-shadow:
+        0 0 0 1px rgba(248,232,200,0.16) inset,
+        0 0 38px rgba(0,0,0,0.35);
+      pointer-events: none;
+      z-index: 40;
+    }
+
+    /* ✅ 4 fleurs de lys (UNICODE) */
+    .lys{
+      position:absolute;
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size: 18px;
+      color: var(--or);
+      opacity: 0.55;
+      text-shadow: 0 0 12px rgba(0,0,0,0.65);
+    }
+    .lys.tl{ top:10px; left:12px; }
+    .lys.tr{ top:10px; right:12px; }
+    .lys.bl{ bottom:10px; left:12px; }
+    .lys.br{ bottom:10px; right:12px; }
+
+    /* ✅ Zone scroll interne */
+    .viewport-scroll{
+      position: fixed;
+      inset: 22px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+    }
+
+    /* ✅ Menu 3 points */
+    .top-menu{
+      position: fixed;
+      top: 26px;
+      right: 26px;
+      z-index: 60;
+      pointer-events: auto;
+    }
+    .top-menu details{ position: relative; }
+    .top-menu summary{
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      width: 46px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(214,167,40,0.55);
+      background: rgba(0,0,0,0.22);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+      font-family:'Cinzel',serif;
+      color: var(--or);
+      font-size: 22px;
+      line-height: 1;
+    }
+    .top-menu summary::-webkit-details-marker{ display:none; }
+    .menu-panel{
+      position: absolute;
+      right: 0;
+      margin-top: 10px;
+      width: 260px;
+      max-width: calc(100vw - 60px);
+      border-radius: 14px;
+      border: 1px solid rgba(214,167,40,0.45);
+      background: rgba(0,0,0,0.70);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+      overflow: hidden;
+    }
+    .menu-panel a{
+      display:block;
+      padding: 11px 12px;
+      text-decoration:none;
+      color: rgba(248,232,200,0.92);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(214,167,40,0.18);
+    }
+    .menu-panel a:hover{
+      background: rgba(214,167,40,0.12);
+      color: #fff;
+    }
+    .menu-panel a:last-child{ border-bottom: none; }
+
+    /* ================== TON CSS EXISTANT (inchangé) ================== */
 
     .wrap{
       max-width:1050px;
@@ -94,13 +192,12 @@
       background:rgba(0,0,0,0.35);
     }
 
-    /* ✅ On garde la même hauteur, mais on coupe PAR LE HAUT (donc on ancre en bas) */
     .hero img{
       display:block;
       width:100%;
       height:320px;
       object-fit:cover;
-      object-position:center bottom; /* ✅ ancre sur le bas => le haut est rogné */
+      object-position:center bottom;
     }
 
     .title{
@@ -128,7 +225,6 @@
     }
     .motto strong{color:var(--or);}
 
-    /* NAV coulissante (comme index) */
     .tabs{
       margin:10px auto 26px;
       display:inline-flex;
@@ -155,13 +251,8 @@
       transition:background 0.2s ease, color 0.2s ease;
       white-space:nowrap;
     }
-    .tab + .tab{
-      border-left:1px solid rgba(214,167,40,0.35);
-    }
-    .tab:hover{
-      background:rgba(214,167,40,0.20);
-      color:#fff;
-    }
+    .tab + .tab{ border-left:1px solid rgba(214,167,40,0.35); }
+    .tab:hover{ background:rgba(214,167,40,0.20); color:#fff; }
 
     .panel{
       background:linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.35));
@@ -217,7 +308,6 @@
       border-radius:10px;
     }
 
-    /* Image inline (Templier) – un peu plus petite + légèrement au-dessus du texte */
     .image-inline{
       margin:10px auto 12px;
       border-radius:18px;
@@ -227,23 +317,15 @@
       max-width:700px;
       background:rgba(0,0,0,0.35);
     }
-    .image-inline img{
-      width:100%;
-      display:block;
-      height:auto;
-    }
+    .image-inline img{ width:100%; display:block; height:auto; }
 
-    /* lien discret dans le texte */
     .tiny-link{
       font-size:0.85em;
       opacity:0.85;
       margin-left:6px;
       white-space:nowrap;
     }
-    .tiny-link a{
-      color:var(--clair);
-      text-decoration:underline;
-    }
+    .tiny-link a{ color:var(--clair); text-decoration:underline; }
 
     .footer{
       margin-top:26px;
@@ -251,7 +333,6 @@
       font-size:0.82rem;
       opacity:0.85;
     }
-
     .footer a{color:var(--clair);}
 
     .nndnn-banner{
@@ -282,7 +363,6 @@
       white-space:nowrap;
     }
 
-    /* ✅ Encadré doré discret pour le passage Hélios (seul ajout) */
     .helios-goldbox{
       display:inline-block;
       margin:10px 0 2px;
@@ -292,9 +372,7 @@
       background:rgba(214,167,40,0.08);
       box-shadow:0 0 14px rgba(0,0,0,0.55);
     }
-    .helios-goldbox p{
-      margin:0;
-    }
+    .helios-goldbox p{ margin:0; }
 
     @media (max-width: 600px){
       .title{font-size:1.55rem;}
@@ -303,264 +381,298 @@
       h2{font-size:1.12rem;}
       h3{font-size:1.02rem;}
       .tab{padding:9px 14px;font-size:0.86rem;}
-      .hero img{
-        height:220px;
-        object-position:center bottom; /* ✅ idem mobile : coupe le haut */
-      }
+      .hero img{ height:220px; object-position:center bottom; }
       .nndnn-banner{gap:10px;}
       .nndnn-banner img{height:58px;}
       .nndnn-text{font-size:1.55rem;}
+      .top-menu{ top:22px; right:22px; }
+      .menu-panel{ width: 240px; }
+      .frame-fixed{ inset: 12px; }
+      .viewport-scroll{ inset: 20px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
 
-    <!-- Image haut de page -->
-    <div class="hero">
-      <img src="chateau.jpg" alt="Château – mémoire et continuité">
-    </div>
-
-    <div class="title">Histoire de l’Association</div>
-    <div class="subtitle">Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</div>
-    <div class="motto">« <strong>Per Crucem, Veritas</strong> »</div>
-
-    <!-- ✅ Menu du haut supprimé -->
-
-    <div class="panel">
-
-      <h2>I. Histoire passée</h2>
-
-      <h3>1. Fondation de l’Ordre d’origine</h3>
-
-      <p>Il y a plus de dix ans, à Bâle, en Suisse, est fondé un ordre chevaleresque sous le nom de :</p>
-
-      <div class="quote-box">
-        <p style="margin:0; text-align:center; font-family:'Cinzel',serif; letter-spacing:0.02em;">
-          <strong>Souverain et Auguste Ordre Chevaleresque de Notre-Dame de Sion</strong>
-        </p>
-      </div>
-
-      <p>Cet Ordre est créé par un évêque, en présence de deux autres évêques témoins, issus de courants du christianisme primitif indépendant, en dehors des structures romaines classiques.</p>
-
-      <p>La fondation repose sur la revendication explicite d’une lignée apostolique, que le fondateur fait remonter, selon ses déclarations et documents statutaires, à la tradition issue de Fabré-Palaprat.<br>
-      Cet élément constitue le socle spirituel et doctrinal initial de l’Ordre.</p>
-
-      <p>L’Ordre est alors conçu comme :</p>
-      <ul>
-        <li>un ordre chevaleresque structuré ;</li>
-        <li>porteur d’une dimension initiatique chrétienne ;</li>
-        <li>organisé autour de Notre-Dame de Sion, dans une compréhension spirituelle assumée.</li>
-      </ul>
-
-      <div class="sep"></div>
-
-      <h3>2. Décès du Grand Maître fondateur</h3>
-
-      <p>Le Grand Maître fondateur décède prématurément à Cuba.<br>
-      Ce décès entraîne une mise en sommeil de facto de l’Ordre, sans dissolution formelle, mais avec un arrêt de son activité structurée.</p>
-
-      <div class="sep"></div>
-
-      <h3>3. Reprise de l’Ordre en 2022</h3>
-
-      <p>En 2022, l’Ordre est réactivé par d’anciens membres réunis en Chapitre.<br>
-      À cette occasion, la continuité revendiquée de la lignée apostolique est transmise au nouveau Grand Maître.</p>
-
-      <p>Cette reprise s’accompagne :</p>
-      <ul>
-        <li>d’un ancrage marial plus affirmé ;</li>
-        <li>d’un rapprochement avec une spiritualité catholique ;</li>
-        <li>du maintien d’une structure d’ordre, fidèle à son identité initiale.</li>
-      </ul>
-
-      <div class="sep"></div>
-
-      <h3>4. Arrivée de futurs responsables (2022)</h3>
-
-      <p>Au cours de l’année 2022, plusieurs personnes — dont certains qui occuperont par la suite des responsabilités importantes dans notre structure actuelle — rejoignent en Suisse le Souverain et Auguste Ordre Chevaleresque de Notre-Dame de Sion.</p>
-
-      <p>Cet engagement se fait dans un état d’esprit clair :</p>
-      <ul>
-        <li>recherche d’un cadre chevaleresque structuré ;</li>
-        <li>volonté d’un chemin templier, entendu dans ses dimensions morale, fraternelle, culturelle et initiatique ;</li>
-        <li>adhésion, à cette époque, au fait que l’Ordre se présente comme un ordre structuré autour de Notre-Dame de Sion, avec une dimension mariale assumée.</li>
-      </ul>
-
-      <p>Pour plusieurs d’entre nous, il s’agissait d’une démarche sérieuse, vécue comme une expérience humaine, fraternelle et structurante.</p>
-
-      <div class="sep"></div>
-
-      <h3>5. Développement en France et création d’une structure juridique (novembre 2024)</h3>
-
-      <p>En novembre 2024, dans le cadre du développement de l’Ordre vers la France, les membres français décident de créer une structure juridique associative afin de disposer d’un cadre légal sur le territoire français.</p>
-
-      <p>Est alors créée l’association :</p>
-
-      <div class="quote-box">
-        <p style="margin:0; text-align:center; font-family:'Cinzel',serif; letter-spacing:0.02em;">
-          <strong>Prieuré de l’Ordre Chevaleresque des Templiers des Terres de Savoie (OCNDS)</strong>
-        </p>
-      </div>
-
-      <p>Cette structure est pensée comme :</p>
-      <ul>
-        <li>une entité associative distincte ;</li>
-        <li>organisée sous forme chevaleresque ;</li>
-        <li>rattachée et affiliée, à cette date, à l’Ordre d’origine (maison-mère située en Italie) et au prieuré suisse.</li>
-      </ul>
-
-      <div class="sep"></div>
-
-      <h3>6. Pourquoi le nom « Terres de Savoie »</h3>
-
-      <p>Le choix de cette dénomination répond à une intention prudente :</p>
-      <ul>
-        <li>éviter tout amalgame avec les constructions médiatiques liées au terme « Sion » ;</li>
-        <li>prévenir les confusions avec le prétendu « Prieuré de Sion » popularisé au XXᵉ siècle ;</li>
-        <li>adopter un ancrage territorial clair et neutre.</li>
-      </ul>
-
-      <div class="sep"></div>
-
-      <h3>7. Assumer l’appartenance réelle</h3>
-
-      <p>Au fil des mois, une réflexion collective s’engage parmi les membres français.<br>
-      Plusieurs constats émergent :</p>
-      <ul>
-        <li>le nom initial ne reflète pas pleinement la réalité du rattachement ;</li>
-        <li>l’évitement du terme « Sion » crée une ambiguïté ;</li>
-        <li>il apparaît plus cohérent d’assumer publiquement l’origine réelle.</li>
-      </ul>
-
-      <p>La structure française adopte alors la dénomination :</p>
-
-      <div class="quote-box">
-        <p style="margin:0; text-align:center; font-family:'Cinzel',serif; letter-spacing:0.02em;">
-          <strong>Ordre Templier de Notre-Dame de Sion (France)</strong>
-        </p>
-      </div>
-
-      <p>
-        Cette évolution vise la transparence, sans intention de rupture.
-        <span class="tiny-link">(<a href="https://ocnss.org" target="_blank" rel="noopener noreferrer">plus d’infos : cliquer ici</a>)</span>
-      </p>
-
-      <div class="sep"></div>
-
-      <h3>8. Clarification juridique et philosophique</h3>
-
-      <p>Une évidence s’impose progressivement :</p>
-
-      <div class="quote-box">
-        <p style="margin:0;">
-          <strong>Une association loi 1901, laïque, ne peut revendiquer ni succession apostolique ni nature religieuse.</strong>
-        </p>
-      </div>
-
-      <p>Cela conduit à :</p>
-      <ul>
-        <li>renoncer à toute revendication de filiation religieuse ;</li>
-        <li>distinguer clairement association culturelle et structure religieuse ;</li>
-        <li>clarifier la vocation réelle du projet porté en France.</li>
-      </ul>
-
-      <div class="sep"></div>
-
-      <h3>9. Décision d’indépendance (octobre 2025)</h3>
-
-      <p>Début octobre 2025, l’ensemble du groupe français, rejoint par quelques membres suisses, prend une décision collective :</p>
-      <ul>
-        <li>affirmation d’une indépendance complète ;</li>
-        <li>absence de revendication apostolique ou religieuse.</li>
-      </ul>
-
-      <p>Cette décision se fait sans rupture humaine, dans un climat apaisé.<br>
-      Des relations amicales et respectueuses subsistent entre membres.</p>
-      <p><strong>
-Les membres ayant choisi de poursuivre leur engagement au sein de l’O.S.D.9.T.D.J. le font désormais exclusivement dans ce cadre, chaque structure poursuivant son activité de manière autonome, indépendante et distincte.
-</strong></p>
-
-      <div class="sep"></div>
-
-      <h3>10. Changement de nom et officialisation</h3>
-
-      <p>L’association adopte alors le nom :</p>
-
-      <div class="quote-box">
-        <p style="margin:0; text-align:center; font-family:'Cinzel',serif; letter-spacing:0.02em;">
-          <strong>Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</strong>
-        </p>
-      </div>
-
-      <p>Ce changement est :</p>
-      <ul>
-        <li>déclaré officiellement ;</li>
-        <li>publié au JOAFE ;</li>
-        <li>accompagné de statuts affirmant clairement la nature laïque et associative de la structure.</li>
-      </ul>
-
-      <h2>II. Histoire présente et future : continuité, ouverture et discernement</h2>
-
-      <div class="image-inline">
-        <img src="templier.jpg"
-             alt="Templier – continuité et avenir"
-             onerror="this.onerror=null; this.src='templier.jpeg';">
-      </div>
-
-      <p>
-        L’Ordre Sacré des Neuf Templiers de Jérusalem est une association laïque, culturelle et indépendante, régie par la loi de 1901.<br>
-        Il n’a ni vocation religieuse, ni prétention à une succession apostolique.
-      </p>
-
-      <p>
-        Il reconnaît toutefois que l’histoire templière fut profondément marquée par une dimension spirituelle, exprimée notamment à travers la fidélité à Notre-Dame, comprise historiquement comme principe de sagesse, de droiture et de protection, tel qu’il était perçu par les Templiers médiévaux.
-      </p>
-
-      <p>
-        Dans cette perspective, l’Ordre reconnaît l’existence de structures religieuses distinctes, relevant d’un autre cadre juridique (notamment la loi de 1905), qui portent un héritage spirituel templier dans leur propre tradition.
-      </p>
-
-      <p>
-        Cette ouverture s’inscrit sans confusion : l’O.S.D.9.T.D.J. demeure indépendant et strictement associatif.
-      </p>
-
-      <div class="helios-goldbox"><p><strong>
-        À ce titre, Hélios est mentionnée comme Église de christianisme primitif, de fondation anté-chalcédonienne, et conservatrice de l’Église apostolique templière dans sa véritable filiation, depuis le pape Benoît XIII, Pedro de Luna.
-      </strong></p></div>
-
-      <p>Cette mention :</p>
-      <ul>
-        <li>n’implique aucune filiation institutionnelle ;</li>
-        <li>n’engage aucune subordination ;</li>
-        <li>s’inscrit dans une démarche de respect, de clarté historique et de non-confusion.</li>
-      </ul>
-
-      <p>
-        L’Ordre Sacré des Neuf Templiers de Jérusalem demeure un espace ouvert, où chaque membre reste libre de son chemin personnel, dans le respect du cadre associatif, de l’indépendance de l’Ordre et de la fraternité.
-      </p>
-
-    </div>
-
-    <div class="nndnn-banner" aria-label="Signature templière nnDnn">
-      <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;">
-      <div class="nndnn-text">nnDnn</div>
-      <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;">
-    </div>
-
-    <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
-      <a class="tab" href="index.html">🏠 Accueil</a>
-      <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
-      <a class="tab" href="contact.html">📞 Contact</a>
-    </nav>
-
-    <div class="footer">
-      © O.S.D.9.T.D.J. – Tous droits réservés •
-      <a href="mentions.html">Informations officielles</a> •
-      <a href="cookies.html">Cookies</a>
-    </div>
-
+  <!-- ✅ Cadre fixe + lys -->
+  <div class="frame-fixed" aria-hidden="true">
+    <div class="lys tl">⚜️</div>
+    <div class="lys tr">⚜️</div>
+    <div class="lys bl">⚜️</div>
+    <div class="lys br">⚜️</div>
   </div>
+
+  <!-- ✅ Menu 3 points (toutes les pages) -->
+  <div class="top-menu" aria-label="Menu du site">
+    <details>
+      <summary title="Menu">⋯</summary>
+      <div class="menu-panel" role="menu" aria-label="Navigation">
+        <a href="index.html">🏠 Accueil</a>
+        <a href="quinoussommes.html">👥 Qui nous sommes</a>
+        <a href="histoire.html">📜 Notre histoire</a>
+        <a href="activites.html">📌 Activités</a>
+        <a href="adhesion.html">📝 Adhésion</a>
+        <a href="commanderie.html">🏰 Commanderie</a>
+        <a href="cotisations.html">💶 Cotisations</a>
+        <a href="assurance.html">🛡️ Assurance</a>
+        <a href="boutique.html">🛒 Boutique</a>
+        <a href="statuts.html">📄 Statuts</a>
+        <a href="contact.html">📞 Contact</a>
+        <a href="mentions.html">⚖️ Mentions légales</a>
+        <a href="cookies.html">🍪 Cookies</a>
+      </div>
+    </details>
+  </div>
+
+  <!-- ✅ Tout défile dedans (TON CONTENU INCHANGÉ) -->
+  <div class="viewport-scroll">
+    <div class="wrap">
+
+      <!-- Image haut de page -->
+      <div class="hero">
+        <img src="chateau.jpg" alt="Château – mémoire et continuité">
+      </div>
+
+      <div class="title">Histoire de l’Association</div>
+      <div class="subtitle">Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</div>
+      <div class="motto">« <strong>Per Crucem, Veritas</strong> »</div>
+
+      <div class="panel">
+
+        <h2>I. Histoire passée</h2>
+
+        <h3>1. Fondation de l’Ordre d’origine</h3>
+
+        <p>Il y a plus de dix ans, à Bâle, en Suisse, est fondé un ordre chevaleresque sous le nom de :</p>
+
+        <div class="quote-box">
+          <p style="margin:0; text-align:center; font-family:'Cinzel',serif; letter-spacing:0.02em;">
+            <strong>Souverain et Auguste Ordre Chevaleresque de Notre-Dame de Sion</strong>
+          </p>
+        </div>
+
+        <p>Cet Ordre est créé par un évêque, en présence de deux autres évêques témoins, issus de courants du christianisme primitif indépendant, en dehors des structures romaines classiques.</p>
+
+        <p>La fondation repose sur la revendication explicite d’une lignée apostolique, que le fondateur fait remonter, selon ses déclarations et documents statutaires, à la tradition issue de Fabré-Palaprat.<br>
+        Cet élément constitue le socle spirituel et doctrinal initial de l’Ordre.</p>
+
+        <p>L’Ordre est alors conçu comme :</p>
+        <ul>
+          <li>un ordre chevaleresque structuré ;</li>
+          <li>porteur d’une dimension initiatique chrétienne ;</li>
+          <li>organisé autour de Notre-Dame de Sion, dans une compréhension spirituelle assumée.</li>
+        </ul>
+
+        <div class="sep"></div>
+
+        <h3>2. Décès du Grand Maître fondateur</h3>
+
+        <p>Le Grand Maître fondateur décède prématurément à Cuba.<br>
+        Ce décès entraîne une mise en sommeil de facto de l’Ordre, sans dissolution formelle, mais avec un arrêt de son activité structurée.</p>
+
+        <div class="sep"></div>
+
+        <h3>3. Reprise de l’Ordre en 2022</h3>
+
+        <p>En 2022, l’Ordre est réactivé par d’anciens membres réunis en Chapitre.<br>
+        À cette occasion, la continuité revendiquée de la lignée apostolique est transmise au nouveau Grand Maître.</p>
+
+        <p>Cette reprise s’accompagne :</p>
+        <ul>
+          <li>d’un ancrage marial plus affirmé ;</li>
+          <li>d’un rapprochement avec une spiritualité catholique ;</li>
+          <li>du maintien d’une structure d’ordre, fidèle à son identité initiale.</li>
+        </ul>
+
+        <div class="sep"></div>
+
+        <h3>4. Arrivée de futurs responsables (2022)</h3>
+
+        <p>Au cours de l’année 2022, plusieurs personnes — dont certains qui occuperont par la suite des responsabilités importantes dans notre structure actuelle — rejoignent en Suisse le Souverain et Auguste Ordre Chevaleresque de Notre-Dame de Sion.</p>
+
+        <p>Cet engagement se fait dans un état d’esprit clair :</p>
+        <ul>
+          <li>recherche d’un cadre chevaleresque structuré ;</li>
+          <li>volonté d’un chemin templier, entendu dans ses dimensions morale, fraternelle, culturelle et initiatique ;</li>
+          <li>adhésion, à cette époque, au fait que l’Ordre se présente comme un ordre structuré autour de Notre-Dame de Sion, avec une dimension mariale assumée.</li>
+        </ul>
+
+        <p>Pour plusieurs d’entre nous, il s’agissait d’une démarche sérieuse, vécue comme une expérience humaine, fraternelle et structurante.</p>
+
+        <div class="sep"></div>
+
+        <h3>5. Développement en France et création d’une structure juridique (novembre 2024)</h3>
+
+        <p>En novembre 2024, dans le cadre du développement de l’Ordre vers la France, les membres français décident de créer une structure juridique associative afin de disposer d’un cadre légal sur le territoire français.</p>
+
+        <p>Est alors créée l’association :</p>
+
+        <div class="quote-box">
+          <p style="margin:0; text-align:center; font-family:'Cinzel',serif; letter-spacing:0.02em;">
+            <strong>Prieuré de l’Ordre Chevaleresque des Templiers des Terres de Savoie (OCNDS)</strong>
+          </p>
+        </div>
+
+        <p>Cette structure est pensée comme :</p>
+        <ul>
+          <li>une entité associative distincte ;</li>
+          <li>organisée sous forme chevaleresque ;</li>
+          <li>rattachée et affiliée, à cette date, à l’Ordre d’origine (maison-mère située en Italie) et au prieuré suisse.</li>
+        </ul>
+
+        <div class="sep"></div>
+
+        <h3>6. Pourquoi le nom « Terres de Savoie »</h3>
+
+        <p>Le choix de cette dénomination répond à une intention prudente :</p>
+        <ul>
+          <li>éviter tout amalgame avec les constructions médiatiques liées au terme « Sion » ;</li>
+          <li>prévenir les confusions avec le prétendu « Prieuré de Sion » popularisé au XXᵉ siècle ;</li>
+          <li>adopter un ancrage territorial clair et neutre.</li>
+        </ul>
+
+        <div class="sep"></div>
+
+        <h3>7. Assumer l’appartenance réelle</h3>
+
+        <p>Au fil des mois, une réflexion collective s’engage parmi les membres français.<br>
+        Plusieurs constats émergent :</p>
+        <ul>
+          <li>le nom initial ne reflète pas pleinement la réalité du rattachement ;</li>
+          <li>l’évitement du terme « Sion » crée une ambiguïté ;</li>
+          <li>il apparaît plus cohérent d’assumer publiquement l’origine réelle.</li>
+        </ul>
+
+        <p>La structure française adopte alors la dénomination :</p>
+
+        <div class="quote-box">
+          <p style="margin:0; text-align:center; font-family:'Cinzel',serif; letter-spacing:0.02em;">
+            <strong>Ordre Templier de Notre-Dame de Sion (France)</strong>
+          </p>
+        </div>
+
+        <p>
+          Cette évolution vise la transparence, sans intention de rupture.
+          <span class="tiny-link">(<a href="https://ocnss.org" target="_blank" rel="noopener noreferrer">plus d’infos : cliquer ici</a>)</span>
+        </p>
+
+        <div class="sep"></div>
+
+        <h3>8. Clarification juridique et philosophique</h3>
+
+        <p>Une évidence s’impose progressivement :</p>
+
+        <div class="quote-box">
+          <p style="margin:0;">
+            <strong>Une association loi 1901, laïque, ne peut revendiquer ni succession apostolique ni nature religieuse.</strong>
+          </p>
+        </div>
+
+        <p>Cela conduit à :</p>
+        <ul>
+          <li>renoncer à toute revendication de filiation religieuse ;</li>
+          <li>distinguer clairement association culturelle et structure religieuse ;</li>
+          <li>clarifier la vocation réelle du projet porté en France.</li>
+        </ul>
+
+        <div class="sep"></div>
+
+        <h3>9. Décision d’indépendance (octobre 2025)</h3>
+
+        <p>Début octobre 2025, l’ensemble du groupe français, rejoint par quelques membres suisses, prend une décision collective :</p>
+        <ul>
+          <li>affirmation d’une indépendance complète ;</li>
+          <li>absence de revendication apostolique ou religieuse.</li>
+        </ul>
+
+        <p>Cette décision se fait sans rupture humaine, dans un climat apaisé.<br>
+        Des relations amicales et respectueuses subsistent entre membres.</p>
+        <p><strong>
+        Les membres ayant choisi de poursuivre leur engagement au sein de l’O.S.D.9.T.D.J. le font désormais exclusivement dans ce cadre, chaque structure poursuivant son activité de manière autonome, indépendante et distincte.
+        </strong></p>
+
+        <div class="sep"></div>
+
+        <h3>10. Changement de nom et officialisation</h3>
+
+        <p>L’association adopte alors le nom :</p>
+
+        <div class="quote-box">
+          <p style="margin:0; text-align:center; font-family:'Cinzel',serif; letter-spacing:0.02em;">
+            <strong>Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</strong>
+          </p>
+        </div>
+
+        <p>Ce changement est :</p>
+        <ul>
+          <li>déclaré officiellement ;</li>
+          <li>publié au JOAFE ;</li>
+          <li>accompagné de statuts affirmant clairement la nature laïque et associative de la structure.</li>
+        </ul>
+
+        <h2>II. Histoire présente et future : continuité, ouverture et discernement</h2>
+
+        <div class="image-inline">
+          <img src="templier.jpg"
+               alt="Templier – continuité et avenir"
+               onerror="this.onerror=null; this.src='templier.jpeg';">
+        </div>
+
+        <p>
+          L’Ordre Sacré des Neuf Templiers de Jérusalem est une association laïque, culturelle et indépendante, régie par la loi de 1901.<br>
+          Il n’a ni vocation religieuse, ni prétention à une succession apostolique.
+        </p>
+
+        <p>
+          Il reconnaît toutefois que l’histoire templière fut profondément marquée par une dimension spirituelle, exprimée notamment à travers la fidélité à Notre-Dame, comprise historiquement comme principe de sagesse, de droiture et de protection, tel qu’il était perçu par les Templiers médiévaux.
+        </p>
+
+        <p>
+          Dans cette perspective, l’Ordre reconnaît l’existence de structures religieuses distinctes, relevant d’un autre cadre juridique (notamment la loi de 1905), qui portent un héritage spirituel templier dans leur propre tradition.
+        </p>
+
+        <p>
+          Cette ouverture s’inscrit sans confusion : l’O.S.D.9.T.D.J. demeure indépendant et strictement associatif.
+        </p>
+
+        <div class="helios-goldbox"><p><strong>
+          À ce titre, Hélios est mentionnée comme Église de christianisme primitif, de fondation anté-chalcédonienne, et conservatrice de l’Église apostolique templière dans sa véritable filiation, depuis le pape Benoît XIII, Pedro de Luna.
+        </strong></p></div>
+
+        <p>Cette mention :</p>
+        <ul>
+          <li>n’implique aucune filiation institutionnelle ;</li>
+          <li>n’engage aucune subordination ;</li>
+          <li>s’inscrit dans une démarche de respect, de clarté historique et de non-confusion.</li>
+        </ul>
+
+        <p>
+          L’Ordre Sacré des Neuf Templiers de Jérusalem demeure un espace ouvert, où chaque membre reste libre de son chemin personnel, dans le respect du cadre associatif, de l’indépendance de l’Ordre et de la fraternité.
+        </p>
+
+      </div>
+
+      <div class="nndnn-banner" aria-label="Signature templière nnDnn">
+        <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;">
+        <div class="nndnn-text">nnDnn</div>
+        <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;">
+      </div>
+
+      <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
+        <a class="tab" href="index.html">🏠 Accueil</a>
+        <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
+        <a class="tab" href="contact.html">📞 Contact</a>
+      </nav>
+
+      <div class="footer">
+        © O.S.D.9.T.D.J. – Tous droits réservés •
+        <a href="mentions.html">Informations officielles</a> •
+        <a href="cookies.html">Cookies</a>
+      </div>
+
+    </div>
+  </div>
+
 </body>
 </html>
