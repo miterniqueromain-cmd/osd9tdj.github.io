@@ -34,19 +34,20 @@
       --clair: #f5f2ea;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Lato', Arial, sans-serif;
+    /* ✅ CADRE FIXE + SCROLL DEDANS */
+    html, body{
+      height:100%;
+      margin:0;
+      padding:0;
+      overflow:hidden; /* body ne scrolle plus */
+      font-family:'Lato', Arial, sans-serif;
       color: var(--clair);
-      background: #000;
-      text-align: center;
-      position: relative;
-      overflow-x: hidden;
+      background:#000;
+      text-align:center;
+      position:relative;
+      overflow-x:hidden;
     }
 
     /* Fond discret */
@@ -66,6 +67,89 @@
       background: radial-gradient(circle at top, rgba(0,0,0,0.2), rgba(0,0,0,0.95));
       z-index: -1;
     }
+
+    /* ✅ Cadre fixe doré */
+    .frame-fixed{
+      position:fixed;
+      inset:14px;
+      border-radius:22px;
+      border:2px solid rgba(214,167,40,0.55);
+      box-shadow:
+        0 0 0 1px rgba(245,242,234,0.16) inset,
+        0 0 38px rgba(0,0,0,0.35);
+      pointer-events:none;
+      z-index:40;
+    }
+
+    /* ✅ Zone scroll interne */
+    .viewport-scroll{
+      position:fixed;
+      inset:22px;
+      overflow-y:auto;
+      overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      z-index:1;
+    }
+
+    /* ✅ Menu 3 points (doré) + menu déroulant sans icônes */
+    .top-menu{
+      position:fixed;
+      top:26px;
+      right:26px;
+      z-index:60;
+      pointer-events:auto;
+    }
+    .top-menu details{ position:relative; }
+    .top-menu summary{
+      list-style:none;
+      cursor:pointer;
+      user-select:none;
+      width:46px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:999px;
+      border:1px solid rgba(214,167,40,0.55);
+      background:rgba(0,0,0,0.22);
+      backdrop-filter: blur(6px);
+      box-shadow:0 6px 16px rgba(0,0,0,0.35);
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-size:22px;
+      line-height:1;
+    }
+    .top-menu summary::-webkit-details-marker{ display:none; }
+
+    .menu-panel{
+      position:absolute;
+      right:0;
+      margin-top:10px;
+      width:260px;
+      max-width:calc(100vw - 60px);
+      border-radius:14px;
+      border:1px solid rgba(214,167,40,0.45);
+      background:rgba(0,0,0,0.70);
+      box-shadow:0 18px 40px rgba(0,0,0,0.55);
+      overflow:hidden;
+    }
+    .menu-panel a{
+      display:block;
+      padding:11px 12px;
+      text-decoration:none;
+      color:rgba(245,242,234,0.92);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size:0.92rem;
+      border-bottom:1px solid rgba(214,167,40,0.18);
+      white-space:nowrap;
+    }
+    .menu-panel a:hover{
+      background:rgba(214,167,40,0.12);
+      color:#fff;
+    }
+    .menu-panel a:last-child{ border-bottom:none; }
+
+    /* ================== TON CSS EXISTANT (inchangé) ================== */
 
     /* NAV coulissante (bas seulement) */
     .tabs{
@@ -212,14 +296,20 @@
     }
     .footer a{
       color: var(--clair);
-      text-decoration: none;
+      text-decoration: underline;
       opacity: 0.92;
     }
+    .footer a:hover{ opacity: 1; }
 
     @media (max-width: 600px) {
       h1 { font-size: 1.5rem; }
       h2 { font-size: 1.1rem; }
       .tab{padding:9px 14px;font-size:0.86rem;}
+
+      .top-menu{ top:22px; right:22px; }
+      .menu-panel{ width:240px; }
+      .frame-fixed{ inset:12px; }
+      .viewport-scroll{ inset:20px; }
     }
   </style>
 
@@ -230,144 +320,171 @@
 
 <body>
 
-  <!-- ✅ Tous les boutons du haut supprimés -->
+  <!-- ✅ Cadre fixe doré -->
+  <div class="frame-fixed" aria-hidden="true"></div>
 
-  <!-- SATOR DORÉ -->
-  <div class="sator-box">
-    <img src="sator.PNG" alt="SATOR de l’O.S.D.9.T.D.J.">
+  <!-- ✅ Menu 3 points (sans icônes) -->
+  <div class="top-menu" aria-label="Menu du site">
+    <details>
+      <summary title="Menu">⋯</summary>
+      <div class="menu-panel" role="menu" aria-label="Navigation">
+        <a href="index.html">Accueil</a>
+        <a href="quinoussommes.html">Qui nous sommes</a>
+        <a href="histoire.html">Notre histoire</a>
+        <a href="activites.html">Activités</a>
+        <a href="adhesion.html">Adhésion</a>
+        <a href="commanderie.html">Commanderie</a>
+        <a href="cotisations.html">Cotisations</a>
+        <a href="assurance.html">Assurance</a>
+        <a href="boutique.html">Boutique</a>
+        <a href="statuts.html">Statuts</a>
+        <a href="contact.html">Contact</a>
+        <a href="mentions.html">Mentions légales</a>
+        <a href="cookies.html">Cookies</a>
+      </div>
+    </details>
   </div>
 
-  <div class="container">
+  <!-- ✅ Tout scrolle dans le cadre -->
+  <div class="viewport-scroll">
 
-    <h1>Commanderies & représentations locales</h1>
-    <p style="text-align:center;font-style:italic;margin-top:0;">
-      Ordre Sacré des Neuf Templiers de Jérusalem – <strong>O.S.D.9.T.D.J.</strong><br>
-      Association loi 1901 – RNA : W744007354 – « <span style="color:var(--or);font-weight:700;">Per Crucem, Veritas</span> »
-    </p>
-
-    <h2>1 – Principe général</h2>
-    <p>
-      Lorsqu’aucune représentation de l’Ordre n’est encore présente sur une région ou un pays,
-      il est possible, sous conditions, de créer une <strong>Commanderie rattachée</strong> à
-      l’association mère. Cette structure agit dans un cadre strictement <strong>laïque, culturel,
-      historique et caritatif</strong>, conformément aux statuts déposés en préfecture.
-    </p>
-    <p>
-      L’objectif d’une Commanderie est de faire rayonner localement l’esprit de l’O.S.D.9.T.D.J.,
-      sans jamais se présenter comme un ordre indépendant ni modifier les emblèmes, les textes
-      ou la doctrine officielle.
-    </p>
-
-    <h2>2 – Activités sociales et rayonnement local</h2>
-    <p>
-      Chaque Commanderie peut organiser, sur son territoire&nbsp;:
-    </p>
-    <ul>
-      <li>des manifestations culturelles, conférences, expositions et rencontres publiques&nbsp;;</li>
-      <li>des buvettes, stands et points de restauration lors de manifestations autorisées&nbsp;;</li>
-      <li>des actions sociales ou caritatives (collectes, aides ponctuelles, visites, etc.)&nbsp;;</li>
-      <li>des temps d’étude, de formation et de fraternité entre membres, en présentiel ou en visio.</li>
-    </ul>
-    <p class="note">
-      Toutes ces activités doivent rester conformes aux lois du pays concerné, aux statuts
-      de l’O.S.D.9.T.D.J. et aux décisions du Grand Maître et du Conseil des Sages.
-    </p>
-
-    <h2>3 – Compte bancaire local et gestion financière</h2>
-    <p>
-      Conformément aux dispositions financières des statuts, une Commanderie peut disposer
-      d’un <strong>compte bancaire local</strong> pour gérer ses activités sociales et culturelles.
-      Ce compte est :
-    </p>
-    <ul>
-      <li>ouvert au nom de la structure autorisée (association locale ou représentation)&nbsp;;</li>
-      <li>placé sous la responsabilité du <strong>Commandeur</strong> et, le cas échéant, d’un trésorier local&nbsp;;</li>
-      <li>sous le contrôle permanent du <strong>Grand Maître</strong> et du Conseil directeur, qui peuvent demander à tout moment les relevés et justificatifs&nbsp;;</li>
-      <li>réservé aux cotisations, dons et recettes d’activités liées à l’Ordre.</li>
-    </ul>
-    <p>
-      Les moyens financiers sont utilisés sur place pour les projets sociaux, caritatifs et
-      culturels, mais restent rattachés à l’O.S.D.9.T.D.J. dans son ensemble.
-    </p>
-
-    <h2>4 – Structure juridique adaptée au pays</h2>
-    <p>
-      Dans certains pays, la loi peut exiger la création d’une <strong>structure juridique locale</strong>
-      (association, fondation ou équivalent) pour mener des activités régulières. Dans ce cas,
-      l’O.S.D.9.T.D.J. peut autoriser, par décision du Grand Maître et du Conseil des Sages,
-      l’ouverture d’une association-sœur ou d’une structure adaptée.
-    </p>
-    <p>
-      Les statuts de cette structure locale doivent être :
-    </p>
-    <ul>
-      <li>compatibles avec les statuts de l’O.S.D.9.T.D.J.&nbsp;;</li>
-      <li>approuvés par l’Ordre avant dépôt&nbsp;;</li>
-      <li>clairement rattachés à l’Ordre Sacré des Neuf Templiers de Jérusalem.</li>
-    </ul>
-
-    <h2>5 – Conditions pour ouvrir une Commanderie</h2>
-    <p>
-      Une Commanderie ne s’ouvre pas pour une seule personne. Elle suppose :
-    </p>
-    <ul>
-      <li>que le secteur ou le pays ne soit pas déjà couvert par une représentation existante&nbsp;;</li>
-      <li>l’existence d’un <strong>petit groupe</strong> de personnes souhaitant se rattacher à l’Ordre
-          (et non un seul membre isolé)&nbsp;;</li>
-      <li>un membre motivé prêt à assumer la charge de Commandeur, dans l’esprit du service&nbsp;;</li>
-      <li>l’acceptation intégrale des statuts, du règlement intérieur et de la charte morale&nbsp;;</li>
-      <li>la validation expresse du <strong>Grand Maître</strong>, après avis du Conseil directeur / Conseil des Sages.</li>
-    </ul>
-
-    <h2>6 – Formation et cursus de l’Ordre</h2>
-    <p>
-      Le membre qui souhaite ouvrir une Commanderie commence comme tout le monde :
-      il remplit le <strong>formulaire officiel d’adhésion</strong>, est admis comme Novice, puis suit le
-      <strong>cursus de formation</strong> de l’Ordre.
-    </p>
-    <p>
-      Cette formation peut se faire :
-    </p>
-    <ul>
-      <li>en présentiel lors des rencontres de l’Ordre&nbsp;;</li>
-      <li>par <strong>visioconférence</strong> pour les frères et sœurs éloignés géographiquement&nbsp;;</li>
-      <li>au moyen des documents et cours transmis par le Grand Maître et le Conseil directeur.</li>
-    </ul>
-    <p>
-      Les personnes qui se rattachent à cette future Commanderie s’engagent elles aussi
-      à <strong>suivre le cursus de l’Ordre</strong>, à respecter le Muliduve, à répondre aux convocations
-      et à participer réellement à la vie de l’association.
-    </p>
-
-    <div class="cta-box">
-      <a class="cta" href="adhesion.html">Remplir le formulaire d’adhésion</a>
-      <a class="cta" href="statuts.html">Lire les statuts complets</a>
+    <!-- SATOR DORÉ -->
+    <div class="sator-box">
+      <img src="sator.PNG" alt="SATOR de l’O.S.D.9.T.D.J.">
     </div>
 
-    <h2>7 – Rappel important</h2>
-    <p class="note">
-      Toute Commanderie, même dotée d’un compte bancaire propre ou d’une structure locale,
-      reste <strong>pleinement rattachée</strong> à l’O.S.D.9.T.D.J. Elle ne peut en aucun cas modifier
-      les emblèmes, la doctrine, les textes ou le nom de l’Ordre sans accord écrit du Grand
-      Maître et du Conseil des Sages.
-    </p>
+    <div class="container">
 
-    <!-- ✅ CTA final supprimé (doublon) -->
+      <h1>Commanderies & représentations locales</h1>
+      <p style="text-align:center;font-style:italic;margin-top:0;">
+        Ordre Sacré des Neuf Templiers de Jérusalem – <strong>O.S.D.9.T.D.J.</strong><br>
+        Association loi 1901 – RNA : W744007354 – « <span style="color:var(--or);font-weight:700;">Per Crucem, Veritas</span> »
+      </p>
 
-    <!-- ✅ Menu déroulant du bas : Accueil / Qui nous sommes / Contact -->
-    <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:18px;">
-      <a class="tab" href="index.html">🏠 Accueil</a>
-      <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
-      <a class="tab" href="contact.html">📞 Contact</a>
-    </nav>
+      <h2>1 – Principe général</h2>
+      <p>
+        Lorsqu’aucune représentation de l’Ordre n’est encore présente sur une région ou un pays,
+        il est possible, sous conditions, de créer une <strong>Commanderie rattachée</strong> à
+        l’association mère. Cette structure agit dans un cadre strictement <strong>laïque, culturel,
+        historique et caritatif</strong>, conformément aux statuts déposés en préfecture.
+      </p>
+      <p>
+        L’objectif d’une Commanderie est de faire rayonner localement l’esprit de l’O.S.D.9.T.D.J.,
+        sans jamais se présenter comme un ordre indépendant ni modifier les emblèmes, les textes
+        ou la doctrine officielle.
+      </p>
 
-    <!-- ✅ Footer : copyright + Mentions légales + Cookies -->
-    <div class="footer">
-      © O.S.D.9.T.D.J. – Tous droits réservés •
-      <a href="mentions.html">Mentions légales</a> •
-      <a href="cookies.html">Cookies</a>
+      <h2>2 – Activités sociales et rayonnement local</h2>
+      <p>
+        Chaque Commanderie peut organiser, sur son territoire&nbsp;:
+      </p>
+      <ul>
+        <li>des manifestations culturelles, conférences, expositions et rencontres publiques&nbsp;;</li>
+        <li>des buvettes, stands et points de restauration lors de manifestations autorisées&nbsp;;</li>
+        <li>des actions sociales ou caritatives (collectes, aides ponctuelles, visites, etc.)&nbsp;;</li>
+        <li>des temps d’étude, de formation et de fraternité entre membres, en présentiel ou en visio.</li>
+      </ul>
+      <p class="note">
+        Toutes ces activités doivent rester conformes aux lois du pays concerné, aux statuts
+        de l’O.S.D.9.T.D.J. et aux décisions du Grand Maître et du Conseil des Sages.
+      </p>
+
+      <h2>3 – Compte bancaire local et gestion financière</h2>
+      <p>
+        Conformément aux dispositions financières des statuts, une Commanderie peut disposer
+        d’un <strong>compte bancaire local</strong> pour gérer ses activités sociales et culturelles.
+        Ce compte est :
+      </p>
+      <ul>
+        <li>ouvert au nom de la structure autorisée (association locale ou représentation)&nbsp;;</li>
+        <li>placé sous la responsabilité du <strong>Commandeur</strong> et, le cas échéant, d’un trésorier local&nbsp;;</li>
+        <li>sous le contrôle permanent du <strong>Grand Maître</strong> et du Conseil directeur, qui peuvent demander à tout moment les relevés et justificatifs&nbsp;;</li>
+        <li>réservé aux cotisations, dons et recettes d’activités liées à l’Ordre.</li>
+      </ul>
+      <p>
+        Les moyens financiers sont utilisés sur place pour les projets sociaux, caritatifs et
+        culturels, mais restent rattachés à l’O.S.D.9.T.D.J. dans son ensemble.
+      </p>
+
+      <h2>4 – Structure juridique adaptée au pays</h2>
+      <p>
+        Dans certains pays, la loi peut exiger la création d’une <strong>structure juridique locale</strong>
+        (association, fondation ou équivalent) pour mener des activités régulières. Dans ce cas,
+        l’O.S.D.9.T.D.J. peut autoriser, par décision du Grand Maître et du Conseil des Sages,
+        l’ouverture d’une association-sœur ou d’une structure adaptée.
+      </p>
+      <p>
+        Les statuts de cette structure locale doivent être :
+      </p>
+      <ul>
+        <li>compatibles avec les statuts de l’O.S.D.9.T.D.J.&nbsp;;</li>
+        <li>approuvés par l’Ordre avant dépôt&nbsp;;</li>
+        <li>clairement rattachés à l’Ordre Sacré des Neuf Templiers de Jérusalem.</li>
+      </ul>
+
+      <h2>5 – Conditions pour ouvrir une Commanderie</h2>
+      <p>
+        Une Commanderie ne s’ouvre pas pour une seule personne. Elle suppose :
+      </p>
+      <ul>
+        <li>que le secteur ou le pays ne soit pas déjà couvert par une représentation existante&nbsp;;</li>
+        <li>l’existence d’un <strong>petit groupe</strong> de personnes souhaitant se rattacher à l’Ordre
+            (et non un seul membre isolé)&nbsp;;</li>
+        <li>un membre motivé prêt à assumer la charge de Commandeur, dans l’esprit du service&nbsp;;</li>
+        <li>l’acceptation intégrale des statuts, du règlement intérieur et de la charte morale&nbsp;;</li>
+        <li>la validation expresse du <strong>Grand Maître</strong>, après avis du Conseil directeur / Conseil des Sages.</li>
+      </ul>
+
+      <h2>6 – Formation et cursus de l’Ordre</h2>
+      <p>
+        Le membre qui souhaite ouvrir une Commanderie commence comme tout le monde :
+        il remplit le <strong>formulaire officiel d’adhésion</strong>, est admis comme Novice, puis suit le
+        <strong>cursus de formation</strong> de l’Ordre.
+      </p>
+      <p>
+        Cette formation peut se faire :
+      </p>
+      <ul>
+        <li>en présentiel lors des rencontres de l’Ordre&nbsp;;</li>
+        <li>par <strong>visioconférence</strong> pour les frères et sœurs éloignés géographiquement&nbsp;;</li>
+        <li>au moyen des documents et cours transmis par le Grand Maître et le Conseil directeur.</li>
+      </ul>
+      <p>
+        Les personnes qui se rattachent à cette future Commanderie s’engagent elles aussi
+        à <strong>suivre le cursus de l’Ordre</strong>, à respecter le Muliduve, à répondre aux convocations
+        et à participer réellement à la vie de l’association.
+      </p>
+
+      <div class="cta-box">
+        <a class="cta" href="adhesion.html">Remplir le formulaire d’adhésion</a>
+        <a class="cta" href="statuts.html">Lire les statuts complets</a>
+      </div>
+
+      <h2>7 – Rappel important</h2>
+      <p class="note">
+        Toute Commanderie, même dotée d’un compte bancaire propre ou d’une structure locale,
+        reste <strong>pleinement rattachée</strong> à l’O.S.D.9.T.D.J. Elle ne peut en aucun cas modifier
+        les emblèmes, la doctrine, les textes ou le nom de l’Ordre sans accord écrit du Grand
+        Maître et du Conseil des Sages.
+      </p>
+
+      <!-- ✅ Menu déroulant du bas : sans icônes -->
+      <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:18px;">
+        <a class="tab" href="index.html">Accueil</a>
+        <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
+        <a class="tab" href="contact.html">Contact</a>
+      </nav>
+
+      <!-- ✅ Footer conforme -->
+      <div class="footer">
+        © O.S.D.9.T.D.J. Association Loi 1901 – Tous droits réservés •
+        <a href="mentions.html">mentions légales</a> •
+        <a href="cookies.html">cookies</a>
+      </div>
+
+      <div style="height:10px;"></div>
+
     </div>
-
   </div>
 
 </body>
