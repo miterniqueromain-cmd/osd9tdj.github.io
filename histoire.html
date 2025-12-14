@@ -394,6 +394,7 @@
     /* ================== ✅ SEULS AJOUTS (TABLETTE/PC) ==================
        1) HERO moins “dégueulasse” sur grands écrans
        2) TABS (boutons du bas) centrés sur tablette/PC
+       3) ✅ IMAGE TEMPLIER RÉTRÉCIE SUR iPAD/PC (pour éviter le flou)
        ================================================================ */
 
     /* ✅ Centrage des tabs sur tablette/PC (sans toucher au mobile) */
@@ -402,6 +403,11 @@
         display:flex;          /* au lieu de inline-flex, uniquement ici */
         width:100%;            /* prend la largeur du wrap -> centrage réel */
         justify-content:center;
+      }
+
+      /* ✅ SEULE MODIF DEMANDÉE : limiter la taille de l’image “templier” sur iPad/PC */
+      .image-inline{
+        max-width: 520px;      /* évite l’agrandissement qui floute (iPad/PC) */
       }
     }
 
