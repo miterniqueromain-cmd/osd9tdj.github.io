@@ -287,6 +287,19 @@
       margin: 0;
     }
 
+    /* ✅ séparateur interne fin argenté (court, ne va pas au bout) */
+    .silver-sep{
+      height: 1px;
+      width: 60%;
+      margin: 12px auto;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(220,220,220,0.45),
+        transparent
+      );
+    }
+
     @media (max-width: 600px) {
       h1 { font-size: 1.6rem; }
       h2 { font-size: 1.05rem; }
@@ -297,6 +310,7 @@
       .frame-fixed{ inset: 12px; }
       .viewport-scroll{ inset: 20px; }
       .silver-box{ padding: 11px 12px; }
+      .silver-sep{ width: 70%; }
     }
   </style>
 
@@ -367,8 +381,9 @@
         <p>
           Le site de l’O.S.D.9.T.D.J. peut utiliser uniquement des cookies et éléments techniques nécessaires :
         </p>
-      </div>
-      <div class="silver-box">
+
+        <div class="silver-sep"></div>
+
         <ul>
           <li><strong>Cookies de fonctionnement</strong> liés à la navigation (chargement des pages, sécurité, stabilité).</li>
           <li><strong>Éléments techniques</strong> fournis par des services tiers si vous y accédez (par exemple un formulaire externe).</li>
@@ -390,15 +405,17 @@
         <p>
           Vous pouvez à tout moment configurer votre navigateur pour :
         </p>
-      </div>
-      <div class="silver-box">
+
+        <div class="silver-sep"></div>
+
         <ul>
           <li>accepter ou refuser les cookies ;</li>
           <li>supprimer les cookies déjà enregistrés ;</li>
           <li>être informé lors du dépôt d’un cookie.</li>
         </ul>
-      </div>
-      <div class="silver-box">
+
+        <div class="silver-sep"></div>
+
         <p>
           La désactivation de certains cookies de fonctionnement peut toutefois altérer l’affichage ou la navigation.
         </p>
