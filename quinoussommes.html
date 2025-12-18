@@ -302,6 +302,19 @@
       text-align: center;
       width: 100%;
     }
+
+    /* ✅ AJOUT : 2 boutons coulissants (sans changer le style des boutons) */
+    .big-history-slider{
+      display: inline-flex;
+      gap: 12px;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 2px 2px;
+    }
+    .big-history-slider::-webkit-scrollbar{ display:none; }
+
     .big-history-btn{
       display:inline-block;
       padding:12px 26px;
@@ -313,6 +326,8 @@
       color:#120702;
       background:linear-gradient(to right, #f3d98b, #d6a728);
       box-shadow:0 4px 10px rgba(0,0,0,0.8);
+      white-space: nowrap;
+      flex: 0 0 auto;
     }
     .big-history-btn:hover{
       filter: brightness(1.05);
@@ -491,6 +506,7 @@
         <a href="index.html"> Accueil</a>
         <a href="quinoussommes.html"> Qui nous sommes</a>
         <a href="histoire.html"> Notre histoire</a>
+        <a href="vocation.html"> Vocation historique</a>
         <a href="activites.html"> Activités</a>
         <a href="adhesion.html"> Adhésion</a>
         <a href="commanderie.html"> Commanderie</a>
@@ -635,9 +651,12 @@
         <img src="croix.epee.PNG" alt="Épée – symbole">
       </div>
 
-      <!-- Bouton "Notre histoire" -->
+      <!-- Boutons coulissants (Notre histoire + Vocation historique) -->
       <div class="big-history-wrap">
-        <a class="big-history-btn" href="histoire.html">📜 Notre histoire</a>
+        <div class="big-history-slider" aria-label="Accès rapides">
+          <a class="big-history-btn" href="histoire.html">📜 Notre histoire</a>
+          <a class="big-history-btn" href="vocation.html">🛡️ Vocation historique</a>
+        </div>
       </div>
 
       <!-- Menu bas (tes 2 liens) -->
