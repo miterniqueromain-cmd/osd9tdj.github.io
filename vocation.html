@@ -182,6 +182,29 @@
       height: auto;
     }
 
+    /* ✅ Blason encadré (petit cadre doré élégant) */
+    .blason-frame{
+      display:inline-block;
+      border-radius: 18px;
+      padding: 10px;
+      border: 1px solid rgba(214,167,40,0.55);
+      background: rgba(0,0,0,0.18);
+      box-shadow:
+        0 10px 26px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(248,232,200,0.12) inset;
+      margin: 6px 0 22px;
+      max-width: 92vw;
+    }
+    .blason-frame img{
+      display:block;
+      width: 520px;
+      max-width: 84vw;
+      height:auto;
+      border-radius: 14px;
+      border: 2px solid rgba(214,167,40,0.75);
+      box-shadow: 0 0 30px rgba(0,0,0,0.85);
+    }
+
     /* ✅ image intégrée DANS les menus déroulants (équilibre visuel) */
     .inner-img{
       margin: 10px auto 18px;
@@ -411,16 +434,6 @@
       position: relative;
     }
 
-    /* ✅ Derniers paragraphes en cadre "fixe" (sticky) */
-    .sticky-final{
-      position: sticky;
-      bottom: 14px;
-      z-index: 12;
-      box-shadow:
-        0 18px 40px rgba(0,0,0,0.72),
-        0 0 0 1px rgba(214,167,40,0.18) inset;
-    }
-
     @media (max-width: 600px) {
       h1 { font-size: 1.6rem; }
       h2 { font-size: 1.05rem; }
@@ -453,6 +466,7 @@
       .viewport-scroll{ inset: 20px; }
 
       .inner-blason{ width: 150px; }
+      .blason-frame img{ width: 360px; max-width: 88vw; }
     }
   </style>
 
@@ -498,20 +512,31 @@
   <div class="viewport-scroll">
     <div class="container">
 
-      <!-- ✅ BLASON EN HAUT -->
-      <div class="image-box" style="max-width:520px;">
+      <!-- ✅ BLASON EN HAUT (encadré doré) -->
+      <div class="blason-frame" aria-label="Blason O.S.D.9.T.D.J.">
         <img src="blason-osd9tdj.PNG" alt="Blason – O.S.D.9.T.D.J.">
       </div>
 
       <h1>ORDRE SACRÉ DES NEUF TEMPLIERS DE JÉRUSALEM</h1>
       <h2>Notre vocation historique</h2>
 
+      <!-- ✅ Mention “images = évocations / interprétations” (pour les pinailleurs) -->
+      <section class="section-card alt" aria-label="Note sur les images">
+        <p>
+          <strong>Note importante (pour la rigueur historique)</strong> : les images présentées sur cette page
+          sont des <strong>évocations symboliques</strong> et des <strong>représentations d’interprétation</strong>,
+          destinées à illustrer une idée (protection des pèlerins, vie communautaire, mémoire du Temple).
+          Elles ne constituent pas des reconstitutions exactes. En particulier, le <strong>Temple de Salomon</strong>
+          était <strong>détruit depuis des siècles</strong> à l’époque des Templiers : toute image d’un Temple “debout”
+          relève donc d’une vision symbolique (Temple idéalisé / Temple intérieur), jamais d’un fait historique.
+        </p>
+      </section>
+
       <!-- 1 -->
       <details class="section-card" open aria-label="Contexte : routes, pèlerinages et naissance d’une mission">
         <summary>Contexte : routes, pèlerinages et naissance d’une mission</summary>
         <div class="details-inner">
 
-          <!-- ✅ image DANS le menu déroulant (pelerin.PNG) -->
           <div class="inner-img">
             <img src="pelerin.PNG" alt="Protection des pèlerins – évocation symbolique">
           </div>
@@ -533,7 +558,6 @@
         <summary>Temple, discrétion initiale et reconnaissance officielle</summary>
         <div class="details-inner">
 
-          <!-- ✅ image DANS le menu déroulant (temple.PNG) -->
           <div class="inner-img">
             <img src="temple.PNG" alt="Temple – mémoire et rigueur historique">
           </div>
@@ -551,7 +575,6 @@
         <summary>Règle, rangs, dépouillement et discipline</summary>
         <div class="details-inner">
 
-          <!-- ✅ image DANS le menu déroulant (repas.jpg) -->
           <div class="inner-img">
             <img src="repas.jpg" alt="Règle et vie commune – évocation symbolique">
           </div>
@@ -564,7 +587,7 @@
         </div>
       </details>
 
-      <!-- 4 (blason inside, pour équilibre) -->
+      <!-- 4 -->
       <details class="section-card alt" aria-label="Autonomie pontificale, finances, lettres de change et reliques">
         <summary>Autonomie pontificale, finances, lettres de change et reliques</summary>
         <div class="details-inner">
@@ -583,7 +606,7 @@
         </div>
       </details>
 
-      <!-- 5 (blason inside, pour équilibre) -->
+      <!-- 5 -->
       <details class="section-card" aria-label="Carrefour des savoirs : échanges, médecine et vision du monde">
         <summary>Carrefour des savoirs : échanges, médecine et vision du monde</summary>
         <div class="details-inner">
@@ -602,7 +625,7 @@
         </div>
       </details>
 
-      <!-- 6 (blason inside, pour équilibre) -->
+      <!-- 6 -->
       <details class="section-card alt" aria-label="Trésor, puissance, dissolution et héritage">
         <summary>Trésor, puissance, dissolution et héritage</summary>
         <div class="details-inner">
@@ -619,8 +642,8 @@
         </div>
       </details>
 
-      <!-- 7 (✅ cadre FIXE sticky pour les derniers paragraphes) -->
-      <details class="section-card sticky-final" aria-label="Notre fidélité : vocation historique, culturelle et intellectuelle" open>
+      <!-- 7 -->
+      <details class="section-card" aria-label="Notre fidélité : vocation historique, culturelle et intellectuelle">
         <summary>Notre fidélité : vocation historique, culturelle et intellectuelle</summary>
         <div class="details-inner">
 
