@@ -76,7 +76,10 @@
       overflow:hidden;
       font-family: 'Lato', Arial, sans-serif;
       color: var(--clair);
-      background: #000;
+
+      /* ✅ fond plus joli : noir profond + dégradé subtil */
+      background: radial-gradient(circle at top, #1a1a1a 0%, #050505 55%, #000 100%);
+
       text-align: center;
       position: relative;
     }
@@ -96,8 +99,8 @@
       content: "";
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at top, rgba(0,0,0,0.2), rgba(0,0,0,0.95)),
-                  linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.98));
+      background: radial-gradient(circle at top, rgba(0,0,0,0.15), rgba(0,0,0,0.92)),
+                  linear-gradient(to bottom, rgba(0,0,0,0.32), rgba(0,0,0,0.985));
       z-index: -1;
     }
 
@@ -398,6 +401,13 @@
         display:flex;
         width:100%;
         justify-content:center;
+      }
+    }
+
+    /* ✅ Centrage des tabs AUSSI sur mobile (sans casser le scroll horizontal) */
+    @media (max-width: 699px){
+      .tabs{
+        justify-content: center;
       }
     }
 
@@ -994,6 +1004,17 @@
               Je fais mienne cette formule solennelle et je demande respectueusement à être
               reçu(e) comme Novice au sein de l’O.S.D.9.T.D.J., sous réserve de la décision du
               Grand Maître assisté de deux Commandeurs.
+            </label>
+          </div>
+
+          <!-- ✅ Clause ajoutée : renouvellement tacite annuel après validation -->
+          <div class="check-group">
+            <label>
+              <input type="checkbox" name="Renouvellement_tacite_annuel" required>
+              Je reconnais qu’une fois ma demande acceptée et mon adhésion validée, mon adhésion est
+              <strong>tacitement renouvelée chaque année</strong>, sans nécessité de remplir à nouveau ce
+              formulaire, sauf notification écrite de ma part dans les conditions prévues par les statuts
+              et/ou le règlement intérieur.
             </label>
           </div>
 
