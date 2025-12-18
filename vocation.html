@@ -182,6 +182,36 @@
       height: auto;
     }
 
+    /* ✅ image intégrée DANS les menus déroulants (équilibre visuel) */
+    .inner-img{
+      margin: 10px auto 18px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 28px rgba(0,0,0,0.85);
+      border: 2px solid rgba(214,167,40,0.82);
+      max-width: 820px;
+    }
+    .inner-img img{
+      display:block;
+      width: 100%;
+      height: auto;
+      max-width: 84vw;
+    }
+
+    /* ✅ blason en séparateur noble (sans mélanger les 3 photos) */
+    .inner-blason{
+      margin: 10px auto 18px;
+      width: 180px;
+      max-width: 60vw;
+      opacity: 0.96;
+      filter: drop-shadow(0 0 14px rgba(0,0,0,0.85));
+    }
+    .inner-blason img{
+      width: 100%;
+      height: auto;
+      display:block;
+    }
+
     h1 {
       font-family: 'Cinzel', serif;
       font-size: 1.95rem;
@@ -381,6 +411,16 @@
       position: relative;
     }
 
+    /* ✅ Derniers paragraphes en cadre "fixe" (sticky) */
+    .sticky-final{
+      position: sticky;
+      bottom: 14px;
+      z-index: 12;
+      box-shadow:
+        0 18px 40px rgba(0,0,0,0.72),
+        0 0 0 1px rgba(214,167,40,0.18) inset;
+    }
+
     @media (max-width: 600px) {
       h1 { font-size: 1.6rem; }
       h2 { font-size: 1.05rem; }
@@ -411,6 +451,8 @@
       .menu-panel{ width: 240px; }
       .frame-fixed{ inset: 12px; }
       .viewport-scroll{ inset: 20px; }
+
+      .inner-blason{ width: 150px; }
     }
   </style>
 
@@ -456,22 +498,24 @@
   <div class="viewport-scroll">
     <div class="container">
 
-      <!-- HERO : temple.PNG -->
-      <div class="image-box">
-        <img src="temple.PNG" alt="Temple – évocation symbolique">
+      <!-- ✅ BLASON EN HAUT -->
+      <div class="image-box" style="max-width:520px;">
+        <img src="blason-osd9tdj.PNG" alt="Blason – O.S.D.9.T.D.J.">
       </div>
 
       <h1>ORDRE SACRÉ DES NEUF TEMPLIERS DE JÉRUSALEM</h1>
       <h2>Notre vocation historique</h2>
 
-      <!-- ✅ BLOC 1 : pelerin.PNG -->
-      <div class="image-box" style="margin-top:22px;">
-        <img src="pelerin.PNG" alt="Protection des pèlerins – évocation symbolique">
-      </div>
-
+      <!-- 1 -->
       <details class="section-card" open aria-label="Contexte : routes, pèlerinages et naissance d’une mission">
         <summary>Contexte : routes, pèlerinages et naissance d’une mission</summary>
         <div class="details-inner">
+
+          <!-- ✅ image DANS le menu déroulant (pelerin.PNG) -->
+          <div class="inner-img">
+            <img src="pelerin.PNG" alt="Protection des pèlerins – évocation symbolique">
+          </div>
+
           <p>Lorsque l’on évoque les Templiers, l’imaginaire moderne se tourne souvent vers les légendes, les trésors cachés ou les mystères romancés. Pourtant, l’histoire réelle de l’Ordre du Temple est bien plus dense, plus humaine et plus déterminante que toutes les fictions qui lui ont été ajoutées. Elle commence à une date précise, dans un lieu précis, face à un problème très concret.</p>
           <div class="soft-sep"></div>
           <p>Après la prise de Jérusalem en 1099, à l’issue de la première croisade, la Terre sainte n’est pas pacifiée. Les routes sont dangereuses, les pèlerins sont attaqués, rançonnés ou tués, et le jeune royaume latin de Jérusalem, constitué entre 1099 et 1101, manque cruellement de forces organisées capables d’assurer une protection durable. Le pèlerinage, pourtant encouragé par l’Église depuis la fin du XIᵉ siècle, est devenu une épreuve risquée, parfois mortelle.</p>
@@ -484,14 +528,16 @@
         </div>
       </details>
 
-      <!-- ✅ BLOC 2 : temple.PNG -->
-      <div class="image-box" style="margin-top:22px;">
-        <img src="temple.PNG" alt="Temple – mémoire et rigueur historique">
-      </div>
-
+      <!-- 2 -->
       <details class="section-card alt" aria-label="Temple, discrétion initiale et reconnaissance officielle">
         <summary>Temple, discrétion initiale et reconnaissance officielle</summary>
         <div class="details-inner">
+
+          <!-- ✅ image DANS le menu déroulant (temple.PNG) -->
+          <div class="inner-img">
+            <img src="temple.PNG" alt="Temple – mémoire et rigueur historique">
+          </div>
+
           <p>Ils sont peu nombreux — traditionnellement neuf —, vivent pauvrement, sans reconnaissance officielle immédiate, logés à proximité de l’esplanade associée à l’ancien Temple de Salomon. Ce Temple, il faut le rappeler avec rigueur, est détruit depuis des siècles, notamment après les événements de 70 apr. J.-C. : les Templiers ne voient pas un édifice biblique debout, mais un lieu chargé de mémoire, symbole d’ordre, de Loi et de sacralité. Toute représentation ultérieure d’un Temple reconstruit relève donc d’une évocation symbolique, jamais d’une reconstitution historique.</p>
           <div class="soft-sep"></div>
           <p>Pendant près de neuf années, entre 1120 et 1128, ces hommes agissent dans une relative discrétion. Ce silence initial est fondamental : il montre que l’Ordre ne naît pas d’une ambition de pouvoir, mais d’une nécessité concrète. Ce n’est qu’en 1128–1129, lors du concile de Troyes, que l’initiative reçoit une reconnaissance officielle, sous l’autorité du pape Honorius II, avec l’appui décisif de Bernard de Clairvaux.</p>
@@ -500,14 +546,16 @@
         </div>
       </details>
 
-      <!-- ✅ BLOC 3 : repas.jpg -->
-      <div class="image-box" style="margin-top:22px;">
-        <img src="repas.jpg" alt="Règle et vie commune – évocation symbolique">
-      </div>
-
+      <!-- 3 -->
       <details class="section-card" aria-label="Règle, rangs, dépouillement et discipline">
         <summary>Règle, rangs, dépouillement et discipline</summary>
         <div class="details-inner">
+
+          <!-- ✅ image DANS le menu déroulant (repas.jpg) -->
+          <div class="inner-img">
+            <img src="repas.jpg" alt="Règle et vie commune – évocation symbolique">
+          </div>
+
           <p>Il faut ici préciser une nuance essentielle, souvent mal comprise. Lorsqu’un homme est reçu au Temple comme chevalier, il l’est parce qu’il est déjà chevalier avant son entrée. La Règle primitive du Temple précise qu’il doit disposer de ses chevaux, de ses armes et de son équipement au moment de son admission. Ces biens sont alors consignés par l’Ordre : ils ne lui appartiennent plus en propre, mais sont mis au service du Temple après le serment de fidélité. En entrant, le chevalier renonce également à ses titres, à ses droits personnels et à toute seigneurie individuelle. C’est précisément pour cette raison qu’un homme sans statut chevaleresque, sans biens ni titres à remettre, ne peut pas être reçu comme chevalier du Temple : il pourra devenir frère-sergent, mais non chevalier. Cette exigence illustre le caractère radical de l’engagement templier, fondé sur le dépouillement d’un homme déjà accompli, et non sur la fabrication d’un statut nouveau.</p>
           <div class="soft-sep"></div>
           <p>Un homme sans cheval, sans moyens, ne peut donc pas être reçu comme chevalier. Il peut devenir frère-sergent, rôle essentiel de l’Ordre, chargé de missions militaires, logistiques et administratives, mais distinct du rang chevaleresque. À côté de ces deux catégories existent les chapelains, seuls membres ordonnés, chargés de la liturgie et des sacrements. Il n’y a pas, à l’origine, de titres inventés ni de hiérarchies symboliques tardives : la structure est fonctionnelle, claire et conforme aux réalités médiévales.</p>
@@ -516,9 +564,15 @@
         </div>
       </details>
 
+      <!-- 4 (blason inside, pour équilibre) -->
       <details class="section-card alt" aria-label="Autonomie pontificale, finances, lettres de change et reliques">
         <summary>Autonomie pontificale, finances, lettres de change et reliques</summary>
         <div class="details-inner">
+
+          <div class="inner-blason" aria-hidden="true">
+            <img src="blason-osd9tdj.PNG" alt="">
+          </div>
+
           <p>Très rapidement, l’Ordre reçoit un statut exceptionnel. Par la bulle Omne Datum Optimum en 1139, puis par d’autres textes pontificaux au cours du XIIᵉ siècle, les Templiers sont placés directement sous l’autorité du pape, échappant aux évêques locaux. Ils peuvent posséder des terres, bâtir, circuler librement, percevoir des revenus et rendre leur propre justice interne. Cette autonomie constitue une véritable révolution institutionnelle dans l’Europe médiévale.</p>
           <div class="soft-sep"></div>
           <p>Parallèlement, l’Ordre met en place une administration financière d’une efficacité inédite. Un pèlerin peut déposer sa fortune dans une maison du Temple en Europe, recevoir un document de dépôt et de transfert — souvent appelé lettre de change — puis récupérer l’équivalent à Jérusalem ou dans une autre commanderie. Cette organisation réduit considérablement le risque d’être attaqué pour son argent pendant le voyage et renforce la sécurité globale des pèlerinages.</p>
@@ -529,9 +583,15 @@
         </div>
       </details>
 
+      <!-- 5 (blason inside, pour équilibre) -->
       <details class="section-card" aria-label="Carrefour des savoirs : échanges, médecine et vision du monde">
         <summary>Carrefour des savoirs : échanges, médecine et vision du monde</summary>
         <div class="details-inner">
+
+          <div class="inner-blason" aria-hidden="true">
+            <img src="blason-osd9tdj.PNG" alt="">
+          </div>
+
           <p>Le Proche-Orient du XIIᵉ siècle est l’un des grands carrefours de civilisation du monde médiéval. Le monde islamique y possède des savoirs avancés en médecine, astronomie, mathématiques et sciences de la nature, hérités des traditions grecques, persanes, égyptiennes et hébraïques. Malgré les conflits, les États latins d’Orient deviennent des zones de contact permanent entre cultures savantes.</p>
           <div class="soft-sep"></div>
           <p>Ces contacts prennent parfois des formes concrètes et surprenantes. Durant certaines périodes de trêve et de relations pratiques, des échanges de courtoisie et de respect religieux ont lieu. Des récits médiévaux rapportent que, sur l’esplanade même où les Templiers sont installés, des musulmans ont pu être autorisés à prier dans des espaces précis, sous protection, illustrant que la réalité du terrain dépasse souvent les clichés de guerre permanente.</p>
@@ -542,9 +602,15 @@
         </div>
       </details>
 
+      <!-- 6 (blason inside, pour équilibre) -->
       <details class="section-card alt" aria-label="Trésor, puissance, dissolution et héritage">
         <summary>Trésor, puissance, dissolution et héritage</summary>
         <div class="details-inner">
+
+          <div class="inner-blason" aria-hidden="true">
+            <img src="blason-osd9tdj.PNG" alt="">
+          </div>
+
           <p>À partir du milieu du XIIᵉ siècle, la puissance des Templiers ne repose plus seulement sur les routes et les forteresses, mais aussi sur leur fiabilité financière. Leur réseau de commanderies inspire une telle confiance que des souverains leur confient des fonds considérables. En France, l’Ordre devient le gardien du Trésor royal, conservé notamment dans l’enceinte du Temple de Paris, où sont déposés argent, chartes et biens de la Couronne. D’autres royaumes européens utilisent également leurs services, attirés par leur discipline, leur neutralité et leur organisation centralisée.</p>
           <div class="soft-sep"></div>
           <p>Cette position place progressivement l’Ordre au cœur des équilibres financiers et politiques. Au début du XIVᵉ siècle, le roi Philippe IV le Bel, lourdement endetté et engagé dans une politique de centralisation autoritaire, voit dans l’Ordre du Temple une institution trop indépendante et trop puissante. Lorsque le pape Clément V prononce la dissolution de l’Ordre en 1312, après l’arrestation massive des Templiers le 13 octobre 1307, il ne s’agit pas seulement d’une affaire religieuse : c’est aussi l’aboutissement d’un rapport de force politique et financier. Le dernier grand maître, Jacques de Molay, est exécuté en 1314.</p>
@@ -553,9 +619,15 @@
         </div>
       </details>
 
-      <details class="section-card" aria-label="Notre fidélité : vocation historique, culturelle et intellectuelle">
+      <!-- 7 (✅ cadre FIXE sticky pour les derniers paragraphes) -->
+      <details class="section-card sticky-final" aria-label="Notre fidélité : vocation historique, culturelle et intellectuelle" open>
         <summary>Notre fidélité : vocation historique, culturelle et intellectuelle</summary>
         <div class="details-inner">
+
+          <div class="inner-blason" aria-hidden="true">
+            <img src="blason-osd9tdj.PNG" alt="">
+          </div>
+
           <p>C’est cette origine historique, précise, datée et documentée — et non une reconstruction fantasmée — que l’Ordre Sacré des Neuf Templiers de Jérusalem revendique aujourd’hui. Non pas comme une filiation juridique ou militaire, mais comme une fidélité à l’idée fondatrice : celle d’hommes déjà formés, déjà chevaliers, entrant librement dans une fraternité exigeante, jurant fidélité à une mission, à une règle et à un engagement.</p>
           <div class="soft-sep"></div>
           <p>Étudier les Templiers, c’est étudier un moment où l’Occident a changé de visage. C’est comprendre comment, à Jérusalem, au début du XIIᵉ siècle, une poignée de chevaliers a contribué à transformer durablement la chevalerie, la société et la circulation des savoirs. Et c’est cette vocation — historique, culturelle et intellectuelle — que notre Ordre entend poursuivre aujourd’hui, dans un cadre civil, associatif et rigoureusement fidèle à la vérité historique.</p>
