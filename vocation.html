@@ -235,6 +235,26 @@
       display:block;
     }
 
+    /* ✅ FIX: mêmes proportions + même cadre doré que les 3 premières images,
+       pour les 4 dernières photos (img1 à img4) qui étaient plus petites et sans cadre. */
+    .inner-blason.is-photo{
+      width: auto;                 /* on ne force plus 180px */
+      max-width: 820px;            /* cohérent avec .inner-img */
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 28px rgba(0,0,0,0.85);
+      border: 2px solid rgba(214,167,40,0.82);
+      margin: 10px auto 18px;
+      opacity: 1;                  /* on évite de "ternir" une photo */
+      filter: none;                /* pas de drop-shadow sur le conteneur */
+    }
+    .inner-blason.is-photo img{
+      width: 100%;
+      height: auto;
+      max-width: 84vw;
+      display: block;
+    }
+
     h1 {
       font-family: 'Cinzel', serif;
       font-size: 1.95rem;
@@ -467,6 +487,9 @@
 
       .inner-blason{ width: 150px; }
       .blason-frame img{ width: 360px; max-width: 88vw; }
+
+      /* ✅ mobile: cohérent avec .inner-img */
+      .inner-blason.is-photo{ max-width: 820px; }
     }
   </style>
 
@@ -592,7 +615,7 @@
         <summary>Autonomie pontificale, finances, lettres de change et reliques</summary>
         <div class="details-inner">
 
-          <div class="inner-blason" aria-hidden="true">
+          <div class="inner-blason is-photo" aria-hidden="true">
             <img src="img1.jpg" alt="">
           </div>
 
@@ -611,7 +634,7 @@
         <summary>Carrefour des savoirs : échanges, médecine et vision du monde</summary>
         <div class="details-inner">
 
-          <div class="inner-blason" aria-hidden="true">
+          <div class="inner-blason is-photo" aria-hidden="true">
             <img src="img2.jpg" alt="">
           </div>
 
@@ -630,7 +653,7 @@
         <summary>Trésor, puissance, dissolution et héritage</summary>
         <div class="details-inner">
 
-          <div class="inner-blason" aria-hidden="true">
+          <div class="inner-blason is-photo" aria-hidden="true">
             <img src="img3.jpg" alt="">
           </div>
 
@@ -647,7 +670,7 @@
         <summary>Notre fidélité : vocation historique, culturelle et intellectuelle</summary>
         <div class="details-inner">
 
-          <div class="inner-blason" aria-hidden="true">
+          <div class="inner-blason is-photo" aria-hidden="true">
             <img src="img4.jpg" alt="">
           </div>
 
