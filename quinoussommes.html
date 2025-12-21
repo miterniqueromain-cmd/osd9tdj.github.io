@@ -306,35 +306,41 @@
     /* ✅ AJOUT : 2 boutons coulissants (sans changer le style des boutons) */
     .big-history-slider{
       display: inline-flex;
-      gap: 12px;
+      align-items: center;
+      gap: 26px;
       max-width: 100%;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-      padding: 2px 2px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #f3d98b, #d6a728);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.8);
     }
     .big-history-slider::-webkit-scrollbar{ display:none; }
 
+    /* ✅ Liens DANS la barre jaune (plus de pastilles séparées) */
     .big-history-btn{
       display:inline-block;
-      padding:12px 26px;
-      border-radius:999px;
+      padding: 0;
+      border-radius: 0;
       font-family:'Cinzel',serif;
       font-weight:700;
       letter-spacing:0.04em;
       text-decoration:none;
       color:#120702;
-      background:linear-gradient(to right, #f3d98b, #d6a728);
-      box-shadow:0 4px 10px rgba(0,0,0,0.8);
+      background: transparent;
+      box-shadow: none;
       white-space: nowrap;
       flex: 0 0 auto;
     }
     .big-history-btn:hover{
-      filter: brightness(1.05);
-      transform: translateY(-1px);
+      filter: none;
+      transform: none;
+      text-decoration: underline;
     }
 
-    .tabs{
+.tabs{
       margin: 18px auto 0;
       display: inline-flex;
       max-width: 100%;
