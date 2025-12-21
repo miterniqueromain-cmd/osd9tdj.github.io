@@ -240,6 +240,18 @@
       opacity: 1;                  /* on évite de "ternir" une photo */
       filter: none;                /* pas de drop-shadow sur le conteneur */
     }
+    
+    .img-caption{
+      margin: -6px auto 10px;
+      max-width: 820px;
+      font-size: 0.92rem;
+      line-height: 1.45;
+      opacity: 0.92;
+      text-align: center;
+      color: rgba(248,232,200,0.88);
+    }
+
+
     .inner-blason.is-photo img{
       width: 100%;
       height: auto;
@@ -522,10 +534,36 @@
       z-index: 2;
     }
 
+  
+    /* ✅ TABLETTE : images stables + largeur harmonisée */
+    @media (min-width: 601px) and (max-width: 1024px){
+      .inner-img, .inner-blason.is-photo{ max-width: 900px; }
+      .inner-img img, .inner-blason.is-photo img{ max-width: 92vw; }
+      .blason-frame img{ max-width: 86vw; }
+      .section-card p{ font-size: 1.06rem; line-height: 1.72; }
+    }
+
   </style>
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
   <link rel="apple-touch-icon" href="icon-192.png">
+
+  <!-- JSON-LD (SEO renforcé) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Bernard de Clairvaux – Règle du Temple et « De laude novae militiae »",
+    "inLanguage": "fr",
+    "about": ["Bernard de Clairvaux","Ordre du Temple","Concile de Troyes","Règle primitive","De laude novae militiae"],
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J.",
+      "url": "https://osd9tdj.org/"
+    }
+  }
+  </script>
+
 </head>
 
 <body>
@@ -563,7 +601,7 @@
     <div class="container">
 
       <div class="blason-frame" aria-label="Blason O.S.D.9.T.D.J.">
-        <img src="blason-osd9tdj.PNG" alt="Blason – O.S.D.9.T.D.J.">
+        <img src="templiers-ix.PNG" alt="Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J.">
       </div>
 
       <h1>SAINT BERNARD DE CLAIRVAUX</h1>
@@ -598,7 +636,7 @@
       </details>
 
       <div class="inner-img"><img src="ber_temple.png" alt="Idéal templier – enluminure"></div>
-      <div class="inner-img"><img src="l’audace.png" alt="Nouvelle chevalerie – enluminure"></div>
+      <div class="inner-img"><img src="l'audace.png" alt="Nouvelle chevalerie – enluminure"></div>
       <div class="inner-img"><img src="enluminure.png" alt="Manuscrit enluminé médiéval"></div>
       <div class="inner-img"><img src="re.png" alt="Manuscrit latin médiéval"></div>
 
@@ -840,7 +878,63 @@
     </div>
   </details>
 
-  <!-- Signature nnDnn -->
+  
+      <!-- 8 -->
+      <details class="section-card alt" aria-label="Textes de référence : version latine et traité De laude novae militiae">
+        <summary>Textes de référence : version latine & « De laude novae militiae »</summary>
+        <div class="details-inner">
+
+          <div class="inner-img">
+            <img src="regle.png" alt="Règle – manuscrit (illustration)">
+          </div>
+          <div class="img-caption">Repères : concile de Troyes (1128–1129), règle primitive (72 chapitres), et l’exhortation de Bernard.</div>
+
+          <p><strong>Pourquoi ajouter la version latine ?</strong> Parce que c’est le socle le plus sûr lorsqu’on veut être irréprochable : le latin médiéval permet de vérifier les termes (obéissance, pauvreté, discipline, office divin) et d’éviter les contresens de certaines « récupérations » modernes.</p>
+
+          <div class="soft-sep"></div>
+
+          <p><strong>1) « De laude novae militiae » (Bernard de Clairvaux, vers 1129–1130)</strong><br>
+          Ce texte est une <strong>exhortation</strong> adressée à Hugues de Payns et à ses frères. Bernard y oppose la chevalerie mondaine (vanité, violence, gloire) à la « nouvelle chevalerie » (discipline, obéissance, finalité spirituelle).</p>
+
+          <div class="soft-sep"></div>
+
+          <p><strong>Extraits latins (repères vérifiables)</strong> :</p>
+          <pre style="white-space:pre-wrap; text-align:left; background:rgba(0,0,0,0.25); border:1px solid rgba(214,167,40,0.22); padding:14px; border-radius:14px;">
+Novum militiae genus ortum nuper auditur in terris...
+Impavidus profecto miles, et omni ex parte securus...
+Quid enim vel vivens, vel moriens metuat, cui vivere Christus est, et mori lucrum?
+          </pre>
+
+          <p style="text-align:left;">
+            <strong>Source latine consultable (référence)</strong> :
+            <a href="https://www.thelatinlibrary.com/bernardclairvaux.shtml" style="color: var(--or); text-decoration: underline;">The Latin Library – Bernardus Claraevallensis</a>.
+          </p>
+
+          <div class="soft-sep"></div>
+
+          <p><strong>2) Règle primitive (concile de Troyes)</strong><br>
+          La « règle » reçue au concile est structurée et pratique : office, pauvreté, hiérarchie, discipline, vie commune, et régulation de l’équipement. Dans l’idéal, on confronte toute traduction moderne au latin quand une nuance est litigieuse.</p>
+
+          <p><strong>Incipit latin (prologue, repère classique)</strong> :</p>
+          <pre style="white-space:pre-wrap; text-align:left; background:rgba(0,0,0,0.25); border:1px solid rgba(214,167,40,0.22); padding:14px; border-radius:14px;">
+Incipit prologus Regulæ pauperum commilitonum Christi, Templique Salomonis.
+Omnibus in primis sermo noster dirigitur, quicumque proprias voluntates sequi contemnunt...
+          </pre>
+
+          <p style="text-align:left;">
+            <strong>Manuscrit / témoins</strong> :
+            <a href="https://gallica.bnf.fr/ark:/12148/btv1b10032810q.image" style="color: var(--or); text-decoration: underline;">Gallica (BnF) – témoins manuscrits</a>.
+          </p>
+
+          <div class="soft-sep"></div>
+
+          <p><strong>Important (anti-récupérations)</strong> : la littérature moderne (courants occultistes, « rose-croix » et autres relectures) a parfois projeté sur le Temple des idées tardives. Ici, on reste volontairement <strong>à hauteur de sources</strong> : dates, contexte, et textes contrôlables.</p>
+
+        </div>
+      </details>
+
+
+      <!-- Signature nnDnn -->
   <div class="nndnn-banner" aria-label="Signature templière nnDnn">
     <img src="croix.epee.PNG" alt="Épée – symbole">
     <div class="nndnn-text">nnDnn</div>
