@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Saint Bernard – Règle primitive du Temple – O.S.D.9.T.D.J.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <meta name="description" content="Saint Bernard de Clairvaux : biographie, rôle au concile de Troyes et fondation spirituelle de la nouvelle chevalerie. Règle primitive du Temple (1129) présentée article par article.">
+  <meta name="keywords" content="Saint Bernard de Clairvaux, Bernard de Clairvaux, Templiers, Règle primitive du Temple, concile de Troyes, nouvelle chevalerie">
+  <link rel="canonical" href="https://osd9tdj.org/bernard.html">
+
+  <!-- OpenGraph -->
+  <meta property="og:title" content="Saint Bernard – Règle primitive du Temple – O.S.D.9.T.D.J.">
+  <meta property="og:description" content="Biographie de Saint Bernard, fondation spirituelle du Temple, et Règle primitive (1129) présentée article par article.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://osd9tdj.org/bernard.html">
+
+  <!-- WATERMARK INVISIBLE -->
+  <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-BERNARD-REGLE-TEMPLE">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    :root {
+      --or: #d6a728;
+      --clair: #f8e8c8;
+      --fond: #120702;
+
+      /* doré adouci */
+      --or-line: rgba(214,167,40,0.40);
+      --or-line2: rgba(214,167,40,0.24);
+      --or-glow: rgba(214,167,40,0.10);
+
+      /* fonds doux (moins lourds) */
+      --card: rgba(0,0,0,0.18);
+      --card2: rgba(0,0,0,0.10);
+    }
+
+    /* ✅ CADRE FIXE + SCROLL DEDANS */
+    html, body{
+      height:100%;
+      margin:0;
+      padding:0;
+      overflow:hidden; /* ✅ pas de scroll sur le body */
+      font-family: 'Lato', Arial, sans-serif;
+      color: var(--clair);
+      text-align: center;
+      background: radial-gradient(circle at top, #3a2513, var(--fond) 70%);
+    }
+
+    .frame-fixed{
+      position: fixed;
+      inset: 14px;
+      border-radius: 22px;
+      border: 2px solid rgba(214,167,40,0.55);
+      box-shadow:
+        0 0 0 1px rgba(248,232,200,0.16) inset,
+        0 0 38px rgba(0,0,0,0.35);
+      pointer-events: none; /* ✅ le cadre ne bloque pas */
+      z-index: 40;
+    }
+
+    /* ✅ 4 fleurs de lys (UNICODE) dans les angles */
+    .lys{
+      position:absolute;
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size: 18px;
+      color: var(--or);
+      opacity: 0.55;
+      text-shadow: 0 0 12px rgba(0,0,0,0.65);
+    }
+    .lys.tl{ top:10px; left:12px; }
+    .lys.tr{ top:10px; right:12px; }
+    .lys.bl{ bottom:10px; left:12px; }
+    .lys.br{ bottom:10px; right:12px; }
+
+    /* ✅ zone qui défile à l'intérieur du cadre */
+    .viewport-scroll{
+      position: fixed;
+      inset: 22px;                /* un peu à l'intérieur du cadre */
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+      padding: 30px 15px 44px;    /* on garde TES paddings */
+      box-sizing: border-box;
+    }
+
+    /* ✅ menu 3 points (TOUTES PAGES) */
+    .top-menu{
+      position: fixed;
+      top: 26px;
+      right: 26px;
+      z-index: 60;
+      pointer-events: auto; /* ✅ cliquable */
+    }
+    .top-menu details{
+      position: relative;
+    }
+    .top-menu summary{
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      width: 46px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(214,167,40,0.55);
+      background: rgba(0,0,0,0.22);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+      font-family:'Cinzel',serif;
+      color: var(--or);
+      font-size: 22px;
+      line-height: 1;
+    }
+    .top-menu summary::-webkit-details-marker{ display:none; }
+
+    .menu-panel{
+      position: absolute;
+      right: 0;
+      margin-top: 10px;
+      width: 260px;
+      max-width: calc(100vw - 60px);
+      border-radius: 14px;
+      border: 1px solid rgba(214,167,40,0.45);
+      background: rgba(0,0,0,0.70);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+      overflow: hidden;
+    }
+    .menu-panel a{
+      display:block;
+      padding: 11px 12px;
+      text-decoration:none;
+      color: rgba(248,232,200,0.92);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(214,167,40,0.18);
+    }
+    .menu-panel a:hover{
+      background: rgba(214,167,40,0.12);
+      color: #fff;
+    }
+    .menu-panel a:last-child{ border-bottom: none; }
+
+    /* ========= TON DESIGN EXISTANT (INCHANGÉ) ========= */
+
+    .container {
+      min-height: auto;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .image-box {
+      margin-top: 10px;
+      margin-bottom: 24px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
+      border: 2px solid rgba(214, 167, 40, 0.85);
+    }
+
+    .image-box img {
+      display: block;
+      max-width: 84vw;
+      width: 720px;
+      height: auto;
+    }
+
+    /* ✅ Blason encadré (petit cadre doré élégant) */
+    .blason-frame{
+      display:inline-block;
+      border-radius: 18px;
+      padding: 10px;
+      border: 1px solid rgba(214,167,40,0.55);
+      background: rgba(0,0,0,0.18);
+      box-shadow:
+        0 10px 26px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(248,232,200,0.12) inset;
+      margin: 6px 0 22px;
+      max-width: 92vw;
+    }
+    .blason-frame img{
+      display:block;
+      width: 520px;
+      max-width: 84vw;
+      height:auto;
+      border-radius: 14px;
+      border: 2px solid rgba(214,167,40,0.75);
+      box-shadow: 0 0 30px rgba(0,0,0,0.85);
+    }
+
+    /* ✅ image intégrée DANS les menus déroulants (équilibre visuel) */
+    .inner-img{
+      margin: 10px auto 18px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 28px rgba(0,0,0,0.85);
+      border: 2px solid rgba(214,167,40,0.82);
+      max-width: 820px;
+    }
+    .inner-img img{
+      display:block;
+      width: 100%;
+      height: auto;
+      max-width: 84vw;
+    }
+
+    /* ✅ blason en séparateur noble (sans mélanger les 3 photos) */
+    .inner-blason{
+      margin: 10px auto 18px;
+      width: 180px;
+      max-width: 60vw;
+      opacity: 0.96;
+      filter: drop-shadow(0 0 14px rgba(0,0,0,0.85));
+    }
+    .inner-blason img{
+      width: 100%;
+      height: auto;
+      display:block;
+    }
+
+    /* ✅ FIX: mêmes proportions + même cadre doré que les 3 premières images,
+       pour les 4 dernières photos (img1 à img4) qui étaient plus petites et sans cadre. */
+    .inner-blason.is-photo{
+      width: auto;                 /* on ne force plus 180px */
+      max-width: 820px;            /* cohérent avec .inner-img */
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 28px rgba(0,0,0,0.85);
+      border: 2px solid rgba(214,167,40,0.82);
+      margin: 10px auto 18px;
+      opacity: 1;                  /* on évite de "ternir" une photo */
+      filter: none;                /* pas de drop-shadow sur le conteneur */
+    }
+    .inner-blason.is-photo img{
+      width: 100%;
+      height: auto;
+      max-width: 84vw;
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.95rem;
+      margin: 10px 0 6px;
+    }
+
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.22rem;
+      margin-bottom: 18px;
+      font-weight: normal;
+      opacity: 0.9;
+    }
+
+    strong { font-weight: 700; }
+
+    .section-card{
+      width: 100%;
+      max-width: 920px;
+      margin: 22px auto;
+      padding: 22px 22px;
+      text-align: justify;
+
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border-radius: 20px;
+      border: 1px solid var(--or-line);
+
+      box-shadow:
+        0 8px 22px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(0,0,0,0.14) inset;
+
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(circle at 18% 0%, var(--or-glow), transparent 62%),
+        radial-gradient(circle at 86% 115%, rgba(248,232,200,0.05), transparent 58%);
+      pointer-events:none;
+      opacity: 0.95;
+    }
+
+    .section-card.alt{
+      background: linear-gradient(180deg, rgba(0,0,0,0.20), rgba(0,0,0,0.12));
+      border-color: var(--or-line2);
+    }
+    .section-card.alt::before{
+      background:
+        radial-gradient(circle at 82% 0%, var(--or-glow), transparent 64%),
+        radial-gradient(circle at 12% 120%, rgba(248,232,200,0.05), transparent 58%);
+    }
+
+    .section-card p{
+      position: relative;
+      max-width: 880px;
+      margin: 18px auto;
+      font-size: 1.08rem;
+      line-height: 1.72;
+      letter-spacing: 0.01em;
+    }
+
+    .soft-sep{
+      position: relative;
+      height: 14px;
+      max-width: 820px;
+      margin: 6px auto 2px;
+    }
+    .soft-sep::after{
+      content:"";
+      position:absolute;
+      left: 10%;
+      right: 10%;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(214,167,40,0.28), transparent);
+      opacity: 0.9;
+      transform: translateY(-50%);
+    }
+
+    .tabs{
+      margin: 18px auto 0;
+      display: inline-flex;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      border-radius: 999px;
+      overflow-y: hidden;
+      border: 1px solid rgba(214,167,40,0.55);
+      background: rgba(0,0,0,0.18);
+      backdrop-filter: blur(6px);
+    }
+    .tabs::-webkit-scrollbar{display:none;}
+    .tab{
+      flex:0 0 auto;
+      padding:10px 18px;
+      text-decoration:none;
+      color:var(--clair);
+      font-size:0.93rem;
+      font-weight:700;
+      font-family:'Cinzel',serif;
+      background:rgba(0,0,0,0.42);
+      transition: background 0.2s ease, color 0.2s ease;
+      white-space:nowrap;
+    }
+    .tab + .tab{ border-left:1px solid rgba(214,167,40,0.35); }
+    .tab:hover{ background:rgba(214,167,40,0.20); color:#fff; }
+
+    .footer-min{
+      margin-top: 26px;
+      padding-top: 14px;
+      width: 100%;
+      max-width: 980px;
+      border-top: 1px solid rgba(214,167,40,0.22);
+      opacity: 0.92;
+    }
+    .footer-min .line{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      font-size:0.78rem;
+      color: rgba(248,232,200,0.85);
+    }
+    .footer-min a{
+      font-size:0.72rem;
+      text-transform: lowercase;
+      letter-spacing: 0.02em;
+      color: rgba(248,232,200,0.78);
+      text-decoration:none;
+      border-bottom: 1px dotted rgba(214,167,40,0.55);
+      padding-bottom: 1px;
+    }
+    .footer-min a:hover{
+      color:#fff;
+      border-bottom-color: rgba(214,167,40,0.95);
+    }
+    .sep{ opacity:0.55; }
+
+    .nndnn-banner{
+      margin:26px auto 6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+      flex-wrap:nowrap;
+      text-align:center;
+    }
+    .nndnn-banner img{
+      height:48px;
+      width:auto;
+      display:block;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.85));
+      opacity:0.96;
+    }
+    .nndnn-text{
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-weight:700;
+      letter-spacing:0.18em;
+      text-transform:none;
+      font-size:2.05rem;
+      line-height:1;
+      text-shadow:0 0 14px rgba(0,0,0,0.9);
+      white-space:nowrap;
+    }
+
+    details.section-card{ padding: 0; }
+    details.section-card > summary{
+      list-style: none;
+      cursor: pointer;
+      padding: 22px 22px;
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      letter-spacing:0.04em;
+      color: var(--or);
+      text-transform: uppercase;
+      text-align: center;
+      position: relative;
+      user-select: none;
+    }
+    details.section-card > summary::-webkit-details-marker{ display:none; }
+    details.section-card > summary::after{
+      content:"▼";
+      margin-left:10px;
+      font-size:0.85rem;
+      opacity:0.9;
+    }
+    details.section-card[open] > summary::after{ content:"▲"; }
+    details.section-card .details-inner{
+      padding: 0 22px 12px;
+      position: relative;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.05rem; }
+      .section-card{
+        padding: 18px 14px;
+        border-radius: 18px;
+        margin: 20px auto;
+      }
+      .section-card p{
+        font-size: 1.02rem;
+        line-height: 1.70;
+        margin: 16px auto;
+      }
+      .tab{ padding:9px 16px; font-size:0.86rem; }
+      .image-box img{ width: 360px; max-width: 88vw; }
+      .soft-sep::after{ left: 6%; right: 6%; }
+
+      details.section-card > summary{
+        padding: 18px 14px;
+        font-size: 0.98rem;
+      }
+
+      .nndnn-banner{gap:10px;}
+      .nndnn-banner img{height:42px;}
+      .nndnn-text{font-size:1.55rem;}
+
+      .top-menu{ top:22px; right:22px; }
+      .menu-panel{ width: 240px; }
+      .frame-fixed{ inset: 12px; }
+      .viewport-scroll{ inset: 20px; }
+
+      .inner-blason{ width: 150px; }
+      .blason-frame img{ width: 360px; max-width: 88vw; }
+
+      /* ✅ mobile: cohérent avec .inner-img */
+      .inner-blason.is-photo{ max-width: 820px; }
+    }
+
+    /* ✅ TABLET FIX (garde le mobile intact) */
+    @media (min-width: 601px) and (max-width: 1024px) {
+      .inner-img,
+      .inner-blason.is-photo{
+        max-width: 92vw;
+      }
+      .inner-img img,
+      .inner-blason.is-photo img{
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+  
+    /* ✅ Liens internes (jaune) */
+    a.internal-link{
+      color: var(--or);
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(214,167,40,0.85);
+      padding-bottom: 1px;
+    }
+    a.internal-link:hover{
+      color: #fff;
+      border-bottom-color: rgba(214,167,40,1);
+    }
+    .link-hint{
+      text-align:center;
+      margin: 6px auto 14px;
+      font-family:'Cinzel',serif;
+      letter-spacing:0.03em;
+      font-size:0.92rem;
+      opacity: 0.95;
+      position: relative;
+      z-index: 2;
+    }
+
+  </style>
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+
+<body>
+
+  <div class="frame-fixed" aria-hidden="true">
+    <div class="lys tl">⚜️</div>
+    <div class="lys tr">⚜️</div>
+    <div class="lys bl">⚜️</div>
+    <div class="lys br">⚜️</div>
+  </div>
+
+  <div class="top-menu" aria-label="Menu du site">
+    <details>
+      <summary title="Menu">⋯</summary>
+      <div class="menu-panel" role="menu" aria-label="Navigation">
+        <a href="index.html"> Accueil</a>
+        <a href="quinoussommes.html"> Qui nous sommes</a>
+        <a href="histoire.html"> Notre histoire</a>
+        <a href="vocation.html"> Vocation historique</a>
+        <a href="activites.html"> Activités</a>
+        <a href="adhesion.html"> Adhésion</a>
+        <a href="commanderie.html"> Commanderie</a>
+        <a href="cotisations.html"> Cotisations</a>
+        <a href="assurance.html"> Assurance</a>
+        <a href="boutique.html"> Boutique</a>
+        <a href="statuts.html"> Statuts</a>
+        <a href="contact.html"> Contact</a>
+        <a href="mentions.html"> Mentions légales</a>
+        <a href="cookies.html"> Cookies</a>
+      </div>
+    </details>
+  </div>
+
+  <div class="viewport-scroll">
+    <div class="container">
+
+      <div class="blason-frame" aria-label="Blason O.S.D.9.T.D.J.">
+        <img src="blason-osd9tdj.PNG" alt="Blason – O.S.D.9.T.D.J.">
+      </div>
+
+      <h1>SAINT BERNARD DE CLAIRVAUX</h1>
+      <h2>Biographie – Nouvelle chevalerie – Règle primitive du Temple (1129)</h2>
+
+      <div class="inner-img"><img src="bernard_genoux.png" alt="Saint Bernard de Clairvaux en prière – enluminure"></div>
+
+      <section class="section-card alt">
+        <p>Bernard de Clairvaux (1090–1153) est l’une des figures spirituelles majeures du XIIᵉ siècle. Abbé de Clairvaux et maître cistercien, il joue un rôle décisif dans l’orientation morale et doctrinale de l’Ordre du Temple, reconnu au concile de Troyes (1129).</p>
+      </section>
+
+      <div class="inner-img"><img src="ber1.png" alt="Saint Bernard enseignant – enluminure"></div>
+
+      <details class="section-card" open aria-label="Bernard de Clairvaux – repères biographiques">
+        <summary>Bernard de Clairvaux – repères biographiques</summary>
+        <div class="details-inner">
+          <p>Né à Fontaine-lès-Dijon, Bernard entre à Cîteaux en 1112. En 1115, il fonde Clairvaux, qui devient un foyer majeur de l’expansion cistercienne.</p>
+          <div class="soft-sep"></div>
+          <p>Son influence dépasse le cadre monastique : il conseille papes et princes, intervient dans des conflits ecclésiaux, et marque durablement la spiritualité médiévale par une exigence de sobriété, de prière et d’obéissance.</p>
+        </div>
+      </details>
+
+      <div class="inner-img"><img src="ber_4.png" alt="Bernard de Clairvaux – tradition cistercienne"></div>
+
+      <details class="section-card alt" aria-label="Bernard et l’Ordre du Temple">
+        <summary>Bernard et l’Ordre du Temple</summary>
+        <div class="details-inner">
+          <p>La naissance du Temple pose une question nouvelle : comment unir une vie réglée et religieuse avec une mission armée permanente de protection des routes et des pèlerins.</p>
+          <div class="soft-sep"></div>
+          <p>Au concile de Troyes (1129), Bernard apporte un cadre spirituel : la force doit être tenue par une règle, la gloire personnelle remplacée par le service, et l’action enracinée dans l’obéissance et la charité.</p>
+        </div>
+      </details>
+
+      <div class="inner-img"><img src="ber_temple.png" alt="Idéal templier – enluminure"></div>
+      <div class="inner-img"><img src="l’audace.png" alt="Nouvelle chevalerie – enluminure"></div>
+      <div class="inner-img"><img src="enluminure.png" alt="Manuscrit enluminé médiéval"></div>
+      <div class="inner-img"><img src="re.png" alt="Manuscrit latin médiéval"></div>
+
+      <details class="section-card" aria-label="De laude novae militiae">
+        <summary>De laude novae militiae : l’esprit de la “nouvelle chevalerie”</summary>
+        <div class="details-inner">
+          <p>Dans l’« Éloge de la nouvelle chevalerie », Bernard oppose la chevalerie mondaine (vanité, luxe, violence sans règle) à la chevalerie du Christ, disciplinée, sobre, orientée vers la protection et la justice.</p>
+          <div class="soft-sep"></div>
+          <p>Ce texte éclaire la Règle primitive : ce que Bernard affirme doctrinalement, la Règle l’organise concrètement, par des articles précis de vie commune, de discipline et de mission.</p>
+        </div>
+      </details>
+
+      <div class="inner-img"><img src="regle.png" alt="Règle primitive du Temple – manuscrit"></div>
+
+      <details class="section-card alt" open aria-label="Prologue de la Règle primitive du Temple">
+        <summary>RÈGLE PRIMITIVE DU TEMPLE (1129) – PROLOGUE</summary>
+        <div class="details-inner">
+          <p>Avant toutes choses, notre parole s’adresse à vous tous qui méprisez de suivre vos volontés propres et qui désirez, avec pureté d’âme, servir le souverain et véritable Roi.</p>
+          <div class="soft-sep"></div>
+          <p>Prenez donc, avec le plus grand soin, la noble armure de l’obéissance, afin de l’accomplir pleinement, et de persévérer en l’accomplissant.</p>
+          <div class="soft-sep"></div>
+          <p>Quiconque, pour l’amour de Dieu, renonce à soi-même, qu’il sache qu’il doit vivre non selon son jugement propre, mais selon la règle commune, par l’obéissance, dans l’unité, et sans murmure.</p>
+        </div>
+      </details>
+
+      <details class="section-card" aria-label="Articles 1 à 10">
+        <summary>ARTICLES 1 À 10</summary>
+        <div class="details-inner">
+          <p><strong>Article 1 —</strong> Que les frères vivent dans l’obéissance, sans propriété propre, et selon la règle commune.</p><div class="soft-sep"></div>
+          <p><strong>Article 2 —</strong> Que nul ne suive sa volonté contre la décision de l’autorité ; mais qu’on s’attache au jugement du Maître.</p><div class="soft-sep"></div>
+          <p><strong>Article 3 —</strong> Que les frères vivent dans la charité, sans querelle ni orgueil, supportant chacun l’autre avec patience.</p><div class="soft-sep"></div>
+          <p><strong>Article 4 —</strong> Que les frères soient assidus à l’office autant que la mission le permet, et qu’ils ne négligent pas la prière.</p><div class="soft-sep"></div>
+          <p><strong>Article 5 —</strong> Si un frère ne peut être présent à l’office pour nécessité, qu’il accomplisse les prières de remplacement établies.</p><div class="soft-sep"></div>
+          <p><strong>Article 6 —</strong> Que les frères gardent sobriété et discipline, fuyant la parole vaine et le relâchement.</p><div class="soft-sep"></div>
+          <p><strong>Article 7 —</strong> Que la correction se fasse selon l’ordre, humblement, et non par jugement intérieur ou passion.</p><div class="soft-sep"></div>
+          <p><strong>Article 8 —</strong> Que la table se tienne dans retenue et ordre, recevant la nourriture comme un don.</p><div class="soft-sep"></div>
+          <p><strong>Article 9 —</strong> Que l’ivresse, l’excès et la recherche des mets raffinés soient évités, car ils affaiblissent l’âme et le corps.</p><div class="soft-sep"></div>
+          <p><strong>Article 10 —</strong> Que les vêtements soient simples et propres, sans luxe ni singularité.</p>
+        </div>
+      </details>
+
+      <details class="section-card alt" aria-label="Articles 11 à 20">
+  <summary>ARTICLES 11 À 20</summary>
+  <div class="details-inner">
+    <p><strong>Article 11 —</strong> Que les frères gardent la paix et la retenue dans la parole : éviter disputes, moqueries et paroles vaines, et parler utilement et avec mesure.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 12 —</strong> Que nul ne chasse pour plaisir ; la chasse, la fauconnerie et les divertissements du siècle sont interdits aux frères professes.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 13 —</strong> Que les frères s’abstiennent de jeux et de spectacles, et fuient tout ce qui entraîne le relâchement de l’âme.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 14 —</strong> Que la nourriture soit simple. La viande est permise selon l’usage de l’Ordre à certains jours, et l’abstinence est gardée aux jours fixés.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 15 —</strong> Que, lorsque la viande est servie, on partage avec ordre et sobriété, sans se presser ni réclamer, en se souvenant des pauvres.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 16 —</strong> Que les frères malades reçoivent des soins convenables, et qu’on n’épargne pas ce qui est nécessaire à leur santé.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 17 —</strong> Que le service des malades soit fait avec charité et diligence, comme au Christ lui‑même.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 18 —</strong> Que les frères observent la modestie : pas d’ornements, pas d’excès de luxe dans les vêtements, les selles, ni les armes.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 19 —</strong> Que la chevelure soit tenue avec simplicité ; la barbe et l’apparence demeurent sans recherche de mode ni de vanité.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 20 —</strong> Que nul ne possède rien en propre : tout est commun, reçu des mains de l’Ordre, et rendu à l’Ordre selon l’obéissance.</p>
+    <div class="soft-sep"></div>
+  </div>
+</details>
+
+<details class="section-card" aria-label="Articles 21 à 30">
+  <summary>ARTICLES 21 À 30</summary>
+  <div class="details-inner">
+    <p><strong>Article 21 —</strong> Que les frères ne reçoivent ni lettres ni messages sans la permission de ceux qui gouvernent, afin d’éviter divisions et influences extérieures.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 22 —</strong> Que les frères évitent toute familiarité dangereuse et les conversations privées qui font naître soupçons et murmures.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 23 —</strong> Que les frères ne fréquentent pas les femmes, ni ne leur donnent baisers, ni ne gardent auprès d’eux femmes ou jeunes filles, pour préserver la pureté.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 24 —</strong> Que nul ne prenne parrainage ni ne s’engage dans des liens mondains sans autorisation, afin de ne pas détourner l’âme du service.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 25 —</strong> Que les frères ne sortent pas seuls : ils doivent aller au moins à deux, et revenir selon l’ordre donné.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 26 —</strong> Que les frères ne se rendent en ville, ni ne s’éloignent, sans permission du Maître ou de celui qui le représente.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 27 —</strong> Que les frères gardent le silence aux heures fixées, surtout la nuit, et évitent les conversations inutiles.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 28 —</strong> Que le coucher soit en vêtement, avec ceinture selon l’usage, afin d’être prêts au service ; et que nul ne dorme sans lumière suffisante.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 29 —</strong> Que les frères ne portent pas de chaussures à la mode, ni pointes ni lacets recherchés ; mais des souliers simples, sans vanité.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 30 —</strong> Que nul ne use d’habits trop courts, trop ajustés ou trop ornés : tout doit porter la marque de sobriété.</p>
+    <div class="soft-sep"></div>
+  </div>
+</details>
+
+<details class="section-card alt" aria-label="Articles 31 à 40">
+  <summary>ARTICLES 31 À 40</summary>
+  <div class="details-inner">
+    <p><strong>Article 31 —</strong> Que les frères reçoivent leurs manteaux et vêtements du Drapier, et qu’ils ne les échangent pas entre eux sans permission.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 32 —</strong> Que le manteau blanc soit donné aux chevaliers selon l’usage de l’Ordre ; et que nul n’en usurpe le signe par orgueil.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 33 —</strong> Que les sergents et autres frères aient le vêtement convenable à leur état, simple et utile, sans imitation vaniteuse.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 34 —</strong> Que nul ne garde fourrures ou étoffes précieuses ; la simplicité est la règle commune.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 35 —</strong> Que l’obéissance soit tenue pour la vertu la plus chère : ce que commande le Maître (ou son délégué) doit être accompli sans réserve.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 36 —</strong> Que les frères ne prennent pas l’habitude de contester les ordres ; s’il y a difficulté, qu’ils l’exposent humblement, puis obéissent.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 37 —</strong> Que nul ne fasse sa propre pénitence de son chef ; tout se fait sous l’autorité, afin d’éviter l’orgueil spirituel.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 38 —</strong> Que les frères confessent leurs fautes selon l’ordre, et reçoivent correction sans murmure.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 39 —</strong> Que les frères ne se frappent pas, ne se menacent pas, ne se provoquent pas ; la correction appartient à l’autorité, non à la passion.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 40 —</strong> Que la discipline et les jeûnes soient observés selon les forces : l’Ordre recherche la vigueur pour le service, non l’épuisement inutile.</p>
+    <div class="soft-sep"></div>
+  </div>
+</details>
+
+<details class="section-card" aria-label="Articles 41 à 50">
+  <summary>ARTICLES 41 À 50</summary>
+  <div class="details-inner">
+    <p><strong>Article 41 —</strong> Que les frères gardent leurs armes et chevaux selon l’ordre : ce qui est donné pour la mission ne doit pas être négligé.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 42 —</strong> Que nul ne s’approprie monture, selle ou équipement : tout appartient à la maison, et se distribue selon les besoins.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 43 —</strong> Que les frères se tiennent prêts au départ ; qu’ils ne retardent pas la mission par des préparatifs superflus.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 44 —</strong> Que les frères ne se parent pas d’or ni d’argent sur les armes, les mors ou les harnais ; la beauté recherchée est suspecte.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 45 —</strong> Que les frères ne boivent pas avec excès ; le vin est reçu avec mesure, et l’ivresse est punie.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 46 —</strong> Que nul ne mange en dehors du temps et de l’ordre commun, sauf nécessité ou maladie.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 47 —</strong> Que les frères gardent la charité envers les pauvres ; les aumônes se donnent selon décision du Maître ou des officiers.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 48 —</strong> Que les frères accueillent les pèlerins et les voyageurs selon la capacité des maisons, avec ordre et charité.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 49 —</strong> Que les frères servent la messe et les offices selon les possibilités de la mission ; et que les chapelains gardent l’ordre liturgique.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 50 —</strong> Que les frères qui manquent l’office pour nécessité accomplissent les prières de remplacement établies.</p>
+    <div class="soft-sep"></div>
+  </div>
+</details>
+
+<details class="section-card alt" aria-label="Articles 51 à 60">
+  <summary>ARTICLES 51 À 60</summary>
+  <div class="details-inner">
+    <p><strong>Article 51 —</strong> Que nul ne se vante de prouesses ; l’Ordre réprouve la ‘prouesse’ recherchée pour la gloire. La discipline prime l’exploit.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 52 —</strong> Que les frères ne se livrent pas à la ‘largesse’ chevaleresque (dons ostentatoires) sans autorisation, car elle nourrit l’orgueil et ruine la maison.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 53 —</strong> Que les frères gardent l’humilité en toute chose ; qu’ils évitent rivalités, préséances et comparaisons.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 54 —</strong> Que les frères envoyés au dehors gardent la règle autant que possible et donnent bon exemple à ceux du siècle.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 55 —</strong> Que nul ne reçoive cadeaux, chevaux, armes ou vêtements de laïcs sans permission, afin d’éviter dépendances et soupçons.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 56 —</strong> Que les frères en voyage ne recherchent ni viandes, ni vins, ni confort : qu’ils vivent sobrement et honorent l’Ordre par leur conduite.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 57 —</strong> Que les frères ne gardent pas avec eux argent ou biens ; tout ce qui est reçu doit être remis à la maison.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 58 —</strong> Que les frères observent la justice interne selon l’ordre : fautes reconnues, pénitences données, paix restaurée.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 59 —</strong> Que le Maître gouverne avec conseil : pour les affaires importantes, il est convenable d’entendre le chapitre et les frères appelés au conseil.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 60 —</strong> Que l’admission des frères se fasse avec prudence, après examen, afin de ne pas introduire division ou scandale.</p>
+    <div class="soft-sep"></div>
+  </div>
+</details>
+
+<details class="section-card" aria-label="Articles 61 à 70">
+  <summary>ARTICLES 61 À 70</summary>
+  <div class="details-inner">
+    <p><strong>Article 61 —</strong> Si des chevaliers excommuniés désirent se joindre à l’Ordre pour leur salut, qu’ils se présentent d’abord à l’évêque de la province et fassent connaître leur intention.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 62 —</strong> Que nul ne soit reçu à la légère : qu’on recherche la conversion vraie, non l’intérêt.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 63 —</strong> Que les frères restent unis au Maître ; qu’ils ne fomentent pas partis ni factions.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 64 —</strong> Que nul ne quitte la maison ni ne se transfère sans permission ; l’instabilité est ennemie de la discipline.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 65 —</strong> Que les frères ne révèlent pas les secrets de la maison : ce qui touche au gouvernement et aux missions doit rester dans la discrétion.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 66 —</strong> Que les frères gardent la mesure dans les corrections : pas de dureté injuste, pas de faiblesse complaisante ; justice et charité ensemble.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 67 —</strong> Que les frères honorent l’Église et ses ministres ; qu’ils évitent querelles avec les clercs, sauf nécessité et selon l’autorité.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 68 —</strong> Que les frères ne s’attachent pas à des maisons étrangères ; leur fidélité est au Temple, non aux amitiés du siècle.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 69 —</strong> Que les frères fassent mémoire des défunts par prières et aumônes selon l’usage de la maison.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 70 —</strong> Que les veilles et jeûnes fixés soient observés selon l’ordre, sauf maladie ou autorisation.</p>
+    <div class="soft-sep"></div>
+  </div>
+</details>
+
+<details class="section-card alt" aria-label="Articles 71 à 76">
+  <summary>ARTICLES 71 À 76</summary>
+  <div class="details-inner">
+    <p><strong>Article 71 —</strong> Des chevaliers séculiers qui servent par miséricorde près des frères : s’ils meurent durant leur temps, qu’un pauvre soit reçu et nourri sept jours, et que chaque frère dise trente Pater pour leur âme.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 72 —</strong> Que les frères jeûnent les veilles des apôtres et les grandes veilles indiquées, selon l’usage reçu.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 73 —</strong> Que les Quatre‑Temps et les veilles principales soient tenus ; et que les dispenses soient données pour cause juste.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 74 —</strong> Que les frères gardent les deux jours avant les Rogations et les veilles solennelles ; et qu’ils évitent les fêtes mineures superflues.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 75 —</strong> Que nulle fête de moindre rang ne soit célébrée dans l’Ordre au‑delà de ce qui est établi ; la règle recherche l’unité et non la multiplication des observances.</p>
+    <div class="soft-sep"></div>
+    <p><strong>Article 76 —</strong> Que tous les frères jeûnent du dimanche avant la Saint‑Martin jusqu’à la Nativité du Seigneur, sauf infirmité ; et si la fête de Saint‑Martin tombe un dimanche, qu’on s’abstienne de chair le dimanche précédent.</p>
+    <div class="soft-sep"></div>
+  </div>
+</details>
+
+      
+  <div class="soft-sep"></div>
+
+  <details class="section-card" aria-label="Idées reçues et récupérations modernes">
+    <summary>Idées reçues et récupérations modernes</summary>
+    <div class="details-inner">
+      <p>
+        L’histoire du Temple a été recouverte, surtout à l’époque moderne, d’une épaisse couche de récits romantiques,
+        occultistes ou sensationnalistes (trésors, sociétés secrètes, filiations imaginaires, « secrets » postérieurs).
+        Ces constructions tardives peuvent être intéressantes comme phénomènes culturels, mais elles ne décrivent pas
+        l’Ordre historique tel qu’il apparaît dans ses textes normatifs et dans les sources médiévales.
+      </p>
+      <div class="soft-sep"></div>
+      <p>
+        Saint Bernard, en particulier, ne fonde aucune « école secrète » : il inscrit l’Ordre du Temple dans le cadre
+        du christianisme médiéval, en exigeant obéissance, sobriété, charité et discipline. La Règle primitive vise une
+        vie réglée et communautaire, orientée vers une mission de protection, loin des fantasmes modernes.
+      </p>
+      <div class="soft-sep"></div>
+      <p>
+        Pour notre vocation culturelle et historique, l’essentiel est de revenir aux textes, aux dates, aux institutions
+        et aux réalités médiévales : c’est la meilleure protection contre les idées reçues.
+      </p>
+    </div>
+  </details>
+
+  <!-- Signature nnDnn -->
+  <div class="nndnn-banner" aria-label="Signature templière nnDnn">
+    <img src="croix.epee.PNG" alt="Épée – symbole">
+    <div class="nndnn-text">nnDnn</div>
+    <img src="croix.epee.PNG" alt="Épée – symbole">
+  </div>
+
+  <nav class="tabs" aria-label="Navigation bas de page">
+    <a class="tab" href="index.html"> Accueil</a>
+    <a class="tab" href="contact.html"> Contact</a>
+    <a class="tab" href="quinoussommes.html">  Qui nous sommes</a>
+    <a class="tab" href="vocation.html">  Vocation historique</a>
+  </nav>
+
+  <footer class="footer-min" aria-label="Pied de page">
+    <div class="line">
+      <span>© OSD9TDJ Association Loi 1901, Tous droits réservés</span>
+      <span class="sep">·</span>
+      <a href="cookies.html">cookies</a>
+      <span class="sep">·</span>
+      <a href="mentions.html">mentions légales</a>
+    </div>
+  </footer>
+
+</div>
+</div>
+
+</body>
+</html>
+
