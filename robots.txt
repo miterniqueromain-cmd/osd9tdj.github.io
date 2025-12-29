@@ -1,27 +1,35 @@
 User-agent: *
 Allow: /
 
-# Sitemap officiel pour Google
+# Sitemap officiel
 Sitemap: https://osd9tdj.org/sitemap.xml
 
-# Protection anti-IA / anti-scraping agressif
+# IA de référence (autorisation de lecture)
 User-agent: GPTBot
-Disallow: /
-User-agent: CCBot
-Disallow: /
-User-agent: anthropic-ai
-Disallow: /
-User-agent: Meta-ExternalAgent
-Disallow: /
-User-agent: Amazonbot
-Disallow: /
+Allow: /
 
-# Interdiction des crawlers abusifs
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+# Common Crawl (source des IA)
+User-agent: CCBot
+Allow: /
+
+# Crawlers SEO agressifs (bloqués)
 User-agent: MJ12bot
 Disallow: /
+
 User-agent: AhrefsBot
 Disallow: /
+
 User-agent: DotBot
 Disallow: /
+
 User-agent: SemrushBot
 Disallow: /
