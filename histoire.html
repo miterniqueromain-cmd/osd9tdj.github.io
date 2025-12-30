@@ -418,6 +418,38 @@
         object-position:center 60%;   /* recadrage plus harmonieux */
       }
     }
+
+    /* ================== ✅ AJOUT UNIQUE : BOUTON VERS "ORDRES HISTORIQUES" ================== */
+    .cta-ordres{
+      margin: 18px auto 6px;
+      text-align:center;
+    }
+    .cta-ordres a{
+      display:inline-block;
+      padding:12px 18px;
+      border-radius:999px;
+      background: linear-gradient(180deg, rgba(214,167,40,0.98), rgba(214,167,40,0.78));
+      border:1px solid rgba(255,231,168,0.75);
+      box-shadow:
+        0 10px 24px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(0,0,0,0.22) inset,
+        0 0 18px rgba(214,167,40,0.18);
+      color:#140b02;
+      font-family:'Cinzel',serif;
+      font-weight:800;
+      letter-spacing:0.03em;
+      text-decoration:none;
+      text-transform:uppercase;
+      transition: transform 0.16s ease, filter 0.16s ease;
+    }
+    .cta-ordres a:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+    }
+    .cta-ordres a:active{
+      transform: translateY(0px);
+      filter: brightness(0.98);
+    }
   </style>
 </head>
 
@@ -693,6 +725,11 @@
         <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
         <a class="tab" href="contact.html">📞 Contact</a>
       </nav>
+
+      <!-- ✅ BOUTON JAUNE (AJOUT UNIQUE) -->
+      <div class="cta-ordres" aria-label="Accès à la page Ordres historiques">
+        <a href="ordres-historiques.html">📜 Découvrir : Ordres historiques</a>
+      </div>
 
       <div class="footer">
         © O.S.D.9.T.D.J. Association Loi 1901 – Tous droits réservés •
