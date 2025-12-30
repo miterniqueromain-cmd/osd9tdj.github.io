@@ -2,30 +2,30 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <title>Ordres historiques — Terre sainte, Byzance, ordres de cour | OSD9TDJ</title>
+  <title>Ordres historiques — Terre sainte, Byzance, Reconquista & ordres de cour | OSD9TDJ</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SEO -->
-  <meta name="description" content="Panorama grand public (liste non exhaustive) des grands ordres historiques : Terre sainte, ordres religieux-militaires, ordres ibériques (Reconquista), Lieux saints, Byzance/Constantinople, et ordres de cour." />
-  <meta name="keywords" content="Ordres historiques, Templiers, Hospitaliers, Malte, Teutoniques, Saint-Lazare, Saint-Sépulcre, Reconquista, Santiago, Calatrava, Byzance, Constantinople, ordres de cour, Toison d'or, Jarretière" />
+  <meta name="description" content="Panorama grand public (non exhaustif) des grands ordres et institutions historiques : Terre sainte, ordres religieux-militaires, hospitalité, Reconquista ibérique, Lieux saints de Jérusalem, Byzance/Constantinople, et ordres de cour. Repères, définitions, évolutions et héritages." />
+  <meta name="keywords" content="ordres historiques, Terre sainte, Jérusalem, croisades, ordres religieux-militaires, Templiers, Ordre du Temple, Hospitaliers, Saint-Jean, Malte, Teutoniques, Saint-Lazare, Saint-Sépulcre, Reconquista, Santiago, Calatrava, Alcántara, Avis, Byzance, Constantinople, ordres de cour, Toison d'or, Jarretière, commanderie" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-  <meta name="author" content="Ordre Sacré des Neuf Templiers de Jérusalem" />
+  <meta name="author" content="Ordre Sacré des Neuf Templiers de Jérusalem (OSD9TDJ)" />
 
-  <!-- Canonical (à ajuster à TON domaine réel) -->
-  <link rel="canonical" href="ordres-historiques.html" />
+  <!-- Canonical (domaine OSD9TDJ) -->
+  <link rel="canonical" href="https://osd9tdj.org/ordres-historiques.html" />
 
   <!-- OpenGraph -->
-  <meta property="og:title" content="Ordres historiques — Terre sainte, Byzance, ordres de cour" />
-  <meta property="og:description" content="Panorama non exhaustif des ordres et institutions historiques (Terre sainte, Reconquista, Byzance, ordres de cour)." />
+  <meta property="og:title" content="Ordres historiques — Terre sainte, Byzance, Reconquista & ordres de cour" />
+  <meta property="og:description" content="Panorama non exhaustif des ordres et institutions historiques (Terre sainte, hospitalité, Reconquista, Byzance, ordres de cour) : repères, définitions, évolutions, héritages." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="ordres-historiques.html" />
+  <meta property="og:url" content="https://osd9tdj.org/ordres-historiques.html" />
   <meta property="og:image" content="icon-512.png" />
   <meta property="og:locale" content="fr_FR" />
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Ordres historiques — Terre sainte, Byzance, ordres de cour" />
-  <meta name="twitter:description" content="Panorama non exhaustif des ordres et institutions historiques (Terre sainte, Reconquista, Byzance, ordres de cour)." />
+  <meta name="twitter:title" content="Ordres historiques — Terre sainte, Byzance, Reconquista & ordres de cour" />
+  <meta name="twitter:description" content="Panorama non exhaustif des ordres et institutions historiques : repères, définitions, évolutions, héritages." />
   <meta name="twitter:image" content="icon-512.png" />
 
   <!-- Polices -->
@@ -37,6 +37,39 @@
   <link rel="icon" sizes="512x512" href="icon-512.png" type="image/png" />
   <link rel="apple-touch-icon" href="icon-192.png" />
 
+  <!-- JSON-LD (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Ordres historiques — Terre sainte, Byzance, Reconquista & ordres de cour",
+    "url":"https://osd9tdj.org/ordres-historiques.html",
+    "inLanguage":"fr-FR",
+    "description":"Panorama grand public (non exhaustif) des grands ordres et institutions historiques : Terre sainte, ordres religieux-militaires, hospitalité, Reconquista ibérique, Lieux saints de Jérusalem, Byzance/Constantinople, et ordres de cour. Repères, définitions, évolutions et héritages.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"OSD9TDJ",
+      "url":"https://osd9tdj.org/"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Ordre Sacré des Neuf Templiers de Jérusalem (OSD9TDJ)",
+      "url":"https://osd9tdj.org/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Accueil","item":"https://osd9tdj.org/index.html"},
+      {"@type":"ListItem","position":2,"name":"Ordres historiques","item":"https://osd9tdj.org/ordres-historiques.html"}
+    ]
+  }
+  </script>
+
   <style>
     :root{
       --or:#d6a728;
@@ -47,19 +80,21 @@
       --or-glow:rgba(214,167,40,0.10);
       --card:rgba(10,10,12,0.86);
       --card2:rgba(0,0,0,0.10);
+      --txt:rgba(248,232,200,0.92);
+      --muted:rgba(248,232,200,0.78);
     }
 
     html,body{
       height:100%;
       margin:0;
       padding:0;
-      overflow:hidden;
       font-family:'Lato',Arial,sans-serif;
       color:var(--clair);
       text-align:center;
       background:radial-gradient(circle at top,#2a2b2f,var(--fond) 70%);
     }
 
+    /* Texture + lumière */
     body::before{
       content:"";
       position:fixed;
@@ -74,6 +109,48 @@
       mix-blend-mode:overlay;
       opacity:0.55;
       filter:blur(0.2px);
+      z-index:0;
+    }
+
+    /* Watermark "de ouf" (discret, élégant, non intrusif) */
+    .wm{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:50;
+      opacity:0.10;
+      mix-blend-mode:overlay;
+      background-image:
+        repeating-linear-gradient(-28deg,
+          rgba(214,167,40,0.50) 0px,
+          rgba(214,167,40,0.50) 1px,
+          rgba(0,0,0,0.0) 1px,
+          rgba(0,0,0,0.0) 140px
+        );
+    }
+    .wm::after{
+      content:attr(data-wm);
+      position:absolute;
+      inset:-40px;
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      letter-spacing:0.28em;
+      color:rgba(214,167,40,0.85);
+      transform:rotate(-18deg);
+      display:grid;
+      place-items:center;
+      text-transform:uppercase;
+      filter:blur(0.15px);
+      opacity:0.85;
+      background:
+        repeating-linear-gradient(0deg,
+          transparent 0px,
+          transparent 64px,
+          rgba(214,167,40,0.06) 64px,
+          rgba(214,167,40,0.06) 66px
+        );
+      white-space:pre;
+      line-height:2.2;
     }
 
     .frame-fixed{
@@ -97,11 +174,33 @@
       box-sizing:border-box;
     }
 
+    /* Skip link (accessibilité) */
+    .skip{
+      position:absolute;
+      left:-9999px;
+      top:auto;
+      width:1px;
+      height:1px;
+      overflow:hidden;
+    }
+    .skip:focus{
+      left:24px;
+      top:24px;
+      width:auto;
+      height:auto;
+      padding:10px 12px;
+      border-radius:999px;
+      background:rgba(0,0,0,0.80);
+      border:1px solid rgba(214,167,40,0.55);
+      color:var(--clair);
+      z-index:1000;
+    }
+
     .top-menu{
       position:fixed;
       top:26px;
       right:26px;
-      z-index:60;
+      z-index:80;
       pointer-events:auto;
     }
     .top-menu details{position:relative;}
@@ -160,19 +259,29 @@
       margin:0 auto;
     }
 
+    header.hero{max-width:980px; margin:0 auto 12px;}
     h1{
       font-family:'Cinzel',serif;
-      font-size:2.05rem;
+      font-size:2.10rem;
       margin:12px 0 6px;
       letter-spacing:0.02em;
     }
     h2{
       font-family:'Cinzel',serif;
-      font-size:1.18rem;
-      margin:0 0 18px;
+      font-size:1.16rem;
+      margin:0 0 10px;
       font-weight:normal;
       opacity:0.92;
     }
+    .lead{
+      margin:8px auto 0;
+      max-width:920px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:0.98rem;
+      text-align:center;
+    }
+
     h3{
       font-family:'Cinzel',serif;
       letter-spacing:0.03em;
@@ -211,19 +320,36 @@
     .section-card p{
       position:relative;
       max-width:880px;
-      margin:18px auto;
+      margin:16px auto;
       font-size:1.10rem;
-      line-height:1.92;
+      line-height:1.94;
       letter-spacing:0.01em;
+      color:var(--txt);
+    }
+    .section-card p strong{color:#fff;}
+    .section-card p em{color:rgba(248,232,200,0.94);}
+
+    .note{
+      position:relative;
+      max-width:880px;
+      margin:14px auto 4px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(214,167,40,0.28);
+      background:rgba(0,0,0,0.20);
+      color:rgba(248,232,200,0.86);
+      line-height:1.8;
+      font-size:1.02rem;
     }
 
     .section-card ul{
       position:relative;
       max-width:880px;
-      margin:14px auto 18px;
+      margin:12px auto 18px;
       padding-left:18px;
+      color:rgba(248,232,200,0.90);
     }
-    .section-card li{margin:8px 0; line-height:1.7;}
+    .section-card li{margin:8px 0; line-height:1.75;}
 
     .soft-sep{
       position:relative;
@@ -243,8 +369,8 @@
       transform:translateY(-50%);
     }
 
-    .inner-img{
-      margin:10px auto 16px;
+    figure.inner-img{
+      margin:10px auto 14px;
       border-radius:16px;
       overflow:hidden;
       box-shadow:0 0 28px rgba(0,0,0,0.85);
@@ -252,15 +378,16 @@
       max-width:820px;
       background:rgba(0,0,0,0.12);
     }
-    .inner-img img{display:block; width:100%; height:auto; max-width:84vw;}
-    .img-caption{
-      margin:-4px auto 14px;
-      max-width:820px;
+    figure.inner-img img{display:block; width:100%; height:auto; max-width:84vw;}
+    figure.inner-img figcaption{
+      padding:10px 12px 12px;
       font-size:0.92rem;
       line-height:1.55;
       opacity:0.92;
       text-align:center;
       color:rgba(248,232,200,0.88);
+      background:rgba(0,0,0,0.18);
+      border-top:1px solid rgba(214,167,40,0.22);
     }
 
     .grid-2{
@@ -292,9 +419,23 @@
       margin:0 0 12px;
       line-height:1.85;
       font-size:1.03rem;
+      color:rgba(248,232,200,0.90);
+      text-align:justify;
     }
-    figure{margin:12px 0 0;}
-    figcaption{text-align:center; opacity:0.9; font-size:0.92rem; margin-top:8px;}
+    .card figure{margin:12px 0 0;}
+    .card figure img{
+      width:100%;
+      border-radius:12px;
+      border:1px solid rgba(214,167,40,0.18);
+      display:block;
+    }
+    .card figcaption{
+      text-align:center;
+      opacity:0.9;
+      font-size:0.92rem;
+      margin-top:8px;
+      color:rgba(248,232,200,0.86);
+    }
 
     .toc a{
       display:inline-block;
@@ -303,6 +444,7 @@
       text-decoration:none;
       border-bottom:1px dashed rgba(214,167,40,0.35);
     }
+
     .section-card a{
       color:rgba(248,232,200,0.92);
       text-decoration:none;
@@ -371,10 +513,10 @@
     .sep{opacity:0.55;}
 
     @media (max-width:600px){
-      h1{font-size:1.65rem;}
+      h1{font-size:1.72rem;}
       h2{font-size:1.02rem;}
       .section-card{padding:18px 14px; border-radius:18px; margin:18px auto;}
-      .section-card p{font-size:1.03rem; line-height:1.88; margin:16px auto;}
+      .section-card p{font-size:1.03rem; line-height:1.90; margin:15px auto;}
       .top-menu{top:22px; right:22px;}
       .menu-panel{width:240px;}
       .frame-fixed{inset:12px;}
@@ -385,6 +527,9 @@
 </head>
 
 <body>
+  <a class="skip" href="#contenu">Aller au contenu</a>
+
+  <div class="wm" aria-hidden="true" data-wm="OSD9TDJ • ORDRES HISTORIQUES • TERRE SAINTE • BYZANCE • RECONQUISTA •"></div>
   <div aria-hidden="true" class="frame-fixed"></div>
 
   <!-- Menu 3 points -->
@@ -413,30 +558,47 @@
     </details>
   </div>
 
-  <div class="viewport-scroll">
+  <div class="viewport-scroll" id="contenu">
     <div class="container">
 
-      <h1>ORDRES HISTORIQUES</h1>
-      <h2>Terre sainte · Lieux saints · Reconquista · Constantinople · Ordres de cour</h2>
+      <header class="hero">
+        <h1>ORDRES HISTORIQUES</h1>
+        <h2>Terre sainte · Lieux saints · Reconquista · Constantinople · Ordres de cour</h2>
+        <p class="lead">
+          Cette page rassemble des <strong>repères historiques</strong> et des <strong>définitions claires</strong> pour distinguer :
+          l’engagement de croisade, la vie monastique, l’hospitalité médiévale, les ordres religieux-militaires, les ordres ibériques
+          de la Reconquista, les institutions liées aux Lieux saints, et enfin les ordres de cour. L’objectif est pédagogique :
+          <em>décrire des familles</em>, comprendre leurs fonctions, et suivre leurs transformations sans confusion.
+        </p>
+      </header>
 
       <!-- Intro -->
       <div class="section-card">
+        <h3>Préambule : de quoi parle-t-on exactement ?</h3>
         <p>
-          Cette page propose un <strong>panorama historique</strong> (volontairement <strong>non exhaustif</strong>) des principales
-          institutions liées au monde chrétien médiéval : croisades, hospitalité, vie religieuse, ordres religieux-militaires,
-          ordres ibériques, évolutions et héritages, avec un chapitre spécifique sur <strong>Constantinople / Byzance</strong>.
+          Quand on dit « ordre » au Moyen Âge, on mélange souvent plusieurs réalités. Certaines sont religieuses (règle, vie communautaire,
+          obéissance), d’autres sont pratiques (accueil, soin, logistique), d’autres encore relèvent d’une mission armée (protection de routes,
+          défense de places) ou d’un cadre politique (ordres de cour, prestige dynastique). Un même nom peut changer de sens selon les siècles,
+          les territoires et les autorités qui l’encadrent.
         </p>
         <p>
-          L’objectif est de <strong>clarifier les catégories</strong> et de replacer chaque réalité dans son contexte
-          (fonctions, statuts, transformations). Les questions modernes de reconnaissance ne sont pas traitées ici :
-          on décrit des <em>familles historiques</em> et des <em>dynamiques</em>.
+          Ici, nous proposons un <strong>panorama non exhaustif</strong> : il ne s’agit pas d’établir une liste « définitive »,
+          mais de donner des <strong>catégories solides</strong> et des <strong>repères chronologiques</strong>. Les débats modernes de
+          reconnaissance, d’appellations contemporaines ou de continuités juridiques ne sont pas l’objet de cette page : on décrit d’abord
+          des <em>réalités historiques</em>, leurs fonctions, et leurs héritages.
         </p>
+        <div class="note">
+          <strong>Principe de lecture :</strong> un emblème (croix, couleur, blason) est un repère utile, mais il ne suffit pas à définir la
+          nature d’un ordre. Pour comprendre, il faut toujours croiser : <strong>fonction</strong> (soin/défense/cour),
+          <strong>règle</strong>, <strong>statut</strong>, <strong>implantation</strong> et <strong>évolutions</strong>.
+        </div>
       </div>
 
-      <div class="inner-img">
-        <img src="IMG_4959.jpeg" alt="Scène de chevaliers médiévaux — illustration" loading="lazy" />
-      </div>
-      <div class="img-caption">Illustration d’ambiance (image d’illustration).</div>
+      <!-- Image d'ambiance générale -->
+      <figure class="inner-img">
+        <img src="IMG_4959.jpeg" alt="Scène médiévale d’illustration : chevaliers et hospitalité en Terre sainte" loading="lazy" />
+        <figcaption>Image d’illustration : ambiance médiévale (Terre sainte, hospitalité, présence armée).</figcaption>
+      </figure>
 
       <!-- Sommaire -->
       <div class="section-card alt" id="sommaire">
@@ -453,7 +615,7 @@
           <a href="#constantinople">9. Constantinople / Byzance : un autre modèle</a><br />
           <a href="#aristocratiques">10. Ordres aristocratiques et dynastiques</a><br />
           <a href="#savoyard">11. Saint-Maurice & Saint-Lazare : recompositions</a><br />
-          <a href="#survivances">12. Transformations et mémoire</a><br />
+          <a href="#survivances">12. Transformations, diffusion et mémoire</a><br />
           <a href="#reperes">13. Repères visuels : transcriptions modernes</a><br />
           <a href="#glossaire">14. Glossaire rapide</a>
         </p>
@@ -463,74 +625,113 @@
       <div class="section-card" id="contexte">
         <h3>1) Contexte : Terre sainte et monde méditerranéen</h3>
         <p>
-          La Terre sainte médiévale est un carrefour de routes, de ports, d’hospices, de pèlerinages et de rivalités politiques.
-          Les États latins d’Orient (après 1099) évoluent au contact de puissances régionales dans un équilibre fragile.
+          La Terre sainte médiévale est un <strong>carrefour</strong> : routes terrestres, ports, relais, sanctuaires, marchés, alliances
+          et conflits. Après 1099, la présence latine en Orient s’inscrit dans des équilibres mouvants, au contact de puissances régionales
+          et d’autorités locales. Les enjeux sont concrets : sécuriser les itinéraires, tenir des places fortes, administrer des territoires,
+          maintenir une vie religieuse organisée, tout en assurant la circulation des pèlerins.
         </p>
         <p>
-          Trois besoins structurants expliquent l’apparition d’institutions durables :
-          <strong>protéger</strong> routes et places fortes, <strong>soigner</strong> et accueillir les pèlerins,
-          <strong>organiser</strong> une présence religieuse et administrative dans un contexte instable.
+          Ce contexte explique l’apparition d’institutions durables : certaines naissent d’un besoin <strong>d’accueil et de soin</strong>,
+          d’autres d’une nécessité <strong>de protection</strong>, d’autres encore de la volonté de structurer une présence religieuse.
+          Avec le temps, des structures initialement modestes peuvent se doter d’une discipline, de ressources et de réseaux
+          (maisons, commanderies, propriétés) qui les rendent comparables, par leur efficacité, à de véritables administrations.
         </p>
       </div>
 
-      <div class="inner-img">
-        <img src="IMG_4960.jpeg" alt="Jérusalem — représentation historique" loading="lazy" />
-      </div>
-      <div class="img-caption">Jérusalem : centre symbolique et spirituel (illustration).</div>
+      <figure class="inner-img">
+        <img src="IMG_4960.jpeg" alt="Représentation de Jérusalem : centre symbolique des pèlerinages et des Lieux saints" loading="lazy" />
+        <figcaption>Jérusalem : centre spirituel et symbolique du pèlerinage, au cœur de la mémoire médiévale.</figcaption>
+      </figure>
 
       <!-- 2 -->
       <div class="section-card alt" id="croises">
         <h3>2) Les croisés : un engagement, pas un ordre</h3>
         <p>
-          Le terme “croisé” désigne d’abord une <strong>condition</strong> : celle d’un chrétien qui prend la croix pour une expédition déterminée,
-          généralement reconnue par l’autorité ecclésiale. Cet engagement est <strong>temporaire</strong>.
+          Le mot « croisé » renvoie d’abord à une <strong>condition</strong> : celle d’un fidèle qui « prend la croix » pour une expédition
+          déterminée, avec un cadre spirituel (vœu, intention, pénitence) et un cadre social (mobilisation, financement, logistique).
+          Cet engagement est <strong>temporaire</strong> : il commence, il se déroule, puis il s’achève. On peut être croisé sans être moine,
+          sans être membre d’une institution permanente, et sans être « chevalier d’ordre ».
         </p>
         <p>
-          Un croisé peut ensuite rejoindre une structure permanente (Temple, Hôpital, etc.), mais la croisade en elle-même
-          n’implique ni règle monastique, ni appartenance automatique à un ordre.
+          Certaines personnes prolongent ensuite leur engagement en rejoignant des structures stables (par exemple des institutions hospitalières
+          ou des ordres religieux-militaires). Mais ce passage n’est pas automatique : la croisade ne fabrique pas, à elle seule, un ordre.
+          C’est précisément là que naissent beaucoup de confusions modernes : on confond l’expédition (moment) avec l’institution (durée).
         </p>
+        <div class="note">
+          <strong>À retenir :</strong> la croisade est une <em>dynamique</em> et un <em>cadre d’engagement</em> ; un ordre est une
+          <em>organisation</em> structurée (règle, hiérarchie, ressources, implantation, mission).
+        </div>
       </div>
 
       <!-- 3 -->
       <div class="section-card" id="monachisme">
         <h3>3) Moines, règles et ordres monastiques</h3>
         <p>
-          La culture des ordres médiévaux s’enracine dans la <strong>vie religieuse</strong> :
-          règles, offices, obéissance, hiérarchie, vie communautaire, hospitalité.
-          La <strong>Règle de saint Benoît</strong> structure durablement l’Occident médiéval, et les réformes (clunisienne, cistercienne, etc.)
-          renouvellent les idéaux de prière et d’austérité.
+          La culture institutionnelle médiévale s’enracine dans la <strong>vie religieuse</strong> : prière, offices, obéissance,
+          stabilité communautaire, hiérarchie interne et discipline. Les règles (au premier rang desquelles la <strong>Règle de saint Benoît</strong>)
+          structurent l’Occident latin en proposant un modèle : vivre ensemble, travailler, prier, accueillir, et organiser le temps.
+          Les réformes successives (par exemple celles qui insistent davantage sur l’austérité, la simplicité ou la rigueur) expriment
+          une quête continue de cohérence spirituelle.
         </p>
         <p>
-          Les ordres religieux-militaires ne surgissent pas “de nulle part” : ils reprennent la logique d’une règle et d’une vie commune,
-          en lui ajoutant une mission armée (protection, escortes, défense de places). C’est ce mélange — <em>règle + discipline + mission</em> —
-          qui fait leur singularité.
+          Les ordres religieux-militaires ne surgissent pas en rupture totale : ils reprennent la logique de la règle et de la vie communautaire,
+          mais l’articulent à une mission spécifique, liée à la protection des itinéraires, à l’escorte, à la défense de places ou à la sécurité
+          d’un espace. C’est un point capital : la singularité n’est pas dans l’existence d’une « armée »,
+          mais dans le <strong>mariage institutionnel</strong> entre <em>règle</em>, <em>discipline</em> et <em>mission</em>.
+        </p>
+        <p>
+          Dans le langage courant, on parle souvent de « moines-soldats ». Historiquement, il vaut mieux parler de
+          <strong>religieux sous vœux</strong> assumant une mission de protection armée, dans un contexte précis. La nuance est importante :
+          elle évite de caricaturer des institutions qui furent aussi des réseaux d’accueil, de logistique, de soins, d’administration,
+          et parfois de diplomatie.
         </p>
       </div>
 
-      <div class="inner-img">
-        <img src="IMG_4961.jpeg" alt="Saint Benoît et la règle — enluminure" loading="lazy" />
-      </div>
-      <div class="img-caption">La “règle” : principe d’organisation religieuse (illustration).</div>
+      <figure class="inner-img">
+        <img src="IMG_4961.jpeg" alt="Enluminure : figure religieuse et transmission d’une règle de vie" loading="lazy" />
+        <figcaption>La « règle » : fondement de l’organisation religieuse, de la discipline et de la vie communautaire.</figcaption>
+      </figure>
 
       <!-- 4 -->
       <div class="section-card alt" id="hospitalite">
         <h3>4) L’hospitalité : hôpitaux, routes, pèlerins</h3>
         <p>
-          L’hospitalité médiévale est une infrastructure : sur des routes difficiles et dangereuses, hospices et hôpitaux
-          accueillent, soignent, hébergent et soutiennent la circulation des voyageurs.
+          L’hospitalité médiévale n’est pas un simple geste privé : c’est une <strong>infrastructure</strong>. Sur des routes longues, coûteuses
+          et parfois dangereuses, il faut des lieux pour accueillir, nourrir, héberger, soigner, protéger les plus faibles, et organiser les flux.
+          On parle d’hospices, d’hôpitaux, de maisons d’accueil, parfois rattachés à des sanctuaires ou à des réseaux urbains.
         </p>
         <p>
-          Certaines institutions hospitalières deviennent suffisamment structurées pour former des réseaux, une administration, des ressources,
-          et parfois — selon les contextes — une nécessité de protection armée.
+          Dans certains contextes, ces institutions se structurent : elles recrutent, administrent des biens, coordonnent des maisons,
+          et mettent en place des règles internes. Elles deviennent des acteurs majeurs de la « logistique du pèlerinage ».
+          Quand les routes deviennent trop incertaines, l’hospitalité peut s’accompagner, selon les lieux et les périodes,
+          d’une <strong>protection</strong> (escortes, gardes, fortifications), sans que la mission de soin et d’accueil disparaisse.
         </p>
+        <div class="note">
+          <strong>Point-clé :</strong> le soin et l’accueil sont une finalité à part entière. L’armement éventuel n’est pas le cœur
+          de l’hospitalité, mais une réponse pragmatique à l’insécurité.
+        </div>
       </div>
+
+      <!-- IMG_4971 : Hospitalité / Hospitaliers (validé par ta capture) -->
+      <figure class="inner-img">
+        <img src="IMG_4971.jpeg" alt="Scène d’hospitalité et de présence hospitalière en Terre sainte (illustration)" loading="lazy" />
+        <figcaption>Hospitalité et assistance : une dimension centrale des institutions de Terre sainte (illustration).</figcaption>
+      </figure>
 
       <!-- 5 -->
       <div class="section-card" id="ordres-militaires">
         <h3>5) Ordres religieux-militaires (Terre sainte)</h3>
         <p>
           Les ordres religieux-militaires regroupent des hommes liés par des <strong>vœux religieux</strong> (pauvreté, chasteté, obéissance),
-          vivant selon une discipline communautaire, et chargés d’une mission de <strong>protection armée</strong>.
+          vivant selon une discipline communautaire et soumis à une hiérarchie. Leur mission est de contribuer, par des moyens organisés,
+          à la <strong>protection</strong> (routes, pèlerins, lieux, places) et, selon les cas, à la défense des États latins d’Orient.
+          Leur efficacité tient à leur capacité à combiner des ressources : maisons, commanderies, réseaux, intendance, et parfois fortifications.
+        </p>
+        <p>
+          Pour éviter les confusions, il faut distinguer : <strong>l’origine</strong> (hospitalière, défensive, mixte),
+          <strong>le mode d’implantation</strong> (Orient/Occident), <strong>la fonction dominante</strong> (soin/escorte/territoire),
+          et <strong>les transformations</strong> au fil du temps. Certaines institutions survivent en changeant d’espace,
+          en modifiant leur mission, ou en réorientant leurs œuvres.
         </p>
 
         <div class="soft-sep"></div>
@@ -540,29 +741,34 @@
           <div class="card">
             <h4>Ordre du Temple</h4>
             <p>
-              Né pour la protection des routes de pèlerinage et la défense des États latins, le Temple se distingue par sa discipline,
-              son réseau de commanderies et sa capacité logistique. Sa dissolution médiévale marque une rupture institutionnelle.
+              L’Ordre du Temple apparaît dans la logique de la protection des itinéraires et de la sécurité des implantations.
+              Sa puissance tient à sa discipline, à son réseau de maisons et de commanderies, et à sa capacité de projection.
+              Sa dissolution au début du XIVe siècle constitue une rupture institutionnelle majeure, dont la mémoire a fortement marqué
+              l’imaginaire européen.
             </p>
           </div>
           <div class="card">
             <h4>Ordre de l’Hôpital (Saint-Jean)</h4>
             <p>
-              L’Hôpital se caractérise par une origine hospitalière : accueil et soin d’abord, protection ensuite.
-              Son histoire est faite de transformations et de déplacements, avec un héritage durable lié aux œuvres.
+              L’Ordre de l’Hôpital se caractérise par une origine centrée sur l’accueil et le soin. Dans un environnement instable,
+              la protection devient un complément de mission, puis une dimension structurante. Son histoire traverse des déplacements
+              et des reconfigurations, avec un héritage durable lié aux œuvres, à l’organisation et à l’identité hospitalière.
             </p>
           </div>
           <div class="card">
             <h4>Ordre Teutonique</h4>
             <p>
-              Né dans la dynamique des croisades, il développe une trajectoire particulièrement marquée par l’Europe du Nord-Est,
-              avec une évolution progressive vers un profil davantage religieux et charitable.
+              Né dans la dynamique des croisades, l’Ordre Teutonique développe une trajectoire singulière, marquée par l’Europe du Nord-Est.
+              Selon les périodes, sa mission se recompose, et l’institution se réoriente progressivement vers des formes davantage religieuses
+              et caritatives, tout en conservant une forte mémoire historique.
             </p>
           </div>
           <div class="card">
             <h4>Ordre de Saint-Lazare</h4>
             <p>
-              Associé à la lèpre et à l’assistance, il illustre la dimension hospitalière et la charité organisée,
-              avec des transformations et recompositions successives selon les périodes.
+              Associé à l’assistance (notamment dans la prise en charge de la lèpre), il illustre la dimension hospitalière et la charité organisée.
+              Au fil des siècles, des recompositions et des fusions modifient ses cadres, ce qui explique la diversité des présentations
+              et des repères visuels dans les sources modernes.
             </p>
           </div>
         </div>
@@ -570,46 +776,58 @@
         <div class="soft-sep"></div>
 
         <p>
-          Les emblèmes (croix, couleurs, boucliers) aident à reconnaître les traditions, mais ne suffisent pas à définir la nature d’un ordre :
-          il faut regarder les <strong>fonctions</strong> (soin / défense / territoire), la <strong>règle</strong>, le <strong>statut</strong>
-          et les <strong>évolutions</strong>.
+          Les emblèmes (croix, couleurs, boucliers) sont des marqueurs forts. Toutefois, pour comprendre un ordre, il faut regarder
+          la <strong>fonction réelle</strong> (soin, escorte, défense, administration), la <strong>règle</strong>, le <strong>statut</strong>
+          et le <strong>cheminement historique</strong>. Une même croix peut être reprise, stylisée ou réinterprétée : l’histoire demande méthode,
+          pas seulement iconographie.
         </p>
       </div>
 
-      <div class="inner-img">
-        <img src="IMG_4962.jpeg" alt="Blasons et croix des grands ordres — planche comparative" loading="lazy" />
-      </div>
-      <div class="img-caption">Planche comparative (illustration) : diversité des signes.</div>
+      <figure class="inner-img">
+        <img src="IMG_4962.jpeg" alt="Planche comparative de croix et blasons d’ordres médiévaux (repère iconographique)" loading="lazy" />
+        <figcaption>Repère iconographique : diversité des croix, blasons et identités visuelles (transcriptions modernes).</figcaption>
+      </figure>
 
       <!-- 6 -->
       <div class="section-card alt" id="ordres-secondaires">
         <h3>6) Ordres secondaires, locaux et spécialisés</h3>
         <p>
-          À côté des grands ordres, une constellation de structures plus petites apparaît : initiatives locales,
-          recrutements “nationaux”, institutions hospitalières spécialisées, tentatives de courte durée, fusions ou absorptions.
+          À côté des grands ordres, on rencontre une constellation d’initiatives : institutions locales, fondations liées à une ville,
+          structures spécialisées, ou ordres à trajectoire brève. Certaines naissent d’une situation précise (un port, une route, une crise),
+          puis disparaissent, fusionnent, ou sont absorbées par des organisations plus puissantes. Cette « galaxie » explique pourquoi des tableaux
+          modernes présentent parfois des listes longues : l’histoire médiévale est riche en fondations et en recompositions.
+        </p>
+        <p>
+          Il est utile de distinguer : ce qui relève d’une institution stable et durable, de ce qui est un projet ponctuel,
+          de ce qui est une maison hospitalière, et de ce qui correspond à un ordre structuré. Le langage contemporain a tendance à
+          « aplatir » ces différences ; l’objectif ici est au contraire de les rendre lisibles.
         </p>
 
         <div class="grid-2">
           <div class="card">
             <h4>Saint-Thomas d’Acre</h4>
             <p>
-              Ordre lié à Acre et à un contexte anglo-normand, combinant assistance et protection, avec une histoire relativement courte.
+              Souvent rattaché à un contexte anglo-normand et à la ville d’Acre, ce type d’institution illustre l’articulation possible
+              entre assistance et protection, dans une géographie où les ports et les routes sont stratégiques. Les sources et les contours
+              peuvent varier, d’où l’importance d’utiliser ces repères comme des points d’orientation plutôt que comme des définitions absolues.
             </p>
             <figure>
-              <img src="IMG_4971.jpeg" alt="Repère visuel : Saint-Thomas d'Acre" loading="lazy" style="width:100%; border-radius:12px; border:1px solid rgba(214,167,40,0.18);" />
-              <figcaption>Repère visuel (illustration moderne).</figcaption>
+              <img src="IMG_4971.jpeg" alt="Illustration d’ambiance liée à l’hospitalité et à l’assistance (repère)" loading="lazy" />
+              <figcaption>Repère d’ambiance : l’assistance et l’organisation en Terre sainte.</figcaption>
             </figure>
           </div>
 
           <div class="card">
             <h4>Montjoie</h4>
             <p>
-              Mentionné selon les sources et les périodes, souvent présenté comme un exemple d’ordre “expérimental” ou de trajectoire brève,
-              parfois absorbée par d’autres structures.
+              Montjoie est souvent cité comme exemple d’une trajectoire brève, ou d’une structure qui n’a pas atteint la stabilité
+              des grands ordres. Selon les corpus, il apparaît comme une tentative, un regroupement ou une institution rapidement
+              reconfigurée. Ce type de cas rappelle qu’au Moyen Âge, beaucoup d’initiatives existent, puis se transforment sous l’effet
+              de la politique, des finances, de la géographie et des besoins locaux.
             </p>
             <figure>
-              <img src="IMG_4972.jpeg" alt="Repère visuel : Montjoie" loading="lazy" style="width:100%; border-radius:12px; border:1px solid rgba(214,167,40,0.18);" />
-              <figcaption>Repère visuel (illustration moderne).</figcaption>
+              <img src="IMG_4972.jpeg" alt="Repère visuel : Montjoie (transcription moderne)" loading="lazy" />
+              <figcaption>Repère visuel (transcription moderne) : utile, à replacer dans son contexte.</figcaption>
             </figure>
           </div>
         </div>
@@ -618,62 +836,78 @@
           <div class="card">
             <h4>Saint-Jacques d’Altopascio</h4>
             <p>
-              Institution hospitalière (Toscane), connue pour l’accueil et la protection des voyageurs ; l’assistance demeure centrale
-              malgré les classifications parfois variables dans les tableaux modernes.
+              Altopascio (Toscane) illustre l’hospitalité au long cours : accueil des voyageurs, aide sur les routes, protection
+              de passages difficiles, et soutien matériel. C’est un bon exemple pour comprendre que « l’ordre » peut, selon les cas,
+              désigner une institution hospitalière structurée, sans être un ordre militaire au sens strict. Les tableaux modernes
+              le classent parfois différemment : l’essentiel est de retenir sa vocation d’assistance.
             </p>
             <figure>
-              <img src="IMG_4969.jpeg" alt="Repère visuel : Altopascio" loading="lazy" style="width:100%; border-radius:12px; border:1px solid rgba(214,167,40,0.18);" />
-              <figcaption>Repère visuel (transcription moderne).</figcaption>
+              <img src="IMG_4969.jpeg" alt="Repère visuel : Altopascio (transcription moderne)" loading="lazy" />
+              <figcaption>Repère visuel : tradition hospitalière (transcription moderne).</figcaption>
             </figure>
           </div>
 
           <div class="card">
             <h4>Avis (Portugal)</h4>
             <p>
-              Ordre majeur du monde portugais, associé à la Reconquista et à l’histoire nationale du Portugal.
+              Avis, rattaché à l’histoire portugaise, illustre l’articulation entre structures d’ordre et dynamique territoriale.
+              Même si l’on peut le rapprocher formellement des ordres religieux-militaires, sa lecture devient plus claire quand on le
+              replace dans le cadre de la Reconquista et de la construction politique du royaume. Son identité est donc à la fois
+              militaire, institutionnelle et nationale, selon les périodes.
             </p>
             <figure>
-              <img src="IMG_4970.jpeg" alt="Repère visuel : Avis" loading="lazy" style="width:100%; border-radius:12px; border:1px solid rgba(214,167,40,0.18);" />
-              <figcaption>Repère visuel (transcription moderne).</figcaption>
+              <img src="IMG_4970.jpeg" alt="Repère visuel : Avis (Portugal) (transcription moderne)" loading="lazy" />
+              <figcaption>Repère visuel : Avis (Portugal) — ancrage ibérique.</figcaption>
             </figure>
           </div>
         </div>
       </div>
 
-      <div class="inner-img">
-        <img src="IMG_4963.jpeg" alt="Chevaliers et emblèmes — illustration pédagogique" loading="lazy" />
-      </div>
-      <div class="img-caption">Illustration pédagogique : diversité des traditions.</div>
+      <figure class="inner-img">
+        <img src="IMG_4963.jpeg" alt="Illustration pédagogique : chevaliers, habits et emblèmes médiévaux" loading="lazy" />
+        <figcaption>Illustration pédagogique : diversité des traditions, des contextes et des représentations.</figcaption>
+      </figure>
 
       <!-- 7 -->
       <div class="section-card" id="iberiques">
         <h3>7) Grands ordres ibériques (Reconquista)</h3>
         <p>
-          La Reconquista correspond à une guerre longue et territoriale (Espagne/Portugal). Les ordres ibériques
-          ressemblent parfois aux ordres de Terre sainte par la forme (règle + discipline), mais leur terrain et leurs enjeux
-          sont principalement péninsulaires : frontières, forteresses, administration foncière, articulation avec les couronnes.
+          La Reconquista correspond à une guerre longue, territoriale et politique, principalement en péninsule Ibérique.
+          Les ordres ibériques adoptent parfois une forme comparable aux ordres d’Orient (discipline, règle, hiérarchie),
+          mais leur terrain, leurs objectifs et leurs équilibres sont d’abord <strong>péninsulaires</strong> : frontière mouvante, contrôle de forteresses,
+          administration de terres, soutien aux couronnes, sécurisation de routes et de zones de colonisation.
+        </p>
+        <p>
+          Leur puissance ne se mesure pas seulement à la dimension militaire : elle se lit aussi dans l’organisation foncière,
+          la gestion de territoires, et la place institutionnelle que les royaumes leur attribuent. C’est pourquoi les ordres ibériques
+          s’inscrivent très directement dans l’histoire politique espagnole et portugaise.
         </p>
 
         <div class="grid-2">
           <div class="card">
             <h4>Santiago</h4>
             <p>
-              Associé à la protection des routes et à la dynamique de reconquête ; sa croix est un symbole très identifiable.
+              Santiago est l’un des symboles les plus identifiables du monde ibérique. L’ordre est associé à une logique de protection,
+              d’organisation territoriale et de soutien à la dynamique de reconquête. La croix, dans les représentations modernes,
+              sert de repère iconographique immédiat, mais la réalité historique se comprend par son implantation, ses fonctions,
+              et son rapport aux pouvoirs.
             </p>
             <figure>
-              <img src="IMG_4964.jpeg" alt="Repère visuel : Santiago" loading="lazy" style="width:100%; border-radius:12px; border:1px solid rgba(214,167,40,0.18);" />
-              <figcaption>Repère visuel (transcription moderne).</figcaption>
+              <img src="IMG_4964.jpeg" alt="Repère visuel : Santiago (transcription moderne)" loading="lazy" />
+              <figcaption>Repère visuel : Santiago (transcription moderne).</figcaption>
             </figure>
           </div>
 
           <div class="card">
             <h4>Calatrava</h4>
             <p>
-              Grand ordre castillan, emblématique de la logique des places fortes et du contrôle stratégique.
+              Calatrava incarne la logique des places fortes et du contrôle stratégique. Dans une frontière mouvante, tenir une forteresse,
+              organiser des hommes, sécuriser des ressources, et administrer un espace sont des compétences centrales. C’est un excellent exemple
+              de la manière dont un ordre peut devenir un acteur territorial, au-delà du champ de bataille.
             </p>
             <figure>
-              <img src="IMG_4966.jpeg" alt="Repère visuel : Calatrava" loading="lazy" style="width:100%; border-radius:12px; border:1px solid rgba(214,167,40,0.18);" />
-              <figcaption>Repère visuel (transcription moderne).</figcaption>
+              <img src="IMG_4966.jpeg" alt="Repère visuel : Calatrava (transcription moderne)" loading="lazy" />
+              <figcaption>Repère visuel : Calatrava (transcription moderne).</figcaption>
             </figure>
           </div>
         </div>
@@ -682,105 +916,136 @@
           <div class="card">
             <h4>Alcántara</h4>
             <p>
-              Ordre de frontière, souvent associé au même ensemble que Santiago et Calatrava.
+              Alcántara est souvent associé au même ensemble que Santiago et Calatrava. Il s’inscrit dans une logique de frontière :
+              fortifications, contrôle d’axes, soutien à l’autorité royale, et organisation des hommes et des biens. Son identité s’éclaire
+              dès lors qu’on la replace dans la géographie politique de la Reconquista, et dans la réalité des zones de passage.
             </p>
             <figure>
-              <img src="IMG_4965.jpeg" alt="Repère visuel : Alcántara" loading="lazy" style="width:100%; border-radius:12px; border:1px solid rgba(214,167,40,0.18);" />
-              <figcaption>Repère visuel (transcription moderne).</figcaption>
+              <img src="IMG_4965.jpeg" alt="Repère visuel : Alcántara (transcription moderne)" loading="lazy" />
+              <figcaption>Repère visuel : Alcántara (transcription moderne).</figcaption>
             </figure>
           </div>
 
           <div class="card">
             <h4>Avis (Portugal)</h4>
             <p>
-              Ordre portugais majeur, fortement lié à l’histoire politique et militaire du royaume.
+              Avis est un ordre majeur du Portugal et un repère essentiel pour comprendre l’histoire nationale.
+              Selon les périodes, son rôle se recompose : participation à la dynamique militaire, ancrage institutionnel,
+              et place dans les traditions du royaume. Sa lecture est plus juste quand on la considère comme un acteur de la construction
+              politique, et pas seulement comme un symbole martial.
             </p>
             <figure>
-              <img src="IMG_4970.jpeg" alt="Repère visuel : Avis" loading="lazy" style="width:100%; border-radius:12px; border:1px solid rgba(214,167,40,0.18);" />
-              <figcaption>Repère visuel (transcription moderne).</figcaption>
+              <img src="IMG_4970.jpeg" alt="Repère visuel : Avis (Portugal) (transcription moderne)" loading="lazy" />
+              <figcaption>Repère visuel : Avis (Portugal) — continuités et transformations.</figcaption>
             </figure>
           </div>
         </div>
       </div>
 
-      <div class="inner-img">
-        <img src="IMG_4967.jpeg" alt="Croix de Santiago — symbole ibérique" loading="lazy" />
-      </div>
-      <div class="img-caption">Santiago (illustration).</div>
+      <figure class="inner-img">
+        <img src="IMG_4967.jpeg" alt="Symbole de Santiago (illustration) : repère visuel ibérique" loading="lazy" />
+        <figcaption>Repère : iconographie de Santiago (illustration).</figcaption>
+      </figure>
 
       <!-- 8 -->
       <div class="section-card alt" id="lieux-saints">
         <h3>8) Lieux saints et institutions liées à Jérusalem</h3>
         <p>
           Les Lieux saints structurent une spiritualité, une liturgie, une théologie et une organisation du pèlerinage.
-          À côté des ordres militaires, il existe des institutions davantage liées au sanctuaire, à l’accueil et à la présence religieuse.
+          Autour des sanctuaires, on trouve des présences religieuses, des œuvres d’accueil, des communautés et des institutions
+          liées à l’encadrement des visiteurs. Cette dimension est parfois moins visible dans l’imaginaire populaire, dominé par les récits
+          militaires, alors qu’elle constitue un socle constant : prière, rites, garde des lieux, hospitalité, et continuité de présence.
         </p>
         <p>
-          Dans certaines traditions et récits, on trouve aussi la mention de groupes locaux rattachés à un lieu et à un service
-          (accueil, encadrement, protection locale, assistance), dont la documentation et les contours peuvent varier selon les sources.
+          Il existe aussi, selon les sources et les périodes, des structures rattachées à un lieu et à un service (accueil, encadrement,
+          protection locale, assistance), dont les contours peuvent varier. Plutôt que de trancher à partir d’un seul tableau ou d’une seule
+          représentation, il est prudent de comprendre ces mentions comme des indices d’une réalité plus large : la Terre sainte est un espace
+          où la présence chrétienne s’organise par strates, au fil des siècles.
         </p>
 
         <div class="soft-sep"></div>
 
         <h3 style="margin-top:0;">Le Saint-Sépulcre (dimension historique)</h3>
         <p>
-          Les formes institutionnelles liées au Saint-Sépulcre varient selon les périodes, mais la logique générale
-          renvoie au sanctuaire, au pèlerinage et à la continuité chrétienne à Jérusalem.
+          Les formes institutionnelles liées au Saint-Sépulcre évoluent avec le temps. L’idée centrale, cependant, reste stable :
+          <strong>un sanctuaire majeur</strong>, point d’ancrage spirituel, liturgique et mémoriel, autour duquel se structurent
+          des continuités de présence et des traditions de pèlerinage. La compréhension historique demande de distinguer le lieu,
+          les communautés, et les cadres institutionnels successifs.
         </p>
       </div>
 
-      <div class="inner-img">
-        <img src="IMG_4968.jpeg" alt="Représentation du Saint-Sépulcre — gravure" loading="lazy" />
-      </div>
-      <div class="img-caption">Jérusalem et ses sanctuaires (illustration).</div>
+      <figure class="inner-img">
+        <img src="IMG_4968.jpeg" alt="Gravure ou représentation historique : Jérusalem, sanctuaires et espaces du pèlerinage" loading="lazy" />
+        <figcaption>Jérusalem : sanctuaires et mémoire du pèlerinage (illustration).</figcaption>
+      </figure>
 
       <!-- 9 -->
       <div class="section-card" id="constantinople">
         <h3>9) Constantinople / Byzance : un autre modèle</h3>
         <p>
-          Constantinople (Byzance) ne se comprend pas toujours à travers les catégories occidentales.
-          Là où l’Occident multiplie des ordres autonomes, l’Empire byzantin s’appuie sur un appareil impérial sacralisé :
-          dignités, titres, hiérarchies de cour, clergé structuré, cérémonial.
+          Constantinople (Byzance) ne se comprend pas toujours avec les catégories occidentales. Là où l’Occident latin voit se développer
+          des ordres relativement autonomes, l’Empire byzantin s’appuie sur un appareil impérial sacralisé : dignités, titres, hiérarchies
+          de cour, clergé structuré, cérémonial, et une articulation forte entre pouvoir, symbolique et institutions.
         </p>
         <p>
-          Le tissu urbain comprend aussi des œuvres et fondations caritatives (hôpitaux, hospices, patronages),
-          dont les noms et dévotions peuvent recouper certaines références communes (saints, traditions) sans produire un modèle identique
-          à celui des ordres chevaleresques latins.
+          La ville est aussi un centre d’œuvres et de fondations : hospices, hôpitaux, patronages, institutions de charité.
+          Les dévotions (saints, traditions communes) peuvent donner des rapprochements de vocabulaire avec l’Occident, sans produire le même
+          modèle que l’ordre chevaleresque latin. Ce « décalage de structure » explique les malentendus : Byzance n’est pas l’absence d’ordre,
+          c’est un autre type d’organisation, où la cour et l’État jouent un rôle différent.
         </p>
+        <div class="note">
+          <strong>À retenir :</strong> la logique byzantine est davantage <em>impériale et cérémonielle</em> ; la logique occidentale
+          des ordres est davantage <em>corporative et institutionnelle</em>.
+        </div>
       </div>
 
-      <div class="inner-img">
-        <img src="IMG_4973.jpeg" alt="Scène byzantine — représentation de cour" loading="lazy" />
-      </div>
-      <div class="img-caption">Byzance : dignités, clergé, pouvoir impérial (illustration).</div>
+      <figure class="inner-img">
+        <img src="IMG_4973.jpeg" alt="Scène byzantine : cour, dignitaires et représentation du pouvoir" loading="lazy" />
+        <figcaption>Byzance : cour, dignités, clergé et pouvoir impérial (illustration).</figcaption>
+      </figure>
 
       <!-- 10 -->
       <div class="section-card alt" id="aristocratiques">
         <h3>10) Ordres aristocratiques et dynastiques</h3>
         <p>
-          À la fin du Moyen Âge, se développent des ordres de cour fondés par des princes, rois ou maisons souveraines.
-          Leur fonction est surtout politique et symbolique : prestige, fidélité, cérémonial, structuration d’une élite autour du souverain.
+          À la fin du Moyen Âge et à l’époque moderne, se développent des ordres de cour fondés par des princes, rois ou maisons souveraines.
+          Leur fonction est d’abord politique, symbolique et sociale : prestige, fidélité au souverain, cérémonial, et structuration d’une élite.
+          Ils produisent des rituels, des chapitres, des insignes, et une mémoire dynastique qui participe au langage du pouvoir.
         </p>
         <p>
-          Ils ne reposent généralement ni sur l’hospitalité, ni sur des vœux monastiques ; ils appartiennent à la logique de la souveraineté.
+          Ces ordres ne reposent généralement ni sur l’hospitalité, ni sur des vœux monastiques. Leur logique est celle de la souveraineté :
+          créer une communauté d’honneur autour du prince. Pour les distinguer des ordres religieux-militaires, on peut retenir un test simple :
+          <strong>vœux + vie communautaire</strong> d’un côté ; <strong>honneur + cour</strong> de l’autre.
         </p>
 
         <div class="grid-2">
           <div class="card">
             <h4>Toison d’or</h4>
-            <p>Ordre prestigieux fondé au XVe siècle, lié à l’histoire dynastique bourguignonne puis aux héritages européens.</p>
+            <p>
+              Ordre prestigieux du XVe siècle, lié à l’histoire bourguignonne puis aux héritages européens. Il incarne l’idéal de fidélité,
+              de prestige et de représentation d’une maison souveraine, dans un contexte où la cour est une scène politique majeure.
+            </p>
           </div>
           <div class="card">
             <h4>Jarretière</h4>
-            <p>Ordre de cour anglais emblématique : fidélité au souverain, chapitres et cérémonial.</p>
+            <p>
+              Ordre de cour anglais emblématique : cérémonial, chapitres, continuité de tradition. Il illustre la manière dont un ordre
+              peut devenir un marqueur durable de l’identité politique et de la mémoire nationale.
+            </p>
           </div>
           <div class="card">
             <h4>Saint-Michel</h4>
-            <p>Ordre de chevalerie français historique, structurant l’honneur autour de la Couronne.</p>
+            <p>
+              Ordre de chevalerie français historique : structuration de l’honneur autour de la Couronne, hiérarchie de prestige,
+              et fonction de cohésion symbolique dans l’espace politique.
+            </p>
           </div>
           <div class="card">
             <h4>Annonciade (Savoie)</h4>
-            <p>Exemple d’ordre dynastique à forte dimension de cour, lié à une maison souveraine.</p>
+            <p>
+              Exemple d’ordre dynastique à forte dimension de cour. Il illustre la logique des maisons souveraines : identité,
+              fidélité, insignes et cérémonial.
+            </p>
           </div>
         </div>
       </div>
@@ -789,46 +1054,73 @@
       <div class="section-card" id="savoyard">
         <h3>11) Saint-Maurice & Saint-Lazare : recompositions</h3>
         <p>
-          Certains héritages s’expliquent par fusions et reconfigurations : un héritage hospitalier ou médiéval peut être repris,
-          réorganisé et intégré dans un cadre dynastique. Ce type de recomposition éclaire des continuités de mémoire,
-          des missions honorifiques, et des formes modernes d’organisation.
+          Certains héritages s’expliquent par des fusions et des reconfigurations : une tradition hospitalière ou médiévale peut être reprise,
+          réorganisée et intégrée dans un cadre dynastique. Ces recompositions ne sont pas des « anomalies » : elles sont fréquentes dans l’histoire,
+          car les institutions s’adaptent aux pouvoirs, aux territoires et aux besoins d’une époque.
+        </p>
+        <p>
+          Ce type de recomposition éclaire la continuité de certaines mémoires (symboles, vocations d’assistance, patronages),
+          tout en montrant que les formes institutionnelles peuvent changer. Autrement dit : un héritage peut survivre,
+          même quand l’organisation n’est plus celle du Moyen Âge.
         </p>
       </div>
 
-      <div class="inner-img">
-        <img src="La_commanderie_de_Saint-Maurice.jpg" alt="Commanderie de Saint-Maurice — illustration" loading="lazy" />
-      </div>
-      <div class="img-caption">Illustration (si disponible dans ton dépôt).</div>
+      <figure class="inner-img">
+        <img src="La_commanderie_de_Saint-Maurice.jpg" alt="Commanderie de Saint-Maurice : architecture et héritage patrimonial" loading="lazy" />
+        <figcaption>Patrimoine et continuités : exemple de commanderie (image de ton dépôt).</figcaption>
+      </figure>
 
       <!-- 12 -->
       <div class="section-card alt" id="survivances">
-        <h3>12) Transformations et mémoire</h3>
+        <h3>12) Transformations, diffusion et mémoire</h3>
         <p>
-          Après les croisades, les institutions suivent des trajectoires différentes : disparitions juridiques, déplacements,
-          changements de mission, reconfigurations, ou survivances sous d’autres formes.
+          Après la période des croisades, les institutions suivent des trajectoires diverses : certaines disparaissent juridiquement,
+          d’autres se déplacent, d’autres changent de mission, et certaines se recomposent sous de nouveaux cadres. Comprendre ces évolutions,
+          c’est éviter deux pièges : croire que tout continue à l’identique, ou croire que tout s’éteint brutalement.
         </p>
+        <p>
+          En réalité, la plupart des héritages se lisent dans des <strong>transitions</strong> : réorientation vers l’assistance,
+          intégration dans des structures politiques, ou transformation en traditions honorifiques et patrimoniales. À l’époque contemporaine,
+          quand une mémoire médiévale est revendiquée, elle s’exprime le plus souvent par des engagements <strong>culturels</strong>,
+          <strong>caritatifs</strong>, <strong>humanitaires</strong> ou <strong>patrimoniaux</strong>, plutôt que par un rôle militaire.
+        </p>
+
         <ul>
-          <li><strong>Transformations institutionnelles</strong> : continuité ou mutation encadrée, mission modernisée.</li>
-          <li><strong>Cadres dynastiques</strong> : ordres de cour, traditions de maison.</li>
-          <li><strong>Réappropriations symboliques</strong> : culture, mémoire, transmission, engagement éthique.</li>
+          <li><strong>Transformations institutionnelles</strong> : continuité encadrée ou mutation progressive des missions.</li>
+          <li><strong>Cadres dynastiques</strong> : ordres de cour, traditions de maison, insignes et cérémonial.</li>
+          <li><strong>Mémoire et transmission</strong> : culture, histoire, symbolique, pédagogie, engagement éthique.</li>
         </ul>
-        <p>
-          Dans le monde contemporain, la dimension dominante est le plus souvent <strong>caritative, culturelle, patrimoniale</strong>
-          ou <strong>humanitaire</strong>, et non militaire.
-        </p>
+
+        <div class="note">
+          <strong>Repère utile :</strong> la mémoire guerrière est très présente dans l’imaginaire, mais elle ne résume pas la totalité des héritages.
+          Les mêmes institutions ont aussi produit accueil, soin, logistique, administration, et parfois diplomatie.
+        </div>
       </div>
 
-      <div class="inner-img">
-        <img src="IMG_4974.jpeg" alt="Siège / bataille médiévale — illustration" loading="lazy" />
-      </div>
-      <div class="img-caption">La mémoire guerrière fait partie de l’imaginaire, sans résumer l’ensemble des héritages.</div>
+      <!-- Image bataille/siege + diffusion Europe -->
+      <figure class="inner-img">
+        <img src="IMG_4974.jpeg" alt="Illustration : siège médiéval et mémoire guerrière (repère d’imaginaire)" loading="lazy" />
+        <figcaption>Repère d’imaginaire : siège et bataille — une mémoire forte, à replacer dans l’ensemble des héritages.</figcaption>
+      </figure>
+
+      <figure class="inner-img">
+        <img src="Templerorden in Europa 1300.png" alt="Carte/repère : implantation ou diffusion des ordres en Europe vers 1300" loading="lazy" />
+        <figcaption>Repère visuel : diffusion/implantation en Europe (vers 1300) — utile pour situer géographiquement les réseaux.</figcaption>
+      </figure>
 
       <!-- 13 -->
       <div class="section-card" id="reperes">
         <h3>13) Repères visuels : transcriptions modernes</h3>
         <p>
-          Les planches et transcriptions modernes (croix, blasons, appellations) sont utiles comme repères iconographiques,
-          mais doivent toujours être replacées dans le contexte historique (époque, fonction, statut, évolutions).
+          Les planches et transcriptions modernes (croix, blasons, appellations) rendent de grands services : elles permettent d’identifier
+          rapidement des familles, de comparer des symboles, et de visualiser des ensembles. Cependant, elles simplifient parfois des réalités
+          complexes : un même emblème peut varier, une appellation peut être tardive, et une classification peut dépendre du point de vue
+          (religieux, militaire, hospitalier, dynastique).
+        </p>
+        <p>
+          La meilleure méthode est donc double : utiliser les repères iconographiques <strong>comme une boussole</strong>,
+          puis vérifier par le contexte : époque, mission, implantation, règles, et transformations. Cette page suit précisément cette logique :
+          d’abord les catégories, ensuite les images.
         </p>
       </div>
 
@@ -836,11 +1128,11 @@
       <div class="section-card alt" id="glossaire">
         <h3>14) Glossaire rapide</h3>
         <ul>
-          <li><strong>Ordre religieux</strong> : communauté sous règle, tournée vers la vie religieuse.</li>
-          <li><strong>Ordre religieux-militaire</strong> : ordre sous vœux, avec mission de protection armée dans un contexte précis.</li>
-          <li><strong>Ordre hospitalier</strong> : institution d’accueil/soin, parfois dotée de moyens de protection.</li>
-          <li><strong>Ordre de cour</strong> : ordre dynastique/aristocratique, lié au souverain, à l’honneur et au cérémonial.</li>
-          <li><strong>Commanderie</strong> : maison/établissement local gérant terres, ressources et accueil, selon les ordres.</li>
+          <li><strong>Ordre religieux</strong> : communauté sous règle, tournée vers la prière, la vie spirituelle et l’organisation communautaire.</li>
+          <li><strong>Ordre religieux-militaire</strong> : institution sous vœux, avec une mission de protection armée (routes, lieux, places) dans un contexte historique précis.</li>
+          <li><strong>Institution hospitalière</strong> : structure d’accueil et de soin (hôpital, hospice), parfois dotée de moyens de protection selon les lieux et périodes.</li>
+          <li><strong>Ordre de cour</strong> : ordre dynastique/aristocratique, lié au souverain, à l’honneur, au prestige et au cérémonial.</li>
+          <li><strong>Commanderie</strong> : maison/établissement local (biens, ressources, accueil, administration), pivot des réseaux d’ordres ou d’institutions.</li>
         </ul>
       </div>
 
@@ -855,7 +1147,7 @@
 
       <div class="footer-min">
         <div class="line">
-          <span>© OSD9TDJ</span>
+          <span>© <span id="y"></span> OSD9TDJ</span>
           <span class="sep">•</span>
           <a href="mentions.html">mentions</a>
           <span class="sep">•</span>
@@ -865,5 +1157,23 @@
 
     </div>
   </div>
+
+  <script>
+    // Année auto
+    (function(){
+      var y = new Date().getFullYear();
+      var el = document.getElementById('y');
+      if(el) el.textContent = y;
+    })();
+
+    // Watermark : texte vivant (discret) + anti-copie (soft)
+    (function(){
+      var wm = document.querySelector('.wm');
+      if(!wm) return;
+      var y = new Date().getFullYear();
+      var base = "OSD9TDJ • ORDRES HISTORIQUES • TERRE SAINTE • BYZANCE • RECONQUISTA • " + y + " •";
+      wm.setAttribute('data-wm', base + "\n" + base + "\n" + base);
+    })();
+  </script>
 </body>
 </html>
