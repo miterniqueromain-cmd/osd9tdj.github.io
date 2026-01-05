@@ -376,7 +376,8 @@
     .muted{ opacity:0.82; font-size:0.92rem; }
     .mini-body p{ margin:6px 0; }
 
-    #commanderie-map{ border-radius:14px; }
+    #commanderie-map,
+    #commanderie-pins-map{ border-radius:14px; }
 
     .map-wrap #commanderie-map{
       width:100%;
@@ -770,6 +771,17 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
           Exemples de pôles associés à la mémoire templière (sélection <strong>non exhaustive</strong>) :
         </p>
 <div class="silver-sep"></div>
+
+<h2>4 – Carte des commanderies (épingles)</h2>
+<div class="map-wrap">
+  <div aria-label="Carte des commanderies (épingles)" id="commanderie-pins-map"></div>
+</div>
+<div class="silver-box">
+  <p>
+    Carte indicative (repères) : quelques sites et pôles historiques associés aux commanderies templières.
+    <strong>Non exhaustive</strong> — repères destinés à la lecture et à l’orientation.
+  </p>
+</div>
 <ul>
 <li><strong>France</strong> : Paris (Enclos du Temple), Provins, Laon, région de Champagne.</li>
 <li><strong>Angleterre</strong> : Londres (Temple / Temple Church).</li>
@@ -837,7 +849,49 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
       weight: 1,
       fillOpacity: 0.75
     }).addTo(map).bindPopup('<strong>'+p.name+'</strong><br><span style="opacity:.85">Repère géographique – liste non exhaustive</span>');
-  });
+  
+  // --- Carte 2 : épingles de commanderies (repères indicatifs) ---
+  const commanderiePins = [
+    {name:'Paris — Enclos du Temple (France)', lat:48.8647, lon:2.3586},
+    {name:'Provins (France)', lat:48.5602, lon:3.2996},
+    {name:'Laon (France)', lat:49.5635, lon:3.6243},
+    {name:'Troyes — Champagne (France)', lat:48.2973, lon:4.0744},
+
+    {name:'Londres — Temple Church (Angleterre)', lat:51.5129, lon:-0.1107},
+
+    {name:'Tomar — Convento de Cristo (Portugal)', lat:39.6033, lon:-8.4187},
+    {name:'Saragosse — Aragon (Espagne)', lat:41.6488, lon:-0.8891},
+    {name:'Barcelone — Catalogne (Espagne)', lat:41.3851, lon:2.1734},
+
+    {name:'Bari — Pouilles (Italie)', lat:41.1171, lon:16.8719},
+
+    {name:'Jérusalem (Orient latin)', lat:31.7780, lon:35.2350},
+    {name:'Saint-Jean-d’Acre / Acre (Orient latin)', lat:32.9236, lon:35.0710},
+    {name:'Tripoli (Liban) — repère', lat:34.4367, lon:35.8497},
+    {name:'Tortose / Tartous (Syrie) — repère', lat:34.8890, lon:35.8866}
+  ];
+
+  const pinsEl = document.getElementById('commanderie-pins-map');
+  if (pinsEl && window.L) {
+    // same sizing rules as the first map
+    pinsEl.style.width = '100%';
+    pinsEl.style.height = '520px';
+
+    const mapPins = L.map('commanderie-pins-map', { scrollWheelZoom:false, tap:false });
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(mapPins);
+
+    const pinsLayer = L.featureGroup().addTo(mapPins);
+    commanderiePins.forEach(p => {
+      L.marker([p.lat, p.lon]).addTo(pinsLayer).bindPopup('<strong>' + p.name + '</strong>');
+    });
+
+    // Frame to show Europe/Levant nicely
+    mapPins.fitBounds(pinsLayer.getBounds().pad(0.25));
+  }
+});
 })();
 </script></body>
 </html>
