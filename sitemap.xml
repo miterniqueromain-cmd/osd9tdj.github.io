@@ -5,13 +5,13 @@
   <url>
     <loc>https://osd9tdj.org/</loc>
     <priority>1.00</priority>
-    <lastmod>2025-12-29</lastmod>
+    <lastmod>2026-01-05</lastmod>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/index.html</loc>
     <priority>1.00</priority>
-    <lastmod>2025-12-29</lastmod>
+    <lastmod>2026-01-05</lastmod>
   </url>
 
   <!-- Pages identitaires majeures -->
@@ -40,12 +40,12 @@
   </url>
 
   <url>
-    <loc>https://osd9tdj.org/commanderies.html</loc>
+    <loc>https://osd9tdj.org/commanderie.html</loc>
     <priority>0.90</priority>
     <lastmod>2025-12-21</lastmod>
   </url>
 
-  <!-- Pages dâaction / vie associative -->
+  <!-- Pages d'action / vie associative -->
   <url>
     <loc>https://osd9tdj.org/adhesion.html</loc>
     <priority>0.95</priority>
@@ -76,7 +76,21 @@
     <lastmod>2025-12-21</lastmod>
   </url>
 
-  <!-- Pages lÃ©gales -->
+  <!-- Pages de contenu historique -->
+  <url>
+    <loc>https://osd9tdj.org/ordres-historiques.html</loc>
+    <priority>0.90</priority>
+    <lastmod>2026-01-05</lastmod>
+  </url>
+
+  <!-- FAQ -->
+  <url>
+    <loc>https://osd9tdj.org/faq.html</loc>
+    <priority>0.80</priority>
+    <lastmod>2026-01-05</lastmod>
+  </url>
+
+  <!-- Pages légales et contact -->
   <url>
     <loc>https://osd9tdj.org/statuts.html</loc>
     <priority>0.70</priority>
