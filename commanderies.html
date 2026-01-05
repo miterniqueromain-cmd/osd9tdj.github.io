@@ -1,1082 +1,581 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>Commanderies & Dignitaires — O.S.D.9.T.D.J.</title>
-  <meta name="description" content="Répertoire (enrichissable) des commanderies templières et liste des dignitaires/offices (sénéchaux, maréchaux, drapiers, turcopliers…). Page O.S.D.9.T.D.J.">
-  <meta name="robots" content="index,follow">
-  <meta property="og:title" content="Commanderies & Dignitaires — O.S.D.9.T.D.J.">
-  <meta property="og:description" content="Commanderies (France/Europe/Monde) & dignitaires de l’Ordre (offices).">
+  <meta charset="UTF-8">
+  <title>Commanderies & dignitaires – Ordre Sacré des Neuf Templiers de Jérusalem</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO (renforcé) -->
+  <meta name="description" content="Commanderies et organisation historique : liste complète des Grands Maîtres de l’Ordre du Temple (1118–1314), dignitaires, offices et repères géographiques. Page culturelle de l’O.S.D.9.T.D.J. (association loi 1901, laïque et indépendante) consacrée à l’étude de la mémoire templière, de ses structures et de son héritage.">
+  <meta name="keywords" content="OSD9TDJ, O.S.D.9.T.D.J., commanderies, Templiers, Ordre du Temple, Grands Maîtres, Jacques de Molay, Hugues de Payns, dignitaires templiers, sénéchal, maréchal, drapier, commandeurs, Terre sainte, Jérusalem, Acre, Europe médiévale, histoire templière">
+  <link rel="canonical" href="https://osd9tdj.org/commanderies.html">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Commanderies & dignitaires – O.S.D.9.T.D.J.">
+  <meta property="og:description" content="Liste complète des Grands Maîtres (1118–1314), offices, dignitaires et repères de commanderies. Page culturelle et historique.">
+  <meta property="og:image" content="https://osd9tdj.org/sceau-osd9tdj.PNG">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://osd9tdj.org/commanderies.html">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Commanderies & dignitaires – O.S.D.9.T.D.J.">
+  <meta name="twitter:description" content="Grands Maîtres, offices et repères de commanderies : page historique.">
+  <meta name="twitter:image" content="https://osd9tdj.org/sceau-osd9tdj.PNG">
+
+  <!-- WATERMARK INVISIBLE – signature -->
+  <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2026-OSD9TDJ-COMMANDERIES-HISTORIQUES">
+
+  <!-- JSON-LD – Données structurées Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Commanderies & dignitaires – Ordre Sacré des Neuf Templiers de Jérusalem",
+    "url": "https://osd9tdj.org/commanderies.html",
+    "about": [
+      {"@type":"Thing","name":"Ordre du Temple"},
+      {"@type":"Thing","name":"Commanderies templières"},
+      {"@type":"Thing","name":"Grands Maîtres des Templiers"}
+    ],
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "O.S.D.9.T.D.J.",
+      "url": "https://osd9tdj.org"
+    }
+  }
+  </script>
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Icônes -->
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+
   <style>
     :root {
-      --bg:#050507;
-      --gold:#c9a24a;
-      --gold2:#8b6b2e;
-      --txt:#f2efe6;
-      --muted:#cfc8b6;
-      --panel: rgba(0,0,0,.55);
-      --stroke: rgba(201,162,74,.35);
-      --shadow: 0 20px 60px rgba(0,0,0,.55);
-      --radius: 22px;
+      --or: #d6a728;
+      --clair: #f5f0e6;
+      --or-line: rgba(214,167,40,0.55);
+
+      --silver-border: rgba(220,220,220,0.24);
+      --silver-bg: rgba(255,255,255,0.04);
     }
-    *{box-sizing:border-box}
-    body{
+
+    html, body{
+      height:100%;
       margin:0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      color:var(--txt);
-      background:
-        radial-gradient(1200px 600px at 50% 0%, rgba(201,162,74,.13), transparent 60%),
-        radial-gradient(900px 500px at 10% 20%, rgba(201,162,74,.08), transparent 55%),
-        linear-gradient(180deg, #050507 0%, #0a0a10 35%, #050507 100%);
-      min-height:100vh;
-    }
-    a{color:var(--gold); text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:1100px; margin:0 auto; padding:18px 14px 80px}
-    .frame{
-      position:relative;
-      border-radius: var(--radius);
-      border: 1px solid var(--stroke);
-      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,.35));
-      box-shadow: var(--shadow);
+      padding:0;
       overflow:hidden;
+      font-family: 'Lato', Arial, sans-serif;
+      color: var(--clair);
+      text-align: center;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1b1b1b, #020202 70%);
+      position: relative;
     }
-    .frame::before{
-      content:"";
-      position:absolute; inset:0;
-      border-radius: var(--radius);
-      padding:2px;
-      background: linear-gradient(120deg, rgba(201,162,74,.65), rgba(201,162,74,.08), rgba(201,162,74,.55));
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events:none;
+
+    .frame-fixed{
+      position: fixed;
+      inset: 14px;
+      border-radius: 22px;
+      border: 2px solid var(--or-line);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.08) inset,
+        0 0 38px rgba(0,0,0,0.40);
+      pointer-events: none;
+      z-index: 40;
     }
-    header{
-      padding:18px 18px 8px;
-      display:flex; gap:14px; align-items:center; flex-wrap:wrap;
+
+    .viewport-scroll{
+      position: fixed;
+      inset: 22px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+      padding: 30px 15px 44px;
+      box-sizing: border-box;
     }
-    .hero-img{
-      width:72px; height:72px; border-radius:16px;
-      border:1px solid var(--stroke);
-      overflow:hidden; flex:0 0 auto;
-      background: rgba(0,0,0,.4);
+
+    /* menu 3 points */
+    .top-menu{
+      position: fixed;
+      top: 26px;
+      right: 26px;
+      z-index: 60;
+      pointer-events: auto;
     }
-    .hero-img img{width:100%; height:100%; object-fit:cover; display:block}
-    h1{margin:0; font-size: clamp(20px, 3.7vw, 32px); letter-spacing:.3px}
-    .sub{margin:2px 0 0; color:var(--muted); font-size:14px}
-    .content{padding:0 18px 18px}
-    .kicker{color:var(--gold); font-weight:600; letter-spacing:.6px; font-size:12px; text-transform:uppercase}
-    .lead{margin:10px 0 0; color:var(--txt); line-height:1.55}
-    .hr{height:1px; background: linear-gradient(90deg, transparent, rgba(201,162,74,.35), transparent); margin:18px 0}
-    /* Accordion */
-    details.acc{border:1px solid var(--stroke); border-radius:18px; background: var(--panel); margin:10px 0; overflow:hidden}
-    details.acc>summary{
-      list-style:none; cursor:pointer; padding:14px 14px;
-      display:flex; align-items:center; justify-content:space-between;
-      font-weight:700; color:var(--txt);
+    .top-menu details{ position: relative; }
+    .top-menu summary{
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      width: 46px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(214,167,40,0.55);
+      background: rgba(0,0,0,0.22);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+      font-family:'Cinzel',serif;
+      color: var(--or);
+      font-size: 22px;
+      line-height: 1;
     }
-    details.acc>summary::-webkit-details-marker{display:none}
-    details.acc>summary::after{content:"▾"; color:var(--gold); margin-left:12px; font-size:14px}
-    details.acc[open]>summary::after{content:"▴"}
-    .acc-body{padding:0 14px 14px; color:var(--muted); line-height:1.6}
-    /* Mini details */
-    details.mini{border:1px solid rgba(201,162,74,.18); border-radius:14px; background: rgba(0,0,0,.35); margin:8px 0; overflow:hidden}
-    details.mini>summary{list-style:none; cursor:pointer; padding:10px 12px; display:flex; gap:10px; flex-wrap:wrap; align-items:baseline}
-    details.mini>summary::-webkit-details-marker{display:none}
-    details.mini>summary::after{content:"+"; margin-left:auto; color:var(--gold); font-weight:700}
-    details.mini[open]>summary::after{content:"–"}
-    .name{color:var(--txt); font-weight:700}
-    .date{color:var(--gold)}
-    .mini-body{padding:0 12px 12px; color:var(--muted)}
-    /* Gallery */
-    .grid{display:grid; grid-template-columns: repeat(12, 1fr); gap:12px}
-    figure.pic{margin:0; grid-column: span 6; border:1px solid var(--stroke); border-radius:18px; overflow:hidden; background: rgba(0,0,0,.35)}
-    figure.pic img{width:100%; height:auto; display:block}
-    figure.pic figcaption{padding:10px 12px; color:var(--muted); font-size:13px}
-    @media (max-width: 860px){ figure.pic{grid-column: span 12;} }
-    /* Table */
-    .tools{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
-    .search{flex:1; min-width:220px}
-    input[type="search"]{
-      width:100%; padding:12px 12px; border-radius:14px;
-      border:1px solid rgba(201,162,74,.25);
-      background: rgba(0,0,0,.35);
-      color:var(--txt); outline:none;
+    .top-menu summary::-webkit-details-marker{ display:none; }
+
+    .menu-panel{
+      position: absolute;
+      right: 0;
+      margin-top: 10px;
+      width: 260px;
+      max-width: calc(100vw - 60px);
+      border-radius: 14px;
+      border: 1px solid rgba(214,167,40,0.45);
+      background: rgba(0,0,0,0.70);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+      overflow: hidden;
     }
-    table{width:100%; border-collapse:separate; border-spacing:0; overflow:hidden; border-radius:18px; border:1px solid var(--stroke); background: rgba(0,0,0,.35)}
-    th,td{padding:10px 10px; text-align:left; border-bottom:1px solid rgba(201,162,74,.12); vertical-align:top}
-    th{color:var(--gold); font-weight:700; font-size:13px; letter-spacing:.3px}
-    tr:last-child td{border-bottom:none}
-    /* Bottom bar */
-    .bottom{
-      position:sticky; bottom:0; left:0; right:0;
-      margin-top:18px;
-      padding:10px 14px 14px;
-      backdrop-filter: blur(8px);
-      background: linear-gradient(180deg, rgba(5,5,7,.05), rgba(5,5,7,.88));
-      border-top: 1px solid rgba(201,162,74,.18);
+    .menu-panel a{
+      display:block;
+      padding: 11px 12px;
+      text-decoration:none;
+      color: rgba(245,240,230,0.92);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(214,167,40,0.18);
     }
-    .tabs{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
-    .tab{
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid rgba(201,162,74,.35);
-      background: rgba(0,0,0,.25);
-      color:var(--txt);
-      font-weight:600;
-      font-size:13px;
+    .menu-panel a:hover{
+      background: rgba(214,167,40,0.12);
+      color: #fff;
     }
-    .tab:hover{background: rgba(201,162,74,.12)}
+    .menu-panel a:last-child{ border-bottom: none; }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-sizing: border-box;
+    }
+
+    .sceau-box {
+      margin-top: 5px;
+      margin-bottom: 18px;
+      padding: 18px;
+      border-radius: 24px;
+      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.96));
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.85);
+      border: 2px solid rgba(214, 167, 40, 0.9);
+    }
+    .sceau-box img {
+      display: block;
+      max-width: 80vw;
+      width: 360px;
+      height: auto;
+      background: #000;
+    }
+
+    h1{
+      font-family:'Cinzel',serif;
+      font-size:1.9rem;
+      margin: 10px 0 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    h2{
+      font-family:'Cinzel',serif;
+      font-size:1.15rem;
+      margin: 18px 0 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--or);
+      max-width: 980px;
+      width: 100%;
+      text-align: center;
+    }
+
+    p{
+      max-width: 900px;
+      margin: 6px auto;
+      font-size: 1rem;
+      line-height: 1.52;
+      text-align: justify;
+    }
+
+    a{ color: var(--clair); text-decoration: underline; }
+
+    .silver-box{
+      width: 100%;
+      max-width: 950px;
+      margin: 10px auto;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--silver-border);
+      background: var(--silver-bg);
+      box-shadow: 0 0 14px rgba(0,0,0,0.55);
+      text-align: left;
+    }
+    .silver-sep{
+      height: 1px;
+      width: 60%;
+      margin: 12px auto;
+      background: linear-gradient(to right, transparent, rgba(220,220,220,0.45), transparent);
+    }
+
+    ul{
+      max-width: 900px;
+      margin: 8px auto;
+      text-align: left;
+      line-height: 1.45;
+      padding-left: 20px;
+    }
+    .note{
+      font-size: 0.95rem;
+      opacity: 0.92;
+    }
+
+    table{
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.98rem;
+    }
+    th, td{
+      padding: 10px 10px;
+      border-bottom: 1px solid rgba(220,220,220,0.16);
+      vertical-align: top;
+    }
+    th{
+      font-family:'Cinzel',serif;
+      letter-spacing: 0.04em;
+      color: var(--or);
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      text-align: left;
+      border-bottom: 1px solid rgba(214,167,40,0.22);
+    }
+    .col-small{ width: 22%; }
+    .col-mid{ width: 22%; }
+    .map-wrap{
+      width:100%;
+      max-width: 950px;
+      border-radius: 14px;
+      border: 1px solid rgba(214,167,40,0.22);
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.50);
+      background: rgba(0,0,0,0.35);
+    }
+    .map-wrap iframe{
+      width:100%;
+      height: 360px;
+      border: 0;
+      display:block;
+      filter: contrast(1.05) saturate(0.9);
+    }
+
+    .footer-min{
+      margin-top: 26px;
+      padding-top: 14px;
+      width: 100%;
+      max-width: 980px;
+      border-top: 1px solid rgba(214,167,40,0.22);
+      opacity: 0.92;
+    }
+    .footer-min .line{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      font-size:0.78rem;
+      color: rgba(245,240,230,0.85);
+    }
+    .footer-min a{
+      font-size:0.72rem;
+      text-transform: lowercase;
+      letter-spacing: 0.02em;
+      color: rgba(245,240,230,0.78);
+      text-decoration:none;
+      border-bottom: 1px dotted rgba(214,167,40,0.55);
+      padding-bottom: 1px;
+    }
+    .footer-min a:hover{
+      color:#fff;
+      border-bottom-color: rgba(214,167,40,0.95);
+    }
+    .sep{ opacity:0.55; }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.05rem; }
+      p  { font-size: 0.95rem; }
+      .top-menu{ top:22px; right:22px; }
+      .menu-panel{ width: 240px; }
+      .frame-fixed{ inset: 12px; }
+      .viewport-scroll{ inset: 20px; }
+      .silver-box{ padding: 11px 12px; }
+      .silver-sep{ width: 70%; }
+      .map-wrap iframe{ height: 310px; }
+      th, td{ padding: 9px 8px; }
+    }
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <div class="frame">
-      <header>
-        <div class="hero-img">
-          <img src="templiers-ix.PNG" alt="O.S.D.9.T.D.J. — Templiers IX" loading="lazy">
-        </div>
-        <div>
-          <div class="kicker">O.S.D.9.T.D.J.</div>
-          <h1>Commanderies & Dignitaires</h1>
-          <div class="sub">Répertoire (France • Europe • Monde) + offices (sénéchal, maréchal, drapier, turcoplier…).</div>
-        </div>
-      </header>
-
-      <div class="content">
-        <p class="lead">
-          Cette page rassemble : (1) un <strong>répertoire des commanderies</strong> (enrichissable), (2) les <strong>dignitaires/offices</strong> historiquement cités
-          (sources compilées), et (3) des <strong>illustrations</strong> libres d’usage que vous avez déjà importées dans votre dépôt.
-        </p>
-
-        <div class="hr"></div>
-
-        <details class="acc" open>
-          <summary>Illustrations (cartes & lieux)</summary>
-          <div class="acc-body">
-            <div class="grid">
-              
-        <figure class="pic">
-          <img src="map-templiers-europe-1300.png" alt="Carte des commanderies templières en Europe (vers 1300)" loading="lazy">
-          <figcaption>Carte des commanderies templières en Europe (vers 1300)</figcaption>
-        </figure>
-        
-
-        <figure class="pic">
-          <img src="Templerorden in Europa 1300.png" alt="Carte de la présence templière en Europe (vers 1300)" loading="lazy">
-          <figcaption>Carte de la présence templière en Europe (vers 1300)</figcaption>
-        </figure>
-        
-
-        <figure class="pic">
-          <img src="Commanderie_du_Ruou_-_Batiments_4.JPG" alt="Commanderie du Ruou — bâtiments" loading="lazy">
-          <figcaption>Commanderie du Ruou — bâtiments</figcaption>
-        </figure>
-        
-
-        <figure class="pic">
-          <img src="Commanderie_Coulommiers.jpg" alt="Commanderie de Coulommiers" loading="lazy">
-          <figcaption>Commanderie de Coulommiers</figcaption>
-        </figure>
-        
-
-        <figure class="pic">
-          <img src="Chapelle_de_la_commanderie_des_Templiers_de_Villemoison.jpg" alt="Chapelle de la commanderie des Templiers de Villemoison" loading="lazy">
-          <figcaption>Chapelle de la commanderie des Templiers de Villemoison</figcaption>
-        </figure>
-        
-
-        <figure class="pic">
-          <img src="Commanderie_des_Templiers_in_Figeac_01.jpg" alt="Commanderie des Templiers à Figeac" loading="lazy">
-          <figcaption>Commanderie des Templiers à Figeac</figcaption>
-        </figure>
-        
-
-        <figure class="pic">
-          <img src="Chambeugle--commanderie-2.JPG" alt="Commanderie de Chambeugle" loading="lazy">
-          <figcaption>Commanderie de Chambeugle</figcaption>
-        </figure>
-        
-
-        <figure class="pic">
-          <img src="Tomar-Convento_de_Cristo-Rotunda_dos_Templários-20140914.jpg" alt="Tomar — Convento de Cristo (rotonde templière)" loading="lazy">
-          <figcaption>Tomar — Convento de Cristo (rotonde templière)</figcaption>
-        </figure>
-        
-
-        <figure class="pic">
-          <img src="La_commanderie_de_Saint-Maurice.jpg" alt="La commanderie de Saint-Maurice" loading="lazy">
-          <figcaption>La commanderie de Saint-Maurice</figcaption>
-        </figure>
-        
-            </div>
-          </div>
-        </details>
-
-        <details class="acc">
-          <summary>Dignitaires & offices (listes compilées)</summary>
-          <div class="acc-body">
-            <p style="margin-top:0">
-              Listes structurées par office. Chaque nom est déroulable (détails / dates / remarques).
-            </p>
-            
-        <details class="acc">
-          <summary>Sénéchaux de l&#x27;Ordre des</summary>
-          <div class="acc-body">
-            
-        <details class="mini">
-          <summary><span class="name">Frère Guillaume</span> <span class="date">— 1130.   Willelmus, Sénéchal du Temple fut, en 1130, témoin de la donation d&#x27;un four,</span></summary>
-          <div class="mini-body">faite à l&#x27;abbaye Notre-Dame de Josaphat par Guillaume, prieur du Saint Sépulcre.<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Robert de Craon</span></summary>
-          <div class="mini-body">Nom : Robert de Craon<br>dates : 1132-1135. Robertus, est cité avec le titre de Sénéchal de l&#x27;ordre du Temple, dans<br>un acte du comte d&#x27;Urgell établit le 19 septembre 1132 au château de Barbera.<br>auparavant : entré au Temple en 1125<br>ensuite : Grand Maître de 1136 à 1147</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">André de Montbard</span></summary>
-          <div class="mini-body">Nom : André de Montbard<br>---PAGE 2---<br>dates : 1140 (?) - 1154. André de Montbard, Sénéchal de l&#x27;ordre du Temple, écrit à la fin de<br>l&#x27;année 1149 au grand maître des Templiers, Evrard des Barres, qui est à Paris auprès du roi<br>de France. Voici cette lettre:<br>« Depuis que nous sommes privés de votre chère présence, nous avons eu le malheur<br>de perdre, dans un combat, le Prince d&#x27;Antioche avec toute sa noblesse. A cet accident<br>en a succédé un second : les Parthes viennent de faire une invasion dans le pays<br>d&#x27;Antioche, et sans que personne osât leur résister, ils en ont fortifié les places, y<br>tiennent garnison, et ne paraissent pas devoir s&#x27;en dessaisir de longtemps, si Dieu n&#x27;y<br>met la main. A la première nouvelle de ce désastre, nous nous sommes assemblés ; et<br>de concert avec le Roi de Jérusalem, nous avons résolu d&#x27;aller au secours de cette<br>Province désolée. Nous n&#x27;avons pu fournir, pour cette expédition, que cent vingt<br>Chevaliers, et mille tant Servants que Soudoyés ; encore nous a-t-il-fallu emprunter,<br>pour leur équipage sept mille bésans à Acre, et mille à Jérusalem. Votre paternité sait à<br>quelle condition nous avons consenti à son départ ; elle connaît le besoin extrême dans<br>lequel nous sommes d&#x27;argent, de Chevaliers et de Servants ; nous la supplions avec<br>instance de nous rejoindre au plutôt avec tous les secours nécessaires à l’Église<br>orientale,<br>notre<br>mère<br>commune...<br>« A peine fûmes-nous arrivés dans le voisinage d&#x27;Antioche que le Sultan d&#x27;Alep d&#x27;un<br>côté, et les Parthes de l&#x27;autre, nous ayant investis et resserrés dans l&#x27;enceinte de la ville,<br>ravagèrent impunément nos vignes et nos moissons. Pénétrés et accablés de la plus<br>vive douleur à la vue de l&#x27;état pitoyable auquel nous sommes réduits, nous vous<br>conjurons de tout quitter pour vous embarquer sans délai : jamais votre présence ne<br>fut plus nécessaire à vos Frères ; nulle autre conjoncture ne peut rendre votre retour<br>plus agréable à Dieu. De quelque manière que la Providence dispose de nous ne tardez<br>pas que de vous mettre en route. Nous savons qu&#x27;il est aussi facile à Dieu de nous<br>délivrer, de la puissance de nos ennemis, que d&#x27;un idolâtre en faire un adorateur du vrai<br>Dieu ; aussi mettons nous toute notre confiance en celui qui nous a lavés de son sang.<br>Si ceux de nos Frères que nous vous envoyons sont en si petit nombre, n&#x27;en soyez pas<br>surpris ; nous voudrions au contraire rassembler et retenir ici, sous vos ordres tous<br>ceux des nôtres qui sont au-delà des mers. La plupart de ceux que nous avions conduits<br>au secours d&#x27;Antioche sont morts, et c&#x27;est une des raisons pour lesquelles nous ne<br>craignons pas de vous lasser, en vous conjurant encore une fois d&#x27;amener avec vous<br>tout ce que vous pourrez de Chevaliers et de Servants les plus capables de porter les<br>armes. Peut être qu&#x27;avec toute la diligence que vous ferez, vous ne nous trouverez plus<br>---PAGE 3---<br>en<br>vie.<br>Usez donc de toute la célérité possible, et de grâce, n&#x27;oubliez pas les nécessités de<br>notre Maison : elles sont telles que nous n&#x27;avons ni couleurs pour les peindre, ni termes<br>pour les exprimer. Il est aussi de la dernière importance d&#x27;annoncer la prochaine<br>désolation de la Terre Sainte au Pape, au Roi de France, aux Princes et aux<br>Ecclésiastiques, afin de les engager à nous secourir en personne, ou à nous envoyer<br>des subsides. Quelques obstacles qu&#x27;on oppose à votre départ, nous espérons de votre<br>zèle qu&#x27;il les surmontera, puisque c&#x27;est ici l&#x27;occasion d&#x27;accomplir parfaitement nos<br>vœux, en nous sacrifiant pour nos Frères, pour la défense de l’Église orientale et du<br>Saint-Sépulcre. Pour vous, nos très chers Frères, que les mêmes liens et les mêmes<br>vœux doivent rendre sensibles à nos calamités, joignez-vous à votre chef, entrez dans<br>ses vues, secondez ses intentions ; et fallût-il vendre tout ce que vous pourrez, venez<br>nous retirer du péril : c&#x27;est de vous que nous attendons la liberté et la vie. »<br>http://www.templiers.net/maitres/index.php?page=evrard-des-barres<br>Andreas de Muntbar, souscrit comme Sénéchal de l&#x27;ordre du Temple, en 1151, une donation<br>faite par le seigneur de Toron à l&#x27;ordre de Saint-Lazare.<br>auparavant : oncle de Saint Bernard, date d&#x27;entrée au Temple incertaine<br>ensuite : Grand Maître de 1153 à 1156</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Guillaume de Guerche</span></summary>
-          <div class="mini-body">Nom : Guillaume de Guerche<br>dates : 1160-1163. Guillelmus de Guerchia, souscrit comme Sénéchal de l&#x27;ordre du Temple,<br>le 26 juillet 1160, un acte du Roi Baudoin III, et vers la même époque, deux chartes de Bertrand<br>de Blanquefort, Grand Maître de l&#x27;ordre établissant des privilèges en faveur du Saint Sépulcre.<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Gautier de Brisebarre dit (de Beyrouth)</span></summary>
-          <div class="mini-body">Nom : Gautier de Brisebarre dit (de Beyrouth)<br>dates : 1169-1171. Gualterius, souscrit comme Sénéchal de l&#x27;ordre du Temple, en 1169,<br>une donation du Roi Amaury à l&#x27; Hôpital de Saint-Jean.<br>auparavant : Commandeur de la terre du royaume de Jérusalem<br>---PAGE 4---<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Béranger de Castel Peire</span></summary>
-          <div class="mini-body">Nom : Béranger de Castel Peire<br>dates : 1174-1179. Frère Bérengarius, Sénéchal de l&#x27;ordre du Temple, souscrit comme<br>témoin, dans divers actes entre les années 1174 et 1176.<br>auparavant :<br>ensuite : Mort au combat à la bataille du gué de Jacob, le 29 août 1179. Il est fort probable,<br>que ce soit au sénéchal de l&#x27;ordre des Templiers Béranger de Castel Peire 1 que fut confié la<br>défense du chastelet du gué de Jacob - place forte située à la frontière des états francs et qui<br>menaçait directement les territoires de la grande cité de Damas.<br>Le sénéchal Béranger de Castel Peire commandait à 80 chevaliers du Temple et à plus 15<br>sergents commandant chacun 50 hommes. Ajouté à cela les turcoples et les supplétifs ainsi<br>que de nombreux artisans: au total on estime à 1500 le nombre d&#x27;hommes composant la<br>garnison du gué de Jacob, qui avait été construit en un temps record. Mais si le chastelet avait<br>été construit en à peine six mois de temps, on peut croire que seuls les murs extérieurs étaient<br>définitivement achevés. Les aménagements intérieurs étaient loin d&#x27;être finis. Les planchers,<br>les escaliers et les appentis étaient encore en bois en attendant une réalisation définitive en<br>pierre de taille.<br>Après la défaite des francs à la bataille de Murj Ayoun, qui avait vu la capture du grand-maître<br>des Templiers Eudes de Saint Amand, le 10 juin 1179, le Sénéchal Béranger de Castel Peire<br>s&#x27;attendait à être la prochaine cible de Saladin dans cette guerre dont l&#x27;objectif principal était<br>précisément cette forteresse. Au mois de mai 1179, les Templiers du gué de Jacob avaient<br>déjà repoussé un premier assaut des armées de Saladin. A cette occasion, un chevalier<br>chrétien s&#x27;était fait remarquer. Il s&#x27;agissait de Renier de Maron, qui d&#x27;une flèche<br>---PAGE 5---<br>particulièrement bien tirée, avait réussi à abattre l&#x27;émir qui commandait l&#x27;assaut de la<br>forteresse.<br>C&#x27;est le samedi 24 août 1179 que toute l&#x27;armée de Saladin se présenta devant les murs du<br>chastelet du gué de Jacob. Le même jour, vers cinq heures de l&#x27;après-midi, il ordonna l&#x27;assaut.<br>Les sarrasins attaquèrent dans toutes les directions en même temps. Les défenseurs n&#x27;étant<br>qu&#x27;un millier d&#x27;hommes, la première ligne de défense céda dans l&#x27;heure et ce fut pour les<br>Templiers le repli général dans la forteresse. Face aux puissantes murailles du chastelet, l&#x27;élan<br>des Sarrasins fut finalement brisé et à la nuit tombante l&#x27;assaut des Sarrasins se terminait par<br>une demi-victoire. Le lendemain matin, le dimanche 25 août, estimant coûteuse en hommes<br>une attaque frontale, Saladin décida de saper les murailles de la forteresse au niveau de la<br>grosse tour, tout en harcelant les chrétiens avec des archers pour les contraindre à rester tapis<br>derrière leurs murailles. a la fin de la journée du 25 août, les tunnels de sape étaient terminés<br>et on commença à mettre le feu aux étais pour faire s&#x27;effondrer la muraille. Mais les tunnels<br>étaient trop étroits et il falut recommencer la manœuvre en élargissant les galeries. Trois jours<br>plus tard, le mercredi 28 août au soir, le travail était terminé. cette fois, on avait pris le soin de<br>faire de vastes tranchées qui furent bourrées de fagots auxquels on mit le feu constituant un<br>foyer qui brûla toute la nuit. La fournaise était intense et la chaleur atteignit des températures<br>infernales. A l&#x27;aube du jeudi 29 août, la muraille s&#x27;effondra au milieu d&#x27;un gigantesque incendie<br>qui gagnant tous les abords de la muraille, repoussant les Templiers tellement la chaleur était<br>intense. De plus, il semble que le vent ait été défavorable aux défenseurs, repoussant les<br>flammes à l&#x27;interieur de la garnison. Bientôt, ce fut le sénéchal lui même qui fut acculé par les<br>flammes. Sa seule chance à cette instant fut de traverser le brasier, mais se précipitant dans<br>les flammes, on ne revut jamais le sénéchal Béranger de Castel Peire.<br>Les chroniques racontent que le brasier était si intense qu&#x27;on pouvait apercevoir les colonnes<br>de fumée jusqu&#x27;aux abords de la cité de Tibériade où l&#x27;armée de secours des Francs avait<br>---PAGE 6---<br>commencé à avancer. Devant ce spectacle, elle compris que tout était perdu et fit demi-tour.<br>L&#x27;incendie avait fait le gros du travail. dès qu&#x27;ils le purent, les troupes de Saladin franchirent la<br>muraille, massacrant ceux qui n&#x27;avaient pas été brûlés vifs. Seuls 700 hommes sur les 1500<br>furent faits prisonniers, et encore beaucoup d&#x27;entre eux furent massacrés en route avant<br>d&#x27;arriver à Damas. Chacun voulait tuer son Templier, ces soldats d&#x27;élites qui étaient si redoutés<br>pendant les batailles.<br>L&#x27;odeur de la chair brûlée était vite devenue insoutenable à l&#x27;intérieur de la forteresse. Les<br>sarrasins avaient beau se protéger le visage, ils se précipitèrent tout de même pour se<br>débarrasser des cadavres en les jetant dans le puits de la forteresse. Mais les chairs en<br>décomposition accumulées dans la citerne contaminèrent l&#x27;eau et plus de dix émirs qui<br>commandaient l&#x27;armée de Saladin périrent dans l&#x27;épidémie qui s&#x27;ensuivit. Saladin insista tout<br>de même pour que l&#x27;on rase entièrement la forteresse &quot;comme on efface les lettres d&#x27;un<br>parchemin&quot; nous dit la chronique.<br>---PAGE 7---</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Urs de Alnet</span></summary>
-          <div class="mini-body">m : Urs de Alnet<br>dates : 1179-1181. Ursus de Alneto, Sénéchal de l&#x27;ordre du Temple, souscrit comme<br>témoin, dans divers actes entre les années 1179 et 1181.<br>auparavant :<br>ensuite:</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Gérard de Ridefort</span></summary>
-          <div class="mini-body">: Gérard de Ridefort<br>dates : 1183-1184. Gyrardus de Radifort, est témoin comme Sénéchal de l&#x27;ordre du Temple,<br>en 1183, dans un accord conclu entre l&#x27;abbaye Notre-Dame de Josaphat et le Temple. On a<br>retrouvé à Jérusalem une lettre de Gérard de Ridefort écrite en 1184, alors sénéchal de l&#x27;ordre<br>des Templiers. Cette lettre est adressée au commandeur de Jérusalem Eudes de Vendôme.<br>Elle concerne le Templier Robert de Sourdeval, poursuivi pour ses crimes.<br>&quot;Nous vous faisons savoir que Robert de Sourdeval s&#x27;est rendu à Tyr et est logé par le<br>commandeur de notre maison. L&#x27;ayant entendu, nous avons convoqué notre chapitre à<br>La Fève et il y eut bien cent chevaliers ou plus. Nous leur avons demandé conseil pour<br>que nous sachions quoi faire sur cette affaire; il a été décidé là-dessus par le commun<br>conseil et l&#x27;assentiment de tous, d&#x27;envoyer cinq de nos frères à Tyr qui lui enlèveraient<br>l&#x27;habit et le conduiraient jusqu&#x27;à Acre et le garderaient là-bas dans une cellule jusqu&#x27;à<br>son transfert par le premier navire en partance (vers l&#x27;Occident).&quot;<br>Comme Adam et Eve furent chassés du Paradis, le Templier Robert de Sourdeval fut chassé<br>de Terre Sainte.<br>auparavant : Seigneur laïc, il était Maréchal du royaume de Jérusalem<br>ensuite : Grand Maître de 1187 à 1189</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Urs de Alnet</span> <span class="date">— 1187.   Frère Hursone que l&#x27;on associe à Urs de Alnet 2, accompagne comme Sénéchal</span></summary>
-          <div class="mini-body">de l&#x27;ordre du Temple, le Grand Maître et le Maréchal de l&#x27;ordre durant leurs négociations, en<br>1187, pour rétablir la paix entre le Comte de Tripoli et Guy de Lusignan, devenu Roi de<br>Jérusalem.<br>auparavant :<br>---PAGE 8---<br>ensuite : Mort au combat, soit à la bataille de la Fontaine Cresson le 1 mai 1187, soit à la<br>bataille de Hattin le 4 juillet 1187.</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Aimé d&#x27;Aix</span></summary>
-          <div class="mini-body">Nom : Aimé d&#x27;Aix<br>dates : 1190-1191. Aimoni de Ais, est témoin comme Sénéchal de l&#x27;ordre du Temple, en<br>1190, au camp devant Acre, d&#x27;une donation faite, à la commanderie du Temple d&#x27;Epernay, par<br>deux chevaliers champenois, Eudes et Guy de Choisi.<br>auparavant : Visiteur Cismarin de 1179 à 1188<br>ensuite : Visiteur Cismarin de 1202 à 1206</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Reric de Courtene</span> <span class="date">— 1191.  Rerico de Corteno 3, est témoin comme Sénéchal de l&#x27;ordre du Temple, en 1191,</span></summary>
-          <div class="mini-body">de la donation, faite par Graus de Bapaumes de 24 deniers sur le château fort de Valennes,<br>dont 12 déjà aumônes par son père.<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Adam Brion</span></summary>
-          <div class="mini-body">Nom : Adam Brion<br>dates : 1192-1195. Adam Brion 4, est témoin comme Sénéchal de l&#x27;ordre du Temple, le 10<br>février 1192, de la donation, faite par le Roi Guy de Lusignan à l&#x27;ordre Teutonique d&#x27;une<br>maison à Acre.<br>auparavant :<br>ensuite : Maréchal<br>La liste des sénéchaux de l&#x27;ordre des Templiers s&#x27;appuie essentiellement sur deux études:<br>une des premières en la matière, celle d&#x27;Emmanuel Guillaume Rey, &quot;L&#x27;ordre du Temple en<br>Syrie et à Chypre, les Templiers en Terre Sainte&quot;, revue de Champagne et de Brie, 1888 et<br>---PAGE 9---<br>l&#x27;une des toutes dernières, de Mr Jochen Burgtorf, The Central Convent of Hospitallers and<br>Templars, History, organization, and personnel (1099/1120-1310), Brill, 2008<br>NOTES:<br>1. Dans sa prosoprographie, Jochen Burgtorf fait référence p. 494 à une lettre du pape<br>Alexandre III datée du 12 avril 1180. Cette lettre est adressée à tous les rois et princes<br>chrétiens et il y est précisé que pendant le siège du chastelet du gué Jacob, le sénéchal du<br>Temple a été tué: &quot;senscalcus captus est et occises&quot;. Pour ce sénéchal, nous n&#x27;avons que<br>le prénom: frère Bérengarius. Jochen Burgtorf suggère le nom de Béranger de Castelpers du<br>fait que ce nom, Berangari de Castello Perso apparaît comme témoin dans plusieurs chartes<br>à côté du grand-maître Bertrand de Blanquefort dans les années 1160, et en 1169 Berangarius<br>de Castello Perso apparaît encore comme témoin dans un acte établi près de Tortose entre<br>l&#x27;évêque de Tortose et les Templiers.<br>2. Jochen Burgtorf fait référence dans sa prosographie p. 666 à la lettre des prélats et barons<br>de Terre Sainte adressée au pape et à l&#x27;empereur Frédéric Ier datée du 23 novembre 1187.<br>Dans cette lettre, sont mentionnés la bataille de la Fontaine Cresson et le sénéchal Urs de<br>Alnet. Jochen Burgtorf précise que le sénéchal a probablement été tué dans cette bataille mais<br>que sa mort n&#x27;a pas été rapportée comme elle le fut pour le maréchal du Temple Robert de<br>Franiel à cette même bataille. Quoiqu&#x27;il en soit, si le sénéchal a survécu à la bataille de la<br>Fontaine-Cresson, où une soixantaine de chevaliers du temple ont été tués, il n&#x27;a pu survivre<br>à la défaite de Hattin, qui eut lieu deux mois plus tard, où tout le couvent du Temple a été<br>anéanti à l&#x27;exception de son grand-maître Gérard de Ridefort qui fut capturé et du commandeur<br>de la terre du Royaume de Jérusalem qui réussit à s&#x27;échapper.<br>3. Dans la liste des sénéchaux de l&#x27;ordre des Templiers présentée par Emmanuel Guillaume<br>Rey apparaît un frère Relis, sénéchal du Temple, dans un accord passé le 7 mai 1192 par le<br>marquis Conrad de Montferrat entre les barons du royaume de Jérusalem et les marchands<br>vénitiens. Cette date du 7 mai 1192 ferait du frère Relis le dernier sénéchal de l&#x27;ordre du<br>Temple connu. Mais cette date n&#x27;est pas recevable car le marquis Conrad de Montferrat fut<br>assassiné le 28 avril 1192. Jochen Burgtorf a rectifié la date de cet accord au 9 mai 1191.<br>---PAGE 10---<br>Frère Relis est très certainement une variante orthographique de Reric (de Courtene), avant-<br>dernier sénéchal de l&#x27;ordre du Temple.<br>4. Le dernier acte connu où l&#x27;on relève la présence comme témoin d&#x27;un sénéchal de l&#x27;ordre<br>des Templiers date de septembre 1195. A cette date, le nom du sénéchal n&#x27;est pas donné<br>mais selon toutes probabilités, il s&#x27;agirait d&#x27;Adam Brion, le dernier sénéchal connu et qui en<br>1198 est cité comme maréchal de l&#x27;ordre des Templiers.<br>Les Grands Maîtres de l&#x27;Ordre<br>des Templiers<br>---PAGE 11---<br>---PAGE 12---<br>---PAGE 13---<br>---PAGE 14---<br>---PAGE 15---<br>---PAGE 16---<br>---PAGE 17---<br>---PAGE 18---<br>---PAGE 19---<br>---PAGE 20---<br>---PAGE 21---<br>---PAGE 22---</div>
-        </details>
-        
-          </div>
-        </details>
-        
-
-        <details class="acc">
-          <summary>Maréchaux de l&#x27;ordre des</summary>
-          <div class="acc-body">
-            
-        <details class="mini">
-          <summary><span class="name">Hugues Salomon de Quilliou ou (de Quiliuco)</span></summary>
-          <div class="mini-body">Nom : Hugues Salomon de Quilliou ou (de Quiliuco)<br>dates : 1150-1153<br>auparavant :<br>ensuite : Mort au combat au siège d&#x27;Ascalon. La Pierre tombale du Maréchal Hugues Salomon<br>de Quilliou fut retrouvée dans cette cité et nous indique les circonstances de son décès.<br>---PAGE 23---<br>« Maréchal Hugues Salomon de Quilliou, preux chevalier de l’insigne milice du<br>Temple, guerrier courageux, assaillant intrépide, redoutable aux ennemis,<br>humble avec ses compagnons, terrassé par la pierre d’une catapulte, inhumé<br>dans cette tombe sous le titre qu’on peut lire. »<br>Les Templiers payèrent un lourd tribut pendant le siège d&#x27;Ascalon qui dura du 25 janvier au 22<br>août 1153. Grâce à une brèche réalisée dans les remparts qui protégeaient la cité, le 16 août<br>1153 les Francs eurent l&#x27;occasion de prendre Ascalon. Le premier sur la brèche fut le grand-<br>maître des Templiers Bernard de Tremelay, accompagné d&#x27;une quarantaine de ses frères.<br>Hélas pour les Templiers, les barons de Terre Sainte qui soutenaient le roi Baudoin III<br>refusèrent de suivre les Templiers sous prétexte que la milice soutenait la reine Mélisende,<br>principale opposante à son fils pour la direction du royaume. La gloire de la prise d&#x27;Ascalon<br>devait revenir selon les barons au jeune Baudoin III et non à sa mère et à ses partisans. Le<br>résultat fut terrible pour les Templiers car le grand-maître et ses frères étaient déjà au milieu<br>de la cité quand ils s&#x27;aperçurent qu&#x27;ils étaient trahis par les barons et abandonnés à leur sort.<br>Les assiégés, après un premier mouvement de panique, purent se ressaisir en comblant la<br>brèche mal défendue avec des poutres enlevées en hâte de leurs propres navires. Au soir du<br>16 août, les ascalonitains firent pendre les cadavres des quarante Templiers dont celui du<br>grand-maître aux murailles d&#x27;Ascalon en signe de victoire. Le chroniqueur Guillaume de Tyr,<br>qui fut un fervent défenseur des barons et de la monarchie, donna une toute autre version des<br>événements. selon lui, ce serait les Templiers qui auraient empêchés les barons de s&#x27;engager<br>dans la brèche pour que la milice puisse s&#x27;octroyer un plus gros butin. Cette version ne tient<br>pas. Cela faisait plus de six mois que les ascalonitains résistaient à toute l&#x27;armée franque. Les<br>Templiers n&#x27;étaient pas assez stupides pour penser que quarante d&#x27;entre eux pourraient<br>vaincre à eux seuls toute l&#x27;armée ennemie. Manifestement, Guillaume de Tyr ment sur le<br>déroulé des événements pour protéger ses amis les barons et calomnier un peu plus les<br>Templiers qu&#x27;il détestait. Sa version n&#x27;est d&#x27;ailleurs pas corroborée par le récit des faits donné<br>par Sigebert d&#x27;Haffligen qui est basé sur un témoignage oculaire des événements. Quand on<br>confronte les différentes chroniques de Terre Sainte, on se rend compte que ce n&#x27;est pas la<br>seule fois où Guillaume de Tyr se plaît à travestir les faits pour affubler les Templiers de tous<br>les péchés capitaux. Guillaume, archevêque de Tyr de 1175 à 1183 et précepteur du roi de<br>Jérusalem Baudoin IV le Lépreux, finira par être excommunié en 1183 par le Patriarche de<br>Jérusalem Héraclius. Cela résume assez bien l&#x27;opinion qu&#x27;on peut se faire de sa chronique.<br>---PAGE 24---</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Robert Franiel</span></summary>
-          <div class="mini-body">m : Robert Franiel<br>dates : 1186-1187. Robberto Franiel, Maréchal du temple, accompagna, en 1187, le Grand<br>Maître durant ses négociations pour rétablir la concorde entre le Comte de Tripoli et Guy de<br>Lusignan.<br>auparavant : Commandeur de la terre du royaume de Jérusalem<br>ensuite : Mort au combat à la bataille de la fontaine Cresson le 1er mai 1187. Par rancoeur<br>contre le roi de Jérusalem, Guy de Lusignan, le comte de Tripoli, Raymond III, s&#x27;était mis sous<br>la protection du sultan musulman Saladin. D&#x27;un commun accord avec lui, il avait même<br>autorisé le passage sur ses terres d&#x27;une armée de Sarrazins qui voulait mener une expédition<br>punitive envers les Francs de Saint-Jean-d&#x27;Acre. Quand le Grand-Maître des Templiers ,<br>Richard de Ridefort, partit en ambassade auprès du comte de Tripoli l&#x27;apprit, il rassembla en<br>toute hâte une petite troupe pour engager le combat contre une armée forte de sept mille<br>cavaliers commandés par le fils de Saladin al-Afdhal.<br>Richard de Ridefort n&#x27;avait pu rassembler que cent trente chevaliers et quatre cents piétons.<br>Le Grand-Maître de l&#x27;ordre des Hospitaliers, Rogers des Moulins, lui fit remarquer que dans<br>ces conditions, il serait suicidaire d&#x27;engager le combat. Un chevalier du Temple, Jacques de<br>Mailly, originaire de Touraine1, était aussi de cet avis. Mais pour Richard de Ridefort l&#x27;occasion<br>était trop belle de détruire la réputation du comte de Tripoli, principal opposant à la couronne<br>hiérosolymitaine, en lui faisant jouer le rôle du traître dans la tragédie à venir. Richard insulta<br>publiquement Jacques de Mailly, son chevalier, en l&#x27;accusant de lâcheté. il lui dit:<br>&quot;Vous aimez trop cette tête blonde que si bien vous voulez la garder.&quot;<br>Piqué au vif, Jacques de Mailly, qui effectivement ne manquait pas de prestance avec ses<br>cheveux blonds, sur son destrier tout blanc, lui répliqua:<br>&quot;Je me ferai tuer comme un gentilhomme et c&#x27;est vous qui lâcherez pied.&quot;<br>Pour convaincre les derniers réticents, le Grand Maître Gérard de Ridefort harangua ses<br>troupes en leur disant:<br>&quot;Chers amis, vous qui n&#x27;avez jamais su reculer ni trembler à la vue de ces impies, c&#x27;est<br>ici le moment de vous rappeler votre ancienne valeur, et de ranimer votre courage: c&#x27;est<br>ici le combat du Seigneur; vous y tenez la place des illustres Machabées; il s&#x27;agit d&#x27;en<br>imiter la bravoure, et d&#x27;exposer en ce moment ce que vous avez de plus cher, pour la<br>foi, pour l&#x27;Eglise, et pour l&#x27;honneur des Saints Lieux. Soutenus par la force d&#x27;un bras<br>---PAGE 25---<br>tout-puissant, nos Ancêtres ne comptèrent jamais leurs ennemis; pour moi, qui faits<br>plus de fond sur l&#x27;ardeur de votre zèle que sur ces armes fragiles, j&#x27;attends tout de vos<br>efforts et de votre magnanimité.&quot;<br>Galvanisés par ces paroles, les chevaliers du Temple répondirent en choeur:<br>&quot;Vaincre ou mourir pour celui qui nous a rachetés: marchons, qu&#x27;attendons-nous? la<br>victoire nous est aussi assurée dans la mort que dans la vie.&quot;.<br>Jacques de Mailly, éperonnera son destrier et participa à la charge de la petite troupe.<br>D&#x27;abord surpris par cette charge intempestive, les cavaliers sarrasins prirent peur et<br>s&#x27;égayèrent un peu partout. Mais comme le nombre des Francs était ridiculement bas, ils se<br>ressaisirent et les Francs commencèrent à se faire assaillir de toutes parts. La bataille<br>commença alors à prendre une tournure des plus féroces, et les Francs tombèrent un à un<br>sous les coups redoublés des hommes d&#x27;al-Afdhal. Le chevalier du Temple Jacques de Mailly,<br>dont l&#x27;acier des armes étincelait au soleil tout de blanc vêtu sur son cheval blanc, se démenait<br>comme un ange exterminateur au milieu de la mêlée. Hélas, tous ses compagnons<br>s&#x27;écroulaient autour de lui. C&#x27;est à ce moment que le Grand-Maître des Hospitaliers, Rogers<br>des Moulins, fut transpercé de part en part par une lance ennemie. C&#x27;est aussi le sort qui<br>attendait le Maréchal du temple Robert Franiel, qui périt dans la bataille. Pressé de toutes<br>parts, isolé face à une multitude, Jacque Mailly semblait pourtant dominer le champ de bataille<br>sur son fier destrier, contrant à lui tout seul les efforts de ses ennemis. C&#x27;est son cheval qui<br>céda la premier. Blessé et épuisé de fatigue, il s&#x27;abattit et entraîna le cavalier dans sa chute.<br>Aussitôt, l&#x27;intrépide templier réussit à se dégager et saisit une lance portant des coups si<br>terribles à ses ennemis que plus personne n&#x27;osait l&#x27;approcher de trop près. La cotte de maille<br>de Jacques de Mailly finit par être hérissée de flèches. Le sang et la poussière avaient<br>recouverts sa personne. Mais rien ne semblait entamer sa détermination. Bien au contraire.<br>avec une rage de lion, il s&#x27;attaquait à ses ennemis.<br>Admiratifs devant une telle vaillance, les Sarrazins lui proposèrent de se rendre avec la liberté<br>de se retirer où il voudrait. Seulement le templier était là pour mourir au milieu de ses frères et<br>il rejeta toute échappatoire à l&#x27;issue fatale. Alors que les flèches et les projectiles<br>recommencèrent à tomber sur lui, le sang qui coulait de ses nombreuses blessures humidifiait<br>le sol à ses pieds. On ne sait à quoi pensait Jacques de Mailly en ses derniers instants. peut-<br>être cherchait-il du regard son Grand-Maître, Gérard de Ridefort, qui réussit à s&#x27;échapper et<br>fut un des rares rescapés de la bataille. Les Sarrazins, quant à eux, commençaient à se<br>---PAGE 26---<br>demander s&#x27;ils n&#x27;avaient pas affaire à un être surnaturel. Des bruits couraient à propos d&#x27;un<br>chevalier nommé Saint Georges monté sur un cheval blanc et qui, disait-on, combattait parfois<br>aux côtés des chrétiens. N&#x27;avaient-ils pas face à eux ce fameux Saint Georges?<br>Dans la plaine jonchée de cadavres, un étrange sentiment superstitieux commençait à<br>s&#x27;insinuer dans l&#x27;esprit des Sarrazins. en réalité, bien qu&#x27;il tenait toujours debout, l&#x27;arme à la<br>main, le chevalier se vidait littéralement de son sang et ses dernières forces le quittaient. Un<br>ultime projectile lancé contre lui le fit tomber à la renverse. Ce fut un cri de joie autant que de<br>soulagement du côté des Sarrazins en le voyant tomber. Ils avaient réussi à tuer Saint<br>Georges. Jacques de Mailly, quant à lui, étendu sur le sol, rendait son dernier soupir. Les<br>chroniques des croisades, qui ont relaté la fin glorieuse du templier, précisèrent pour lui rendre<br>hommage, qu&#x27;il était plutôt mort de fatigue que vaincu.<br>Les Sarrazins avaient été tellement impressionnés par ce chevalier, que chacun voulut avoir<br>un morceau du saint guerrier. Ses vêtements furent arrachés, tout ce que le chevalier<br>possédait fut emporté comme relique, certains iront jusqu&#x27;à recueillir la poussière imprégnées<br>de son sang et la répandirent sur leur tête et sur leurs habits , convaincus qu&#x27;elle leur<br>transmettrait cette force extraordinaire dont le chevalier Saint Georges avait fait preuve.</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Geoffroy Morin</span> <span class="date">— 1188. Gaufredi Morini, souscrit comme Maréchal du Temple, en 1188, un acte de</span></summary>
-          <div class="mini-body">Conrad, Marquis de Monferrat.<br>auparavant : Commandeur de la maison du Temple à Tyr.<br>ensuite :<br>---PAGE 27---</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Adam Brion</span> <span class="date">— 1198.  Adam Bren, souscrit comme Maréchal du Temple, en 1198, un acte entre le</span></summary>
-          <div class="mini-body">Grand-Maître des Templiers Gilbert Erail et l&#x27;abbé de Notre Dame de Josaphat.<br>auparavant : Sénéchal<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Guillaume des Ardillières</span></summary>
-          <div class="mini-body">Nom : Guillaume des Ardillières<br>dates : 1200-1204. Guillelmus de Ardillières , souscrit comme Maréchal du Temple, en 1201<br>ou 1204, lors de la donation par le comte Henri II de ses biens et dépendances situés au village<br>de Sancey.<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Hugues de Montlaur</span> <span class="date">— 1239. Hugues de Montlaur, est cité comme Maréchal dans la règle des templiers, article</span></summary>
-          <div class="mini-body">592, détails des pénitences.<br>auparavant : Maître d&#x27;Aragon<br>ensuite : mort au combat à la bataille de la Forbie le 17 octobre 1244. Il est à souligner que<br>pendant la terrible défaite de La Forbie, les Templiers combattirent auprès de leurs alliés<br>musulmans commandés par le valeureux Malik de Homs al-Mansûr Ibrāhim. Dans cette<br>défaite, les Templiers perdirent 312 chevaliers et 324 turcoples, sans compter les piétons<br>soudoyés par l&#x27;ordre. Le maréchal de l&#x27;ordre, Hugues de Montlaur, fut tué ainsi que le grand-<br>maître du Temple, Armand de Périgord. Seuls 36 Templiers purent s&#x27;échapper du champ de<br>bataille, emportant avec eux l&#x27;étendard de la milice, le gonfanon baucent pour qu&#x27;il ne tombe<br>pas entre les mains de l&#x27;ennemi.<br>---PAGE 28---<br>Il semble que les moines bénédictins de l&#x27;abbaye de Saint-Albans dans le Hertfordshire en<br>Angleterre, d&#x27;où provient cette miniature, n&#x27;avaient pas une très bonne opinion des ordres de<br>chevalerie de Terre Sainte. On remarque qu&#x27;ils ont surtout mis en valeur la fuite d&#x27;un Templier<br>avec le gonfanon baucent pendant la bataille - ce qui paraît assez cruel de la part de ces<br>moines anglais quand on songe que le couvent du Temple fut anéanti sur le champ de bataille<br>de La Forbie, y compris avec la mort du grand-maître et du maréchal de l&#x27;ordre qui ont fait le<br>sacrifice de leur vie.</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Renaud de Vichiers</span></summary>
-          <div class="mini-body">Nom : Renaud de Vichiers<br>dates : 1249-1250. Renaud de Vichiers participa comme Maréchal à la bataille de la<br>Mansourah, en 1250.<br>auparavant : Visiteur Cismarin<br>ensuite : Grand Maître de 1250 à 1252</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Hugues de Jouy</span></summary>
-          <div class="mini-body">Nom : Hugues de Jouy<br>dates :1251-1252<br>auparavant : Visiteur Cismarin<br>ensuite : En 1252, pendant la 7ème Croisade, le Maréchal Hugues de Jouy, sous l&#x27;autorité<br>du Grand-Maître Renaud de Vichiers, négocie des accords avec le souverain ayyubîde de<br>Damas al-Nâsir Yûsuf. Quand Renaud de Vichiers en parle au roi de France Saint-Louis, pour<br>obtenir son accord de principe, le roi entre dans une colère furieuse - car non seulement les<br>Templiers ne l&#x27;ont pas averti de cette démarche mais en plus elle contrecarre la diplomatie du<br>roi qui traite avec les mamelouks d&#x27;Egypte.<br>---PAGE 29---<br>Saint Louis exige du Grand-Maître que son Maréchal Hugues de Jouy soit banni de Terre<br>Sainte. Renaud de Vichiers s&#x27;exécutera et Hugues de Jouy sera envoyé au-delà des mers<br>comme Maître d&#x27;Aragon.<br>Cette soumission du Grand-Maître au desiderata du roi de France ne lui portera pas bonheur<br>car il sera démis de ses fonctions cette même année 1252 par le chapitre général des<br>Templiers qui le remplacera par Thomas Bérard.</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Etienne de Sissey</span></summary>
-          <div class="mini-body">Nom : Etienne de Sissey<br>dates : 1260-1262<br>auparavant : précepteur de Saint-Jean-d&#x27;Acre<br>ensuite : En septembre 1263, le pape Urbain IV exigera la révocation d&#x27;Etienne de Sissey, qui<br>à cette époque n&#x27;est pas Maréchal comme on l&#x27;a souvent dit mais plus probablement Maître<br>des pouilles. Les historiens ignorent les causes du conflit qui opposa Urbain IV à Etienne de<br>Sissey mais il semble que d&#x27;une manière ou d&#x27;une autre, Etienne de Sissey se soit élevé contre<br>les manoeuvres du pape qui détournait l&#x27;esprit des croisades au profit de la future expédition<br>militaire qui se préparait en Italie.<br>Dirigé par le frère du roi de France Charles d&#x27;Anjou, cette croisade italienne avait pour but de<br>chasser les derniers représentants de la dynastie des Hohenstaufen d&#x27;Italie. Pour subvenir<br>aux besoins de cette campagne, le pape Urbain IV accordait les mêmes bénéfices spirituels<br>que s&#x27;il s&#x27;agissait de s&#x27;engager en Terre Sainte. Une défection avait été particulièrement mal<br>ressentie de la part des Templiers. C&#x27;était celle du puissant seigneur Barral de Baux. Le<br>seigneur provençal, suivi de nombreux chevaliers de sa suite, avait déjà entrepris des<br>préparatifs pour se rendre en Terre Sainte quand, à la demande spéciale du pape, il fut relevé<br>de sa promesse faite en 1253 devant Alphonse de Poitiers, comte de Toulouse, pour s&#x27;engager<br>dans la croisade italienne.<br>C&#x27;est ainsi que toute une petite armée provençale fut détournée de la Terre Sainte pour se<br>rendre en Italie. A l&#x27;époque où le royaume de Jérusalem manquait cruellement de bras pour<br>contenir les assauts du sultan Baibars, la politique italienne menée par le pape Urbain IV, était<br>jugée par les Templiers comme un véritable coup de poignard dans le dos.<br>Quand Etienne de Sissey fut convoqué à Rome, le Maître des Pouilles, plus habitué aux<br>champs de bataille qu&#x27;aux séances de contrition, refusa de démissionner de sa charge.<br>---PAGE 30---<br>Etienne de Sissey avança un argument de droit: ce n&#x27;est pas le pape qui l&#x27;avait nommé mais<br>le chapitre général de son ordre et le Grand-Maître. Eux seuls avaient le pouvoir selon la Règle<br>de le révoquer. Pour envenimer un peu plus les choses, Etienne de Sissey rajouta qu&#x27;il n&#x27;avait<br>jamais entendu dire qu&#x27;un pape se mêlait des affaires internes de l&#x27;ordre. Urbain IV<br>excommunia sur le champ cet insolent.<br>Perfidement, la curie romaine laissa courir des bruits malveillants à l&#x27;encontre d&#x27;Etienne , dont<br>la chronique du templier de Tyr se fera l&#x27;écho. En 1260, Etienne de Sissey, Maréchal de l&#x27;ordre,<br>fut un des rares rescapés de la bataille de Tibériade. On l&#x27;accuse à cette occasion d&#x27;avoir<br>mené mollement la pointe et de s&#x27;être enfui par mauvaise volonté envers Jean Ibelin, seigneur<br>de Beyrouth, qui menait l&#x27;expédition. Le Maréchal Etienne de Sissey aurait été jaloux de ce<br>seigneur à cause d&#x27;une dame ? Mais d&#x27;après une chronique arabe datée de 1312 de la<br>bibliothèque de la Grande Mosquée de Constantinople citée par Laurent Dailliez, le Maréchal<br>Etienne de Sissey aurait été tout bonnement assommé pendant l&#x27;assaut et laissé pour mort<br>sur le champ de bataille. Cette version est crédible car il est très possible qu&#x27;un chevalier dont<br>le cheval est abattu en plein galop puisse perdre connaissance après avoir percuté violemment<br>le sol - entraînant malheureusement avec lui l&#x27;étendard de la milice, le gonfanon baucent<br>Après avoir fait amende honorable, le pape Clément IV, successeur d&#x27;Urbain IV, leva la<br>sentence d&#x27;excommunication qui pesait sur Etienne de Sissey à condition que celui-ci<br>retourne en Palestine comme simple frère - pénitence qui ne durera qu&#x27;un temps car Etienne<br>de Sissey reprit bientôt sa place parmi les dignitaires de l&#x27;ordre.</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Guillaume de Molay 2</span> <span class="date">— 1262. Guillaume de Malay, souscrit comme Maréchal du temple, le 19 décembre 1262,</span></summary>
-          <div class="mini-body">une sentence arbitrale mettant un terme à une contestation, relative à des moulins, survenue<br>entre le temple et l&#x27;Hôpital.<br>auparavant : Lieutenant du Maréchal.<br>ensuite : Drapier</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Amblard de Vienne</span> <span class="date">— 1270. Frère Ambelardo, souscrit comme Maréchal du temple, le 11 mars 1271, une</span></summary>
-          <div class="mini-body">décision remettant dans l&#x27;état primitif une contestation entre le chapitre de Nazareth et<br>l&#x27;Hôpital.<br>auparavant : Maître d&#x27;Angleterre<br>ensuite : Maître du Poitou</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Gui de Foresta</span></summary>
-          <div class="mini-body">Nom : Gui de Foresta<br>dates : 1277-1288. Guidone de Foresta, parait comme Maréchal du temple, le 1 juillet 1277,<br>dans l&#x27; accord conclu au casal de la sommellerie du temple d&#x27;Acre entre Jean de Montfort,<br>seigneur de Tyr, et le Doge de Venise.<br>auparavant : Maître d&#x27;Angleterre<br>ensuite : Maître d&#x27;Angleterre</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Geoffroy de Vandac</span> <span class="date">— 1289. Le Maréchal du temple, Jofrey de Vandac , prit part à la défense de Tripoli, qui</span></summary>
-          <div class="mini-body">tomba, le 26 avril 1289. Geoffroy de Vandac put s&#x27;échapper mais le commandeur du temple<br>d&#x27;Acre Pierre de Moncade fut tué.<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Pierre de Sevry</span> <span class="date">— mentionné en 1291</span></summary>
-          <div class="mini-body">auparavant : Drapier<br>ensuite : mort au combat.<br>Cela faisait plus d&#x27;un mois que le port de Saint-Jean d&#x27;Acre, capitale de l&#x27;état franc de Terre<br>Sainte, était assiégé par 220.000 sarrasins. Le mercredi 16 mai 1291, les Mamelouks<br>d&#x27;Egypte, commandés par le sultan al-Ashraf Khalîl, réussirent à prendre possession de la<br>Tour Neuve du roi Henri qui faisait partie de la muraille extérieure de la cité d&#x27;Acre.<br>---PAGE 32---<br>Une deuxième muraille, la muraille intérieure, séparée de plusieurs dizaines de mètres de la<br>muraille extérieure, protégeait encore la cité. Au petit matin du vendredi 18 mai 1291, après<br>un ultime assaut, les armées des Sarrasins prirent pied au niveau de la Tour Maudite sur la<br>muraille intérieure de Saint-Jean d&#x27;Acre. Partie de la porte Saint-Antoine, la chevalerie<br>templière et hospitalière, s&#x27;engouffrant dans l&#x27;espace entre les deux murailles, chargea au<br>triple galop pour dégager la Tour Maudite. Mais l&#x27;armée des Sarrasins riposta en utilisant le<br>feu grégeois ainsi que toutes sortes de fumigènes et d&#x27;engins explosifs submergeant la<br>chevalerie franque de flammes et de fumées. Ce qui eut pour effet d&#x27;aveugler le grand-maître<br>des Templiers, Guillaume de Beaujeu qui menait la charge.<br>N&#x27;y voyant plus à trois mètres, à cause de la fumée, le grand-maître était obligé de faire de<br>grands mouvements pour reformer les rangs de sa chevalerie. Mais de ce brouillard artificiel<br>surgissait des flèches tirées par les archers sarrasins qu&#x27;il était impossible de voir venir. L&#x27;une<br>d&#x27;entre elles vint se ficher sous l&#x27;aisselle gauche du grand-maître qui ne portait pas de bouclier.<br>Blessé mortellement, Guillaume de Beaujeu n&#x27;était plus en état de combattre. Les frères du<br>Temple prirent son cheval par le mors et l&#x27;entrainèrent vers l&#x27;arrière. Des chevaliers de Spolète<br>qui combattaient à leurs côtés, croyant que le grand-maître se repliait, s&#x27;écrièrent: &quot;Pour Dieu,<br>Sire, ne partez pas, car la ville sera bientôt perdue.&quot; Le grand-maître leur répondit:<br>&quot;Seigneur, je ne peux plus car je suis mort, voyez le coup.&quot;<br>---PAGE 33---<br>A partir de la Tour Maudite, les Sarrasins envahirent la cité en direction de la rue Saint Romain.<br>Pris de panique, la population d&#x27;Acre se précipita vers le port mais les embarcations chargées<br>de les transporter des quais sur les différents navires de la chrétienté ancrés au large étaient<br>trop peu nombreux pour tous les accueillir. Certains, parmi les plus chanceux ou parmi les plus<br>riches, réussirent à s&#x27;embarquer – voyant s&#x27;éloigner avec soulagement le danger mortel. Quant<br>aux autres, ils se jetaient sur tout ce qui pouvait flotter. Beaucoup de frêles esquifs surchargés<br>par le nombre chavirèrent ou coulèrent à pic, emportant par le fond tous ces malheureux qui<br>cherchaient à fuir. Ce jour ressemblait à la fin du monde.<br>Dans la chapelle de la citadelle des Templiers, on avait déposé le corps du grand-maître<br>Guillaume de Beaujeu. Les dignitaires de l&#x27;ordre des Templiers et de l&#x27;ordre des Hospitaliers<br>étaient là pour lui rendre un dernier hommage. Le silence à l&#x27;intérieur de la chapelle, avec tous<br>ces chevaliers debout, recueillis devant le corps du grand-maître, contrastait avec la fureur et<br>les hurlements qui montaient des ruelles de la cité. Dorénavant c&#x27;était au maréchal du Temple,<br>Pierre de Sevry, de prendre les choses en main. A cette heure, il n&#x27;y avait plus d&#x27;espoir de<br>sauver la ville, les Mamelouks avaient déjà investis les quais du port. Le dernier espoir de la<br>population, prise au piège dans la cité, était de se réfugier dans les différentes maisons fortes<br>des ordres de chevalerie qui étaient nombreuses à Saint-Jean d&#x27;Acre.<br>La majestueuse citadelle des Templiers à Acre, située sur le front de mer, était certainement<br>la plus imposante. Mais le manoir de l&#x27;ordre des Hospitaliers ou celui des Teutoniques<br>pouvaient aussi servir de solides refuges.<br>Le maréchal des Hospitaliers, Mathieu de Clermont, qui était présent dans la chapelle des<br>Templiers, décida de rejoindre avec ses hommes le palais des Hospitaliers en traversant à<br>cheval le quartier génois. Seulement il était déjà trop tard. Les Sarrasins étaient partout.<br>---PAGE 34---<br>Surpris dans les ruelles du quartier génois, Mathieu de Clermont mena un combat de rue.<br>Submergé par le nombre, il n&#x27;arriva jamais à se frayer un chemin jusqu&#x27;au palais. Lui et ses<br>hommes furent tués dans ces ruelles.<br>Quand les habitants d&#x27;Acre, réfugiés dans la citadelle des Templiers, s&#x27;aperçurent que les<br>navires de la flotte chrétienne étaient en train d&#x27;appareiller et de mettre le cap sur l&#x27;île de<br>Chypre toutes voiles dehors, les Chroniques nous disent qu&#x27;il y eut des cris d&#x27;angoisse –<br>certains hurlant leur désespoir du haut des remparts. Pour le maréchal Pierre de Sevry, une<br>autre nouvelle fut désagréable: on comptait plusieurs milliers de personnes qui s&#x27;étaient<br>réfugiées dans la citadelle des Templiers. Les Chroniques parlent de 10.000 personnes – soit<br>un quart de la population de Saint-Jean d&#x27;Acre. Autant dire que les vivres allaitent vite venir à<br>manquer et que dans ces conditions on ne pourrait pas tenir un siège bien longtemps.<br>C&#x27;est au bout de deux jours, et par humanité pour cette population qui était sous sa<br>responsabilité, que le maréchal Pierre de Sevry engagea des pourparlers. Le sultan al-Ashraf<br>Khalîl proposa aux Templiers une reddition honorable. Il leur accordait à tous la vie sauve,<br>ainsi que la permission de se retirer, lui et ses frères, librement vers l&#x27;île de Chypre en<br>emmenant avec eux toute la population réfugiée dans la citadelle. L&#x27;accord fut conclu sur cette<br>base. Pour montrer sa bonne foi, le sultan fit remettre aux Templiers son étendard qui,<br>déployée sur la tour de la citadelle, signifiait qu&#x27;ils étaient tous sous sa protection personnelle.<br>---PAGE 35---<br>Pour faire respecter ces accords, le sultan envoya l&#x27;émir syrien Katbughâ al-Mansûri, un<br>homme de confiance, qui se présenta devant les portes de la citadelle accompagné de 100<br>Mamelouks à cheval. Le maréchal Pierre de Sevry ordonna qu&#x27;on ouvre les portes. L&#x27;émir et<br>sa chevalerie pénétrèrent dans le cour intérieure de la citadelle sous le regard inquiet d&#x27;une<br>foule de chrétiens terrorisés. L&#x27;émir était venu pour présider à l&#x27;embarquement des chrétiens.<br>Mais les portes de la citadelle restaient grandes ouvertes. A la suite des troupes régulières,<br>c&#x27;est toute une bande armée de soldats irréguliers qui s&#x27;engouffra. Ces hommes qui n&#x27;étaient<br>pas payés par le sultan venaient rançonner les chrétiens car ils se remboursaient de leurs<br>efforts par le pillage de la cité. Parmi ces hommes, certains ne se contentaient pas des bourses<br>et des bijoux, ils entraînèrent les jeunes filles sous les yeux horrifiés de leurs parents dans les<br>coins obscurs de la citadelle. Si le sultan avait accordé la vie sauve aux chrétiens, il faut croire<br>que l&#x27;émir considéra que le viol et la rapine ne concernaient par les dits accords. Mais comment<br>croire que les chevaliers du Temple allaient laisser les jeunes filles se faire violer sous leurs<br>yeux au milieu de leur citadelle? En un éclair, les armes sont sorties de leur fourreau et très<br>vite les faits dégénèrent en bataille rangée. On sectionne les garrots des chevaux pour faire<br>chuter les cavaliers Mamelouks. L&#x27;émir comprend vite qu&#x27;il a besoin de renfort pour mater les<br>rebelles. C&#x27;est donc à la porte de la citadelle que tout se joue. Hélas pour l&#x27;émir, les Templiers<br>qui étaient sur le qui-vive, surgirent de leurs postes de garde et se ruèrent en masse pour<br>refermer les portes, isolant 150 à 200 Sarrasins qui virent fondre sur eux toute la haine de la<br>population d&#x27;Acre. Le plus regrettable dans cette histoire est que, folle de rage, la population<br>s&#x27;en pris à l&#x27;étendard du sultan qu&#x27;elle arracha en petits morceaux. Ce fait constituait une injure<br>directement dirigée contre le chef de l&#x27;armée musulmane. Le maréchal Pierre de Sevry, de<br>nouveau retranché dans sa citadelle, avait bien du souci à se faire.<br>De leur côté, les maisons fortes de l&#x27;ordre des Hospitaliers et de l&#x27;ordre teutonique, peut être<br>en apercevant au loin l&#x27;étendard du sultan flotter sur la citadelle des Templiers, négocièrent ce<br>même jour leur reddition dans les mêmes termes que ce qui avait prévalu pour les Templiers.<br>On ignore le sort qui leur fut réservé.<br>---PAGE 36---<br>Le temps passant, la situation à l&#x27;intérieur de la citadelle des Templiers, bondée de 10.000<br>personnes, était intenable – même si maintenant on pouvait manger du cheval. Pierre de Sevry<br>chercha donc de nouveau à prendre contact avec les assaillants. Malgré les derniers<br>événements fâcheux, le sultan semblait toujours bien disposé à leur égard. Il allait même<br>jusqu&#x27;à mettre la responsabilité des derniers événements sur le compte des siens qui s&#x27;étaient<br>mal comportés. Pour Pierre de Sevry ce fut un grand &quot;ouf&quot; de soulagement. Pour éviter tout<br>autre incident, on décida que cette fois-ci ce serait les chrétiens qui sortiraient de la citadelle<br>escortés par les Templiers et que tout ce monde serait conduit vers la place franque la plus<br>proche. C&#x27;est donc une longue marche à laquelle il fallait se préparer. Cette perspective<br>découragea beaucoup d&#x27;habitants qui, épuisés, n&#x27;avaient plus la force d&#x27;un tel périple. Certains<br>ne faisaient pas confiance aux Sarrasins. D&#x27;autres étaient trop faibles ou trop blessés.<br>Pierre de Sevry devait se résoudre à abandonner une bonne partie de cette population<br>cantonnée dans la citadelle. Le maréchal prit la tète des plus valides - ce qui représentait tout<br>de même plusieurs milliers de personnes. Et il les amena à l&#x27;extérieur de la cité. C&#x27;est le<br>chroniqueur égyptien Abû al-Mahâsin qui nous raconte la suite des événements. Arrivés dans<br>les faubourgs de Saint-Jean d&#x27;Acre, il n&#x27;était plus question pour les Sarrasins de respecter les<br>accords. En réalité, le sultan était furieux. Les Templiers avaient tués un de ses plus fidèles<br>officiers et, chose surprenante, il avait été profondément choqué par un fait qui nous semble<br>dérisoire compte tenu du nombre de personnes massacrées pendant ces journées: le sultan,<br>qui devait beaucoup aimer les chevaux, avait été horrifié que l&#x27;on puisse couper les jarrets des<br>chevaux pour abattre ses cavaliers. Le chroniquer nous dit qu&#x27;en représailles, il massacra plus<br>de 2.000 personnes dont le maréchal du Temple Pierre de Sevry et ses hommes qui furent<br>décapités. Quant aux femmes et aux enfants, amenés à la porte du pavillon du sultan, ils furent<br>réduits en esclavage.<br>---PAGE 37---<br>Quand les Francs, restés dans la citadelle, apprirent le sort qui fut réservé à leurs<br>compagnons, ils décidèrent de poursuivre la résistance jusqu&#x27;à leur dernier souffle. Il fallut<br>pour les réduire saper les fondations de la citadelle. Le 28 mai 1291, soit dix jours après la<br>chute de la cité, une brèche fut finalement provoquée. Mais quand les troupes musulmanes<br>se précipitèrent par la brèche, leur poids fit céder les étançons des sapes et la tour s&#x27;écroula<br>sur eux, provoquant de nombreux morts dans leurs rangs. Pour les chrétiens survivants le<br>sultan fit mettre à part les femmes et les enfants et décapita tous les hommes – ce qui<br>consituait une grande masse d&#x27;exécutés.</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Baudoin de La Andrin</span></summary>
-          <div class="mini-body">Nom : Baudoin de La Andrin<br>dates : 1292-1294. Baudewin de la Andrin, souscrit comme Maréchal du Temple un acte daté,<br>du 20 avril 1292. Archive de la couronne d&#x27;Aragon.<br>auparavant :<br>ensuite : Précepteur de Nicosie</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Barthélemy de Quincy</span></summary>
-          <div class="mini-body">Nom : Barthélemy de Quincy<br>dates : 1300-1302<br>auparavant :<br>ensuite : mort au combat lors de la défense de l&#x27;îlot de Rouad le 26 septembre 1302. En 1300,<br>l&#x27;ordre des Templiers fait de l&#x27;îlot de Rouad, en face du port deTortose, la tête de pont de sa<br>reconquête de la Terre Sainte.<br>---PAGE 38---<br>Le grand maître Jacques de Molay espère cette reconquête grâce à l&#x27;alliance militaire obtenue<br>avec le chef des Monghols, Ghâzân. Les Tartars venaient de remporter une grande victoire<br>sur les Mamelouks le 24 septembre 1299.<br>Durant l&#x27;été 1301, Jacques de Molay est encore confiant. Il écrit au roi d&#x27;Aragon:<br>&quot;Ghâzân une fois de plus a annoncé sa venue et nous ayant su cela, avons à présent<br>l&#x27;intention d&#x27;aller sur l&#x27;île de Tortose (Rouad) où notre couvent a séjourné avec chevaux<br>et armes toute cette présente année, en causant beaucoup de dommages aux villages<br>du littoral et en capturant beaucoup de Sarrasins. Nous avons l&#x27;intention de nous y<br>rendre et établir pour attendre les Tartars.&quot;<br>Touché par le zèle des templiers, le pape Boniface VIII leur céda le 13 novembre 1301 la<br>moitié de l&#x27;îlot de Rouad qui leur manquait et qui relevait de l&#x27;église de Tortose - désormais in<br>partibus.<br>Dorénavant pleinement chez eux sur l&#x27;îlot de Rouad, les Templiers peuvent y renforcer les<br>fortifications à leur guise et notamment la courtine qui court tout autour de l&#x27;île – faisant de l&#x27;îlot<br>une véritable forteresse sur la mer.<br>---PAGE 39---<br>Pour ce faire, Jacques de Molay mobilise toutes les ressources de l&#x27;ordre en hommes et en<br>matériel. Bien qu&#x27;aucune information n&#x27;a été donnée à ce sujet, on pense aussi que le grand-<br>maître a fait transférer le trésor des Templiers de leur maison de Limassol sur l&#x27;îlot de Rouad,<br>au plus près de son couvent.<br>Les relations de l&#x27;ordre avec le roi de Chypre Henri II sont à cette époque assez tendues.<br>Jacques de Molay se souvient très bien que le père d&#x27;Henri II n&#x27;avait pas hésité en 1279 à<br>séquestrer tous leurs biens sur l&#x27;île de Chypre et à faire abattre la maison des Templiers de<br>Limassol – maison cheftaine de la province de Chypre.<br>C&#x27;est très certainement le couvent du Temple au complet qui est engagé sur l&#x27;îlot – c&#x27;est-à-<br>dire au moins 300 chevaliers et non pas 120 comme on l&#x27;a souvent répété.<br>En 1302, Jacques de Molay est à Limassol car la diplomatie et les affaires du Levant se traitent<br>sur l&#x27;île de Chypre. Il a laissé son couvent aux mains du maréchal de l&#x27;ordre, Barthélémy de<br>Quincy. Mais il a aussi pris le soin de lui adjoindre des hommes en qui il a toute confiance<br>comme le maître de France, Gérard de Villiers. Les Templiers s&#x27;installent donc sur l&#x27;îlot de<br>Rouad pour durer.<br>Ils semblent assez confiants car ils étaient persuadés que les Mamelouks d&#x27;Égypte n&#x27;avaient<br>pas la capacité militaire d&#x27;armer une flotte conséquente capable d&#x27;aller les chercher sur l&#x27;îlot.<br>La suprématie maritime des Francs n&#x27;avait jusqu&#x27;alors jamais remise en question.<br>C&#x27;est pour cette raison qu&#x27;au mois de septembre 1302, quand les Templiers virent à l&#x27;horizon<br>s&#x27;approcher une flotte armée de 16 galères de combat, ils n&#x27;en crurent pas leurs yeux. L&#x27;armée<br>d&#x27;Égypte venait envahir l&#x27;îlot. Cette armée était commandée par l&#x27;émir mamelouk Sayf ad-Dîn<br>Zarrâk al-Mansûri. L&#x27;émir avait pris le soin de faire un détour par la cité de Tripoli pour<br>embarquer une armée de combattants redoutables dirigée par Sayf ad-Dîn Ansadamur al-<br>Kurdjî (dit &quot;le Géorgien&quot;).<br>---PAGE 40---<br>Même si cette bataille n&#x27;a pas laissé beaucoup de traces dans la mémoire des croisades,<br>certainement parce qu&#x27;elle s&#x27;est passée à huis clos, elle fut pour les Templiers la dernière de<br>toutes les batailles. L&#x27;ancien secrétaire du grand-maître Guillaume de Beaujeu la qualifiera de<br>&quot;très âpre&quot;, doux euphémisme pour dire que le couvent des Templiers sera pratiquement<br>totalement anéanti et que cinq ans après les faits on en parlait encore dans les chapitres du<br>Temple.<br>C&#x27;est au son des tambours que les premières vagues d&#x27;assaut mamelouk débarquèrent en<br>même temps aux deux extrémités de l&#x27;île. Nous n&#x27;avons que très peu de détails sur le<br>déroulement des combats mais il semble que les charges répétées des chevaliers du Temple<br>et le feu nourri des archers syriens à leur solde ont réussi l&#x27;impossible en repoussant la flotte<br>égyptienne. Le nombre de tués dans les deux camps est inconnu mais on peut penser que le<br>Temple a dû payer un lourd tribut pour réussir cet exploit.<br>L&#x27;îlot de Rouad n&#x27;est qu&#x27;à trois kilomètres du port de Tortose, ce qui constituait un avantage<br>certain pour la flotte égyptienne qui pouvait à très peu de distance se replier pour récupérer<br>des derniers combats et éventuellement se renouveler en troupes fraiches.<br>---PAGE 41---<br>Comme cela avait déjà été le cas lors de la chute du port de Saint-Jean d&#x27;Acre avec le<br>maréchal du Temple Pierre de Sevry, Barthélémy de Quincy devait à ce moment se soucier<br>en priorité de l&#x27;évacuation du trésor de l&#x27;ordre vers l&#x27;île de Chypre. Il semble que ce soit au<br>maître de France Gérard de Villiers que fut confiée cette mission. Le maître de France prit<br>avec lui un certain nombre de chevaliers et pendant la nuit chargea le trésor sur les petits<br>navires du Temple amarrés au port pour s&#x27;éloigner au plus vite vers la haute mer.<br>Au chapitre provincial tenu à Paris le jour de la Chandeleur 1307, le Templier Renaud de la<br>Folie accusera Gérard de Villiers d&#x27;être responsable de la perte de l&#x27;îlot parce qu&#x27;il était parti<br>avec ses amis – tous de bons combattants – un jour avant la chute de Rouad. Renaud de la<br>Folie rendait responsable le maître de France de la mort ou de la capture d&#x27;un grand nombre<br>de frères. Ce Templier accusait sans raison et manifestement il n&#x27;était pas présent lors des<br>événements, sinon il ne serait pas à Paris pour en parler.<br>Quand vint le jour de l&#x27;ultime assaut, pour les Templiers il n&#x27;y avait plus qu&#x27;une stratégie<br>possible: combattre au plus près du rivage quand les Mamelouks sont encore sur leurs navires,<br>car si les Égyptiens arrivaient à prendre pied sur l&#x27;île, avec leur supériorité numérique, ils<br>seraient impossibles à contenir.<br>C&#x27;est en combattant sur la rive de l&#x27;îlot de Rouad que le maréchal du Temple Barthélémy de<br>Quincy fut tué. Débordés de toutes parts, les derniers survivants se réfugièrent dans le<br>château. On ne compte plus à ce moment que 120 chevaliers et 500 archers, ainsi que 400<br>civils retranchés dans la forteresse. Une fois la maîtrise du port acquise, les Égyptiens purent<br>faire débarquer leurs troupes et c&#x27;est plusieurs milliers de soldats qui assiégèrent le château<br>du Temple.<br>---PAGE 42---<br>Après la mort du maréchal Barthélémy de Quincy, c&#x27;est un chevalier catalan nommé Hugues<br>d&#x27;Empúries qui prit le commandement. On ignore quel titre il portait. Tout ce que l&#x27;on sait de<br>lui est qu&#x27;il avait déjà été fait prisonnier pendant la chute de la cité de Tripoli en 1289 et qu&#x27;il<br>fut libéré des geôles du Caire grâce aux bonnes œuvres du roi Jacques d&#x27;Aragon autour des<br>années 1294-1295.<br>Hugues d&#x27;Empúries aurait pu faire le choix de résister jusqu&#x27;au bout, de &quot;faire Camerone&quot;<br>comme disent nos soldats de la Légion Étrangère. Mais il choisit au contraire une reddition<br>peu glorieuse le 26 septembre 1302. La conséquence fut que les 500 archers syriens au<br>service du Temple furent tous décapités, certainement pour se venger des lourdes pertes<br>qu&#x27;avaient subis les assaillants. Les civils furent réduits en esclavage. Quant aux chevaliers<br>du Temple, la plupart d&#x27;entre eux finiront leur vie oubliés de tous, dans les geôles du Caire –<br>à l&#x27;exception de quelques privilégiés comme le frère templier Dalmau de Rocaberti, frère de<br>l&#x27;archevêque de Tarragone qui fut fait prisonnier sur l&#x27;îlot de Rouad et libéré au début de<br>l&#x27;année 1315.</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Aimé de Oyselier</span></summary>
-          <div class="mini-body">Nom : Aimé de Oyselier<br>dates : 1302-1312<br>auparavant : précepteur de Bourgogne<br>ensuite :Le maréchal Aimé de Oyselier était prêt à tout pour sauver l&#x27;ordre des Templiers . En<br>octobre 1307 le grand-maître Jacques de Molay a été fait prisonnier par le roi de France. En<br>janvier 1308, le maréchal Aimé de Oyselier décide que la royauté à Chypre devait échoir à<br>Amaury de Chypre , régent du royaume et frère du roi de Chypre Henri II.<br>---PAGE 43---<br>Le maréchal du Temple sait qu&#x27;Amaury de Chypre est plus favorable aux Templiers que son<br>frère. Aimé de Oyselier envisage, avec très certainement l&#x27;assentiment de son couvent,<br>d&#x27;enlever le roi de Chypre, Henri II, pour qu&#x27;il abdique en faveur de son frère. On peut se douter<br>que pour Amaury de Chypre cette initiative paraissait par trop radicale. Le régent aurait été<br>immanquablement excommunié s&#x27;il avait suivi le maréchal du Temple dans cet audacieux<br>projet.<br>Le 6 mai 1308, Amaury de Chypre reçut la bulle fulminée par le pape Clément V lui ordonnant<br>d&#x27;arrêter tous les Templiers dans l&#x27;île. Amaury, qui était proche de l&#x27;ordre, dû être bien<br>embarrassé. C&#x27;est après mûre réflexion qu&#x27;il dût juger que la raison d&#x27;état exigeait qu&#x27;on se<br>soumette à la volonté du pape.<br>Le 12 mai, le régent envoya Balian d&#x27;Ibelin négocier la reddition des Templiers qui étaient dans<br>leur maison de Limassol. La réponse du maréchal Aimé de Oyselier est intéressante. Il était<br>prêt à accepter à ne plus exercer le contrôle direct sur les domaines de l&#x27;ordre mais refusait<br>d&#x27;abandonner les armes et le trésor, demandant qu&#x27;il soit conservé là où seraient les frères.<br>Le maréchal dans une ultime concession proposait que les frères se retirent dans une de leurs<br>propriétés sous la garde des chevaliers laïcs jusqu&#x27;à ce que le pape ait tranché l&#x27;affaire.<br>Le maréchal de Oyselier parle d&#x27;un trésor sous sa garde. S&#x27;agit-il du trésor général que<br>Jacques de Molay avait emmené à Paris? Si c&#x27;était le cas, il faudrait admettre que Gérard de<br>Villiers à qui le grand-maître avait confié le trésor du Temple, se soit embarqué de la Rochelle<br>pour mettre les voiles en direction du port de Limassol à Chypre. Le port de la Rochelle était<br>le seul port au plus proche de Paris où les Templiers de leur commanderie à la Rochelle<br>avaient un accès direct à la mer, leur permettant de se dérober à la vigilance des officiers du<br>---PAGE 44---<br>roi. Gérard de Villiers, qui avait été récemment nommé visiteur cismarin par le grand maître<br>Jacques de Molay, aurait remis son précieux chargement entre les mains du maréchal du<br>Temple Aimé de Oyselier. Ce n&#x27;est qu&#x27;une hypothèse, mais elle reste logique car depuis le<br>grand maître Jacques de Molay, l&#x27;ordre avait pris l&#x27;habitude de faire voyager son trésor au plus<br>près de son couvent. Et c&#x27;est ce que réaffirme le maréchal quand il demande que le trésor soit<br>conservé là où seraient les frères.<br>Le 19 mai, Amaury envoya un autre émissaire: Baudoin, chanoine de la cathédrale de Nicosie.<br>Cette fois-ci le ton était beaucoup plus menaçant. Si les frères n&#x27;obéissaient pas, le régent les<br>ferait mettre à mort et les détruirait tous. Le maréchal chercha à gagner du temps en<br>demandant un délai jusqu&#x27;en septembre, le temps d&#x27;informer le pape de la situation et qu&#x27;il leur<br>fasse connaître sa décision.<br>Bien entendu, Amaury de Chypre ne pouvait accéder à de telles exigences. Il lui fallait<br>impérativement accélérer les choses. Le 24 mai, le maréchal Aimé de Oyselier et les<br>dignitaires du Temple se présentèrent devant Amaury de Chypre à Nicosie. Les frères lurent<br>publiquement une profession de foi devant le clergé et le peuple, puis s&#x27;en retournèrent à<br>Limassol. A Limassol, l&#x27;armée du régent avait commencé à se mettre en place pour se saisir<br>des Templiers. Le 29 mai, le maréchal et tout son couvent prennent les armes pour leur<br>défense. Mais finalement le 1er juin 1308, les Templiers se rendirent aux hommes du régent<br>qui les fit emprisonner dans leurs deux châteaux de Khirokitia et de Yermasoyia.<br>Par la suite, le maître du Temple Aimé de Oyselier, le maître de la province de Chypre Jacques<br>de Doumanin, le drapier Jean de Vila, le turcoplier Bertrand de Gourdon, le trésorier frère<br>Albert et le maître des Pouilles Odon de Villaret furent transférés au château de Lefcara. Il<br>semblerait que l&#x27;on ait craint que les dignitaires cherchent à s&#x27;enfuir sur une galère génoise.<br>Les Templiers ne furent interrogés qu&#x27;à partir du mois de mai 1310. Le vendredi 5 juin 1310,<br>le procès fut interrompu. Amaury de Chypre venait d&#x27;être assassiné, probablement par un<br>partisan de son frère Henri II. C&#x27;était une très mauvaise nouvelle pour les Templiers qui<br>pouvaient s&#x27;attendre dorénavant à moins d&#x27;indulgence.<br>Le résultat de l&#x27;enquête menée à Chypre se révéla trop favorable aux Templiers. Le pape<br>Clément V ordonna dans une lettre écrite en août 1311 que l&#x27;on organise un nouveau procès<br>en utilisant la torture. Cette fois-ci c&#x27;était Henri II, l&#x27;ennemi personnel des Templiers, qui était<br>au pouvoir. Les Templiers furent transférés dans le très austère château de Kyrenia où Pierre<br>de Plaine-Cassagne, évêque de Rodez et légat pontifical en Orient, avait le champ libre pour<br>collaborer avec les inquisiteurs et faire appliquer la torture.<br>---PAGE 45---<br>De ce nouveau procès, nous ignorons tout. Mais le chroniqueur Fransesco Amadi précisa tout<br>de même en 1316 que le maréchal Aimé de Oyselier ainsi que bien d&#x27;autres frères étaient<br>morts dans le donjon de Kyrenia. Sous le règne du roi Henri II, les Templiers de Chypre, isolés<br>de tous, furent torturés à mort dans un sinistre donjon.<br>Le 1er juin 1308, quand les chevaliers du régent Amaury avaient fouillé la maison cheftaine<br>de l&#x27;ordre à Limassol, ils avaient retrouvé à l&#x27;intérieur 120.000 besants blancs. On a du mal à<br>croire que cette somme correspondait au fameux trésor dont parlait le maréchal. Quand on<br>connaît un peu les habitudes de l&#x27;ordre, on se dit qu&#x27;un des premiers soucis du maréchal Aimé<br>de Oyselier fut de faire évacuer le trésor de l&#x27;ordre avant que le régent puisse mettre la main<br>dessus.<br>Si le trésor dont parle le maréchal était bien le trésor général, on peut croire qu&#x27;Aimé de<br>Oyselier a confié cette mission à celui-là même qui lui avait apporté – c&#x27;est-à-dire à Gérard de<br>Villiers. Nous n&#x27;avons aucune trace de ce chevalier à chypre à cette période, mais Gérard de<br>---PAGE 46---<br>Villiers dont on sait qu&#x27;il avait sous sa protection le trésor général n&#x27;a laissé aucune trace nulle<br>part. On imagine bien que le nouveau visiteur cismarin devait se faire discret au moment où<br>toute la chrétienté réclamait la destruction de l&#x27;ordre.<br>Toujours en suivant cette hypothèse, on peut penser que la pseudo résistance des Templiers<br>à Limassol le 29 mai 1308 n&#x27;avait pour seul but que de protéger l&#x27;évacuation du trésor de<br>l&#x27;ordre du port de Limassol vers d&#x27;autres cieux. Un des moyens d&#x27;en savoir plus sur cette affaire<br>serait peut-être de suivre la piste du second procès des Templiers de Chypre. Il n&#x27;est pas<br>impossible que Pierre de Plaine-Cassagne, légat pontifical en Orient, ait cherché à en savoir<br>plus à propos de ce fameux trésor qui, rappelons-le, contient la couronne du Roi des Derniers,<br>celui-là même qui à Jérusalem réunira les Nations Unies, autour des valeurs de la citoyenneté<br>et de la démocratie.<br>On ne doute pas que Pierre de Plaine-Cassagne avait des arguments pour faire parler le<br>maréchal. Sur cette question, la seule manière d&#x27;en avoir le cœur net serait de retrouver dans<br>les archives du Vatican ou ailleurs le compte-rendu des interrogatoires du second procès des<br>Templiers à Chypre.<br>NOTES:<br>---PAGE 47---<br>1. Selon la chronique Les Gestes des Chyprois, compilée au début du XIV° siècle, Jacques<br>de Mailly serait à ce moment maréchal du Temple. Ce fait est contredit par plusieurs lettres<br>datées de 1187, écrites par des prélats et des barons de Terre Sainte qui furent adressées au<br>pape, à l&#x27;empereur germanique et à d&#x27;autres seigneurs d&#x27;Occident. Dans ces lettres, Robert<br>de Franiel est cité comme maréchal du Temple lors de la bataille de La Fontaine-Cresson. Soit<br>le chroniqueur a fait une confusion entre les ordres de chevalerie de Terre Sainte, et Jacques<br>de Mailly aurait été en réalité maréchal de l&#x27;ordre des Hospitaliers, soit la grande réputation du<br>chevalier a poussé le chroniqueur à lui donner un titre qu&#x27;il n&#x27;avait pas au sein de son ordre.<br>2. Bien que ce fait ne soit pas encore établi, nous avons pris le parti de donner le nom du<br>dernier grand-maître des Templiers au maréchal Guillaume de Malay. Compte tenu des<br>variations orthographiques qui avaient cours à cette époque, cette initiative est autorisée. Nous<br>pensons que le haut dignitaire du Temple Guillaume de Malay était en fait l&#x27;oncle de Jacques<br>de Molay, et que c&#x27;est grâce à la réputation de ce parent que Jacques atteindra les plus hautes<br>fonctions de l&#x27;ordre. On remarque par exemple que Jacques de Molay, qui semble avoir fait<br>toute sa carrière en Terre Sainte, est présent à Paris en 1285 - date de la mort de Guillaume<br>de Malay, alors maître de France. A cette occasion, Jacques de Molay aura le privilège de<br>présider à la réception de nouveaux frères alors qu&#x27;il n&#x27;occupe aucune fonction officielle dans<br>l&#x27;ordre à notre connaissance. Ce fait rarissime ne peut s&#x27;expliquer que si Jacques de Molay<br>bénéficiait de puissants appuis au sein de l&#x27;ordre. Il n&#x27;est pas rare de constater que certains<br>chevaliers font de belles carrières grâce à l&#x27;appui de parents bien placés dans l&#x27;ordre. Ce fut<br>le cas notamment d&#x27;Hugues de Pairaud, le grand rival de Jacques de Molay au sein du chapitre<br>général - qui était le neveu du dignitaire du Temple Humbert de Pairaud.</div>
-        </details>
-        
-          </div>
-        </details>
-        
-
-        <details class="acc">
-          <summary>commandeurs de la terre du</summary>
-          <div class="acc-body">
-            
-        <details class="mini">
-          <summary><span class="name">Geoffroy Foucher</span> <span class="date">— 1156-1168</span></summary>
-          <div class="mini-body">Avec le commandeur de la terre du royaume de Jérusalem Geoffroy Foucher,<br>nous avons affaire à un fin administrateur des affaires de l&#x27;ordre mais aussi<br>à un diplomate que l&#x27;on n&#x27;hésitera pas à solliciter pour les affaires de politique<br>internationale.<br>En 1163, le grand maître Bertrand de Blanquefort envoya Geoffroy Foucher en Occident pour<br>solliciter des renforts auprès du roi d&#x27;Angleterre Henri II de Plantagenet et du roi de France<br>Louis VII. Le trésorier de l&#x27;ordre obtint à cette occasion de nombreux subsides qui vinrent<br>grossir le trésor général de l&#x27;ordre. Seulement, même pour un trésorier, l&#x27;argent n&#x27;était pas<br>tout. Geoffroy Foucher était surtout venu en Europe pour prêcher une nouvelle croisade.<br>Hélas! Après le fiasco de la Seconde Croisade, les monarques d&#x27;Occident n&#x27;étaient pas prêts<br>à rééditer un pareil exploit. Notre Templier dût se contenter de vagues promesses.<br>---PAGE 49---<br>Pendant son séjour en Europe, le pape Alexandre III, dans sa bulle Litteras Nostras, confia au<br>Templier Geoffroy Foucher la mission de réconcilier le roi d&#x27;Angleterre Henri II avec son<br>chancelier Thomas Becket, archevêque de Canterbury.<br>Mission délicate, dans laquelle notre Templier ne réussit que provisoirement. Malgré tout,<br>Geoffroy Foucher avait réussi à tisser des liens de confiance avec les monarques occidentaux.<br>C&#x27;est ce qui ressort d&#x27;une lettre que le commandeur de la terre du royaume de Jérusalem<br>adressa au roi de France lors de son retour en Terre Sainte en avril/mai 1164.<br>&quot;Par la faveur de Dieu je suis venu à terre, en bonne santé, dans le Port d&#x27;Antioche. Dès<br>que j&#x27;eus salué le Maître et les frères en votre nom, je leur ai raconté quels honneurs<br>insignes vous m&#x27;avez rendus, pour l&#x27;amour de Dieu et de notre chevalerie. Mes frères<br>---PAGE 50---<br>vous ont tout de suite rendu grâces, en se recommandant à votre noblesse; ils ont offert<br>leurs prières envers vous et pour vous. Ne croyez pas que votre serviteur ait oublié ce<br>qu&#x27;il s&#x27;est réjoui d&#x27;entendre de votre bouche. Car vous m&#x27;avez chargé de saluer les Lieux<br>Saints en votre nom, et de penser à vous dans chaque Station quand je les visiterais.<br>Attentif à votre demande, je vous envoie une bague que j&#x27;ai portée aux Lieux Saints, la<br>faisant attoucher à chaque objet de vénération. Pour révérence de ces choses, je vous<br>prie de la conserver et de la chérir. Adieu. Adieu encore avec mon souvenir.&quot;<br>En 1164, le couvent du Temple, le grand maître Bertrand de Blanquefort et les dignitaires de<br>l&#x27;ordre accompagnent l&#x27;armée du roi de Jérusalem Amaury, qui est parti faire campagne en<br>Egypte. Geoffroy Foucher, en tant que commandeur de la terre du royaume de Jérusalem, se<br>retrouve seul à Jérusalem pour gérer les affaires de l&#x27;ordre. C&#x27;est ce moment que choisit Nûr<br>al-Dīn, l&#x27;atabeg d&#x27;Alep et de Damas, pour attaquer la principauté d&#x27;Antioche. S&#x27;ensuit le<br>désastre de la bataille de Harim, où toute la noblesse franque de la Syrie du Nord est faite<br>prisonnier par les Sarrasins.<br>---PAGE 51---<br>A tout moment, le royaume de Jérusalem pouvait être envahi, et Geoffroy Foucher n&#x27;a que<br>très peu d&#x27;homme à sa disposition pour y faire face. C&#x27;est dans ces circonstances qu&#x27;il va<br>adresser deux lettres au roi de France.<br>&quot;Frère Geoffroy Foucher, indigne procureur des maisons de la Pauvre Milice du Temple ,<br>adresse cette lettre à son grand ami et seigneur Louis, sanctissime roi de France par la grâce<br>de Dieu (…) Il arriva, au mois de juillet de cette année, que notre roi Amaury, avec notre maître<br>et d&#x27;autres pairs de la Terre Sainte, entra dans les confins de Babylone et assiégea, dans la<br>ville de Berbeis, Syracon le Connétable de Noradin, qui avait pénétré dans ce pays-là pour en<br>faire la conquête. A la fin de ce mois, et au début du mois suivant, les nôtres tendirent leurs<br>tentes devant la ville. Là-dessus Noradin, furieux et enragé d&#x27;esprit, rassembla ses forces par<br>lettres et par messagers de tous les pays qui avaient entendu son nom et en tremblaient.<br>Rempli de son orgueil et rage accoutumés, il assiégea un château qui s&#x27;appelle Harinc (Harim)<br>entre Antioche et Alep. Il assaillit tant les assiégés avec perrières et mangonaux, qu&#x27;ils ne<br>purent plus résister, surtout parce qu&#x27;ils manquaient presque entièrement d&#x27;eau et de vivres.<br>Pendant ce temps, le prince Bohemond d&#x27;Antioche, le comte de Tripoli et le duc de<br>Marmisterna (le roi d&#x27;Arménie) avec beaucoup de nos frères qui les avaient rejoints, se<br>préparaient à porter secours aux assiégés. Le prince rassembla une telle force de chevaliers,<br>de turcopoles et de sergents, que jamais de notre temps l&#x27;on ne vit une plus belle armée de<br>chrétiens partir contre les infidèles. Mais il advint qu&#x27;après un premier succès les nôtres furent<br>déconfits par un nombre supérieur de Sarrasins, qui en mirent beaucoup à mort, et firent<br>prisonniers le duc et le comte. Ensuite, parcourant notre terre en tous sens, ils prirent Harinc<br>et assiégèrent Antioche. Nous n&#x27;avons plus de troupes pour les résister, car de six cents<br>chevaliers et de douze mille piétons, il n&#x27;échappa que les quelques-uns qui ont rapporté les<br>nouvelles… Que votre conscience se réveille, que les lieux de notre Rédemption, la Terre<br>Sainte, la Cité de fortitude, l&#x27;Église primitive vous émeuvent et vous touchent de charité<br>sincère. Plus d&#x27;une fois nous avons envoyé de tels avertissements, mais aujourd&#x27;hui avec plus<br>d&#x27;urgence et de gravité que jamais. A nous, la Grâce Divine assigne ces prières et ces<br>supplications, mais à vous des actes et l&#x27;exécution de vos promesses.&quot; Cité par Marion<br>Melville, La Vie des Templiers, Gallimard, 1951, p. 70<br>---PAGE 52---<br>Les nouvelles de la progression des armées sarrasines étant inquiétantes, Geoffroy Foucher<br>envoya une deuxième lettre au roi de France dans laquelle il donnait quelques précisions sur<br>la bataille de Harim.<br>Hugues de Lusignan était prisonnier à Alep. Soixante frères du Temple avaient été tués. Sans<br>compter les turcoples et les confrères de l&#x27;ordre. Seuls sept chevaliers du Temple avaient pu<br>s&#x27;échapper. Il termine sa seconde lettre par ces mots:<br>&quot;Et nous, si peu nombreux en Jérusalem, nous sommes menacés d&#x27;invasion et de siège.<br>Voyez donc notre nécessité: si vous dissimulez ou hésitez à vous laisser convaincre selon vos<br>habitudes, si vous ne vous décidez pas à nous aider avant que les derniers vestiges de la<br>chrétienté ne soient consumés, jugez combien il est à craindre qu&#x27;il ne soit trop tard lorsque<br>vous voulez nous apporter du secours.<br>---PAGE 53---<br>Que tous ceux qui sont de Dieu et qu&#x27;on nomme chrétiens prennent leurs armes et viennent<br>libérer le royaume de leurs aïeux et la terre de notre libération, de peur que les fils ne perdent<br>honteusement ce que les pères ont conquis en hommes.<br>N&#x27;attendez pas d&#x27;autres messagers d&#x27;ici, puisque dans l&#x27;absence de notre roi et de notre maître<br>nous sommes trop démunis pour renvoyer encore de nos prud&#x27;hommes.&quot; Idem, p. 71<br>Finalement Nûr al-Dīn renonça à pousser plus loin son offensive et Jérusalem échappa encore<br>une fois au pire. En 1167, c&#x27;est encore à Geoffroy Foucher que le grand maître Bertrand de<br>Blanquefort fait appel pour négocier les accords entre les Francs et les Égyptiens. En 1168,<br>Geoffroy Foucher sera envoyé en Occident avec le titre de visiteur cismarin.<br>auparavant :<br>ensuite: Visiteur Cismarin</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Gautier de Briseberre dit ( de Beyrouth )</span> <span class="date">— 1169. Frére Galterus de Berito, preceptor, souscrit comme témoin, 16 mars 1169,</span></summary>
-          <div class="mini-body">dans un acte de l&#x27;évêque Pierre de Tortose en faveur de l&#x27;ordre du temple.<br>auparavant : Visiteur Cismarin<br>ensuite: Sénéchal</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Robert  Franiel</span> <span class="date">— 1179. Frère Roberti Fresn, magno preceptore, souscrit comme témoin un acte daté</span></summary>
-          <div class="mini-body">après le 9 octobre 1179, concernant Arnold d&#x27;Aurillac pour l&#x27;ordre du temple.<br>auparavant<br>ensuite: Maréchal</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Gilbert d&#x27;Erail</span> <span class="date">— 1183. Frère Girbertus  Arayl , magnus preceptor , souscrit comme témoin en 1183 , un</span></summary>
-          <div class="mini-body">accord conclu entre l&#x27;abbaye Notre-Dame de Josaphat et l&#x27;ordre du temple.<br>---PAGE 54---<br>auparavant :<br>ensuite : Maître en Aragon</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Eudes de Vendôme</span></summary>
-          <div class="mini-body">Nom : Eudes de Vendôme<br>auparavant : 1184 . On a retrouvé à Jérusalem une lettre du Sénéchal Gérard de Ridefort<br>écrite en 1184 et adressée au commandeur de Jérusalem Eudes de Vendôme<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Jean de Terric</span></summary>
-          <div class="mini-body">Nom : Jean de Terric<br>dates : 1187-1188<br>auparavant :<br>ensuite: Nous possédons plusieurs lettres du commandeur de la terre du royaume de<br>Jérusalem qui n&#x27;hésite pas à s&#x27;intituler lui-même grand précepteur de la maison du Temple de<br>Jérusalem. L&#x27;apparition de ce personnage dans l&#x27;histoire du Temple est aussi courte que peu<br>banale. Il semble avoir été très proche du grand maître Gérard de Ridefort et a fait partie des<br>templiers qui ont réussi à s&#x27;échapper après la bataille de Hattin le 4 juillet 1187. On a longtemps<br>pris Jean de Terric pour un grand maître à cause d&#x27;un malentendu. Jean de Terric, grand<br>commandeur du royaume de Jérusalem, a fait parvenir en Occident plusieurs lettres. Voici la<br>lettre adressée au roi d&#x27;Angleterre. Cette lettre témoigne du désarroi du chevalier qui dans ces<br>heures tragiques espère que le salut viendra du roi d&#x27;Angleterre.<br>&quot; A mon très-cher Seigneur Henri, illustre Roi des Anglais, Duc de Normandie, d&#x27;Aquitaine, et<br>comte d&#x27;Anjou, Salut en celui de qui dépend la vie des Rois, Frère Terric, jadis Grand-<br>Précepteur de la Maison du Temple de Jérusalem. on ne doit pas, Sire, vous laisser ignorer<br>que Jérusalem et la Tour de David se sont rendues au Sultan; que les Syriens n&#x27;ont à rester à<br>la garde du Saint-Sépulcre que jusqu&#x27;au quatrième d&#x27;octobre. On a permis aux Hospitaliers de<br>rester dans leur Maison, au nombre de dix seulement, afin de soigner les blessés et les<br>malades. Ceux de cet Ordre qui défendent le château de Beauvoir, s&#x27;y comportent en braves;<br>ils ont enlevé aux Sarrasins deux caravanes, dans l&#x27;une desquelles ils ont trouvé les armes,<br>effets et victuailles que l&#x27;ennemi transportait de Faba, après avoir démoli ce fort; les environs<br>de Tripoli et d&#x27;Antioche sont en état de se défendre. quelques forts, entr&#x27;autres, Margat,<br>Saphet-du-Temple, Mont-Royal, Castelblanc, l&#x27;un et l&#x27;autre Krak ont méprisé jusqu&#x27;à présent<br>---PAGE 55---<br>les menaces de Saladin. non content d&#x27;avoir abattu la croix du haut de l&#x27;Eglise qui est près de<br>l&#x27;ancien Temple, il l&#x27;a fait exposer pendant deux jours à la risée et aux insultes d&#x27;une<br>soldatesque effrénée; il a fait laver d&#x27;eau rose le haut et le bas, l&#x27;intérieur et l&#x27;extérieur de la<br>principale Eglise, et y a fait proclamer, en grande solennité, la loi de Mahomet; il a tenu Tyr<br>bloquée depuis la Saint-Martin jusqu&#x27;à la Circoncision, sans cesser de la battre jour et nuit par<br>le moyen de ses balises et catapultes. La veille de S. Sylvestre, le jeune Marquis de Montferrat,<br>après avoir porté son infanterie sur les murs de cette ville, et lui en avoir confié la garde, sortit<br>du port avec dix-sept galères et dix autres petits bâtiments, attaqua l&#x27;escadre Musulmane, lui<br>enleva onze galères, se saisit du Grand-Amiral, de huit autres Emirs, et soutenu par l&#x27;exemple<br>des Templiers et des Hospitaliers, rougit les eaux de la mer du sang des Infidèles; le reste des<br>vaisseaux ennemis ayant échoué sur la côte, Saladin aima mieux les vois réduits en cendres<br>par les ordres, que de souffrir que les Chrétiens en retirassent aucune utilité, et pour faire<br>retomber sur les siens la honte et la défaite, il affecta de paraître devant eux en équipage<br>ridicule, monté sur un cheval de bataille qui avait la queue et les oreilles coupées.&quot;<br>En lisant cette lettre, certains en ont tiré la conclusion que Jean de Terric avait démissionné<br>de sa charge. Mais l&#x27;expression &quot;jadis grand précepteur de la maison du Temple de Jérusalem&quot;<br>peut signifier dans l&#x27;esprit du templier qu&#x27;il vient de perdre tout ce qui faisait l&#x27;essence de sa<br>charge: la Terre Sainte, Jérusalem, l&#x27;accès à l&#x27;esplanade du Temple de Salomon. Ce n&#x27;est pas<br>le commandeur de la terre du royaume de Jérusalem qui a démissionné, c&#x27;est la Terre Sainte<br>elle-même qui s&#x27;est dérobée sous ses pieds.</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Irmengaud</span> <span class="date">— 1198. fratre siquidem Irmengaud tunc existente magno praeceptore, souscrit comme</span></summary>
-          <div class="mini-body">témoin en juin 1198, un acte entre le Grand Maître du temple Gilbert Eral et l&#x27;abbaye de Notre-<br>Dame de Josaphat.<br>auparavant : Maître d&#x27;Antioche<br>ensuite:</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Pierre de Moneta</span> <span class="date">— 1204. Frère Petrus de Manaia, magnus preceptor, souscrit un acte le 19 juillet 1204,</span></summary>
-          <div class="mini-body">entre Soffred de Saint-Praxedis, Peter de Marcellus , Cardinal légat et les Grand Maîtres des<br>ordres templier et hospitalier, Philippe de Plessis et Alphonse du Portugal.<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Guillaume Cadeil</span> <span class="date">— mentionné en 1222, comme lieutenant du grand maître (chronique), puis preceptore</span></summary>
-          <div class="mini-body">templi en 1223 (lettre), mais a probablement cumulé ces fonctions avec celle de visiteur<br>cismarin.<br>auparavant : Visiteur cismarin<br>ensuite : Maître d&#x27;Aragon</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Barthelemy de Moret</span> <span class="date">— 1240. Bartholomei de Moretto, tunc temporis magni preceptoris dicte militie in regno</span></summary>
-          <div class="mini-body">Jerusalem, contresigne au mois de septembre 1240, une donation faite à l&#x27;ordre de Saint-<br>Lazare par Armand de Périgord grand maître du Temple<br>auparavant :<br>ensuite:</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Pierre de Saint-Romain</span> <span class="date">— 1241. P. de S. Romain, grant comandeor, souscrit comme témoin, le 18 novembre 1241,</span></summary>
-          <div class="mini-body">un accord conclu entre l&#x27;ordre de l&#x27;Hôpital et Bohémond, seigneur d&#x27;Antioche et de Tripoli à<br>propos de la cession de ses droits en faveur de l&#x27;ordre sur le fief de Maraclée et de ses<br>dépendances.<br>auparavant : Visiteur cismarin<br>ensuite: Maître de Tripoli<br>---PAGE 57---</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Etienne de Hautetour 1</span></summary>
-          <div class="mini-body">m : Etienne de Hautetour 1<br>dates : 1249. Frère Sthephanus de Alta Turre preceptor terre rigiminis Hierusalem , souscrit<br>comme témoin à Limassol le 12 mai 1249, une transaction financière pour une somme de 10<br>000 besans syriens soit 3750 livres tournois.<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Frère Gilles</span> <span class="date">— mentionné en 1250</span></summary>
-          <div class="mini-body">auparavant :<br>ensuite: mort au combat à la bataille de la Mansourah le 8 février 1250. Les conseils de<br>prudence de frère Gilles vaudront aux ordres de chevalerie de Terre Sainte une de leurs plus<br>cinglantes récriminations. Pendant la Septième Croisade, après la prise de Damiette, le comte<br>Robert d&#x27;Artois, frère du roi de France, convainc le roi de frapper au coeur de l&#x27;Egypte en visant<br>directement le Caire contre l&#x27;avis des ordres militaires de Terre Sainte, les Templiers en<br>tête, qui conseillaient avec les barons de s&#x27;attaquer en premier lieu au grand port commercial<br>d&#x27;Alexandrie. C&#x27;est évidemment Robert d&#x27;Artois qui emportera la décision. Le roi de France,<br>saint Louis, se méfiait des Templiers. Robert d&#x27;Artois dirigeait l&#x27;avant-garde de l&#x27;armée franque.<br>Après plus d&#x27;un mois d&#x27;une lutte de positions autour des rives du Bahr al-Saghîr - un bras du<br>Nil - l&#x27;avant-garde de l&#x27;armée franque renforcée par le couvent des Templiers réussit à<br>traverser, grâce aux informations d&#x27;un indicateur, le Bahr al-Saghîr dans la nuit du 7 au 8<br>février 1250. L&#x27;armée égyptienne, qui depuis un mois avait bloqué avec succès les Francs sur<br>l&#x27;autre rive du fleuve, s&#x27;était mal gardée contre cette éventualité. Le résultat fut catastrophique<br>pour l&#x27;armée égyptienne. A peine l&#x27;avant-garde franque avait-elle réussi à traverser au petit<br>matin, qu&#x27;elle chargeait le camp égyptien encore endormi. L&#x27;émir Fakhr al-Dîn, le<br>généralissime des égyptiens, fut, comme ses soldats, entièrement surpris. Il sortait de son<br>bain quand les premières clameurs des fuyards lui apprirent que les Francs avaient traversé<br>le fleuve. Sautant sur son cheval, accompagné d&#x27;une poignée de Mammelouks, le général<br>essaya de raisonner ses hommes qui cédaient à la panique. Il partit au galop au devant de<br>l&#x27;ennemi en rassemblant autour de lui le plus d&#x27;hommes qu&#x27;il pouvait. Quand soudain surgit le<br>gonfanon baucent , suivi du terrible grondement des sabots de la charge de la chevalerie<br>---PAGE 58---<br>templière. C&#x27;est à ce moment que le général se rendit compte qu&#x27;il était sortit sur son cheval<br>sans aucune protection. La plupart des hommes qui l&#x27;accompagnait, terrifié par la charge des<br>Templiers, était déjà en train de fuir quand le général fut percé au flanc par la lance d&#x27;un<br>Templier qui le projeta au sol. Il mourut sur place, criblé de coups d&#x27;épées. L&#x27;avant-garde<br>dirigée par Robert d&#x27;Artois déboucha dans le camp égyptien et finit d&#x27;achever ceux qui ne<br>s&#x27;étaient pas encore échappés. Les événements semblaient donner raison au frère du roi de<br>France. Mais le comte d&#x27;Artois ne voulait pas en rester là. Voyant fuir l&#x27;armée égyptienne en<br>ordre dispersé, il comptait achever le travail quand frère Gilles lui rappela les consignes du roi<br>de France qui voulait qu&#x27;on attende que le gros de l&#x27;armée ait traversé le fleuve pour avancer.<br>Pour le comte d&#x27;Artois c&#x27;était encore une insubordination de ces Templiers qui passaient leur<br>temps à entraver son initiative alors que cette victoire confirmait le bien-fondé de ses choix<br>stratégiques. Pour raisonner le frère du roi, frère Gilles tenta la flatterie - faisant remarquer à<br>Robert d&#x27;Artois qu&#x27;il avait déjà réussi un des plus grands coups d&#x27;audace qui ait été fait depuis<br>longtemps en Terre Sainte et que si on continuait à charger en ordre dispersé, le premier effet<br>de surprise passé, les Sarrasins se rendraient vite compte qu&#x27;ils n&#x27;avaient affaire qu&#x27;à un petite<br>nombre de chevaliers face à toute une armée - et qu&#x27;alors cette victoire risquait vite de se<br>transformer en déconfiture. Exaspéré par le ton mielleux du commandeur, le frère du roi de<br>France rétorqua:<br>&quot;Il ne faut point chercher d&#x27;autres preuves que ce discours artificieux, de l&#x27;intelligence qu&#x27;on dit<br>que les Templiers entretiennent avec les infidèles, je reconnais ici leur trahison et l&#x27;esprit<br>séditieux des Hospitaliers. C&#x27;est avec bien de la justice qu&#x27;on publie depuis si longtemps qu&#x27;eux<br>seuls, pour se rendre toujours nécessaires, et pour tirer tout l&#x27;argent de l&#x27;Occident, ne veulent<br>point que la guerre finisse: voilà la terrible cause de la perte de tant de princes et de seigneurs<br>croisés, qu&#x27;ils ont empoisonnés, ou qu&#x27;ils ont laissés périr dans les batailles, de peur de se voir<br>soumis à la domination des princes d&#x27;Occident; et qui ne sait toute la peine que l&#x27;empereur<br>Frédéric a eue pour se débarrasser de leur trahison et de leurs embûches?&quot;<br>Le grand maître des Templiers, Guillaume de Sonnac, choqué par les paroles du comte<br>d&#x27;Artois répondit:<br>&quot;Prince, pouvez-vous penser que nous ayons abandonné nos biens et notre patrie, que nous<br>ayons pris l&#x27;habit religieux dans une terre étrangère, et que nous exposions tous les jours nos<br>vies pour trahir l&#x27;Eglise de Jésus-Christ et renoncer à notre salut? Soyez persuadé qu&#x27;une<br>pensée si indigne d&#x27;un chrétien n&#x27;est jamais entrée dans l&#x27;esprit d&#x27;aucun chevalier.&quot;<br>---PAGE 59---<br>La suite ne fut qu&#x27;une longue prise de becs entre ceux qui voulaient rester sur place pour<br>attendre le gros de l&#x27;armée et le comte d&#x27;Artois, bien décidé à vaincre l&#x27;armée égyptienne à lui<br>tout seul. Quand plusieurs chevaliers, prévenus de l&#x27;attitude du comte d&#x27;Artois, vinrent au nom<br>de son frère le roi lui rappeler qu&#x27;il devait attendre sur place, le comte n&#x27;avait qu&#x27;une réponse:<br>&quot;Que les Sarrasins étaient déjà battus et qu&#x27;il ne resterait pas là mais les chasserait.&quot;<br>C&#x27;&#x27;était le signal que ses chevaliers attendaient pour charger. Hautain, le comte d&#x27;Artois,<br>passant devant le frère Gilles, lui dit que s&#x27;il avait peur il n&#x27;avait qu&#x27;à rester sur place. Le<br>Commandeur répondit :<br>&quot;Sire, ni moi ni mes frères nous n&#x27;avons peur. Nous ne resterons pas en arrière et nous irons<br>avec vous. Mais sachez que vraiment nous doutons que ni nous ni vous n&#x27;en revenions<br>jamais.&quot;<br>L&#x27;avant-garde chargea, tuant tous les soldats qui se trouvaient sur son passage. Arrivés dans<br>la localité de la Mansourah avec ses ruelles étroites, une partie des Francs s&#x27;éparpillèrent à la<br>poursuite des fuyards et les habitants terrés dans leurs maisons entendaient les cris de leurs<br>compatriotes que l&#x27;on était en train d&#x27;achever au bas de leurs portes. Robert d&#x27;Artois traversa<br>la Mansourah pour se retrouver face aux portes closes du palais-forteresse de la Cité. C&#x27;est là<br>qu&#x27;il choisit de s&#x27;arrêter pour attendre le reste de l&#x27;avant-garde qui s&#x27;était dispersée. C&#x27;est aussi<br>à ce moment que les Sarrasins purent constater à quel point les Francs qui les chassaient<br>étaient peu nombreux. C&#x27;est le mamelouk turc Baîbars Bundukdâri qui, constatant<br>l&#x27;imprudence des Francs, décida de charger à l&#x27;improviste à la tête de la brigade des<br>mamelouks bahrides . Très vite submergés par le nombre, le comte Robert d&#x27;Artois et ses<br>hommes furent obligés de battre en retraite. Mais quand les habitants de la Mansourah<br>réalisèrent que les Francs étaient en train de fuir, ils jetèrent dans les rues des poutres et des<br>palissades et tout ce qui leur passait entre les mains pour transformer les ruelles étroites de<br>la ville en impasse mortelle. Pris au piège, le comte d&#x27;Artois se réfugia dans une maison de la<br>Mansourah alors que ses chevaliers se faisaient décimer dans les ruelles. Il est probable que<br>le comte fit valoir sa qualité, espérant être fait prisonnier et libéré contre forte rançon. Mais à<br>cette heure, les Sarrasins qui s&#x27;étaient fait tailler en pièces par ses hommes n&#x27;étaient pas<br>disposés à respecter les codes de la chevalerie et le frère du roi fut massacré sur place.<br>---PAGE 60---<br>Les Templiers vendirent chèrement leur peau et le gonfanon baucent ne fut pas pris à<br>Mansourah. Le grand maître des Templiers, Guillaume de Sonnac, réussit à rejoindre l&#x27;armée<br>chrétienne avec le maréchal du Temple Renaud de Vichiers et quelques frères d&#x27;armes. Le<br>grand maître était couvert de blessures. Il avait un oeil arraché, ses vêtements étaient déchirés<br>et sa cuirasse percée de coups. Deux cent quatre-vingt cinq Templiers étaient tombés à la<br>Mansourah - dont le commandeur de la terre, frère Gilles. Mais le gonfanon était toujours là.<br>Le grand maître sera tué trois jours plus tard, le 11 février 1250. Le lendemain, l&#x27;armée franque<br>sera vaincue et le roi de France fait prisonnier. Mais le gonfanon baucent ne sera jamais pris<br>et le maréchal Renaud de Vichiers le ramènera à Saint-Jean-d&#x27;Acre.</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Guy de Basenville</span></summary>
-          <div class="mini-body">Nom : Guy de Basenville<br>dates : 1256. Frère Guido de Basainvilla domorum militiae templi praeceptor in regno<br>hyerosolimitano, dans une lettre du 4 octobre 1256, informe l&#x27;évêque d&#x27;Orléans de sa bonne<br>santé, du tremblement de terre et de l&#x27;incendie de Médine ainsi que de l&#x27;avancée des<br>Mongols.<br>auparavant : Maître de France<br>---PAGE 61---<br>ensuite: Visiteur Cismarin</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Mathieu Sauvage</span> <span class="date">— mentionné en 1260</span></summary>
-          <div class="mini-body">auparavant :<br>ensuite: Mathieu Sauvage est fait prisonnier à la bataille de Tibériade en 1260. Peu de temps<br>après, lui et plusieurs de ses frères templiers , dont Guillaume de Beaujeu et Thibaud Gaudin,<br>deux futurs grand maîtres, furent rachetés par l&#x27;ordre qui paya rançon.</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Amaury de la Roche</span> <span class="date">— 1262. Amaury de la Roche, grant commandeor, souscrit comme témoin, le 31 mai 1262,</span></summary>
-          <div class="mini-body">un accord entre le grand maître du Temple Thomas Bérard et l&#x27; ordre de l&#x27;Hôpital de Saint-<br>Jean de Jérusalem.<br>auparavant :<br>ensuite : Maître de France</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Guillaume de Montignane</span> <span class="date">— 1262. Guillaume de Montignane, grant comandeor dou Temple, souscrit le 19 décembre</span></summary>
-          <div class="mini-body">1262, une sentence arbitrale mettant fin à un différend qui s&#x27;était élevé entre les ordres du<br>Temple et de l&#x27;Hôpital, relativement à des moulins.<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Simon de la Tour</span> <span class="date">— 1271. Symone de Turri, magno preceptore domus Templi, souscrit comme témoin, le 2</span></summary>
-          <div class="mini-body">juin 1271, de la remise par le seigneur de Gibelet à Hugues, grand maître de l&#x27;Hôpital, de 44<br>titres de propriétés déposées entre les mains du grand maître, par le seigneur de Gibelet.<br>auparavant :<br>---PAGE 62---<br>ensuite : Maître des Pouilles</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Gonfier de Salvaing</span> <span class="date">— 1273. Mentionné dans la chronique d&#x27;Eraclès à propos de l&#x27;élection du grand maître</span></summary>
-          <div class="mini-body">Guillaume de Beaujeu le 13 mai 1273. A cette occasion, &quot;frère Goufier fu fait commandeor<br>grant tenant lieu de maistre&quot;. A partir du 13 mai 1273, Gonfier de Salvaing dû gérer les affaires<br>de l&#x27;ordre et cela plusieurs années durant. Pendant cette période, les Templiers furent<br>déconcertés de ne pas voir venir leur grand maître qui s&#x27;obstinait à rester en Occident.<br>Guillaume de Beaujeu participa au concile de Lyon du 7 mai au 17 juillet 1274. Il fit aussi le<br>tour des provinces d&#x27;Occident, mais – cerise sur le gâteau – il ira jusqu&#x27;à rappeler auprès de<br>lui des dignitaires basés en Terre Sainte pour venir le seconder en Occident – comme le<br>templier Simon de la Tour, l&#x27;ancien commandeur de la Terre du royaume de Jérusalem qui<br>deviendra maître des Pouilles. Faute d&#x27;un grand maître disponible, Gonfier de Salvaing<br>nommera Robert de Torteville maître d&#x27;Angleterre comme nous l&#x27;apprend une lettre écrite le 3<br>octobre 1274. Finalement, Guillaume de Beaujeu ne se présentera en Terre Sainte dans le<br>port de Saint-Jean d&#x27;Acre que le 15 septembre 1275 – soit de plus de deux ans après avoir<br>été élu grand maître.<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Arnaud de Castelnou</span> <span class="date">— 1277. Arnaldo de Castronovo, magno praeceptore, souscrit  l&#x27;accord conclu à la</span></summary>
-          <div class="mini-body">sommellerie du temple, près d&#x27;Acre, le 1 juillet 1277, entre Jean de Monfort, seigneur de Tyr,<br>et la République de Venise.<br>auparavant : Maître en Aragon<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Thibaud Gaudin</span></summary>
-          <div class="mini-body">Nom : Thibaud Gaudin<br>dates : 1279-1291 Le commandeur de la terre du royaume de Jérusalem, Thibaud Gaudin,<br>était présent lors du siège de Saint-Jean d&#x27;Acre en avril et mai 1291. Le 18 mai 1291, la Tour<br>---PAGE 63---<br>Maudite vient de céder et les Sarrasins pénètrent dans la cité. Le secrétaire et écuyer du grand<br>maître des Templiers rapatrie le corps dans la citadelle des Templiers de Guillaume de<br>Beaujeu, qui vient d&#x27;être blessé mortellement devant la Tour Maudite. Celui que l&#x27;on appellera<br>improprement le Templier de Tyr nous laissera un récit circonstancié des événements<br>auxquels il a personnellement participé. Agé d&#x27;environ 37 ans à l&#x27;époque des faits, il fut aux<br>côtés du grand maître jusqu&#x27;à sa mort et va ensuit suivre Thibaud Gaudin pour le reste des<br>événements . La ville étant définitivement perdue, le trésor des Templiers devait être évacué<br>sur le champ. C&#x27;est au frère commandeur de la terre Thibaud Gaudin que fut confié cette tâche.<br>Prenant plusieurs hommes avec lui, dont le fameux secrétaire du grand maître, Thibaud<br>Gaudin évacue le trésor des Templiers par les souterrains - qui, de la citadelle des Templiers,<br>passent sous le quartier des Pisans et débouchent directement dans le port.<br>C&#x27;est au bout du souterrain que les attendait un navire vénitien spécialement affrété pour<br>l&#x27;occasion. On transporta le trésor sur ce navire, qui fut chargé d&#x27;amener le précieux<br>chargement jusqu&#x27;à la forteresse templière de Sidon.<br>---PAGE 64---<br>C&#x27;est dans cette forteresse que fut pendant un temps entreposé le trésor des Templiers.<br>---PAGE 65---<br>C&#x27;est aussi là, au milieu de ses frères, que le commandeur de la terre Thibaud Gaudin fut élu<br>grand maître des Templiers suite à la mort de Guillaume de Beaujeu. Après presque deux<br>mois de siège, les Templiers vont abandonner la forteresse de Sidon le 14 juillet 1291 pour se<br>replier sur l&#x27;île de Chypre. Ils vont aussi évacuer Tortose le 3 août 1291 et Château-Pèlerin le<br>14 août 1291.<br>auparavant :<br>ensuite : Grand Maître de 1291 à 1292</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Berenger de Saint-Just</span></summary>
-          <div class="mini-body">Nom : Berenger de Saint-Just<br>dates : 1292-1297. Frère Berenguer de Saint Just, comander de la terre, mentionné comme<br>témoin dans une lettre écrite à Nicosie le 20 avril 1292, par le grand maître Jacques de Molay<br>et adressé à Beranger de Cardona, Maître d&#x27;Aragon.<br>auparavant : Maître d&#x27;Aragon<br>---PAGE 66---<br>ensuite : Précepteur de Miravet</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Florent de Villa</span></summary>
-          <div class="mini-body">Nom : Florent de Villa<br>dates : 1299. Frère Florentino de Velu, preceptori sacre milicie domus templi, mentionné dans<br>une lettre écrite le 24 juin 1299, par James II d&#x27;Aragon. Dans cette lettre, James II d&#x27;Aragon<br>demande à Frère Florentino de Velu de rendre une certaine quantité d&#x27;or et d&#x27;argent à un<br>marchand de Pise, qui avait déposé ses fonds chez les templiers à Atlit. L&#x27;or et l&#x27;argent que<br>les templiers détenaient à Atlit, avait probablement été transféré à Chypre.<br>auparavant : compagnon du Maître<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Pierre de Vares</span> <span class="date">— 1300. Frère Petro de Vares, Preceptori domus milicie templi, souscrit un acte passé à</span></summary>
-          <div class="mini-body">Famagouste le 25 février 1300, concernant le Génois Pierre Rubeus.<br>---PAGE 67---<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Raimbaud de Caron</span></summary>
-          <div class="mini-body">Nom : Raimbaud de Caron<br>dates : 1302-1308. Riambau de Caro2 qui es comanador de la terra est mentionné dans une<br>lettre de Pierre de Castillon adressée à Pierre de Saint-Just début janvier 1305.<br>auparavant : compagnon du Maître<br>ensuite: Raimbaud de Caron est arrêté à Paris le vendredi 13 octobre 1307 par les officiers<br>du roi de France avec 137 autres templiers - dont le grand maître Jacques de Molay et les<br>dignitaires Hugues de Pairaud , Geoffoy de Charney et Geoffroy de Gonneville. Le dernier<br>commandeur de la terre du Royaume de Jérusalem meurt pendant le procès suite aux tortures<br>infligées par les inquisiteurs.<br>NOTES<br>1. Plusieurs historiens font d&#x27;Etienne de Hautetour, mentionné en 1249, et d&#x27;Etienne<br>d&#x27;Otricourt, mentionné en 1250, le seul et même Templier. L&#x27;inconvénient de ce<br>rapprochement est qu&#x27;il faudrait admettre que les Chroniques se soient trompées et que frère<br>Gille n&#x27;ait pas été commandeur de la Terre pendant la bataille de la Mansourah. Cela est très<br>possible car les chroniqueurs des croisades ne sont pas toujours au fait des grades de chaque<br>Templier. une autre possibilité serait qu&#x27;Etienne de Hautetour et Etienne d&#x27;Otricourt soient<br>deux chevaliers distincts. c&#x27;est cette dernière option que nous avons privilégiée.<br>2. Le Templier provençal Raimbaud de Caron est appelé Raimbaud II de Caromb. Plusieurs<br>historiens font de Raimbaud de Caron le parent du chevalier provençal Raimbaud Ier de<br>Caromb, qui fut maître de Hongrie en 1239 puis visiteur cismarin de 1240 à 1246 et enfin<br>maître en Provence de 1251 à 1263. Raimbaud de Caron, ou Raimbaud II de Caromb, avait<br>été reçu en 1265 comme frère du Temple dans la commanderie de Richerenches par le maître<br>---PAGE 68---<br>de Provence Roncelin de Fos, l&#x27;auteur présumé des statuts secrets de l&#x27;ordre des Templiers.<br>De plus, les seigneurs de Caromb étaient les vassaux de la très puissante maison seigneuriale<br>des Baux, qui en Provence dirigeait la confrérie des Rois Mages. Le chevalier provençal<br>Raimbaud II de Caromb, commandeur de la terre du royaume de Jérusalem, a tous les critères<br>d&#x27;un frère consolé, membre de la mystérieuse confrérie des Rois Mages. On remarque que le<br>blason de la cité de Caromb porte trois dés de pierres d&#x27;argent, symbole de trois pierres<br>taillées.<br>La cité de Caromb était située à proximité d&#x27;une ancienne carrière de pierres - Caromb, ou<br>Caron, signifiant en provençal &quot;grosse pierre&quot;, probablement en référence à la carrière. En<br>admirant le blason de la cité de Caromb, on peut se rappeler le sermon du chancelier de<br>l&#x27;église de Paris Pierre Le Mangeur (1164-1169) à propos du psaume CXXII 3 (121)<br>&quot;Jérusalem, bâtie comme une ville où tout ensemble fait corps.&quot; Ce sermon sied comme un<br>gant au Templier Raimbaud II de Caromb, commandeur de la terre du royaume de Jérusalem.<br>&quot; Dans l&#x27;édification d&#x27;une cité, trois éléments concourent. D&#x27;abord on extrait avec violence des<br>pierres de la carrière, avec des marteaux et des barres de fer, avec beaucoup de travail et de<br>sueur des hommes; ensuite avec le burin, la bipenne et la règle elles sont polies, égalisées,<br>taillées à équerre; et troisièmement elles sont mises à leur place par la main de l&#x27;artiste. De la<br>même façon, dans l&#x27;édification de la Jérusalem Céleste il faut distinguer trois phases: la<br>séparation, le nettoyage et la &quot;position&quot;. La séparation est violente, le nettoyage purgatoire, la<br>positon éternelle. Dans la première phase, l&#x27;homme est dans l&#x27;angoisse et l&#x27;affliction; dans la<br>seconde, dans la patience et l&#x27;attente; dans la troisième, dans la gloire et l&#x27;exultation. Dans la<br>première phase l&#x27;homme est criblé comme du grain, dans la seconde il est examiné comme<br>---PAGE 69---<br>l&#x27;argent; dans la troisième il est placé dans le trésor…&quot; (cité par Jacques Le Goff dans La<br>Naissance du Purgatoire, éditons Gallimard, 1981, p. 210)</div>
-        </details>
-        
-          </div>
-        </details>
-        
-
-        <details class="acc">
-          <summary>grands commandeurs de l&#x27;ordre</summary>
-          <div class="acc-body">
-            
-        <details class="mini">
-          <summary><span class="name">Guillaume de Roquefort</span> <span class="date">— 1244. Frère Guillermus de Rokaforti vicimagester domus militiae</span></summary>
-          <div class="mini-body">Templi, co-signataire le 25 novembre 1244 d&#x27;une lettre de Robert,<br>patriarche de Jérusalem et du légat du pape ainsi que d&#x27;autres prélats<br>anglais. Pendant cette période, Guillaume de Roquefort semble faire office<br>de maître par intérim après la défaite de la Forbie le 17 octobre 1244, qui a<br>vu la disparition du grand maître Armand de Périgord.<br>auparavant:<br>ensuite: Précepteur de la Selve<br>---PAGE 70---</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Etienne d&#x27;Otricourt</span> <span class="date">— 1250 . C&#x27;est suite à la terrible défaite à la Mansourah, avec la fin</span></summary>
-          <div class="mini-body">tragique du grand maître guillaume de Sonnac, que fut élu par le chapitre<br>Etienne d&#x27;Otricourt comme grand commandeur de l&#x27;ordre pour préparer<br>l&#x27;élection d&#x27;un nouveau grand maître.<br>Cette épisode se passe pendant la septième croisade, menée par le roi de<br>France Saint Louis. Saint Louis avait embarqué à Aigues-Mortes le 25 août<br>1248.<br>Le roi était accompagné du maréchal de l&#x27;ordre des Templiers Renaud de<br>Vichiers qui auparavant était le maître de la province templière de France.<br>La flotte française accosta sur l&#x27;île de Chypre le 17 décembre 1248.<br>Hélas pour les Templiers, le roi de France ainsi que son frère le comte<br>d&#x27;Artois, imbus de leurs personnes et jaloux de leurs prérogatives,<br>entendaient mener cette croisade selon leur bon vouloir - et cela même s&#x27;ils<br>n&#x27;avaient aucune expérience dans les affaires de Terre Sainte. quand le<br>---PAGE 71---<br>grand maître Guillaume de Sonnac proposa au roi de France de rencontrer<br>des émirs musulmans pour négocier ou former des alliances, celui-ci refusa<br>avec mépris tout pourparler. Il alla jusqu&#x27;à blâmer le maître du Temple, lui<br>interdisant de recevoir des émissaires turcs sans son autorisation expresse.<br>Le 19 mai 1249, une grande réunion des dignitaires du Temple se tint sous<br>la tente du commandeur de Jérusalem à Limassol. Le grand maître et les<br>dignitaires de l&#x27;ordre étaient plutôt dépités par l&#x27;attitude rigide voire agressive<br>du roi de France à leur égard. Seul le maréchal de l&#x27;ordre Renaud de Vichiers<br>se faisait l&#x27;avocat du monarque capétien qu&#x27;il semblait apprécier. Le premier<br>objectif de la septième croisade fut la prise de Damiette. Les capétiens<br>pensaient pouvoir facilement soumettre les égyptiens et ainsi tirer une gloire<br>éternelle qui serait saluée par tous à leur retour en Occident. Les premiers<br>événements semblaient leur donner raison, car les égyptiens, minés par des<br>conflits internes, n&#x27;opposèrent qu&#x27;une médiocre résistance dans la défense<br>de Damiette. Fort de ce succès facile, le frère du roi de France réussit à<br>convaincre saint Louis que le prochain objectif devait être Le Caire, la<br>capitale de l&#x27;Egypte - et ceci contre l&#x27;avis des Templiers et d&#x27;une bonne partie<br>des barons qui pensaient qu&#x27;ils fallait d&#x27;abord s&#x27;emparer du port d&#x27;Alexandrie<br>pour affaiblir les égyptiens et négocier la rétrocession de Jérusalem.<br>Les Templiers savaient pertinemment que l&#x27;objectif en Terre Sainte n&#x27;était<br>pas d&#x27;exterminer ses ennemis mais d&#x27;établir des rapports de force crédibles<br>---PAGE 72---<br>qui permettent une coexistence bien comprise. Projet politique qui ne dut pas<br>paraître assez sexy aux yeux des capétiens, qui rêvaient d&#x27;exploits<br>grandiloquents pour nourrir leurs ego surdimensionnés. C&#x27;est donc la pire<br>des solutions qui fut choisie, ce qui finalement entraîna la défaite de l&#x27;armée<br>française ainsi que la mort de 285 chevaliers du Temple à la Mansourah,<br>suivi trois jours plus tard de la mort du grand maître Guillaume de Sonnac.<br>Enorme gâchis, dû à l&#x27;incompétence de droit divin. C&#x27;est après ce désastre<br>qu&#x27;Etienne d&#x27;Otricourt fut élu grand commandeur de l&#x27;ordre afin d&#x27;organiser<br>l&#x27;élection d&#x27;un nouveau grand maître. C&#x27;est aussi après avoir vu mourir ses<br>frères que se place un incident concernant Etienne d&#x27;Otricourt qui restera<br>dans les annales de l&#x27;histoire de France. C&#x27;est le sénéchal Jean de Joinville,<br>acteur des événements, qui nous le raconte dans sa Vie de Saint Louis.<br>&quot;On commença le paiement de la rançon le samedi matin. On mit à le faire<br>le samedi et le dimanche, toute la journée jusqu&#x27;à la nuit, parce qu&#x27;on payait<br>à la balance, chacune valant dix mille livres. Le dimanche au soir, les gens<br>du roi qui faisaient le paiement lui firent savoir qu&#x27;il leur manquait trente mille<br>livres. Il n&#x27;y avait alors avec le roi que le roi de Sicile, le maréchal de France,<br>le Maître de la Trinité et moi. Tous les autres étaient à faire le paiement. Je<br>dis au roi qu&#x27;il serait bon qu&#x27;il envoyât chercher le Commandeur et le<br>maréchal du Temple, car le Maître était mort, pour leur demander de lui<br>prêter trente mille livres, afin de délivrer son frère. Le roi les envoya chercher<br>et me dit de leur parler. Quand j&#x27;eus fini, frère Etienne d&#x27;Otricourt, le<br>Commandeur du Temple, me répondit:<br>- &quot;Sire de Joinville, ce conseil que vous donnez n&#x27;est ni bon, ni<br>raisonnable, car vous savez que nous recevons les fonds en<br>commandite de telle manière que, d&#x27;après nos serments, nous ne les<br>pouvons remettre à personne, si ce n&#x27;est à ceux qui nous les ont<br>baillés.&quot;<br>Il y eut assez de dures et injurieuses paroles entre moi et lui. Alors, frère<br>Renaud de Vichiers, qui était Maréchal du Temple dit:<br>- &quot; Sire, laissez aller cette dispute entre le seigneur de Joinville et notre<br>Commandeur. Comme il vous l&#x27;a dit, nous ne pouvions rien bailler sans<br>être parjures. Lorsque le Sénéchal vous conseille de prendre, si nous<br>---PAGE 73---<br>ne voulons pas prêter, il ne dit pas là bien grande nouvelle. Vous en<br>ferez à votre volonté. Mais si vous prenez du nôtre, nous avons bien<br>assez du vôtre en Acre pour nous en dédommager.&quot;<br>Je dis au roi que j&#x27;irais, s&#x27;il le voulait. Il me le commanda. J&#x27;allai à la maitresse-<br>galère du Temple où était le trésor. Je demandais au Commandeur du<br>Temple de venir voir ce que j&#x27;allais prendre, mais il ne daigna pas le faire. Le<br>Maréchal dit qu&#x27;il viendrait voir quelle violence je lui ferais. Lorsque je fus<br>descendu auprès du trésor, je demandai au Trésorier du Temple qu&#x27;il me<br>baillât les clés d&#x27;une huche qui était devant moi. Mais lui me voyant maigre<br>et décharné par la maladie et dans l&#x27;habit que j&#x27;avais porté en prison, refusa<br>de m&#x27;en bailler aucune. J&#x27;aperçus une cognée qui gisait là, je la levai en<br>disant que j&#x27;en ferai la clé du roi. Lorsque le Maréchal vit ceci, il me prit par<br>le poing et me dit:<br>- &quot;Sire, nous voyons bien que c&#x27;est violence que vous nous faites. Nous<br>vous ferons bailler les clés.&quot;<br>Alors, il commanda au Trésorier de me les donner. Quand le Maréchal lui eut<br>dit qui j&#x27;étais, il en fut bien ébahi. Je trouvai que ce coffre était à Nicolas de<br>Choisy, un sergent du roi. Je jetai dehors l&#x27;argent que j&#x27;y trouvai, puis allai<br>m&#x27;asseoir à la proue du bateau qui m&#x27;avait amené.&quot; (Les Templiers, ces<br>inconnus, pp.294-295)<br>Au final, ce sera Renaud de Vichiers qui sera élu grand maître de l&#x27;ordre des<br>Templiers, mais jugé trop proche du roi de France il sera démis de ses<br>fonctions par le chapitre général en 1252.<br>auparavant:<br>ensuite:</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Guillaume de Pontons</span> <span class="date">— 1273. Chronique Eraclès. Frère Guillaume de Poncon qui avoit tenu</span></summary>
-          <div class="mini-body">lieu de maistre et Bertrand de Fos débarquent dans le sud de l&#x27;Italie pour<br>---PAGE 74---<br>avertir le maître des Pouilles Guillaume de Beaujeu qu&#x27;il vient d&#x27;être élu grand<br>maître par le chapitre du Temple le 13 mai 1273. Guillaume de Ponton selon<br>toutes probabilités a été élu grand commandeur de l&#x27;ordre après la mort du<br>grand maître Thomas Bérard le 23 mars 1273. La présence de Bertrand de<br>Fos, maître de la province de Chypre, n&#x27;est pas anodine au moment où le<br>grand commandeur de l&#x27;ordre remit la bourse contenant la boule des grands<br>maîtres de l&#x27;ordre des Templiers à Guillaume de Beaujeu.<br>On se souvient qu&#x27;après l&#x27;élection du grand maître Thomas Bérard, les<br>compagnons du maître qui souscrivirent lors d&#x27;un des premiers actes émis<br>par Thomas Bérard en 1252 sont: Roncelin de Fos, maître de la province<br>d&#x27;Angleterre, accompagné de Geoffroy de Fos, maître de la province de<br>Tripoli. La maison provençale des seigneurs de Fos forme un clan puissant<br>au sein du chapitre général des Templiers. N&#x27;oublions pas que Roncelin de<br>Fos est considéré comme l&#x27;auteur présumé des statuts secrets de l&#x27;ordre des<br>Templiers. La présence de Bertrand de Fos lors de la remise du sceau du<br>grand maître à Guillaume de Beaujeu a deux significations. La première est<br>que le clan provençal ne s&#x27;est pas opposé à son élection malgré la réputation<br>de Guillaume de Beaujeu d&#x27;être proche de la monarchie capétienne. La<br>deuxième est de signifier au nouveau grand maître que l&#x27;influence des<br>provençaux sur les décisions du chapitre général reste incontournable.<br>D&#x27;ailleurs à ce propos, le grand maître Guillaume de Beaujeu ne cherchera<br>pas à réduire cette influence. Bertrand de Fos, maître de la province de<br>Chypre le restera jusqu&#x27;en 1290. Guillaume de Beaujeu ne cherchera pas<br>non plus à les promouvoir, comme le fera Jacques de Molay qui nommera le<br>chevalier provençal Raimbaud de Caron, reçu dans l&#x27;ordre en 1265 par<br>Roncelin de Fos, comme commandeur de la terre du royaume de Jérusalem.<br>Avec Guillaume de Beaujeu, c&#x27;est plutôt le statu quo vis-à-vis de ces<br>Templiers un peu particuliers.<br>auparavant:<br>ensuite<br>---PAGE 75---</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Thibaud Gaudin</span> <span class="date">— 1291</span></summary>
-          <div class="mini-body">auparavant:<br>ensuite: Grand Maître</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Jacques de Molay</span></summary>
-          <div class="mini-body">Nom: Jacques de Molay<br>dates: 1292. Selon le Templier limousin Hugues de Faur interrogé lors du procès des<br>Templiers le 12 mai 1311 à Paris, guillaume de Molay aurait été fait grand commandeur de<br>l&#x27;ordre avant d&#x27;être élu grand maître. Voici sa déposition que donne Alain Demurger dans son<br>ouvrage Jacques de Molay page 101:<br>&quot;Comme il y avait discorde dans le chapitre qui se tint outremer pour la création du maître et<br>que les frères de la province de Limousin et d&#x27;Auvergne qui constituaient la majeure partie du<br>couvent voulaient avoir comme maître frère Hugues de Pairaud et la minorité le dit maître<br>[c&#x27;est-à-dire Jacques de Molay], le dit maître jura devant le maître des hospitaliers qui alors<br>était et devant le seigneur Otton de Grandson, chevalier, et de plusieurs autres que lui-même<br>consentait au choix du dit frère Hugues et qu&#x27;il ne voulait pas être maître. Et comme cette<br>majorité avait consenti qu&#x27;il fut fait grand commandeur, ce qu&#x27;il était usage de faire après la<br>mort du maître, le dit maître [Jacques de Molay], comme il y eut des tractations après pour<br>faire le dit frère Hugues maître, leur fit savoir que, du moment qu&#x27;il l&#x27;avait fait &quot;cape&quot;, c&#x27;est-à-<br>dire grand commandeur, ils le feraient &quot;capuchon&quot; c&#x27;est-à-dire grand maître, parce que, qu&#x27;ils<br>le veuillent ou non il serait maître, et ainsi, par pression, il en fut fait.&quot;<br>auparavant:<br>ensuite: Grand Maître</div>
-        </details>
-        
-          </div>
-        </details>
-        
-
-        <details class="acc">
-          <summary>Visiteurs Cismarins de l&#x27;ordre des</summary>
-          <div class="acc-body">
-            
-        <details class="mini">
-          <summary><span class="name">Gautier de Brisebarre dit ( de Beyrouth)</span></summary>
-          <div class="mini-body">Nom : Gautier de Brisebarre dit ( de Beyrouth)<br>dates : 1166. Frère Walterus Brisebarre omnium fratrum Jerosolimitani templi qui sunt citra<br>mare dei nutu primatum obtinens, cité dans une charte pour l&#x27;abbé de Saint Silvin à Auchy en<br>Artois.<br>auparavant : Maitre de France<br>ensuite : Commandeur de la terre du royaume de Jérusalem</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Geoffroy Foucher</span></summary>
-          <div class="mini-body">Nom : Geoffroy Foucher<br>dates : 1168-1172. Frère Gaufridus Fulcherii domorum cismarinarum templi procurator,<br>souscrit un accord en 1168, entre l&#x27;ordre du temple et le chapitre de Saint Etienne de Bourges.<br>auparavant : Commandeur de la terre du Royaume de Jérusalem<br>---PAGE 77---<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Albert de Vaux</span></summary>
-          <div class="mini-body">Nom : Albert de Vaux<br>dates : 1173-1174<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Bausoin de Gand</span></summary>
-          <div class="mini-body">Nom : Bausoin de Gand<br>dates : 1176-1178<br>auparavant : précepteur de Flandre<br>ensuite : précepteur de Hainaut</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Aimé d&#x27;Aix</span></summary>
-          <div class="mini-body">Nom : Aimé d&#x27;Aix<br>dates : 1179-1188<br>auparavant : lieutenant du précepteur de Flandre<br>ensuite : Sénéchal</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Eluard de Neuville</span></summary>
-          <div class="mini-body">Nom : Eluard de Neuville<br>dates : 1188-1190<br>auparavant : précepteur de Ponthieu<br>ensuite : précepteur de Flandre</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Gilbert d&#x27;Erail</span></summary>
-          <div class="mini-body">Nom : Gilbert d&#x27;Erail<br>dates : 1190-1193. Sceau utilisé par frère Gislebertus Herail cistra marinorum humilis<br>procurator, qui approuve un accord passé entre les templiers de bure et les moines de Grancey,<br>à propos de leurs manants respectifs, prenant effet le 25 décembre 1190.<br>---PAGE 78---<br>auparavant : Maître d&#x27;Aragon<br>ensuite : Maître de France</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Pons Rigaud</span></summary>
-          <div class="mini-body">Nom : Pons Rigaud<br>dates : 1195-1198<br>auparavant : Maître d&#x27;Aragon<br>ensuite : Maître des Pouilles</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Aimé d&#x27;aix</span></summary>
-          <div class="mini-body">Nom : Aimé d&#x27;aix<br>dates : 1202-1206. Sceau utilisé par frère Amio de Aiis, humilis citra mare dodus milicie<br>temple minister, qui approuve un accord passé au sujet d&#x27;un moulin à Montaigu. vers 1202.<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Pons Rigaud</span></summary>
-          <div class="mini-body">Nom : Pons Rigaud<br>---PAGE 79---<br>dates : 1207-1208<br>auparavant : Maître d&#x27;Aragon<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Guillaume Oeil-de-Boeuf</span></summary>
-          <div class="mini-body">Nom : Guillaume Oeil-de-Boeuf<br>dates : 1209-1211<br>auparavant : Maître du Poitou<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Guillaume Cadeil</span></summary>
-          <div class="mini-body">Nom : Guillaume Cadeil<br>dates : 1214-1216. Frère Guillelmo Cadelli, magister cismare, signe une trêve entre la France<br>et l&#x27;Angleterre à Chinon, le 28 septembre 1214.<br>auparavant : Maître d&#x27;Angleterre<br>ensuite : Commandeur de la terre du Royaume de Jérusalem</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Alain Martel</span></summary>
-          <div class="mini-body">Nom : Alain Martel<br>dates : 1219(?)-1221<br>auparavant :<br>ensuite : Maître d&#x27;Angleterre</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Hugues de Montlaur</span> <span class="date">— 1236. Omnia supradicta per fratre nostros et per dominum Hugonem de Monte Lauro</span></summary>
-          <div class="mini-body">magistrum citra mare faciem comprobari et sigillé ejusdem magistri firmari. Acte fait à Arles,<br>le 16 décembre 1236, à propos d&#x27;un accord entre l&#x27;Archevêque Jean d&#x27;Arles et le précepteur du<br>temple de Saint Gilles Jean de Castroboc. Hugues de Montlaur cumule la fonction de visiteur<br>cismarin avec celle de Maître d&#x27;Aragon.<br>auparavant :<br>---PAGE 80---<br>ensuite : Maréchal</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Pierre de Saint-Romain</span></summary>
-          <div class="mini-body">Nom : Pierre de Saint-Romain<br>dates : 1238-1241. Frère Petrus de sancto Romano humilis preceptor domus milicie templi in<br>Francia et in partibus cismarinis, souscrit un acte pour les cisterciens de la Ferté. Chalon-sur-<br>Saône, juillet 1238.<br>auparavant : Maître de France<br>ensuite : Commandeur de la Terre du Royaume de Jérusalem</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Raimbaud de Caromb</span></summary>
-          <div class="mini-body">Nom : Raimbaud de Caromb<br>dates : 1246(?)<br>auparavant : Maître de Hongrie<br>ensuite : Maître de Provence</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Renaud de Vichiers</span></summary>
-          <div class="mini-body">Nom : Renaud de Vichiers<br>dates : 1247-1249. Sceau utilisé par Regnaud de Vichier sur un acte de 1255.<br>auparavant : Maître de France<br>ensuite : Maréchal<br>---PAGE 81---</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Hugues de Jouy</span></summary>
-          <div class="mini-body">m : Hugues de Jouy<br>dates : 1251(?)<br>auparavant :<br>ensuite : Maréchal</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Constant de Hoverio</span> <span class="date">— ?</span></summary>
-          <div class="mini-body">auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Guy de Basenville</span></summary>
-          <div class="mini-body">Nom : Guy de Basenville<br>dates : 1257-1262. Frère Guido de basenvilla tenens locus magistri militis templi et visitor in<br>partibus cismarinis, souscrit un accord entre les templiers les moines de Plesseio Grumondi,<br>Paris, le 9 janvier 1259.<br>auparavant : Commandeur de la terre du Royaume de Jérusalem<br>ensuite : Maître du Poitou</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Humbert de Pairaud</span></summary>
-          <div class="mini-body">Nom : Humbert de Pairaud<br>dates : 1265-1269 Il cumule la fonction de Visiteur Cismarin et de Maître du Poitou<br>auparavant : Maître de France<br>ensuite : Maître d&#x27;Angleterre</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">François de Bort</span></summary>
-          <div class="mini-body">Nom : François de Bort<br>dates : 1270-1273<br>auparavant : Maître du Poitou<br>ensuite : Maître de France<br>---PAGE 82---</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Hugues de Raoul</span> <span class="date">— 1273</span></summary>
-          <div class="mini-body">auparavant : Précepteur de Toulouse<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Pons de Brozet</span></summary>
-          <div class="mini-body">Nom : Pons de Brozet<br>dates : 1274-1280<br>auparavant : Précepteur de Carcassonne et Razès<br>ensuite : Maître de Provence</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Geoffroy de Vichier</span></summary>
-          <div class="mini-body">Nom : Geoffroy de Vichier<br>dates : 1286-1293. Sceau utilisé par Geoffroy de Vicherio, visiteur des maisons du temple.<br>1288. Paris, archives nationales supplément 4958, n°17.<br>auparavant : Lieutenant du Maître de France<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Hugues de Pairaud</span></summary>
-          <div class="mini-body">Nom : Hugues de Pairaud<br>dates : 1293-1305. Sceau utilisé par frère Hugues de Péraut, général visiteur des maisons de la<br>chevalerie dou temple ès partie deça la mer, qui passe un accord avec Guillaume de Chalon,<br>comte d&#x27;Auxerre et de Tonnerre. Janvier 1298. Jusqu&#x27;en 1300, Hugues de Pairaud a cumulé la<br>fonction de Visiteur Cismarin et de maître de France.<br>---PAGE 83---<br>Nous possédons une lettre d&#x27;Hugues Pairaud, visiteur cismarin, adressée au Templier de la<br>commanderie de Coulommiers, datée de juillet 1302, confirmant le don d&#x27;une maison et<br>l&#x27;obligation à payer le cens qui lui est attaché.<br>&quot;A tous ceux que ces présentes lettres verront et auront Frères Hugues de Peraud général<br>visiteur des maisons de la chevalerie du temple deçà mer salut en notre seigneur. Sachent<br>tous que selon le regard de la divine pitié entendez la dévote religion et honnête vie en quelle<br>les frères et les sœurs de la maison dieu — (Maison-Dieu ; était l&#x27;ancien nom de la<br>commanderie de Coulommiers) persévèrent et et les œuvres de miséricorde faites chaque jour<br>en cette même maison Dieu assise à Coulomiers du conseil et de l&#x27;assentiment de nos frères<br>donnons au-dessus dits frères et sœurs de la dite maison Dieu présent et avenir faculté octroi<br>et plein pouvoir par la teneur de ces lettres que ils tiennent nantis et possèdent pour toujours<br>sans rappel une maison située à Coulommiers mouvant de la censive de notre maison dessus<br>Coulommiers à quatre deniers tournois petit de cens accoutumez à payer chaque an en notre<br>maison dessus dite au jour de fête saint Remi ou chef d&#x27; Octobre. Joignant d&#x27;une part à la<br>dite maison Dieu et d&#x27;autre part à la maison Simon Paillart affrontant par devant au chemin<br>le roi et par derrière à la dite maison Dieu laquelle maison que jadis Jacques de Patras laissa<br>pour Dieu et en aumône aux frères et aux sœurs dessus dit. Sauf tant qu&#x27; ils seront tenus à<br>---PAGE 84---<br>rendre et à payer chaque an les cens dessus dit au terme et au lieu dessus dit sous la peine de<br>la commune amende de défaut de payer du cens. Et promettons en bonne foi de tenir<br>fermement le dit octroi en la manière dessus dite sans rappel et sans contredit. En témoignage<br>des quelles choses nous avons donné aux dits frères et sœurs ces présentes lettres scellées de<br>notre sceau faites en l&#x27;an de notre Seigneur mil trois cent et deux au mois de juillet.&quot;<br>auparavant : Maître de France<br>ensuite : Maître de France</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Gérard de Villiers</span></summary>
-          <div class="mini-body">Nom : Gérard de Villiers<br>dates : 1305-1312<br>auparavant : Maître de France<br>ensuite : Le 22 septembre 1307, avertis de l&#x27;arrestation imminente des Templiers, le Visiteur<br>Cismarin Gérard de Villiers et quarante chevaliers emportent les coffres du trésor général de<br>l&#x27;ordre chargés sur dix chevaux. La destination la plus probable de cet équipage reste la<br>commanderie templière de La Rochelle où le trésor du Temple dut être embarqué sur un navire<br>des Templiers, escorté par les galères de combat de l&#x27;ordre. A partir de là, la milice des Pauvres<br>Chevaliers du Christ du Temple de Salomon finira par s&#x27;en remettre à la miséricorde de Sainte<br>Marie, patronne de leur religion, en attendant qu&#x27; un jour leur soit enfin rendu justice.</div>
-        </details>
-        
-          </div>
-        </details>
-        
-
-        <details class="acc">
-          <summary>drapiers de l&#x27;ordre des Templiers</summary>
-          <div class="acc-body">
-            
-        <details class="mini">
-          <summary><span class="name">Pierre d&#x27;Aramont</span> <span class="date">— 1241. Pierre d&#x27;Aramont, souscrit comme drapier de l&#x27;ordre, le 18 novembre 1241, la</span></summary>
-          <div class="mini-body">cession de Maraclée à l&#x27;ordre de l&#x27;Hôpital.<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Aimery de Jaureo</span> <span class="date">— mentionné en 1249</span></summary>
-          <div class="mini-body">auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Richard Le Loup</span> <span class="date">— 1262.  Richard le Loup, souscrit comme Drapier de l&#x27;ordre, le 31 mai 1262, un accord</span></summary>
-          <div class="mini-body">conclu à Acre entre Thomas Bérard, Grand-Maître du Temple, et Hugues de Revel, Grand-<br>Maître de l&#x27;Hôpital, relativement à certains casaux.<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Guillaume de Molay</span></summary>
-          <div class="mini-body">Nom : Guillaume de Molay<br>---PAGE 86---<br>dates : 1272-1277. Guillelmo Malart, souscrit comme Drapier de l&#x27;ordre, le 2 juin 1271, un acte<br>concernant la remise au Grand-Maître de l&#x27;Hôpital, de 44 titres de propriétés déposés entre<br>ses mains par Guy de Gibelet.<br>auparavant : Maréchal<br>ensuite : Maître de France</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Pierre de Sévry</span></summary>
-          <div class="mini-body">Nom : Pierre de Sévry<br>dates : 1283-1285<br>auparavant :<br>ensuite : Maréchal</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Gaucher de Liencourt</span> <span class="date">— mentionné en 1292, avec le titre de lieutenant du Drapier</span></summary>
-          <div class="mini-body">auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Adam de Cronvalle</span> <span class="date">— mentionné en 1300</span></summary>
-          <div class="mini-body">auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Geoffroy de Charney</span> <span class="date">— mentionné en 1304</span></summary>
-          <div class="mini-body">auparavant :<br>ensuite : précepteur de Normandie. Il est brûlé vif à Paris le 18 mai 1314, le même jour que<br>le Grand Maître Jacques de Molay.<br>---PAGE 87---</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Jean de Vila</span></summary>
-          <div class="mini-body">Nom : Jean de Vila<br>dates : 1307-1312<br>auparavant :<br>ensuite : fait prisonnier à Chypre le 1er juin 1308. Il est interrogé à Chypre le 28 mai 1310</div>
-        </details>
-        
-          </div>
-        </details>
-        
-
-        <details class="acc">
-          <summary>Turcopliers de l&#x27;ordre des</summary>
-          <div class="acc-body">
-            
-        <details class="mini">
-          <summary><span class="name">Frère Ahenric</span></summary>
-          <div class="mini-body">Nom : Frère Ahenric<br>dates : 1184-1187<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Hervé de Lyon</span> <span class="date">— mentionné en 1262.  Hervi de Lyon était turcoplier de l&#x27; ordre du Temple quand, le 31</span></summary>
-          <div class="mini-body">mai 1262, il souscrit un accord intervenu entre Thomas Bérart, Grand Maître des templiers, et<br>les Hospitaliers de Saint-Jean par suite de la médiation de l&#x27;Evêque de Bethléem, légat du<br>Saint Siège, de Hartman de Heldrungen, Grand Commandeur des Teutoniques, de Geoffroy<br>de Sargines, Baile du royaume de Jérusalem, et de Guillaume du Boutron, Connétable de ce<br>royaume, au sujet des revenus du casal de Gabor, près d&#x27;Acre, de ceux du casal de la Fève<br>en Galilée et du casal de Damour en la seigneurie de Sagette.<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Ponce de Gusanz</span></summary>
-          <div class="mini-body">Nom: Ponce de Gusanz<br>dates : 1268-1273. Pos de Gusans est mentionné dans la Règle de Barcelone (p. 212)<br>auparavant:<br>ensuite:</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Frère Thibaud</span> <span class="date">— mentionné en 1277.  Frère Tibaldo, turcoplier, souscrit, l&#x27;accord conclu le 1 juillet 1277</span></summary>
-          <div class="mini-body">au casal de la sommellerie du temple entre Jean de Montfort, seigneur de Tyr, et le Doge de<br>Venise.<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Guillaume de la Tour</span></summary>
-          <div class="mini-body">Nom : Guillaume de la Tour<br>dates : 1292-1293<br>auparavant :<br>ensuite : Guillaume de la Tour est tué d&#x27;un carreau d&#x27;arbalète en juillet 1293 pendant la bataille<br>navale qui opposa quatre galères vénitiennes se rendant à Chypre - sur lesquelles se trouvait<br>notre Turcoplier - contre une flotte de galères génoises rencontrées en chemin. La supériorité<br>numérique des galères génoises sera fatale aux vénitiens et à Guillaume de la Tour qui se<br>---PAGE 89---<br>rendait à Chypre pour armer des galères du Temple. Il meurt dans un épisode de la guerre<br>que se mènent les deux cités maritimes pour le contrôle des ports de la Méditerranée.</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Damien de Timor</span></summary>
-          <div class="mini-body">Nom : Damien de Timor<br>dates : 1300-1302<br>auparavant : précepteur d&#x27;Ultramort<br>ensuite : précepteur de Barbera</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Bertrand de Gourdon</span></summary>
-          <div class="mini-body">Nom : Bertrand de Gourdon<br>dates : 1304-1312<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-          </div>
-        </details>
-        
-
-        <details class="acc">
-          <summary>sous-maréchaux</summary>
-          <div class="acc-body">
-            
-        <details class="mini">
-          <summary><span class="name">Raymond de Barberan</span></summary>
-          <div class="mini-body">Nom : Raymond de Barberan<br>dates : 1292<br>---PAGE 90---<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Piere de Aruyes (ou Druyes)</span></summary>
-          <div class="mini-body">Nom : Piere de Aruyes (ou Druyes)<br>dates : 1304<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-          </div>
-        </details>
-        
-
-        <details class="acc">
-          <summary>gonfanoniers de l&#x27;ordre des</summary>
-          <div class="acc-body">
-            
-        <details class="mini">
-          <summary><span class="name">Raymond d&#x27;Argentan</span> <span class="date">— 1237</span></summary>
-          <div class="mini-body">auparavant:<br>ensuite: Mort au combat au siège de trapezac. En juin 1237, lors du siège de la<br>forteresse de Trapezac, surpris par une contre-attaque des Turcs, les Templiers se<br>virent très vite encerclés par une armée innombrable. Le gonfanonier Renaud<br>d&#x27;Argentan, anglais d&#x27;origine, au milieu de la mêlée tint haut levé l&#x27;étendard de la<br>milice le gonfanon baucent. Assailli par les ennemis, c&#x27;est avec une admirable<br>obstination qu&#x27;il garda sa lance levée, le gonfanon déployé - donnant la force aux<br>Templiers de résister jusqu&#x27;à leur dernier souffle. Ayant les jambes brisées, ce n&#x27;est<br>que lorsque ses ennemis parvinrent à lui briser les bras à coups de masses d&#x27;armes<br>que Raymond d&#x27;Argentan céda à l&#x27;inévitable issue.<br>---PAGE 91---</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Simon Picard</span> <span class="date">— 1273</span></summary>
-          <div class="mini-body">auparavant:<br>ensuite:</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Pierre Borden</span></summary>
-          <div class="mini-body">Nom: Pierre Borden<br>dates: 1307-1308<br>auparavant:<br>ensuite:</div>
-        </details>
-        
-          </div>
-        </details>
-        
-
-        <details class="acc">
-          <summary>infirimiers de l&#x27;ordre des Templiers</summary>
-          <div class="acc-body">
-            
-        <details class="mini">
-          <summary><span class="name">Jacques de Vallebrune</span></summary>
-          <div class="mini-body">Nom: Jacques de Vallebrune<br>dates: 1307-1308<br>auparavant:<br>ensuite:</div>
-        </details>
-        
-          </div>
-        </details>
-        
-
-        <details class="acc">
-          <summary>trésoriers de l&#x27;ordre des Templiers</summary>
-          <div class="acc-body">
-            
-        <details class="mini">
-          <summary><span class="name">Geoffroy de Tour</span></summary>
-          <div class="mini-body">Nom: Geoffroy de Tour<br>dates : 1207-1213. G. Turonensis est mentionné comme Trésorier en 1207 dans l&#x27;<br>acte d&#x27;accord de mariage entre Hugues de Lusignan, Roi de Chypre et Alix de<br>Champagne.<br>auparavant:<br>ensuite:</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">frère Bienvenu</span> <span class="date">— 1262. Frère Bienvenu Trésorier du temple, souscrit, ainsi que les grands</span></summary>
-          <div class="mini-body">officiers de l&#x27;ordre, le 18 décembre 1262 un accord conclu avec l&#x27; ordre de l&#x27;Hôpital<br>de Saint-Jean, à propos du casal de Alme. (archive de l&#x27;ordre de Malte.)<br>auparavant:<br>ensuite:</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Martin Le Lou</span> <span class="date">— 1292</span></summary>
-          <div class="mini-body">auparavant:<br>ensuite:</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Pierre de Castillon</span> <span class="date">— 1305</span></summary>
-          <div class="mini-body">auparavant:<br>---PAGE 93---<br>ensuite:</div>
-        </details>
-        
-
-        <details class="mini">
-          <summary><span class="name">Frère Albert</span></summary>
-          <div class="mini-body">Nom : Frère Albert<br>dates : 1308-1312<br>auparavant :<br>ensuite :</div>
-        </details>
-        
-          </div>
-        </details>
-        
-
-        <details class="acc">
-          <summary>Commandeurs de la voûte</summary>
-          <div class="acc-body">
-            
-        <details class="mini">
-          <summary><span class="name">Guillaume d&#x27;Ourenc</span> <span class="date">— 1292</span></summary>
-          <div class="mini-body">auparavant:<br>ensuite:</div>
-        </details>
-        
-          </div>
-        </details>
-        
-          </div>
-        </details>
-
-        <details class="acc">
-          <summary>Répertoire des commanderies (table filtrable)</summary>
-          <div class="acc-body">
-            <div class="tools">
-              <div class="search">
-                <input id="q" type="search" placeholder="Filtrer (ex : France, Tomar, Figeac, commanderie, chapelle…)" autocomplete="off">
-              </div>
-            </div>
-            <div style="height:10px"></div>
-            <table aria-label="Répertoire des commanderies">
-              <thead>
-                <tr>
-                  <th>Pays</th>
-                  <th>Région / Province</th>
-                  <th>Lieu</th>
-                  <th>Type / note</th>
-                </tr>
-              </thead>
-              <tbody id="rows"></tbody>
-            </table>
-            <!--
-              IMPORTANT (non visible sur le site) :
-              Pour ajouter "toutes les commanderies", collez ici vos entrées dans COMMANDERIES_DATA
-              au format : { "pays":"", "region":"", "lieu":"", "type":"" }
-            -->
-          </div>
-        </details>
-
-        <div class="bottom">
-          <div class="tabs">
-            <a class="tab" href="index.html">Accueil</a>
-            <a class="tab" href="qui-sommes-nous.html">Qui sommes‑nous</a>
-            <a class="tab" href="evocation-historique.html">Évocation historique</a>
-            <a class="tab" href="vocation.html">Vocation</a>
-            <a class="tab" href="contact.html">Contact</a>
-          </div>
-        </div>
-
+  <div class="frame-fixed" aria-hidden="true"></div>
+
+  <!-- Menu 3 points -->
+  <div class="top-menu" aria-label="Menu du site">
+    <details>
+      <summary title="Menu">⋯</summary>
+      <div class="menu-panel" role="menu" aria-label="Navigation">
+        <a href="index.html"> Accueil</a>
+        <a href="quinoussommes.html"> Qui nous sommes</a>
+        <a href="histoire.html"> Notre histoire</a>
+        <a href="vocation.html"> Vocation historique</a>
+        <a href="activites.html"> Activités</a>
+        <a href="adhesion.html"> Adhésion</a>
+        <a href="commanderies.html"> Commanderies</a>
+        <a href="ordres-historiques.html"> Ordres historiques</a>
+        <a href="faq.html"> FAQ</a>
+        <a href="cotisations.html"> Cotisations</a>
+        <a href="assurance.html"> Assurance</a>
+        <a href="boutique.html"> Boutique</a>
+        <a href="statuts.html"> Statuts</a>
+        <a href="contact.html"> Contact</a>
+        <a href="mentions.html"> Informations officielles</a>
+        <a href="cookies.html"> Cookies</a>
       </div>
+    </details>
+  </div>
+
+  <div class="viewport-scroll">
+    <div class="container">
+
+      <div class="sceau-box">
+        <img src="sceau-osd9tdj.PNG" alt="Sceau officiel de l’O.S.D.9.T.D.J.">
+      </div>
+
+      <h1>Commanderies & dignitaires</h1>
+
+      <div class="silver-box">
+        <p>
+          Cette page présente des repères <strong>historiques</strong> sur l’Ordre du Temple (XIIᵉ–XIVᵉ siècle) :
+          <strong>liste complète des Grands Maîtres</strong>, principales fonctions (offices), et une carte indicative
+          de quelques pôles de commanderies en <strong>Occident</strong> et en <strong>Orient</strong>.
+        </p>
+        <div class="silver-sep"></div>
+        <p class="note">
+          Il s’agit d’un contenu culturel et documentaire. Les listes de commanderies sont, par nature,
+          <strong>non exhaustives</strong> : l’implantation templière fut très vaste et évolutive.
+        </p>
+      </div>
+
+      <h2>1 – Liste complète des Grands Maîtres (1118–1314)</h2>
+
+      <div class="silver-box">
+        <table aria-label="Liste des Grands Maîtres des Templiers">
+          <thead>
+            <tr>
+              <th>Grand Maître</th>
+              <th class="col-mid">Mandat</th>
+              <th class="col-small">Origine / remarque</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Hugues de Payns</strong></td>
+              <td>1118–1136</td>
+              <td>Champagne (France)</td>
+            </tr>
+            <tr>
+              <td><strong>Robert de Craon</strong></td>
+              <td>1136–1147</td>
+              <td>Anjou (France)</td>
+            </tr>
+            <tr>
+              <td><strong>Evrard des Barres</strong></td>
+              <td>1147–1152</td>
+              <td>Champagne (France)</td>
+            </tr>
+            <tr>
+              <td><strong>Bernard de Tremelay</strong></td>
+              <td>1152–1153</td>
+              <td>Franche-Comté (France)</td>
+            </tr>
+            <tr>
+              <td><strong>André de Montbard</strong></td>
+              <td>1153–1156</td>
+              <td>Bourgogne (France)</td>
+            </tr>
+            <tr>
+              <td><strong>Bertrand de Blanquefort</strong></td>
+              <td>1156–1169</td>
+              <td>Bordelais / Gascogne (France)</td>
+            </tr>
+            <tr>
+              <td><strong>Philippe de Milly</strong></td>
+              <td>1169–1171</td>
+              <td>Terre sainte (royaume de Jérusalem)</td>
+            </tr>
+            <tr>
+              <td><strong>Eudes de Saint-Amand</strong></td>
+              <td>1171–1180</td>
+              <td>Provence (France)</td>
+            </tr>
+            <tr>
+              <td><strong>Arnaud de Toroge</strong></td>
+              <td>1181–1184</td>
+              <td>Catalogne (Couronne d’Aragon)</td>
+            </tr>
+            <tr>
+              <td><strong>Gérard de Ridefort</strong></td>
+              <td>1185–1189</td>
+              <td>Flandre</td>
+            </tr>
+            <tr>
+              <td><strong>Robert de Sablé</strong></td>
+              <td>1191–1193</td>
+              <td>Maine (France)</td>
+            </tr>
+            <tr>
+              <td><strong>Gilbert Hérail</strong></td>
+              <td>1194–1200</td>
+              <td>Aragon</td>
+            </tr>
+            <tr>
+              <td><strong>Philippe du Plessis</strong></td>
+              <td>1201–1209</td>
+              <td>Anjou (France)</td>
+            </tr>
+            <tr>
+              <td><strong>Guillaume de Chartres</strong></td>
+              <td>1210–1219</td>
+              <td>Chartres (France)</td>
+            </tr>
+            <tr>
+              <td><strong>Pierre de Montaigu</strong></td>
+              <td>1219–1232</td>
+              <td>Languedoc / Occitanie (France)</td>
+            </tr>
+            <tr>
+              <td><strong>Armand de Périgord</strong></td>
+              <td>1232–1244</td>
+              <td>Périgord (France)</td>
+            </tr>
+            <tr>
+              <td><strong>Guillaume de Sonnac</strong></td>
+              <td>1245–1250</td>
+              <td>Rouergue (France)</td>
+            </tr>
+            <tr>
+              <td><strong>Renaud de Vichiers</strong></td>
+              <td>1250–1256</td>
+              <td>Champagne (France)</td>
+            </tr>
+            <tr>
+              <td><strong>Thomas Bérard</strong></td>
+              <td>1256–1273</td>
+              <td>Angleterre (selon plusieurs sources)</td>
+            </tr>
+            <tr>
+              <td><strong>Guillaume de Beaujeu</strong></td>
+              <td>1273–1291</td>
+              <td>Beaujolais (France)</td>
+            </tr>
+            <tr>
+              <td><strong>Thibaud Gaudin</strong></td>
+              <td>1291–1292</td>
+              <td>— (souvent indiqué originaire de Provence)</td>
+            </tr>
+            <tr>
+              <td><strong>Jacques de Molay</strong></td>
+              <td>1292–1314</td>
+              <td>Franche-Comté (France)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="silver-sep"></div>
+
+        <p class="note">
+          Note : certains auteurs mentionnent aussi des périodes <strong>intermédiaires</strong> ou <strong>contestées</strong>
+          (ex. « Richard de Bures ») selon les corpus et méthodes de reconstitution. Lorsque ces attributions ne font
+          pas consensus, elles sont généralement signalées comme disputées.
+        </p>
+      </div>
+
+      <h2>2 – Offices et dignitaires (repères)</h2>
+
+      <div class="silver-box">
+        <p>
+          L’Ordre du Temple disposait d’une organisation centralisée, avec des offices au service de la conduite
+          militaire, de l’administration, de l’intendance et des commanderies.
+        </p>
+        <div class="silver-sep"></div>
+        <ul>
+          <li><strong>Sénéchal</strong> : coordination interne et administration au plus proche du Grand Maître.</li>
+          <li><strong>Maréchal</strong> : organisation militaire (discipline, logistique, cavalerie, équipement).</li>
+          <li><strong>Drapier</strong> : gestion des vêtements, de l’équipement et de l’intendance matérielle.</li>
+          <li><strong>Commandeur de la Terre (Terre sainte)</strong> : gestion territoriale et logistique en Orient.</li>
+          <li><strong>Commandeurs provinciaux</strong> : supervision des maisons et commanderies dans les provinces d’Occident.</li>
+          <li><strong>Turcopolier</strong> : commandement des turcopoles (troupes auxiliaires locales), selon les périodes.</li>
+          <li><strong>Visiteur / Inspecteur</strong> : contrôle des maisons, des comptes et de la discipline interne.</li>
+        </ul>
+        <div class="silver-sep"></div>
+        <p class="note">
+          Les intitulés et périmètres ont varié selon les époques et les régions. L’objectif ici est de donner un
+          aperçu clair et lisible des fonctions principales.
+        </p>
+      </div>
+
+      <h2>3 – Carte indicative et pôles de commanderies</h2>
+
+      <div class="map-wrap" aria-label="Carte (OpenStreetMap) Europe et Levant">
+        <iframe
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-11.2%2C33.0%2C43.8%2C51.5&amp;layer=mapnik"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Carte Europe – Méditerranée – Levant (indicative)">
+        </iframe>
+      </div>
+
+      <div class="silver-box">
+        <p>
+          Exemples de pôles associés à la mémoire templière (sélection <strong>non exhaustive</strong>) :
+        </p>
+        <div class="silver-sep"></div>
+        <ul>
+          <li><strong>France</strong> : Paris (Enclos du Temple), Provins, Laon, région de Champagne.</li>
+          <li><strong>Angleterre</strong> : Londres (Temple / Temple Church).</li>
+          <li><strong>Péninsule ibérique</strong> : Tomar (Portugal), Aragon / Catalogne (implantations et forteresses), zones de frontière.</li>
+          <li><strong>Italie du Sud</strong> : Pouilles (présences logistiques liées aux routes maritimes).</li>
+          <li><strong>Orient latin</strong> : Jérusalem, Acre (Saint-Jean-d’Acre), couloirs stratégiques et places fortes liées aux États latins.</li>
+        </ul>
+        <div class="silver-sep"></div>
+        <p class="note">
+          Cette carte est un repère géographique global (et non un inventaire). Pour un travail complet, il faut croiser
+          chartes, cartulaires, archives et études régionales.
+        </p>
+      </div>
+
+      <footer class="footer-min" aria-label="Pied de page">
+        <div class="line">
+          <span>© OSD9TDJ Association Loi 1901, Tous droits réservés</span>
+          <span class="sep">·</span>
+          <a href="cookies.html">cookies</a>
+          <span class="sep">·</span>
+          <a href="mentions.html">mentions légales</a>
+        </div>
+      </footer>
+
     </div>
   </div>
 
-<script>
-const COMMANDERIES_DATA = [
-  {"pays": "France", "region": "Var", "lieu": "Le Ruou", "type": "Commanderie"},
-  {"pays": "France", "region": "Seine-et-Marne", "lieu": "Coulommiers", "type": "Commanderie"},
-  {"pays": "France", "region": "Loiret", "lieu": "Villemoison-sur-Orge", "type": "Chapelle/Commanderie"},
-  {"pays": "France", "region": "Lot", "lieu": "Figeac", "type": "Commanderie"},
-  {"pays": "France", "region": "Loiret", "lieu": "Chambeugle", "type": "Commanderie"},
-  {"pays": "Portugal", "region": "Santarém", "lieu": "Tomar", "type": "Convento de Cristo (héritage templier)"},
-  {"pays": "France", "region": "?", "lieu": "Saint‑Maurice", "type": "Commanderie"}
-];
-
-const q = document.getElementById('q');
-const tbody = document.getElementById('rows');
-
-function render(filterText=""){
-  const t = (filterText||"").trim().toLowerCase();
-  const data = COMMANDERIES_DATA.filter(r => {
-    if (!t) return true;
-    const hay = `${r.pays} ${r.region} ${r.lieu} ${r.type}`.toLowerCase();
-    return hay.includes(t);
-  });
-  tbody.innerHTML = data.map(r => `
-    <tr>
-      <td>${escapeHtml(r.pays || "")}</td>
-      <td>${escapeHtml(r.region || "")}</td>
-      <td>${escapeHtml(r.lieu || "")}</td>
-      <td>${escapeHtml(r.type || "")}</td>
-    </tr>
-  `).join("");
-}
-
-function escapeHtml(s){
-  return String(s)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-}
-
-q.addEventListener('input', () => render(q.value));
-render();
-</script>
 </body>
 </html>
