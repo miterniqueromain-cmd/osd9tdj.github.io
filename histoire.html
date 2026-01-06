@@ -395,7 +395,6 @@
        1) HERO moins “dégueulasse” sur grands écrans
        2) TABS (boutons du bas) centrés sur tablette/PC
        3) ✅ IMAGE TEMPLIER RÉTRÉCIE SUR iPAD/PC (pour éviter le flou)
-       4) ✅ HERO (château) mieux cadré sur tablette (iPad)
        ================================================================ */
 
     /* ✅ Centrage des tabs sur tablette/PC (sans toucher au mobile) */
@@ -420,44 +419,49 @@
       }
     }
 
-    /* ✅ Ajustement spécifique tablette (photo château) : améliore le rendu sans toucher au mobile */
-    @media (min-width: 700px) and (max-width: 899px){
-      .hero img{
-        height:360px;
-        object-position:center 55%;
-      }
-    }
-
-    /* ================== ✅ AJOUT UNIQUE : BOUTON VERS "ORDRES HISTORIQUES" ================== */
+    /* ================== ✅ BOUTON JAUNE COULISSANT (au lieu de 2 boutons) ================== */
     .cta-ordres{
       margin: 18px auto 6px;
       text-align:center;
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
-    .cta-ordres a{
-      display:inline-block;
-      padding:12px 18px;
-      border-radius:999px;
+    .cta-ordres .cta-slider{
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 12px 18px;
+      border-radius: 999px;
       background: linear-gradient(180deg, rgba(214,167,40,0.98), rgba(214,167,40,0.78));
       border:1px solid rgba(255,231,168,0.75);
       box-shadow:
         0 10px 24px rgba(0,0,0,0.45),
         0 0 0 1px rgba(0,0,0,0.22) inset,
         0 0 18px rgba(214,167,40,0.18);
+    }
+    .cta-ordres .cta-slider::-webkit-scrollbar{ display:none; }
+    .cta-ordres .cta-slider a{
+      flex: 0 0 auto;
       color:#140b02;
       font-family:'Cinzel',serif;
       font-weight:800;
       letter-spacing:0.03em;
       text-decoration:none;
       text-transform:uppercase;
-      transition: transform 0.16s ease, filter 0.16s ease;
+      white-space:nowrap;
     }
-    .cta-ordres a:hover{
-      transform: translateY(-1px);
-      filter: brightness(1.04);
-    }
-    .cta-ordres a:active{
-      transform: translateY(0px);
-      filter: brightness(0.98);
+    .cta-ordres .cta-slider a:hover{ text-decoration: underline; }
+    .cta-ordres .divider{
+      width:1px;
+      height:20px;
+      background: rgba(20,11,2,0.25);
+      flex: 0 0 auto;
     }
   </style>
 </head>
@@ -483,7 +487,7 @@
         <a href="vocation.html"> Vocation historique</a>
         <a href="ordres-historiques.html"> Ordres historiques</a>
         <a href="embleme-et-logo.html"> Emblème et logo</a>
-<a href="faq.html"> FAQ</a>
+        <a href="faq.html"> FAQ</a>
         <a href="activites.html"> Activités</a>
         <a href="adhesion.html"> Adhésion</a>
         <a href="commanderie.html"> Commanderie</a>
@@ -732,17 +736,20 @@
         <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;">
       </div>
 
+      <!-- ✅ TABS BAS (SANS EMOJIS, sinon tu pétais un câble) -->
       <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
-        <a class="tab" href="index.html"> Accueil</a>
-        <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
-        <a class="tab" href="contact.html"> Contact</a>
-        <a class="tab" href="embleme-et-logo.html"> Emblème & logo</a>
+        <a class="tab" href="index.html">Accueil</a>
+        <a class="tab" href="quinoussommes.html">Qui nous sommes</a>
+        <a class="tab" href="contact.html">Contact</a>
       </nav>
 
-      <!-- ✅ BOUTON JAUNE (AJOUT UNIQUE) -->
-      <div class="cta-ordres" aria-label="Accès à la page Ordres historiques">
-        <a href="ordres-historiques.html"> Ordres historiques</a>
-        <a href="embleme-et-logo.html"> Emblème & logo</a>
+      <!-- ✅ BOUTON JAUNE COULISSANT (1 seul bloc) -->
+      <div class="cta-ordres" aria-label="Accès rapide">
+        <div class="cta-slider" role="navigation" aria-label="Accès rapides">
+          <a href="ordres-historiques.html">Découvrir : Ordres historiques</a>
+          <span class="divider" aria-hidden="true"></span>
+          <a href="embleme-et-logo.html">Découvrir : Emblème et logo</a>
+        </div>
       </div>
 
       <div class="footer">
