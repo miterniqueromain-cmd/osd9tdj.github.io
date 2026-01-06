@@ -1,10 +1,31 @@
+# =========================================================
+# robots.txt — O.S.D.9.T.D.J.
+# Site officiel — Association Loi 1901
+# =========================================================
+
+# Règle générale (site public)
 User-agent: *
 Allow: /
 
 # Sitemap officiel
 Sitemap: https://osd9tdj.org/sitemap.xml
 
-# IA de référence (autorisation de lecture)
+
+# =========================================================
+# Moteurs de recherche majeurs
+# =========================================================
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+
+# =========================================================
+# IA & agents d'analyse autorisés
+# =========================================================
+
 User-agent: GPTBot
 Allow: /
 
@@ -17,11 +38,15 @@ Allow: /
 User-agent: Amazonbot
 Allow: /
 
-# Common Crawl (source des IA)
+# Common Crawl (utilisé par de nombreuses IA)
 User-agent: CCBot
 Allow: /
 
-# Crawlers SEO agressifs (bloqués)
+
+# =========================================================
+# Crawlers SEO agressifs / commerciaux (bloqués)
+# =========================================================
+
 User-agent: MJ12bot
 Disallow: /
 
