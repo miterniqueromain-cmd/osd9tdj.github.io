@@ -395,6 +395,7 @@
        1) HERO moins “dégueulasse” sur grands écrans
        2) TABS (boutons du bas) centrés sur tablette/PC
        3) ✅ IMAGE TEMPLIER RÉTRÉCIE SUR iPAD/PC (pour éviter le flou)
+       4) ✅ HERO (château) mieux cadré sur tablette (iPad)
        ================================================================ */
 
     /* ✅ Centrage des tabs sur tablette/PC (sans toucher au mobile) */
@@ -416,6 +417,14 @@
       .hero img{
         height:420px;                 /* plus confortable sur tablette/PC */
         object-position:center 60%;   /* recadrage plus harmonieux */
+      }
+    }
+
+    /* ✅ Ajustement spécifique tablette (photo château) : améliore le rendu sans toucher au mobile */
+    @media (min-width: 700px) and (max-width: 899px){
+      .hero img{
+        height:360px;
+        object-position:center 55%;
       }
     }
 
@@ -473,6 +482,7 @@
         <a href="histoire.html"> Notre histoire</a>
         <a href="vocation.html"> Vocation historique</a>
         <a href="ordres-historiques.html"> Ordres historiques</a>
+        <a href="embleme-et-logo.html"> Emblème et logo</a>
 <a href="faq.html"> FAQ</a>
         <a href="activites.html"> Activités</a>
         <a href="adhesion.html"> Adhésion</a>
@@ -726,11 +736,13 @@
         <a class="tab" href="index.html">🏠 Accueil</a>
         <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
         <a class="tab" href="contact.html">📞 Contact</a>
+        <a class="tab" href="embleme-et-logo.html">🛡️ Emblème & logo</a>
       </nav>
 
       <!-- ✅ BOUTON JAUNE (AJOUT UNIQUE) -->
       <div class="cta-ordres" aria-label="Accès à la page Ordres historiques">
         <a href="ordres-historiques.html">📜 Découvrir : Ordres historiques</a>
+        <a href="embleme-et-logo.html">🛡️ Découvrir : Emblème & logo</a>
       </div>
 
       <div class="footer">
