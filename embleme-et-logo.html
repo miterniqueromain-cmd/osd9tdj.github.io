@@ -166,7 +166,7 @@
       align-items: center;
     }
 
-    /* ✅ AJOUT : HERO templier en haut (comme "Notre histoire") */
+    /* ✅ HERO templier en haut */
     .hero{
       margin:10px auto 22px;
       border-radius:18px;
@@ -187,10 +187,18 @@
     @media (max-width: 600px){
       .hero img{ height:220px; object-position:center bottom; }
     }
+    /* ✅ MODIF CHIRURGICALE : tablettes (meilleur cadrage / moins “zoom”) */
+    @media (min-width: 700px) and (max-width: 899px){
+      .hero img{
+        height:280px;
+        object-position:center 38%;
+      }
+    }
+    /* ✅ MODIF CHIRURGICALE : grands écrans (moins agressif que 420) */
     @media (min-width: 900px){
       .hero img{
-        height:420px;
-        object-position:center 60%;
+        height:360px;
+        object-position:center 38%;
       }
     }
 
@@ -313,7 +321,6 @@
     a.inline-link:hover::before { transform: scaleX(1); }
     a.inline-link:hover { color: #ffeeb5; }
 
-    /* ✅ figure image (ton correctif) */
     figure.inner-img{
       margin:10px auto 14px;
       border-radius:16px;
@@ -331,7 +338,6 @@
       max-width:100%;
     }
 
-    /* ✅ encadré "avis public" */
     .notice{
       position: relative;
       margin: 18px auto;
@@ -454,9 +460,6 @@
     }
   
 
-/* =========================================================
-   PRESENTATION DES BAGUES (haut de page)
-   ========================================================= */
 .rings-showcase{
   margin: 18px auto 8px;
   width: 100%;
@@ -508,9 +511,6 @@
   .rings-grid{ grid-template-columns: 1fr; }
 }
 
-/* =========================================================
-   MEDIA (MENU DÉROULANT : insignes & tenues)
-   ========================================================= */
 .media-gap-top{ margin-top: 10px; }
 .media-grid-2{
   display:grid;
@@ -537,9 +537,9 @@
   .media-grid-2{ grid-template-columns: 1fr; }
 }
 
-/* ================== ✅ AJOUT : TABS + BOUTON JAUNE (bas identique à Histoire) ================== */
+/* ================== ✅ TABS (bas) — MODIF CHIRURGICALE : plus court ================== */
 .tabs{
-  margin:10px auto 26px;
+  margin:10px auto 18px;
   display:inline-flex;
   max-width:100%;
   overflow-x:auto;
@@ -554,10 +554,10 @@
 .tabs::-webkit-scrollbar{display:none;}
 .tab{
   flex:0 0 auto;
-  padding:10px 16px;
+  padding:7px 14px;              /* ✅ plus court */
   text-decoration:none;
   color:var(--clair);
-  font-size:0.92rem;
+  font-size:0.88rem;             /* ✅ plus court */
   font-weight:700;
   font-family:'Cinzel',serif;
   background:rgba(0,0,0,0.42);
@@ -575,7 +575,7 @@
   }
 }
 
-/* ✅ MODIF CHIRURGICALE : bouton jaune -> version COULISSANTE (1 seul bloc) */
+/* ✅ BOUTON JAUNE UNIQUE + COULISSANT INTERNE */
 .cta-ordres{
   margin: 18px auto 6px;
   text-align:center;
@@ -699,12 +699,11 @@
 <div class="viewport-scroll">
 <div class="container">
 
-<!-- ✅ HERO templier en haut (comme "Notre histoire") -->
+<!-- ✅ HERO templier en haut -->
 <div class="hero">
   <img src="templier.jpg" alt="Templier – continuité et avenir" onerror="this.onerror=null; this.src='templier.jpeg';">
 </div>
 
-<!-- ✅ MENU DÉROULANT : Bag(s), manteau, médailles, épée (ajout demandé) -->
 <details aria-label="Insignes et tenues de l’Ordre" class="section-card">
   <summary>Insignes &amp; Tenues : bagues, manteau, médailles &amp; épée</summary>
   <div class="details-inner">
@@ -811,9 +810,7 @@
           <strong>venir à l’Association</strong> : c’est précisément l’un des buts de l’O.S.D.9.T.D.J.
         </div>
 </section>
-<!-- HERO : bague en haut -->
 
-<!-- ACCORDEON 1 : Blason -->
 <details aria-label="Le blason de l'O.S.D.9.T.D.J." class="section-card">
 <summary>Notre blason : une « table d’étude » en langage héraldique</summary>
 <div class="acc-body">
@@ -890,7 +887,7 @@
   </p>
 </div>
 </details>
-<!-- ACCORDEON 2 : Croix -->
+
 <details aria-label="La croix de l'O.S.D.9.T.D.J." class="section-card alt">
 <summary>Notre croix : tradition templière, « IX » et sens du Nom</summary>
 <div class="details-inner">
@@ -911,8 +908,6 @@
             Elle est, pour le grand public, un signe immédiatement lisible : celui d’une démarche
             inspirée par la chevalerie et par la tradition des ordres de service.
           </p>
-<!-- Bague au milieu (menu 2) -->
-
 <h3>2) Le « IX » au centre : les Neuf, la mémoire fondatrice</h3>
 <p>
             Le <strong>IX</strong> (neuf) rappelle l’esprit des <strong>Neuf</strong> :
@@ -941,7 +936,7 @@
           </p>
 </div>
 </details>
-<!-- ACCORDEON 3 : Sceau -->
+
 <details aria-label="Le sceau de l'O.S.D.9.T.D.J." class="section-card">
 <summary>Notre sceau : deux cavaliers, une seule monture — fraternité et dépouillement</summary>
 <div class="details-inner">
@@ -960,8 +955,6 @@
             Elle peut être lue comme une métaphore de la <strong>fraternité</strong> :
             aucune quête n’est durable si elle se vit dans l’isolement, l’orgueil ou la compétition permanente.
           </p>
-<!-- Bague au milieu (menu 3) -->
-
 <h3>2) Dépouillement et humilité : servir avant de paraître</h3>
 <p>
             L’interprétation la plus connue associe ce motif à un idéal de <strong>dépouillement</strong> :
@@ -987,21 +980,19 @@
 </div>
 </details>
 
-<!-- ✅ Signature + bas identique -->
 <div class="nndnn-banner" aria-label="Signature templière nnDnn">
   <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;">
   <div class="nndnn-text">nnDnn</div>
   <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;">
 </div>
 
+<!-- ✅ MODIF CHIRURGICALE : bandeau noir = uniquement Accueil + Contact -->
 <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
   <a class="tab" href="index.html"> Accueil</a>
-  <a class="tab" href="quinoussommes.html"> Qui nous sommes</a>
-  <a class="tab" href="histoire.html">  Notre histoire</a>
-  <a class="tab" href="contact.html">  Contact</a>
+  <a class="tab" href="contact.html"> Contact</a>
 </nav>
 
-<!-- ✅ BOUTON JAUNE COULISSANT (1 seul bloc) -->
+<!-- ✅ BOUTON JAUNE UNIQUE (coulissant interne) -->
 <div class="cta-ordres" aria-label="Accès rapide">
   <div class="cta-slider" role="navigation" aria-label="Accès rapides">
     <a href="quinoussommes.html">Qui nous sommes</a>
