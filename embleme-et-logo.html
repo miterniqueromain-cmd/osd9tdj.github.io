@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>Emblème &amp; Logo | O.S.D.9.T.D.J. – Ordre Sacré des Neuf Templiers de Jérusalem</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- SEO -->
+<meta content="Découvrir les emblèmes de l’O.S.D.9.T.D.J. : blason, drapeau, croix et sceaux. Lecture historique, culturelle et symbolique — association laïque (loi 1901)." name="description"/>
+<meta content="OSD9TDJ, Ordre Sacré des Neuf Templiers de Jérusalem, emblème, logo, blason, sceau, croix templière, Beauceant, symbolique, histoire, association loi 1901" name="keywords"/>
+<link href="https://osd9tdj.org/embleme-et-logo.html" rel="canonical"/>
+<!-- SEO avancé -->
+<meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="googlebot"/>
+<meta content="Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J." name="author"/>
+<meta content="O.S.D.9.T.D.J." name="publisher"/>
+<meta content="7 days" name="revisit-after"/>
+<meta content="strict-origin-when-cross-origin" name="referrer"/>
+<!-- OpenGraph -->
+<meta content="Emblème &amp; Logo | O.S.D.9.T.D.J." property="og:title"/>
+<meta content="Blason, croix, drapeau et sceaux : comprendre les symboles de l’O.S.D.9.T.D.J. (association laïque, culturelle et historique)." property="og:description"/>
+<meta content="https://osd9tdj.org/blason-osd9tdj.PNG" property="og:image"/>
+<meta content="website" property="og:type"/>
+<meta content="https://osd9tdj.org/embleme-et-logo.html" property="og:url"/>
+<meta content="O.S.D.9.T.D.J." property="og:site_name"/>
+<meta content="fr_FR" property="og:locale"/>
+<!-- Twitter -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Emblème &amp; Logo | O.S.D.9.T.D.J." name="twitter:title"/>
+<meta content="Blason, croix, drapeau et sceaux : lecture historique et symbolique des emblèmes de l’O.S.D.9.T.D.J." name="twitter:description"/>
+<meta content="https://osd9tdj.org/blason-osd9tdj.PNG" name="twitter:image"/>
+<!-- WATERMARK INVISIBLE -->
+<meta content="WTRMK-IX-ALPHA-2026-OSD9TDJ-EMBLEME-LOGO" name="osd9tdj-signature"/>
+<meta content="OSD9TDJ|EMBLEME|LOGO|IX|2026|BLAZON|SCEAU|CROIX|BEAUCEANT" name="osd9tdj-watermark"/>
+<meta content="WTRMK-IX-ALPHA-2026-OSD9TDJ-EMBLEME-LOGO-LOCK" name="osd9tdj-signature-2"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      --or: #d6a728;
+      --clair: #f8e8c8;
+      --fond: #120702;
+
+      /* doré adouci */
+      --or-line: rgba(214,167,40,0.40);
+      --or-line2: rgba(214,167,40,0.24);
+      --or-glow: rgba(214,167,40,0.10);
+
+      /* fonds doux (moins lourds) */
+      --card: rgba(0,0,0,0.18);
+      --card2: rgba(0,0,0,0.10);
+    }
+
+    /* ✅ CADRE FIXE + SCROLL DEDANS */
+    html, body{
+      height:100%;
+      margin:0;
+      padding:0;
+      overflow:hidden; /* ✅ pas de scroll sur le body */
+      font-family: 'Lato', Arial, sans-serif;
+      color: var(--clair);
+      text-align: center;
+      background: radial-gradient(circle at top, #3a2513, var(--fond) 70%);
+    }
+
+    .frame-fixed{
+      position: fixed;
+      inset: 14px;
+      border-radius: 22px;
+      border: 2px solid rgba(214,167,40,0.55);
+      box-shadow:
+        0 0 0 1px rgba(248,232,200,0.16) inset,
+        0 0 38px rgba(0,0,0,0.35);
+      pointer-events: none; /* ✅ le cadre ne bloque pas */
+      z-index: 40;
+    }
+
+    /* ✅ 4 fleurs de lys (UNICODE) dans les angles */
+    .lys{
+      position:absolute;
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size: 18px;
+      color: var(--or);
+      opacity: 0.55;
+      text-shadow: 0 0 12px rgba(0,0,0,0.65);
+    }
+    .lys.tl{ top:10px; left:12px; }
+    .lys.tr{ top:10px; right:12px; }
+    .lys.bl{ bottom:10px; left:12px; }
+    .lys.br{ bottom:10px; right:12px; }
+
+    /* ✅ zone qui défile à l'intérieur du cadre */
+    .viewport-scroll{
+      position: fixed;
+      inset: 22px;                /* un peu à l'intérieur du cadre */
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1;
+      padding: 30px 15px 44px;
+      box-sizing: border-box;
+    }
+
+    /* ✅ menu 3 points (TOUTES PAGES) */
+    .top-menu{
+      position: fixed;
+      top: 26px;
+      right: 26px;
+      z-index: 60;
+      pointer-events: auto;
+    }
+    .top-menu details{ position: relative; }
+    .top-menu summary{
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+      width: 46px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(214,167,40,0.55);
+      background: rgba(0,0,0,0.22);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+      font-family:'Cinzel',serif;
+      color: var(--or);
+      font-size: 22px;
+      line-height: 1;
+    }
+    .top-menu summary::-webkit-details-marker{ display:none; }
+
+    .menu-panel{
+      position: absolute;
+      right: 0;
+      margin-top: 10px;
+      width: 260px;
+      max-width: calc(100vw - 60px);
+      border-radius: 14px;
+      border: 1px solid rgba(214,167,40,0.45);
+      background: rgba(0,0,0,0.70);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+      overflow: hidden;
+    }
+    .menu-panel a{
+      display:block;
+      padding: 11px 12px;
+      text-decoration:none;
+      color: rgba(248,232,200,0.92);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(214,167,40,0.18);
+    }
+    .menu-panel a:hover{
+      background: rgba(214,167,40,0.12);
+      color: #fff;
+    }
+    .menu-panel a:last-child{ border-bottom: none; }
+
+    .container {
+      min-height: auto;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ✅ AJOUT : HERO templier en haut (comme "Notre histoire") */
+    .hero{
+      margin:10px auto 22px;
+      border-radius:18px;
+      overflow:hidden;
+      border:2px solid rgba(214,167,40,0.9);
+      box-shadow:0 0 40px rgba(0,0,0,0.92);
+      background:rgba(0,0,0,0.35);
+      width:100%;
+      max-width: 1100px;
+    }
+    .hero img{
+      display:block;
+      width:100%;
+      height:320px;
+      object-fit:cover;
+      object-position:center bottom;
+    }
+    @media (max-width: 600px){
+      .hero img{ height:220px; object-position:center bottom; }
+    }
+    @media (min-width: 900px){
+      .hero img{
+        height:420px;
+        object-position:center 60%;
+      }
+    }
+
+    h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.95rem;
+      margin: 10px 0 6px;
+    }
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.22rem;
+      margin-bottom: 18px;
+      font-weight: normal;
+      opacity: 0.9;
+    }
+    h3{
+      font-family:'Cinzel',serif;
+      letter-spacing:0.04em;
+      font-weight:700;
+      color: var(--or);
+      text-transform: uppercase;
+      margin: 10px 0 6px;
+      text-align:center;
+    }
+
+    strong { font-weight: 700; }
+
+    .section-card{
+      width: 100%;
+      max-width: 920px;
+      margin: 22px auto;
+      padding: 22px 22px;
+      text-align: justify;
+
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border-radius: 20px;
+      border: 1px solid var(--or-line);
+
+      box-shadow:
+        0 8px 22px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(0,0,0,0.14) inset;
+
+      position: relative;
+      overflow: hidden;
+    }
+    .section-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(circle at 18% 0%, var(--or-glow), transparent 62%),
+        radial-gradient(circle at 86% 115%, rgba(248,232,200,0.05), transparent 58%);
+      pointer-events:none;
+      opacity: 0.95;
+    }
+
+    .section-card.alt{
+      background: linear-gradient(180deg, rgba(0,0,0,0.20), rgba(0,0,0,0.12));
+      border-color: var(--or-line2);
+    }
+    .section-card.alt::before{
+      background:
+        radial-gradient(circle at 82% 0%, var(--or-glow), transparent 64%),
+        radial-gradient(circle at 12% 120%, rgba(248,232,200,0.05), transparent 58%);
+    }
+
+    .section-card p{
+      position: relative;
+      max-width: 880px;
+      margin: 18px auto;
+      font-size: 1.08rem;
+      line-height: 1.72;
+      letter-spacing: 0.01em;
+    }
+
+    .soft-sep{
+      position: relative;
+      height: 14px;
+      max-width: 820px;
+      margin: 6px auto 2px;
+    }
+    .soft-sep::after{
+      content:"";
+      position:absolute;
+      left: 10%;
+      right: 10%;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(214,167,40,0.28), transparent);
+      opacity: 0.9;
+      transform: translateY(-50%);
+    }
+
+    a.inline-link {
+      position: relative;
+      display: inline-block;
+      padding: 0 3px 2px;
+      margin: 0 2px;
+      color: var(--or);
+      font-family: 'Cinzel', serif;
+      font-size: 0.96rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    a.inline-link::after { content: " ⟶"; font-size: 0.82rem; }
+    a.inline-link::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: linear-gradient(to right, #fff2b2, #d6a728);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.18s ease-out;
+      opacity: 0.70;
+    }
+    a.inline-link:hover::before { transform: scaleX(1); }
+    a.inline-link:hover { color: #ffeeb5; }
+
+    /* ✅ figure image (ton correctif) */
+    figure.inner-img{
+      margin:10px auto 14px;
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 0 28px rgba(0,0,0,0.85);
+      border:2px solid rgba(214,167,40,0.82);
+      background:rgba(0,0,0,0.12);
+      width:100%;
+      max-width:820px;
+    }
+    figure.inner-img img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-width:100%;
+    }
+
+    /* ✅ encadré "avis public" */
+    .notice{
+      position: relative;
+      margin: 18px auto;
+      max-width: 880px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border: 1px dashed rgba(214,167,40,0.55);
+      background: rgba(0,0,0,0.18);
+      color: rgba(248,232,200,0.92);
+      font-size: 0.98rem;
+      line-height: 1.60;
+      text-align: left;
+    }
+    .notice strong{ color: #ffeeb5; }
+
+    details.section-card{ padding: 0; }
+    details.section-card > summary{
+      list-style: none;
+      cursor: pointer;
+      padding: 22px 22px;
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      letter-spacing:0.04em;
+      color: var(--or);
+      text-transform: uppercase;
+      text-align: center;
+      position: relative;
+      user-select: none;
+    }
+    details.section-card > summary::-webkit-details-marker{ display:none; }
+    details.section-card > summary::after{
+      content:"▼";
+      margin-left:10px;
+      font-size:0.85rem;
+      opacity:0.9;
+    }
+    details.section-card[open] > summary::after{ content:"▲"; }
+    details.section-card .details-inner{
+      padding: 0 22px 12px;
+      position: relative;
+    }
+
+    .sep{ opacity:0.55; }
+
+    .nndnn-banner{
+      margin:26px auto 6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+      flex-wrap:nowrap;
+      text-align:center;
+    }
+    .nndnn-banner img{
+      height:48px;
+      width:auto;
+      display:block;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.85));
+      opacity:0.96;
+    }
+    .nndnn-text{
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-weight:700;
+      letter-spacing:0.18em;
+      text-transform:none;
+      font-size:2.05rem;
+      line-height:1;
+      text-shadow:0 0 14px rgba(0,0,0,0.9);
+      white-space:nowrap;
+    }
+
+    .big-history-wrap{ margin-top: 22px; width: 100%; display: flex; justify-content: center; }
+    .big-history-slider{
+      display: inline-flex;
+      align-items: center;
+      gap: 26px;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #f3d98b, #d6a728);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+      margin: 0 auto;
+    }
+    .big-history-slider::-webkit-scrollbar{ display:none; }
+    .big-history-btn{
+      display:inline-block;
+      padding: 0;
+      border-radius: 0;
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      letter-spacing:0.04em;
+      text-decoration:none;
+      color:#120702;
+      background: transparent;
+      box-shadow: none;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+    .big-history-btn:hover{ text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.05rem; }
+      .section-card{ padding: 18px 14px; border-radius: 18px; margin: 20px auto; }
+      .section-card p{ font-size: 1.02rem; line-height: 1.70; margin: 16px auto; }
+      details.section-card > summary{ padding: 18px 14px; font-size: 0.98rem; }
+      .soft-sep::after{ left: 6%; right: 6%; }
+      .nndnn-banner{gap:10px;}
+      .nndnn-banner img{height:42px;}
+      .nndnn-text{font-size:1.55rem;}
+      .top-menu{ top:22px; right:22px; }
+      .menu-panel{ width: 240px; }
+      .frame-fixed{ inset: 12px; }
+      .viewport-scroll{ inset: 20px; }
+    }
+  
+
+/* =========================================================
+   PRESENTATION DES BAGUES (haut de page)
+   ========================================================= */
+.rings-showcase{
+  margin: 18px auto 8px;
+  width: 100%;
+}
+.rings-wrap{
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  padding: 18px 18px 10px;
+  border-radius: 18px;
+  border: 1px solid rgba(214,167,40,0.28);
+  background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.12));
+  box-shadow: 0 0 26px rgba(0,0,0,0.62);
+}
+.rings-title{
+  margin: 0 0 6px;
+  font-size: clamp(1.15rem, 1.5vw + 0.9rem, 1.55rem);
+  letter-spacing: 0.02em;
+}
+.rings-sub{
+  margin: 0 0 14px;
+  opacity: 0.92;
+  line-height: 1.55;
+}
+.rings-grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+.ring-card{
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid rgba(214,167,40,0.55);
+  background: rgba(0,0,0,0.18);
+  box-shadow: 0 0 22px rgba(0,0,0,0.70);
+}
+.ring-card img{
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+@media (max-width: 980px){
+  .rings-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px){
+  .rings-wrap{ padding: 16px 14px 10px; }
+  .rings-grid{ grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   MEDIA (MENU DÉROULANT : insignes & tenues)
+   ========================================================= */
+.media-gap-top{ margin-top: 10px; }
+.media-grid-2{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+  margin-top: 10px;
+}
+.media-card{
+  margin:0;
+  border-radius:16px;
+  overflow:hidden;
+  border: 2px solid rgba(214,167,40,0.55);
+  background: rgba(0,0,0,0.18);
+  box-shadow: 0 0 22px rgba(0,0,0,0.70);
+}
+.media-card img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-width:100%;
+}
+@media (max-width: 980px){
+  .media-grid-2{ grid-template-columns: 1fr; }
+}
+
+/* ================== ✅ AJOUT : TABS + BOUTON JAUNE (bas identique à Histoire) ================== */
+.tabs{
+  margin:10px auto 26px;
+  display:inline-flex;
+  max-width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  border-radius:999px;
+  overflow-y:hidden;
+  border:1px solid rgba(214,167,40,0.55);
+  backdrop-filter: blur(6px);
+  background:rgba(0,0,0,0.18);
+}
+.tabs::-webkit-scrollbar{display:none;}
+.tab{
+  flex:0 0 auto;
+  padding:10px 16px;
+  text-decoration:none;
+  color:var(--clair);
+  font-size:0.92rem;
+  font-weight:700;
+  font-family:'Cinzel',serif;
+  background:rgba(0,0,0,0.42);
+  transition:background 0.2s ease, color 0.2s ease;
+  white-space:nowrap;
+}
+.tab + .tab{ border-left:1px solid rgba(214,167,40,0.35); }
+.tab:hover{ background:rgba(214,167,40,0.20); color:#fff; }
+
+@media (min-width: 700px){
+  .tabs{
+    display:flex;
+    width:100%;
+    justify-content:center;
+  }
+}
+
+.cta-ordres{
+  margin: 18px auto 6px;
+  text-align:center;
+}
+.cta-ordres a{
+  display:inline-block;
+  padding:12px 18px;
+  border-radius:999px;
+  background: linear-gradient(180deg, rgba(214,167,40,0.98), rgba(214,167,40,0.78));
+  border:1px solid rgba(255,231,168,0.75);
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(0,0,0,0.22) inset,
+    0 0 18px rgba(214,167,40,0.18);
+  color:#140b02;
+  font-family:'Cinzel',serif;
+  font-weight:800;
+  letter-spacing:0.03em;
+  text-decoration:none;
+  text-transform:uppercase;
+  transition: transform 0.16s ease, filter 0.16s ease;
+  margin: 6px 6px 0;
+}
+.cta-ordres a:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+}
+.cta-ordres a:active{
+  transform: translateY(0px);
+  filter: brightness(0.98);
+}
+
+.footer{
+  margin-top:26px;
+  text-align:center;
+  font-size:0.82rem;
+  opacity:0.85;
+}
+.footer a{color:var(--clair);}
+</style>
+<link href="icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
+<link href="icon-512.png" rel="icon" sizes="512x512" type="image/png"/>
+<link href="icon-192.png" rel="apple-touch-icon"/>
+<!-- JSON-LD (Schema.org) -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Emblème & Logo – Ordre Sacré des Neuf Templiers de Jérusalem",
+    "url": "https://osd9tdj.org/embleme-et-logo.html",
+    "inLanguage": "fr",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "O.S.D.9.T.D.J. – Ordre Sacré des Neuf Templiers de Jérusalem",
+      "url": "https://osd9tdj.org"
+    },
+    "about": {
+      "@type": "Organization",
+      "name": "Ordre Sacré des Neuf Templiers de Jérusalem",
+      "alternateName": "O.S.D.9.T.D.J.",
+      "keywords": [
+        "emblème",
+        "logo",
+        "blason",
+        "sceau",
+        "croix templière",
+        "Beauceant",
+        "association laïque",
+        "histoire et symbolique"
+      ]
+    }
+  }
+  </script>
+</head>
+<body>
+<!-- ✅ Cadre fixe + lys -->
+<div aria-hidden="true" class="frame-fixed">
+<div class="lys tl">⚜️</div>
+<div class="lys tr">⚜️</div>
+<div class="lys bl">⚜️</div>
+<div class="lys br">⚜️</div>
+</div>
+<!-- ✅ Menu 3 points avec toutes les pages -->
+<div aria-label="Menu du site" class="top-menu">
+<details>
+<summary title="Menu">⋯</summary>
+<div aria-label="Navigation" class="menu-panel" role="menu">
+<a href="index.html"> Accueil</a>
+<a href="quinoussommes.html"> Qui nous sommes</a>
+<a href="histoire.html"> Notre histoire</a>
+<a href="vocation.html"> Vocation historique</a>
+<a href="ordres-historiques.html"> Ordres historiques</a>
+<a href="embleme-et-logo.html"> Emblème et logo</a>
+<a href="faq.html"> FAQ</a>
+<a href="activites.html"> Activités</a>
+<a href="adhesion.html"> Adhésion</a>
+<a href="commanderie.html"> Commanderie</a>
+<a href="cotisations.html"> Cotisations</a>
+<a href="assurance.html"> Assurance</a>
+<a href="boutique.html"> Boutique</a>
+<a href="statuts.html"> Statuts</a>
+<a href="contact.html"> Contact</a>
+<a href="mentions.html"> Mentions légales</a>
+<a href="cookies.html"> Cookies</a>
+</div>
+</details>
+</div>
+<!-- ✅ Tout défile dedans -->
+<div class="viewport-scroll">
+<div class="container">
+
+<!-- ✅ HERO templier en haut (comme "Notre histoire") -->
+<div class="hero">
+  <img src="templier.jpg" alt="Templier – continuité et avenir" onerror="this.onerror=null; this.src='templier.jpeg';">
+</div>
+
+<!-- ✅ MENU DÉROULANT : Bag(s), manteau, médailles, épée (ajout demandé) -->
+<details aria-label="Insignes et tenues de l’Ordre" class="section-card">
+  <summary>Insignes &amp; Tenues : bagues, manteau, médailles &amp; épée</summary>
+  <div class="details-inner">
+    <p>
+      Cette section présente, de manière claire et publique, quelques éléments visuels utilisés par l’O.S.D.9.T.D.J.
+      Il s’agit d’<strong>insignes associatifs</strong> et d’éléments de <strong>tenue</strong> à vocation symbolique et protocolaire
+      (usage culturel, pédagogique et représentatif), sans prétention de filiation juridique avec l’Ordre du Temple médiéval.
+    </p>
+
+    <div class="soft-sep"></div>
+
+    <h3>Bague(s) de l’Ordre — identité, engagement et repère</h3>
+    <p>
+      Les bagues de l’O.S.D.9.T.D.J. ne sont pas des insignes « de pouvoir » : elles servent de <strong>repère visuel</strong>,
+      de rappel d’<strong>engagement</strong> et de marque d’appartenance à une démarche <strong>culturelle, éducative et caritative</strong>.
+      Elles peuvent varier selon les séries, les finitions ou l’usage (tenue, cérémonie, présentation).
+    </p>
+    <div class="rings-grid media-gap-top">
+      <figure class="ring-card">
+        <img alt="Bague O.S.D.9.T.D.J. — croix et marque IX" loading="lazy" src="bague1.PNG"/>
+      </figure>
+      <figure class="ring-card">
+        <img alt="Bague O.S.D.9.T.D.J. — anneau et gravure interne" loading="lazy" src="bague2.PNG"/>
+      </figure>
+      <figure class="ring-card">
+        <img alt="Bague O.S.D.9.T.D.J. — face principale avec IX" loading="lazy" src="bague3.PNG"/>
+      </figure>
+      <figure class="ring-card">
+        <img alt="Bague O.S.D.9.T.D.J. — variante sombre et croix" loading="lazy" src="bague4.PNG"/>
+      </figure>
+    </div>
+
+    <div class="soft-sep"></div>
+
+    <h3>Manteau — tenue de représentation</h3>
+    <p>
+      Le manteau est un élément de <strong>tenue de représentation</strong> : il vise l’unité visuelle lors des événements,
+      des cérémonies internes ou des prises de vues protocolaires. Il rappelle la sobriété et la discipline : porter une tenue,
+      c’est surtout porter une <strong>exigence de conduite</strong> et de cohérence.
+    </p>
+    <figure class="inner-img">
+      <img alt="Manteau de représentation O.S.D.9.T.D.J." loading="lazy" src="manteaux.PNG"/>
+    </figure>
+
+    <div class="soft-sep"></div>
+
+    <h3>Médailles — distinctions associatives</h3>
+    <p>
+      Les médailles présentées ci-dessous sont des <strong>distinctions associatives</strong> : elles matérialisent une reconnaissance,
+      un rôle, un service rendu ou une participation à la vie de l’Ordre. Elles sont utilisées dans un cadre interne et protocolaire,
+      selon les règles de l’association (et sans assimilation à des décorations officielles d’État).
+    </p>
+    <div class="media-grid-2">
+      <figure class="media-card">
+        <img alt="Médaille O.S.D.9.T.D.J. — modèle 1" loading="lazy" src="medaille1.PNG"/>
+      </figure>
+      <figure class="media-card">
+        <img alt="Médaille O.S.D.9.T.D.J. — modèle 2" loading="lazy" src="medaille2.jpg"/>
+      </figure>
+    </div>
+
+    <div class="soft-sep"></div>
+
+    <h3>Épée — symbole de serment et de responsabilité</h3>
+    <p>
+      L’épée relève d’un langage symbolique : elle représente la <strong>parole donnée</strong>, la <strong>droiture</strong>,
+      et la responsabilité de protéger et servir. Dans l’O.S.D.9.T.D.J., elle est comprise comme un rappel de la maîtrise de soi :
+      la force n’a de sens qu’orientée vers le bien, la justice, et la vérité.
+    </p>
+    <figure class="inner-img">
+      <img alt="Épée symbolique O.S.D.9.T.D.J." loading="lazy" src="epee.PNG"/>
+    </figure>
+
+    <div aria-label="Note d'usage" class="notice" role="note">
+      <strong>Note :</strong> les visuels ci-dessus sont présentés à titre informatif et pédagogique. Leur usage est réservé au cadre
+      associatif de l’O.S.D.9.T.D.J. (communication, représentation, cérémonial interne), conformément aux règles et décisions de l’association.
+    </div>
+  </div>
+</details>
+
+<h1>ORDRE SACRÉ DES NEUF TEMPLIERS DE JÉRUSALEM</h1>
+<h2>Emblème &amp; Logo</h2>
+<section aria-label="Introduction" class="section-card">
+<p>
+          Chaque tradition chevaleresque se reconnaît à ses signes. Les nôtres ne sont ni des ornements gratuits, ni des
+          « codes secrets » destinés à exclure : ce sont des <strong>repères de mémoire</strong>, des <strong>outils pédagogiques</strong> et
+          des <strong>marqueurs d’identité</strong> d’une association laïque et culturelle (loi de 1901).
+        </p>
+<div class="soft-sep"></div>
+<p>
+          Cette page présente, pour le grand public, l’ensemble des emblèmes de l’O.S.D.9.T.D.J. :
+          <strong>le blason</strong>, <strong>le drapeau (Beauceant)</strong>, <strong>la croix</strong> et <strong>les sceaux</strong>.
+          Les explications proposées relèvent d’une lecture <strong>historique</strong>, <strong>culturelle</strong> et <strong>symbolique</strong> :
+          elles ne constituent ni revendication religieuse, ni prétention à une continuité juridique avec l’Ordre du Temple médiéval.
+        </p>
+<div aria-label="Note de clarification" class="notice" role="note">
+<strong>Clarification publique :</strong> l’O.S.D.9.T.D.J. est une association culturelle et laïque.
+          Les termes internes (« Grand Maître », « Commandeur », etc.) sont honorifiques et symboliques.
+          Toute référence à des traditions, symboles ou interprétations est présentée comme une lecture pédagogique,
+          sans valeur canonique ni pratique cultuelle.
+          <br><br>
+          <strong>Information grand public :</strong> ce contenu est volontairement destiné à une consultation en ligne, simple et accessible.
+          Pour en savoir davantage, approfondir, ou découvrir la réalité concrète de notre démarche, le meilleur chemin est de
+          <strong>venir à l’Association</strong> : c’est précisément l’un des buts de l’O.S.D.9.T.D.J.
+        </div>
+</section>
+<!-- HERO : bague en haut -->
+
+<!-- ACCORDEON 1 : Blason -->
+<details aria-label="Le blason de l'O.S.D.9.T.D.J." class="section-card">
+<summary>Notre blason : une « table d’étude » en langage héraldique</summary>
+<div class="acc-body">
+<figure class="inner-img">
+<img alt="Blason officiel de l’O.S.D.9.T.D.J." loading="lazy" src="blason-osd9tdj.PNG"/>
+</figure>
+<p class="legal-note" role="note" aria-label="Protection des signes distinctifs">
+  <strong>Protection &amp; droits :</strong> l’ensemble de nos <strong>logos, blasons, sceaux, signes, devises</strong> et éléments graphiques
+  est <strong>déposé et protégé</strong>. Toute reproduction, copie, diffusion, modification ou réutilisation — <strong>même partielle</strong> —
+  est interdite sans autorisation écrite (copyright). Pour en savoir plus, le bon chemin est simple : <strong>venir à l’association</strong> et échanger avec nous.
+</p>
+<p>
+    Le blason de l’<strong>Ordre Sacré des Neuf Templiers de Jérusalem</strong> n’est pas un « décor » :
+    c’est une <strong>table d’étude</strong>. Chaque forme, chaque couleur et chaque position raconte une idée
+    et renvoie à une pédagogie : apprendre, servir, transmettre — avec mesure et discipline.
+  </p>
+<p>
+    Sa composition réunit volontairement plusieurs langages : l’héraldique (couleurs et partitions),
+    la géométrie (structures stables), et une symbolique templière étudiée comme héritage culturel.
+    L’ensemble se lit comme un chemin : <em>des fondations</em> vers <em>l’élévation</em>, puis vers <em>la vérité</em>.
+  </p>
+<h3>1) Le fond noir &amp; blanc : l’équilibre avant l’action</h3>
+<p>
+    Le champ du blason reprend l’esprit du <strong>Beauceant</strong>, la bannière templière mi-noire, mi-blanche.
+    Dans notre lecture, ce contraste exprime l’<strong>union des contraires</strong> : l’ombre et la lumière,
+    la rigueur et la compassion, l’étude et l’action. Il rappelle une règle simple : on ne sert durablement
+    que si l’on sait tenir ensemble la force et la mesure.
+  </p>
+<h3>2) Le carré de quatre cercles : les fondations stables</h3>
+<p>
+    La base géométrique du blason est un <strong>carré</strong> (stabilité) contenant <strong>quatre cercles</strong>
+    (cycles, continuité). Cette structure renvoie aux <strong>quatre éléments</strong> — terre, air, feu, eau —
+    non comme croyance, mais comme langage traditionnel : une manière d’enseigner que toute construction
+    solide commence par des bases concrètes, vérifiables, et équilibrées.
+  </p>
+<h3>3) La « roue de la vie » : la quintessence au centre</h3>
+<p>
+    Au cœur du blason, un disque bleu accueille une <strong>croix blanche centrale</strong> entourée de
+    <strong>quatre cercles blancs</strong>. Ce motif représente les <strong>cinq sens</strong> (quatre + un centre),
+    et la recherche du « <strong>cinquième principe</strong> » — la <strong>quintessence</strong> — entendue comme
+    ce qui ordonne, harmonise et donne du sens.
+  </p>
+<p>
+    Le <strong>blanc</strong> au centre signifie la clarté et l’équilibre ; le <strong>bleu</strong> évoque la profondeur,
+    la sagesse et l’ouverture. La croix blanche agit ici comme un <strong>pivot symbolique</strong> : elle ne prétend
+    pas reproduire un insigne d’un ordre existant, mais indique l’axe autour duquel s’organise l’étude.
+    Dans vos textes, ce pivot « se déploie en mouvement équilibré », reposant sur la base des quatre fondations.
+  </p>
+<h3>4) La croix rouge &amp; or : courage, fidélité, accomplissement</h3>
+<p>
+    La croix stylisée rouge et or (souvent décrite comme « angélique ») se distingue par son
+    <strong>traitement chromatique</strong> : elle marque une identité propre à l’association.
+    Le <strong>rouge</strong> renvoie au courage, au sacrifice et à la fidélité ; l’<strong>or</strong> symbolise la lumière,
+    l’accomplissement et la part d’œuvre menée jusqu’au bout. Cette croix rappelle un imaginaire templier
+    étudié comme patrimoine culturel, et non comme revendication de privilège.
+  </p>
+<h3>5) La lecture « en chemin » : du bas vers le haut</h3>
+<p>
+    Le blason se lit comme une progression :
+    <strong>fondations</strong> (carré/éléments) → <strong>harmonie</strong> (quintessence) → <strong>engagement</strong> (croix).
+    Autrement dit : on ne commence pas par la proclamation, on commence par la structure ; on ne termine
+    pas par la théorie, on termine par le service.
+  </p>
+<h3>6) Les signes complémentaires : vigilance, unité, vérité</h3>
+<p>
+    Les éléments « secondaires » du blason renforcent cette lecture :
+    <strong>l’œil</strong> (vigilance et discernement), les <strong>ailes</strong> (élévation et protection),
+    et la devise <strong>« Per Crucem, Veritas »</strong> — « par la Croix, la Vérité » — comprise ici comme un appel
+    à la droiture, à la cohérence et à l’exigence morale dans l’action caritative et culturelle.
+  </p>
+<p class="note">
+    Le blason est utilisé comme <strong>support pédagogique</strong> : il aide à transmettre des repères communs,
+    à éviter les mythes faciles, et à rappeler que la symbolique n’a de valeur que si elle est suivie d’actes.
+  </p>
+</div>
+</details>
+<!-- ACCORDEON 2 : Croix -->
+<details aria-label="La croix de l'O.S.D.9.T.D.J." class="section-card alt">
+<summary>Notre croix : tradition templière, « IX » et sens du Nom</summary>
+<div class="details-inner">
+<figure class="inner-img">
+<img alt="Croix de l’O.S.D.9.T.D.J. avec monogramme IX (présentée sur le drapeau)" src="drapeau-osd9tdj.PNG"/>
+</figure>
+<p>
+            La croix que nous utilisons s’inscrit dans la forme <strong>pattée</strong>,
+            associée à l’imaginaire templier.
+            Sur nos supports, elle est souvent présentée sur un drapeau :
+            non pour « parler du drapeau », mais parce que ce support met en valeur la croix,
+            son cercle central et ses inscriptions.
+          </p>
+<h3>1) Une croix pattée : un repère visuel et une exigence morale</h3>
+<p>
+            Cette croix rappelle l’idée de <strong>chemin</strong> (les quatre directions),
+            d’<strong>engagement</strong> (tenir sa parole) et de <strong>service</strong> (agir pour quelque chose de plus grand que soi).
+            Elle est, pour le grand public, un signe immédiatement lisible : celui d’une démarche
+            inspirée par la chevalerie et par la tradition des ordres de service.
+          </p>
+<!-- Bague au milieu (menu 2) -->
+
+<h3>2) Le « IX » au centre : les Neuf, la mémoire fondatrice</h3>
+<p>
+            Le <strong>IX</strong> (neuf) rappelle l’esprit des <strong>Neuf</strong> :
+            une mémoire fondatrice articulée autour de valeurs et d’un idéal de conduite.
+            Dans nos textes internes, ces « neuf colonnes » sont associées à des vertus
+            (confiance, fraternité, loyauté, justice, force morale, prudence, vision, équilibre, bienveillance).
+          </p>
+<p>
+            Pour le public, il faut retenir ceci :
+            le « IX » n’est pas un code secret, ni un marqueur d’élitisme.
+            C’est un <strong>rappel d’exigence</strong> :
+            apprendre, s’élever, et servir avec constance.
+          </p>
+<h3>3) Ce qui est écrit : du Nom à l’abréviation</h3>
+<p>
+            Autour du centre, l’inscription renvoie à la dénomination de l’Ordre :
+            <strong>Ordre Sacré des Neuf Templiers de Jérusalem</strong>,
+            et à son sigle <strong>O.S.D.9.T.D.J.</strong>.
+            La présence du latin rappelle la tradition des ordres historiques,
+            tout en restant, chez nous, une référence culturelle.
+          </p>
+<div class="soft-sep"></div>
+<p class="notice">
+            Notre usage des symboles et de la croix est <strong>associatif</strong> : il relève de la culture, de l’étude,
+            et de la transmission de valeurs. Il ne revendique aucune filiation juridique ou canonique.
+          </p>
+</div>
+</details>
+<!-- ACCORDEON 3 : Sceau -->
+<details aria-label="Le sceau de l'O.S.D.9.T.D.J." class="section-card">
+<summary>Notre sceau : deux cavaliers, une seule monture — fraternité et dépouillement</summary>
+<div class="details-inner">
+<figure class="inner-img">
+<img alt="Sceau de l’O.S.D.9.T.D.J. inspiré du symbole templier : deux cavaliers sur un cheval" src="sceau-osd9tdj.PNG"/>
+</figure>
+<p>
+            Le sceau de l’O.S.D.9.T.D.J. est un sceau <strong>général</strong> de l’Ordre :
+            il n’est pas « le sceau d’un Grand Maître », mais un signe d’<strong>identité collective</strong>.
+            Il reprend un motif iconique associé aux Templiers : <strong>deux cavaliers sur une seule monture</strong>.
+          </p>
+<h3>1) Deux sur un cheval : une image de fraternité</h3>
+<p>
+            Cette scène parle immédiatement au regard :
+            elle évoque l’idée d’aller ensemble, de se soutenir, et d’avancer d’un même mouvement.
+            Elle peut être lue comme une métaphore de la <strong>fraternité</strong> :
+            aucune quête n’est durable si elle se vit dans l’isolement, l’orgueil ou la compétition permanente.
+          </p>
+<!-- Bague au milieu (menu 3) -->
+
+<h3>2) Dépouillement et humilité : servir avant de paraître</h3>
+<p>
+            L’interprétation la plus connue associe ce motif à un idéal de <strong>dépouillement</strong> :
+            choisir l’essentiel, ne pas confondre l’apparence et la valeur,
+            et garder l’humilité nécessaire à toute démarche exigeante.
+            Dans notre Ordre, cette lecture est centrale :
+            la symbolique n’est pas faite pour « se donner un style », mais pour rappeler un devoir intérieur.
+          </p>
+<h3>3) L’abréviation et le Nom : un sceau qui « dit ce que nous sommes »</h3>
+<p>
+            Le sceau n’est pas seulement une image : c’est un résumé.
+            Il renvoie à notre nom :
+            <strong>Ordre Sacré des Neuf Templiers de Jérusalem</strong> — <strong>O.S.D.9.T.D.J.</strong>.
+            Il rappelle notre vocation : <strong>servir</strong>, <strong>protéger</strong>, <strong>étudier</strong>,
+            dans une démarche culturelle, éducative et caritative.
+          </p>
+<div class="soft-sep"></div>
+<p class="notice">
+            Le sceau est un signe de reconnaissance et de cohérence visuelle.
+            Il n’a pas pour but d’imiter une autorité historique : il transmet une mémoire,
+            et invite à la responsabilité.
+          </p>
+</div>
+</details>
+
+<!-- ✅ Signature + bas identique -->
+<div class="nndnn-banner" aria-label="Signature templière nnDnn">
+  <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;">
+  <div class="nndnn-text">nnDnn</div>
+  <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;">
+</div>
+
+<nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
+  <a class="tab" href="index.html">🏠 Accueil</a>
+  <a class="tab" href="quinoussommes.html">← Qui nous sommes</a>
+  <a class="tab" href="histoire.html">📖 Notre histoire</a>
+  <a class="tab" href="contact.html">📞 Contact</a>
+</nav>
+
+<div class="cta-ordres" aria-label="Accès rapide">
+  <a href="quinoussommes.html">← Retour : Qui nous sommes</a>
+  <a href="histoire.html">📖 Découvrir : Notre histoire</a>
+  <a href="ordres-historiques.html">📜 Découvrir : Ordres historiques</a>
+</div>
+
+<div class="footer">
+  © O.S.D.9.T.D.J. Association Loi 1901 – Tous droits réservés •
+  <a href="mentions.html">Informations officielles</a> •
+  <a href="cookies.html">Cookies</a>
+</div>
+
+</div>
+</div>
+</body>
+</html>
