@@ -575,12 +575,23 @@
   }
 }
 
+/* ✅ MODIF CHIRURGICALE : bouton jaune -> version COULISSANTE (1 seul bloc) */
 .cta-ordres{
   margin: 18px auto 6px;
   text-align:center;
+  width:100%;
+  display:flex;
+  justify-content:center;
 }
-.cta-ordres a{
-  display:inline-block;
+.cta-ordres .cta-slider{
+  display:inline-flex;
+  align-items:center;
+  gap:18px;
+  max-width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
   padding:12px 18px;
   border-radius:999px;
   background: linear-gradient(180deg, rgba(214,167,40,0.98), rgba(214,167,40,0.78));
@@ -589,22 +600,24 @@
     0 10px 24px rgba(0,0,0,0.45),
     0 0 0 1px rgba(0,0,0,0.22) inset,
     0 0 18px rgba(214,167,40,0.18);
+}
+.cta-ordres .cta-slider::-webkit-scrollbar{ display:none; }
+.cta-ordres .cta-slider a{
+  flex:0 0 auto;
   color:#140b02;
   font-family:'Cinzel',serif;
   font-weight:800;
   letter-spacing:0.03em;
   text-decoration:none;
   text-transform:uppercase;
-  transition: transform 0.16s ease, filter 0.16s ease;
-  margin: 6px 6px 0;
+  white-space:nowrap;
 }
-.cta-ordres a:hover{
-  transform: translateY(-1px);
-  filter: brightness(1.04);
-}
-.cta-ordres a:active{
-  transform: translateY(0px);
-  filter: brightness(0.98);
+.cta-ordres .cta-slider a:hover{ text-decoration:underline; }
+.cta-ordres .divider{
+  width:1px;
+  height:20px;
+  background: rgba(20,11,2,0.25);
+  flex: 0 0 auto;
 }
 
 .footer{
@@ -988,10 +1001,15 @@
   <a class="tab" href="contact.html">  Contact</a>
 </nav>
 
+<!-- ✅ BOUTON JAUNE COULISSANT (1 seul bloc) -->
 <div class="cta-ordres" aria-label="Accès rapide">
-  <a href="quinoussommes.html"> Qui nous sommes</a>
-  <a href="histoire.html">  Notre histoire</a>
-  <a href="ordres-historiques.html"> Ordres historiques</a>
+  <div class="cta-slider" role="navigation" aria-label="Accès rapides">
+    <a href="quinoussommes.html">Qui nous sommes</a>
+    <span class="divider" aria-hidden="true"></span>
+    <a href="histoire.html">Notre histoire</a>
+    <span class="divider" aria-hidden="true"></span>
+    <a href="ordres-historiques.html">Ordres historiques</a>
+  </div>
 </div>
 
 <div class="footer">
