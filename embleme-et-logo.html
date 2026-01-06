@@ -180,25 +180,25 @@
     .hero img{
       display:block;
       width:100%;
-      height:320px;
-      object-fit:cover;
-      object-position:center bottom;
+      height:auto;
+      object-fit:contain;
+      object-position:center;
+      background:rgba(0,0,0,0.15);
+      max-height:320px;
     }
     @media (max-width: 600px){
-      .hero img{ height:220px; object-position:center bottom; }
+      .hero img{ max-height:220px; }
     }
-    /* ✅ MODIF CHIRURGICALE : tablettes (meilleur cadrage / moins “zoom”) */
+    /* ✅ MODIF CHIRURGICALE : tablettes */
     @media (min-width: 700px) and (max-width: 899px){
       .hero img{
-        height:280px;
-        object-position:center 38%;
+        max-height:280px;
       }
     }
-    /* ✅ MODIF CHIRURGICALE : grands écrans (moins agressif que 420) */
+    /* ✅ MODIF CHIRURGICALE : grands écrans */
     @media (min-width: 900px){
       .hero img{
-        height:360px;
-        object-position:center 38%;
+        max-height:360px;
       }
     }
 
