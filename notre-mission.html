@@ -307,6 +307,43 @@
   }
   .notice strong{ color:#ffeeb5; }
 
+  /* ✅ ACCORDÉONS (uniquement pour les sections sans photo) */
+  .drop{
+    position:relative;
+    margin:0 auto;
+    max-width:880px;
+  }
+  .drop summary{
+    list-style:none;
+    cursor:pointer;
+    user-select:none;
+    padding:10px 12px;
+    border-radius:14px;
+    border:1px solid rgba(214,167,40,0.45);
+    background:rgba(0,0,0,0.22);
+    backdrop-filter: blur(6px);
+    box-shadow:0 10px 22px rgba(0,0,0,0.30);
+    font-family:'Cinzel',serif;
+    font-weight:800;
+    letter-spacing:0.04em;
+    color:var(--or);
+    text-transform:uppercase;
+    text-align:center;
+  }
+  .drop summary::-webkit-details-marker{ display:none; }
+  .drop summary::after{
+    content:"▾";
+    display:inline-block;
+    margin-left:10px;
+    transform: translateY(-1px);
+    opacity:0.9;
+  }
+  .drop[open] summary::after{ content:"▴"; }
+  .drop .drop-body{
+    position:relative;
+    margin-top:12px;
+  }
+
   .tabs{
     margin:10px auto 18px;
     display:inline-flex;
@@ -512,31 +549,41 @@
       </figure>
     </section>
 
+    <!-- ✅ SECTION SANS PHOTO => MENU DÉROULANT -->
     <section aria-label="Fraternité associative" class="section-card alt">
-      <h3>Une fraternité associative structurée</h3>
-      <p>
-        L’O.S.D.9.T.D.J. est également une <strong>fraternité humaine et associative</strong>, fondée sur la solidarité, le respect mutuel,
-        la loyauté et la responsabilité partagée entre ses membres.
-      </p>
-      <p>
-        Cette fraternité constitue un <strong>socle humain, moral et organisationnel</strong>, indispensable à la cohérence et à la continuité
-        de l’action associative. Elle favorise l’entraide, la transmission interne des valeurs, la stabilité des engagements et la capacité
-        à mener des projets collectifs durables.
-      </p>
+      <details class="drop">
+        <summary>Une fraternité associative structurée</summary>
+        <div class="drop-body">
+          <p>
+            L’O.S.D.9.T.D.J. est également une <strong>fraternité humaine et associative</strong>, fondée sur la solidarité, le respect mutuel,
+            la loyauté et la responsabilité partagée entre ses membres.
+          </p>
+          <p>
+            Cette fraternité constitue un <strong>socle humain, moral et organisationnel</strong>, indispensable à la cohérence et à la continuité
+            de l’action associative. Elle favorise l’entraide, la transmission interne des valeurs, la stabilité des engagements et la capacité
+            à mener des projets collectifs durables.
+          </p>
+        </div>
+      </details>
     </section>
 
+    <!-- ✅ SECTION SANS PHOTO => MENU DÉROULANT -->
     <section aria-label="Démarche initiatique" class="section-card">
-      <h3>Une démarche initiatique interne, maîtrisée et encadrée</h3>
-      <p>
-        La démarche de l’O.S.D.9.T.D.J. <strong>prend racine dans une tradition initiatique structurée</strong>, héritée des ordres chevaleresques
-        et des écoles de pensée médiévales. Cette dimension initiatique constitue un <strong>cadre interne</strong>, destiné à former les membres,
-        à assurer la discipline, la cohérence morale et la continuité de l’esprit de l’Ordre.
-      </p>
-      <p>
-        Cette initiation est <strong>fermée, volontaire et interne</strong>. Elle <strong>n’a pas vocation à être pratiquée, enseignée ou imposée au public</strong>.
-        Ce qui est proposé au public relève exclusivement d’une <strong>approche culturelle, historique et pédagogique</strong>, sans engagement requis,
-        sans pratique cultuelle et sans orientation spirituelle imposée.
-      </p>
+      <details class="drop">
+        <summary>Une démarche initiatique interne, maîtrisée et encadrée</summary>
+        <div class="drop-body">
+          <p>
+            La démarche de l’O.S.D.9.T.D.J. <strong>prend racine dans une tradition initiatique structurée</strong>, héritée des ordres chevaleresques
+            et des écoles de pensée médiévales. Cette dimension initiatique constitue un <strong>cadre interne</strong>, destiné à former les membres,
+            à assurer la discipline, la cohérence morale et la continuité de l’esprit de l’Ordre.
+          </p>
+          <p>
+            Cette initiation est <strong>fermée, volontaire et interne</strong>. Elle <strong>n’a pas vocation à être pratiquée, enseignée ou imposée au public</strong>.
+            Ce qui est proposé au public relève exclusivement d’une <strong>approche culturelle, historique et pédagogique</strong>, sans engagement requis,
+            sans pratique cultuelle et sans orientation spirituelle imposée.
+          </p>
+        </div>
+      </details>
     </section>
 
     <section aria-label="Servir" class="section-card">
@@ -559,19 +606,24 @@
       <p>Servir, c’est incarner les valeurs dans les actes, et non dans les discours.</p>
     </section>
 
+    <!-- ✅ SECTION SANS PHOTO => MENU DÉROULANT -->
     <section aria-label="Protéger" class="section-card alt">
-      <h3>Protéger le patrimoine et la mémoire templière</h3>
-      <p>
-        Protéger signifie <strong>veiller, préserver et transmettre</strong>. L’O.S.D.9.T.D.J. œuvre à la <strong>protection</strong>, à la
-        <strong>valorisation</strong> et à la <strong>transmission</strong> du patrimoine templier et médiéval, compris comme un héritage
-        <strong>historique, culturel et symbolique</strong>.
-      </p>
-      <p>
-        Cette mission s’exerce par : une approche <strong>documentée, rigoureuse et respectueuse des sources</strong> ; la prévention des confusions,
-        récupérations et interprétations abusives ; la reconnaissance et le respect des autres ordres et traditions historiques, chacun dans sa
-        légitimité propre.
-      </p>
-      <p>Il ne s’agit ni de revendiquer une autorité, ni d’imiter une institution historique, mais de <strong>préserver une mémoire et un patrimoine communs</strong>.</p>
+      <details class="drop">
+        <summary>Protéger le patrimoine et la mémoire templière</summary>
+        <div class="drop-body">
+          <p>
+            Protéger signifie <strong>veiller, préserver et transmettre</strong>. L’O.S.D.9.T.D.J. œuvre à la <strong>protection</strong>, à la
+            <strong>valorisation</strong> et à la <strong>transmission</strong> du patrimoine templier et médiéval, compris comme un héritage
+            <strong>historique, culturel et symbolique</strong>.
+          </p>
+          <p>
+            Cette mission s’exerce par : une approche <strong>documentée, rigoureuse et respectueuse des sources</strong> ; la prévention des confusions,
+            récupérations et interprétations abusives ; la reconnaissance et le respect des autres ordres et traditions historiques, chacun dans sa
+            légitimité propre.
+          </p>
+          <p>Il ne s’agit ni de revendiquer une autorité, ni d’imiter une institution historique, mais de <strong>préserver une mémoire et un patrimoine communs</strong>.</p>
+        </div>
+      </details>
     </section>
 
     <section aria-label="Étudier" class="section-card">
@@ -614,63 +666,96 @@
       </p>
     </section>
 
+    <!-- ✅ SECTION SANS PHOTO => MENU DÉROULANT -->
     <section aria-label="Ouverture culturelle et relations" class="section-card">
-      <h3>Une ouverture culturelle, spirituelle et partenariale respectueuse des libertés</h3>
-      <p>
-        Dans le cadre de sa mission culturelle, l’O.S.D.9.T.D.J. entretient des <strong>relations amicales, respectueuses et partenariales</strong>
-        avec des acteurs du monde <strong>culturel, patrimonial, intellectuel et religieux</strong>, chacun agissant dans le cadre de ses propres
-        institutions, règles et responsabilités.
-      </p>
-      <p>
-        L’association <strong>n’organise pas de culte</strong>, ne dirige aucune pratique religieuse et n’exerce aucune autorité spirituelle.
-        Elle se situe comme un <strong>pont culturel et humain</strong>, favorisant le dialogue, la compréhension mutuelle et la transmission du sens,
-        sans confusion des rôles.
-      </p>
-      <p>
-        Les membres de l’O.S.D.9.T.D.J. demeurent <strong>entièrement libres</strong>, à titre strictement personnel, de participer — ou non — à des
-        offices, cérémonies ou pratiques religieuses, selon leurs convictions individuelles. Ces démarches relèvent exclusivement de la sphère privée
-        et n’engagent en aucun cas l’association.
-      </p>
-      <p>
-        Lorsque l’O.S.D.9.T.D.J. est présent dans des <strong>églises, abbayes ou lieux religieux</strong>, cette présence s’inscrit à titre
-        <strong>culturel, symbolique ou patrimonial</strong>, toujours dans le respect des autorités compétentes et des lieux concernés. Cette posture
-        permet de maintenir des relations sereines et respectueuses avec les Églises et institutions religieuses, tout en garantissant la
-        <strong>liberté de conscience</strong> de chacun.
-      </p>
+      <details class="drop">
+        <summary>Une ouverture culturelle, spirituelle et partenariale respectueuse des libertés</summary>
+        <div class="drop-body">
+          <p>
+            Dans le cadre de sa mission culturelle, l’O.S.D.9.T.D.J. entretient des <strong>relations amicales, respectueuses et partenariales</strong>
+            avec des acteurs du monde <strong>culturel, patrimonial, intellectuel et religieux</strong>, chacun agissant dans le cadre de ses propres
+            institutions, règles et responsabilités.
+          </p>
+          <p>
+            L’association <strong>n’organise pas de culte</strong>, ne dirige aucune pratique religieuse et n’exerce aucune autorité spirituelle.
+            Elle se situe comme un <strong>pont culturel et humain</strong>, favorisant le dialogue, la compréhension mutuelle et la transmission du sens,
+            sans confusion des rôles.
+          </p>
+          <p>
+            Les membres de l’O.S.D.9.T.D.J. demeurent <strong>entièrement libres</strong>, à titre strictement personnel, de participer — ou non — à des
+            offices, cérémonies ou pratiques religieuses, selon leurs convictions individuelles. Ces démarches relèvent exclusivement de la sphère privée
+            et n’engagent en aucun cas l’association.
+          </p>
+          <p>
+            Lorsque l’O.S.D.9.T.D.J. est présent dans des <strong>églises, abbayes ou lieux religieux</strong>, cette présence s’inscrit à titre
+            <strong>culturel, symbolique ou patrimonial</strong>, toujours dans le respect des autorités compétentes et des lieux concernés. Cette posture
+            permet de maintenir des relations sereines et respectueuses avec les Églises et institutions religieuses, tout en garantissant la
+            <strong>liberté de conscience</strong> de chacun.
+          </p>
+        </div>
+      </details>
     </section>
 
+    <!-- ✅ SECTION SANS PHOTO => MENU DÉROULANT -->
     <section aria-label="Actions concrètes" class="section-card alt">
-      <h3>Des actions concrètes pour faire vivre la mission</h3>
-      <p>
-        Pour mener à bien ses missions, l’association organise et participe à de nombreuses activités, nécessaires à la fois à la <strong>diffusion culturelle</strong>
-        et au <strong>financement</strong> de ses actions associatives.
-      </p>
-      <p>
-        Parmi celles-ci : organisation de <strong>séminaires</strong>, conférences et rencontres culturelles ; mise en place de <strong>galas associatifs</strong> et
-        événements de soutien ; tenue de <strong>buvettes</strong> et actions logistiques lors de fêtes locales ; participation active à des <strong>fêtes médiévales</strong>
-        et manifestations historiques ; organisation d’<strong>expositions</strong> dédiées à l’histoire templière et médiévale (présentations pédagogiques, panneaux,
-        objets et supports culturels), notamment dans des <strong>châteaux</strong>, anciennes <strong>abbayes</strong> et lieux patrimoniaux, en partenariat avec les acteurs
-        locaux et dans le respect des sites ; actions <strong>caritatives</strong>, <strong>humanitaires</strong> et <strong>solidaires</strong>.
-      </p>
+      <details class="drop">
+        <summary>Des actions concrètes pour faire vivre la mission</summary>
+        <div class="drop-body">
+          <p>
+            Pour mener à bien ses missions, l’association organise et participe à de nombreuses activités, nécessaires à la fois à la <strong>diffusion culturelle</strong>
+            et au <strong>financement</strong> de ses actions associatives.
+          </p>
+          <p>
+            Parmi celles-ci : organisation de <strong>séminaires</strong>, conférences et rencontres culturelles ; mise en place de <strong>galas associatifs</strong> et
+            événements de soutien ; tenue de <strong>buvettes</strong> et actions logistiques lors de fêtes locales ; participation active à des <strong>fêtes médiévales</strong>
+            et manifestations historiques ; organisation d’<strong>expositions</strong> dédiées à l’histoire templière et médiévale (présentations pédagogiques, panneaux,
+            objets et supports culturels), notamment dans des <strong>châteaux</strong>, anciennes <strong>abbayes</strong> et lieux patrimoniaux, en partenariat avec les acteurs
+            locaux et dans le respect des sites ; actions <strong>caritatives</strong>, <strong>humanitaires</strong> et <strong>solidaires</strong>.
+          </p>
 
-      <div class="notice" role="note" aria-label="Clarification">
-        <strong>Clarification publique :</strong> les références historiques et symboliques de l’association sont présentées comme un contenu culturel et pédagogique.
-        Elles n’emportent aucune revendication institutionnelle et n’ont pas de valeur cultuelle.
-      </div>
+          <div class="notice" role="note" aria-label="Clarification">
+            <strong>Clarification publique :</strong> les références historiques et symboliques de l’association sont présentées comme un contenu culturel et pédagogique.
+            Elles n’emportent aucune revendication institutionnelle et n’ont pas de valeur cultuelle.
+          </div>
+        </div>
+      </details>
     </section>
 
+    <!-- ✅ SECTION SANS PHOTO => MENU DÉROULANT -->
     <section aria-label="Conclusion" class="section-card">
-      <h3>Une mission claire, assumée et responsable</h3>
-      <p>
-        L’O.S.D.9.T.D.J. agit dans un esprit de <strong>transparence</strong>, de <strong>respect des lois</strong> et de <strong>responsabilité associative</strong>.
-        Ses titres, symboles et références sont honorifiques, culturels et pédagogiques. Ils ne visent ni à concurrencer, ni à imiter, ni à remplacer des
-        institutions religieuses, historiques ou souveraines.
-      </p>
-      <p>
-        Sa mission peut se résumer simplement : <strong>servir, protéger, étudier et transmettre</strong>, en s’appuyant sur une <strong>structure initiatique interne
-        maîtrisée</strong>, au service du bien commun, de la culture, du patrimoine et du vivre-ensemble.
-      </p>
+      <details class="drop">
+        <summary>Une mission claire, assumée et responsable</summary>
+        <div class="drop-body">
+          <p>
+            L’O.S.D.9.T.D.J. agit dans un esprit de <strong>transparence</strong>, de <strong>respect des lois</strong> et de <strong>responsabilité associative</strong>.
+            Ses titres, symboles et références sont honorifiques, culturels et pédagogiques. Ils ne visent ni à concurrencer, ni à imiter, ni à remplacer des
+            institutions religieuses, historiques ou souveraines.
+          </p>
+          <p>
+            Sa mission peut se résumer simplement : <strong>servir, protéger, étudier et transmettre</strong>, en s’appuyant sur une <strong>structure initiatique interne
+            maîtrisée</strong>, au service du bien commun, de la culture, du patrimoine et du vivre-ensemble.
+          </p>
+        </div>
+      </details>
     </section>
+
+    <!-- ✅ ENCADRÉ FINAL (PAS DE MENU DÉROULANT) -->
+    <div class="notice" role="note" aria-label="Infos et engagement" style="margin-top:10px;">
+      <strong>Une question, une envie de nous rejoindre ?</strong><br><br>
+      Si vous souhaitez mieux comprendre notre démarche, vérifier nos informations officielles, ou simplement échanger avec nous :
+      <strong>n’hésitez pas</strong>. Nous répondrons avec clarté et sérieux, et surtout avec plaisir.<br><br>
+      <strong>Le plus important :</strong> l’O.S.D.9.T.D.J. vit grâce aux femmes et aux hommes qui décident de s’engager.
+      Si nos valeurs vous parlent, si vous aimez l’histoire, le patrimoine, la transmission et l’action concrète,
+      <strong>nous vous attendons</strong> : venez nous rencontrer et participer à l’aventure associative.<br><br>
+      <strong>Accès rapide :</strong>
+      <a href="contact.html">Contact</a> •
+      <a href="statuts.html">Statuts</a> •
+      <a href="mentions.html">Mentions légales</a> •
+      <a href="faq.html">FAQ</a>
+      <br><br>
+      <strong>Prêt(e) à franchir le pas ?</strong> Découvrez comment adhérer ici :
+      <a href="adhesion.html"><strong>Adhésion</strong></a>
+    </div>
 
     <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
       <a class="tab" href="index.html"> Accueil</a>
