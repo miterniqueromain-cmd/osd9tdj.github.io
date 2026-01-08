@@ -2,47 +2,39 @@ name: Generate Sitemap Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  generate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Generate sitemap-pages.xml
         run: |
+          TODAY=$(date -u +"%Y-%m-%d")
+
           echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap-pages.xml
           echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap-pages.xml
 
-          # Homepage canonique
           echo "  <url>" >> sitemap-pages.xml
           echo "    <loc>https://osd9tdj.org/</loc>" >> sitemap-pages.xml
-          echo "    <lastmod>$(date -u +"%Y-%m-%d")</lastmod>" >> sitemap-pages.xml
+          echo "    <lastmod>$TODAY</lastmod>" >> sitemap-pages.xml
           echo "    <changefreq>weekly</changefreq>" >> sitemap-pages.xml
           echo "    <priority>1.0</priority>" >> sitemap-pages.xml
           echo "  </url>" >> sitemap-pages.xml
 
-          # Toutes les pages HTML
           for file in *.html; do
-            # priorités un peu plus “pro” sans spam
-            prio="0.80"
-            freq="monthly"
-            if [ "$file" = "index.html" ]; then prio="0.90"; freq="weekly"; fi
-            if [ "$file" = "notre-mission.html" ]; then prio="0.98"; freq="monthly"; fi
-            if [ "$file" = "adhesion.html" ]; then prio="0.95"; freq="monthly"; fi
-            if [ "$file" = "contact.html" ]; then prio="0.75"; freq="yearly"; fi
-            if [ "$file" = "mentions.html" ]; then prio="0.50"; freq="yearly"; fi
-            if [ "$file" = "cookies.html" ]; then prio="0.40"; freq="yearly"; fi
-
             echo "  <url>" >> sitemap-pages.xml
             echo "    <loc>https://osd9tdj.org/$file</loc>" >> sitemap-pages.xml
-            echo "    <lastmod>$(date -u +"%Y-%m-%d")</lastmod>" >> sitemap-pages.xml
-            echo "    <changefreq>$freq</changefreq>" >> sitemap-pages.xml
-            echo "    <priority>$prio</priority>" >> sitemap-pages.xml
+            echo "    <lastmod>$TODAY</lastmod>" >> sitemap-pages.xml
+            echo "    <changefreq>monthly</changefreq>" >> sitemap-pages.xml
+            echo "    <priority>0.80</priority>" >> sitemap-pages.xml
             echo "  </url>" >> sitemap-pages.xml
           done
 
