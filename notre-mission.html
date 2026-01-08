@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="utf-8"/>
 <title>Notre mission | O.S.D.9.T.D.J. – Ordre Sacré des Neuf Templiers de Jérusalem</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<!-- SEO -->
 <meta content="Découvrir la mission de l’O.S.D.9.T.D.J. : servir, protéger le patrimoine templier et médiéval, étudier et transmettre par des actions culturelles, éducatives et solidaires (association loi 1901)." name="description"/>
-<meta content="OSD9TDJ, Ordre Sacré des Neuf Templiers de Jérusalem, notre mission, servir, protéger, étudier, transmettre, patrimoine templier, expositions, fêtes médiévales, conférences, séminaires, association loi 1901" name="keywords"/>
+<meta content="OSD9TDJ, Ordre Sacré des Neuf Templiers de Jérusalem, notre mission, servir, protéger, étudier, transmettre, patrimoine templier, patrimoine médiéval, expositions, châteaux, abbayes, fêtes médiévales, conférences, séminaires, galas, buvettes, caritatif, humanitaire, association loi 1901" name="keywords"/>
 <link href="https://osd9tdj.org/notre-mission.html" rel="canonical"/>
+
+<!-- SEO avancé -->
 <meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/>
 <meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="googlebot"/>
 <meta content="Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J." name="author"/>
@@ -15,6 +18,7 @@
 <meta content="7 days" name="revisit-after"/>
 <meta content="strict-origin-when-cross-origin" name="referrer"/>
 
+<!-- OpenGraph -->
 <meta content="Notre mission | O.S.D.9.T.D.J." property="og:title"/>
 <meta content="Servir, protéger, étudier et transmettre : la mission publique de l’O.S.D.9.T.D.J. (association loi 1901)." property="og:description"/>
 <meta content="https://osd9tdj.org/mission.PNG" property="og:image"/>
@@ -23,14 +27,18 @@
 <meta content="O.S.D.9.T.D.J." property="og:site_name"/>
 <meta content="fr_FR" property="og:locale"/>
 
+<!-- Twitter -->
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Notre mission | O.S.D.9.T.D.J." name="twitter:title"/>
 <meta content="Servir, protéger, étudier et transmettre : la mission publique de l’O.S.D.9.T.D.J." name="twitter:description"/>
 <meta content="https://osd9tdj.org/mission.PNG" name="twitter:image"/>
 
+<!-- WATERMARK INVISIBLE (renforcé) -->
 <meta content="WTRMK-IX-ALPHA-2026-OSD9TDJ-NOTRE-MISSION" name="osd9tdj-signature"/>
-<meta content="OSD9TDJ|NOTRE-MISSION|IX|2026|SERVIR|PROTEGER|ETUDIER|TRANSMETTRE|PATRIMOINE|EXPOSITIONS" name="osd9tdj-watermark"/>
+<meta content="OSD9TDJ|NOTRE-MISSION|IX|2026|SERVIR|PROTEGER|ETUDIER|TRANSMETTRE|PATRIMOINE|EXPOSITIONS|CHATEAUX|ABBAYES|SEMINAIRES|GALAS|BUVETTES|FETES-MEDIEVALES" name="osd9tdj-watermark"/>
 <meta content="WTRMK-IX-ALPHA-2026-OSD9TDJ-NOTRE-MISSION-LOCK" name="osd9tdj-signature-2"/>
+<meta content="WTRMK-IX-ALPHA-2026-OSD9TDJ-NOTRE-MISSION-PROVENANCE" name="osd9tdj-signature-3"/>
+<meta content="OSD9TDJ|NM|PUBLIC|LAIQUE|CULTURE|PATRIMOINE|SOLIDARITE|IX|LOCK" name="osd9tdj-watermark-2"/>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
 
@@ -267,6 +275,23 @@
     transform:translateY(-50%);
   }
 
+  figure.inner-img{
+    margin:10px auto 14px;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 0 28px rgba(0,0,0,0.85);
+    border:2px solid rgba(214,167,40,0.82);
+    background:rgba(0,0,0,0.12);
+    width:100%;
+    max-width:820px;
+  }
+  figure.inner-img img{
+    display:block;
+    width:100%;
+    height:auto;
+    max-width:100%;
+  }
+
   .notice{
     position:relative;
     margin:18px auto;
@@ -281,56 +306,6 @@
     text-align:left;
   }
   .notice strong{ color:#ffeeb5; }
-
-  .media-grid-2{
-    display:grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap:14px;
-    align-items:stretch;
-    margin-top:10px;
-  }
-  .media-card{
-    margin:0;
-    border-radius:16px;
-    overflow:hidden;
-    border:2px solid rgba(214,167,40,0.55);
-    background:rgba(0,0,0,0.18);
-    box-shadow:0 0 22px rgba(0,0,0,0.70);
-  }
-  .media-card img{
-    display:block;
-    width:100%;
-    height:auto;
-    max-width:100%;
-  }
-  @media (max-width:980px){
-    .media-grid-2{ grid-template-columns:1fr; }
-  }
-
-  .tri-grid{
-    display:grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap:14px;
-    align-items:stretch;
-    margin-top:10px;
-  }
-  .tri-card{
-    margin:0;
-    border-radius:16px;
-    overflow:hidden;
-    border:2px solid rgba(214,167,40,0.55);
-    background:rgba(0,0,0,0.18);
-    box-shadow:0 0 22px rgba(0,0,0,0.70);
-  }
-  .tri-card img{
-    display:block;
-    width:100%;
-    height:auto;
-    max-width:100%;
-  }
-  @media (max-width:980px){
-    .tri-grid{ grid-template-columns:1fr; }
-  }
 
   .tabs{
     margin:10px auto 18px;
@@ -460,7 +435,16 @@
       "étudier",
       "transmettre",
       "patrimoine templier",
+      "patrimoine médiéval",
       "expositions",
+      "châteaux",
+      "abbayes",
+      "fêtes médiévales",
+      "conférences",
+      "séminaires",
+      "galas",
+      "buvettes",
+      "actions solidaires",
       "association loi 1901"
     ]
   }
@@ -473,249 +457,245 @@
 <div aria-hidden="true" class="frame-fixed"></div>
 
 <div aria-label="Menu du site" class="top-menu">
-<details>
-<summary title="Menu">⋯</summary>
-<div aria-label="Navigation" class="menu-panel" role="menu">
-<a href="index.html"> Accueil</a>
-<a href="quinoussommes.html"> Qui nous sommes</a>
-<a href="histoire.html"> Notre histoire</a>
-<a href="notre-mission.html"> Notre mission</a>
-<a href="vocation.html"> Vocation historique</a>
-<a href="ordres-historiques.html"> Ordres historiques</a>
-<a href="embleme-et-logo.html"> Emblème et logo</a>
-<a href="faq.html"> FAQ</a>
-<a href="activites.html"> Activités</a>
-<a href="adhesion.html"> Adhésion</a>
-<a href="commanderie.html"> Commanderie</a>
-<a href="cotisations.html"> Cotisations</a>
-<a href="assurance.html"> Assurance</a>
-<a href="boutique.html"> Boutique</a>
-<a href="statuts.html"> Statuts</a>
-<a href="contact.html"> Contact</a>
-<a href="mentions.html"> Mentions légales</a>
-<a href="cookies.html"> Cookies</a>
-</div>
-</details>
+  <details>
+    <summary title="Menu">⋯</summary>
+    <div aria-label="Navigation" class="menu-panel" role="menu">
+      <a href="index.html"> Accueil</a>
+      <a href="quinoussommes.html"> Qui nous sommes</a>
+      <a href="histoire.html"> Notre histoire</a>
+      <a href="notre-mission.html"> Notre mission</a>
+      <a href="vocation.html"> Vocation historique</a>
+      <a href="ordres-historiques.html"> Ordres historiques</a>
+      <a href="embleme-et-logo.html"> Emblème et logo</a>
+      <a href="faq.html"> FAQ</a>
+      <a href="activites.html"> Activités</a>
+      <a href="adhesion.html"> Adhésion</a>
+      <a href="commanderie.html"> Commanderie</a>
+      <a href="cotisations.html"> Cotisations</a>
+      <a href="assurance.html"> Assurance</a>
+      <a href="boutique.html"> Boutique</a>
+      <a href="statuts.html"> Statuts</a>
+      <a href="contact.html"> Contact</a>
+      <a href="mentions.html"> Mentions légales</a>
+      <a href="cookies.html"> Cookies</a>
+    </div>
+  </details>
 </div>
 
 <div class="viewport-scroll">
-<div class="container">
+  <div class="container">
 
-<div class="hero">
-  <img src="mission.PNG" alt="Notre mission – O.S.D.9.T.D.J." onerror="this.onerror=null; this.src='mission.png';">
-</div>
+    <!-- ✅ HERO : mission.PNG en haut -->
+    <div class="hero">
+      <img src="mission.PNG" alt="Notre mission – O.S.D.9.T.D.J." onerror="this.onerror=null; this.src='mission.png';">
+    </div>
 
-<h1>ORDRE SACRÉ DES NEUF TEMPLIERS DE JÉRUSALEM</h1>
-<h2>Notre mission</h2>
+    <h1>ORDRE SACRÉ DES NEUF TEMPLIERS DE JÉRUSALEM</h1>
+    <h2>Notre mission</h2>
 
-<section aria-label="Introduction" class="section-card">
-  <p>
-    L’<strong>Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</strong> est une <strong>association loi 1901</strong>, à vocation
-    <strong>culturelle, historique, éducative et caritative</strong>.
-    Sa mission est de faire vivre, de manière contemporaine, responsable et accessible, un <strong>héritage de valeurs</strong>,
-    un <strong>patrimoine historique</strong> et une <strong>démarche de service</strong>, au bénéfice du plus grand nombre.
-  </p>
-  <p>
-    L’O.S.D.9.T.D.J. <strong>n’est pas la continuité juridique, religieuse ou institutionnelle</strong> de l’Ordre du Temple médiéval,
-    dissous en 1312. Il s’inscrit dans une démarche <strong>laïque, associative et culturelle</strong>, respectueuse du droit,
-    des institutions et des traditions historiques existantes.
-  </p>
-</section>
+    <section aria-label="Introduction" class="section-card">
+      <p>
+        L’<strong>Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</strong> est une <strong>association loi 1901</strong>, à vocation
+        <strong>culturelle, historique, éducative et caritative</strong>.
+        Sa mission est de faire vivre, de manière contemporaine, responsable et accessible, un <strong>héritage de valeurs</strong>,
+        un <strong>patrimoine historique</strong> et une <strong>démarche de service</strong>, au bénéfice du plus grand nombre.
+      </p>
+      <p>
+        L’O.S.D.9.T.D.J. <strong>n’est pas la continuité juridique, religieuse ou institutionnelle</strong> de l’Ordre du Temple médiéval,
+        dissous en 1312. Il s’inscrit dans une démarche <strong>laïque, associative et culturelle</strong>, respectueuse du droit,
+        des institutions et des traditions historiques existantes.
+      </p>
 
-<section aria-label="Fraternité associative" class="section-card alt">
-  <h3>Une fraternité associative structurée</h3>
-  <p>
-    L’O.S.D.9.T.D.J. est également une <strong>fraternité humaine et associative</strong>, fondée sur la solidarité, le respect mutuel,
-    la loyauté et la responsabilité partagée entre ses membres.
-  </p>
-  <p>
-    Cette fraternité constitue un <strong>socle humain, moral et organisationnel</strong>, indispensable à la cohérence et à la continuité
-    de l’action associative. Elle favorise l’entraide, la transmission interne des valeurs, la stabilité des engagements et la capacité
-    à mener des projets collectifs durables.
-  </p>
-</section>
+      <!-- ✅ transmettre2 juste après les 2 premiers paragraphes -->
+      <figure class="inner-img">
+        <img alt="Transmission — actions et présence publique" loading="lazy" src="transmettre2.PNG"/>
+      </figure>
+    </section>
 
-<section aria-label="Démarche initiatique" class="section-card">
-  <h3>Une démarche initiatique interne, maîtrisée et encadrée</h3>
-  <p>
-    La démarche de l’O.S.D.9.T.D.J. <strong>prend racine dans une tradition initiatique structurée</strong>, héritée des ordres chevaleresques
-    et des écoles de pensée médiévales. Cette dimension initiatique constitue un <strong>cadre interne</strong>, destiné à former les membres,
-    à assurer la discipline, la cohérence morale et la continuité de l’esprit de l’Ordre.
-  </p>
-  <p>
-    Cette initiation est <strong>fermée, volontaire et interne</strong>. Elle <strong>n’a pas vocation à être pratiquée, enseignée ou imposée au public</strong>.
-    Ce qui est proposé au public relève exclusivement d’une <strong>approche culturelle, historique et pédagogique</strong>, sans engagement requis,
-    sans pratique cultuelle et sans orientation spirituelle imposée.
-  </p>
-</section>
+    <section aria-label="Fraternité associative" class="section-card alt">
+      <h3>Une fraternité associative structurée</h3>
+      <p>
+        L’O.S.D.9.T.D.J. est également une <strong>fraternité humaine et associative</strong>, fondée sur la solidarité, le respect mutuel,
+        la loyauté et la responsabilité partagée entre ses membres.
+      </p>
+      <p>
+        Cette fraternité constitue un <strong>socle humain, moral et organisationnel</strong>, indispensable à la cohérence et à la continuité
+        de l’action associative. Elle favorise l’entraide, la transmission interne des valeurs, la stabilité des engagements et la capacité
+        à mener des projets collectifs durables.
+      </p>
+    </section>
 
-<section aria-label="Servir protéger étudier transmettre" class="section-card alt">
-  <h3>Servir • Protéger • Étudier • Transmettre</h3>
-  <p>
-    Notre mission se comprend simplement à travers quatre verbes : <strong>servir</strong>, <strong>protéger</strong>, <strong>étudier</strong> et <strong>transmettre</strong>.
-    Ils expriment une démarche de responsabilité : agir, préserver, comprendre et partager.
-  </p>
+    <section aria-label="Démarche initiatique" class="section-card">
+      <h3>Une démarche initiatique interne, maîtrisée et encadrée</h3>
+      <p>
+        La démarche de l’O.S.D.9.T.D.J. <strong>prend racine dans une tradition initiatique structurée</strong>, héritée des ordres chevaleresques
+        et des écoles de pensée médiévales. Cette dimension initiatique constitue un <strong>cadre interne</strong>, destiné à former les membres,
+        à assurer la discipline, la cohérence morale et la continuité de l’esprit de l’Ordre.
+      </p>
+      <p>
+        Cette initiation est <strong>fermée, volontaire et interne</strong>. Elle <strong>n’a pas vocation à être pratiquée, enseignée ou imposée au public</strong>.
+        Ce qui est proposé au public relève exclusivement d’une <strong>approche culturelle, historique et pédagogique</strong>, sans engagement requis,
+        sans pratique cultuelle et sans orientation spirituelle imposée.
+      </p>
+    </section>
 
-  <div class="tri-grid" aria-label="Visuels mission">
-    <figure class="tri-card">
-      <img alt="Étudier — héritage culturel, historique et symbolique" loading="lazy" src="étudier.PNG"/>
-    </figure>
-    <figure class="tri-card">
-      <img alt="Servir — actions solidaires et caritatives" loading="lazy" src="servir.PNG"/>
-    </figure>
-    <figure class="tri-card">
-      <img alt="Transmettre — pédagogie et diffusion culturelle" loading="lazy" src="transmettre1.PNG"/>
-    </figure>
+    <section aria-label="Servir" class="section-card">
+      <h3>Servir</h3>
+
+      <!-- ✅ photo servir placée dans la section Servir -->
+      <figure class="inner-img">
+        <img alt="Servir — actions solidaires et caritatives" loading="lazy" src="servir.PNG"/>
+      </figure>
+
+      <p>
+        Servir signifie <strong>agir concrètement</strong>. Le service est au cœur de la mission de l’O.S.D.9.T.D.J. : il s’exprime par la présence,
+        l’aide, l’accompagnement et l’engagement au service des autres.
+      </p>
+      <p>
+        Cette mission se traduit notamment par : des <strong>actions de soutien aux plus faibles</strong> et aux personnes en situation de précarité ;
+        des initiatives d’<strong>entraide</strong>, de solidarité et de présence humaine ; une implication associative fondée sur la
+        <strong>discrétion</strong>, la <strong>dignité</strong> et la <strong>fidélité à la parole donnée</strong>.
+      </p>
+      <p>Servir, c’est incarner les valeurs dans les actes, et non dans les discours.</p>
+    </section>
+
+    <section aria-label="Protéger" class="section-card alt">
+      <h3>Protéger le patrimoine et la mémoire templière</h3>
+      <p>
+        Protéger signifie <strong>veiller, préserver et transmettre</strong>. L’O.S.D.9.T.D.J. œuvre à la <strong>protection</strong>, à la
+        <strong>valorisation</strong> et à la <strong>transmission</strong> du patrimoine templier et médiéval, compris comme un héritage
+        <strong>historique, culturel et symbolique</strong>.
+      </p>
+      <p>
+        Cette mission s’exerce par : une approche <strong>documentée, rigoureuse et respectueuse des sources</strong> ; la prévention des confusions,
+        récupérations et interprétations abusives ; la reconnaissance et le respect des autres ordres et traditions historiques, chacun dans sa
+        légitimité propre.
+      </p>
+      <p>Il ne s’agit ni de revendiquer une autorité, ni d’imiter une institution historique, mais de <strong>préserver une mémoire et un patrimoine communs</strong>.</p>
+    </section>
+
+    <section aria-label="Étudier" class="section-card">
+      <h3>Étudier</h3>
+
+      <!-- ✅ image étudiER : nom de fichier sans accent pour éviter les soucis -->
+      <figure class="inner-img">
+        <img alt="Étudier — héritage culturel, historique et symbolique" loading="lazy" src="etudier.PNG" onerror="this.onerror=null; this.src='étudier.PNG';">
+      </figure>
+
+      <p>
+        Étudier, c’est comprendre avant de transmettre. L’association développe une démarche d’<strong>étude</strong>, de <strong>recherche</strong> et
+        de <strong>réflexion</strong>, portant sur : l’histoire des Templiers et du Moyen Âge ; la symbolique, l’héraldique et les traditions
+        chevaleresques ; le contexte culturel, social et intellectuel des ordres médiévaux.
+      </p>
+      <p>
+        Cette approche est <strong>culturelle, comparative et laïque</strong>. Elle n’impose aucune croyance et ne relève d’aucune pratique cultuelle.
+      </p>
+    </section>
+
+    <section aria-label="Transmettre" class="section-card alt">
+      <h3>Transmettre : un pont entre le passé et le présent</h3>
+
+      <!-- ✅ photo transmettre1 placée dans la section Transmettre -->
+      <figure class="inner-img">
+        <img alt="Transmettre — pédagogie et diffusion culturelle" loading="lazy" src="transmettre1.PNG"/>
+      </figure>
+
+      <p>
+        Transmettre est l’une des missions essentielles de l’O.S.D.9.T.D.J. L’association agit comme un <strong>pont de transmission culturelle</strong>
+        entre le passé et le présent.
+      </p>
+      <p>
+        Sans vocation religieuse ou cultuelle, elle propose au public des <strong>récits historiques et symboliques porteurs de repères</strong>,
+        capables de nourrir la réflexion, l’imaginaire et le sens de l’engagement, notamment auprès des jeunes générations.
+      </p>
+      <p>
+        Cette transmission peut s’exercer : dans des <strong>établissements scolaires</strong>, instituts, écoles ou structures éducatives ; lors de
+        conférences, séminaires et interventions pédagogiques ; par le récit historique comme <strong>outil de repère moral, culturel et citoyen</strong>.
+      </p>
+    </section>
+
+    <section aria-label="Ouverture culturelle et relations" class="section-card">
+      <h3>Une ouverture culturelle, spirituelle et partenariale respectueuse des libertés</h3>
+      <p>
+        Dans le cadre de sa mission culturelle, l’O.S.D.9.T.D.J. entretient des <strong>relations amicales, respectueuses et partenariales</strong>
+        avec des acteurs du monde <strong>culturel, patrimonial, intellectuel et religieux</strong>, chacun agissant dans le cadre de ses propres
+        institutions, règles et responsabilités.
+      </p>
+      <p>
+        L’association <strong>n’organise pas de culte</strong>, ne dirige aucune pratique religieuse et n’exerce aucune autorité spirituelle.
+        Elle se situe comme un <strong>pont culturel et humain</strong>, favorisant le dialogue, la compréhension mutuelle et la transmission du sens,
+        sans confusion des rôles.
+      </p>
+      <p>
+        Les membres de l’O.S.D.9.T.D.J. demeurent <strong>entièrement libres</strong>, à titre strictement personnel, de participer — ou non — à des
+        offices, cérémonies ou pratiques religieuses, selon leurs convictions individuelles. Ces démarches relèvent exclusivement de la sphère privée
+        et n’engagent en aucun cas l’association.
+      </p>
+      <p>
+        Lorsque l’O.S.D.9.T.D.J. est présent dans des <strong>églises, abbayes ou lieux religieux</strong>, cette présence s’inscrit à titre
+        <strong>culturel, symbolique ou patrimonial</strong>, toujours dans le respect des autorités compétentes et des lieux concernés. Cette posture
+        permet de maintenir des relations sereines et respectueuses avec les Églises et institutions religieuses, tout en garantissant la
+        <strong>liberté de conscience</strong> de chacun.
+      </p>
+    </section>
+
+    <section aria-label="Actions concrètes" class="section-card alt">
+      <h3>Des actions concrètes pour faire vivre la mission</h3>
+      <p>
+        Pour mener à bien ses missions, l’association organise et participe à de nombreuses activités, nécessaires à la fois à la <strong>diffusion culturelle</strong>
+        et au <strong>financement</strong> de ses actions associatives.
+      </p>
+      <p>
+        Parmi celles-ci : organisation de <strong>séminaires</strong>, conférences et rencontres culturelles ; mise en place de <strong>galas associatifs</strong> et
+        événements de soutien ; tenue de <strong>buvettes</strong> et actions logistiques lors de fêtes locales ; participation active à des <strong>fêtes médiévales</strong>
+        et manifestations historiques ; organisation d’<strong>expositions</strong> dédiées à l’histoire templière et médiévale (présentations pédagogiques, panneaux,
+        objets et supports culturels), notamment dans des <strong>châteaux</strong>, anciennes <strong>abbayes</strong> et lieux patrimoniaux, en partenariat avec les acteurs
+        locaux et dans le respect des sites ; actions <strong>caritatives</strong>, <strong>humanitaires</strong> et <strong>solidaires</strong>.
+      </p>
+
+      <div class="notice" role="note" aria-label="Clarification">
+        <strong>Clarification publique :</strong> les références historiques et symboliques de l’association sont présentées comme un contenu culturel et pédagogique.
+        Elles n’emportent aucune revendication institutionnelle et n’ont pas de valeur cultuelle.
+      </div>
+    </section>
+
+    <section aria-label="Conclusion" class="section-card">
+      <h3>Une mission claire, assumée et responsable</h3>
+      <p>
+        L’O.S.D.9.T.D.J. agit dans un esprit de <strong>transparence</strong>, de <strong>respect des lois</strong> et de <strong>responsabilité associative</strong>.
+        Ses titres, symboles et références sont honorifiques, culturels et pédagogiques. Ils ne visent ni à concurrencer, ni à imiter, ni à remplacer des
+        institutions religieuses, historiques ou souveraines.
+      </p>
+      <p>
+        Sa mission peut se résumer simplement : <strong>servir, protéger, étudier et transmettre</strong>, en s’appuyant sur une <strong>structure initiatique interne
+        maîtrisée</strong>, au service du bien commun, de la culture, du patrimoine et du vivre-ensemble.
+      </p>
+    </section>
+
+    <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
+      <a class="tab" href="index.html"> Accueil</a>
+      <a class="tab" href="contact.html"> Contact</a>
+    </nav>
+
+    <div class="cta-ordres" aria-label="Accès rapide">
+      <div class="cta-slider" role="navigation" aria-label="Accès rapides">
+        <a href="quinoussommes.html">Qui nous sommes</a>
+        <span class="divider" aria-hidden="true"></span>
+        <a href="histoire.html">Notre histoire</a>
+        <span class="divider" aria-hidden="true"></span>
+        <a href="notre-mission.html">Notre mission</a>
+        <span class="divider" aria-hidden="true"></span>
+        <a href="ordres-historiques.html">Ordres historiques</a>
+      </div>
+    </div>
+
+    <div class="footer">
+      © O.S.D.9.T.D.J. Association Loi 1901 – Tous droits réservés •
+      <a href="mentions.html">Informations officielles</a> •
+      <a href="cookies.html">Cookies</a>
+    </div>
+
   </div>
-</section>
-
-<section aria-label="Servir" class="section-card">
-  <h3>Servir</h3>
-  <p>
-    Servir signifie <strong>agir concrètement</strong>. Le service est au cœur de la mission de l’O.S.D.9.T.D.J. : il s’exprime par la présence,
-    l’aide, l’accompagnement et l’engagement au service des autres.
-  </p>
-  <p>
-    Cette mission se traduit notamment par : des <strong>actions de soutien aux plus faibles</strong> et aux personnes en situation de précarité ;
-    des initiatives d’<strong>entraide</strong>, de solidarité et de présence humaine ; une implication associative fondée sur la
-    <strong>discrétion</strong>, la <strong>dignité</strong> et la <strong>fidélité à la parole donnée</strong>.
-  </p>
-  <p>Servir, c’est incarner les valeurs dans les actes, et non dans les discours.</p>
-</section>
-
-<section aria-label="Protéger" class="section-card alt">
-  <h3>Protéger le patrimoine et la mémoire templière</h3>
-  <p>
-    Protéger signifie <strong>veiller, préserver et transmettre</strong>. L’O.S.D.9.T.D.J. œuvre à la <strong>protection</strong>, à la
-    <strong>valorisation</strong> et à la <strong>transmission</strong> du patrimoine templier et médiéval, compris comme un héritage
-    <strong>historique, culturel et symbolique</strong>.
-  </p>
-  <p>
-    Cette mission s’exerce par : une approche <strong>documentée, rigoureuse et respectueuse des sources</strong> ; la prévention des confusions,
-    récupérations et interprétations abusives ; la reconnaissance et le respect des autres ordres et traditions historiques, chacun dans sa
-    légitimité propre.
-  </p>
-  <p>Il ne s’agit ni de revendiquer une autorité, ni d’imiter une institution historique, mais de <strong>préserver une mémoire et un patrimoine communs</strong>.</p>
-</section>
-
-<section aria-label="Étudier" class="section-card">
-  <h3>Étudier</h3>
-  <p>
-    Étudier, c’est comprendre avant de transmettre. L’association développe une démarche d’<strong>étude</strong>, de <strong>recherche</strong> et
-    de <strong>réflexion</strong>, portant sur : l’histoire des Templiers et du Moyen Âge ; la symbolique, l’héraldique et les traditions
-    chevaleresques ; le contexte culturel, social et intellectuel des ordres médiévaux.
-  </p>
-  <p>
-    Cette approche est <strong>culturelle, comparative et laïque</strong>. Elle n’impose aucune croyance et ne relève d’aucune pratique cultuelle.
-  </p>
-</section>
-
-<section aria-label="Transmettre" class="section-card alt">
-  <h3>Transmettre : un pont entre le passé et le présent</h3>
-  <p>
-    Transmettre est l’une des missions essentielles de l’O.S.D.9.T.D.J. L’association agit comme un <strong>pont de transmission culturelle</strong>
-    entre le passé et le présent.
-  </p>
-  <p>
-    Sans vocation religieuse ou cultuelle, elle propose au public des <strong>récits historiques et symboliques porteurs de repères</strong>,
-    capables de nourrir la réflexion, l’imaginaire et le sens de l’engagement, notamment auprès des jeunes générations.
-  </p>
-  <p>
-    Cette transmission peut s’exercer : dans des <strong>établissements scolaires</strong>, instituts, écoles ou structures éducatives ; lors de
-    conférences, séminaires et interventions pédagogiques ; par le récit historique comme <strong>outil de repère moral, culturel et citoyen</strong>.
-  </p>
-</section>
-
-<section aria-label="Ouverture culturelle et relations" class="section-card">
-  <h3>Une ouverture culturelle, spirituelle et partenariale respectueuse des libertés</h3>
-  <p>
-    Dans le cadre de sa mission culturelle, l’O.S.D.9.T.D.J. entretient des <strong>relations amicales, respectueuses et partenariales</strong>
-    avec des acteurs du monde <strong>culturel, patrimonial, intellectuel et religieux</strong>, chacun agissant dans le cadre de ses propres
-    institutions, règles et responsabilités.
-  </p>
-  <p>
-    L’association <strong>n’organise pas de culte</strong>, ne dirige aucune pratique religieuse et n’exerce aucune autorité spirituelle.
-    Elle se situe comme un <strong>pont culturel et humain</strong>, favorisant le dialogue, la compréhension mutuelle et la transmission du sens,
-    sans confusion des rôles.
-  </p>
-  <p>
-    Les membres de l’O.S.D.9.T.D.J. demeurent <strong>entièrement libres</strong>, à titre strictement personnel, de participer — ou non — à des
-    offices, cérémonies ou pratiques religieuses, selon leurs convictions individuelles. Ces démarches relèvent exclusivement de la sphère privée
-    et n’engagent en aucun cas l’association.
-  </p>
-  <p>
-    Lorsque l’O.S.D.9.T.D.J. est présent dans des églises, abbayes ou lieux religieux, cette présence s’inscrit à titre <strong>culturel, symbolique
-    ou patrimonial</strong>, toujours dans le respect des autorités compétentes et des lieux concernés. Cette posture permet de maintenir des relations
-    sereines et respectueuses avec les Églises et institutions religieuses, tout en garantissant la <strong>liberté de conscience</strong> de chacun.
-  </p>
-</section>
-
-<section aria-label="Actions concrètes" class="section-card alt">
-  <h3>Des actions concrètes pour faire vivre la mission</h3>
-  <p>
-    Pour mener à bien ses missions, l’association organise et participe à de nombreuses activités, nécessaires à la fois à la <strong>diffusion culturelle</strong>
-    et au <strong>financement</strong> de ses actions associatives.
-  </p>
-  <p>
-    Parmi celles-ci : organisation de <strong>séminaires</strong>, conférences et rencontres culturelles ; mise en place de <strong>galas associatifs</strong> et
-    événements de soutien ; tenue de <strong>buvettes</strong> et actions logistiques lors de fêtes locales ; participation active à des <strong>fêtes médiévales</strong>
-    et manifestations historiques ; organisation d’<strong>expositions</strong> dédiées à l’histoire templière et médiévale (présentations pédagogiques, panneaux,
-    objets et supports culturels), notamment dans des <strong>châteaux</strong>, anciennes <strong>abbayes</strong> et lieux patrimoniaux, en partenariat avec les acteurs
-    locaux et dans le respect des sites ; actions <strong>caritatives</strong>, <strong>humanitaires</strong> et <strong>solidaires</strong>.
-  </p>
-
-  <div class="media-grid-2" aria-label="Illustrations actions">
-    <figure class="media-card">
-      <img alt="Transmission — actions et présence publique" loading="lazy" src="transmettre2.PNG"/>
-    </figure>
-    <figure class="media-card">
-      <img alt="Mission — servir et agir" loading="lazy" src="mission.PNG"/>
-    </figure>
-  </div>
-
-  <div class="notice" role="note" aria-label="Clarification">
-    <strong>Clarification publique :</strong> les références historiques et symboliques de l’association sont présentées comme un contenu culturel et pédagogique.
-    Elles n’emportent aucune revendication institutionnelle et n’ont pas de valeur cultuelle.
-  </div>
-</section>
-
-<section aria-label="Conclusion" class="section-card">
-  <h3>Une mission claire, assumée et responsable</h3>
-  <p>
-    L’O.S.D.9.T.D.J. agit dans un esprit de <strong>transparence</strong>, de <strong>respect des lois</strong> et de <strong>responsabilité associative</strong>.
-    Ses titres, symboles et références sont honorifiques, culturels et pédagogiques. Ils ne visent ni à concurrencer, ni à imiter, ni à remplacer des
-    institutions religieuses, historiques ou souveraines.
-  </p>
-  <p>
-    Sa mission peut se résumer simplement : <strong>servir, protéger, étudier et transmettre</strong>, en s’appuyant sur une <strong>structure initiatique interne
-    maîtrisée</strong>, au service du bien commun, de la culture, du patrimoine et du vivre-ensemble.
-  </p>
-</section>
-
-<nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
-  <a class="tab" href="index.html"> Accueil</a>
-  <a class="tab" href="contact.html"> Contact</a>
-</nav>
-
-<div class="cta-ordres" aria-label="Accès rapide">
-  <div class="cta-slider" role="navigation" aria-label="Accès rapides">
-    <a href="quinoussommes.html">Qui nous sommes</a>
-    <span class="divider" aria-hidden="true"></span>
-    <a href="histoire.html">Notre histoire</a>
-    <span class="divider" aria-hidden="true"></span>
-    <a href="notre-mission.html">Notre mission</a>
-    <span class="divider" aria-hidden="true"></span>
-    <a href="ordres-historiques.html">Ordres historiques</a>
-  </div>
-</div>
-
-<div class="footer">
-  © O.S.D.9.T.D.J. Association Loi 1901 – Tous droits réservés •
-  <a href="mentions.html">Informations officielles</a> •
-  <a href="cookies.html">Cookies</a>
-</div>
-
-</div>
 </div>
 </body>
 </html>
