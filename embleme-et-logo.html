@@ -61,10 +61,13 @@
       text-align: center;
       background: radial-gradient(circle at top, #3a2513, var(--fond) 70%);
     }
+    @supports (height: 100dvh){
+      html, body{ height: 100dvh; }
+    }
 
     .frame-fixed{
       position: fixed;
-      inset: 14px;
+      inset: calc(14px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left));
       border-radius: 22px;
       border: 2px solid rgba(214,167,40,0.55);
       box-shadow:
@@ -92,13 +95,15 @@
     /* ✅ zone qui défile à l'intérieur du cadre */
     .viewport-scroll{
       position: fixed;
-      inset: 22px;                /* un peu à l'intérieur du cadre */
+      inset: calc(22px + env(safe-area-inset-top)) calc(22px + env(safe-area-inset-right)) calc(22px + env(safe-area-inset-bottom)) calc(22px + env(safe-area-inset-left));
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
       z-index: 1;
       padding: 30px 15px 44px;
       box-sizing: border-box;
+      overscroll-behavior: contain;
+      touch-action: pan-y;
     }
 
     /* ✅ menu 3 points (TOUTES PAGES) */
@@ -455,10 +460,9 @@
       .nndnn-text{font-size:1.55rem;}
       .top-menu{ top:22px; right:22px; }
       .menu-panel{ width: 240px; }
-      .frame-fixed{ inset: 12px; }
-      .viewport-scroll{ inset: 20px; }
+      .frame-fixed{ inset: calc(12px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left)); }
+      .viewport-scroll{ inset: calc(20px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left)); }
     }
-  
 
 .rings-showcase{
   margin: 18px auto 8px;
@@ -678,6 +682,7 @@
 <a href="index.html"> Accueil</a>
 <a href="quinoussommes.html"> Qui nous sommes</a>
 <a href="histoire.html"> Notre histoire</a>
+<a href="notre-mission.html"> Notre mission</a>
 <a href="vocation.html"> Vocation historique</a>
 <a href="ordres-historiques.html"> Ordres historiques</a>
 <a href="embleme-et-logo.html"> Emblème et logo</a>
@@ -744,9 +749,20 @@
       des cérémonies internes ou des prises de vues protocolaires. Il rappelle la sobriété et la discipline : porter une tenue,
       c’est surtout porter une <strong>exigence de conduite</strong> et de cohérence.
     </p>
-    <figure class="inner-img">
-      <img alt="Manteau de représentation O.S.D.9.T.D.J." loading="lazy" src="manteaux.PNG"/>
-    </figure>
+    <div class="rings-grid media-gap-top">
+      <figure class="ring-card">
+        <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 1" loading="lazy" src="manteaux.PNG"/>
+      </figure>
+      <figure class="ring-card">
+        <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 2" loading="lazy" src="manteaux2.PNG"/>
+      </figure>
+      <figure class="ring-card">
+        <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 3" loading="lazy" src="manteaux3.PNG"/>
+      </figure>
+      <figure class="ring-card">
+        <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 4" loading="lazy" src="manteaux4.PNG"/>
+      </figure>
+    </div>
 
     <div class="soft-sep"></div>
 
@@ -822,69 +838,50 @@
   est <strong>déposé et protégé</strong>. Toute reproduction, copie, diffusion, modification ou réutilisation — <strong>même partielle</strong> —
   est interdite sans autorisation écrite (copyright). Pour en savoir plus, le bon chemin est simple : <strong>venir à l’association</strong> et échanger avec nous.
 </p>
+
+<h3>Le Blason et sa signification</h3>
+<p>Notre blason est une table d’étude templier :</p>
+
 <p>
-    Le blason de l’<strong>Ordre Sacré des Neuf Templiers de Jérusalem</strong> n’est pas un « décor » :
-    c’est une <strong>table d’étude</strong>. Chaque forme, chaque couleur et chaque position raconte une idée
-    et renvoie à une pédagogie : apprendre, servir, transmettre — avec mesure et discipline.
-  </p>
+  • <strong>Noir &amp; blanc :</strong> héritage du <strong>Beauceant</strong> (bannière mi-noire mi-blanche), union des contraires et mesure dans l’action.
+  <br><br>
+  • <strong>Carré de quatre cercles :</strong> fondations stables — les quatre éléments (terre, air, feu, eau), la matière brute à transformer.
+  <br><br>
+  • <strong>Roue de la vie (quintessence) :</strong> croix blanche centrale et quatre cercles blancs sur fond bleu. L’ensemble figure les cinq sens et la quête du cinquième principe (quintessence).
+  <br>
+  - Blanc au centre : clarté, équilibre. Bleu : profondeur, sagesse, ciel.
+  <br>
+  - La croix blanche agit uniquement comme pivot symbolique de la quintessence, laquelle se déploie en mouvement équilibré, reposant sur la cathénaire des quatre fondations élémentaires à la base de l’écu.
+  <br><br>
+  • <strong>La croix angélique rouge &amp; or :</strong> Histoire : attribuée aux Templiers vers 1147, lors de la Seconde Croisade (pape Eugène III).
+  <br>
+  - Symbolique : le rouge = le sang du sacrifice, du courage et de la fidélité ; l’or = l’accomplissement, la gloire et la lumière de l’œuvre achevée.
+  <br>
+  - Sa forme angélique exprime les huit pointes, rappel des vertus cardinales et du cycle de régénération.
+</p>
+
 <p>
-    Sa composition réunit volontairement plusieurs langages : l’héraldique (couleurs et partitions),
-    la géométrie (structures stables), et une symbolique templière étudiée comme héritage culturel.
-    L’ensemble se lit comme un chemin : <em>des fondations</em> vers <em>l’élévation</em>, puis vers <em>la vérité</em>.
-  </p>
-<h3>1) Le fond noir &amp; blanc : l’équilibre avant l’action</h3>
+⚖️La croix à huit pointes adoptées par l’ Ordre Sacré des Neuf Templiers de Jérusalem se distingue nettement, par son traitement chromatique, des insignes historiques ou contemporains des autres ordres :
+<br><br>
+– Ordre de Malte : croix blanche sur fond noir ou rouge, emblème officiel et protégé ;
+<br>
+– Ordre de Saint-Lazare : croix verte, parfois bordée de blanc ou d’or ;
+<br>
+– autres ordres hospitaliers : croix blanches ou noires selon les usages traditionnels.
+<br><br>
+L’Ordre utilise une croix stylisée en rouge et or, éventuellement entourée de liserés dorés, afin de marquer sa différence visuelle et symbolique. Cette déclinaison chromatique n’imite ni ne reproduit les insignes officiels protégés : elle exprime uniquement une valeur culturelle et décorative.
+<br><br>
+Ainsi, le rouge rappelle le courage et le sacrifice, tandis que l’or évoque la lumière et l’accomplissement. Ces choix, conformes au langage héraldique, garantissent une identité propre à l’association et écartent toute confusion avec les emblèmes des ordres hospitaliers ou souverains.
+</p>
+
 <p>
-    Le champ du blason reprend l’esprit du <strong>Beauceant</strong>, la bannière templière mi-noire, mi-blanche.
-    Dans notre lecture, ce contraste exprime l’<strong>union des contraires</strong> : l’ombre et la lumière,
-    la rigueur et la compassion, l’étude et l’action. Il rappelle une règle simple : on ne sert durablement
-    que si l’on sait tenir ensemble la force et la mesure.
-  </p>
-<h3>2) Le carré de quatre cercles : les fondations stables</h3>
-<p>
-    La base géométrique du blason est un <strong>carré</strong> (stabilité) contenant <strong>quatre cercles</strong>
-    (cycles, continuité). Cette structure renvoie aux <strong>quatre éléments</strong> — terre, air, feu, eau —
-    non comme croyance, mais comme langage traditionnel : une manière d’enseigner que toute construction
-    solide commence par des bases concrètes, vérifiables, et équilibrées.
-  </p>
-<h3>3) La « roue de la vie » : la quintessence au centre</h3>
-<p>
-    Au cœur du blason, un disque bleu accueille une <strong>croix blanche centrale</strong> entourée de
-    <strong>quatre cercles blancs</strong>. Ce motif représente les <strong>cinq sens</strong> (quatre + un centre),
-    et la recherche du « <strong>cinquième principe</strong> » — la <strong>quintessence</strong> — entendue comme
-    ce qui ordonne, harmonise et donne du sens.
-  </p>
-<p>
-    Le <strong>blanc</strong> au centre signifie la clarté et l’équilibre ; le <strong>bleu</strong> évoque la profondeur,
-    la sagesse et l’ouverture. La croix blanche agit ici comme un <strong>pivot symbolique</strong> : elle ne prétend
-    pas reproduire un insigne d’un ordre existant, mais indique l’axe autour duquel s’organise l’étude.
-    Dans vos textes, ce pivot « se déploie en mouvement équilibré », reposant sur la base des quatre fondations.
-  </p>
-<h3>4) La croix rouge &amp; or : courage, fidélité, accomplissement</h3>
-<p>
-    La croix stylisée rouge et or (souvent décrite comme « angélique ») se distingue par son
-    <strong>traitement chromatique</strong> : elle marque une identité propre à l’association.
-    Le <strong>rouge</strong> renvoie au courage, au sacrifice et à la fidélité ; l’<strong>or</strong> symbolise la lumière,
-    l’accomplissement et la part d’œuvre menée jusqu’au bout. Cette croix rappelle un imaginaire templier
-    étudié comme patrimoine culturel, et non comme revendication de privilège.
-  </p>
-<h3>5) La lecture « en chemin » : du bas vers le haut</h3>
-<p>
-    Le blason se lit comme une progression :
-    <strong>fondations</strong> (carré/éléments) → <strong>harmonie</strong> (quintessence) → <strong>engagement</strong> (croix).
-    Autrement dit : on ne commence pas par la proclamation, on commence par la structure ; on ne termine
-    pas par la théorie, on termine par le service.
-  </p>
-<h3>6) Les signes complémentaires : vigilance, unité, vérité</h3>
-<p>
-    Les éléments « secondaires » du blason renforcent cette lecture :
-    <strong>l’œil</strong> (vigilance et discernement), les <strong>ailes</strong> (élévation et protection),
-    et la devise <strong>« Per Crucem, Veritas »</strong> — « par la Croix, la Vérité » — comprise ici comme un appel
-    à la droiture, à la cohérence et à l’exigence morale dans l’action caritative et culturelle.
-  </p>
-<p class="note">
-    Le blason est utilisé comme <strong>support pédagogique</strong> : il aide à transmettre des repères communs,
-    à éviter les mythes faciles, et à rappeler que la symbolique n’a de valeur que si elle est suivie d’actes.
-  </p>
+  • <strong>Casque templier :</strong> discipline, vigilance, force intérieure ; l’armure de l’esprit.
+  <br><br>
+  • <strong>Triangle rayonnant &amp; Œil :</strong> unité et triade universelle ; regard qui discerne (parfois nommé « troisième œil »).
+  <br><br>
+  • <strong>Ailes dorées :</strong> élévation et fraternité ; nul chevalier ne progresse seul — il est soutenu par la communauté et l’idéal commun.
+</p>
+
 </div>
 </details>
 
@@ -998,6 +995,8 @@
     <a href="quinoussommes.html">Qui nous sommes</a>
     <span class="divider" aria-hidden="true"></span>
     <a href="histoire.html">Notre histoire</a>
+    <span class="divider" aria-hidden="true"></span>
+    <a href="notre-mission.html">Notre mission</a>
     <span class="divider" aria-hidden="true"></span>
     <a href="ordres-historiques.html">Ordres historiques</a>
   </div>
