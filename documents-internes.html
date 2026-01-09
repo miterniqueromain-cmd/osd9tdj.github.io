@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO (page interne) -->
-  <meta name="description" content="Espace documents internes réservé aux membres de l’OSD9TDJ : organisation, statuts, documents administratifs, cours, procès-verbaux, travaux, archives." />
+  <meta name="description" content="Espace documents internes réservé aux membres de l’OSD9TDJ : organisation, administratif, convocations, cours, procès-verbaux, travaux et archives." />
   <link rel="canonical" href="https://osd9tdj.org/documents-internes.html" />
   <meta name="robots" content="noindex,nofollow,noarchive,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
   <meta name="googlebot" content="noindex,nofollow,noarchive,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
   <meta name="bingbot" content="noindex,nofollow,noarchive,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
 
-  <!-- Open Graph (cohérence) -->
+  <!-- Open Graph -->
   <meta property="og:title" content="Documents internes – O.S.D.9.T.D.J." />
   <meta property="og:description" content="Accès réservé aux membres – documents internes de l’OSD9TDJ." />
   <meta property="og:image" content="https://osd9tdj.org/blason-osd9tdj.PNG" />
@@ -27,7 +27,7 @@
 
   <!-- WATERMARKS (internes) -->
   <meta name="osd9tdj-signature" content="WTRMK-DOCS-INTERNES-OMEGA-2026-OSD9TDJ-ACCESS-RESERVE-MEMBRES" />
-  <meta name="osd9tdj-integrity" content="HASH-STYLE-LOCK-FRAME-SCROLL-MENU-FOOTER-NNDNN" />
+  <meta name="osd9tdj-integrity" content="HASH-LOCK-FRAME-SCROLL-MENU-FOOTER-NNDNN" />
   <meta name="osd9tdj-origin" content="osd9tdj.org / documents-internes.html" />
 
   <!-- Données structurées (JSON-LD) -->
@@ -47,6 +47,7 @@
       {"@type":"Thing","name":"Documents internes"},
       {"@type":"Thing","name":"Organisation associative"},
       {"@type":"Thing","name":"Statuts et administration"},
+      {"@type":"Thing","name":"Convocations"},
       {"@type":"Thing","name":"Cours et formation"},
       {"@type":"Thing","name":"Procès-verbaux"},
       {"@type":"Thing","name":"Archives internes"}
@@ -68,7 +69,7 @@
     height:100%;
     margin:0;
     padding:0;
-    overflow:hidden;
+    overflow:hidden; /* pas de scroll body */
     font-family:'Lato', Arial, sans-serif;
     color:#ffffff;
     text-align:center;
@@ -165,24 +166,14 @@
   }
   .menu-panel a:last-child{ border-bottom:none; }
 
-  /* ✅ Voile (marbré rouge/fuchsia + noir) */
+  /* ✅ Voile (retour noir classique, comme l’index) */
   .overlay{
     min-height:100vh;
-    padding:30px 15px 20px;
+    padding:30px 15px 28px;
     box-sizing:border-box;
-    background:
-      radial-gradient(circle at 15% 10%,
-        rgba(190, 0, 60, 0.28),
-        rgba(0, 0, 0, 0.00) 55%),
-      radial-gradient(circle at 85% 25%,
-        rgba(255, 0, 140, 0.20),
-        rgba(0, 0, 0, 0.00) 60%),
-      radial-gradient(circle at 35% 85%,
-        rgba(120, 0, 40, 0.22),
-        rgba(0, 0, 0, 0.00) 60%),
-      linear-gradient(180deg,
-        rgba(0, 0, 0, 0.30),
-        rgba(0, 0, 0, 0.88));
+    background: radial-gradient(circle at top,
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.85));
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -254,14 +245,22 @@
     opacity:0.95;
   }
 
+  /* ✅ Grille responsive (évite le “hors champ”) */
   .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    grid-template-columns:repeat(1, minmax(0, 1fr)); /* mobile */
     gap:18px;
     max-width:980px;
     width:100%;
     margin:0 auto 12px;
   }
+  @media (min-width: 700px){
+    .cards{ grid-template-columns:repeat(2, minmax(0, 1fr)); } /* tablette */
+  }
+  @media (min-width: 1000px){
+    .cards{ grid-template-columns:repeat(3, minmax(0, 1fr)); } /* PC */
+  }
+
   .card{
     background:rgba(0,0,0,0.65);
     border:1px solid rgba(255,215,0,0.45);
@@ -292,6 +291,7 @@
     border:1px solid rgba(255,215,0,0.55);
     font-family:'Cinzel',serif;
     font-size:0.88rem;
+    max-width:100%;
   }
   .card a:hover{ background:rgba(255,215,0,0.35); }
 
@@ -305,18 +305,30 @@
   }
   .contacts-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    grid-template-columns:repeat(1, minmax(0,1fr)); /* mobile */
     gap:12px;
     margin-top:10px;
   }
+  @media (min-width: 700px){
+    .contacts-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+  }
+  @media (min-width: 1000px){
+    .contacts-grid{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+  }
+
   .contact-item{
     background:rgba(0,0,0,0.55);
     border:1px solid rgba(255,215,0,0.35);
     border-radius:14px;
     padding:12px 12px;
     box-shadow:0 0 18px rgba(0,0,0,0.55);
+    overflow-wrap:anywhere; /* ✅ évite les débordements */
+    word-break:break-word;
   }
-  .contact-item strong{ color:var(--or); font-family:'Cinzel',serif; }
+  .contact-item strong{
+    color:var(--or);
+    font-family:'Cinzel',serif;
+  }
   .contact-item a{
     color:#fff;
     text-decoration:none;
@@ -388,7 +400,7 @@
   }
   .sep{ opacity:0.55; }
 
-  .legal-line {
+  .legal-line{
     margin-top: 14px;
     font-size: 0.75rem;
     opacity: 0.92;
@@ -462,66 +474,107 @@
       <!-- ORGANISATION / ADMIN -->
       <div class="section-title" id="organisation">Organisation & administratif</div>
       <div class="cards">
+
         <div class="card">
           <h2>Statuts & règlements</h2>
           <p>Statuts, règlement intérieur, chartes, documents officiels.</p>
+          <!-- COLLE ICI TON LIEN ZOHO -->
           <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
         </div>
 
         <div class="card">
           <h2>Documents Préfecture</h2>
           <p>Déclarations, récépissés, courriers et pièces administratives.</p>
+          <!-- COLLE ICI TON LIEN ZOHO -->
+          <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
+        </div>
+
+        <div class="card">
+          <h2>Convocations</h2>
+          <p>Convocations officielles pour chaque réunion (documents à jour).</p>
+          <!-- COLLE ICI TON LIEN ZOHO "CONVOCATIONS" -->
           <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
         </div>
 
         <div class="card">
           <h2>Organisation des événements</h2>
           <p>Dossiers, check-lists, logistique, informations internes.</p>
+          <!-- COLLE ICI TON LIEN ZOHO -->
           <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
         </div>
 
         <div class="card">
           <h2>Planning annuel</h2>
           <p>Planning des rencontres, thèmes, dates et informations.</p>
+          <!-- COLLE ICI TON LIEN ZOHO -->
           <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
         </div>
+
       </div>
 
       <!-- COURS -->
       <div class="section-title" id="cours">Cours & études</div>
       <div class="cards">
+
         <div class="card">
           <h2>Supports de cours</h2>
           <p>Documents pédagogiques, lectures, supports et fiches.</p>
+          <!-- COLLE ICI TON LIEN ZOHO -->
           <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
         </div>
 
         <div class="card">
           <h2>Procès-verbaux de cours</h2>
           <p>Comptes rendus, PV scannés, documents associés.</p>
+          <!-- COLLE ICI TON LIEN ZOHO -->
           <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
         </div>
 
         <div class="card">
           <h2>Travaux & documents</h2>
           <p>Travaux, documents internes, éléments de suivi.</p>
+          <!-- COLLE ICI TON LIEN ZOHO -->
           <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
         </div>
+
       </div>
 
       <!-- CONTACTS -->
       <div class="contacts" id="contacts">
         <div class="section-title">Contacts internes</div>
+
         <div class="contacts-grid">
-          <div class="contact-item"><strong>Contact général</strong><br>contact@osd9tdj.org</div>
-          <div class="contact-item"><strong>Interne membres</strong><br>interne@osd9tdj.org</div>
-          <div class="contact-item"><strong>Trésorerie</strong><br>tresorier@osd9tdj.org</div>
-          <div class="contact-item"><strong>Secrétariat</strong><br>secretariat@osd9tdj.org</div>
+          <div class="contact-item">
+            <strong>Contact général</strong><br>
+            <a href="mailto:contact@osd9tdj.org">contact@osd9tdj.org</a>
+          </div>
+
+          <div class="contact-item">
+            <strong>Interne membres</strong><br>
+            <a href="mailto:interne@osd9tdj.org">interne@osd9tdj.org</a>
+          </div>
+
+          <div class="contact-item">
+            <strong>Trésorerie</strong><br>
+            <a href="mailto:tresorier@osd9tdj.org">tresorier@osd9tdj.org</a>
+          </div>
+
+          <div class="contact-item">
+            <strong>Secrétariat</strong><br>
+            <a href="mailto:secretariat@osd9tdj.org">secretariat@osd9tdj.org</a>
+          </div>
+
           <div class="contact-item">
             <strong>Téléphone officiel (WhatsApp)</strong><br>
-            <a href="https://wa.me/33744828970" target="_blank" rel="noopener noreferrer">+33 7 44 82 89 70</a>
+            <a href="https://wa.me/33744828970" target="_blank" rel="noopener noreferrer">
+              +33 7 44 82 89 70
+            </a>
           </div>
-          <div class="contact-item"><strong>Localisation</strong><br>Haute-Savoie, France</div>
+
+          <div class="contact-item">
+            <strong>Localisation</strong><br>
+            Haute-Savoie, France
+          </div>
         </div>
       </div>
 
