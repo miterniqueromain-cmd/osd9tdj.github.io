@@ -6,11 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO (page interne) -->
-  <meta name="description" content="Espace documents internes réservé aux membres de l’OSD9TDJ : organisation, administratif, convocations, cours, procès-verbaux, travaux et archives." />
+  <meta name="description" content="Espace documents internes réservé aux membres de l’OSD9TDJ : organisation, administratif, convocations, études, planches, procès-verbaux, travaux et archives." />
   <link rel="canonical" href="https://osd9tdj.org/documents-internes.html" />
-  <meta name="robots" content="noindex,nofollow,noarchive,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
-  <meta name="googlebot" content="noindex,nofollow,noarchive,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
-  <meta name="bingbot" content="noindex,nofollow,noarchive,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
+
+  <!-- Anti-indexation / anti-cache (interne) -->
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
+  <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
+  <meta name="bingbot" content="noindex,nofollow,noarchive,nosnippet,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Documents internes – O.S.D.9.T.D.J." />
@@ -27,8 +29,24 @@
 
   <!-- WATERMARKS (internes) -->
   <meta name="osd9tdj-signature" content="WTRMK-DOCS-INTERNES-OMEGA-2026-OSD9TDJ-ACCESS-RESERVE-MEMBRES" />
-  <meta name="osd9tdj-integrity" content="HASH-LOCK-FRAME-SCROLL-MENU-FOOTER-NNDNN" />
+  <meta name="osd9tdj-integrity" content="HASH-LOCK-FRAME-SCROLL-MENU-FOOTER-NNDNN-ETUDES" />
   <meta name="osd9tdj-origin" content="osd9tdj.org / documents-internes.html" />
+
+  <!-- Hardening (défensif / anti-embedding / anti-leak) -->
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';
+    object-src 'none';
+    connect-src 'none';
+    img-src 'self' https: data:;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src https://fonts.gstatic.com;
+    script-src 'self';
+    upgrade-insecure-requests;
+  ">
 
   <!-- Données structurées (JSON-LD) -->
   <script type="application/ld+json">
@@ -48,7 +66,9 @@
       {"@type":"Thing","name":"Organisation associative"},
       {"@type":"Thing","name":"Statuts et administration"},
       {"@type":"Thing","name":"Convocations"},
-      {"@type":"Thing","name":"Cours et formation"},
+      {"@type":"Thing","name":"Études"},
+      {"@type":"Thing","name":"Planches d’étude"},
+      {"@type":"Thing","name":"Bibliothèque d’étude"},
       {"@type":"Thing","name":"Procès-verbaux"},
       {"@type":"Thing","name":"Archives internes"}
     ]
@@ -166,7 +186,7 @@
   }
   .menu-panel a:last-child{ border-bottom:none; }
 
-  /* ✅ Voile (retour noir classique, comme l’index) */
+  /* ✅ Voile noir (classique) */
   .overlay{
     min-height:100vh;
     padding:30px 15px 28px;
@@ -245,7 +265,7 @@
     opacity:0.95;
   }
 
-  /* ✅ Grille responsive (évite le “hors champ”) */
+  /* ✅ Grille responsive béton (évite le hors-champ) */
   .cards{
     display:grid;
     grid-template-columns:repeat(1, minmax(0, 1fr)); /* mobile */
@@ -315,14 +335,13 @@
   @media (min-width: 1000px){
     .contacts-grid{ grid-template-columns:repeat(3, minmax(0,1fr)); }
   }
-
   .contact-item{
     background:rgba(0,0,0,0.55);
     border:1px solid rgba(255,215,0,0.35);
     border-radius:14px;
     padding:12px 12px;
     box-shadow:0 0 18px rgba(0,0,0,0.55);
-    overflow-wrap:anywhere; /* ✅ évite les débordements */
+    overflow-wrap:anywhere;
     word-break:break-word;
   }
   .contact-item strong{
@@ -374,7 +393,6 @@
     max-width: 980px;
     border-top: 1px solid rgba(255,215,0,0.22);
   }
-
   .footer .line{
     display:flex;
     flex-wrap:wrap;
@@ -384,7 +402,6 @@
     font-size:0.78rem;
     color: rgba(253,247,229,0.88);
   }
-
   .footer a{
     color: rgba(253,247,229,0.85) !important;
     text-decoration:none !important;
@@ -412,7 +429,7 @@
     border-bottom: 1px dotted rgba(255,215,0,0.55);
   }
 
-  /* Watermark invisible (dans la page) */
+  /* Watermark invisible */
   .wmk{
     position:fixed;
     left:-9999px;
@@ -442,7 +459,7 @@
 
 <body>
 
-  <!-- WTRMK: DO NOT REMOVE / OSD9TDJ / DOCS INTERNES / OMEGA -->
+  <!-- WATERMARK (interne) -->
   <span class="wmk">OSD9TDJ::DOCUMENTS-INTERNES::WTRMK-OMEGA-2026</span>
 
   <div class="frame-fixed" aria-hidden="true"></div>
@@ -452,7 +469,7 @@
       <summary title="Menu">⋯</summary>
       <div class="menu-panel" role="menu" aria-label="Navigation interne">
         <a href="#organisation">📌 Organisation</a>
-        <a href="#cours">📘 Cours & études</a>
+        <a href="#etudes">📘 Études</a>
         <a href="#contacts">📞 Contacts</a>
         <a href="#archives">📁 Archives</a>
         <a href="index.html">← Retour site public</a>
@@ -512,19 +529,26 @@
 
       </div>
 
-      <!-- COURS -->
-      <div class="section-title" id="cours">Cours & études</div>
+      <!-- ÉTUDES -->
+      <div class="section-title" id="etudes">Études</div>
       <div class="cards">
 
         <div class="card">
-          <h2>Supports de cours</h2>
-          <p>Documents pédagogiques, lectures, supports et fiches.</p>
+          <h2>Documents d’étude</h2>
+          <p>Documents de travail, lectures, supports et synthèses.</p>
           <!-- COLLE ICI TON LIEN ZOHO -->
           <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
         </div>
 
         <div class="card">
-          <h2>Procès-verbaux de cours</h2>
+          <h2>Planches d’étude</h2>
+          <p>Planches, travaux d’étude et documents d’approfondissement.</p>
+          <!-- COLLE ICI TON LIEN ZOHO "PLANCHES" -->
+          <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
+        </div>
+
+        <div class="card">
+          <h2>Procès-verbaux</h2>
           <p>Comptes rendus, PV scannés, documents associés.</p>
           <!-- COLLE ICI TON LIEN ZOHO -->
           <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
@@ -534,6 +558,13 @@
           <h2>Travaux & documents</h2>
           <p>Travaux, documents internes, éléments de suivi.</p>
           <!-- COLLE ICI TON LIEN ZOHO -->
+          <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
+        </div>
+
+        <div class="card">
+          <h2>Bibliothèque d’étude (références)</h2>
+          <p>Ouvrages et documents de référence (accès restreint).</p>
+          <!-- COLLE ICI TON LIEN ZOHO "BIBLIOTHEQUE" -->
           <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
         </div>
 
@@ -578,7 +609,7 @@
         </div>
       </div>
 
-      <!-- ARCHIVES (DOCTRINE À LA FIN) -->
+      <!-- ARCHIVES (À LA FIN) -->
       <div class="section-title" id="archives">Archives</div>
       <div class="cards">
         <div class="card">
