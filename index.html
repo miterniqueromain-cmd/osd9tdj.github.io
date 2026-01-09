@@ -379,6 +379,34 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
     .nndnn-banner img{ height:42px; }
     .nndnn-text{ font-size:1.55rem; }
   }
+    /* 🔒 Badge Documents internes */
+.docs-internes-badge{
+  margin: 14px auto 6px;
+}
+
+.docs-internes-badge a{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffd700, #e6c200);
+  color: #111;
+  text-decoration: none;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  box-shadow:
+    0 0 0 1px rgba(255,215,0,0.75) inset,
+    0 6px 14px rgba(0,0,0,0.45);
+}
+
+.docs-internes-badge a:hover{
+  background: linear-gradient(135deg, #ffe066, #f0d000);
+  box-shadow:
+    0 0 0 1px rgba(255,215,0,0.95) inset,
+    0 8px 18px rgba(0,0,0,0.55);
+}
   </style>
 
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -420,6 +448,10 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
         <a href="boutique.html" class="tab">🛒 Boutique en ligne</a>
         <a href="contact.html" class="tab">📞 Contact</a>
       </nav>
+      <!-- 🔒 Accès Documents internes -->
+<div class="docs-internes-badge">
+  <a href="documents-internes.html">🔒 Documents internes</a>
+</div>
 
       <!-- BLASON -->
       <div class="blason-box">
