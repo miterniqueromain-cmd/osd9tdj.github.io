@@ -1,222 +1,465 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>Documents internes – O.S.D.9.T.D.J.</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Documents internes – Accès réservé aux membres | OSD9TDJ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
 
-<meta name="robots" content="noindex,nofollow">
+  <!-- Polices identiques -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --or:#ffd700;
+      --clair:#fdf7e5;
+    }
 
-<style>
-:root{
-  --or:#ffd700;
-  --clair:#fdf7e5;
-}
+    /* ✅ CADRE FIXE + SCROLL DEDANS (même effets que l’index) */
+    html, body{
+      height:100%;
+      margin:0;
+      padding:0;
+      overflow:hidden;
+      font-family:'Lato', Arial, sans-serif;
+      color:#ffffff;
+      text-align:center;
+      min-height:100vh;
+    }
 
-html,body{
-  margin:0;
-  padding:0;
-  font-family:'Lato',Arial,sans-serif;
-  background:#000;
-  color:#fff;
-  text-align:center;
-}
+    /* Fond drapeau */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:url("drapeau-osd9tdj.PNG") no-repeat center center fixed;
+      background-size:cover;
+      z-index:-2;
+    }
 
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:url("drapeau-osd9tdj.PNG") no-repeat center center fixed;
-  background-size:cover;
-  z-index:-2;
-}
+    /* Cadre fixe */
+    .frame-fixed{
+      position:fixed;
+      inset:14px;
+      border-radius:22px;
+      border:2px solid rgba(255,215,0,0.55);
+      box-shadow:
+        0 0 0 1px rgba(253,247,229,0.16) inset,
+        0 0 38px rgba(0,0,0,0.35);
+      pointer-events:none;
+      z-index:40;
+    }
 
-.overlay{
-  min-height:100vh;
-  padding:30px 15px 40px;
-  background:radial-gradient(circle at top,
-    rgba(0,0,0,0.35),
-    rgba(0,0,0,0.9));
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
+    /* Zone scroll interne */
+    .viewport-scroll{
+      position:fixed;
+      inset:22px;
+      overflow-y:auto;
+      overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      z-index:1;
+    }
 
-h1{
-  font-family:'Cinzel',serif;
-  font-size:1.9rem;
-  margin:10px 0 6px;
-}
+    /* Menu 3 points */
+    .top-menu{
+      position:fixed;
+      top:26px;
+      right:26px;
+      z-index:60;
+      pointer-events:auto;
+    }
+    .top-menu details{ position:relative; }
+    .top-menu summary{
+      list-style:none;
+      cursor:pointer;
+      user-select:none;
+      width:46px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:999px;
+      border:1px solid rgba(255,215,0,0.55);
+      background:rgba(0,0,0,0.22);
+      backdrop-filter: blur(6px);
+      box-shadow:0 6px 16px rgba(0,0,0,0.35);
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-size:22px;
+      line-height:1;
+    }
+    .top-menu summary::-webkit-details-marker{ display:none; }
 
-.subtitle{
-  font-size:0.95rem;
-  opacity:0.9;
-  margin-bottom:25px;
-}
+    .menu-panel{
+      position:absolute;
+      right:0;
+      margin-top:10px;
+      width:260px;
+      max-width:calc(100vw - 60px);
+      border-radius:14px;
+      border:1px solid rgba(255,215,0,0.45);
+      background:rgba(0,0,0,0.70);
+      box-shadow:0 18px 40px rgba(0,0,0,0.55);
+      overflow:hidden;
+    }
+    .menu-panel a{
+      display:block;
+      padding:11px 12px;
+      text-decoration:none;
+      color:rgba(253,247,229,0.92);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size:0.92rem;
+      border-bottom:1px solid rgba(255,215,0,0.18);
+    }
+    .menu-panel a:hover{
+      background:rgba(255,215,0,0.12);
+      color:#fff;
+    }
+    .menu-panel a:last-child{ border-bottom:none; }
 
-.lock-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 20px;
-  border-radius:999px;
-  border:1px solid rgba(255,215,0,0.65);
-  background:rgba(255,215,0,0.18);
-  font-family:'Cinzel',serif;
-  font-weight:700;
-  color:var(--or);
-  margin-bottom:30px;
-  box-shadow:0 0 18px rgba(0,0,0,0.6);
-}
+    /* Voile interne */
+    .overlay{
+      min-height:100vh;
+      padding:30px 15px 26px;
+      box-sizing:border-box;
+      background:radial-gradient(circle at top,
+        rgba(0, 0, 0, 0.25),
+        rgba(0, 0, 0, 0.85));
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
 
-.section{
-  width:100%;
-  max-width:780px;
-  margin-bottom:28px;
-}
+    /* Badge cadenas */
+    .lock-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 20px;
+      border-radius:999px;
+      border:1px solid rgba(255,215,0,0.65);
+      background:rgba(255,215,0,0.18);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      color:var(--or);
+      margin:8px auto 16px;
+      box-shadow:0 0 18px rgba(0,0,0,0.6);
+    }
 
-.doc-card{
-  background:rgba(0,0,0,0.55);
-  border:1px solid rgba(255,215,0,0.45);
-  border-radius:18px;
-  padding:20px 18px;
-  box-shadow:0 0 26px rgba(0,0,0,0.65);
-  margin-bottom:20px;
-}
+    h1{
+      font-family:'Cinzel',serif;
+      font-size:1.9rem;
+      margin:10px 0 6px;
+      text-shadow:0 0 8px rgba(0,0,0,0.7);
+    }
 
-.doc-card h2{
-  font-family:'Cinzel',serif;
-  color:var(--or);
-  font-size:1.2rem;
-  margin-top:0;
-}
+    .subtitle{
+      font-size:0.95rem;
+      opacity:0.95;
+      margin:0 0 16px;
+      max-width:980px;
+    }
 
-.doc-link{
-  display:inline-block;
-  margin-top:12px;
-  padding:10px 18px;
-  border-radius:999px;
-  border:1px solid rgba(255,215,0,0.6);
-  background:rgba(255,215,0,0.18);
-  color:#fff;
-  text-decoration:none;
-  font-weight:700;
-  font-size:0.9rem;
-}
-.doc-link:hover{
-  background:rgba(255,215,0,0.35);
-}
+    /* Bouton jaune (même esprit) */
+    .btn-or{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 18px;
+      border-radius:999px;
+      background: linear-gradient(135deg, #ffd700, #e6c200);
+      color:#111;
+      text-decoration:none;
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size:0.9rem;
+      box-shadow:
+        0 0 0 1px rgba(255,215,0,0.75) inset,
+        0 6px 14px rgba(0,0,0,0.45);
+      margin:12px 0 18px;
+    }
+    .btn-or:hover{
+      background: linear-gradient(135deg, #ffe066, #f0d000);
+      box-shadow:
+        0 0 0 1px rgba(255,215,0,0.95) inset,
+        0 8px 18px rgba(0,0,0,0.55);
+    }
 
-.footer{
-  margin-top:auto;
-  font-size:0.75rem;
-  opacity:0.9;
-  border-top:1px solid rgba(255,215,0,0.25);
-  padding-top:14px;
-  max-width:780px;
-}
-.footer a{
-  color:#fff;
-  text-decoration:none;
-  border-bottom:1px dotted rgba(255,215,0,0.6);
-}
-</style>
+    /* Sections */
+    .section-title{
+      width:100%;
+      max-width:980px;
+      margin:18px auto 10px;
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-size:1.05rem;
+      letter-spacing:0.06em;
+      text-transform:none;
+      opacity:0.95;
+    }
 
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    /* Cartes */
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:18px;
+      max-width:980px;
+      width:100%;
+      margin:0 auto 12px;
+    }
+    .card{
+      background:rgba(0,0,0,0.65);
+      border:1px solid rgba(255,215,0,0.45);
+      border-radius:18px;
+      padding:18px 16px;
+      box-shadow:0 0 22px rgba(0,0,0,0.6);
+      text-align:center;
+    }
+    .card h2{
+      font-family:'Cinzel',serif;
+      font-size:1.05rem;
+      color:var(--or);
+      margin:0 0 8px;
+    }
+    .card p{
+      font-size:0.9rem;
+      opacity:0.92;
+      margin:0 0 14px;
+      line-height:1.45;
+    }
+    .card a{
+      display:inline-block;
+      padding:10px 16px;
+      border-radius:999px;
+      background:rgba(255,215,0,0.18);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      border:1px solid rgba(255,215,0,0.55);
+      font-family:'Cinzel',serif;
+      font-size:0.88rem;
+    }
+    .card a:hover{ background:rgba(255,215,0,0.35); }
+
+    /* Contacts */
+    .contacts{
+      width:100%;
+      max-width:980px;
+      margin:18px auto 0;
+      padding-top:18px;
+      border-top:1px solid rgba(255,215,0,0.22);
+    }
+    .contacts .note{
+      font-size:0.85rem;
+      opacity:0.85;
+      margin:0 0 12px;
+    }
+    .contacts-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:12px;
+      margin-top:10px;
+    }
+    .contact-item{
+      background:rgba(0,0,0,0.55);
+      border:1px solid rgba(255,215,0,0.35);
+      border-radius:14px;
+      padding:12px 12px;
+      box-shadow:0 0 18px rgba(0,0,0,0.55);
+    }
+    .contact-item strong{ color:var(--or); font-family:'Cinzel',serif; }
+    .contact-item a{
+      color:#fff;
+      text-decoration:none;
+      border-bottom:1px dotted rgba(255,215,0,0.55);
+    }
+
+    /* Footer */
+    .footer{
+      margin-top:auto;
+      padding-top:14px;
+      font-size:0.75rem;
+      opacity:0.9;
+      width:100%;
+      max-width:980px;
+      border-top:1px solid rgba(255,215,0,0.22);
+    }
+
+    @media (max-width: 480px){
+      .top-menu{ top:22px; right:22px; }
+      .menu-panel{ width:240px; }
+      .frame-fixed{ inset:12px; }
+      .viewport-scroll{ inset:20px; }
+      h1{ font-size:1.6rem; }
+      .btn-or{ font-size:0.85rem; }
+    }
+  </style>
+
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 </head>
 
 <body>
 
-<div class="overlay">
+  <!-- ✅ Cadre fixe -->
+  <div class="frame-fixed" aria-hidden="true"></div>
 
-  <!-- TITRE -->
-  <h1>Documents internes</h1>
-  <p class="subtitle">Espace réservé aux membres de l’Ordre</p>
-
-  <!-- BADGE CADENAS -->
-  <div class="lock-badge">
-    🔒 Accès interne sécurisé
+  <!-- ✅ Menu 3 points (page interne) -->
+  <div class="top-menu" aria-label="Menu documents internes">
+    <details>
+      <summary title="Menu">⋯</summary>
+      <div class="menu-panel" role="menu" aria-label="Navigation interne">
+        <a href="#organisation">📌 Organisation</a>
+        <a href="#cours">📘 Cours & études</a>
+        <a href="#archives">📁 Archives</a>
+        <a href="#contacts">📞 Contacts</a>
+        <a href="index.html">← Retour site public</a>
+      </div>
+    </details>
   </div>
 
-  <!-- ===================== -->
-  <!-- DOCUMENTS / LIENS -->
-  <!-- ===================== -->
+  <!-- ✅ Tout défile dedans -->
+  <div class="viewport-scroll">
+    <div class="overlay">
 
-  <div class="section">
+      <div class="lock-badge">🔒 Accès interne sécurisé</div>
 
-    <div class="doc-card">
-      <h2>Archives doctrinales</h2>
-      <p>Documents d’archives internes mis à disposition des membres autorisés.</p>
-
-      <!-- 🔗 REMPLACE LE LIEN QUAND TU VEUX -->
-      <a class="doc-link"
-         href="https://workdrive.zohopublic.eu/external/9ef517340ff897d63b6fd3081d546423549bbefa2dab96e9aceba65bbcfa5ef8"
-         target="_blank">
-        Accéder au dossier
-      </a>
-    </div>
-
-    <div class="doc-card">
-      <h2>Supports de cours</h2>
-      <p>Supports pédagogiques et documents de formation.</p>
-
-      <!-- 🔗 COLLE ICI UN AUTRE LIEN ZOHO -->
-      <a class="doc-link" href="#" target="_blank">
-        Lien à définir
-      </a>
-    </div>
-
-    <div class="doc-card">
-      <h2>Procès-verbaux</h2>
-      <p>Comptes rendus et documents de travail internes.</p>
-
-      <!-- 🔗 COLLE ICI UN AUTRE LIEN -->
-      <a class="doc-link" href="#" target="_blank">
-        Lien à définir
-      </a>
-    </div>
-
-  </div>
-
-  <!-- ===================== -->
-  <!-- CONTACTS INTERNES -->
-  <!-- ===================== -->
-
-  <div class="section">
-
-    <div class="doc-card">
-      <h2>Contacts internes</h2>
-
-      <p style="font-size:0.85rem;opacity:0.85;">
-        Informations réservées aux membres actifs de l’Ordre.
+      <h1>Documents internes</h1>
+      <p class="subtitle">
+        Réservé aux membres. Les liens ci-dessous ouvrent des dossiers protégés par mot de passe.<br>
+        (Ne mets jamais les mots de passe sur le site.)
       </p>
 
-      <p>📧 <strong>Contact général</strong><br>contact@osd9tdj.org</p>
-      <p>📧 <strong>Interne membres</strong><br>interne@osd9tdj.org</p>
-      <p>📧 <strong>Trésorerie</strong><br>tresorier@osd9tdj.org</p>
-      <p>📧 <strong>Secrétariat</strong><br>secretariat@osd9tdj.org</p>
+      <!-- ✅ Bouton retour site public (jaune, centré) -->
+      <a class="btn-or" href="index.html">← Retour au site public</a>
 
-      <p>
-        📱 <strong>Téléphone officiel (WhatsApp)</strong><br>
-        <a href="https://wa.me/33744828970" target="_blank">+33 7 44 82 89 70</a>
-      </p>
+      <!-- ========================= -->
+      <!-- ORGANISATION (EN HAUT) -->
+      <!-- ========================= -->
+      <div class="section-title" id="organisation">Organisation & administratif</div>
 
-      <p style="font-size:0.85rem;opacity:0.8;">
-        📍 Haute-Savoie, France
-      </p>
+      <div class="cards">
+        <div class="card">
+          <h2>Statuts & règlements</h2>
+          <p>Statuts, règlement intérieur, chartes, documents officiels.</p>
+          <!-- COLLE ICI TON LIEN ZOHO -->
+          <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
+        </div>
+
+        <div class="card">
+          <h2>Documents Préfecture</h2>
+          <p>Déclarations, récépissés, courriers et pièces administratives.</p>
+          <!-- COLLE ICI TON LIEN ZOHO -->
+          <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
+        </div>
+
+        <div class="card">
+          <h2>Organisation des événements</h2>
+          <p>Dossiers d’organisation, check-lists, logistique, comptes rendus.</p>
+          <!-- COLLE ICI TON LIEN ZOHO -->
+          <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
+        </div>
+
+        <div class="card">
+          <h2>Planning annuel</h2>
+          <p>Planning des rencontres (PDF ou page interne), thèmes et dates.</p>
+          <!-- COLLE ICI TON LIEN ZOHO -->
+          <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
+        </div>
+      </div>
+
+      <!-- ========================= -->
+      <!-- COURS / ÉTUDES -->
+      <!-- ========================= -->
+      <div class="section-title" id="cours">Cours & études</div>
+
+      <div class="cards">
+        <div class="card">
+          <h2>Supports de cours</h2>
+          <p>Documents pédagogiques, lectures, supports et fiches.</p>
+          <!-- COLLE ICI TON LIEN ZOHO -->
+          <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
+        </div>
+
+        <div class="card">
+          <h2>Procès-verbaux de cours</h2>
+          <p>Comptes rendus, PV scannés, documents associés.</p>
+          <!-- COLLE ICI TON LIEN ZOHO -->
+          <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
+        </div>
+
+        <div class="card">
+          <h2>Travaux & documents</h2>
+          <p>Travaux, documents internes, éléments de suivi.</p>
+          <!-- COLLE ICI TON LIEN ZOHO -->
+          <a href="#" target="_blank" rel="noopener noreferrer">Accéder</a>
+        </div>
+      </div>
+
+      <!-- ========================= -->
+      <!-- ARCHIVES (DOCTRINE EN BAS) -->
+      <!-- ========================= -->
+      <div class="section-title" id="archives">Archives</div>
+
+      <div class="cards">
+        <div class="card">
+          <h2>Archives – Doctrine interne</h2>
+          <p>Archives internes protégées par mot de passe.</p>
+          <!-- ✅ TON LIEN ZOHO (TEST) -->
+          <a href="https://workdrive.zohopublic.eu/external/9ef517340ff897d63b6fd3081d546423549bbefa2dab96e9aceba65bbcfa5ef8"
+             target="_blank" rel="noopener noreferrer">
+            Accéder
+          </a>
+        </div>
+      </div>
+
+      <!-- ========================= -->
+      <!-- CONTACTS -->
+      <!-- ========================= -->
+      <div class="contacts" id="contacts">
+        <div class="section-title">Contacts internes (membres uniquement)</div>
+        <p class="note">Informations réservées aux membres actifs de l’Ordre. Usage interne uniquement.</p>
+
+        <div class="contacts-grid">
+          <div class="contact-item">
+            <strong>Contact général</strong><br>
+            contact@osd9tdj.org
+          </div>
+
+          <div class="contact-item">
+            <strong>Interne membres</strong><br>
+            interne@osd9tdj.org
+          </div>
+
+          <div class="contact-item">
+            <strong>Trésorerie</strong><br>
+            tresorier@osd9tdj.org
+          </div>
+
+          <div class="contact-item">
+            <strong>Secrétariat</strong><br>
+            secretariat@osd9tdj.org
+          </div>
+
+          <div class="contact-item">
+            <strong>Téléphone officiel (WhatsApp)</strong><br>
+            <a href="https://wa.me/33744828970" target="_blank" rel="noopener noreferrer">
+              +33 7 44 82 89 70
+            </a>
+          </div>
+
+          <div class="contact-item">
+            <strong>Localisation</strong><br>
+            Haute-Savoie, France
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        © OSD9TDJ — Documents internes — Accès réservé aux membres
+      </div>
+
     </div>
-
   </div>
-
-  <!-- FOOTER -->
-  <div class="footer">
-    © O.S.D.9.T.D.J. – Documents internes – Accès réservé<br>
-    <a href="index.html">Retour au site public</a>
-  </div>
-
-</div>
 
 </body>
 </html>
