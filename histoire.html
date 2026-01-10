@@ -239,12 +239,12 @@
     }
     .motto strong{color:var(--or);}
 
-    /* ✅ FIX: les 2 boutons noirs (Accueil/Contact) ne prennent plus toute la longueur du cadre */
+    /* ✅ FIX FINAL : nav noir du bas (Accueil/Contact) CENTRÉE et NON pleine largeur */
     .tabs{
       margin:10px auto 26px;
-      display:inline-flex;          /* ✅ au lieu de flex */
-      justify-content:center;
-      width:fit-content;           /* ✅ empêche la "barre" pleine largeur */
+      display:flex;                 /* ✅ important (pas inline-flex) */
+      justify-content:center;       /* ✅ centre les boutons */
+      width:fit-content;            /* ✅ pas pleine largeur */
       max-width:100%;
       overflow-x:auto;
       -webkit-overflow-scrolling:touch;
@@ -417,7 +417,7 @@
     /* ✅ Centrage des tabs sur tablette/PC (sans toucher au mobile) */
     @media (min-width: 700px){
       .tabs{
-        display:inline-flex;
+        display:flex;
         width:fit-content;
         justify-content:center;
       }
