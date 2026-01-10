@@ -46,46 +46,40 @@
       --clair: #f8e8c8;
       --fond: #120702;
 
-      /* doré adouci */
       --or-line: rgba(214,167,40,0.40);
       --or-line2: rgba(214,167,40,0.24);
       --or-glow: rgba(214,167,40,0.10);
 
-      /* fonds doux (moins lourds) */
       --card: rgba(0,0,0,0.18);
       --card2: rgba(0,0,0,0.10);
     }
 
-    /* ✅ CADRE FIXE + SCROLL DEDANS */
+    /* ✅ FIX IMPORTANT (comme ton 1er HTML) : empêche les cartes de déborder */
+    *, *::before, *::after { box-sizing: border-box; }
+
     html, body{
       height:100%;
       margin:0;
       padding:0;
-      overflow:hidden; /* ✅ pas de scroll sur le body */
+      overflow:hidden;
       font-family: 'Lato', Arial, sans-serif;
       color: var(--clair);
       text-align: center;
-
-      /* ✅ image de fond */
       background: url("fond-qns.PNG") center / cover no-repeat fixed;
     }
 
-    /* ✅ voile noir par-dessus, effet coulissant (LÉGÈREMENT plus sombre) */
-    body{
-      position: relative;
-    }
+    body{ position: relative; }
+
+    /* ✅ voile noir (un peu plus sombre) */
     body::before{
       content:"";
       position:fixed;
       inset:0;
       pointer-events:none;
-
-      /* ✅ MODIF: voile un peu plus sombre pour que le texte ressorte */
       background:
         linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.84)),
         radial-gradient(circle at 10% 0%, rgba(214,167,40,0.08), transparent 35%),
         radial-gradient(circle at 90% 0%, rgba(214,167,40,0.06), transparent 40%);
-
       transform: translateX(-100%);
       animation: veilSlide 900ms ease forwards;
       z-index: 0;
@@ -104,7 +98,6 @@
       z-index: 40;
     }
 
-    /* ✅ 4 fleurs de lys (UNICODE) dans les angles */
     .lys{
       position:absolute;
       font-family:'Cinzel',serif;
@@ -119,7 +112,6 @@
     .lys.bl{ bottom:10px; left:12px; }
     .lys.br{ bottom:10px; right:12px; }
 
-    /* ✅ zone qui défile à l'intérieur du cadre */
     .viewport-scroll{
       position: fixed;
       inset: 22px;
@@ -128,10 +120,8 @@
       -webkit-overflow-scrolling: touch;
       z-index: 1;
       padding: 30px 15px 44px;
-      box-sizing: border-box;
     }
 
-    /* ✅ menu 3 points (TOUTES PAGES) */
     .top-menu{
       position: fixed;
       top: 26px;
@@ -188,19 +178,16 @@
     }
     .menu-panel a:last-child{ border-bottom: none; }
 
-    /* ========= TON DESIGN EXISTANT (INCHANGÉ) ========= */
-
     .container {
       min-height: auto;
-      box-sizing: border-box;
       display: flex;
       flex-direction: column;
-
-      /* ✅ FIX MOBILE: évite décalage à droite */
       align-items: stretch;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden; /* ✅ sécurité */
     }
 
-    /* ✅ garde les éléments “centrés” */
     .image-box, h1, h2, .nndnn-banner, .big-history-wrap, nav.tabs, footer.footer-min{
       align-self: center;
     }
@@ -240,6 +227,7 @@
     .section-card{
       width: 100%;
       max-width: 920px;
+      max-width: min(920px, 100%); /* ✅ évite tout dépassement */
       margin: 22px auto;
       padding: 22px 22px;
       text-align: justify;
@@ -254,8 +242,6 @@
 
       position: relative;
       overflow: hidden;
-
-      /* ✅ FIX MOBILE: force le centrage dans le flex container */
       align-self: center;
     }
 
@@ -319,10 +305,7 @@
       text-decoration: none;
       cursor: pointer;
     }
-    a.inline-link::after {
-      content: " ⟶";
-      font-size: 0.82rem;
-    }
+    a.inline-link::after { content: " ⟶"; font-size: 0.82rem; }
     a.inline-link::before {
       content: "";
       position: absolute;
@@ -345,47 +328,35 @@
       display: flex;
       justify-content: center;
     }
-
     .big-history-slider{
       display: inline-flex;
       align-items: center;
       gap: 26px;
-
       max-width: 100%;
       overflow-x: auto;
       overflow-y: hidden;
-
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-
       padding: 14px 28px;
       border-radius: 999px;
       background: linear-gradient(to right, #f3d98b, #d6a728);
       box-shadow: 0 4px 10px rgba(0,0,0,0.8);
-
       margin: 0 auto;
     }
     .big-history-slider::-webkit-scrollbar{ display:none; }
 
     .big-history-btn{
       display:inline-block;
-      padding: 0;
-      border-radius: 0;
       font-family:'Cinzel',serif;
       font-weight:700;
       letter-spacing:0.04em;
       text-decoration:none;
       color:#120702;
       background: transparent;
-      box-shadow: none;
       white-space: nowrap;
       flex: 0 0 auto;
     }
-    .big-history-btn:hover{
-      filter: none;
-      transform: none;
-      text-decoration: underline;
-    }
+    .big-history-btn:hover{ text-decoration: underline; }
 
     .tabs{
       margin: 18px auto 0;
@@ -570,12 +541,10 @@
     }
   }
   </script>
-
 </head>
 
 <body>
 
-  <!-- ✅ Cadre fixe + lys -->
   <div class="frame-fixed" aria-hidden="true">
     <div class="lys tl">⚜️</div>
     <div class="lys tr">⚜️</div>
@@ -583,7 +552,6 @@
     <div class="lys br">⚜️</div>
   </div>
 
-  <!-- ✅ Menu 3 points avec toutes les pages -->
   <div class="top-menu" aria-label="Menu du site">
     <details>
       <summary title="Menu">⋯</summary>
@@ -606,7 +574,6 @@
     </details>
   </div>
 
-  <!-- ✅ Tout défile dedans -->
   <div class="viewport-scroll">
     <div class="container">
 
@@ -617,7 +584,6 @@
       <h1>ORDRE SACRÉ DES NEUF TEMPLIERS DE JÉRUSALEM</h1>
       <h2>Qui nous sommes</h2>
 
-      <!-- BLOC 1 (paragraphe 1 à 3) -->
       <details class="section-card" aria-label="Présentation générale">
         <summary>Présentation générale</summary>
         <div class="details-inner">
@@ -645,7 +611,6 @@
         </div>
       </details>
 
-      <!-- BLOC 2 (paragraphe 4 à 7) -->
       <details class="section-card alt" aria-label="Esprit de service et fraternité">
         <summary>Esprit de service et fraternité</summary>
         <div class="details-inner">
@@ -674,7 +639,6 @@
         </div>
       </details>
 
-      <!-- BLOC 3 DÉROULANT -->
       <details class="section-card" aria-label="Engagement et esprit des origines">
         <summary>Engagement et esprit des origines</summary>
         <div class="details-inner">
@@ -705,7 +669,6 @@
         </div>
       </details>
 
-      <!-- DERNIER BLOC NON DÉROULANT -->
       <section class="section-card" aria-label="Ouverture, adhésion et fonctionnement">
         <p>
           L’Ordre est <strong>mixte</strong>, ouvert aux femmes et aux hommes, et respecte strictement
@@ -729,14 +692,12 @@
         </p>
       </section>
 
-      <!-- Signature nnDnn -->
       <div class="nndnn-banner" aria-label="Signature templière nnDnn">
         <img src="croix.epee.PNG" alt="Épée – symbole">
         <div class="nndnn-text">nnDnn</div>
         <img src="croix.epee.PNG" alt="Épée – symbole">
       </div>
 
-      <!-- Bouton jaune coulissant unique -->
       <div class="big-history-wrap">
         <div class="big-history-slider" aria-label="Accès rapides">
           <a class="big-history-btn" href="histoire.html"> Notre histoire</a>
@@ -746,13 +707,11 @@
         </div>
       </div>
 
-      <!-- Menu bas (tes 2 liens) -->
       <nav class="tabs" aria-label="Navigation bas de page">
         <a class="tab" href="index.html">  Accueil</a>
         <a class="tab" href="contact.html">  Contact</a>
       </nav>
 
-      <!-- Footer standardisé -->
       <footer class="footer-min" aria-label="Pied de page">
         <div class="line">
           <span>© OSD9TDJ Association Loi 1901, Tous droits réservés</span>
