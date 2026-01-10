@@ -239,12 +239,12 @@
     }
     .motto strong{color:var(--or);}
 
-    /* ✅ FIX (portable): nav noir du bas centré */
+    /* ✅ FIX: les 2 boutons noirs (Accueil/Contact) ne prennent plus toute la longueur du cadre */
     .tabs{
       margin:10px auto 26px;
-      display:flex;                 /* ✅ était inline-flex */
-      justify-content:center;       /* ✅ centre réellement */
-      width:100%;                   /* ✅ prend la largeur */
+      display:inline-flex;          /* ✅ au lieu de flex */
+      justify-content:center;
+      width:fit-content;           /* ✅ empêche la "barre" pleine largeur */
       max-width:100%;
       overflow-x:auto;
       -webkit-overflow-scrolling:touch;
@@ -417,8 +417,8 @@
     /* ✅ Centrage des tabs sur tablette/PC (sans toucher au mobile) */
     @media (min-width: 700px){
       .tabs{
-        display:flex;
-        width:100%;
+        display:inline-flex;
+        width:fit-content;
         justify-content:center;
       }
 
@@ -747,7 +747,7 @@
         <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;">
       </div>
 
-      <!-- ✅ BOUTON NOIR DU BAS (centré portable OK) -->
+      <!-- ✅ BOUTON NOIR DU BAS -->
       <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
         <a class="tab" href="index.html">Accueil</a>
         <a class="tab" href="contact.html">Contact</a>
