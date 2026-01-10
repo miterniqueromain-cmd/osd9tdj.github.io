@@ -55,6 +55,9 @@
     --card2: rgba(0,0,0,0.10);
   }
 
+  /* ✅ FIX mobile anti-débordement (cadres qui sortent) */
+  *, *::before, *::after{ box-sizing:border-box; }
+
   html,body{
     height:100%;
     margin:0;
@@ -64,15 +67,21 @@
     color:var(--clair);
     text-align:center;
 
-    background:
-      radial-gradient(1200px 700px at 12% 18%, rgba(56, 220, 187, 0.22), transparent 60%),
-      radial-gradient(900px 650px at 88% 28%, rgba(64, 132, 255, 0.22), transparent 62%),
-      radial-gradient(820px 560px at 42% 84%, rgba(43, 255, 155, 0.14), transparent 62%),
-      radial-gradient(980px 720px at 72% 88%, rgba(6, 26, 62, 0.62), transparent 58%),
-      linear-gradient(135deg, #04111b 0%, #062a2f 26%, #063b35 52%, #021019 100%);
+    /* ✅ fond nn + voile noir */
+    background: url("fonds.nn.jpg") center / cover no-repeat fixed;
   }
   @supports (height: 100dvh){
     html,body{ height:100dvh; }
+  }
+
+  /* ✅ voile noir global */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background: rgba(0,0,0,0.42);
+    z-index:0;
+    pointer-events:none;
   }
 
   .frame-fixed{
@@ -162,6 +171,11 @@
     display:flex;
     flex-direction:column;
     align-items:center;
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+    position:relative;
+    z-index:1;
   }
 
   .hero{
@@ -172,7 +186,7 @@
     box-shadow:0 0 40px rgba(0,0,0,0.92);
     background:rgba(0,0,0,0.35);
     width:100%;
-    max-width:1100px;
+    max-width:min(1100px, 100%);
   }
   .hero img{
     display:block;
@@ -212,7 +226,7 @@
 
   .section-card{
     width:100%;
-    max-width:920px;
+    max-width:min(920px, 100%);
     margin:22px auto;
     padding:22px 22px;
     text-align:justify;
@@ -283,7 +297,7 @@
     border:2px solid rgba(214,167,40,0.82);
     background:rgba(0,0,0,0.12);
     width:100%;
-    max-width:820px;
+    max-width:min(820px, 100%);
   }
   figure.inner-img img{
     display:block;
@@ -295,7 +309,7 @@
   .notice{
     position:relative;
     margin:18px auto;
-    max-width:880px;
+    max-width:min(880px, 100%);
     padding:14px 14px;
     border-radius:16px;
     border:1px dashed rgba(214,167,40,0.55);
@@ -307,10 +321,9 @@
   }
   .notice strong{ color:#ffeeb5; }
 
-  /* ✅ menus déroulants (uniquement là où il n’y a pas de photo) */
   details.accordion{
     width:100%;
-    max-width:920px;
+    max-width:min(920px, 100%);
     margin:22px auto;
     border-radius:20px;
     border:1px solid var(--or-line);
@@ -465,18 +478,15 @@
     .accordion-body p{ font-size:1.02rem; line-height:1.70; }
   }
 
-  /* ✅ 1) Accès rapides en bas : empêcher le bleu (liens visités / iOS) */
   .cta-ordres .cta-slider a:visited{ color:#140b02; }
   .tabs .tab:visited{ color:var(--clair); }
 
-  /* ✅ 2) Mobile : éviter chevauchements + texte coupé dans les accordéons (sans réduire les textes) */
   details.accordion summary{
     padding-right:52px;
     line-height:1.25;
     word-break:break-word;
   }
 
-  /* ✅ 3) LIENS DANS LES ENCARTS .notice : empêcher le bleu/violet iOS (VISITED) */
   .notice a{ color: var(--clair); text-decoration: underline; }
   .notice a:visited{ color: var(--clair); }
 </style>
@@ -553,7 +563,6 @@
 <div class="viewport-scroll">
   <div class="container">
 
-    <!-- ✅ HERO : mission.PNG en haut -->
     <div class="hero">
       <img src="mission.PNG" alt="Notre mission – O.S.D.9.T.D.J." onerror="this.onerror=null; this.src='mission.png';">
     </div>
@@ -569,18 +578,16 @@
         un <strong>patrimoine historique</strong> et une <strong>démarche de service</strong>, au bénéfice du plus grand nombre.
       </p>
       <p>
-        L’O.S.D.9.T.D.J. <strong>n’est pas la continuité juridique, religieuse ou institutionnelle</strong> de l’Ordre du Temple médiéval,
+        L’O.S.D.9.T.D.J. <strong>n’est pas la continuité juridique, de conviction ou institutionnelle</strong> de l’Ordre du Temple médiéval,
         dissous en 1312. Il s’inscrit dans une démarche <strong>laïque, associative et culturelle</strong>, respectueuse du droit,
         des institutions et des traditions historiques existantes.
       </p>
 
-      <!-- ✅ transmettre2 juste après les 2 premiers paragraphes -->
       <figure class="inner-img">
         <img alt="Transmission — actions et présence publique" loading="lazy" src="transmettre2.PNG"/>
       </figure>
     </section>
 
-    <!-- ✅ PAS DE PHOTO -> menu déroulant -->
     <details class="accordion alt" aria-label="Fraternité associative">
       <summary>Une fraternité associative structurée</summary>
       <div class="accordion-body">
@@ -596,7 +603,6 @@
       </div>
     </details>
 
-    <!-- ✅ PAS DE PHOTO -> menu déroulant -->
     <details class="accordion" aria-label="Démarche initiatique">
       <summary>Une démarche initiatique interne, maîtrisée et encadrée</summary>
       <div class="accordion-body">
@@ -608,7 +614,7 @@
         <p>
           Cette initiation est <strong>fermée, volontaire et interne</strong>. Elle <strong>n’a pas vocation à être pratiquée, enseignée ou imposée au public</strong>.
           Ce qui est proposé au public relève exclusivement d’une <strong>approche culturelle, historique et pédagogique</strong>, sans engagement requis,
-          sans pratique cultuelle et sans orientation spirituelle imposée.
+          sans pratique rituelle publique et sans orientation intérieure imposée.
         </p>
       </div>
     </details>
@@ -616,7 +622,6 @@
     <section aria-label="Servir" class="section-card">
       <h3>Servir</h3>
 
-      <!-- ✅ photo servir placée dans la section Servir -->
       <figure class="inner-img">
         <img alt="Servir — actions solidaires et caritatives" loading="lazy" src="servir.PNG"/>
       </figure>
@@ -633,7 +638,6 @@
       <p>Servir, c’est incarner les valeurs dans les actes, et non dans les discours.</p>
     </section>
 
-    <!-- ✅ PAS DE PHOTO -> menu déroulant -->
     <details class="accordion alt" aria-label="Protéger">
       <summary>Protéger le patrimoine et la mémoire templière</summary>
       <div class="accordion-body">
@@ -654,9 +658,13 @@
     <section aria-label="Étudier" class="section-card">
       <h3>Étudier</h3>
 
-      <!-- ✅ image étudiER : nom de fichier sans accent pour éviter les soucis -->
       <figure class="inner-img">
         <img alt="Étudier — héritage culturel, historique et symbolique" loading="lazy" src="etudier.PNG" onerror="this.onerror=null; this.src='étudier.PNG';">
+      </figure>
+
+      <!-- ✅ ajout demandé : notrehistoire-etudie.PNG -->
+      <figure class="inner-img">
+        <img alt="Notre histoire — étude et recherche" loading="lazy" src="notrehistoire-etudie.PNG" onerror="this.onerror=null; this.src='notrehistoire-etudie.png';">
       </figure>
 
       <p>
@@ -665,14 +673,13 @@
         chevaleresques ; le contexte culturel, social et intellectuel des ordres médiévaux.
       </p>
       <p>
-        Cette approche est <strong>culturelle, comparative et laïque</strong>. Elle n’impose aucune croyance et ne relève d’aucune pratique cultuelle.
+        Cette approche est <strong>culturelle, comparative et laïque</strong>. Elle n’impose aucune croyance et ne relève d’aucune pratique rituelle.
       </p>
     </section>
 
     <section aria-label="Transmettre" class="section-card alt">
       <h3>Transmettre : un pont entre le passé et le présent</h3>
 
-      <!-- ✅ photo transmettre1 placée dans la section Transmettre -->
       <figure class="inner-img">
         <img alt="Transmettre — pédagogie et diffusion culturelle" loading="lazy" src="transmettre1.PNG"/>
       </figure>
@@ -691,35 +698,33 @@
       </p>
     </section>
 
-    <!-- ✅ PAS DE PHOTO -> menu déroulant -->
     <details class="accordion" aria-label="Ouverture culturelle et relations">
-      <summary>Une ouverture culturelle, spirituelle et partenariale respectueuse des libertés</summary>
+      <summary>Une ouverture culturelle, intérieure et partenariale respectueuse des libertés</summary>
       <div class="accordion-body">
         <p>
           Dans le cadre de sa mission culturelle, l’O.S.D.9.T.D.J. entretient des <strong>relations amicales, respectueuses et partenariales</strong>
-          avec des acteurs du monde <strong>culturel, patrimonial, intellectuel et religieux</strong>, chacun agissant dans le cadre de ses propres
+          avec des acteurs du monde <strong>culturel, patrimonial, intellectuel et cultuel</strong>, chacun agissant dans le cadre de ses propres
           institutions, règles et responsabilités.
         </p>
         <p>
-          L’association <strong>n’organise pas de culte</strong>, ne dirige aucune pratique religieuse et n’exerce aucune autorité spirituelle.
+          L’association <strong>n’organise pas de cérémonies de culte</strong>, ne dirige aucune pratique confessionnelle et n’exerce aucune autorité intérieure.
           Elle se situe comme un <strong>pont culturel et humain</strong>, favorisant le dialogue, la compréhension mutuelle et la transmission du sens,
           sans confusion des rôles.
         </p>
         <p>
           Les membres de l’O.S.D.9.T.D.J. demeurent <strong>entièrement libres</strong>, à titre strictement personnel, de participer — ou non — à des
-          offices, cérémonies ou pratiques religieuses, selon leurs convictions individuelles. Ces démarches relèvent exclusivement de la sphère privée
+          offices, cérémonies ou pratiques confessionnelles, selon leurs convictions individuelles. Ces démarches relèvent exclusivement de la sphère privée
           et n’engagent en aucun cas l’association.
         </p>
         <p>
-          Lorsque l’O.S.D.9.T.D.J. est présent dans des <strong>églises, abbayes ou lieux religieux</strong>, cette présence s’inscrit à titre
+          Lorsque l’O.S.D.9.T.D.J. est présent dans des <strong>églises, abbayes ou lieux de tradition</strong>, cette présence s’inscrit à titre
           <strong>culturel, symbolique ou patrimonial</strong>, toujours dans le respect des autorités compétentes et des lieux concernés. Cette posture
-          permet de maintenir des relations sereines et respectueuses avec les Églises et institutions religieuses, tout en garantissant la
+          permet de maintenir des relations sereines et respectueuses avec les Églises et institutions de tradition, tout en garantissant la
           <strong>liberté de conscience</strong> de chacun.
         </p>
       </div>
     </details>
 
-    <!-- ✅ PAS DE PHOTO -> menu déroulant (notice conservée) -->
     <details class="accordion alt" aria-label="Actions concrètes">
       <summary>Des actions concrètes pour faire vivre la mission</summary>
       <div class="accordion-body">
@@ -737,19 +742,18 @@
 
         <div class="notice" role="note" aria-label="Clarification">
           <strong>Clarification publique :</strong> les références historiques et symboliques de l’association sont présentées comme un contenu culturel et pédagogique.
-          Elles n’emportent aucune revendication institutionnelle et n’ont pas de valeur cultuelle.
+          Elles n’emportent aucune revendication institutionnelle et n’ont pas de valeur de culte.
         </div>
       </div>
     </details>
 
-    <!-- ✅ PAS DE PHOTO -> menu déroulant -->
     <details class="accordion" aria-label="Conclusion">
       <summary>Une mission claire, assumée et responsable</summary>
       <div class="accordion-body">
         <p>
           L’O.S.D.9.T.D.J. agit dans un esprit de <strong>transparence</strong>, de <strong>respect des lois</strong> et de <strong>responsabilité associative</strong>.
           Ses titres, symboles et références sont honorifiques, culturels et pédagogiques. Ils ne visent ni à concurrencer, ni à imiter, ni à remplacer des
-          institutions religieuses, historiques ou souveraines.
+          institutions de conviction, historiques ou souveraines.
         </p>
         <p>
           Sa mission peut se résumer simplement : <strong>servir, protéger, étudier et transmettre</strong>, en s’appuyant sur une <strong>structure initiatique interne
@@ -758,7 +762,6 @@
       </div>
     </details>
 
-    <!-- ✅ encadré final (pas de menu déroulant) -->
     <div class="notice" role="note" aria-label="Informations et rejoindre l’association" style="margin-top:20px;">
       <strong>Une question ? Envie de nous rejoindre ?</strong><br/><br/>
       Pour toute demande, <strong>n’hésitez pas à nous contacter</strong> : nous vous répondrons avec plaisir.
@@ -775,14 +778,14 @@
     </nav>
 
     <div class="cta-ordres" aria-label="Accès rapide">
-  <div class="cta-slider" role="navigation" aria-label="Accès rapides">
-    <a href="quinoussommes.html">Qui nous sommes</a>
-    <span class="divider" aria-hidden="true"></span>
-    <a href="histoire.html">Notre histoire</a>
-    <span class="divider" aria-hidden="true"></span>
-    <a href="vocation.html">Histoire du Temple</a>
-  </div>
-</div>
+      <div class="cta-slider" role="navigation" aria-label="Accès rapides">
+        <a href="quinoussommes.html">Qui nous sommes</a>
+        <span class="divider" aria-hidden="true"></span>
+        <a href="histoire.html">Notre histoire</a>
+        <span class="divider" aria-hidden="true"></span>
+        <a href="vocation.html">Histoire du Temple</a>
+      </div>
+    </div>
 
     <div class="footer">
       © O.S.D.9.T.D.J. Association Loi 1901 – Tous droits réservés •
