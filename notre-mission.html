@@ -74,20 +74,20 @@
     html,body{ height:100dvh; }
   }
 
-  /* ✅ VOILE NOIR (plus fort sur mobile/tablette) */
+  /* ✅ VOILE NOIR (encore plus fort sur mobile) */
   body::before{
     content:"";
     position:fixed;
     inset:0;
-    background: rgba(0,0,0,0.50); /* desktop */
+    background: rgba(0,0,0,0.52); /* desktop */
     z-index:0;
     pointer-events:none;
   }
   @media (max-width: 1024px){
-    body::before{ background: rgba(0,0,0,0.72); } /* tablette */
+    body::before{ background: rgba(0,0,0,0.80); } /* tablette */
   }
   @media (max-width: 600px){
-    body::before{ background: rgba(0,0,0,0.80); } /* téléphone */
+    body::before{ background: rgba(0,0,0,0.88); } /* téléphone */
   }
 
   .frame-fixed{
@@ -622,6 +622,11 @@
           Ce qui est proposé au public relève exclusivement d’une <strong>approche culturelle, historique et pédagogique</strong>, sans engagement requis,
           sans pratique rituelle publique et sans orientation intérieure imposée.
         </p>
+
+        <!-- ✅ photo demandée DANS le menu déroulant "initiatique" -->
+        <figure class="inner-img">
+          <img alt="Notre histoire — étude et recherche" loading="lazy" src="notrehistoire-etudie.PNG" onerror="this.onerror=null; this.src='notrehistoire-etudie.png';">
+        </figure>
       </div>
     </details>
 
@@ -666,10 +671,6 @@
 
       <figure class="inner-img">
         <img alt="Étudier — héritage culturel, historique et symbolique" loading="lazy" src="etudier.PNG" onerror="this.onerror=null; this.src='étudier.PNG';">
-      </figure>
-
-      <figure class="inner-img">
-        <img alt="Notre histoire — étude et recherche" loading="lazy" src="notrehistoire-etudie.PNG" onerror="this.onerror=null; this.src='notrehistoire-etudie.png';">
       </figure>
 
       <p>
