@@ -594,6 +594,55 @@
     }
     /* fallback si ton fichier est finalement en png */
     .mask-icon.malte{ background:#ffffff; }
+ /* ================= FIX TABLETTE / MOBILE – CHEVAUCHEMENT TITRES ================= */
+
+/* Sécurise le header */
+header.hero{
+  position: relative;
+  z-index: 2;
+  margin-bottom: 28px;
+}
+
+/* Empêche l’empilement sauvage */
+header.hero h1{
+  margin-top: 0;
+}
+
+header.hero h2{
+  margin-top: 6px;
+}
+
+/* Texte d’intro plus respirant */
+header.hero .lead{
+  margin-top: 12px;
+}
+
+/* Force l’image suivante à rester en dessous */
+header.hero + figure.inner-img{
+  margin-top: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Spécifique TABLETTES */
+@media (max-width: 900px){
+  header.hero{
+    padding-top: 10px;
+  }
+}
+
+/* Spécifique MOBILE */
+@media (max-width: 600px){
+  header.hero h1{
+    font-size: 1.6rem;
+  }
+  header.hero h2{
+    font-size: 1rem;
+  }
+  header.hero .lead{
+    font-size: 0.95rem;
+  }
+}
   </style>
 </head>
 <body>
