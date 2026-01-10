@@ -55,7 +55,7 @@
     --card2: rgba(0,0,0,0.10);
   }
 
-  /* ✅ FIX mobile anti-débordement (cadres qui sortent) */
+  /* ✅ FIX mobile anti-débordement */
   *, *::before, *::after{ box-sizing:border-box; }
 
   html,body{
@@ -67,21 +67,27 @@
     color:var(--clair);
     text-align:center;
 
-    /* ✅ fond nn + voile noir */
+    /* ✅ fond nn */
     background: url("fonds.nn.jpg") center / cover no-repeat fixed;
   }
   @supports (height: 100dvh){
     html,body{ height:100dvh; }
   }
 
-  /* ✅ voile noir global */
+  /* ✅ VOILE NOIR (plus fort sur mobile/tablette) */
   body::before{
     content:"";
     position:fixed;
     inset:0;
-    background: rgba(0,0,0,0.42);
+    background: rgba(0,0,0,0.50); /* desktop */
     z-index:0;
     pointer-events:none;
+  }
+  @media (max-width: 1024px){
+    body::before{ background: rgba(0,0,0,0.72); } /* tablette */
+  }
+  @media (max-width: 600px){
+    body::before{ background: rgba(0,0,0,0.80); } /* téléphone */
   }
 
   .frame-fixed{
@@ -662,7 +668,6 @@
         <img alt="Étudier — héritage culturel, historique et symbolique" loading="lazy" src="etudier.PNG" onerror="this.onerror=null; this.src='étudier.PNG';">
       </figure>
 
-      <!-- ✅ ajout demandé : notrehistoire-etudie.PNG -->
       <figure class="inner-img">
         <img alt="Notre histoire — étude et recherche" loading="lazy" src="notrehistoire-etudie.PNG" onerror="this.onerror=null; this.src='notrehistoire-etudie.png';">
       </figure>
