@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="utf-8"/>
 <title>Emblème &amp; Logo | O.S.D.9.T.D.J. – Ordre Sacré des Neuf Templiers de Jérusalem</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
 <!-- SEO -->
 <meta content="Découvrir les emblèmes de l’O.S.D.9.T.D.J. : blason, drapeau, croix et sceaux. Lecture historique, culturelle et symbolique — association laïque (loi 1901)." name="description"/>
 <meta content="OSD9TDJ, Ordre Sacré des Neuf Templiers de Jérusalem, emblème, logo, blason, sceau, croix templière, Beauceant, symbolique, histoire, association loi 1901" name="keywords"/>
 <link href="https://osd9tdj.org/embleme-et-logo.html" rel="canonical"/>
+
 <!-- SEO avancé -->
 <meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/>
 <meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="googlebot"/>
@@ -16,6 +17,7 @@
 <meta content="O.S.D.9.T.D.J." name="publisher"/>
 <meta content="7 days" name="revisit-after"/>
 <meta content="strict-origin-when-cross-origin" name="referrer"/>
+
 <!-- OpenGraph -->
 <meta content="Emblème &amp; Logo | O.S.D.9.T.D.J." property="og:title"/>
 <meta content="Blason, croix, drapeau et sceaux : comprendre les symboles de l’O.S.D.9.T.D.J. (association laïque, culturelle et historique)." property="og:description"/>
@@ -24,16 +26,20 @@
 <meta content="https://osd9tdj.org/embleme-et-logo.html" property="og:url"/>
 <meta content="O.S.D.9.T.D.J." property="og:site_name"/>
 <meta content="fr_FR" property="og:locale"/>
+
 <!-- Twitter -->
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Emblème &amp; Logo | O.S.D.9.T.D.J." name="twitter:title"/>
 <meta content="Blason, croix, drapeau et sceaux : lecture historique et symbolique des emblèmes de l’O.S.D.9.T.D.J." name="twitter:description"/>
 <meta content="https://osd9tdj.org/blason-osd9tdj.PNG" name="twitter:image"/>
+
 <!-- WATERMARK INVISIBLE -->
 <meta content="WTRMK-IX-ALPHA-2026-OSD9TDJ-EMBLEME-LOGO" name="osd9tdj-signature"/>
 <meta content="OSD9TDJ|EMBLEME|LOGO|IX|2026|BLAZON|SCEAU|CROIX|BEAUCEANT" name="osd9tdj-watermark"/>
 <meta content="WTRMK-IX-ALPHA-2026-OSD9TDJ-EMBLEME-LOGO-LOCK" name="osd9tdj-signature-2"/>
+
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+
 <style>
     :root {
       --or: #d6a728;
@@ -50,6 +56,9 @@
       --card2: rgba(0,0,0,0.10);
     }
 
+    /* ✅ FIX ALIGNEMENT MOBILE (comme ton 1er HTML) */
+    *, *::before, *::after{ box-sizing: border-box; }
+
     /* ✅ CADRE FIXE + SCROLL DEDANS */
     html, body{
       height:100%;
@@ -59,7 +68,7 @@
       font-family: 'Lato', Arial, sans-serif;
       color: var(--clair);
       text-align: center;
-      background: radial-gradient(circle at top, #3a2513, var(--fond) 70%);
+      background: url("fonds-el.PNG") center / cover no-repeat fixed;
     }
     @supports (height: 100dvh){
       html, body{ height: 100dvh; }
@@ -101,7 +110,6 @@
       -webkit-overflow-scrolling: touch;
       z-index: 1;
       padding: 30px 15px 44px;
-      box-sizing: border-box;
       overscroll-behavior: contain;
       touch-action: pan-y;
     }
@@ -165,10 +173,12 @@
 
     .container {
       min-height: auto;
-      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden; /* ✅ sécurité anti débordement mobile */
     }
 
     /* ✅ HERO templier en haut */
@@ -180,7 +190,7 @@
       box-shadow:0 0 40px rgba(0,0,0,0.92);
       background:rgba(0,0,0,0.35);
       width:100%;
-      max-width: 1100px;
+      max-width: min(1100px, 100%);
     }
     .hero img{
       display:block;
@@ -194,17 +204,11 @@
     @media (max-width: 600px){
       .hero img{ max-height:220px; }
     }
-    /* ✅ MODIF CHIRURGICALE : tablettes */
     @media (min-width: 700px) and (max-width: 899px){
-      .hero img{
-        max-height:280px;
-      }
+      .hero img{ max-height:280px; }
     }
-    /* ✅ MODIF CHIRURGICALE : grands écrans */
     @media (min-width: 900px){
-      .hero img{
-        max-height:360px;
-      }
+      .hero img{ max-height:360px; }
     }
 
     h1 {
@@ -234,6 +238,7 @@
     .section-card{
       width: 100%;
       max-width: 920px;
+      max-width: min(920px, 100%); /* ✅ évite tout dépassement mobile */
       margin: 22px auto;
       padding: 22px 22px;
       text-align: justify;
@@ -334,7 +339,7 @@
       border:2px solid rgba(214,167,40,0.82);
       background:rgba(0,0,0,0.12);
       width:100%;
-      max-width:820px;
+      max-width: min(820px, 100%);
     }
     figure.inner-img img{
       display:block;
@@ -558,10 +563,10 @@
 .tabs::-webkit-scrollbar{display:none;}
 .tab{
   flex:0 0 auto;
-  padding:7px 14px;              /* ✅ plus court */
+  padding:7px 14px;
   text-decoration:none;
   color:var(--clair);
-  font-size:0.88rem;             /* ✅ plus court */
+  font-size:0.88rem;
   font-weight:700;
   font-family:'Cinzel',serif;
   background:rgba(0,0,0,0.42);
@@ -632,9 +637,11 @@
 }
 .footer a{color:var(--clair);}
 </style>
+
 <link href="icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
 <link href="icon-512.png" rel="icon" sizes="512x512" type="image/png"/>
 <link href="icon-192.png" rel="apple-touch-icon"/>
+
 <!-- JSON-LD (Schema.org) -->
 <script type="application/ld+json">
   {
@@ -664,351 +671,345 @@
       ]
     }
   }
-  </script>
+</script>
 </head>
+
 <body>
 <!-- ✅ Cadre fixe + lys -->
 <div aria-hidden="true" class="frame-fixed">
-<div class="lys tl">⚜️</div>
-<div class="lys tr">⚜️</div>
-<div class="lys bl">⚜️</div>
-<div class="lys br">⚜️</div>
+  <div class="lys tl">⚜️</div>
+  <div class="lys tr">⚜️</div>
+  <div class="lys bl">⚜️</div>
+  <div class="lys br">⚜️</div>
 </div>
+
 <!-- ✅ Menu 3 points avec toutes les pages -->
 <div aria-label="Menu du site" class="top-menu">
-<details>
-<summary title="Menu">⋯</summary>
-<div aria-label="Navigation" class="menu-panel" role="menu">
-<a href="index.html"> Accueil</a>
-<a href="quinoussommes.html"> Qui nous sommes</a>
-<a href="histoire.html"> Notre histoire</a>
-<a href="notre-mission.html"> Notre mission</a>
-<a href="vocation.html"> Vocation historique</a>
-<a href="ordres-historiques.html"> Ordres historiques</a>
-<a href="embleme-et-logo.html"> Emblème et logo</a>
-<a href="faq.html"> FAQ</a>
-<a href="activites.html"> Activités</a>
-<a href="adhesion.html"> Adhésion</a>
-<a href="commanderie.html"> Commanderie</a>
-<a href="cotisations.html"> Cotisations</a>
-<a href="assurance.html"> Assurance</a>
-<a href="boutique.html"> Boutique</a>
-<a href="statuts.html"> Statuts</a>
-<a href="contact.html"> Contact</a>
-<a href="mentions.html"> Mentions légales</a>
-<a href="cookies.html"> Cookies</a>
+  <details>
+    <summary title="Menu">⋯</summary>
+    <div aria-label="Navigation" class="menu-panel" role="menu">
+      <a href="index.html"> Accueil</a>
+      <a href="quinoussommes.html"> Qui nous sommes</a>
+      <a href="histoire.html"> Notre histoire</a>
+      <a href="notre-mission.html"> Notre mission</a>
+      <a href="vocation.html"> histoire du temple</a>
+      <a href="faq.html"> FAQ</a>
+      <a href="activites.html"> Nos Evenements</a>
+      <a href="adhesion.html"> Adhésion</a>
+      <a href="boutique.html"> Boutique</a>
+      <a href="contact.html"> Contact</a>
+      
+    </div>
+  </details>
 </div>
-</details>
-</div>
+
 <!-- ✅ Tout défile dedans -->
 <div class="viewport-scroll">
-<div class="container">
+  <div class="container">
 
-<!-- ✅ HERO templier en haut -->
-<div class="hero">
-  <img src="templier.jpg" alt="Templier – continuité et avenir" onerror="this.onerror=null; this.src='templier.jpeg';">
-</div>
-
-<details aria-label="Insignes et tenues de l’Ordre" class="section-card">
-  <summary>Insignes &amp; Tenues : bagues, manteau, médailles &amp; épée</summary>
-  <div class="details-inner">
-    <p>
-      Cette section présente, de manière claire et publique, quelques éléments visuels utilisés par l’O.S.D.9.T.D.J.
-      Il s’agit d’<strong>insignes associatifs</strong> et d’éléments de <strong>tenue</strong> à vocation symbolique et protocolaire
-      (usage culturel, pédagogique et représentatif), sans prétention de filiation juridique avec l’Ordre du Temple médiéval.
-    </p>
-
-    <div class="soft-sep"></div>
-
-    <h3>Bague(s) de l’Ordre — identité, engagement et repère</h3>
-    <p>
-      Les bagues de l’O.S.D.9.T.D.J. ne sont pas des insignes « de pouvoir » : elles servent de <strong>repère visuel</strong>,
-      de rappel d’<strong>engagement</strong> et de marque d’appartenance à une démarche <strong>culturelle, éducative et caritative</strong>.
-      Elles peuvent varier selon les séries, les finitions ou l’usage (tenue, cérémonie, présentation).
-    </p>
-    <div class="rings-grid media-gap-top">
-      <figure class="ring-card">
-        <img alt="Bague O.S.D.9.T.D.J. — croix et marque IX" loading="lazy" src="bague1.PNG"/>
-      </figure>
-      <figure class="ring-card">
-        <img alt="Bague O.S.D.9.T.D.J. — anneau et gravure interne" loading="lazy" src="bague2.PNG"/>
-      </figure>
-      <figure class="ring-card">
-        <img alt="Bague O.S.D.9.T.D.J. — face principale avec IX" loading="lazy" src="bague3.PNG"/>
-      </figure>
-      <figure class="ring-card">
-        <img alt="Bague O.S.D.9.T.D.J. — variante sombre et croix" loading="lazy" src="bague4.PNG"/>
-      </figure>
+    <!-- ✅ HERO templier en haut -->
+    <div class="hero">
+      <img src="templier.jpg" alt="Templier – continuité et avenir" onerror="this.onerror=null; this.src='templier.jpeg';">
     </div>
 
-    <div class="soft-sep"></div>
-
-    <h3>Manteau — tenue de représentation</h3>
-    <p>
-      Le manteau est un élément de <strong>tenue de représentation</strong> : il vise l’unité visuelle lors des événements,
-      des cérémonies internes ou des prises de vues protocolaires. Il rappelle la sobriété et la discipline : porter une tenue,
-      c’est surtout porter une <strong>exigence de conduite</strong> et de cohérence.
-    </p>
-    <div class="rings-grid media-gap-top">
-      <figure class="ring-card">
-        <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 1" loading="lazy" src="manteaux.PNG"/>
-      </figure>
-      <figure class="ring-card">
-        <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 2" loading="lazy" src="manteaux2.PNG"/>
-      </figure>
-      <figure class="ring-card">
-        <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 3" loading="lazy" src="manteaux3.PNG"/>
-      </figure>
-      <figure class="ring-card">
-        <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 4" loading="lazy" src="manteaux4.PNG"/>
-      </figure>
-    </div>
-
-    <div class="soft-sep"></div>
-
-    <h3>Médailles — distinctions associatives</h3>
-    <p>
-      Les médailles présentées ci-dessous sont des <strong>distinctions associatives</strong> : elles matérialisent une reconnaissance,
-      un rôle, un service rendu ou une participation à la vie de l’Ordre. Elles sont utilisées dans un cadre interne et protocolaire,
-      selon les règles de l’association (et sans assimilation à des décorations officielles d’État).
-    </p>
-    <div class="media-grid-2">
-      <figure class="media-card">
-        <img alt="Médaille O.S.D.9.T.D.J. — modèle 1" loading="lazy" src="medaille1.PNG"/>
-      </figure>
-      <figure class="media-card">
-        <img alt="Médaille O.S.D.9.T.D.J. — modèle 2" loading="lazy" src="medaille2.jpg"/>
-      </figure>
-    </div>
-
-    <div class="soft-sep"></div>
-
-    <h3>Épée — symbole de serment et de responsabilité</h3>
-    <p>
-      L’épée relève d’un langage symbolique : elle représente la <strong>parole donnée</strong>, la <strong>droiture</strong>,
-      et la responsabilité de protéger et servir. Dans l’O.S.D.9.T.D.J., elle est comprise comme un rappel de la maîtrise de soi :
-      la force n’a de sens qu’orientée vers le bien, la justice, et la vérité.
-    </p>
-    <figure class="inner-img">
-      <img alt="Épée symbolique O.S.D.9.T.D.J." loading="lazy" src="epee.PNG"/>
-    </figure>
-
-    <div aria-label="Note d'usage" class="notice" role="note">
-      <strong>Note :</strong> les visuels ci-dessus sont présentés à titre informatif et pédagogique. Leur usage est réservé au cadre
-      associatif de l’O.S.D.9.T.D.J. (communication, représentation, cérémonial interne), conformément aux règles et décisions de l’association.
-    </div>
-  </div>
-</details>
-
-<h1>ORDRE SACRÉ DES NEUF TEMPLIERS DE JÉRUSALEM</h1>
-<h2>Emblème &amp; Logo</h2>
-<section aria-label="Introduction" class="section-card">
-<p>
-          Chaque tradition chevaleresque se reconnaît à ses signes. Les nôtres ne sont ni des ornements gratuits, ni des
-          « codes secrets » destinés à exclure : ce sont des <strong>repères de mémoire</strong>, des <strong>outils pédagogiques</strong> et
-          des <strong>marqueurs d’identité</strong> d’une association laïque et culturelle (loi de 1901).
+    <details aria-label="Insignes et tenues de l’Ordre" class="section-card">
+      <summary>Insignes &amp; Tenues : bagues, manteau, médailles &amp; épée</summary>
+      <div class="details-inner">
+        <p>
+          Cette section présente, de manière claire et publique, quelques éléments visuels utilisés par l’O.S.D.9.T.D.J.
+          Il s’agit d’<strong>insignes associatifs</strong> et d’éléments de <strong>tenue</strong> à vocation symbolique et protocolaire
+          (usage culturel, pédagogique et représentatif), sans prétention de filiation juridique avec l’Ordre du Temple médiéval.
         </p>
-<div class="soft-sep"></div>
-<p>
-          Cette page présente, pour le grand public, l’ensemble des emblèmes de l’O.S.D.9.T.D.J. :
-          <strong>le blason</strong>, <strong>le drapeau (Beauceant)</strong>, <strong>la croix</strong> et <strong>les sceaux</strong>.
-          Les explications proposées relèvent d’une lecture <strong>historique</strong>, <strong>culturelle</strong> et <strong>symbolique</strong> :
-          elles ne constituent ni revendication religieuse, ni prétention à une continuité juridique avec l’Ordre du Temple médiéval.
+
+        <div class="soft-sep"></div>
+
+        <h3>Bague(s) de l’Ordre — identité, engagement et repère</h3>
+        <p>
+          Les bagues de l’O.S.D.9.T.D.J. ne sont pas des insignes « de pouvoir » : elles servent de <strong>repère visuel</strong>,
+          de rappel d’<strong>engagement</strong> et de marque d’appartenance à une démarche <strong>culturelle, éducative et caritative</strong>.
+          Elles peuvent varier selon les séries, les finitions ou l’usage (tenue, cérémonie, présentation).
         </p>
-<div aria-label="Note de clarification" class="notice" role="note">
-<strong>Clarification publique :</strong> l’O.S.D.9.T.D.J. est une association culturelle et laïque.
-          Les termes internes (« Grand Maître », « Commandeur », etc.) sont honorifiques et symboliques.
-          Toute référence à des traditions, symboles ou interprétations est présentée comme une lecture pédagogique,
-          sans valeur canonique ni pratique cultuelle.
-          <br><br>
-          <strong>Information grand public :</strong> ce contenu est volontairement destiné à une consultation en ligne, simple et accessible.
-          Pour en savoir davantage, approfondir, ou découvrir la réalité concrète de notre démarche, le meilleur chemin est de
-          <strong>venir à l’Association</strong> : c’est précisément l’un des buts de l’O.S.D.9.T.D.J.
+        <div class="rings-grid media-gap-top">
+          <figure class="ring-card">
+            <img alt="Bague O.S.D.9.T.D.J. — croix et marque IX" loading="lazy" src="bague1.PNG"/>
+          </figure>
+          <figure class="ring-card">
+            <img alt="Bague O.S.D.9.T.D.J. — anneau et gravure interne" loading="lazy" src="bague2.PNG"/>
+          </figure>
+          <figure class="ring-card">
+            <img alt="Bague O.S.D.9.T.D.J. — face principale avec IX" loading="lazy" src="bague3.PNG"/>
+          </figure>
+          <figure class="ring-card">
+            <img alt="Bague O.S.D.9.T.D.J. — variante sombre et croix" loading="lazy" src="bague4.PNG"/>
+          </figure>
         </div>
-</section>
 
-<details aria-label="Le blason de l'O.S.D.9.T.D.J." class="section-card">
-<summary>Notre blason : une « table d’étude » en langage héraldique</summary>
-<div class="acc-body">
-<figure class="inner-img">
-<img alt="Blason officiel de l’O.S.D.9.T.D.J." loading="lazy" src="blason-osd9tdj.PNG"/>
-</figure>
-<p class="legal-note" role="note" aria-label="Protection des signes distinctifs">
-  <strong>Protection &amp; droits :</strong> l’ensemble de nos <strong>logos, blasons, sceaux, signes, devises</strong> et éléments graphiques
-  est <strong>déposé et protégé</strong>. Toute reproduction, copie, diffusion, modification ou réutilisation — <strong>même partielle</strong> —
-  est interdite sans autorisation écrite (copyright). Pour en savoir plus, le bon chemin est simple : <strong>venir à l’association</strong> et échanger avec nous.
-</p>
+        <div class="soft-sep"></div>
 
-<h3>Le Blason et sa signification</h3>
-<p>Notre blason est une table d’étude templier :</p>
+        <h3>Manteau — tenue de représentation</h3>
+        <p>
+          Le manteau est un élément de <strong>tenue de représentation</strong> : il vise l’unité visuelle lors des événements,
+          des cérémonies internes ou des prises de vues protocolaires. Il rappelle la sobriété et la discipline : porter une tenue,
+          c’est surtout porter une <strong>exigence de conduite</strong> et de cohérence.
+        </p>
+        <div class="rings-grid media-gap-top">
+          <figure class="ring-card">
+            <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 1" loading="lazy" src="manteaux.PNG"/>
+          </figure>
+          <figure class="ring-card">
+            <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 2" loading="lazy" src="manteaux2.PNG"/>
+          </figure>
+          <figure class="ring-card">
+            <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 3" loading="lazy" src="manteaux3.PNG"/>
+          </figure>
+          <figure class="ring-card">
+            <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 4" loading="lazy" src="manteaux4.PNG"/>
+          </figure>
+        </div>
 
-<p>
-  • <strong>Noir &amp; blanc :</strong> héritage du <strong>Beauceant</strong> (bannière mi-noire mi-blanche), union des contraires et mesure dans l’action.
-  <br><br>
-  • <strong>Carré de quatre cercles :</strong> fondations stables — les quatre éléments (terre, air, feu, eau), la matière brute à transformer.
-  <br><br>
-  • <strong>Roue de la vie (quintessence) :</strong> croix blanche centrale et quatre cercles blancs sur fond bleu. L’ensemble figure les cinq sens et la quête du cinquième principe (quintessence).
-  <br>
-  - Blanc au centre : clarté, équilibre. Bleu : profondeur, sagesse, ciel.
-  <br>
-  - La croix blanche agit uniquement comme pivot symbolique de la quintessence, laquelle se déploie en mouvement équilibré, reposant sur la cathénaire des quatre fondations élémentaires à la base de l’écu.
-  <br><br>
-  • <strong>La croix angélique rouge &amp; or :</strong> Histoire : attribuée aux Templiers vers 1147, lors de la Seconde Croisade (pape Eugène III).
-  <br>
-  - Symbolique : le rouge = le sang du sacrifice, du courage et de la fidélité ; l’or = l’accomplissement, la gloire et la lumière de l’œuvre achevée.
-  <br>
-  - Sa forme angélique exprime les huit pointes, rappel des vertus cardinales et du cycle de régénération.
-</p>
+        <div class="soft-sep"></div>
 
-<p>
-⚖️La croix à huit pointes adoptées par l’ Ordre Sacré des Neuf Templiers de Jérusalem se distingue nettement, par son traitement chromatique, des insignes historiques ou contemporains des autres ordres :
-<br><br>
-– Ordre de Malte : croix blanche sur fond noir ou rouge, emblème officiel et protégé ;
-<br>
-– Ordre de Saint-Lazare : croix verte, parfois bordée de blanc ou d’or ;
-<br>
-– autres ordres hospitaliers : croix blanches ou noires selon les usages traditionnels.
-<br><br>
-L’Ordre utilise une croix stylisée en rouge et or, éventuellement entourée de liserés dorés, afin de marquer sa différence visuelle et symbolique. Cette déclinaison chromatique n’imite ni ne reproduit les insignes officiels protégés : elle exprime uniquement une valeur culturelle et décorative.
-<br><br>
-Ainsi, le rouge rappelle le courage et le sacrifice, tandis que l’or évoque la lumière et l’accomplissement. Ces choix, conformes au langage héraldique, garantissent une identité propre à l’association et écartent toute confusion avec les emblèmes des ordres hospitaliers ou souverains.
-</p>
+        <h3>Médailles — distinctions associatives</h3>
+        <p>
+          Les médailles présentées ci-dessous sont des <strong>distinctions associatives</strong> : elles matérialisent une reconnaissance,
+          un rôle, un service rendu ou une participation à la vie de l’Ordre. Elles sont utilisées dans un cadre interne et protocolaire,
+          selon les règles de l’association (et sans assimilation à des décorations officielles d’État).
+        </p>
+        <div class="media-grid-2">
+          <figure class="media-card">
+            <img alt="Médaille O.S.D.9.T.D.J. — modèle 1" loading="lazy" src="medaille1.PNG"/>
+          </figure>
+          <figure class="media-card">
+            <img alt="Médaille O.S.D.9.T.D.J. — modèle 2" loading="lazy" src="medaille2.jpg"/>
+          </figure>
+        </div>
 
-<p>
-  • <strong>Casque templier :</strong> discipline, vigilance, force intérieure ; l’armure de l’esprit.
-  <br><br>
-  • <strong>Triangle rayonnant &amp; Œil :</strong> unité et triade universelle ; regard qui discerne (parfois nommé « troisième œil »).
-  <br><br>
-  • <strong>Ailes dorées :</strong> élévation et fraternité ; nul chevalier ne progresse seul — il est soutenu par la communauté et l’idéal commun.
-</p>
+        <div class="soft-sep"></div>
 
-</div>
-</details>
+        <h3>Épée — symbole de serment et de responsabilité</h3>
+        <p>
+          L’épée relève d’un langage symbolique : elle représente la <strong>parole donnée</strong>, la <strong>droiture</strong>,
+          et la responsabilité de protéger et servir. Dans l’O.S.D.9.T.D.J., elle est comprise comme un rappel de la maîtrise de soi :
+          la force n’a de sens qu’orientée vers le bien, la justice, et la vérité.
+        </p>
+        <figure class="inner-img">
+          <img alt="Épée symbolique O.S.D.9.T.D.J." loading="lazy" src="epee.PNG"/>
+        </figure>
 
-<details aria-label="La croix de l'O.S.D.9.T.D.J." class="section-card alt">
-<summary>Notre croix : tradition templière, « IX » et sens du Nom</summary>
-<div class="details-inner">
-<figure class="inner-img">
-<img alt="Croix de l’O.S.D.9.T.D.J. avec monogramme IX (présentée sur le drapeau)" src="drapeau-osd9tdj.PNG"/>
-</figure>
-<p>
-            La croix que nous utilisons s’inscrit dans la forme <strong>pattée</strong>,
-            associée à l’imaginaire templier.
-            Sur nos supports, elle est souvent présentée sur un drapeau :
-            non pour « parler du drapeau », mais parce que ce support met en valeur la croix,
-            son cercle central et ses inscriptions.
-          </p>
-<h3>1) Une croix pattée : un repère visuel et une exigence morale</h3>
-<p>
-            Cette croix rappelle l’idée de <strong>chemin</strong> (les quatre directions),
-            d’<strong>engagement</strong> (tenir sa parole) et de <strong>service</strong> (agir pour quelque chose de plus grand que soi).
-            Elle est, pour le grand public, un signe immédiatement lisible : celui d’une démarche
-            inspirée par la chevalerie et par la tradition des ordres de service.
-          </p>
-<h3>2) Le « IX » au centre : les Neuf, la mémoire fondatrice</h3>
-<p>
-            Le <strong>IX</strong> (neuf) rappelle l’esprit des <strong>Neuf</strong> :
-            une mémoire fondatrice articulée autour de valeurs et d’un idéal de conduite.
-            Dans nos textes internes, ces « neuf colonnes » sont associées à des vertus
-            (confiance, fraternité, loyauté, justice, force morale, prudence, vision, équilibre, bienveillance).
-          </p>
-<p>
-            Pour le public, il faut retenir ceci :
-            le « IX » n’est pas un code secret, ni un marqueur d’élitisme.
-            C’est un <strong>rappel d’exigence</strong> :
-            apprendre, s’élever, et servir avec constance.
-          </p>
-<h3>3) Ce qui est écrit : du Nom à l’abréviation</h3>
-<p>
-            Autour du centre, l’inscription renvoie à la dénomination de l’Ordre :
-            <strong>Ordre Sacré des Neuf Templiers de Jérusalem</strong>,
-            et à son sigle <strong>O.S.D.9.T.D.J.</strong>.
-            La présence du latin rappelle la tradition des ordres historiques,
-            tout en restant, chez nous, une référence culturelle.
-          </p>
-<div class="soft-sep"></div>
-<p class="notice">
-            Notre usage des symboles et de la croix est <strong>associatif</strong> : il relève de la culture, de l’étude,
-            et de la transmission de valeurs. Il ne revendique aucune filiation juridique ou canonique.
-          </p>
-</div>
-</details>
+        <div aria-label="Note d'usage" class="notice" role="note">
+          <strong>Note :</strong> les visuels ci-dessus sont présentés à titre informatif et pédagogique. Leur usage est réservé au cadre
+          associatif de l’O.S.D.9.T.D.J. (communication, représentation, cérémonial interne), conformément aux règles et décisions de l’association.
+        </div>
+      </div>
+    </details>
 
-<details aria-label="Le sceau de l'O.S.D.9.T.D.J." class="section-card">
-<summary>Notre sceau : deux cavaliers, une seule monture — fraternité et dépouillement</summary>
-<div class="details-inner">
-<figure class="inner-img">
-<img alt="Sceau de l’O.S.D.9.T.D.J. inspiré du symbole templier : deux cavaliers sur un cheval" src="sceau-osd9tdj.PNG"/>
-</figure>
-<p>
-            Le sceau de l’O.S.D.9.T.D.J. est un sceau <strong>général</strong> de l’Ordre :
-            il n’est pas « le sceau d’un Grand Maître », mais un signe d’<strong>identité collective</strong>.
-            Il reprend un motif iconique associé aux Templiers : <strong>deux cavaliers sur une seule monture</strong>.
-          </p>
-<h3>1) Deux sur un cheval : une image de fraternité</h3>
-<p>
-            Cette scène parle immédiatement au regard :
-            elle évoque l’idée d’aller ensemble, de se soutenir, et d’avancer d’un même mouvement.
-            Elle peut être lue comme une métaphore de la <strong>fraternité</strong> :
-            aucune quête n’est durable si elle se vit dans l’isolement, l’orgueil ou la compétition permanente.
-          </p>
-<h3>2) Dépouillement et humilité : servir avant de paraître</h3>
-<p>
-            L’interprétation la plus connue associe ce motif à un idéal de <strong>dépouillement</strong> :
-            choisir l’essentiel, ne pas confondre l’apparence et la valeur,
-            et garder l’humilité nécessaire à toute démarche exigeante.
-            Dans notre Ordre, cette lecture est centrale :
-            la symbolique n’est pas faite pour « se donner un style », mais pour rappeler un devoir intérieur.
-          </p>
-<h3>3) L’abréviation et le Nom : un sceau qui « dit ce que nous sommes »</h3>
-<p>
-            Le sceau n’est pas seulement une image : c’est un résumé.
-            Il renvoie à notre nom :
-            <strong>Ordre Sacré des Neuf Templiers de Jérusalem</strong> — <strong>O.S.D.9.T.D.J.</strong>.
-            Il rappelle notre vocation : <strong>servir</strong>, <strong>protéger</strong>, <strong>étudier</strong>,
-            dans une démarche culturelle, éducative et caritative.
-          </p>
-<div class="soft-sep"></div>
-<p class="notice">
-            Le sceau est un signe de reconnaissance et de cohérence visuelle.
-            Il n’a pas pour but d’imiter une autorité historique : il transmet une mémoire,
-            et invite à la responsabilité.
-          </p>
-</div>
-</details>
+    <h1>ORDRE SACRÉ DES NEUF TEMPLIERS DE JÉRUSALEM</h1>
+    <h2>Emblème &amp; Logo</h2>
 
-<div class="nndnn-banner" aria-label="Signature templière nnDnn">
-  <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;">
-  <div class="nndnn-text">nnDnn</div>
-  <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;">
-</div>
+    <section aria-label="Introduction" class="section-card">
+      <p>
+        Chaque tradition chevaleresque se reconnaît à ses signes. Les nôtres ne sont ni des ornements gratuits, ni des
+        « codes secrets » destinés à exclure : ce sont des <strong>repères de mémoire</strong>, des <strong>outils pédagogiques</strong> et
+        des <strong>marqueurs d’identité</strong> d’une association laïque et culturelle (loi de 1901).
+      </p>
+      <div class="soft-sep"></div>
+      <p>
+        Cette page présente, pour le grand public, l’ensemble des emblèmes de l’O.S.D.9.T.D.J. :
+        <strong>le blason</strong>, <strong>le drapeau (Beauceant)</strong>, <strong>la croix</strong> et <strong>les sceaux</strong>.
+        Les explications proposées relèvent d’une lecture <strong>historique</strong>, <strong>culturelle</strong> et <strong>symbolique</strong> :
+        elles ne constituent ni revendication religieuse, ni prétention à une continuité juridique avec l’Ordre du Temple médiéval.
+      </p>
+      <div aria-label="Note de clarification" class="notice" role="note">
+        <strong>Clarification publique :</strong> l’O.S.D.9.T.D.J. est une association culturelle et laïque.
+        Les termes internes (« Grand Maître », « Commandeur », etc.) sont honorifiques et symboliques.
+        Toute référence à des traditions, symboles ou interprétations est présentée comme une lecture pédagogique,
+        sans valeur canonique ni pratique cultuelle.
+        <br><br>
+        <strong>Information grand public :</strong> ce contenu est volontairement destiné à une consultation en ligne, simple et accessible.
+        Pour en savoir davantage, approfondir, ou découvrir la réalité concrète de notre démarche, le meilleur chemin est de
+        <strong>venir à l’Association</strong> : c’est précisément l’un des buts de l’O.S.D.9.T.D.J.
+      </div>
+    </section>
 
-<!-- ✅ MODIF CHIRURGICALE : bandeau noir = uniquement Accueil + Contact -->
-<nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
-  <a class="tab" href="index.html"> Accueil</a>
-  <a class="tab" href="contact.html"> Contact</a>
-</nav>
+    <details aria-label="Le blason de l'O.S.D.9.T.D.J." class="section-card">
+      <summary>Notre blason : une « table d’étude » en langage héraldique</summary>
+      <div class="acc-body">
+        <figure class="inner-img">
+          <img alt="Blason officiel de l’O.S.D.9.T.D.J." loading="lazy" src="blason-osd9tdj.PNG"/>
+        </figure>
+        <p class="legal-note" role="note" aria-label="Protection des signes distinctifs">
+          <strong>Protection &amp; droits :</strong> l’ensemble de nos <strong>logos, blasons, sceaux, signes, devises</strong> et éléments graphiques
+          est <strong>déposé et protégé</strong>. Toute reproduction, copie, diffusion, modification ou réutilisation — <strong>même partielle</strong> —
+          est interdite sans autorisation écrite (copyright). Pour en savoir plus, le bon chemin est simple : <strong>venir à l’association</strong> et échanger avec nous.
+        </p>
 
-<!-- ✅ BOUTON JAUNE UNIQUE (coulissant interne) -->
-<div class="cta-ordres" aria-label="Accès rapide">
-  <div class="cta-slider" role="navigation" aria-label="Accès rapides">
-    <a href="quinoussommes.html">Qui nous sommes</a>
-    <span class="divider" aria-hidden="true"></span>
-    <a href="histoire.html">Notre histoire</a>
-    <span class="divider" aria-hidden="true"></span>
-    <a href="notre-mission.html">Notre mission</a>
-    <span class="divider" aria-hidden="true"></span>
-    <a href="ordres-historiques.html">Ordres historiques</a>
+        <h3>Le Blason et sa signification</h3>
+        <p>Notre blason est une table d’étude templier :</p>
+
+        <p>
+          • <strong>Noir &amp; blanc :</strong> héritage du <strong>Beauceant</strong> (bannière mi-noire mi-blanche), union des contraires et mesure dans l’action.
+          <br><br>
+          • <strong>Carré de quatre cercles :</strong> fondations stables — les quatre éléments (terre, air, feu, eau), la matière brute à transformer.
+          <br><br>
+          • <strong>Roue de la vie (quintessence) :</strong> croix blanche centrale et quatre cercles blancs sur fond bleu. L’ensemble figure les cinq sens et la quête du cinquième principe (quintessence).
+          <br>
+          - Blanc au centre : clarté, équilibre. Bleu : profondeur, sagesse, ciel.
+          <br>
+          - La croix blanche agit uniquement comme pivot symbolique de la quintessence, laquelle se déploie en mouvement équilibré, reposant sur la cathénaire des quatre fondations élémentaires à la base de l’écu.
+          <br><br>
+          • <strong>La croix angélique rouge &amp; or :</strong> Histoire : attribuée aux Templiers vers 1147, lors de la Seconde Croisade (pape Eugène III).
+          <br>
+          - Symbolique : le rouge = le sang du sacrifice, du courage et de la fidélité ; l’or = l’accomplissement, la gloire et la lumière de l’œuvre achevée.
+          <br>
+          - Sa forme angélique exprime les huit pointes, rappel des vertus cardinales et du cycle de régénération.
+        </p>
+
+        <p>
+          ⚖️La croix à huit pointes adoptées par l’ Ordre Sacré des Neuf Templiers de Jérusalem se distingue nettement, par son traitement chromatique, des insignes historiques ou contemporains des autres ordres :
+          <br><br>
+          – Ordre de Malte : croix blanche sur fond noir ou rouge, emblème officiel et protégé ;
+          <br>
+          – Ordre de Saint-Lazare : croix verte, parfois bordée de blanc ou d’or ;
+          <br>
+          – autres ordres hospitaliers : croix blanches ou noires selon les usages traditionnels.
+          <br><br>
+          L’Ordre utilise une croix stylisée en rouge et or, éventuellement entourée de liserés dorés, afin de marquer sa différence visuelle et symbolique. Cette déclinaison chromatique n’imite ni ne reproduit les insignes officiels protégés : elle exprime uniquement une valeur culturelle et décorative.
+          <br><br>
+          Ainsi, le rouge rappelle le courage et le sacrifice, tandis que l’or évoque la lumière et l’accomplissement. Ces choix, conformes au langage héraldique, garantissent une identité propre à l’association et écartent toute confusion avec les emblèmes des ordres hospitaliers ou souverains.
+        </p>
+
+        <p>
+          • <strong>Casque templier :</strong> discipline, vigilance, force intérieure ; l’armure de l’esprit.
+          <br><br>
+          • <strong>Triangle rayonnant &amp; Œil :</strong> unité et triade universelle ; regard qui discerne (parfois nommé « troisième œil »).
+          <br><br>
+          • <strong>Ailes dorées :</strong> élévation et fraternité ; nul chevalier ne progresse seul — il est soutenu par la communauté et l’idéal commun.
+        </p>
+      </div>
+    </details>
+
+    <details aria-label="La croix de l'O.S.D.9.T.D.J." class="section-card alt">
+      <summary>Notre croix : tradition templière, « IX » et sens du Nom</summary>
+      <div class="details-inner">
+        <figure class="inner-img">
+          <img alt="Croix de l’O.S.D.9.T.D.J. avec monogramme IX (présentée sur le drapeau)" src="drapeau-osd9tdj.PNG"/>
+        </figure>
+        <p>
+          La croix que nous utilisons s’inscrit dans la forme <strong>pattée</strong>,
+          associée à l’imaginaire templier.
+          Sur nos supports, elle est souvent présentée sur un drapeau :
+          non pour « parler du drapeau », mais parce que ce support met en valeur la croix,
+          son cercle central et ses inscriptions.
+        </p>
+        <h3>1) Une croix pattée : un repère visuel et une exigence morale</h3>
+        <p>
+          Cette croix rappelle l’idée de <strong>chemin</strong> (les quatre directions),
+          d’<strong>engagement</strong> (tenir sa parole) et de <strong>service</strong> (agir pour quelque chose de plus grand que soi).
+          Elle est, pour le grand public, un signe immédiatement lisible : celui d’une démarche
+          inspirée par la chevalerie et par la tradition des ordres de service.
+        </p>
+        <h3>2) Le « IX » au centre : les Neuf, la mémoire fondatrice</h3>
+        <p>
+          Le <strong>IX</strong> (neuf) rappelle l’esprit des <strong>Neuf</strong> :
+          une mémoire fondatrice articulée autour de valeurs et d’un idéal de conduite.
+          Dans nos textes internes, ces « neuf colonnes » sont associées à des vertus
+          (confiance, fraternité, loyauté, justice, force morale, prudence, vision, équilibre, bienveillance).
+        </p>
+        <p>
+          Pour le public, il faut retenir ceci :
+          le « IX » n’est pas un code secret, ni un marqueur d’élitisme.
+          C’est un <strong>rappel d’exigence</strong> :
+          apprendre, s’élever, et servir avec constance.
+        </p>
+        <h3>3) Ce qui est écrit : du Nom à l’abréviation</h3>
+        <p>
+          Autour du centre, l’inscription renvoie à la dénomination de l’Ordre :
+          <strong>Ordre Sacré des Neuf Templiers de Jérusalem</strong>,
+          et à son sigle <strong>O.S.D.9.T.D.J.</strong>.
+          La présence du latin rappelle la tradition des ordres historiques,
+          tout en restant, chez nous, une référence culturelle.
+        </p>
+        <div class="soft-sep"></div>
+        <p class="notice">
+          Notre usage des symboles et de la croix est <strong>associatif</strong> : il relève de la culture, de l’étude,
+          et de la transmission de valeurs. Il ne revendique aucune filiation juridique ou canonique.
+        </p>
+      </div>
+    </details>
+
+    <details aria-label="Le sceau de l'O.S.D.9.T.D.J." class="section-card">
+      <summary>Notre sceau : deux cavaliers, une seule monture — fraternité et dépouillement</summary>
+      <div class="details-inner">
+        <figure class="inner-img">
+          <img alt="Sceau de l’O.S.D.9.T.D.J. inspiré du symbole templier : deux cavaliers sur un cheval" src="sceau-osd9tdj.PNG"/>
+        </figure>
+        <p>
+          Le sceau de l’O.S.D.9.T.D.J. est un sceau <strong>général</strong> de l’Ordre :
+          il n’est pas « le sceau d’un Grand Maître », mais un signe d’<strong>identité collective</strong>.
+          Il reprend un motif iconique associé aux Templiers : <strong>deux cavaliers sur une seule monture</strong>.
+        </p>
+        <h3>1) Deux sur un cheval : une image de fraternité</h3>
+        <p>
+          Cette scène parle immédiatement au regard :
+          elle évoque l’idée d’aller ensemble, de se soutenir, et d’avancer d’un même mouvement.
+          Elle peut être lue comme une métaphore de la <strong>fraternité</strong> :
+          aucune quête n’est durable si elle se vit dans l’isolement, l’orgueil ou la compétition permanente.
+        </p>
+        <h3>2) Dépouillement et humilité : servir avant de paraître</h3>
+        <p>
+          L’interprétation la plus connue associe ce motif à un idéal de <strong>dépouillement</strong> :
+          choisir l’essentiel, ne pas confondre l’apparence et la valeur,
+          et garder l’humilité nécessaire à toute démarche exigeante.
+          Dans notre Ordre, cette lecture est centrale :
+          la symbolique n’est pas faite pour « se donner un style », mais pour rappeler un devoir intérieur.
+        </p>
+        <h3>3) L’abréviation et le Nom : un sceau qui « dit ce que nous sommes »</h3>
+        <p>
+          Le sceau n’est pas seulement une image : c’est un résumé.
+          Il renvoie à notre nom :
+          <strong>Ordre Sacré des Neuf Templiers de Jérusalem</strong> — <strong>O.S.D.9.T.D.J.</strong>.
+          Il rappelle notre vocation : <strong>servir</strong>, <strong>protéger</strong>, <strong>étudier</strong>,
+          dans une démarche culturelle, éducative et caritative.
+        </p>
+        <div class="soft-sep"></div>
+        <p class="notice">
+          Le sceau est un signe de reconnaissance et de cohérence visuelle.
+          Il n’a pas pour but d’imiter une autorité historique : il transmet une mémoire,
+          et invite à la responsabilité.
+        </p>
+      </div>
+    </details>
+
+    <div class="nndnn-banner" aria-label="Signature templière nnDnn">
+      <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;">
+      <div class="nndnn-text">nnDnn</div>
+      <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;">
+    </div>
+
+    <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
+      <a class="tab" href="index.html"> Accueil</a>
+      <a class="tab" href="contact.html"> Contact</a>
+    </nav>
+
+    <div class="cta-ordres" aria-label="Accès rapide">
+      <div class="cta-slider" role="navigation" aria-label="Accès rapides">
+        <a href="quinoussommes.html">Qui nous sommes</a>
+        <span class="divider" aria-hidden="true"></span>
+        <a href="histoire.html">Notre histoire</a>
+        <span class="divider" aria-hidden="true"></span>
+        <a href="notre-mission.html">Notre mission</a>
+        <span class="divider" aria-hidden="true"></span>
+        <a href="ordres-historiques.html">Ordres historiques</a>
+      </div>
+    </div>
+
+    <div class="footer">
+      © O.S.D.9.T.D.J. Association Loi 1901 – Tous droits réservés •
+      <a href="mentions.html">Informations officielles</a> •
+      <a href="cookies.html">Cookies</a>
+    </div>
+
   </div>
-</div>
-
-<div class="footer">
-  © O.S.D.9.T.D.J. Association Loi 1901 – Tous droits réservés •
-  <a href="mentions.html">Informations officielles</a> •
-  <a href="cookies.html">Cookies</a>
-</div>
-
-</div>
 </div>
 </body>
 </html>
