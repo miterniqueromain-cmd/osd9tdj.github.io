@@ -104,6 +104,13 @@
       z-index:0;
     }
 
+    /* ✅ lisibilité titres/texte d’intro sur fond clair */
+    header.hero h1,
+    header.hero h2,
+    header.hero .lead{
+      text-shadow:0 2px 14px rgba(0,0,0,0.78);
+    }
+
     .wm{
       position:fixed;
       inset:0;
@@ -557,6 +564,36 @@
       word-break:break-word;
       hyphens:auto;
     }
+
+    /* ✅ CROIX DE MALTE : “transparence” via mask (fonctionne même si le fichier est en .jpg sur fond noir) */
+    .icon-frame{
+      max-width:260px;
+      width:60vw;
+      margin:10px auto 6px;
+      border-radius:14px;
+      border:1px solid rgba(214,167,40,0.30);
+      box-sizing:border-box;
+      padding:18px;
+      background:transparent;
+    }
+    .mask-icon{
+      display:block;
+      width:100%;
+      aspect-ratio:1/1;
+      background:#ffffff; /* couleur de la croix */
+      -webkit-mask-position:center;
+      -webkit-mask-repeat:no-repeat;
+      -webkit-mask-size:contain;
+              mask-position:center;
+              mask-repeat:no-repeat;
+              mask-size:contain;
+    }
+    .mask-icon.malte{
+      -webkit-mask-image:url("croix-malte.jpg");
+              mask-image:url("croix-malte.jpg");
+    }
+    /* fallback si ton fichier est finalement en png */
+    .mask-icon.malte{ background:#ffffff; }
   </style>
 </head>
 <body>
@@ -580,10 +617,10 @@
 <a href="bernard.html"> Bernard de Clairvaux</a>
 <a href="faq.html"> FAQ</a>
 <a href="contact.html"> Contact</a>
-
 </div>
 </details>
 </div>
+
 <div class="viewport-scroll" id="contenu">
 <div class="container">
 <header class="hero">
@@ -596,10 +633,12 @@
           <em>décrire des familles</em>, comprendre leurs fonctions, et suivre leurs transformations sans confusion.
         </p>
 </header>
+
 <!-- (1/9) Ambiance Terre sainte / Jérusalem -->
 <figure class="inner-img">
 <img alt="Terre sainte : Jérusalem et présence hospitalière" loading="lazy" src="hospitaliers-terre-sainte-scene-jerusalem.jpg"/>
 </figure>
+
 <div class="section-card">
 <h3>Préambule : de quoi parle-t-on exactement ?</h3>
 <p>
@@ -626,6 +665,7 @@
           chez nous, dans un esprit de considération, de courtoisie et d’honneur.
         </div>
 </div>
+
 <!-- Sommaire -->
 <div class="section-card alt" id="sommaire">
 <h3>Sommaire</h3>
@@ -646,6 +686,7 @@
 <a href="#glossaire">14. Glossaire rapide</a>
 </p>
 </div>
+
 <!-- 1 -->
 <div class="section-card" id="contexte">
 <h3>1) Contexte : Terre sainte et monde méditerranéen</h3>
@@ -662,10 +703,12 @@
           (maisons, commanderies, propriétés) qui les rendent comparables, par leur efficacité, à de véritables administrations.
         </p>
 </div>
+
 <!-- (2/9) Contexte général (chevaliers / époque) -->
 <figure class="inner-img">
 <img alt="Enluminure médiévale : chevaliers et contexte d’époque" loading="lazy" src="bataille-medievale-enluminure-chevaliers.JPG"/>
 </figure>
+
 <!-- 2 -->
 <div class="section-card alt" id="croises">
 <h3>2) Les croisés : un engagement, pas un ordre</h3>
@@ -685,10 +728,12 @@
           <em>organisation</em> structurée (règle, hiérarchie, ressources, implantation, mission).
         </div>
 </div>
+
 <!-- (3/9) Croisade (siège / assaut) -->
 <figure class="inner-img">
 <img alt="Croisades : siège et assaut d’une forteresse (peinture)" loading="lazy" src="croisades-siege-assaut-forteresse-peinture.jpg"/>
 </figure>
+
 <!-- 3 -->
 <div class="section-card" id="monachisme">
 <h3>3) Moines, règles et ordres monastiques</h3>
@@ -712,10 +757,12 @@
           et parfois de diplomatie.
         </p>
 </div>
+
 <!-- (4/9) Règle monastique -->
 <figure class="inner-img">
 <img alt="Saint Benoît : remise de la règle (enluminure)" loading="lazy" src="saint-benoit-remise-regle-enluminure.JPG"/>
 </figure>
+
 <!-- 4 -->
 <div class="section-card alt" id="hospitalite">
 <h3>4) L’hospitalité : hôpitaux, routes, pèlerins</h3>
@@ -735,10 +782,12 @@
           de l’hospitalité, mais une réponse pragmatique à l’insécurité.
         </div>
 </div>
+
 <!-- (5/9) Hospitalité / soin -->
 <figure class="inner-img">
 <img alt="Hospitaliers : secours à un blessé (illustration)" loading="lazy" src="hospitaliers-secours-templier-blesse.jpg"/>
 </figure>
+
 <!-- 5 -->
 <div class="section-card" id="ordres-militaires">
 <h3>5) Ordres religieux-militaires (Terre sainte)</h3>
@@ -756,6 +805,7 @@
         </p><figure class="inner-img"><img alt="Ordre du Temple : chevalier templier (illustration moderne)" src="chevalier-templier-illustration-moderne.JPG"/></figure>
 <div class="soft-sep"></div>
 <h3 style="margin-top:0;">Repères majeurs</h3>
+
 <div class="grid-2">
 <div class="card">
 <h4>Ordre du Temple</h4>
@@ -773,10 +823,11 @@
 1312 : L’ordre est liquidé par le pape Clément V, dans un contexte troublé où le roi de France Philippe le Bel joue un rôle majeur.
 </p>
 </div>
+
 <div class="card">
 <h4>Ordre de l’Hôpital (Saint-Jean)</h4>
-<figure class="inner-img">
-<img alt="Croix de l’Ordre de l’Hôpital (Saint-Jean)" loading="lazy" src="croix-malte.png" onerror="this.onerror=null; this.src='croix-malte.jpg';" style="max-width:260px;width:60vw;height:auto;display:block;margin:10px auto 6px;background:rgba(248,232,200,0.10);padding:18px;border-radius:14px;border:1px solid rgba(214,167,40,0.30);box-sizing:border-box;"/>
+<figure class="inner-img icon-frame" aria-label="Croix de l’Ordre de l’Hôpital (Saint-Jean)">
+  <span class="mask-icon malte" role="img" aria-label="Croix de Malte"></span>
 </figure>
 <p>
               L’Ordre de l’Hôpital se caractérise par une origine centrée sur l’accueil et le soin. Dans un environnement instable,
@@ -791,6 +842,7 @@ Après la mort de frère Gérard, Raymond du Puy, son successeur, est le premier
 Organisation en 8 « langues » : Provence, Auvergne, France, Italie, Aragón-Navarre, Castille-León-Portugal, Angleterre et Allemagne (Marseille : haut-lieu de l’ordre).
 </p>
 </div>
+
 <div class="card">
 <h4>Ordre Teutonique</h4>
 <figure class="inner-img">
@@ -805,10 +857,11 @@ Organisation en 8 « langues » : Provence, Auvergne, France, Italie, Aragón-Na
 L’ordre existe toujours : il n’est plus un ordre de chevalerie mais un ordre religieux (« Frères de l’Ordre Allemand de Sainte-Marie-de-Jérusalem »), dirigé par un abbé mitré relevant du pape ; environ un millier de membres (prêtres, religieuses et laïcs) poursuivent l’œuvre hospitalière et éducative.
 </p>
 </div>
+
 <div class="card">
 <h4>Ordre de Saint-Lazare</h4>
 <figure class="inner-img">
-<img alt="Croix de l’Ordre de Saint-Lazare" loading="lazy" src="croix-slazarre.png" style="max-width:260px;width:60vw;height:auto;display:block;margin:10px auto 6px;background:rgba(248,232,200,0.10);padding:18px;border-radius:14px;border:1px solid rgba(214,167,40,0.30);box-sizing:border-box;"/>
+<img alt="Croix de l’Ordre de Saint-Lazare" loading="lazy" src="croix-slazarre.png" style="max-width:260px;width:60vw;height:auto;display:block;margin:10px auto 6px;"/>
 </figure>
 <p>
               Associé à l’assistance (notamment dans la prise en charge de la lèpre), il illustre la dimension hospitalière et la charité organisée.
@@ -821,6 +874,7 @@ L’ordre existe toujours : il n’est plus un ordre de chevalerie mais un ordre
 </p>
 </div>
 </div>
+
 <div class="soft-sep"></div>
 <p>
           Les emblèmes (croix, couleurs, boucliers) sont des marqueurs forts. Toutefois, pour comprendre un ordre, il faut regarder
@@ -828,10 +882,12 @@ L’ordre existe toujours : il n’est plus un ordre de chevalerie mais un ordre
           et le <strong>cheminement historique</strong>.
         </p>
 </div>
+
 <!-- (6/9) Blasons / croix (repères iconographiques) -->
 <figure class="inner-img">
 <img alt="Tableau : blasons et croix d’ordres médiévaux" loading="lazy" src="tableau-ordres-militaires-blasons-croises.jpg"/>
 </figure>
+
 <!-- 6 -->
 <div class="section-card alt" id="ordres-secondaires">
 <h3>6) Ordres secondaires, locaux et spécialisés</h3>
@@ -846,7 +902,17 @@ L’ordre existe toujours : il n’est plus un ordre de chevalerie mais un ordre
           de ce qui est une maison hospitalière, et de ce qui correspond à un ordre structuré. Le langage contemporain a tendance à
           « aplatir » ces différences ; l’objectif ici est au contraire de les rendre lisibles.
         </p>
-<div class="soft-sep"></div><h3>Repères : ordres secondaires, locaux et spécialisés (dates)</h3><div class="grid-2"><div class="card"><h4>Ordre de Montjoie</h4><p>1175 : Fondation en Terre Sainte par le comte Rodrigo Alvarez de Sarriá ; siège au château de Montjoie, sur une colline dominant Jérusalem.1221 : L’Ordre est incorporé dans l’Ordre de Calatrava.</p></div><div class="card"><h4>Ordre de Saint-Georges d’Alfama</h4><p>1201 : Fondation par le roi Pedro II d’Aragón pour protéger les côtes catalanes des pirates musulmans.1373 : Reconnaissance pontificale.Participation à la libération de Valence.1400 : Fusion avec l’Ordre de Montesa.</p></div><div class="card"><h4>Ordre des Chevaliers Porte-Glaive</h4><p>1202 : Albert de Buxhövden, évêque de Livonie et fondateur de Riga, fonde l’Ordre des Chevaliers Porte-Glaive (Frères de la Milice du Christ).XVIe siècle : sécularisation de l’Ordre.</p></div><div class="card"><h4>Ordre de Dobrin</h4><p>1216 : Ordre polonais du XIIIe siècle.</p></div><div class="card"><h4>Ordre de Sainte-Marie d’Espagne</h4><p>1272 : Ordre espagnol du XIIIe siècle ayant pour mission d’opérer sur mer.</p></div></div></div>
+
+<div class="soft-sep"></div>
+<div class="grid-2">
+  <div class="card"><h4>Ordre de Montjoie</h4><p>1175 : Fondation en Terre Sainte par le comte Rodrigo Alvarez de Sarriá ; siège au château de Montjoie, sur une colline dominant Jérusalem.1221 : L’Ordre est incorporé dans l’Ordre de Calatrava.</p></div>
+  <div class="card"><h4>Ordre de Saint-Georges d’Alfama</h4><p>1201 : Fondation par le roi Pedro II d’Aragón pour protéger les côtes catalanes des pirates musulmans.1373 : Reconnaissance pontificale.Participation à la libération de Valence.1400 : Fusion avec l’Ordre de Montesa.</p></div>
+  <div class="card"><h4>Ordre des Chevaliers Porte-Glaive</h4><p>1202 : Albert de Buxhövden, évêque de Livonie et fondateur de Riga, fonde l’Ordre des Chevaliers Porte-Glaive (Frères de la Milice du Christ).XVIe siècle : sécularisation de l’Ordre.</p></div>
+  <div class="card"><h4>Ordre de Dobrin</h4><p>1216 : Ordre polonais du XIIIe siècle.</p></div>
+  <div class="card"><h4>Ordre de Sainte-Marie d’Espagne</h4><p>1272 : Ordre espagnol du XIIIe siècle ayant pour mission d’opérer sur mer.</p></div>
+</div>
+</div>
+
 <!-- 7 -->
 <div class="section-card" id="iberiques">
 <h3>7) Grands ordres ibériques (Reconquista)</h3>
@@ -883,12 +949,19 @@ L’Ordre existe toujours (deux couvents : Madrid et Burgos).
 </p>
 </div>
 </div>
-<div class="soft-sep"></div><h3>Compléments : autres ordres ibériques (dates)</h3><div class="grid-2"><div class="card"><h4>Ordre de Saint-Benoît d’Aviz (Avis)</h4><p>1147 : Le roi Alfonso Henriques Ier de Portugal prend Évora aux Maures ; création d’une troupe de chevaliers (« Confrères de Sainte-Marie d’Évora ») pour la défense de la ville.1187 : Création de l’Ordre (dans la filiation de Calatrava), régi par les règles de Saint Benoît et de Cîteaux.1963 : Devenu honorifique, l’Ordre récompense les services militaires.</p></div><div class="card"><h4>Ordre de Montesa</h4><p>1312 : Après la dissolution de l’Ordre du Temple par le pape Clément V, le roi d’Aragón Jaime II refuse la fusion avec les Hospitaliers dans ses États.1317 : Compromis : fusion en Aragón et Catalogne ; dans le royaume de Valence, création d’un nouvel ordre (« Nuestra Señora de Montesa ») à partir de Templiers reconnus innocents lors du procès.L’Ordre est devenu honorifique.</p></div><div class="card"><h4>Ordre du Christ (Portugal)</h4><p>1319 : Après la dissolution du Temple, le roi Dinis Ier obtient du pape Jean XXII l’autorisation de créer la « Milice du Christ » ; continuité sous un nouveau nom, avec accueil de nombreux Templiers.Aujourd’hui : ordre dédié à récompenser d’éminents services civils et de hautes personnalités étrangères.</p></div></div></div>
+
+<div class="soft-sep"></div>
+<div class="grid-2">
+  <div class="card"><h4>Ordre de Saint-Benoît d’Aviz (Avis)</h4><p>1147 : Le roi Alfonso Henriques Ier de Portugal prend Évora aux Maures ; création d’une troupe de chevaliers (« Confrères de Sainte-Marie d’Évora ») pour la défense de la ville.1187 : Création de l’Ordre (dans la filiation de Calatrava), régi par les règles de Saint Benoît et de Cîteaux.1963 : Devenu honorifique, l’Ordre récompense les services militaires.</p></div>
+  <div class="card"><h4>Ordre de Montesa</h4><p>1312 : Après la dissolution de l’Ordre du Temple par le pape Clément V, le roi d’Aragón Jaime II refuse la fusion avec les Hospitaliers dans ses États.1317 : Compromis : fusion en Aragón et Catalogne ; dans le royaume de Valence, création d’un nouvel ordre (« Nuestra Señora de Montesa ») à partir de Templiers reconnus innocents lors du procès.L’Ordre est devenu honorifique.</p></div>
+  <div class="card"><h4>Ordre du Christ (Portugal)</h4><p>1319 : Après la dissolution du Temple, le roi Dinis Ier obtient du pape Jean XXII l’autorisation de créer la « Milice du Christ » ; continuité sous un nouveau nom, avec accueil de nombreux Templiers.Aujourd’hui : ordre dédié à récompenser d’éminents services civils et de hautes personnalités étrangères.</p></div>
+</div>
+</div>
+
 <!-- (7/9) Repère ibérique (croix verte) -->
 <figure class="inner-img">
 <img alt="Reconquista : cavalerie et croix verte (reconstitution)" loading="lazy" src="cavalerie-croix-verte-reconstitution.jpg"/>
 </figure>
-<!-- (8/9) Calatrava (croix rouge) -->
 
 <!-- 8 -->
 <div class="section-card alt" id="lieux-saints">
@@ -905,6 +978,8 @@ L’Ordre existe toujours (deux couvents : Madrid et Burgos).
 <figure class="inner-img">
 <img alt="Croix de l’Ordre du Saint-Sépulcre de Jérusalem" loading="lazy" src="croix-sepultre.PNG" style="max-width:260px;width:60vw;height:auto;display:block;margin:10px auto 6px;background:rgba(248,232,200,0.16);padding:18px;border-radius:14px;border:1px solid rgba(214,167,40,0.30);box-sizing:border-box;"/>
 </figure><p>1099 : Fondation ; Godefroy de Bouillon fonde un ordre de chanoines réguliers. Mission : veiller sur le Saint-Sépulcre et y célébrer les offices.1112 : Les religieux sont placés sous la règle de Saint Augustin par le patriarche de Jérusalem.1122 : Une bulle du pape Calixte II confirme l’organisation.Ce n’est que plus tard que l’institution devient un ordre de chevalerie.</p></div></div></div>
+</div>
+
 <!-- 9 -->
 <div class="section-card" id="constantinople">
 <h3>9) Constantinople / Byzance : un autre modèle</h3>
@@ -924,7 +999,7 @@ L’Ordre existe toujours (deux couvents : Madrid et Burgos).
 <figure class="inner-img">
 <img alt="Croix de l’Ordre Constantinien de Saint-Georges" loading="lazy" src="croix-saintgconstantinople.JPG" style="max-width:260px;width:60vw;height:auto;display:block;margin:10px auto 6px;"/>
 </figure><p>28 octobre 312 : Référence fondatrice : après la victoire de Constantin sur Maxence, création d’une légion chargée d’accompagner le « labarum » orné de la croix.1190 : La milice devient un ordre de chevalerie sous l’autorité de l’empereur de Constantinople, Ange Comnène.L’Ordre existe toujours : sous l’autorité de la Maison royale des Deux-Siciles ; glorifie la Croix, aide à la propagation de la Foi, à la défense de l’Église, à l’assistance hospitalière et à la bienfaisance.</p></div></div></div>
-<!-- (9/9) Byzance / négociation / camp -->
+</div>
 
 <!-- 10 -->
 <div class="section-card alt" id="aristocratiques">
@@ -938,6 +1013,8 @@ L’Ordre existe toujours (deux couvents : Madrid et Burgos).
           créer une communauté d’honneur autour du prince.
         </p>
 <div class="soft-sep"></div><h3>Repères : principaux ordres de cour (dates)</h3><div class="grid-2"><div class="card"><h4>Ordre Très Noble de la Jarretière</h4><p>1348 : Créé par le roi Édouard III ; principal ordre de chevalerie britannique, parmi les plus prestigieux au monde.Grand maître : le roi ou la reine ; composition : chevaliers royaux, dames, 24 chevaliers, et « extra knights » (dont plusieurs souverains européens).</p></div><div class="card"><h4>Ordre des Chevaliers de la Noble Maison de Saint-Ouen (Chevaliers de l’Étoile)</h4><p>1351 : Créé par le roi de France Jean II, le Bon ; ordre de courte durée, probablement inspiré par l’Ordre de la Jarretière.</p></div><div class="card"><h4>Très Honorable Ordre du Bain</h4><p>1399 : Origine liée au couronnement d’Henri IV d’Angleterre (rite du « bain » avant l’adoubement).Ordre toujours actif ; récompense de nombreux services.</p></div><div class="card"><h4>Ordre du Dragon</h4><p>1408–1437 : Ordre de courte durée dans le Saint-Empire romain germanique.</p></div><div class="card"><h4>Noble Ordre de la Toison d’Or</h4><p>1430 : Créé à Bruges lors du mariage de Philippe III le Bon (duc de Bourgogne) avec l’infante Isabelle de Portugal ; but : gloire de Dieu et défense de la religion chrétienne.Aujourd’hui : deux branches de la Toison d’Or se disputent la légitimité ; la France reconnaît la branche espagnole (grand maître : le roi d’Espagne).</p></div><div class="card"><h4>Ordre de l’Eléphant</h4><p>1462 : Ordre danois, mixte, toujours existant ; symbole traditionnel associé à la chasteté et à la pureté.</p></div><div class="card"><h4>Ordre de Saint-Michel</h4><p>1469 : Créé par Louis XI (France) en réponse à la Toison d’Or ; premier siège : abbaye du Mont Saint-Michel.L’Ordre n’est pas totalement inactif : certains prétendants « légitimistes » de la Maison de Bourbon-Anjou s’en réclament.</p></div><div class="card"><h4>Ordre de San Stefano</h4><p>1561 : Créé par Cosimo de Médicis (duc de Toscane) ; rapidement approuvé par le pape.Mission initiale : lutte contre les pirates d’Afrique du Nord (territoires maritimes toscans et mer Tyrrhénienne).Ordre toujours actif ; assistance auprès de la marine italienne.</p></div><div class="card"><h4>Ordre du Saint-Esprit</h4><p>1578 : Créé par Henri III (France) pour s’attacher les principaux chefs du « parti catholique » durant les guerres de religion.</p></div><div class="card"><h4>Ordre Très Ancien et Très Noble du Chardon</h4><p>1687 : Ordre écossais (modèle : Jarretière, Toison d’Or, Saint-Michel) ; devise : « Nemo Me Impune Lacessit ».</p></div><div class="card"><h4>Ordre Royal et Militaire de Saint-Louis</h4><p>1693 : Créé par Louis XIV ; récompense les meilleurs serviteurs de la Monarchie.</p></div></div></div>
+</div>
+
 <!-- 11 -->
 <div class="section-card" id="savoyard">
 <h3>11) Saint-Maurice &amp; Saint-Lazare : recompositions</h3>
@@ -947,6 +1024,8 @@ L’Ordre existe toujours (deux couvents : Madrid et Burgos).
           aux territoires et aux besoins d’une époque.
         </p>
 <div class="soft-sep"></div><h3>Repères : Savoie et recompositions (dates)</h3><div class="grid-2"><div class="card"><h4>Ordre des Saints-Maurice-et-Lazare (Savoie)</h4><p>1434 : Amédée VIII, duc de Savoie, crée une Milice de Saint-Maurice.1572 : Le duc Emmanuel Philibert de Savoie crée l’Ordre Militaire et Religieux de Saint-Maurice.Aujourd’hui : apanage de la Maison de Savoie.</p></div></div></div>
+</div>
+
 <!-- 12 -->
 <div class="section-card alt" id="survivances">
 <h3>12) Transformations, diffusion et mémoire</h3>
@@ -959,12 +1038,13 @@ L’Ordre existe toujours (deux couvents : Madrid et Burgos).
           ou transformation en traditions honorifiques et patrimoniales.
         </p>
 <div class="soft-sep"></div><h3>Repères : dérivations et continuités (dates)</h3><div class="grid-2"><div class="card"><h4>Bailliage d’Utrecht de l’Ordre Teutonique</h4><p>1580 : « L’Ordre Teutonique des Pays-Bas » dérive de l’Ordre Teutonique traditionnel.1975 : Le Bailliage d’Utrecht et le « Johanniter Orde in Nederland » se réunissent pour coordonner leurs activités hospitalières.</p></div></div></div>
-<!-- 13 -->
+</div>
 
 <!-- IMAGE TABLEAU ORDRES (ENTRE BLOC 12 ET 13) -->
 <figure class="inner-img">
   <img src="tableau-ordre.jpg" alt="Tableau comparatif des ordres historiques"/>
 </figure>
+
 <div class="section-card" id="reperes">
 <h3>13) Repères visuels : transcriptions modernes</h3>
 <p>
@@ -972,22 +1052,23 @@ L’Ordre existe toujours (deux couvents : Madrid et Burgos).
           parfois des réalités complexes : variantes d’emblèmes, appellations tardives, classifications différentes.
         </p>
 </div>
+
 <!-- 14 -->
 <div class="section-card alt" id="glossaire">
 <h3>14) Glossaire rapide</h3>
 <ul>
 <li><strong>Ordre religieux</strong> : communauté sous règle, tournée vers la prière, la vie spirituelle et l’organisation communautaire.</li>
-<li><strong>Ordre religieux-militaire</strong> : institution sous vœux, avec une mission de protection armée dans un contexte historique précis.</li>
+<li><strong>Ordre religieux-militaire</strong> : institution sous vœux, avec une mission de protection armée dans un contexte historigue précis.</li>
 <li><strong>Institution hospitalière</strong> : structure d’accueil et de soin, parfois dotée de moyens de protection selon les lieux et périodes.</li>
 <li><strong>Ordre de cour</strong> : ordre dynastique/aristocratique, lié au souverain, à l’honneur, au prestige et au cérémonial.</li>
 <li><strong>Commanderie</strong> : établissement local pivot des réseaux d’ordres ou d’institutions.</li>
 </ul>
 </div>
+
+<!-- ✅ BOUTON NOIR EN BAS : uniquement Sommaire / Accueil / Contact -->
 <div aria-label="Navigation de page" class="tabs">
 <a class="tab" href="#sommaire">Sommaire</a>
 <a class="tab" href="index.html">Accueil</a>
-<a class="tab" href="histoire.html">Notre histoire</a>
-<a class="tab" href="faq.html">FAQ</a>
 <a class="tab" href="contact.html">Contact</a>
 </div>
 
@@ -1009,8 +1090,10 @@ L’Ordre existe toujours (deux couvents : Madrid et Burgos).
 <a href="cookies.html">cookies</a>
 </div>
 </div>
+
 </div>
 </div>
+
 <script>
     (function(){
       var y = new Date().getFullYear();
@@ -1025,6 +1108,6 @@ L’Ordre existe toujours (deux couvents : Madrid et Burgos).
       var base = "OSD9TDJ • ORDRES HISTORIQUES • TERRE SAINTE • BYZANCE • RECONQUISTA • " + y + " •";
       wm.setAttribute('data-wm', base + "\n" + base + "\n" + base);
     })();
-  </script>
+</script>
 </body>
 </html>
