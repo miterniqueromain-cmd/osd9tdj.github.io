@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="utf-8"/>
 <title>Ordres historiques — Terre sainte, Byzance, Reconquista &amp; ordres de cour | OSD9TDJ</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
 <!-- SEO -->
 <meta content="Panorama grand public (non exhaustif) des grands ordres et institutions historiques : Terre sainte, ordres religieux-militaires, hospitalité, Reconquista ibérique, Lieux saints de Jérusalem, Byzance/Constantinople, et ordres de cour. Repères, définitions, évolutions et héritages." name="description"/>
 <meta content="ordres historiques, Terre sainte, Jérusalem, croisades, ordres religieux-militaires, Templiers, Ordre du Temple, Hospitaliers, Saint-Jean, Malte, Teutoniques, Saint-Lazare, Saint-Sépulcre, Reconquista, Santiago, Calatrava, Alcántara, Avis, Byzance, Constantinople, ordres de cour, Toison d'or, Jarretière, commanderie" name="keywords"/>
 <meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/>
 <meta content="Ordre Sacré des Neuf Templiers de Jérusalem (OSD9TDJ)" name="author"/>
 <link href="https://osd9tdj.org/ordres-historiques.html" rel="canonical"/>
+
 <!-- OpenGraph -->
 <meta content="Ordres historiques — Terre sainte, Byzance, Reconquista &amp; ordres de cour" property="og:title"/>
 <meta content="Panorama non exhaustif des ordres et institutions historiques (Terre sainte, hospitalité, Reconquista, Byzance, ordres de cour) : repères, définitions, évolutions, héritages." property="og:description"/>
@@ -18,18 +19,22 @@
 <meta content="https://osd9tdj.org/ordres-historiques.html" property="og:url"/>
 <meta content="icon-512.png" property="og:image"/>
 <meta content="fr_FR" property="og:locale"/>
+
 <!-- Twitter / X -->
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Ordres historiques — Terre sainte, Byzance, Reconquista &amp; ordres de cour" name="twitter:title"/>
 <meta content="Panorama non exhaustif des ordres et institutions historiques : repères, définitions, évolutions, héritages." name="twitter:description"/>
 <meta content="icon-512.png" name="twitter:image"/>
+
 <!-- Polices -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+
 <link href="icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
 <link href="icon-512.png" rel="icon" sizes="512x512" type="image/png"/>
 <link href="icon-192.png" rel="apple-touch-icon"/>
+
 <!-- JSON-LD (SEO) -->
 <script type="application/ld+json">
   {
@@ -566,7 +571,8 @@
     hyphens:auto;
   }
 
-  /* ✅ CADRE ICONES : images normales (fond noir + croix blanche) */
+  /* ✅ CADRE ICONES : image telle quelle (fond noir + croix blanche).
+     + FIX important : on évite le recadrage/zoom -> object-fit:contain + carré */
   .icon-frame{
     max-width:260px;
     width:60vw;
@@ -576,61 +582,42 @@
     box-sizing:border-box;
     padding:18px;
     background:#000;
+    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
   .icon-frame img{
     display:block;
     width:100%;
-    height:auto;
+    height:100%;
+    object-fit:contain;
   }
 
   /* ================= FIX TABLETTE / MOBILE – CHEVAUCHEMENT TITRES ================= */
-
-  /* Sécurise le header */
   header.hero{
     position: relative;
     z-index: 2;
     margin-bottom: 28px;
   }
+  header.hero h1{ margin-top: 0; }
+  header.hero h2{ margin-top: 6px; }
+  header.hero .lead{ margin-top: 12px; }
 
-  /* Empêche l’empilement sauvage */
-  header.hero h1{
-    margin-top: 0;
-  }
-
-  header.hero h2{
-    margin-top: 6px;
-  }
-
-  /* Texte d’intro plus respirant */
-  header.hero .lead{
-    margin-top: 12px;
-  }
-
-  /* Force l’image suivante à rester en dessous */
   header.hero + figure.inner-img{
     margin-top: 24px;
     position: relative;
     z-index: 1;
   }
 
-  /* Spécifique TABLETTES */
   @media (max-width: 900px){
-    header.hero{
-      padding-top: 10px;
-    }
+    header.hero{ padding-top: 10px; }
   }
 
-  /* Spécifique MOBILE */
   @media (max-width: 600px){
-    header.hero h1{
-      font-size: 1.6rem;
-    }
-    header.hero h2{
-      font-size: 1rem;
-    }
-    header.hero .lead{
-      font-size: 0.95rem;
-    }
+    header.hero h1{ font-size: 1.6rem; }
+    header.hero h2{ font-size: 1rem; }
+    header.hero .lead{ font-size: 0.95rem; }
   }
 </style>
 </head>
@@ -873,13 +860,9 @@
 
     <div class="card">
       <h4>Ordre de l’Hôpital (Saint-Jean)</h4>
-      <!-- ✅ IMAGE NORMALE : fond noir + croix blanche (ton fichier) -->
+      <!-- ✅ IMAGE EXACTE : noir + croix blanche, sans masque -->
       <figure class="inner-img icon-frame" aria-label="Croix de l’Ordre de l’Hôpital (Saint-Jean)">
-        <img
-          src="croix-malte.jpg"
-          alt="Croix de l’Ordre de l’Hôpital (Saint-Jean)"
-          loading="lazy"
-        />
+        <img src="croix-malte.jpg" alt="Croix de l’Ordre de l’Hôpital (Saint-Jean)" loading="lazy"/>
       </figure>
       <p>
         L’Ordre de l’Hôpital se caractérise par une origine centrée sur l’accueil et le soin. Dans un environnement instable,
@@ -912,13 +895,9 @@
 
     <div class="card">
       <h4>Ordre de Saint-Lazare</h4>
-      <!-- ✅ PAS DE MASQUE : IMAGE NORMALE -->
+      <!-- ✅ MASQUE SUPPRIMÉ : image normale -->
       <figure class="inner-img icon-frame" aria-label="Croix de l’Ordre de Saint-Lazare">
-        <img
-          src="croix-slazarre.png"
-          alt="Croix de l’Ordre de Saint-Lazare"
-          loading="lazy"
-        />
+        <img src="croix-slazarre.png" alt="Croix de l’Ordre de Saint-Lazare" loading="lazy"/>
       </figure>
       <p>
         Associé à l’assistance (notamment dans la prise en charge de la lèpre), il illustre la dimension hospitalière et la charité organisée.
@@ -1160,7 +1139,7 @@
   <h3>14) Glossaire rapide</h3>
   <ul>
     <li><strong>Ordre religieux</strong> : communauté sous règle, tournée vers la prière, la vie spirituelle et l’organisation communautaire.</li>
-    <li><strong>Ordre religieux-militaire</strong> : institution sous vœux, avec une mission de protection armée dans un contexte historigue précis.</li>
+    <li><strong>Ordre religieux-militaire</strong> : institution sous vœux, avec une mission de protection armée dans un contexte historique précis.</li>
     <li><strong>Institution hospitalière</strong> : structure d’accueil et de soin, parfois dotée de moyens de protection selon les lieux et périodes.</li>
     <li><strong>Ordre de cour</strong> : ordre dynastique/aristocratique, lié au souverain, à l’honneur, au prestige et au cérémonial.</li>
     <li><strong>Commanderie</strong> : établissement local pivot des réseaux d’ordres ou d’institutions.</li>
