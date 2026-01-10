@@ -408,6 +408,14 @@ body::before{
     backdrop-filter: blur(6px);
     background:rgba(0,0,0,0.18);
   }
+  /* ✅ TABLETTE : tabs centrées et NON pleine largeur */
+@media (min-width:601px) and (max-width:1024px){
+  .tabs{
+    max-width: fit-content;
+    width: auto;
+    justify-content: center;
+  }
+}
   .tabs::-webkit-scrollbar{ display:none; }
   .tab{
     flex:0 0 auto;
