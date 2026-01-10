@@ -184,6 +184,77 @@ body{
       url("fonds-voca.jpg") center center / cover no-repeat scroll;
   }
 }
+    /* ===================== PATCH FOND + VOILE (GLOBAL) ===================== */
+
+/* 1) Fond : on enlève le rendu "marron" en forçant un fond noir + ton image */
+html, body{
+  background: #000 !important; /* plus de radial marron */
+}
+
+/* 2) On met l'image de fond + un voile noir plus fort (desktop/tablet = cover) */
+body{
+  position: relative;
+  background:
+    linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.82)),
+    url("fonds-voca.jpg") center center / cover no-repeat fixed !important;
+}
+
+/* 3) Voile additionnel (vignette) pour renforcer la lisibilité */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(0,0,0,0.12), rgba(0,0,0,0.70) 70%),
+    linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.22));
+}
+
+/* On s'assure que ton contenu reste AU-DESSUS du voile */
+.viewport-scroll{ position: relative; z-index: 1; }
+.frame-fixed{ z-index: 40; }
+.top-menu{ z-index: 60; }
+
+/* 4) Mobile : image entière (contain) + bandes noires propres */
+@media (max-width: 600px){
+  body{
+    background:
+      linear-gradient(rgba(0,0,0,0.86), rgba(0,0,0,0.86)),
+      url("fonds-voca.jpg") center center / contain no-repeat scroll !important;
+    background-color: #000 !important;
+  }
+}
+    /* ===================== PATCH IMAGES (NOIRCIR + UNIFIER) ===================== */
+
+/* 5) Tous les cadres d’images : fond plus sombre + bordures un peu plus nettes */
+.image-box,
+.inner-img,
+.inner-blason.is-photo,
+.blason-frame{
+  background: rgba(0,0,0,0.55) !important;   /* enlève l'effet marron clair derrière */
+  border-color: rgba(214,167,40,0.85) !important;
+  box-shadow: 0 0 35px rgba(0,0,0,0.90) !important;
+}
+
+/* 6) Assombrir légèrement toutes les images (y compris blason + photos) */
+.image-box img,
+.inner-img img,
+.inner-blason.is-photo img,
+.blason-frame img{
+  filter: brightness(0.90) contrast(1.06) saturate(0.98);
+}
+
+/* 7) Option : cartes/menus un poil plus opaques pour le texte */
+.section-card{
+  background: linear-gradient(180deg, rgba(0,0,0,0.34), rgba(0,0,0,0.20)) !important;
+}
+.section-card.alt{
+  background: linear-gradient(180deg, rgba(0,0,0,0.30), rgba(0,0,0,0.18)) !important;
+}
+.menu-panel{
+  background: rgba(0,0,0,0.82) !important;
+}
 
 /* ================== FIN PATCH IMAGE DE FOND ================== */
 </style> <!-- Données structurées (SEO Google) --> <script type="application/ld+json"> { "@context": "https://schema.org", "@type": "WebPage", "name": "Histoire du Temple – Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J.", "url": "https://osd9tdj.org/vocation.html", "inLanguage": "fr", "description": "Présentation rigoureuse, datée et documentée de l’origine de l’Ordre du Temple, de sa mission, de sa règle, de sa reconnaissance et de son héritage.", "publisher": { "@type": "Organization", "name": "Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J.", "url": "https://osd9tdj.org/" } } </script> <link href="icon-192.png" rel="icon" sizes="192x192" type="image/png"/> <link href="icon-512.png" rel="icon" sizes="512x512" type="image/png"/> <link href="icon-192.png" rel="apple-touch-icon"/>
