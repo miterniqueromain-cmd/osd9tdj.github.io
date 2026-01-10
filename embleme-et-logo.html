@@ -74,6 +74,16 @@
       html, body{ height: 100dvh; }
     }
 
+    /* ✅ VOILE PLUS NOIR (pour faire ressortir les blancs) */
+    body::before{
+      content:"";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.42); /* 👈 plus sombre mais léger */
+      z-index: 0;
+      pointer-events: none;
+    }
+
     .frame-fixed{
       position: fixed;
       inset: calc(14px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left));
@@ -179,6 +189,8 @@
       width: 100%;
       max-width: 100%;
       overflow-x: hidden; /* ✅ sécurité anti débordement mobile */
+      position: relative;
+      z-index: 1;
     }
 
     /* ✅ HERO templier en haut */
@@ -698,7 +710,6 @@
       <a href="adhesion.html"> Adhésion</a>
       <a href="boutique.html"> Boutique</a>
       <a href="contact.html"> Contact</a>
-      
     </div>
   </details>
 </div>
@@ -998,8 +1009,6 @@
         <a href="histoire.html">Notre histoire</a>
         <span class="divider" aria-hidden="true"></span>
         <a href="notre-mission.html">Notre mission</a>
-        <span class="divider" aria-hidden="true"></span>
-        <a href="ordres-historiques.html">Ordres historiques</a>
       </div>
     </div>
 
