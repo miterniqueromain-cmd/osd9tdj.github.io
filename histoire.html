@@ -64,21 +64,35 @@
       overflow:hidden; /* ✅ important */
       font-family:'Lato',Arial,sans-serif;
       color:var(--clair);
-      background:
-        radial-gradient(circle at top, rgba(255,255,255,0.06), rgba(0,0,0,0) 35%),
-        radial-gradient(circle at top, var(--fond1), var(--fond2) 72%);
+
+      /* ✅ AJOUT: image de fond */
+      background: url("fonds-nh.jpg") center / cover no-repeat fixed;
     }
 
+    /* ✅ AJOUT: voile noir qui coulisse par-dessus l'image de fond */
+    body{
+      position: relative;
+    }
     body::before{
       content:"";
       position:fixed;
       inset:0;
-      background:
-        radial-gradient(circle at 10% 0%, rgba(214,167,40,0.08), transparent 35%),
-        radial-gradient(circle at 90% 0%, rgba(214,167,40,0.06), transparent 40%),
-        linear-gradient(to bottom, rgba(0,0,0,0.10), rgba(0,0,0,0.55));
       pointer-events:none;
-      z-index:-1;
+
+      /* noir + tes effets dorés (au-dessus de l'image) */
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.75)),
+        radial-gradient(circle at 10% 0%, rgba(214,167,40,0.08), transparent 35%),
+        radial-gradient(circle at 90% 0%, rgba(214,167,40,0.06), transparent 40%);
+
+      /* effet coulisse */
+      transform: translateX(-100%);
+      animation: veilSlide 900ms ease forwards;
+
+      z-index: 0;
+    }
+    @keyframes veilSlide{
+      to{ transform: translateX(0); }
     }
 
     /* ✅ Cadre fixe */
@@ -116,7 +130,7 @@
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
-      z-index: 1;
+      z-index: 1; /* ✅ contenu au-dessus du voile */
     }
 
     /* ✅ Menu 3 points */
@@ -225,9 +239,12 @@
     }
     .motto strong{color:var(--or);}
 
+    /* ✅ FIX (portable): nav noir du bas centré */
     .tabs{
       margin:10px auto 26px;
-      display:inline-flex;
+      display:flex;                 /* ✅ était inline-flex */
+      justify-content:center;       /* ✅ centre réellement */
+      width:100%;                   /* ✅ prend la largeur */
       max-width:100%;
       overflow-x:auto;
       -webkit-overflow-scrolling:touch;
@@ -400,26 +417,24 @@
     /* ✅ Centrage des tabs sur tablette/PC (sans toucher au mobile) */
     @media (min-width: 700px){
       .tabs{
-        display:flex;          /* au lieu de inline-flex, uniquement ici */
-        width:100%;            /* prend la largeur du wrap -> centrage réel */
+        display:flex;
+        width:100%;
         justify-content:center;
       }
 
-      /* ✅ SEULE MODIF DEMANDÉE : limiter la taille de l’image “templier” sur iPad/PC */
       .image-inline{
-        max-width: 520px;      /* évite l’agrandissement qui floute (iPad/PC) */
+        max-width: 520px;
       }
     }
 
-    /* ✅ Hero plus propre sur tablette/PC (recadrage + hauteur adaptée) */
     @media (min-width: 900px){
       .hero img{
-        height:420px;                 /* plus confortable sur tablette/PC */
-        object-position:center 60%;   /* recadrage plus harmonieux */
+        height:420px;
+        object-position:center 60%;
       }
     }
 
-    /* ================== ✅ BOUTON JAUNE COULISSANT (au lieu de 2 boutons) ================== */
+    /* ================== ✅ BOUTON JAUNE COULISSANT ================== */
     .cta-ordres{
       margin: 18px auto 6px;
       text-align:center;
@@ -498,7 +513,7 @@
     </details>
   </div>
 
-  <!-- ✅ Tout défile dedans (TON CONTENU INCHANGÉ) -->
+  <!-- ✅ Tout défile dedans -->
   <div class="viewport-scroll">
     <div class="wrap">
 
@@ -732,24 +747,24 @@
         <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;">
       </div>
 
-      <!-- ✅ TABS BAS (SANS EMOJIS, sinon tu pétais un câble) -->
+      <!-- ✅ BOUTON NOIR DU BAS (centré portable OK) -->
       <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
         <a class="tab" href="index.html">Accueil</a>
         <a class="tab" href="contact.html">Contact</a>
       </nav>
 
-      <!-- ✅ BOUTON JAUNE COULISSANT (1 seul bloc) -->
+      <!-- ✅ BOUTON JAUNE COULISSANT -->
       <div class="cta-ordres" aria-label="Accès rapide">
-  <div class="cta-slider" role="navigation" aria-label="Accès rapides">
-    <a href="ordres-historiques.html"> Ordres historiques</a>
-    <span class="divider" aria-hidden="true"></span>
-    <a href="embleme-et-logo.html"> Emblème et logo</a>
-    <span class="divider" aria-hidden="true"></span>
-    <a href="quinoussommes.html"> Qui nous sommes</a>
-    <span class="divider" aria-hidden="true"></span>
-    <a href="notre-mission.html"> Notre mission</a>
-  </div>
-</div>
+        <div class="cta-slider" role="navigation" aria-label="Accès rapides">
+          <a href="ordres-historiques.html"> Ordres historiques</a>
+          <span class="divider" aria-hidden="true"></span>
+          <a href="embleme-et-logo.html"> Emblème et logo</a>
+          <span class="divider" aria-hidden="true"></span>
+          <a href="quinoussommes.html"> Qui nous sommes</a>
+          <span class="divider" aria-hidden="true"></span>
+          <a href="notre-mission.html"> Notre mission</a>
+        </div>
+      </div>
 
       <div class="footer">
         © O.S.D.9.T.D.J. Association Loi 1901 – Tous droits réservés •
