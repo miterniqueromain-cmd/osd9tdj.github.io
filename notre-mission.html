@@ -74,14 +74,29 @@
     html,body{ height:100dvh; }
   }
 
-  /* ✅ VOILE NOIR (encore plus fort sur mobile) */
+  /* ✅ VOILE NOIR – RÉGLAGE FINAL */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,0.55); /* PC */
+  z-index:0;
+  pointer-events:none;
+}
+
+/* Tablettes : très légèrement plus sombre */
+@media (max-width:1024px){
   body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background: rgba(0,0,0,0.52); /* desktop */
-    z-index:0;
-    pointer-events:none;
+    background: rgba(0,0,0,0.60);
+  }
+}
+
+/* Mobiles : moins sombre qu’avant */
+@media (max-width:600px){
+  body::before{
+    background: rgba(0,0,0,0.52);
+  }
+}
   }
   @media (max-width: 1024px){
     body::before{ background: rgba(0,0,0,0.80); } /* tablette */
