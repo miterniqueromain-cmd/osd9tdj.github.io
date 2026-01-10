@@ -74,35 +74,22 @@
     html,body{ height:100dvh; }
   }
 
-  /* ✅ VOILE NOIR – RÉGLAGE FINAL */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background: rgba(0,0,0,0.55); /* PC */
-  z-index:0;
-  pointer-events:none;
-}
-
-/* Tablettes : très légèrement plus sombre */
-@media (max-width:1024px){
+  /* ✅ VOILE NOIR : téléphone = tablette (comme demandé) */
   body::before{
-    background: rgba(0,0,0,0.60);
+    content:"";
+    position:fixed;
+    inset:0;
+    background: rgba(0,0,0,0.55); /* PC */
+    z-index:0;
+    pointer-events:none;
   }
-}
-
-/* Mobiles : moins sombre qu’avant */
-@media (max-width:600px){
-  body::before{
-    background: rgba(0,0,0,0.52);
+  /* Tablettes */
+  @media (max-width:1024px){
+    body::before{ background: rgba(0,0,0,0.60); }
   }
-}
-  }
-  @media (max-width: 1024px){
-    body::before{ background: rgba(0,0,0,0.80); } /* tablette */
-  }
-  @media (max-width: 600px){
-    body::before{ background: rgba(0,0,0,0.88); } /* téléphone */
+  /* Téléphones = Tablettes */
+  @media (max-width:600px){
+    body::before{ background: rgba(0,0,0,0.60); }
   }
 
   .frame-fixed{
@@ -408,14 +395,6 @@ body::before{
     backdrop-filter: blur(6px);
     background:rgba(0,0,0,0.18);
   }
-  /* ✅ TABLETTE : tabs centrées et NON pleine largeur */
-@media (min-width:601px) and (max-width:1024px){
-  .tabs{
-    max-width: fit-content;
-    width: auto;
-    justify-content: center;
-  }
-}
   .tabs::-webkit-scrollbar{ display:none; }
   .tab{
     flex:0 0 auto;
@@ -431,8 +410,26 @@ body::before{
   }
   .tab + .tab{ border-left:1px solid rgba(214,167,40,0.35); }
   .tab:hover{ background:rgba(214,167,40,0.20); color:#fff; }
+
+  /* ✅ TABLETTE : tabs centrées, NON pleine largeur, restent coulissantes */
+  @media (min-width:601px) and (max-width:1024px){
+    .tabs{
+      display:inline-flex;
+      width:auto;
+      max-width:100%;
+      margin-left:auto;
+      margin-right:auto;
+    }
+  }
+  /* ✅ DESKTOP : ne PAS forcer width:100% (sinon barre trop longue) */
   @media (min-width:700px){
-    .tabs{ display:flex; width:100%; justify-content:center; }
+    .tabs{
+      display:inline-flex;
+      width:auto;
+      max-width:100%;
+      margin-left:auto;
+      margin-right:auto;
+    }
   }
 
   .cta-ordres{
