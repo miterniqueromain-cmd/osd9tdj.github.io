@@ -66,11 +66,11 @@
       color: var(--clair);
       text-align: center;
 
-      /* ✅ MODIF: image de fond demandée */
+      /* ✅ image de fond */
       background: url("fond-qns.PNG") center / cover no-repeat fixed;
     }
 
-    /* ✅ AJOUT: voile noir par-dessus, effet coulissant (sans casser le reste) */
+    /* ✅ voile noir par-dessus, effet coulissant (LÉGÈREMENT plus sombre) */
     body{
       position: relative;
     }
@@ -79,10 +79,13 @@
       position:fixed;
       inset:0;
       pointer-events:none;
+
+      /* ✅ MODIF: voile un peu plus sombre pour que le texte ressorte */
       background:
-        linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.78)),
+        linear-gradient(to bottom, rgba(0,0,0,0.35), rgba(0,0,0,0.84)),
         radial-gradient(circle at 10% 0%, rgba(214,167,40,0.08), transparent 35%),
         radial-gradient(circle at 90% 0%, rgba(214,167,40,0.06), transparent 40%);
+
       transform: translateX(-100%);
       animation: veilSlide 900ms ease forwards;
       z-index: 0;
@@ -97,7 +100,7 @@
       box-shadow:
         0 0 0 1px rgba(248,232,200,0.16) inset,
         0 0 38px rgba(0,0,0,0.35);
-      pointer-events: none; /* ✅ le cadre ne bloque pas */
+      pointer-events: none;
       z-index: 40;
     }
 
@@ -119,12 +122,12 @@
     /* ✅ zone qui défile à l'intérieur du cadre */
     .viewport-scroll{
       position: fixed;
-      inset: 22px;                /* un peu à l'intérieur du cadre */
+      inset: 22px;
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
       z-index: 1;
-      padding: 30px 15px 44px;    /* on garde TES paddings */
+      padding: 30px 15px 44px;
       box-sizing: border-box;
     }
 
@@ -134,11 +137,9 @@
       top: 26px;
       right: 26px;
       z-index: 60;
-      pointer-events: auto; /* ✅ cliquable */
+      pointer-events: auto;
     }
-    .top-menu details{
-      position: relative;
-    }
+    .top-menu details{ position: relative; }
     .top-menu summary{
       list-style: none;
       cursor: pointer;
@@ -194,7 +195,14 @@
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      align-items: center;
+
+      /* ✅ FIX MOBILE: évite décalage à droite */
+      align-items: stretch;
+    }
+
+    /* ✅ garde les éléments “centrés” */
+    .image-box, h1, h2, .nndnn-banner, .big-history-wrap, nav.tabs, footer.footer-min{
+      align-self: center;
     }
 
     .image-box {
@@ -246,6 +254,9 @@
 
       position: relative;
       overflow: hidden;
+
+      /* ✅ FIX MOBILE: force le centrage dans le flex container */
+      align-self: center;
     }
 
     .section-card::before{
@@ -332,10 +343,9 @@
       margin-top: 22px;
       width: 100%;
       display: flex;
-      justify-content: center;   /* ✅ centrage horizontal (mobile & desktop) */
+      justify-content: center;
     }
 
-    /* ✅ barre jaune centrée + coulissante partout */
     .big-history-slider{
       display: inline-flex;
       align-items: center;
@@ -353,11 +363,10 @@
       background: linear-gradient(to right, #f3d98b, #d6a728);
       box-shadow: 0 4px 10px rgba(0,0,0,0.8);
 
-      margin: 0 auto;            /* ✅ centrage robuste */
+      margin: 0 auto;
     }
     .big-history-slider::-webkit-scrollbar{ display:none; }
 
-    /* ✅ Liens DANS la barre jaune (plus de pastilles séparées) */
     .big-history-btn{
       display:inline-block;
       padding: 0;
@@ -727,7 +736,7 @@
         <img src="croix.epee.PNG" alt="Épée – symbole">
       </div>
 
-      <!-- Bouton jaune coulissant unique : ajout du lien demandé -->
+      <!-- Bouton jaune coulissant unique -->
       <div class="big-history-wrap">
         <div class="big-history-slider" aria-label="Accès rapides">
           <a class="big-history-btn" href="histoire.html"> Notre histoire</a>
@@ -743,7 +752,7 @@
         <a class="tab" href="contact.html">  Contact</a>
       </nav>
 
-      <!-- Footer standardisé comme demandé -->
+      <!-- Footer standardisé -->
       <footer class="footer-min" aria-label="Pied de page">
         <div class="line">
           <span>© OSD9TDJ Association Loi 1901, Tous droits réservés</span>
