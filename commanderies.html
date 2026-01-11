@@ -786,7 +786,10 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
     Carte indicative : les épingles apparaissent progressivement quand on zoome et quand on se déplace.
     Clic sur une épingle = accès direct à Wikipédia (si disponible). <strong>Non exhaustive</strong>.
   </p>
-  <div id="templar-status" style="margin-top:10px;opacity:.88;font-size:.95rem;"></div>
+  <div class="silver-sep"></div>
+  <p class="note" id="wd-status" style="margin:0;">
+    ⏳ Préparation de la carte…
+  </p>
 </div>
 
 <div class="silver-sep"></div>
@@ -808,7 +811,8 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
   <a class="nav-btn gold" href="histoire.html">Notre histoire</a>
   <a class="nav-btn gold" href="vocation.html">Histoire du Temple</a>
   <a class="nav-btn gold" href="ordres-historiques.html">Ordres historiques</a>
-  
+  <a class="nav-btn gold" href="commanderies.html">Commanderies</a>
+  <a class="nav-btn gold" href="faq.html">FAQ</a>
 </nav>
 
 <footer class="footer-min" aria-label="Pied de page">
@@ -824,19 +828,12 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
 </div><!-- /.container -->
 </div><!-- /.viewport-scroll -->
 
-<!-- =========================
-     SCRIPTS (JUSTE AVANT </body>)
-     IMPORTANT : Leaflet JS 1 seule fois dans la page
-     ========================= -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-  crossorigin=""></script>
-
+<!-- ===== Patch carte (CSS mini, ne casse pas ton style existant) ===== -->
 <style>
-  /* Hauteur stable (sinon carte invisible) */
+  /* Hauteur stable (sinon Leaflet peut rester vide) */
   #templar-map{ width:100%; height:520px; }
 
-  /* Bouton wiki dans le popup */
+  /* Bouton wiki dans popup */
   .wiki-btn{
     display:inline-block;
     margin-top:8px;
@@ -859,208 +856,265 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
 
 <script>
 (function(){
-  // ---------- helpers ----------
+  const statusEl = document.getElementById("wd-status");
+  const mapEl = document.getElementById("templar-map");
+  if(!mapEl) return;
+
+  function setStatus(txt){
+    if(statusEl) statusEl.textContent = txt;
+  }
+
+  // --- charge Leaflet si besoin (évite doublons) ---
+  function ensureLeaflet(){
+    return new Promise((resolve, reject) => {
+      if(window.L) return resolve();
+
+      // CSS Leaflet (au cas où)
+      const hasCss = Array.from(document.styleSheets || []).some(ss => (ss.href || "").includes("leaflet"));
+      if(!hasCss){
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+        link.crossOrigin = "";
+        document.head.appendChild(link);
+      }
+
+      const s = document.createElement("script");
+      s.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+      s.crossOrigin = "";
+      s.onload = () => resolve();
+      s.onerror = () => reject(new Error("Leaflet ne se charge pas"));
+      document.body.appendChild(s);
+    });
+  }
+
   function esc(s){
-    return String(s ?? '').replace(/[&<>"']/g, m => ({
-      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-    }[m]));
+    return String(s ?? "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   }
   function parsePoint(wkt){
-    // WKT: Point(lon lat)
     const m = /Point\(([-\d.]+)\s+([-\d.]+)\)/.exec(wkt || "");
-    return m ? { lon:+m[1], lat:+m[2] } : null;
+    if(!m) return null;
+    return { lon: parseFloat(m[1]), lat: parseFloat(m[2]) };
   }
 
-  // ---------- dom / leaflet ----------
-  const statusEl = document.getElementById('templar-status');
-  const mapEl = document.getElementById('templar-map');
+  // --- Petites épingles garanties (même si Wikidata bloque) ---
+  const ALWAYS_PINS = [
+    { name:"Paris — Enclos du Temple", lat:48.8647, lon:2.3586, wiki:"https://fr.wikipedia.org/wiki/Enclos_du_Temple" },
+    { name:"Londres — Temple Church", lat:51.5129, lon:-0.1107, wiki:"https://en.wikipedia.org/wiki/Temple_Church" },
+    { name:"Tomar — Convento de Cristo", lat:39.6033, lon:-8.4187, wiki:"https://fr.wikipedia.org/wiki/Couvent_du_Christ" },
+    { name:"Jérusalem (repère)", lat:31.7780, lon:35.2350, wiki:"https://fr.wikipedia.org/wiki/J%C3%A9rusalem" },
+    { name:"Acre — Saint-Jean-d’Acre", lat:32.9236, lon:35.0710, wiki:"https://fr.wikipedia.org/wiki/Acre_(Isra%C3%ABl)" }
+  ];
 
-  function setStatus(html){
-    if(statusEl) statusEl.innerHTML = html || "";
+  // --- Réglages WDQS (Wikidata Query Service) ---
+  const MIN_ZOOM = 6;         // en dessous, on ne requête pas (trop large)
+  const LIMIT    = 250;       // limite par zone visible (évite de saturer)
+  const DEBOUNCE = 450;
+  const TIMEOUT_MS = 10000;
+
+  let map, layer;
+  const fetched = new Set();
+  let timer = null;
+
+  function makeGoldDot(){
+    return L.divIcon({
+      className: "",
+      html: '<div style="width:12px;height:12px;border-radius:50%;background:rgba(214,167,40,0.95);border:2px solid rgba(0,0,0,0.55);box-shadow:0 2px 10px rgba(0,0,0,0.35)"></div>',
+      iconSize: [12,12],
+      iconAnchor: [6,6],
+      popupAnchor: [0,-10]
+    });
   }
 
-  function init(){
-    if(!window.L || !mapEl) return;
+  function addAlwaysPins(){
+    const icon = makeGoldDot();
+    ALWAYS_PINS.forEach(p=>{
+      const popup =
+        "<strong>"+esc(p.name)+"</strong>" +
+        (p.wiki ? '<br><a class="wiki-btn" href="'+esc(p.wiki)+'" target="_blank" rel="noopener">Voir sur Wikipédia</a>' : "");
+      const m = L.marker([p.lat, p.lon], {icon}).addTo(layer);
+      m.bindPopup(popup);
+      m.on("click", ()=>{ if(p.wiki) window.open(p.wiki, "_blank", "noopener"); });
+    });
+  }
 
-    const map = L.map('templar-map', {
-      zoomControl:true,
-      scrollWheelZoom:true,
-      dragging:true,
-      tap:true
-    }).setView([20, 0], 2); // monde
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: '&copy; OpenStreetMap'
-    }).addTo(map);
-
-    const layer = L.featureGroup().addTo(map);
-
-    // ---------- réglages ----------
-    const MIN_ZOOM = 5;       // à zoom trop faible, WDQS renvoie trop large => souvent 0/ratelimit
-    const LIMIT    = 220;     // stable sur mobile/tablette
-    const DEBOUNCE = 550;
-
-    const loadedZones = new Set();
-    let timer = null;
-    let loading = false;
-
-    // fallback (si WDQS bloqué / rate-limit)
-    const FALLBACK = [
-      {name:"Paris — Enclos du Temple", lat:48.8647, lon:2.3586, wiki:"https://fr.wikipedia.org/wiki/Enclos_du_Temple"},
-      {name:"Londres — Temple Church", lat:51.5129, lon:-0.1107, wiki:"https://en.wikipedia.org/wiki/Temple_Church"},
-      {name:"Tomar — Convento de Cristo", lat:39.6033, lon:-8.4187, wiki:"https://fr.wikipedia.org/wiki/Couvent_du_Christ"},
-      {name:"Jérusalem — Mont du Temple", lat:31.7780, lon:35.2350, wiki:"https://fr.wikipedia.org/wiki/Mont_du_Temple"},
-      {name:"Acre — Saint-Jean-d’Acre", lat:32.9236, lon:35.0710, wiki:"https://fr.wikipedia.org/wiki/Acre_(Isra%C3%ABl)"}
-    ];
-
-    function addDot(lat, lon, name, wiki){
-      const m = L.circleMarker([lat, lon], {
-        radius: 6,
-        weight: 1,
-        color: "rgba(0,0,0,0.55)",
-        fillColor: "rgba(214,167,40,0.95)",
-        fillOpacity: 0.90
-      }).addTo(layer);
-
-      m.bindPopup(
-        "<strong>" + esc(name) + "</strong>" +
-        (wiki
-          ? '<br><a class="wiki-btn" href="'+esc(wiki)+'" target="_blank" rel="noopener">Voir sur Wikipédia</a>'
-          : '<br><span style="opacity:.75">Pas d’article Wikipédia trouvé</span>'
-        )
-      );
-
-      m.on("click", function(){
-        if(wiki) window.open(wiki, "_blank", "noopener");
-      });
-    }
-
-    function buildSparql(sw, ne){
-      // ✅ IMPORTANT: on prend un vrai label rdfs:label + box visible
-      return `
+  function buildSparql(sw, ne){
+    // Note: filtre pragmatique par label (Wikidata est hétérogène)
+    return `
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX wikibase: <http://wikiba.se/ontology#>
 PREFIX bd: <http://www.bigdata.com/rdf#>
 PREFIX schema: <http://schema.org/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?item ?label ?coord ?frwiki ?enwiki WHERE {
+SELECT ?item ?itemLabel ?coord ?frwiki ?enwiki WHERE {
   SERVICE wikibase:box {
     ?item wdt:P625 ?coord .
     bd:serviceParam wikibase:cornerWest "Point(${sw.lng} ${sw.lat})"^^geo:wktLiteral .
     bd:serviceParam wikibase:cornerEast "Point(${ne.lng} ${ne.lat})"^^geo:wktLiteral .
   }
 
-  ?item rdfs:label ?label .
-  FILTER(LANG(?label) = "fr" || LANG(?label) = "en")
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". }
 
   FILTER(
-    CONTAINS(LCASE(STR(?label)), "commanderie") ||
-    CONTAINS(LCASE(STR(?label)), "commandery") ||
-    CONTAINS(LCASE(STR(?label)), "templar") ||
-    CONTAINS(LCASE(STR(?label)), "templier")
+    CONTAINS(LCASE(STR(?itemLabel)), "commanderie") ||
+    CONTAINS(LCASE(STR(?itemLabel)), "commandery") ||
+    CONTAINS(LCASE(STR(?itemLabel)), "templar") ||
+    CONTAINS(LCASE(STR(?itemLabel)), "templier")
   )
 
   OPTIONAL {
-    ?fr schema:about ?item ; schema:isPartOf <https://fr.wikipedia.org/> ; schema:name ?frTitle .
+    ?fr schema:about ?item ;
+        schema:isPartOf <https://fr.wikipedia.org/> ;
+        schema:name ?frTitle .
     BIND(CONCAT("https://fr.wikipedia.org/wiki/", ENCODE_FOR_URI(?frTitle)) AS ?frwiki)
   }
   OPTIONAL {
-    ?en schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> ; schema:name ?enTitle .
+    ?en schema:about ?item ;
+        schema:isPartOf <https://en.wikipedia.org/> ;
+        schema:name ?enTitle .
     BIND(CONCAT("https://en.wikipedia.org/wiki/", ENCODE_FOR_URI(?enTitle)) AS ?enwiki)
   }
 }
 LIMIT ${LIMIT}
-      `.trim();
+    `.trim();
+  }
+
+  function addWdPins(rows){
+    const icon = makeGoldDot();
+
+    let added = 0;
+    rows.forEach(row=>{
+      const c = parsePoint(row.coord && row.coord.value);
+      if(!c) return;
+
+      const name = (row.itemLabel && row.itemLabel.value) ? row.itemLabel.value : "Lieu";
+      const wiki = (row.frwiki && row.frwiki.value) || (row.enwiki && row.enwiki.value) || "";
+
+      const popup =
+        "<strong>"+esc(name)+"</strong>" +
+        (wiki ? '<br><a class="wiki-btn" href="'+esc(wiki)+'" target="_blank" rel="noopener">Voir sur Wikipédia</a>'
+              : '<br><span style="opacity:.75">Pas d’article Wikipédia trouvé</span>');
+
+      // petit point doré (marker)
+      const m = L.marker([c.lat, c.lon], {icon}).addTo(layer);
+      m.bindPopup(popup);
+
+      // clic = ouvre Wikipédia si dispo
+      m.on("click", ()=>{ if(wiki) window.open(wiki, "_blank", "noopener"); });
+
+      added++;
+    });
+
+    return added;
+  }
+
+  async function fetchWdForView(){
+    if(map.getZoom() < MIN_ZOOM){
+      setStatus("🔎 Zoome encore un peu (≥ " + MIN_ZOOM + ") pour charger des épingles…");
+      return;
     }
 
-    async function fetchJsonWithRetry(url){
-      // retry simple (429/503) = très courant avec WDQS
-      for(let i=0;i<4;i++){
-        const r = await fetch(url, { headers: { "Accept":"application/sparql-results+json" } });
-        if(r.ok) return await r.json();
-        const wait = (r.status === 429 || r.status === 503) ? (900 * (i+1)) : (400 * (i+1));
-        await new Promise(res=>setTimeout(res, wait));
-      }
-      throw new Error("WDQS failed");
+    const b = map.getBounds();
+    const sw = b.getSouthWest();
+    const ne = b.getNorthEast();
+
+    const key = [
+      map.getZoom(),
+      sw.lat.toFixed(2), sw.lng.toFixed(2),
+      ne.lat.toFixed(2), ne.lng.toFixed(2)
+    ].join("|");
+    if(fetched.has(key)){
+      setStatus("✅ Zone déjà chargée. Déplace/zoome pour charger d’autres épingles.");
+      return;
     }
+    fetched.add(key);
 
-    function scheduleLoad(){
-      clearTimeout(timer);
-      timer = setTimeout(loadData, DEBOUNCE);
-    }
+    setStatus("⏳ Chargement des épingles (Wikidata)…");
 
-    async function loadData(){
-      if(loading) return;
+    const sparql = buildSparql(sw, ne);
+    const url = "https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(sparql);
 
-      if(map.getZoom() < MIN_ZOOM){
-        setStatus("🔎 Zoome davantage (zoom ≥ <strong>"+MIN_ZOOM+"</strong>) pour charger les épingles…");
+    const controller = new AbortController();
+    const t = setTimeout(()=>controller.abort(), TIMEOUT_MS);
+
+    try{
+      const r = await fetch(url, {
+        headers: { "Accept":"application/sparql-results+json" },
+        signal: controller.signal
+      });
+      clearTimeout(t);
+
+      if(!r.ok){
+        // souvent 429 si WDQS limite
+        setStatus("⚠️ Wikidata refuse temporairement ("+r.status+"). Réessaie dans 30s ou zoome/déplace.");
         return;
       }
 
-      const b = map.getBounds();
-      const sw = b.getSouthWest();
-      const ne = b.getNorthEast();
+      const data = await r.json();
+      const rows = (data && data.results && data.results.bindings) ? data.results.bindings : [];
+      const added = addWdPins(rows);
 
-      const key = [
-        map.getZoom(),
-        sw.lat.toFixed(2), sw.lng.toFixed(2),
-        ne.lat.toFixed(2), ne.lng.toFixed(2)
-      ].join("|");
-      if(loadedZones.has(key)) return;
-      loadedZones.add(key);
-
-      loading = true;
-      setStatus("⏳ Chargement des épingles (Wikidata)…");
-
-      try{
-        const sparql = buildSparql(sw, ne);
-        const url = "https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(sparql);
-
-        const data = await fetchJsonWithRetry(url);
-        const rows = data?.results?.bindings || [];
-
-        if(!rows.length){
-          setStatus("✅ Zone chargée, mais aucun résultat dans cette zone. Essaie de te déplacer / zoomer ailleurs.");
-        }else{
-          let added = 0;
-          rows.forEach(row=>{
-            const c = parsePoint(row.coord?.value);
-            if(!c) return;
-            const name = row.label?.value || "Lieu";
-            const wiki = row.frwiki?.value || row.enwiki?.value || "";
-            addDot(c.lat, c.lon, name, wiki);
-            added++;
-          });
-          setStatus("✅ Épingles ajoutées : <strong>"+added+"</strong> (dans cette zone).");
-        }
-      }catch(e){
-        // fallback si WDQS bloque
-        if(layer.getLayers().length === 0){
-          FALLBACK.forEach(p=>addDot(p.lat, p.lon, p.name, p.wiki));
-        }
-        setStatus("⚠️ Wikidata bloque/limite parfois (429). Affichage d’un <strong>jeu de repères</strong> en attendant. Réessaie plus tard en zoomant/déplaçant.");
-      }finally{
-        loading = false;
+      if(added === 0){
+        setStatus("ℹ️ Aucune épingle trouvée dans cette zone (essaie un autre endroit ou zoome encore).");
+      }else{
+        setStatus("✅ " + added + " épingle(s) ajoutée(s) dans cette zone. Déplace/zoome pour en charger plus.");
       }
+
+    }catch(err){
+      clearTimeout(t);
+      setStatus("⚠️ Chargement impossible (Wikidata). Vérifie réseau / limite WDQS. Les épingles fixes restent disponibles.");
+      // console utile si tu regardes avec l’inspecteur
+      console.log("WDQS error:", err);
     }
-
-    map.on("moveend", scheduleLoad);
-    map.on("zoomend", scheduleLoad);
-
-    // Fix “carte vide” dans viewport scroll / iOS
-    setTimeout(()=>map.invalidateSize(), 160);
-
-    // 1er message
-    setStatus("🔎 Zoome (zoom ≥ <strong>"+MIN_ZOOM+"</strong>) puis déplace la carte pour charger des épingles…");
   }
 
-  if(document.readyState === "loading"){
-    document.addEventListener("DOMContentLoaded", init);
-  }else{
-    init();
+  function schedule(){
+    clearTimeout(timer);
+    timer = setTimeout(fetchWdForView, DEBOUNCE);
   }
+
+  function initMap(){
+    setStatus("⏳ Initialisation…");
+
+    map = L.map("templar-map", {
+      zoomControl:true,
+      scrollWheelZoom:true,
+      dragging:true,
+      tap:true
+    }).setView([20, 0], 2);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 18,
+      attribution: "&copy; OpenStreetMap"
+    }).addTo(map);
+
+    layer = L.featureGroup().addTo(map);
+
+    // épingles garanties
+    addAlwaysPins();
+
+    // IMPORTANT: dans ton viewport scroll/fixed, Leaflet a parfois besoin d’un invalidateSize
+    setTimeout(()=>map.invalidateSize(), 180);
+
+    // chargements progressifs
+    map.on("moveend", schedule);
+    map.on("zoomend", schedule);
+
+    // 1er chargement (mais MIN_ZOOM protège)
+    schedule();
+  }
+
+  // go
+  (async function(){
+    try{
+      await ensureLeaflet();
+      initMap();
+    }catch(e){
+      setStatus("❌ Leaflet ne se charge pas. (vérifie connexion / blocage Safari)");
+      console.log(e);
+    }
+  })();
+
 })();
 </script>
 
