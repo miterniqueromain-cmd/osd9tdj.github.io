@@ -517,80 +517,76 @@
   .notice a:visited{ color: var(--clair); }
 
   /* =========================================================
-     PATCH CHIRURGICAL : Α / Ω sur le cadre intérieur (OR MÉTAL)
-     - position auto parfaite sur PC / tablette / mobile
-     - apparaît seulement quand "Initiation" est ouvert
+     PATCH CHIRURGICAL : Α / Ω ENTRE LES 2 PARAGRAPHES
+     - au niveau exact du “gap” entre paragraphes
+     - posés sur le cadre intérieur (gauche/droite)
+     - OR MÉTAL (beau, pas jaune plat)
      ========================================================= */
 
-  /* conteneur sticky : top calculé par JS, sinon fallback */
-  details.accordion.initiation .ao-sigils{
-    position: sticky;
-    top: var(--ao-top, 120px);
-    z-index: 6;
-    height: 0;
-    pointer-events: none;
+  details.accordion.initiation .ao-inline{
+    /* on étend jusqu’au cadre intérieur (on “annule” le padding 22px de .accordion-body) */
+    width: calc(100% + 44px);
+    margin-left: -22px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    /* espace vertical propre entre les paragraphes */
+    margin-top: 14px;
+    margin-bottom: 14px;
+
+    pointer-events:none;
   }
 
-  /* spans */
-  details.accordion.initiation .ao-sigils .ao{
-    position: absolute;
-    top: -12px;
+  details.accordion.initiation .ao-inline .ao{
+    font-family:'Cinzel',serif;
+    font-weight:800;
+    font-size: 38px;
+    line-height:1;
 
-    font-family: 'Cinzel', serif;
-    font-weight: 800;
-    font-size: 36px;
-    line-height: 1;
-
-    /* OR MÉTAL (pas jaune plat) */
+    /* OR MÉTAL (dégradé + relief) */
     color: transparent;
     background: linear-gradient(
       180deg,
       #fff7d2 0%,
-      #ffe7a3 12%,
-      #f6d77b 26%,
-      #d6a728 50%,
-      #f2cf63 68%,
+      #ffe7a3 14%,
+      #f6d77b 30%,
+      #d6a728 52%,
+      #f2cf63 70%,
       #fff2bf 100%
     );
-    -webkit-background-clip: text;
-    background-clip: text;
+    -webkit-background-clip:text;
+    background-clip:text;
 
-    /* bordure chaude + relief */
     -webkit-text-stroke: 0.7px rgba(58, 34, 6, 0.55);
+
     text-shadow:
-      0 0 10px rgba(214,167,40,0.34),
-      0 0 22px rgba(214,167,40,0.22),
+      0 0 10px rgba(214,167,40,0.32),
+      0 0 22px rgba(214,167,40,0.20),
       0 6px 18px rgba(0,0,0,0.35);
-
-    opacity: 0;
-    transform: translateY(0);
   }
 
-  /* gauche/droite sur le cadre intérieur + léger débordement */
-  details.accordion.initiation .ao-sigils .ao.left{
-    left: -22px;
+  /* léger débordement sur le cadre intérieur */
+  details.accordion.initiation .ao-inline .ao.left{
+    transform: translateX(-16px);
   }
-  details.accordion.initiation .ao-sigils .ao.right{
-    right: -22px;
-  }
-
-  /* visible uniquement quand open */
-  details.accordion.initiation[open] .ao-sigils .ao{
-    opacity: 1;
+  details.accordion.initiation .ao-inline .ao.right{
+    transform: translateX(16px);
   }
 
   /* tablette */
   @media (max-width:1024px){
-    details.accordion.initiation .ao-sigils .ao{ font-size: 32px; top: -10px; }
-    details.accordion.initiation .ao-sigils .ao.left{ left: -18px; }
-    details.accordion.initiation .ao-sigils .ao.right{ right: -18px; }
+    details.accordion.initiation .ao-inline .ao{ font-size: 34px; }
+    details.accordion.initiation .ao-inline .ao.left{ transform: translateX(-14px); }
+    details.accordion.initiation .ao-inline .ao.right{ transform: translateX(14px); }
   }
 
   /* mobile */
   @media (max-width:600px){
-    details.accordion.initiation .ao-sigils .ao{ font-size: 28px; top: -9px; }
-    details.accordion.initiation .ao-sigils .ao.left{ left: -16px; }
-    details.accordion.initiation .ao-sigils .ao.right{ right: -16px; }
+    details.accordion.initiation .ao-inline .ao{ font-size: 30px; }
+    details.accordion.initiation .ao-inline .ao.left{ transform: translateX(-12px); }
+    details.accordion.initiation .ao-inline .ao.right{ transform: translateX(12px); }
   }
 </style>
 
@@ -706,7 +702,7 @@
       </div>
     </details>
 
-    <!-- ✅ PATCH : uniquement ajout "initiation" -->
+    <!-- ✅ PATCH : ajout uniquement "initiation" -->
     <details class="accordion initiation" aria-label="Démarche initiatique">
       <summary>Une démarche initiatique interne, maîtrisée et encadrée</summary>
       <div class="accordion-body">
@@ -716,8 +712,8 @@
           à assurer la discipline, la cohérence morale et la continuité de l’esprit de l’Ordre.
         </p>
 
-        <!-- ✅ PATCH : entre les deux paragraphes -->
-        <div class="ao-sigils" aria-hidden="true">
+        <!-- ✅ PATCH : EXACTEMENT entre les 2 paragraphes -->
+        <div class="ao-inline" aria-hidden="true">
           <span class="ao left">Α</span>
           <span class="ao right">Ω</span>
         </div>
@@ -908,69 +904,5 @@
 
   </div>
 </div>
-
-<!-- =========================================================
-     PATCH CHIRURGICAL JS :
-     calcule la position parfaite du sticky (PC/tablette/mobile)
-     uniquement pour le details.initiation
-     ========================================================= -->
-<script>
-(function(){
-  function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
-
-  function computeAOTop(detailsEl){
-    const scroller = document.querySelector('.viewport-scroll');
-    if(!scroller) return;
-
-    const sigils = detailsEl.querySelector('.ao-sigils');
-    if(!sigils) return;
-
-    // Position actuelle du bloc sigils par rapport au scroller
-    const scRect = scroller.getBoundingClientRect();
-    const siRect = sigils.getBoundingClientRect();
-
-    // Distance du bloc sigils depuis le haut du scroller (en pixels visibles)
-    // => c’est exactement là où tu le vois "entre les paragraphes"
-    let top = siRect.top - scRect.top;
-
-    // On limite pour éviter qu'il monte trop haut ou descende trop bas selon écrans
-    // (valeurs conservatrices, tu peux laisser tel quel)
-    top = clamp(top, 70, Math.max(90, scRect.height - 120));
-
-    detailsEl.style.setProperty('--ao-top', top + 'px');
-  }
-
-  function setup(){
-    const detailsEl = document.querySelector('details.accordion.initiation');
-    if(!detailsEl) return;
-
-    // quand on ouvre/ferme
-    detailsEl.addEventListener('toggle', function(){
-      if(detailsEl.open){
-        // attendre un tick pour que le layout se stabilise
-        requestAnimationFrame(function(){ computeAOTop(detailsEl); });
-        setTimeout(function(){ computeAOTop(detailsEl); }, 60);
-      }
-    });
-
-    // resize/orientation
-    window.addEventListener('resize', function(){
-      if(detailsEl.open) computeAOTop(detailsEl);
-    });
-
-    // si déjà ouvert (rare)
-    if(detailsEl.open){
-      requestAnimationFrame(function(){ computeAOTop(detailsEl); });
-    }
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', setup);
-  }else{
-    setup();
-  }
-})();
-</script>
-
 </body>
 </html>
