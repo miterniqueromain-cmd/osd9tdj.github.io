@@ -775,6 +775,9 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
 <!-- =========================
      CARTE UNIQUE (MONDE) + ÉPINGLES PROGRESSIVES
      ========================= -->
+<!-- =========================
+     CARTE UNIQUE (MONDE) + ÉPINGLES FIXES + BONUS WIKIDATA (ZOOM)
+     ========================= -->
 <h2>Carte des lieux templiers (repères évolutifs)</h2>
 
 <div class="map-wrap" aria-label="Carte des lieux templiers">
@@ -783,13 +786,12 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
 
 <div class="silver-box">
   <p>
-    Carte indicative : les épingles apparaissent progressivement quand on zoome et quand on se déplace.
+    Carte indicative : des <strong>épingles fixes</strong> sont affichées immédiatement.
+    En zoomant, un <strong>bonus</strong> tente d’ajouter d’autres lieux depuis Wikidata.
     Clic sur une épingle = accès direct à Wikipédia (si disponible). <strong>Non exhaustive</strong>.
   </p>
   <div class="silver-sep"></div>
-  <p class="note" id="wd-status" style="margin:0;">
-    ⏳ Préparation de la carte…
-  </p>
+  <p class="note" id="map-status" style="margin:0;">⏳ Préparation de la carte…</p>
 </div>
 
 <div class="silver-sep"></div>
@@ -811,8 +813,12 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
   <a class="nav-btn gold" href="histoire.html">Notre histoire</a>
   <a class="nav-btn gold" href="vocation.html">Histoire du Temple</a>
   <a class="nav-btn gold" href="ordres-historiques.html">Ordres historiques</a>
-  
+  <a class="nav-btn gold" href="commanderies.html">Commanderies</a>
+  <a class="nav-btn gold" href="faq.html">FAQ</a>
 </nav>
+
+<!-- petit espace pour que le footer “respire” sous la barre jaune -->
+<div style="height:10px;"></div>
 
 <footer class="footer-min" aria-label="Pied de page">
   <div class="line">
@@ -827,10 +833,18 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
 </div><!-- /.container -->
 </div><!-- /.viewport-scroll -->
 
-<!-- ===== Patch carte (CSS mini, ne casse pas ton style existant) ===== -->
+<!-- =========================
+     Leaflet JS (UNE SEULE FOIS DANS LA PAGE)
+     ========================= -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""></script>
+
+<!-- ✅ Patch mini carte (ne touche pas ton gros CSS) -->
 <style>
-  /* Hauteur stable (sinon Leaflet peut rester vide) */
+  /* Hauteur stable (sinon Leaflet peut “disparaître” sur iOS) */
   #templar-map{ width:100%; height:520px; }
+  @media (max-width:700px){ #templar-map{ height:480px; } }
 
   /* Bouton wiki dans popup */
   .wiki-btn{
@@ -847,30 +861,25 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
     letter-spacing:0.03em;
   }
   .wiki-btn:hover{ background: rgba(214,167,40,0.28); }
-
-  @media (max-width:700px){
-    #templar-map{ height:480px; }
-  }
 </style>
 
 <script>
 (function(){
   const statusEl = document.getElementById("map-status");
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-  const isDesktop = matchMedia("(min-width: 1100px)").matches && !isIOS;
-
   function setStatus(t){ if(statusEl) statusEl.textContent = t; }
-
   function esc(s){
-    return String(s ?? "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    return String(s ?? "").replace(/[&<>"']/g, m =>
+      ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])
+    );
   }
 
   function init(){
     if(!window.L){ setStatus("❌ Leaflet non chargé."); return; }
 
     const el = document.getElementById("templar-map");
-    if(!el) return;
+    if(!el){ setStatus("❌ #templar-map introuvable."); return; }
 
+    // 🌍 carte monde (mais centrée Europe/Levant par défaut)
     const map = L.map("templar-map", {
       zoomControl:true,
       scrollWheelZoom:true,
@@ -883,9 +892,11 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
       attribution: "&copy; OpenStreetMap"
     }).addTo(map);
 
+    // 2 couches : FIXE (toujours) + AUTO (bonus)
     const layerFixed = L.featureGroup().addTo(map);
     const layerAuto  = L.featureGroup().addTo(map);
 
+    // icône “point or”
     const goldIcon = L.divIcon({
       className: "",
       html: '<div style="width:12px;height:12px;border-radius:50%;background:rgba(214,167,40,0.95);border:2px solid rgba(0,0,0,0.55);box-shadow:0 2px 10px rgba(0,0,0,0.35)"></div>',
@@ -899,122 +910,79 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
         (p.name || "Lieu") +
         (p.city ? " — " + p.city : "") +
         (p.country ? " (" + p.country + ")" : "");
-      const wiki = p.wiki || "";
 
+      const wiki = p.wiki || "";
       const popup =
         "<strong>" + esc(title) + "</strong>" +
         (wiki
           ? '<br><a class="wiki-btn" href="'+esc(wiki)+'" target="_blank" rel="noopener">Voir sur Wikipédia</a>'
-          : '<br><span style="opacity:.75">Pas de lien Wikipédia</span>');
+          : '<br><span style="opacity:.75">Pas d’article Wikipédia trouvé</span>');
 
-      const m = L.marker([p.lat, p.lon], {icon: goldIcon}).addTo(group);
+      const m = L.marker([p.lat, p.lon], { icon: goldIcon }).addTo(group);
       m.bindPopup(popup);
 
-      // clic direct = Wikipédia si dispo
+      // clic direct vers Wikipédia si dispo
       m.on("click", function(){
         if(wiki) window.open(wiki, "_blank", "noopener");
-        else m.openPopup();
       });
     }
 
-    /* ====== ÉPINGLES FIXES (FIABLES) ======
-       NB: repères "mémoire / implantation / logistique" (non exhaustif).
-       Tu peux en ajouter en copiant une ligne.
-    */
-    const PINS = [
+    // =========================
+    // ✅ ÉPINGLES FIXES (rapides, toujours visibles)
+    // Ajoute-en autant que tu veux ici (c’est LE filet de sécurité)
+    // =========================
+    const fixedPins = [
       // FRANCE
       {name:"Enclos du Temple", city:"Paris", country:"France", lat:48.8647, lon:2.3586, wiki:"https://fr.wikipedia.org/wiki/Enclos_du_Temple"},
-      {name:"Provins", city:"Provins", country:"France", lat:48.5602, lon:3.2996, wiki:"https://fr.wikipedia.org/wiki/Provins"},
-      {name:"Troyes (concile 1129)", city:"Troyes", country:"France", lat:48.2973, lon:4.0744, wiki:"https://fr.wikipedia.org/wiki/Concile_de_Troyes"},
-      {name:"Laon", city:"Laon", country:"France", lat:49.5635, lon:3.6243, wiki:"https://fr.wikipedia.org/wiki/Laon"},
-      {name:"Reims", city:"Reims", country:"France", lat:49.2583, lon:4.0317, wiki:"https://fr.wikipedia.org/wiki/Reims"},
-      {name:"Chartres", city:"Chartres", country:"France", lat:48.4439, lon:1.4890, wiki:"https://fr.wikipedia.org/wiki/Chartres"},
-      {name:"Orléans", city:"Orléans", country:"France", lat:47.9030, lon:1.9093, wiki:"https://fr.wikipedia.org/wiki/Orl%C3%A9ans"},
-      {name:"Poitiers", city:"Poitiers", country:"France", lat:46.5802, lon:0.3404, wiki:"https://fr.wikipedia.org/wiki/Poitiers"},
-      {name:"Bordeaux", city:"Bordeaux", country:"France", lat:44.8378, lon:-0.5792, wiki:"https://fr.wikipedia.org/wiki/Bordeaux"},
-      {name:"Toulouse", city:"Toulouse", country:"France", lat:43.6047, lon:1.4442, wiki:"https://fr.wikipedia.org/wiki/Toulouse"},
-      {name:"Lyon", city:"Lyon", country:"France", lat:45.7640, lon:4.8357, wiki:"https://fr.wikipedia.org/wiki/Lyon"},
-      {name:"Marseille", city:"Marseille", country:"France", lat:43.2965, lon:5.3698, wiki:"https://fr.wikipedia.org/wiki/Marseille"},
-      {name:"Aigues-Mortes (repère)", city:"Aigues-Mortes", country:"France", lat:43.5667, lon:4.1900, wiki:"https://fr.wikipedia.org/wiki/Aigues-Mortes"},
-      {name:"Avignon (repère)", city:"Avignon", country:"France", lat:43.9493, lon:4.8055, wiki:"https://fr.wikipedia.org/wiki/Avignon"},
+      {name:"Commanderie d’Arville", city:"Couëtron-au-Perche", country:"France", lat:48.2876, lon:0.9790, wiki:"https://fr.wikipedia.org/wiki/Commanderie_templi%C3%A8re_d%27Arville"},
+      {name:"Commanderie de La Couvertoirade", city:"La Couvertoirade", country:"France", lat:43.9136, lon:3.3197, wiki:"https://fr.wikipedia.org/wiki/La_Couvertoirade"},
+      {name:"Commanderie de Sainte-Eulalie-de-Cernon", city:"Sainte-Eulalie-de-Cernon", country:"France", lat:44.0187, lon:3.1483, wiki:"https://fr.wikipedia.org/wiki/Sainte-Eulalie-de-Cernon"},
+      {name:"Commanderie de Coulommiers", city:"Coulommiers", country:"France", lat:48.8147, lon:3.0840, wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Coulommiers"},
+      {name:"Provins (pôle templier)", city:"Provins", country:"France", lat:48.5602, lon:3.2996, wiki:"https://fr.wikipedia.org/wiki/Provins"},
+      {name:"Troyes (Champagne)", city:"Troyes", country:"France", lat:48.2973, lon:4.0744, wiki:"https://fr.wikipedia.org/wiki/Troyes"},
+      {name:"Laon (pôle)", city:"Laon", country:"France", lat:49.5635, lon:3.6243, wiki:"https://fr.wikipedia.org/wiki/Laon"},
 
-      // SUISSE
-      {name:"Genève", city:"Genève", country:"Suisse", lat:46.2044, lon:6.1432, wiki:"https://fr.wikipedia.org/wiki/Gen%C3%A8ve"},
-      {name:"Lausanne", city:"Lausanne", country:"Suisse", lat:46.5197, lon:6.6323, wiki:"https://fr.wikipedia.org/wiki/Lausanne"},
-      {name:"Sion", city:"Sion", country:"Suisse", lat:46.2333, lon:7.3667, wiki:"https://fr.wikipedia.org/wiki/Sion_(Suisse)"},
-      {name:"Fribourg", city:"Fribourg", country:"Suisse", lat:46.8065, lon:7.1610, wiki:"https://fr.wikipedia.org/wiki/Fribourg_(Suisse)"},
-      {name:"Berne (repère)", city:"Berne", country:"Suisse", lat:46.9480, lon:7.4474, wiki:"https://fr.wikipedia.org/wiki/Berne"},
+      // ANGLETERRE
+      {name:"Temple Church", city:"Londres", country:"Angleterre", lat:51.5111, lon:-0.1103, wiki:"https://en.wikipedia.org/wiki/Temple_Church"},
 
-      // ANGLETERRE / ÉCOSSE / IRLANDE (repères)
-      {name:"Temple Church", city:"Londres", country:"Angleterre", lat:51.5129, lon:-0.1107, wiki:"https://en.wikipedia.org/wiki/Temple_Church"},
-      {name:"Londres (repère)", city:"Londres", country:"Angleterre", lat:51.5074, lon:-0.1278, wiki:"https://fr.wikipedia.org/wiki/Londres"},
-      {name:"Édimbourg (repère)", city:"Édimbourg", country:"Écosse", lat:55.9533, lon:-3.1883, wiki:"https://fr.wikipedia.org/wiki/%C3%89dimbourg"},
-      {name:"Dublin (repère)", city:"Dublin", country:"Irlande", lat:53.3498, lon:-6.2603, wiki:"https://fr.wikipedia.org/wiki/Dublin"},
-
-      // BELGIQUE / PAYS-BAS / ALLEMAGNE (repères)
-      {name:"Bruxelles (repère)", city:"Bruxelles", country:"Belgique", lat:50.8503, lon:4.3517, wiki:"https://fr.wikipedia.org/wiki/Bruxelles"},
-      {name:"Bruges (repère)", city:"Bruges", country:"Belgique", lat:51.2093, lon:3.2247, wiki:"https://fr.wikipedia.org/wiki/Bruges"},
-      {name:"Amsterdam (repère)", city:"Amsterdam", country:"Pays-Bas", lat:52.3676, lon:4.9041, wiki:"https://fr.wikipedia.org/wiki/Amsterdam"},
-      {name:"Cologne (repère)", city:"Cologne", country:"Allemagne", lat:50.9375, lon:6.9603, wiki:"https://fr.wikipedia.org/wiki/Cologne"},
-      {name:"Francfort (repère)", city:"Francfort", country:"Allemagne", lat:50.1109, lon:8.6821, wiki:"https://fr.wikipedia.org/wiki/Francfort-sur-le-Main"},
-
-      // PORTUGAL
+      // PORTUGAL / ESPAGNE
       {name:"Convento de Cristo", city:"Tomar", country:"Portugal", lat:39.6033, lon:-8.4187, wiki:"https://fr.wikipedia.org/wiki/Couvent_du_Christ"},
-      {name:"Château d'Almourol (repère)", city:"Vila Nova da Barquinha", country:"Portugal", lat:39.4628, lon:-8.3811, wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_d%27Almourol"},
-      {name:"Lisbonne (repère)", city:"Lisbonne", country:"Portugal", lat:38.7223, lon:-9.1393, wiki:"https://fr.wikipedia.org/wiki/Lisbonne"},
-      {name:"Porto (repère)", city:"Porto", country:"Portugal", lat:41.1579, lon:-8.6291, wiki:"https://fr.wikipedia.org/wiki/Porto"},
-
-      // ESPAGNE (plus)
-      {name:"Saragosse (repère Aragon)", city:"Saragosse", country:"Espagne", lat:41.6488, lon:-0.8891, wiki:"https://fr.wikipedia.org/wiki/Saragosse"},
-      {name:"Barcelone (repère Catalogne)", city:"Barcelone", country:"Espagne", lat:41.3851, lon:2.1734, wiki:"https://fr.wikipedia.org/wiki/Barcelone"},
-      {name:"Château de Monzón (repère)", city:"Monzón", country:"Espagne", lat:41.9112, lon:0.1904, wiki:"https://es.wikipedia.org/wiki/Castillo_de_Monz%C3%B3n"},
-      {name:"Miravet (repère)", city:"Miravet", country:"Espagne", lat:41.0405, lon:0.5973, wiki:"https://es.wikipedia.org/wiki/Castillo_de_Miravet"},
-      {name:"Valence (repère)", city:"Valence", country:"Espagne", lat:39.4699, lon:-0.3763, wiki:"https://fr.wikipedia.org/wiki/Valence_(Espagne)"},
-      {name:"Madrid (repère)", city:"Madrid", country:"Espagne", lat:40.4168, lon:-3.7038, wiki:"https://fr.wikipedia.org/wiki/Madrid"},
+      {name:"Castillo de Ponferrada (pôle templier)", city:"Ponferrada", country:"Espagne", lat:42.5463, lon:-6.5973, wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Ponferrada"},
+      {name:"Monzón (pôle templier)", city:"Monzón", country:"Espagne", lat:41.9109, lon:0.1941, wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Monz%C3%B3n"},
 
       // ITALIE
-      {name:"Rome (repère)", city:"Rome", country:"Italie", lat:41.9028, lon:12.4964, wiki:"https://fr.wikipedia.org/wiki/Rome"},
-      {name:"Bari (Pouilles)", city:"Bari", country:"Italie", lat:41.1171, lon:16.8719, wiki:"https://fr.wikipedia.org/wiki/Bari"},
-      {name:"Naples (repère)", city:"Naples", country:"Italie", lat:40.8518, lon:14.2681, wiki:"https://fr.wikipedia.org/wiki/Naples"},
-      {name:"Messine (Sicile)", city:"Messine", country:"Italie", lat:38.1938, lon:15.5540, wiki:"https://fr.wikipedia.org/wiki/Messine"},
-      {name:"Venise (repère)", city:"Venise", country:"Italie", lat:45.4408, lon:12.3155, wiki:"https://fr.wikipedia.org/wiki/Venise"},
+      {name:"Bari (Pouilles, pôle)", city:"Bari", country:"Italie", lat:41.1171, lon:16.8719, wiki:"https://fr.wikipedia.org/wiki/Bari"},
 
-      // EUROPE CENTRALE / EST (repères)
-      {name:"Vienne (repère)", city:"Vienne", country:"Autriche", lat:48.2082, lon:16.3738, wiki:"https://fr.wikipedia.org/wiki/Vienne_(Autriche)"},
-      {name:"Prague (repère)", city:"Prague", country:"Tchéquie", lat:50.0755, lon:14.4378, wiki:"https://fr.wikipedia.org/wiki/Prague"},
-      {name:"Cracovie (repère)", city:"Cracovie", country:"Pologne", lat:50.0647, lon:19.9450, wiki:"https://fr.wikipedia.org/wiki/Cracovie"},
-      {name:"Budapest (repère)", city:"Budapest", country:"Hongrie", lat:47.4979, lon:19.0402, wiki:"https://fr.wikipedia.org/wiki/Budapest"},
+      // LEVANT
+      {name:"Saint-Jean-d’Acre", city:"Acre", country:"Israël/Palestine", lat:32.9236, lon:35.0710, wiki:"https://fr.wikipedia.org/wiki/Acre_(Isra%C3%ABl)"},
+      {name:"Jérusalem", city:"Jérusalem", country:"Israël/Palestine", lat:31.7780, lon:35.2350, wiki:"https://fr.wikipedia.org/wiki/J%C3%A9rusalem"},
+      {name:"Nicosie (pôle)", city:"Nicosie", country:"Chypre", lat:35.1856, lon:33.3823, wiki:"https://fr.wikipedia.org/wiki/Nicosie"},
+      {name:"Tripoli (pôle)", city:"Tripoli", country:"Liban", lat:34.4367, lon:35.8497, wiki:"https://fr.wikipedia.org/wiki/Tripoli_(Liban)"},
 
-      // ORIENT LATIN / LEVANT
-      {name:"Jérusalem", city:"Jérusalem", country:"Terre sainte", lat:31.7780, lon:35.2350, wiki:"https://fr.wikipedia.org/wiki/J%C3%A9rusalem"},
-      {name:"Saint-Jean-d’Acre (Acre)", city:"Acre", country:"Terre sainte", lat:32.9236, lon:35.0710, wiki:"https://fr.wikipedia.org/wiki/Acre_(Isra%C3%ABl)"},
-      {name:"Tripoli (repère)", city:"Tripoli", country:"Liban", lat:34.4367, lon:35.8497, wiki:"https://fr.wikipedia.org/wiki/Tripoli_(Liban)"},
-      {name:"Antioche (repère)", city:"Antioche", country:"Turquie", lat:36.2020, lon:36.1600, wiki:"https://fr.wikipedia.org/wiki/Antioche"},
-      {name:"Nicosie (Chypre)", city:"Nicosie", country:"Chypre", lat:35.1856, lon:33.3823, wiki:"https://fr.wikipedia.org/wiki/Nicosie"},
-      {name:"Famagouste (repère)", city:"Famagouste", country:"Chypre", lat:35.1264, lon:33.9503, wiki:"https://fr.wikipedia.org/wiki/Famagouste"},
-
-      // BONUS “monde” (repères généraux – tu peux en ajouter)
-      {name:"Istanbul (repère)", city:"Istanbul", country:"Turquie", lat:41.0082, lon:28.9784, wiki:"https://fr.wikipedia.org/wiki/Istanbul"},
-      {name:"Le Caire (repère)", city:"Le Caire", country:"Égypte", lat:30.0444, lon:31.2357, wiki:"https://fr.wikipedia.org/wiki/Le_Caire"}
+      // SUISSE (exemples de repères géo — tu peux en ajouter)
+      {name:"Genève (repère)", city:"Genève", country:"Suisse", lat:46.2044, lon:6.1432, wiki:"https://fr.wikipedia.org/wiki/Gen%C3%A8ve"},
+      {name:"Lausanne (repère)", city:"Lausanne", country:"Suisse", lat:46.5197, lon:6.6323, wiki:"https://fr.wikipedia.org/wiki/Lausanne"}
     ];
 
-    PINS.forEach(p => addPin(p, layerFixed));
+    fixedPins.forEach(p => addPin(p, layerFixed));
 
-    // Vue initiale sur les pins fixes
-    if(PINS.length > 1) map.fitBounds(layerFixed.getBounds().pad(0.20));
-    setTimeout(()=>map.invalidateSize(), 180);
-    setStatus("✅ " + PINS.length + " épingles fixes chargées. Bonus auto sur PC : " + (isDesktop ? "ON" : "OFF"));
+    // On cadre la carte sur les épingles fixes au départ (si dispo)
+    try{
+      if(layerFixed.getLayers().length){
+        map.fitBounds(layerFixed.getBounds().pad(0.25));
+      }
+    }catch(e){}
 
-    /* ====== BONUS AUTO (PC UNIQUEMENT) ======
-       - On essaye Wikidata en “petite dose”
-       - Si WDQS bloque, ça n’affecte pas la carte
-    */
-    if(!isDesktop) return;
-
+    // =========================
+    // ✅ BONUS AUTO (Wikidata) : petites doses quand on ZOOM
+    // - Si WDQS bloque : la carte continue (épingles fixes restent)
+    // =========================
     const loadedZones = new Set();
-    const MIN_ZOOM = 7;      // on évite de charger trop large
-    const LIMIT = 220;       // petite dose par zone
-    const DEBOUNCE = 450;
+
+    // réglages anti-limite WDQS
+    const MIN_ZOOM = 7;     // on n’attaque WDQS qu’à un zoom “proche”
+    const LIMIT    = 180;   // dose par zone (évite les gros paquets)
+    const DEBOUNCE = 650;   // évite spam requêtes
     let timer = null;
 
     function parsePoint(wkt){
@@ -1028,12 +996,16 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
     }
 
     function loadAuto(){
-      if(map.getZoom() < MIN_ZOOM) return;
+      if(map.getZoom() < MIN_ZOOM){
+        setStatus("✅ Épingles fixes : OK. Zoome davantage pour tenter le bonus Wikidata.");
+        return;
+      }
 
-      const b = map.getBounds();
+      const b  = map.getBounds();
       const sw = b.getSouthWest();
       const ne = b.getNorthEast();
 
+      // zone “arrondie” = cache (évite de recharger en boucle)
       const key = [
         map.getZoom(),
         sw.lat.toFixed(2), sw.lng.toFixed(2),
@@ -1042,7 +1014,7 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
       if(loadedZones.has(key)) return;
       loadedZones.add(key);
 
-      setStatus("⏳ Bonus PC : chargement auto (Wikidata)…");
+      setStatus("⏳ Chargement d’épingles (Wikidata)…");
 
       const sparql = `
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
@@ -1087,8 +1059,10 @@ LIMIT ${LIMIT}
           if(!r.ok) throw new Error("HTTP " + r.status);
           return r.json();
         })
-        .then(data => {
-          const rows = data?.results?.bindings || [];
+        .then(json => {
+          const rows = json?.results?.bindings || [];
+          let added = 0;
+
           rows.forEach(row => {
             const c = parsePoint(row.coord?.value);
             if(!c) return;
@@ -1096,34 +1070,39 @@ LIMIT ${LIMIT}
             const name = row.label?.value || "Lieu";
             const wiki = row.frwiki?.value || row.enwiki?.value || "";
 
-            addPin({
-              name: name,
-              city: "",
-              country: "",
-              lat: c.lat,
-              lon: c.lon,
-              wiki: wiki
-            }, layerAuto);
+            // petit filtre anti-doublon basique : on évite d’empiler 2x la même coord
+            // (pas parfait, mais utile)
+            const k = c.lat.toFixed(5) + "|" + c.lon.toFixed(5);
+            if(map.__seen && map.__seen.has(k)) return;
+            map.__seen = map.__seen || new Set();
+            map.__seen.add(k);
+
+            addPin({name, lat:c.lat, lon:c.lon, wiki}, layerAuto);
+            added++;
           });
 
-          const nFixed = layerFixed.getLayers().length;
-          const nAuto  = layerAuto.getLayers().length;
-          setStatus("✅ Épingles : fixes " + nFixed + " + auto PC " + nAuto + " (si dispo).");
+          setStatus("✅ Épingles fixes : OK. Bonus Wikidata : +" + added + " (zone actuelle).");
         })
-        .catch(() => {
-          // silencieux : ça ne casse rien
-          setStatus("⚠️ Bonus PC (Wikidata) indisponible pour le moment. Épingles fixes OK.");
+        .catch(err => {
+          console.log("WDQS:", err);
+          setStatus("⚠️ Chargement impossible (Wikidata). Réseau/limite WDQS. Les épingles fixes restent disponibles.");
         });
     }
 
     map.on("moveend", schedule);
     map.on("zoomend", schedule);
-    schedule();
+
+    // iOS/scroll: évite “carte vide”
+    setTimeout(() => map.invalidateSize(), 200);
+
+    // 1er message
+    setStatus("✅ Épingles fixes : OK. Zoome pour tenter le bonus Wikidata.");
   }
 
   if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 })();
 </script>
+
 </body>
 </html>
