@@ -772,163 +772,155 @@ de Saint -Jean, à propos du casal de Alme. (archive de l'ordre de Malte.)</p></
 Le Commandeur de la voûte est sous l'autorité du Commandeur de la Terre du 
 royaume de Jérusalem. Basé dans le port de Saint -Jean-d'Acre, il est chargé de 
 contrôler toutes les marchandises qui sont débarquées par les vaisseaux de mer.</p></div></details><details class="mini"><summary>Guillaume d'Ourenc</summary><div class="mini-body"><p><strong>Fonction : </strong>sous-maréchaux</p><p><strong>Dates : </strong>1292</p><p><strong>Auparavant : </strong>ensuite:</p></div></details></div></details></div>
-<h2>3 – Carte indicative et pôles de commanderies</h2>
-<div class="map-wrap" aria-label="Carte (OpenStreetMap) Europe et Levant">
-  <div id="commanderie-map" aria-label="Carte des commanderies (repères indicatifs)"></div>
-</div>
+<!-- =========================
+     CARTE UNIQUE (MONDE) + ÉPINGLES PROGRESSIVES
+     ========================= -->
+<h2>Carte des lieux templiers (repères évolutifs)</h2>
 
-<div class="silver-box">
-  <p>Exemples de pôles associés à la mémoire templière (sélection <strong>non exhaustive</strong>) :</p>
-  <div class="silver-sep"></div>
-  <ul>
-    <li><strong>France</strong> : Paris (Enclos du Temple), Provins, Laon, région de Champagne.</li>
-    <li><strong>Angleterre</strong> : Londres (Temple / Temple Church).</li>
-    <li><strong>Péninsule ibérique</strong> : Tomar (Portugal), Aragon / Catalogne.</li>
-    <li><strong>Italie du Sud</strong> : Pouilles (présences logistiques).</li>
-    <li><strong>Orient latin</strong> : Jérusalem, Acre (Saint-Jean-d’Acre), couloirs stratégiques.</li>
-  </ul>
-</div>
-
-<h2>4 – Carte des commanderies (épingles)</h2>
-<div class="map-wrap" aria-label="Carte des commanderies (épingles)">
-  <div id="commanderie-pins-map"></div>
+<div class="map-wrap" aria-label="Carte des lieux templiers">
+  <div id="templar-map" aria-label="Carte des lieux templiers"></div>
 </div>
 
 <div class="silver-box">
   <p>
-    Carte indicative (repères) : sites et pôles historiques associés aux commanderies templières.
-    <strong>Non exhaustive</strong>.
-  </p>
-  <div class="silver-sep"></div>
-  <p class="note">
-    Repère géographique global (et non un inventaire). Pour un travail complet, croiser chartes, cartulaires, archives et études régionales.
+    Carte indicative : les épingles apparaissent progressivement quand on zoome et quand on se déplace.
+    Clic sur une épingle = accès direct à Wikipédia (si disponible). <strong>Non exhaustive</strong>.
   </p>
 </div>
 
-<!-- Barre NOIRE (Accueil + Contact) -->
+<div class="silver-sep"></div>
+
+<!-- =========================
+     BARRE NOIRE (Accueil + Contact)
+     ========================= -->
 <nav class="nav-strip dark" aria-label="Navigation principale">
   <a class="nav-btn dark" href="index.html">Accueil</a>
   <a class="nav-btn dark" href="contact.html">Contact</a>
 </nav>
 
-<!-- Barre JAUNE (autres pages) -->
+<!-- =========================
+     BARRE JAUNE (autres pages)
+     ========================= -->
 <nav class="nav-strip gold" aria-label="Navigation secondaire">
   <a class="nav-btn gold" href="quinoussommes.html">Qui nous sommes</a>
   <a class="nav-btn gold" href="notre-mission.html">Notre mission</a>
   <a class="nav-btn gold" href="histoire.html">Notre histoire</a>
   <a class="nav-btn gold" href="vocation.html">Histoire du Temple</a>
   <a class="nav-btn gold" href="ordres-historiques.html">Ordres historiques</a>
+  <a class="nav-btn gold" href="commanderies.html">Commanderies</a>
+  <a class="nav-btn gold" href="faq.html">FAQ</a>
 </nav>
 
-<!-- ✅ Leaflet JS (à laisser juste avant </body>) -->
-<script crossorigin="" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<footer class="footer-min" aria-label="Pied de page">
+  <div class="line">
+    <span>© OSD9TDJ Association Loi 1901, Tous droits réservés</span>
+    <span class="sep">•</span>
+    <a href="cookies.html">cookies</a>
+    <span class="sep">•</span>
+    <a href="mentions.html">informations officielles</a>
+  </div>
+</footer>
+
+</div><!-- /.container -->
+</div><!-- /.viewport-scroll -->
+
+<!-- =========================
+     SCRIPTS (JUSTE AVANT </body>)
+     IMPORTANT :
+     - Leaflet CSS doit déjà être dans ton HEAD (tu l'as déjà)
+     - Leaflet JS ne doit être présent QU'UNE FOIS dans la page
+     ========================= -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""></script>
 
 <style>
-  /* ✅ Hauteurs STABLES : sinon Leaflet ne s’affiche pas */
-  #commanderie-map{ height: 360px; width: 100%; }
-  #commanderie-pins-map{ height: 520px; width: 100%; }
+  /* Hauteur stable (sinon carte invisible) */
+  #templar-map{ width:100%; height:520px; }
 
-  .pin-label{
-    background: rgba(0,0,0,0.68);
+  /* petit label propre (si jamais tu utilises les tooltips) */
+  .templar-label{
+    background: rgba(0,0,0,0.72);
     border: 1px solid rgba(214,167,40,0.55);
     border-radius: 10px;
-    padding: 2px 8px;
+    padding: 3px 8px;
     color: #f5f0e6;
-    font-family: "Lato", Arial, sans-serif;
     font-size: 12px;
-    line-height: 1.2;
     white-space: nowrap;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.35);
   }
-  .wiki-btn{
-    display:inline-block;
-    margin-top:8px;
-    padding:8px 10px;
-    border-radius:10px;
-    border:1px solid rgba(214,167,40,0.55);
-    background: rgba(214,167,40,0.18);
-    color:#fff;
-    text-decoration:none;
-    font-weight:800;
-    font-family:'Cinzel',serif;
-    letter-spacing:0.03em;
-  }
-  .wiki-btn:hover{ background: rgba(214,167,40,0.28); }
-  @media (max-width: 700px){
-    .pin-label{ font-size: 11px; padding: 2px 7px; }
-    #commanderie-pins-map{ height: 480px; }
+
+  @media (max-width:700px){
+    #templar-map{ height:480px; }
   }
 </style>
 
 <script>
 (function(){
+  if(!window.L) return;
+
+  const mapEl = document.getElementById('templar-map');
+  if(!mapEl) return;
+
+  const map = L.map('templar-map', {
+    zoomControl:true,
+    scrollWheelZoom:true,
+    dragging:true,
+    tap:true
+  }).setView([20, 0], 2); // 🌍 monde
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; OpenStreetMap'
+  }).addTo(map);
+
+  const layer = L.featureGroup().addTo(map);
+
+  // Réglages
+  const MIN_ZOOM = 3;      // commence à charger dès zoom 3
+  const LIMIT    = 600;    // densité par zone (monte à 800 si tu veux, mais ça peut ramer)
+  const DEBOUNCE = 450;
+
+  const loadedZones = new Set();
+  let timer = null;
+
   function esc(s){
-    return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    return String(s||"").replace(/[&<>"']/g,c=>(
+      {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]
+    ));
   }
   function parsePoint(wkt){
-    const m = /Point\\(([-\\d.]+)\\s+([-\\d.]+)\\)/.exec(wkt || "");
-    if(!m) return null;
-    return { lon: parseFloat(m[1]), lat: parseFloat(m[2]) };
+    const m = /Point\(([-\d.]+)\s+([-\d.]+)\)/.exec(wkt || "");
+    return m ? { lon:+m[1], lat:+m[2] } : null;
   }
 
-  function init(){
-    if(!window.L) return;
+  function scheduleLoad(){
+    clearTimeout(timer);
+    timer = setTimeout(loadData, DEBOUNCE);
+  }
 
-    // --- Carte 1 ---
-    const el1 = document.getElementById('commanderie-map');
-    if(el1){
-      const map1 = L.map('commanderie-map', { zoomControl:true, scrollWheelZoom:true }).setView([46.5, 4.0], 5);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 12, attribution: '&copy; OpenStreetMap' }).addTo(map1);
-      const zones = [
-        {name:'France — réseau dense', lat:46.6, lon:2.5},
-        {name:'Angleterre — Temple Church & réseau', lat:52.2, lon:-1.5},
-        {name:'Portugal — Tomar', lat:39.6033, lon:-8.4187},
-        {name:'Espagne — Aragon / Catalogne', lat:41.65, lon:-0.88},
-        {name:'Italie — routes & possessions', lat:41.90, lon:12.49},
-        {name:'Jérusalem', lat:31.7780, lon:35.2350},
-        {name:'Acre (Saint-Jean-d’Acre)', lat:32.9236, lon:35.0710},
-        {name:'Chypre — Nicosie', lat:35.1856, lon:33.3823}
-      ];
-      zones.forEach(p=>{
-        L.circleMarker([p.lat, p.lon], { radius:6, weight:1, fillOpacity:0.75 })
-          .addTo(map1)
-          .bindPopup('<strong>'+esc(p.name)+'</strong>');
-      });
-      setTimeout(()=>map1.invalidateSize(), 50);
-    }
+  function loadData(){
+    if(map.getZoom() < MIN_ZOOM) return;
 
-    // --- Carte 2 (pins dynamiques) ---
-    const el2 = document.getElementById('commanderie-pins-map');
-    if(!el2) return;
+    const b = map.getBounds();
+    const sw = b.getSouthWest();
+    const ne = b.getNorthEast();
 
-    const map2 = L.map('commanderie-pins-map', { scrollWheelZoom:false, tap:true }).setView([46.5, 4.0], 5);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap' }).addTo(map2);
+    // cache zones (évite requêtes en boucle)
+    const key = [
+      map.getZoom(),
+      sw.lat.toFixed(2), sw.lng.toFixed(2),
+      ne.lat.toFixed(2), ne.lng.toFixed(2)
+    ].join("|");
+    if(loadedZones.has(key)) return;
+    loadedZones.add(key);
 
-    const layer = L.featureGroup().addTo(map2);
-
-    const MIN_ZOOM_TO_LOAD = 6;
-    const LIMIT_PER_VIEW = 450;
-    const DEBOUNCE_MS = 450;
-    const fetched = new Set();
-    let timer = null;
-
-    function updateLabels(){
-      const show = map2.getZoom() >= 7;
-      layer.eachLayer(m=>{
-        const t = m.getTooltip && m.getTooltip();
-        const el = t && t.getElement && t.getElement();
-        if(el) el.style.display = show ? "" : "none";
-      });
-    }
-
-    function buildSparql(sw, ne){
-      return `
+    const sparql = `
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX wikibase: <http://wikiba.se/ontology#>
 PREFIX bd: <http://www.bigdata.com/rdf#>
 PREFIX schema: <http://schema.org/>
 
-SELECT ?item ?itemLabel ?coord ?adminLabel ?countryLabel ?frwiki ?enwiki WHERE {
+SELECT ?item ?itemLabel ?coord ?frwiki ?enwiki WHERE {
   SERVICE wikibase:box {
     ?item wdt:P625 ?coord .
     bd:serviceParam wikibase:cornerWest "Point(${sw.lng} ${sw.lat})"^^geo:wktLiteral .
@@ -942,88 +934,66 @@ SELECT ?item ?itemLabel ?coord ?adminLabel ?countryLabel ?frwiki ?enwiki WHERE {
     CONTAINS(LCASE(STR(?itemLabel)), "templier")
   )
 
-  OPTIONAL { ?item wdt:P131 ?admin . }
-  OPTIONAL { ?item wdt:P17  ?country . }
-
   OPTIONAL {
-    ?fr schema:about ?item ; schema:isPartOf <https://fr.wikipedia.org/> ; schema:name ?frTitle .
+    ?fr schema:about ?item ;
+        schema:isPartOf <https://fr.wikipedia.org/> ;
+        schema:name ?frTitle .
     BIND(CONCAT("https://fr.wikipedia.org/wiki/", ENCODE_FOR_URI(?frTitle)) AS ?frwiki)
   }
   OPTIONAL {
-    ?en schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> ; schema:name ?enTitle .
+    ?en schema:about ?item ;
+        schema:isPartOf <https://en.wikipedia.org/> ;
+        schema:name ?enTitle .
     BIND(CONCAT("https://en.wikipedia.org/wiki/", ENCODE_FOR_URI(?enTitle)) AS ?enwiki)
   }
 
   SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". }
 }
-LIMIT ${LIMIT_PER_VIEW}
-      `.trim();
-    }
+LIMIT ${LIMIT}
+    `.trim();
 
-    function addPin(row){
-      const coord = parsePoint(row.coord?.value);
-      if(!coord) return;
+    const url = "https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(sparql);
 
-      const name = row.itemLabel?.value || "Lieu";
-      const admin = row.adminLabel?.value || "";
-      const country = row.countryLabel?.value || "";
-      const subtitle = admin || country || "";
-      const wiki = row.frwiki?.value || row.enwiki?.value || "";
+    fetch(url, { headers: { "Accept":"application/sparql-results+json" } })
+      .then(r => r.json())
+      .then(data => {
+        const rows = (data && data.results && data.results.bindings) ? data.results.bindings : [];
+        rows.forEach(row => {
+          const c = parsePoint(row.coord && row.coord.value);
+          if(!c) return;
 
-      const popup =
-        `<strong>${esc(name)}</strong>` +
-        (subtitle ? `<br><span style="opacity:.85">${esc(subtitle)}</span>` : "") +
-        (wiki ? `<br><a class="wiki-btn" href="${esc(wiki)}" target="_blank" rel="noopener">Voir sur Wikipédia</a>`
-              : `<br><span style="opacity:.75">Pas d’article Wikipédia trouvé</span>`);
+          const name = row.itemLabel ? row.itemLabel.value : "Lieu";
+          const wiki = (row.frwiki && row.frwiki.value) || (row.enwiki && row.enwiki.value) || "";
 
-      const m = L.marker([coord.lat, coord.lon]).addTo(layer);
-      m.bindPopup(popup);
-      m.bindTooltip(
-        subtitle ? `${name} — ${subtitle}` : name,
-        { permanent:true, direction:"top", offset:[0,-10], className:"pin-label" }
-      );
+          const m = L.circleMarker([c.lat, c.lon], {
+            radius: 6,
+            weight: 1,
+            color: "rgba(0,0,0,0.55)",
+            fillColor: "rgba(214,167,40,0.95)",
+            fillOpacity: 0.90
+          }).addTo(layer);
 
-      m.on("click", ()=>{ if(wiki) window.open(wiki, "_blank", "noopener"); else m.openPopup(); });
-    }
+          m.bindPopup(
+            "<strong>" + esc(name) + "</strong>" +
+            (wiki ? '<br><a class="wiki-btn" href="'+esc(wiki)+'" target="_blank" rel="noopener">Voir sur Wikipédia</a>' : "")
+          );
 
-    function load(){
-      if(map2.getZoom() < MIN_ZOOM_TO_LOAD){ updateLabels(); return; }
-
-      const b = map2.getBounds();
-      const sw = b.getSouthWest();
-      const ne = b.getNorthEast();
-
-      const key = [map2.getZoom(), sw.lat.toFixed(2), sw.lng.toFixed(2), ne.lat.toFixed(2), ne.lng.toFixed(2)].join("|");
-      if(fetched.has(key)) return;
-      fetched.add(key);
-
-      const sparql = buildSparql(sw, ne);
-      const url = "https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(sparql);
-
-      fetch(url, { headers: { "Accept":"application/sparql-results+json" } })
-        .then(r => r.json())
-        .then(json => {
-          (json?.results?.bindings || []).forEach(addPin);
-          updateLabels();
-        })
-        .catch(err => console.error("WDQS error:", err));
-    }
-
-    function schedule(){
-      clearTimeout(timer);
-      timer = setTimeout(load, DEBOUNCE_MS);
-    }
-
-    map2.on("moveend", schedule);
-    map2.on("zoomend", ()=>{ updateLabels(); schedule(); });
-
-    setTimeout(()=>{ map2.invalidateSize(); updateLabels(); schedule(); }, 80);
+          m.on("click", function(){
+            if(wiki) window.open(wiki, "_blank", "noopener");
+          });
+        });
+      })
+      .catch(err => console.log("WDQS:", err));
   }
 
-  // ✅ évite les bugs “carte vide” (Safari/scroll/fixed)
-  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
-  else init();
+  map.on("moveend", scheduleLoad);
+  map.on("zoomend", scheduleLoad);
 
+  // 1er lancement + fix affichage dans viewport scroll
+  scheduleLoad();
+  setTimeout(() => map.invalidateSize(), 140);
 })();
 </script>
-    
+
+</body>
+</html>
