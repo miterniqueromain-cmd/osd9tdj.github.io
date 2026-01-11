@@ -502,6 +502,72 @@
   border-bottom-color: rgba(214,167,40,0.95);
 }
 .sep{ opacity:0.55; }
+    /* =========================
+   DOUBLE BARRE COULISSANTE (noire + jaune)
+   ========================= */
+
+.nav-strip{
+  margin: 18px auto 0;
+  display: inline-flex;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-radius: 999px;
+  overflow-y: hidden;
+  border: 1px solid rgba(214,167,40,0.55);
+  background: rgba(0,0,0,0.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.nav-strip::-webkit-scrollbar{ display:none; }
+
+/* Base bouton */
+.nav-btn{
+  flex: 0 0 auto;
+  padding: 10px 18px;
+  text-decoration: none !important;
+  font-size: 0.93rem;
+  font-weight: 700;
+  font-family: 'Cinzel', serif;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-btn:visited{ text-decoration:none !important; }
+
+/* Séparateurs entre boutons */
+.nav-btn + .nav-btn{
+  border-left: 1px solid rgba(214,167,40,0.35);
+}
+
+/* Barre NOIRE (Accueil/Contact) */
+.nav-strip.dark{ background: rgba(0,0,0,0.18); }
+.nav-btn.dark{
+  color: var(--clair) !important;
+  background: rgba(0,0,0,0.42);
+}
+.nav-btn.dark:hover{ background: rgba(214,167,40,0.20); color:#fff !important; }
+
+/* Barre JAUNE (liens secondaires) */
+.nav-strip.gold{
+  border-color: rgba(214,167,40,0.65);
+  background: rgba(214,167,40,0.12);
+}
+.nav-btn.gold{
+  color: #1a0f05 !important;
+  background: rgba(214,167,40,0.82);
+}
+.nav-btn.gold:visited{ color:#1a0f05 !important; }
+.nav-btn.gold:hover{
+  background: rgba(214,167,40,0.95);
+  transform: translateY(-1px);
+}
+
+/* Mobile: un peu plus compact */
+@media (max-width:600px){
+  .nav-btn{ padding: 10px 14px; font-size: 0.90rem; }
+}
   </style>
 
   <!-- JSON-LD -->
@@ -733,13 +799,22 @@ LETTRE CCLXXXVIII. SON ONCLE ANDRÉ, CHEVALIER
 DU TEMPLE</p>
 </p></div></details>
 <!-- Boutons bas (coulissant) -->
-<nav class="tabs" aria-label="Navigation rapide">
-  <a class="tab" href="index.html">Accueil</a>
-  <a class="tab" href="contact.html">Contact</a>
-  <a class="tab" href="quinoussommes.html">Qui nous sommes</a>
-  <a class="tab" href="notre-mission.html">Notre mission</a>
-  <a class="tab" href="commanderies.html">Dignitaires de l’Ordre</a>
-  <a class="tab" href="ordres-historiques.html">Ordres historiques</a>
+
+      <!-- Barre NOIRE (seulement Accueil + Contact) -->
+<nav class="nav-strip dark" aria-label="Navigation principale">
+  <a class="nav-btn dark" href="index.html">Accueil</a>
+  <a class="nav-btn dark" href="contact.html">Contact</a>
+</nav>
+
+<!-- Barre JAUNE (les autres pages, coulissant aussi) -->
+<nav class="nav-strip gold" aria-label="Navigation secondaire">
+  <a class="nav-btn gold" href="quinoussommes.html">Qui nous sommes</a>
+  <a class="nav-btn gold" href="notre-mission.html">Notre mission</a>
+   <a class="nav-btn gold" href="histoire.html">Notre histoire</a>
+  <a class="nav-btn gold" href="vocation.html">Histoire du Temple</a>
+  <a class="nav-btn gold" href="commanderies.html">Dignitaires</a>
+  <a class="nav-btn gold" href="ordres-historiques.html">Ordres historiques</a>
+
 </nav>
 
 <footer class="footer-min" aria-label="Pied de page">
