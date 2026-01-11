@@ -499,6 +499,41 @@
 @media (max-width: 600px){
   .viewport-scroll{ padding-top: 64px; } /* laisse la place au menu fixe */
 }
+ /* ===== Fix iOS Safari: texte qui "saute" / mots manquants ===== */
+
+/* Isoler les couches (évite les conflits avec mix-blend-mode / pseudo-éléments) */
+.viewport-scroll{
+  isolation: isolate;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Stabiliser le rendu des textes */
+.section-card,
+.section-card p,
+.details-inner,
+.details-inner p{
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Sur mobile: on désactive le grain en mix-blend-mode (souvent le coupable) */
+@media (max-width: 900px){
+  body::after{
+    mix-blend-mode: normal;
+    opacity: 0.02; /* garde un léger grain sans casser le texte */
+  }
+}
+
+/* Bonus: si tu utilises backdrop-filter, ça peut aussi provoquer des artefacts */
+@media (max-width: 900px){
+  .top-menu summary{
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
   </style>
 
   <!-- JSON-LD -->
