@@ -820,6 +820,7 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
   <a class="nav-btn gold" href="ordres-historiques.html">Ordres historiques</a>
   
 </nav>
+    </div>
 
 <footer class="footer-min" aria-label="Pied de page">
   <div class="line">
@@ -832,208 +833,238 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
 </footer>
 
 </div>
-<script crossorigin="" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script crossorigin="" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+  .pin-label{
+    background: rgba(0,0,0,0.68);
+    border: 1px solid rgba(214,167,40,0.55);
+    border-radius: 10px;
+    padding: 2px 8px;
+    color: #f5f0e6;
+    font-family: "Lato", Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.2;
+    white-space: nowrap;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+  }
+  .wiki-btn{
+    display:inline-block;
+    margin-top:8px;
+    padding:8px 10px;
+    border-radius:10px;
+    border:1px solid rgba(214,167,40,0.55);
+    background: rgba(214,167,40,0.18);
+    color:#fff;
+    text-decoration:none;
+    font-weight:800;
+    font-family:'Cinzel',serif;
+    letter-spacing:0.03em;
+  }
+  .wiki-btn:hover{ background: rgba(214,167,40,0.28); }
+  @media (max-width: 700px){
+    .pin-label{ font-size: 11px; padding: 2px 7px; }
+  }
+</style>
+
 <script>
 (function(){
-  // --- helpers ---
-  function esc(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+  if(!window.L) return;
 
-  // =========================
-  // CARTE 1 : grandes zones (cercles)
-  // =========================
+  // ⚙️ Réglages
+  const MIN_ZOOM_TO_LOAD = 6;      // en dessous: on ne charge pas (trop large)
+  const LIMIT_PER_VIEW   = 450;    // "combien d'épingles max" par zone visible
+  const DEBOUNCE_MS      = 450;    // anti-spam requêtes pendant pan/zoom
+
+  function esc(s){
+    return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  }
+  function parsePoint(wkt){
+    const m = /Point\(([-\d.]+)\s+([-\d.]+)\)/.exec(wkt || "");
+    if(!m) return null;
+    return { lon: parseFloat(m[1]), lat: parseFloat(m[2]) };
+  }
+
+  // --- Carte 1 (vue générale simple) ---
   const el1 = document.getElementById('commanderie-map');
-  if (el1 && window.L) {
-    el1.style.width = '100%';
-    el1.style.height = '360px';
-
-    const map1 = L.map('commanderie-map', {
-      zoomControl: true,
-      scrollWheelZoom: true,
-      dragging: true,
-      tap: true
-    }).setView([46.5, 5.5], 4);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 9,
-      attribution: '&copy; OpenStreetMap'
-    }).addTo(map1);
-
-    // Repères indicatifs (non exhaustifs)
-    const points = [
-      {name:'France — réseau très dense', lat:46.6, lon:2.5},
-      {name:'Angleterre — commanderies et Temple Church', lat:52.2, lon:-1.5},
-      {name:'Portugal — Tomar et réseau lusitanien', lat:39.6, lon:-8.4},
-      {name:'Espagne — Aragon / Catalogne / Castille', lat:41.6, lon:-0.9},
-      {name:'Italie — routes et possessions', lat:41.9, lon:12.5},
-      {name:'Saint-Jean-d’Acre (Acre)', lat:32.9236, lon:35.0710},
-      {name:'Jérusalem — royaume latin', lat:31.7780, lon:35.2350},
-      {name:'Chypre — Nicosie', lat:35.1856, lon:33.3823},
-      {name:'Antioche — région', lat:36.2020, lon:36.1600},
-      {name:'Tripoli — Levant', lat:34.4367, lon:35.8497},
-      {name:'Hongrie — axes d’Orient', lat:47.4979, lon:19.0402}
-    ];
-
-    points.forEach(p=>{
-      L.circleMarker([p.lat, p.lon], {
-        radius: 6,
-        weight: 1,
-        color: 'rgba(214,167,40,0.95)',
-        fillColor: 'rgba(214,167,40,0.70)',
-        fillOpacity: 0.75
-      }).addTo(map1).bindPopup(
-        '<strong>' + esc(p.name) + '</strong><br>' +
-        '<span style="opacity:.85">Repère géographique – indicatif</span>'
-      );
-    });
+  if (el1){
+    el1.style.width = "100%";
+    el1.style.height = "360px";
+    const map1 = L.map('commanderie-map', { zoomControl:true, scrollWheelZoom:true }).setView([46.5, 4.0], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 12, attribution: '&copy; OpenStreetMap' }).addTo(map1);
   }
 
-  // =========================
-  // CARTE 2 : épingles (couches par pays)
-  // =========================
+  // --- Carte 2 (épingles dynamiques + Wikipédia) ---
   const pinsEl = document.getElementById('commanderie-pins-map');
-  if (pinsEl && window.L) {
-    pinsEl.style.width = '100%';
-    pinsEl.style.height = '520px';
+  if(!pinsEl) return;
 
-    const map2 = L.map('commanderie-pins-map', {
-      scrollWheelZoom: false,
-      tap: true,
-      dragging: true
-    });
+  pinsEl.style.width  = "100%";
+  pinsEl.style.height = "520px";
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: '&copy; OpenStreetMap'
-    }).addTo(map2);
+  const map2 = L.map('commanderie-pins-map', { scrollWheelZoom:false, tap:true, dragging:true }).setView([46.5, 4.0], 5);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '&copy; OpenStreetMap' }).addTo(map2);
 
-    // Icône simple (dorée) pour mieux voir sur fond sombre
-    const goldIcon = L.divIcon({
-      className: "",
-      html: '<div style="width:14px;height:14px;border-radius:50%;background:rgba(214,167,40,0.95);border:2px solid rgba(0,0,0,0.55);box-shadow:0 2px 10px rgba(0,0,0,0.35)"></div>',
-      iconSize: [14,14],
-      iconAnchor: [7,7],
-      popupAnchor: [0,-10]
-    });
+  const goldIcon = L.divIcon({
+    className: "",
+    html: '<div style="width:14px;height:14px;border-radius:50%;background:rgba(214,167,40,0.95);border:2px solid rgba(0,0,0,0.55);box-shadow:0 2px 10px rgba(0,0,0,0.35)"></div>',
+    iconSize: [14,14],
+    iconAnchor: [7,7],
+    popupAnchor: [0,-10]
+  });
 
-    // --- Données : repères INDICATIFS (villes / sites templiers connus)
-    // ⚠️ Non exhaustif : ce sont des repères de localisation (centre ville / site).
-    const data = [
-      // ===== FRANCE =====
-      {layer:'France', name:'Paris — Enclos du Temple', lat:48.8647, lon:2.3586, tag:'Île-de-France'},
-      {layer:'France', name:'Provins', lat:48.5602, lon:3.2996, tag:'Champagne'},
-      {layer:'France', name:'Troyes (Champagne)', lat:48.2973, lon:4.0744, tag:'Champagne'},
-      {layer:'France', name:'Payns (près de Troyes)', lat:48.2916, lon:4.0330, tag:'Champagne (repère)'},
-      {layer:'France', name:'Laon', lat:49.5635, lon:3.6243, tag:'Hauts-de-France'},
-      {layer:'France', name:'Reims', lat:49.2583, lon:4.0317, tag:'Grand Est'},
-      {layer:'France', name:'Orléans', lat:47.9029, lon:1.9093, tag:'Centre-Val de Loire'},
-      {layer:'France', name:'Tours', lat:47.3941, lon:0.6848, tag:'Centre-Val de Loire'},
-      {layer:'France', name:'Poitiers', lat:46.5802, lon:0.3404, tag:'Nouvelle-Aquitaine'},
-      {layer:'France', name:'La Rochelle', lat:46.1603, lon:-1.1511, tag:'Nouvelle-Aquitaine'},
-      {layer:'France', name:'Bordeaux', lat:44.8378, lon:-0.5792, tag:'Nouvelle-Aquitaine'},
-      {layer:'France', name:'Toulouse', lat:43.6047, lon:1.4442, tag:'Occitanie'},
-      {layer:'France', name:'Carcassonne (repère)', lat:43.2130, lon:2.3491, tag:'Occitanie'},
-      {layer:'France', name:'Montpellier', lat:43.6108, lon:3.8767, tag:'Occitanie'},
-      {layer:'France', name:'Marseille', lat:43.2965, lon:5.3698, tag:'PACA'},
-      {layer:'France', name:'Avignon', lat:43.9493, lon:4.8055, tag:'PACA'},
-      {layer:'France', name:'Lyon', lat:45.7640, lon:4.8357, tag:'Auvergne-Rhône-Alpes'},
-      {layer:'France', name:'Dijon', lat:47.3220, lon:5.0415, tag:'Bourgogne'},
-      {layer:'France', name:'Strasbourg', lat:48.5734, lon:7.7521, tag:'Grand Est'},
-      {layer:'France', name:'Arville (repère)', lat:47.9719, lon:1.1787, tag:'Centre-Val de Loire (repère)'},
+  const layer = L.featureGroup().addTo(map2);
 
-      // ===== ANGLETERRE =====
-      {layer:'Angleterre', name:'Londres — Temple Church', lat:51.5129, lon:-0.1107, tag:'London'},
-      {layer:'Angleterre', name:'Bristol (repère)', lat:51.4545, lon:-2.5879, tag:'South West'},
-      {layer:'Angleterre', name:'York (repère)', lat:53.9590, lon:-1.0815, tag:'North Yorkshire'},
-      {layer:'Angleterre', name:'Canterbury (repère)', lat:51.2802, lon:1.0789, tag:'Kent'},
+  // Cache: évite de recharger 10x la même zone
+  // clé = bounds arrondis + zoom
+  const fetched = new Set();
 
-      // ===== ÉCOSSE / IRLANDE (repères) =====
-      {layer:'Écosse/Irlande', name:'Édimbourg (repère)', lat:55.9533, lon:-3.1883, tag:'Scotland'},
-      {layer:'Écosse/Irlande', name:'Dublin (repère)', lat:53.3498, lon:-6.2603, tag:'Ireland'},
-
-      // ===== PORTUGAL =====
-      {layer:'Portugal', name:'Tomar — Convento de Cristo', lat:39.6033, lon:-8.4187, tag:'Réseau portugais'},
-      {layer:'Portugal', name:'Lisbonne (repère)', lat:38.7223, lon:-9.1393, tag:'Lisboa'},
-      {layer:'Portugal', name:'Coimbra (repère)', lat:40.2033, lon:-8.4103, tag:'Centro'},
-      {layer:'Portugal', name:'Santarém (repère)', lat:39.2362, lon:-8.6850, tag:'Ribatejo'},
-
-      // ===== ESPAGNE =====
-      {layer:'Espagne', name:'Saragosse — Aragon', lat:41.6488, lon:-0.8891, tag:'Aragón'},
-      {layer:'Espagne', name:'Barcelone — Catalogne', lat:41.3851, lon:2.1734, tag:'Catalunya'},
-      {layer:'Espagne', name:'Lleida (repère)', lat:41.6176, lon:0.6200, tag:'Catalunya'},
-      {layer:'Espagne', name:'Valence (repère)', lat:39.4699, lon:-0.3763, tag:'Comunitat Valenciana'},
-      {layer:'Espagne', name:'Tolède (repère)', lat:39.8628, lon:-4.0273, tag:'Castilla-La Mancha'},
-      {layer:'Espagne', name:'Salamanque (repère)', lat:40.9701, lon:-5.6635, tag:'Castilla y León'},
-
-      // ===== ITALIE =====
-      {layer:'Italie', name:'Rome (repère)', lat:41.9028, lon:12.4964, tag:'Lazio'},
-      {layer:'Italie', name:'Bari — Pouilles', lat:41.1171, lon:16.8719, tag:'Puglia'},
-      {layer:'Italie', name:'Naples (repère)', lat:40.8518, lon:14.2681, tag:'Campania'},
-      {layer:'Italie', name:'Palerme (repère)', lat:38.1157, lon:13.3615, tag:'Sicilia'},
-      {layer:'Italie', name:'Venise (repère)', lat:45.4408, lon:12.3155, tag:'Veneto'},
-
-      // ===== ALLEMAGNE / EMPIRE (repères) =====
-      {layer:'Empire', name:'Mayence (repère)', lat:49.9929, lon:8.2473, tag:'Mainz'},
-      {layer:'Empire', name:'Cologne (repère)', lat:50.9375, lon:6.9603, tag:'Köln'},
-
-      // ===== SUISSE (repères) =====
-      {layer:'Suisse', name:'Genève (repère)', lat:46.2044, lon:6.1432, tag:'CH'},
-      {layer:'Suisse', name:'Lausanne (repère)', lat:46.5197, lon:6.6323, tag:'CH'},
-      {layer:'Suisse', name:'Fribourg (repère)', lat:46.8065, lon:7.1610, tag:'CH'},
-      {layer:'Suisse', name:'Sion (repère)', lat:46.2333, lon:7.3667, tag:'Valais (CH)'},
-      {layer:'Suisse', name:'Berne (repère)', lat:46.9480, lon:7.4474, tag:'CH'},
-      {layer:'Suisse', name:'Bâle (repère)', lat:47.5596, lon:7.5886, tag:'CH'},
-
-      // ===== BELGIQUE / PAYS-BAS (repères) =====
-      {layer:'Belgique/Pays-Bas', name:'Bruxelles (repère)', lat:50.8503, lon:4.3517, tag:'BE'},
-      {layer:'Belgique/Pays-Bas', name:'Bruges (repère)', lat:51.2093, lon:3.2247, tag:'BE'},
-      {layer:'Belgique/Pays-Bas', name:'Anvers (repère)', lat:51.2194, lon:4.4025, tag:'BE'},
-      {layer:'Belgique/Pays-Bas', name:'Amsterdam (repère)', lat:52.3676, lon:4.9041, tag:'NL'},
-
-      // ===== EUROPE CENTRALE (repères) =====
-      {layer:'Europe centrale', name:'Vienne (repère)', lat:48.2082, lon:16.3738, tag:'AT'},
-      {layer:'Europe centrale', name:'Prague (repère)', lat:50.0755, lon:14.4378, tag:'CZ'},
-      {layer:'Europe centrale', name:'Budapest (repère)', lat:47.4979, lon:19.0402, tag:'HU'},
-
-      // ===== ORIENT LATIN / LEVANT =====
-      {layer:'Orient latin', name:'Jérusalem (repère)', lat:31.7780, lon:35.2350, tag:'Royaume latin'},
-      {layer:'Orient latin', name:'Saint-Jean-d’Acre / Acre', lat:32.9236, lon:35.0710, tag:'Port majeur'},
-      {layer:'Orient latin', name:'Tyr (repère)', lat:33.2703, lon:35.2034, tag:'Liban'},
-      {layer:'Orient latin', name:'Tripoli (repère)', lat:34.4367, lon:35.8497, tag:'Liban'},
-      {layer:'Orient latin', name:'Antioche (région)', lat:36.2020, lon:36.1600, tag:'Turquie/Syrie (repère)'},
-      {layer:'Orient latin', name:'Tortose / Tartous (repère)', lat:34.8890, lon:35.8866, tag:'Syrie'},
-      {layer:'Orient latin', name:'Nicosie (Chypre)', lat:35.1856, lon:33.3823, tag:'Chypre'}
-    ];
-
-    // Couches
-    const layers = {};
-    const all = L.featureGroup().addTo(map2);
-
-    data.forEach(p=>{
-      if(!layers[p.layer]) layers[p.layer] = L.layerGroup();
-      const popup =
-        '<strong>' + esc(p.name) + '</strong>' +
-        (p.tag ? ('<br><span style="opacity:.85">' + esc(p.tag) + '</span>') : '') +
-        '<br><span style="opacity:.75">Repère indicatif (non exhaustif)</span>';
-
-      L.marker([p.lat, p.lon], {icon: goldIcon})
-        .bindPopup(popup)
-        .addTo(layers[p.layer])
-        .addTo(all);
-    });
-
-    // Ajoute toutes les couches par défaut (tu peux décocher via contrôle)
-    Object.values(layers).forEach(g => g.addTo(map2));
-
-    // Contrôle de couches (afficher/masquer par pays)
-    L.control.layers(null, layers, {collapsed: true}).addTo(map2);
-
-    // Cadre auto sur tous les points
-    if (all.getLayers().length) {
-      map2.fitBounds(all.getBounds().pad(0.20));
-    } else {
-      map2.setView([46.5, 5.5], 4);
-    }
+  // Petit compteur visible dans la console (pratique)
+  function countPins(){
+    return layer.getLayers().length;
   }
+
+  function buildSparqlForBounds(sw, ne){
+    // IMPORTANT: on charge seulement ce qui est DANS LA BOX visible
+    // (fonctionnement "box")  [oai_citation:1‡Wikibooks](https://en.wikibooks.org/wiki/SPARQL/SERVICE_-_around_and_box?utm_source=chatgpt.com)
+    // On essaye de cibler les items pertinents par label (pragmatique, car Wikidata est hétérogène).
+    // Tu peux améliorer ensuite en filtrant par "part of Knights Templar (Q41300)" si tes items sont bien renseignés.  [oai_citation:2‡Wikidata](https://www.wikidata.org/wiki/Q41300?utm_source=chatgpt.com)
+    return `
+SELECT ?item ?itemLabel ?coord ?adminLabel ?countryLabel ?frwiki ?enwiki WHERE {
+  SERVICE wikibase:box {
+    ?item wdt:P625 ?coord .
+    bd:serviceParam wikibase:cornerWest "Point(${sw.lng} ${sw.lat})"^^geo:wktLiteral .
+    bd:serviceParam wikibase:cornerEast "Point(${ne.lng} ${ne.lat})"^^geo:wktLiteral .
+  }
+
+  FILTER(
+    CONTAINS(LCASE(STR(?itemLabel)), "commanderie") ||
+    CONTAINS(LCASE(STR(?itemLabel)), "commandery") ||
+    CONTAINS(LCASE(STR(?itemLabel)), "templar") ||
+    CONTAINS(LCASE(STR(?itemLabel)), "templier")
+  )
+
+  OPTIONAL { ?item wdt:P131 ?admin . }
+  OPTIONAL { ?item wdt:P17  ?country . }
+
+  OPTIONAL {
+    ?fr schema:about ?item ;
+        schema:isPartOf <https://fr.wikipedia.org/> ;
+        schema:name ?frTitle .
+    BIND(CONCAT("https://fr.wikipedia.org/wiki/", ENCODE_FOR_URI(?frTitle)) AS ?frwiki)
+  }
+  OPTIONAL {
+    ?en schema:about ?item ;
+        schema:isPartOf <https://en.wikipedia.org/> ;
+        schema:name ?enTitle .
+    BIND(CONCAT("https://en.wikipedia.org/wiki/", ENCODE_FOR_URI(?enTitle)) AS ?enwiki)
+  }
+
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". }
+}
+LIMIT ${LIMIT_PER_VIEW}
+    `.trim();
+  }
+
+  function addPin(row){
+    const coord = parsePoint(row.coord?.value);
+    if(!coord) return;
+
+    const name = row.itemLabel?.value || "Lieu";
+    const admin = row.adminLabel?.value || "";
+    const country = row.countryLabel?.value || "";
+    const subtitle = admin || country || "";
+
+    const wiki = row.frwiki?.value || row.enwiki?.value || "";
+
+    const popup =
+      `<strong>${esc(name)}</strong>` +
+      (subtitle ? `<br><span style="opacity:.85">${esc(subtitle)}</span>` : "") +
+      (wiki
+        ? `<br><a class="wiki-btn" href="${esc(wiki)}" target="_blank" rel="noopener">Voir sur Wikipédia</a>`
+        : `<br><span style="opacity:.75">Pas d’article Wikipédia trouvé</span>`);
+
+    const m = L.marker([coord.lat, coord.lon], {icon: goldIcon}).addTo(layer);
+
+    m.bindPopup(popup);
+
+    // Label permanent (visible à partir d’un certain zoom plus bas)
+    m.bindTooltip(
+      subtitle ? `${name} — ${subtitle}` : name,
+      { permanent:true, direction:"top", offset:[0,-10], className:"pin-label" }
+    );
+
+    // Clic = Wikipédia si dispo, sinon popup
+    m.on("click", function(){
+      if(wiki) window.open(wiki, "_blank", "noopener");
+      else m.openPopup();
+    });
+  }
+
+  // Afficher/masquer les labels selon zoom (évite l’amas sur mobile)
+  function updateLabels(){
+    const z = map2.getZoom();
+    const show = (z >= 7);
+    layer.eachLayer(m=>{
+      const t = m.getTooltip && m.getTooltip();
+      const el = t && t.getElement && t.getElement();
+      if(!el) return;
+      el.style.display = show ? "" : "none";
+    });
+  }
+  map2.on("zoomend", updateLabels);
+
+  // Debounce (anti rafale)
+  let timer = null;
+  function scheduleLoad(){
+    clearTimeout(timer);
+    timer = setTimeout(loadForView, DEBOUNCE_MS);
+  }
+
+  function loadForView(){
+    const z = map2.getZoom();
+    if(z < MIN_ZOOM_TO_LOAD){
+      // trop large : on ne charge rien, on évite les requêtes énormes
+      updateLabels();
+      return;
+    }
+
+    const b = map2.getBounds();
+    const sw = b.getSouthWest();
+    const ne = b.getNorthEast();
+
+    // cache key arrondi (évite reload constant)
+    const key = [
+      z,
+      sw.lat.toFixed(2), sw.lng.toFixed(2),
+      ne.lat.toFixed(2), ne.lng.toFixed(2)
+    ].join("|");
+    if(fetched.has(key)) return;
+    fetched.add(key);
+
+    const sparql = buildSparqlForBounds(sw, ne);
+    const url = "https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(sparql);
+
+    fetch(url, { headers: { "Accept":"application/sparql-results+json" } })
+      .then(r => r.json())
+      .then(json => {
+        const rows = json?.results?.bindings || [];
+        rows.forEach(addPin);
+        updateLabels();
+        // (optionnel) console log
+        console.log("Pins:", countPins(), "Dernière zone:", key);
+      })
+      .catch(err => {
+        console.error("Erreur WDQS:", err);
+      });
+  }
+
+  // Charger quand on bouge / zoom
+  map2.on("moveend", scheduleLoad);
+  map2.on("zoomend", scheduleLoad);
+
+  // 1er chargement
+  scheduleLoad();
+
 })();
 </script>
   
