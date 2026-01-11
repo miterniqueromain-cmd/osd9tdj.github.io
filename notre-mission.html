@@ -30,7 +30,7 @@
 <!-- Twitter -->
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Notre mission | O.S.D.9.T.D.J." name="twitter:title"/>
-<meta content="Servir, protéger, étudier et transmettre : la mission publique de l’O.S.D.9.T.D.J." name="twitter:description"/>
+<meta content="Servir, protéger, étudier et transmettre : la mission publique de l’O.S.D.9.T.D.J. (association loi 1901)." name="twitter:description"/>
 <meta content="https://osd9tdj.org/mission.PNG" name="twitter:image"/>
 
 <!-- WATERMARK INVISIBLE (renforcé) -->
@@ -517,53 +517,80 @@
   .notice a:visited{ color: var(--clair); }
 
   /* =========================================================
-     PATCH CHIRURGICAL : Α / Ω dans le dropdown "initiation"
-     (rien d'autre ne change)
+     PATCH CHIRURGICAL : Α / Ω sur le cadre intérieur (OR MÉTAL)
+     - position auto parfaite sur PC / tablette / mobile
+     - apparaît seulement quand "Initiation" est ouvert
      ========================================================= */
 
-  details.accordion.initiation .accordion-body{
-    position: relative;
-  }
-
-  /* wrapper sticky : reste “accroché” pendant le scroll */
+  /* conteneur sticky : top calculé par JS, sinon fallback */
   details.accordion.initiation .ao-sigils{
     position: sticky;
-    top: 10px;
-    z-index: 6;            /* au-dessus du texte et de l'image */
-    height: 0;             /* n'ajoute pas d'espace */
-    pointer-events: none;  /* ne gêne pas le scroll/clic */
+    top: var(--ao-top, 120px);
+    z-index: 6;
+    height: 0;
+    pointer-events: none;
   }
 
-  /* sigils positionnés sur les bords (proches de la bordure dorée) */
-  details.accordion.initiation .ao{
+  /* spans */
+  details.accordion.initiation .ao-sigils .ao{
     position: absolute;
-    top: 0;
+    top: -12px;
+
     font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: 34px;
-    color: var(--or);
+    font-weight: 800;
+    font-size: 36px;
     line-height: 1;
-    opacity: 0;                 /* caché par défaut */
-    transform: translateY(-2px);
+
+    /* OR MÉTAL (pas jaune plat) */
+    color: transparent;
+    background: linear-gradient(
+      180deg,
+      #fff7d2 0%,
+      #ffe7a3 12%,
+      #f6d77b 26%,
+      #d6a728 50%,
+      #f2cf63 68%,
+      #fff2bf 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    /* bordure chaude + relief */
+    -webkit-text-stroke: 0.7px rgba(58, 34, 6, 0.55);
     text-shadow:
-      0 0 10px rgba(214,167,40,0.35),
-      0 0 22px rgba(214,167,40,0.18);
+      0 0 10px rgba(214,167,40,0.34),
+      0 0 22px rgba(214,167,40,0.22),
+      0 6px 18px rgba(0,0,0,0.35);
+
+    opacity: 0;
+    transform: translateY(0);
   }
 
-  /* placement gauche / droite */
-  details.accordion.initiation .ao.left{ left: -10px; }
-  details.accordion.initiation .ao.right{ right: -10px; }
+  /* gauche/droite sur le cadre intérieur + léger débordement */
+  details.accordion.initiation .ao-sigils .ao.left{
+    left: -22px;
+  }
+  details.accordion.initiation .ao-sigils .ao.right{
+    right: -22px;
+  }
 
-  /* visible seulement quand le details est ouvert */
-  details.accordion.initiation[open] .ao{
+  /* visible uniquement quand open */
+  details.accordion.initiation[open] .ao-sigils .ao{
     opacity: 1;
   }
 
-  /* mobile : un peu plus petit + mieux centré */
+  /* tablette */
+  @media (max-width:1024px){
+    details.accordion.initiation .ao-sigils .ao{ font-size: 32px; top: -10px; }
+    details.accordion.initiation .ao-sigils .ao.left{ left: -18px; }
+    details.accordion.initiation .ao-sigils .ao.right{ right: -18px; }
+  }
+
+  /* mobile */
   @media (max-width:600px){
-    details.accordion.initiation .ao{ font-size: 28px; }
-    details.accordion.initiation .ao.left{ left: -8px; }
-    details.accordion.initiation .ao.right{ right: -8px; }
+    details.accordion.initiation .ao-sigils .ao{ font-size: 28px; top: -9px; }
+    details.accordion.initiation .ao-sigils .ao.left{ left: -16px; }
+    details.accordion.initiation .ao-sigils .ao.right{ right: -16px; }
   }
 </style>
 
@@ -679,22 +706,22 @@
       </div>
     </details>
 
-    <!-- ✅ PATCH : ajout de la classe "initiation" (rien d'autre) -->
+    <!-- ✅ PATCH : uniquement ajout "initiation" -->
     <details class="accordion initiation" aria-label="Démarche initiatique">
       <summary>Une démarche initiatique interne, maîtrisée et encadrée</summary>
       <div class="accordion-body">
-
-        <!-- ✅ PATCH : Α / Ω visibles quand le dropdown est ouvert -->
-        <div class="ao-sigils" aria-hidden="true">
-          <span class="ao left">Α</span>
-          <span class="ao right">Ω</span>
-        </div>
-
         <p>
           La démarche de l’O.S.D.9.T.D.J. <strong>prend racine dans une tradition initiatique structurée</strong>, héritée des ordres chevaleresques
           et des écoles de pensée médiévales. Cette dimension initiatique constitue un <strong>cadre interne</strong>, destiné à former les membres,
           à assurer la discipline, la cohérence morale et la continuité de l’esprit de l’Ordre.
         </p>
+
+        <!-- ✅ PATCH : entre les deux paragraphes -->
+        <div class="ao-sigils" aria-hidden="true">
+          <span class="ao left">Α</span>
+          <span class="ao right">Ω</span>
+        </div>
+
         <p>
           Cette initiation est <strong>fermée, volontaire et interne</strong>. Elle <strong>n’a pas vocation à être pratiquée, enseignée ou imposée au public</strong>.
           Ce qui est proposé au public relève exclusivement d’une <strong>approche culturelle, historique et pédagogique</strong>, sans engagement requis,
@@ -881,5 +908,69 @@
 
   </div>
 </div>
+
+<!-- =========================================================
+     PATCH CHIRURGICAL JS :
+     calcule la position parfaite du sticky (PC/tablette/mobile)
+     uniquement pour le details.initiation
+     ========================================================= -->
+<script>
+(function(){
+  function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+
+  function computeAOTop(detailsEl){
+    const scroller = document.querySelector('.viewport-scroll');
+    if(!scroller) return;
+
+    const sigils = detailsEl.querySelector('.ao-sigils');
+    if(!sigils) return;
+
+    // Position actuelle du bloc sigils par rapport au scroller
+    const scRect = scroller.getBoundingClientRect();
+    const siRect = sigils.getBoundingClientRect();
+
+    // Distance du bloc sigils depuis le haut du scroller (en pixels visibles)
+    // => c’est exactement là où tu le vois "entre les paragraphes"
+    let top = siRect.top - scRect.top;
+
+    // On limite pour éviter qu'il monte trop haut ou descende trop bas selon écrans
+    // (valeurs conservatrices, tu peux laisser tel quel)
+    top = clamp(top, 70, Math.max(90, scRect.height - 120));
+
+    detailsEl.style.setProperty('--ao-top', top + 'px');
+  }
+
+  function setup(){
+    const detailsEl = document.querySelector('details.accordion.initiation');
+    if(!detailsEl) return;
+
+    // quand on ouvre/ferme
+    detailsEl.addEventListener('toggle', function(){
+      if(detailsEl.open){
+        // attendre un tick pour que le layout se stabilise
+        requestAnimationFrame(function(){ computeAOTop(detailsEl); });
+        setTimeout(function(){ computeAOTop(detailsEl); }, 60);
+      }
+    });
+
+    // resize/orientation
+    window.addEventListener('resize', function(){
+      if(detailsEl.open) computeAOTop(detailsEl);
+    });
+
+    // si déjà ouvert (rare)
+    if(detailsEl.open){
+      requestAnimationFrame(function(){ computeAOTop(detailsEl); });
+    }
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', setup);
+  }else{
+    setup();
+  }
+})();
+</script>
+
 </body>
 </html>
