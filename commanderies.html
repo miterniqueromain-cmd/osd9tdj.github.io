@@ -838,7 +838,7 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
   /* Hauteur stable (sinon carte invisible) */
   #templar-map{ width:100%; height:520px; }
 
-  /* petit label propre (si jamais tu utilises les tooltips) */
+  /* Tooltip (si besoin plus tard) */
   .templar-label{
     background: rgba(0,0,0,0.72);
     border: 1px solid rgba(214,167,40,0.55);
@@ -848,6 +848,22 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
     font-size: 12px;
     white-space: nowrap;
   }
+
+  /* Bouton wiki dans le popup */
+  .wiki-btn{
+    display:inline-block;
+    margin-top:8px;
+    padding:8px 10px;
+    border-radius:10px;
+    border:1px solid rgba(214,167,40,0.55);
+    background: rgba(214,167,40,0.18);
+    color:#fff;
+    text-decoration:none;
+    font-weight:800;
+    font-family:'Cinzel',serif;
+    letter-spacing:0.03em;
+  }
+  .wiki-btn:hover{ background: rgba(214,167,40,0.28); }
 
   @media (max-width:700px){
     #templar-map{ height:480px; }
@@ -876,8 +892,8 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
   const layer = L.featureGroup().addTo(map);
 
   // Réglages
-  const MIN_ZOOM = 3;      // commence à charger dès zoom 3
-  const LIMIT    = 600;    // densité par zone (monte à 800 si tu veux, mais ça peut ramer)
+  const MIN_ZOOM = 3;      // charge à partir de zoom 3
+  const LIMIT    = 600;    // densité par zone
   const DEBOUNCE = 450;
 
   const loadedZones = new Set();
@@ -905,7 +921,6 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
     const sw = b.getSouthWest();
     const ne = b.getNorthEast();
 
-    // cache zones (évite requêtes en boucle)
     const key = [
       map.getZoom(),
       sw.lat.toFixed(2), sw.lng.toFixed(2),
@@ -914,24 +929,29 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
     if(loadedZones.has(key)) return;
     loadedZones.add(key);
 
+    // ✅ FIX : on récupère un vrai label (rdfs:label) AVANT de filtrer
     const sparql = `
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX wikibase: <http://wikiba.se/ontology#>
 PREFIX bd: <http://www.bigdata.com/rdf#>
 PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?item ?itemLabel ?coord ?frwiki ?enwiki WHERE {
+SELECT ?item ?label ?coord ?frwiki ?enwiki WHERE {
   SERVICE wikibase:box {
     ?item wdt:P625 ?coord .
     bd:serviceParam wikibase:cornerWest "Point(${sw.lng} ${sw.lat})"^^geo:wktLiteral .
     bd:serviceParam wikibase:cornerEast "Point(${ne.lng} ${ne.lat})"^^geo:wktLiteral .
   }
 
+  ?item rdfs:label ?label .
+  FILTER(LANG(?label) = "fr" || LANG(?label) = "en")
+
   FILTER(
-    CONTAINS(LCASE(STR(?itemLabel)), "commanderie") ||
-    CONTAINS(LCASE(STR(?itemLabel)), "commandery") ||
-    CONTAINS(LCASE(STR(?itemLabel)), "templar") ||
-    CONTAINS(LCASE(STR(?itemLabel)), "templier")
+    CONTAINS(LCASE(STR(?label)), "commanderie") ||
+    CONTAINS(LCASE(STR(?label)), "commandery") ||
+    CONTAINS(LCASE(STR(?label)), "templar") ||
+    CONTAINS(LCASE(STR(?label)), "templier")
   )
 
   OPTIONAL {
@@ -946,8 +966,6 @@ SELECT ?item ?itemLabel ?coord ?frwiki ?enwiki WHERE {
         schema:name ?enTitle .
     BIND(CONCAT("https://en.wikipedia.org/wiki/", ENCODE_FOR_URI(?enTitle)) AS ?enwiki)
   }
-
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "fr,en". }
 }
 LIMIT ${LIMIT}
     `.trim();
@@ -958,11 +976,13 @@ LIMIT ${LIMIT}
       .then(r => r.json())
       .then(data => {
         const rows = (data && data.results && data.results.bindings) ? data.results.bindings : [];
+        // console.log("WDQS rows:", rows.length, "zoom:", map.getZoom(), "key:", key);
+
         rows.forEach(row => {
           const c = parsePoint(row.coord && row.coord.value);
           if(!c) return;
 
-          const name = row.itemLabel ? row.itemLabel.value : "Lieu";
+          const name = row.label ? row.label.value : "Lieu";
           const wiki = (row.frwiki && row.frwiki.value) || (row.enwiki && row.enwiki.value) || "";
 
           const m = L.circleMarker([c.lat, c.lon], {
@@ -975,7 +995,7 @@ LIMIT ${LIMIT}
 
           m.bindPopup(
             "<strong>" + esc(name) + "</strong>" +
-            (wiki ? '<br><a class="wiki-btn" href="'+esc(wiki)+'" target="_blank" rel="noopener">Voir sur Wikipédia</a>' : "")
+            (wiki ? '<br><a class="wiki-btn" href="'+esc(wiki)+'" target="_blank" rel="noopener">Voir sur Wikipédia</a>' : '<br><span style="opacity:.75">Pas d’article Wikipédia trouvé</span>')
           );
 
           m.on("click", function(){
@@ -989,11 +1009,9 @@ LIMIT ${LIMIT}
   map.on("moveend", scheduleLoad);
   map.on("zoomend", scheduleLoad);
 
-  // 1er lancement + fix affichage dans viewport scroll
   scheduleLoad();
   setTimeout(() => map.invalidateSize(), 140);
 })();
 </script>
-
 </body>
 </html>
