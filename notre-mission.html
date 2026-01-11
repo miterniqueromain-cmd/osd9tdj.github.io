@@ -515,6 +515,56 @@
 
   .notice a{ color: var(--clair); text-decoration: underline; }
   .notice a:visited{ color: var(--clair); }
+
+  /* =========================================================
+     PATCH CHIRURGICAL : Α / Ω dans le dropdown "initiation"
+     (rien d'autre ne change)
+     ========================================================= */
+
+  details.accordion.initiation .accordion-body{
+    position: relative;
+  }
+
+  /* wrapper sticky : reste “accroché” pendant le scroll */
+  details.accordion.initiation .ao-sigils{
+    position: sticky;
+    top: 10px;
+    z-index: 6;            /* au-dessus du texte et de l'image */
+    height: 0;             /* n'ajoute pas d'espace */
+    pointer-events: none;  /* ne gêne pas le scroll/clic */
+  }
+
+  /* sigils positionnés sur les bords (proches de la bordure dorée) */
+  details.accordion.initiation .ao{
+    position: absolute;
+    top: 0;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 34px;
+    color: var(--or);
+    line-height: 1;
+    opacity: 0;                 /* caché par défaut */
+    transform: translateY(-2px);
+    text-shadow:
+      0 0 10px rgba(214,167,40,0.35),
+      0 0 22px rgba(214,167,40,0.18);
+  }
+
+  /* placement gauche / droite */
+  details.accordion.initiation .ao.left{ left: -10px; }
+  details.accordion.initiation .ao.right{ right: -10px; }
+
+  /* visible seulement quand le details est ouvert */
+  details.accordion.initiation[open] .ao{
+    opacity: 1;
+  }
+
+  /* mobile : un peu plus petit + mieux centré */
+  @media (max-width:600px){
+    details.accordion.initiation .ao{ font-size: 28px; }
+    details.accordion.initiation .ao.left{ left: -8px; }
+    details.accordion.initiation .ao.right{ right: -8px; }
+  }
 </style>
 
 <link href="icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
@@ -629,9 +679,17 @@
       </div>
     </details>
 
-    <details class="accordion" aria-label="Démarche initiatique">
+    <!-- ✅ PATCH : ajout de la classe "initiation" (rien d'autre) -->
+    <details class="accordion initiation" aria-label="Démarche initiatique">
       <summary>Une démarche initiatique interne, maîtrisée et encadrée</summary>
       <div class="accordion-body">
+
+        <!-- ✅ PATCH : Α / Ω visibles quand le dropdown est ouvert -->
+        <div class="ao-sigils" aria-hidden="true">
+          <span class="ao left">Α</span>
+          <span class="ao right">Ω</span>
+        </div>
+
         <p>
           La démarche de l’O.S.D.9.T.D.J. <strong>prend racine dans une tradition initiatique structurée</strong>, héritée des ordres chevaleresques
           et des écoles de pensée médiévales. Cette dimension initiatique constitue un <strong>cadre interne</strong>, destiné à former les membres,
