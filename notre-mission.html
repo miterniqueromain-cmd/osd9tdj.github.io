@@ -30,7 +30,7 @@
 <!-- Twitter -->
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Notre mission | O.S.D.9.T.D.J." name="twitter:title"/>
-<meta content="Servir, protéger, étudier et transmettre : la mission publique de l’O.S.D.9.T.D.J. (association loi 1901)." name="twitter:description"/>
+<meta content="Servir, protéger, étudier et transmettre : la mission publique de l’O.S.D.9.T.D.J." name="twitter:description"/>
 <meta content="https://osd9tdj.org/mission.PNG" name="twitter:image"/>
 
 <!-- WATERMARK INVISIBLE (renforcé) -->
@@ -518,13 +518,10 @@
 
   /* =========================================================
      PATCH CHIRURGICAL : Α / Ω ENTRE LES 2 PARAGRAPHES
-     - au niveau exact du “gap” entre paragraphes
-     - posés sur le cadre intérieur (gauche/droite)
-     - OR MÉTAL (beau, pas jaune plat)
+     - bien dans le cadre (plus de débordement hors écran)
+     - OR “marron doré / sali” (plus chaud, plus profond)
      ========================================================= */
-
   details.accordion.initiation .ao-inline{
-    /* on étend jusqu’au cadre intérieur (on “annule” le padding 22px de .accordion-body) */
     width: calc(100% + 44px);
     margin-left: -22px;
 
@@ -532,9 +529,11 @@
     justify-content:space-between;
     align-items:center;
 
-    /* espace vertical propre entre les paragraphes */
     margin-top: 14px;
     margin-bottom: 14px;
+
+    padding-left: 10px;
+    padding-right: 10px;
 
     pointer-events:none;
   }
@@ -545,48 +544,41 @@
     font-size: 38px;
     line-height:1;
 
-    /* OR MÉTAL (dégradé + relief) */
+    /* OR patiné / marron doré (pas jaune) */
     color: transparent;
     background: linear-gradient(
       180deg,
-      #fff7d2 0%,
-      #ffe7a3 14%,
-      #f6d77b 30%,
-      #d6a728 52%,
-      #f2cf63 70%,
-      #fff2bf 100%
+      #f6e3b0 0%,
+      #e9c27a 14%,
+      #c9932c 32%,
+      #8a5a17 52%,
+      #d2a23d 70%,
+      #f1ddaa 100%
     );
     -webkit-background-clip:text;
     background-clip:text;
 
-    -webkit-text-stroke: 0.7px rgba(58, 34, 6, 0.55);
+    -webkit-text-stroke: 0.9px rgba(40, 22, 6, 0.62);
 
     text-shadow:
-      0 0 10px rgba(214,167,40,0.32),
-      0 0 22px rgba(214,167,40,0.20),
-      0 6px 18px rgba(0,0,0,0.35);
+      0 0 10px rgba(150, 95, 20, 0.28),
+      0 0 20px rgba(214,167,40,0.18),
+      0 6px 18px rgba(0,0,0,0.40);
   }
 
-  /* léger débordement sur le cadre intérieur */
   details.accordion.initiation .ao-inline .ao.left{
-    transform: translateX(-16px);
+    transform: translateX(0);
   }
   details.accordion.initiation .ao-inline .ao.right{
-    transform: translateX(16px);
+    transform: translateX(0);
   }
 
-  /* tablette */
   @media (max-width:1024px){
     details.accordion.initiation .ao-inline .ao{ font-size: 34px; }
-    details.accordion.initiation .ao-inline .ao.left{ transform: translateX(-14px); }
-    details.accordion.initiation .ao-inline .ao.right{ transform: translateX(14px); }
   }
 
-  /* mobile */
   @media (max-width:600px){
     details.accordion.initiation .ao-inline .ao{ font-size: 30px; }
-    details.accordion.initiation .ao-inline .ao.left{ transform: translateX(-12px); }
-    details.accordion.initiation .ao-inline .ao.right{ transform: translateX(12px); }
   }
 </style>
 
@@ -702,7 +694,6 @@
       </div>
     </details>
 
-    <!-- ✅ PATCH : ajout uniquement "initiation" -->
     <details class="accordion initiation" aria-label="Démarche initiatique">
       <summary>Une démarche initiatique interne, maîtrisée et encadrée</summary>
       <div class="accordion-body">
@@ -712,7 +703,7 @@
           à assurer la discipline, la cohérence morale et la continuité de l’esprit de l’Ordre.
         </p>
 
-        <!-- ✅ PATCH : EXACTEMENT entre les 2 paragraphes -->
+        <!-- ✅ Α / Ω exactement entre les deux paragraphes -->
         <div class="ao-inline" aria-hidden="true">
           <span class="ao left">Α</span>
           <span class="ao right">Ω</span>
