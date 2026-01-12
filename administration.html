@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Administration – Accès réservé (Bureau) | OSD9TDJ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Interne : anti-indexation / anti-cache -->
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
+  <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
+  <meta name="bingbot" content="noindex,nofollow,noarchive,nosnippet,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
+
+  <!-- Sécurité -->
+  <meta name="referrer" content="no-referrer">
+
+  <!-- CSP : autorise Zoho en iframe + JS inline (modale) -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';
+    object-src 'none';
+    connect-src 'none';
+    img-src 'self' https: data:;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src https://fonts.gstatic.com;
+    script-src 'self' 'unsafe-inline';
+    frame-src https://workdrive.zohopublic.eu https://*.zohopublic.eu https://*.zoho.com https://*.zoho.eu;
+    upgrade-insecure-requests;
+  ">
+
+  <!-- Watermarks internes -->
+  <meta name="osd9tdj-signature" content="WTRMK-ADMIN-OMEGA-2026-OSD9TDJ-BUREAU-ACCESS-RESERVE" />
+  <meta name="osd9tdj-origin" content="osd9tdj.org / administration.html" />
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --or:#ffd700;
+      --clair:#fdf7e5;
+      --orSoft: rgba(255,215,0,0.45);
+      --orLine: rgba(255,215,0,0.28);
+      --darkA: rgba(0,0,0,0.62);
+      --darkB: rgba(0,0,0,0.92);
+    }
+    *{ box-sizing:border-box; }
+
+    html, body{
+      height:100%;
+      margin:0;
+      padding:0;
+      overflow:hidden;
+      font-family:'Lato', Arial, sans-serif;
+      color:#fff;
+      text-align:center;
+      min-height:100vh;
+    }
+
+    /* ✅ Fond admin (cadre bien sur mobile) */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background-image:url("fond-adm.JPG");
+      background-repeat:no-repeat;
+      background-position:center center;
+      background-size:cover;
+      background-attachment:fixed;
+      z-index:-2;
+    }
+    /* iOS/Android : fixed parfois “bizarre”, on passe en scroll */
+    @media (max-width: 900px){
+      body::before{ background-attachment:scroll; }
+    }
+
+    /* Cadre fixe */
+    .frame-fixed{
+      position:fixed;
+      inset:14px;
+      border-radius:22px;
+      border:2px solid rgba(255,215,0,0.55);
+      box-shadow:
+        0 0 0 1px rgba(253,247,229,0.16) inset,
+        0 0 38px rgba(0,0,0,0.35);
+      pointer-events:none;
+      z-index:40;
+    }
+
+    /* Scroll interne */
+    .viewport-scroll{
+      position:fixed;
+      inset:22px;
+      overflow-y:auto;
+      overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      z-index:1;
+    }
+
+    /* Menu 3 points */
+    .top-menu{
+      position:fixed;
+      top:26px;
+      right:26px;
+      z-index:60;
+      pointer-events:auto;
+    }
+    .top-menu details{ position:relative; }
+    .top-menu summary{
+      list-style:none;
+      cursor:pointer;
+      user-select:none;
+      width:46px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:999px;
+      border:1px solid rgba(255,215,0,0.55);
+      background:rgba(0,0,0,0.22);
+      backdrop-filter: blur(6px);
+      box-shadow:0 6px 16px rgba(0,0,0,0.35);
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-size:22px;
+      line-height:1;
+    }
+    .top-menu summary::-webkit-details-marker{ display:none; }
+
+    .menu-panel{
+      position:absolute;
+      right:0;
+      margin-top:10px;
+      width:290px;
+      max-width:calc(100vw - 60px);
+      border-radius:14px;
+      border:1px solid rgba(255,215,0,0.45);
+      background:rgba(0,0,0,0.80);
+      box-shadow:0 18px 40px rgba(0,0,0,0.55);
+      overflow:hidden;
+    }
+    .menu-panel a{
+      display:block;
+      padding:11px 12px;
+      text-decoration:none;
+      color:rgba(253,247,229,0.92);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size:0.92rem;
+      border-bottom:1px solid rgba(255,215,0,0.18);
+    }
+    .menu-panel a:hover{
+      background:rgba(255,215,0,0.10);
+      color:#fff;
+    }
+    .menu-panel a:last-child{ border-bottom:none; }
+
+    /* ✅ Voile noir plus noir */
+    .overlay{
+      min-height:100vh;
+      padding:30px 15px 28px;
+      box-sizing:border-box;
+      background: radial-gradient(circle at top,
+        rgba(0,0,0,0.70),
+        rgba(0,0,0,0.95));
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    /* ✅ Badge joli (pas jaune) */
+    .lock-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 18px;
+      border-radius:999px;
+      border:1px solid var(--orSoft);
+      background:rgba(0,0,0,0.55);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      color:var(--or);
+      margin:8px auto 10px;
+      box-shadow:0 0 18px rgba(0,0,0,0.65);
+    }
+
+    h1{
+      font-family:'Cinzel',serif;
+      font-size:1.9rem;
+      margin:6px 0 6px;
+      text-shadow:0 0 8px rgba(0,0,0,0.7);
+    }
+    .subtitle{
+      font-size:0.95rem;
+      opacity:0.95;
+      margin:0 0 12px;
+      max-width:980px;
+    }
+
+    /* Avertissement */
+    .warning{
+      width:100%;
+      max-width:980px;
+      margin:10px auto 14px;
+      padding:14px 14px;
+      border-radius:16px;
+      border:1px solid rgba(255,215,0,0.28);
+      background:rgba(0,0,0,0.62);
+      text-align:left;
+      box-shadow:0 0 22px rgba(0,0,0,0.65);
+    }
+    .warning strong{
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      letter-spacing:0.03em;
+    }
+    .warning p{
+      margin:8px 0 0;
+      font-size:0.92rem;
+      line-height:1.45;
+      opacity:0.92;
+    }
+
+    .btn-or{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 14px;
+      border-radius:999px;
+      background: linear-gradient(135deg, #ffd700, #e6c200);
+      color:#111;
+      text-decoration:none;
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size:0.86rem;
+      box-shadow:
+        0 0 0 1px rgba(255,215,0,0.75) inset,
+        0 6px 14px rgba(0,0,0,0.45);
+      margin:10px 0 10px;
+      border:0;
+      cursor:pointer;
+    }
+
+    /* Accordéons */
+    .accordion{
+      width:100%;
+      max-width:980px;
+      margin:12px auto 0;
+      background:rgba(0,0,0,0.60);
+      border:1px solid rgba(255,215,0,0.28);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 0 22px rgba(0,0,0,0.65);
+      text-align:left;
+    }
+    .accordion summary{
+      cursor:pointer;
+      list-style:none;
+      user-select:none;
+      padding:14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-weight:700;
+      letter-spacing:0.04em;
+      background:rgba(0,0,0,0.45);
+      border-bottom:1px solid rgba(255,215,0,0.14);
+    }
+    .accordion summary::-webkit-details-marker{ display:none; }
+    .acc-right{ color:rgba(255,215,0,0.85); font-size:1.1rem; }
+    .acc-body{ padding:14px; }
+
+    /* Sous-accordéons */
+    .subacc{
+      margin:10px 0 0;
+      border:1px solid rgba(255,215,0,0.18);
+      border-radius:16px;
+      overflow:hidden;
+      background:rgba(0,0,0,0.35);
+    }
+    .subacc summary{
+      padding:12px 12px;
+      font-size:0.95rem;
+      border-bottom:1px solid rgba(255,215,0,0.12);
+    }
+
+    /* Cartes */
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(1, minmax(0, 1fr));
+      gap:16px;
+      width:100%;
+      margin:0;
+    }
+    @media (min-width: 700px){
+      .cards{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+    }
+    @media (min-width: 1000px){
+      .cards{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
+    }
+    .card{
+      background:rgba(0,0,0,0.62);
+      border:1px solid rgba(255,215,0,0.35);
+      border-radius:18px;
+      padding:16px 14px;
+      box-shadow:0 0 18px rgba(0,0,0,0.55);
+    }
+    .card h3{
+      font-family:'Cinzel',serif;
+      font-size:1.0rem;
+      color:var(--or);
+      margin:0 0 8px;
+    }
+    .card p{
+      font-size:0.9rem;
+      opacity:0.92;
+      margin:0 0 12px;
+      line-height:1.45;
+    }
+    .card a{
+      display:inline-block;
+      padding:9px 14px;
+      border-radius:999px;
+      background:rgba(255,215,0,0.16);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      border:1px solid rgba(255,215,0,0.45);
+      font-family:'Cinzel',serif;
+      font-size:0.82rem;
+      max-width:100%;
+    }
+    .card a:hover{ background:rgba(255,215,0,0.28); }
+
+    /* Footer simple */
+    .footer{
+      margin-top: 18px;
+      padding-top: 15px;
+      font-size: 0.8rem;
+      opacity: 0.92;
+      line-height: 1.35rem;
+      width:100%;
+      max-width: 980px;
+      border-top: 1px solid rgba(255,215,0,0.20);
+    }
+    .footer .line{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      font-size:0.78rem;
+      color: rgba(253,247,229,0.88);
+    }
+    .footer a{
+      color: rgba(253,247,229,0.85) !important;
+      text-decoration:none !important;
+      border-bottom: 1px dotted rgba(255,215,0,0.55);
+      padding-bottom: 1px;
+      font-size:0.72rem;
+      text-transform: lowercase;
+    }
+
+    /* Modal Zoho */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.80);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+      padding:18px;
+    }
+    .modal.open{ display:flex; }
+    .modal-card{
+      width:min(1100px, 96vw);
+      height:min(760px, 88vh);
+      background:rgba(0,0,0,0.92);
+      border:1px solid rgba(255,215,0,0.55);
+      border-radius:18px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.75);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .modal-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 12px;
+      border-bottom:1px solid rgba(255,215,0,0.18);
+      background:rgba(0,0,0,0.65);
+    }
+    .modal-title{
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-weight:700;
+      font-size:0.95rem;
+      letter-spacing:0.04em;
+      text-align:left;
+    }
+    .modal-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .btn-mini{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,215,0,0.14);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      border:1px solid rgba(255,215,0,0.40);
+      font-family:'Cinzel',serif;
+      font-size:0.78rem;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .btn-mini:hover{ background:rgba(255,215,0,0.24); }
+    .modal-body{ flex:1 1 auto; }
+    .zoho-frame{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+      background:#000;
+    }
+    .modal-hint{
+      padding:10px 12px;
+      border-top:1px solid rgba(255,215,0,0.18);
+      font-size:0.82rem;
+      opacity:0.88;
+      line-height:1.35;
+      text-align:left;
+    }
+
+    @media (max-width: 480px){
+      .top-menu{ top:22px; right:22px; }
+      .menu-panel{ width:240px; }
+      .frame-fixed{ inset:12px; }
+      .viewport-scroll{ inset:20px; }
+      h1{ font-size:1.6rem; }
+    }
+  </style>
+
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+
+<body>
+  <div class="frame-fixed" aria-hidden="true"></div>
+
+  <div class="top-menu" aria-label="Menu administration">
+    <details>
+      <summary title="Menu">⋯</summary>
+      <div class="menu-panel" role="menu" aria-label="Navigation admin">
+        <a href="#bureau"> Bureau (privé)</a>
+        <a href="#membres"> Membres (gestion)</a>
+        <a href="documents-internes.html">← Page membres</a>
+        <a href="index.html">← Retour site public</a>
+      </div>
+    </details>
+  </div>
+
+  <div class="viewport-scroll">
+    <div class="overlay">
+
+      <div class="lock-badge">🔒 Administration – Accès strictement réservé</div>
+      <h1>Administration</h1>
+      <p class="subtitle">Page réservée au Bureau. Ne pas modifier sans autorisation.</p>
+
+      <div class="warning">
+        <strong>AVERTISSEMENT – ACCÈS RÉSERVÉ</strong>
+        <p>
+          Page destinée exclusivement aux membres autorisés du Bureau de l’association.
+          Toute tentative d’accès non autorisé, altération, extraction ou usage frauduleux est interdite.
+          Des mesures pourront être engagées en cas d’abus.
+        </p>
+      </div>
+
+      <a class="btn-or" href="index.html">← Retour au site public</a>
+
+      <!-- 1) BUREAU (PRIVÉ) -->
+      <details class="accordion" id="bureau" open>
+        <summary><span>Documents Bureau (privé)</span><span class="acc-right">▾</span></summary>
+        <div class="acc-body">
+
+          <details class="subacc">
+            <summary><span>Grand Maître</span><span class="acc-right">▾</span></summary>
+            <div class="acc-body">
+              <div class="cards">
+                <div class="card">
+                  <h3>Dossier Grand Maître</h3>
+                  <p>COLLE TON LIEN ZOHO ICI (droits Bureau).</p>
+                  <a href="https://COLLE-ICI-LIEN-ZOHO-GRAND-MAITRE">Accéder</a>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <details class="subacc">
+            <summary><span>Secrétariat</span><span class="acc-right">▾</span></summary>
+            <div class="acc-body">
+              <div class="cards">
+                <div class="card">
+                  <h3>Dossier Secrétariat</h3>
+                  <p>COLLE TON LIEN ZOHO ICI (droits Bureau).</p>
+                  <a href="https://COLLE-ICI-LIEN-ZOHO-SECRETARIAT">Accéder</a>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <details class="subacc">
+            <summary><span>Trésorerie</span><span class="acc-right">▾</span></summary>
+            <div class="acc-body">
+              <div class="cards">
+                <div class="card">
+                  <h3>Dossier Trésorerie</h3>
+                  <p>COLLE TON LIEN ZOHO ICI (droits Bureau).</p>
+                  <a href="https://COLLE-ICI-LIEN-ZOHO-TRESORERIE">Accéder</a>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <details class="subacc">
+            <summary><span>Archives (Bureau)</span><span class="acc-right">▾</span></summary>
+            <div class="acc-body">
+              <div class="cards">
+                <div class="card">
+                  <h3>Dossier Archives (Bureau)</h3>
+                  <p>COLLE TON LIEN ZOHO ICI (droits Bureau).</p>
+                  <a href="https://COLLE-ICI-LIEN-ZOHO-ARCHIVES-BUREAU">Accéder</a>
+                </div>
+              </div>
+            </div>
+          </details>
+
+        </div>
+      </details>
+
+      <!-- 2) MEMBRES (GESTION) : mêmes sections que documents-internes -->
+      <details class="accordion" id="membres">
+        <summary><span>Membres (gestion – liens avec droits dépôt/édition)</span><span class="acc-right">▾</span></summary>
+        <div class="acc-body">
+
+          <!-- Nouveaux adhérents -->
+          <details class="subacc" open>
+            <summary><span>Nouveaux adhérents (dépôt)</span><span class="acc-right">▾</span></summary>
+            <div class="acc-body">
+              <div class="cards">
+                <div class="card">
+                  <h3>Dossier “Nouveaux adhérents”</h3>
+                  <p>COLLE TON LIEN ZOHO ICI (droits dépôt).</p>
+                  <a href="https://COLLE-ICI-LIEN-ZOHO-NOUVEAUX-ADHERENTS">Accéder</a>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <!-- Organisation & administratif COMPLET -->
+          <details class="subacc" open>
+            <summary><span>Organisation & administratif (gestion)</span><span class="acc-right">▾</span></summary>
+            <div class="acc-body">
+              <div class="cards">
+                <div class="card">
+                  <h3>Statuts & règlements</h3>
+                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <a href="https://COLLE-ICI-STATUTS-GESTION">Accéder</a>
+                </div>
+                <div class="card">
+                  <h3>Procès-verbaux & comptes annuels</h3>
+                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <a href="https://COLLE-ICI-PV-COMPTES-GESTION">Accéder</a>
+                </div>
+                <div class="card">
+                  <h3>Documents Préfecture</h3>
+                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <a href="https://COLLE-ICI-PREFECTURE-GESTION">Accéder</a>
+                </div>
+                <div class="card">
+                  <h3>Convocations</h3>
+                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <a href="https://COLLE-ICI-CONVOCATIONS-GESTION">Accéder</a>
+                </div>
+                <div class="card">
+                  <h3>Organisation des événements</h3>
+                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <a href="https://COLLE-ICI-EVENEMENTS-GESTION">Accéder</a>
+                </div>
+                <div class="card">
+                  <h3>Planning annuel</h3>
+                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <a href="https://COLLE-ICI-PLANNING-ANNUEL-GESTION">Accéder</a>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <!-- Études -->
+          <details class="subacc">
+            <summary><span>Études (gestion)</span><span class="acc-right">▾</span></summary>
+            <div class="acc-body">
+              <div class="cards">
+                <div class="card">
+                  <h3>Documents d’étude</h3>
+                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <a href="https://COLLE-ICI-ETUDES-GESTION">Accéder</a>
+                </div>
+                <div class="card">
+                  <h3>Planches d’étude</h3>
+                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <a href="https://COLLE-ICI-PLANCHES-GESTION">Accéder</a>
+                </div>
+                <div class="card">
+                  <h3>Procès-verbaux (Études)</h3>
+                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <a href="https://COLLE-ICI-PV-ETUDES-GESTION">Accéder</a>
+                </div>
+                <div class="card">
+                  <h3>Travaux & documents</h3>
+                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <a href="https://COLLE-ICI-TRAVAUX-GESTION">Accéder</a>
+                </div>
+                <div class="card">
+                  <h3>Bibliothèque d’étude</h3>
+                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <a href="https://COLLE-ICI-BIBLIO-GESTION">Accéder</a>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <!-- Archives -->
+          <details class="subacc">
+            <summary><span>Archives (gestion)</span><span class="acc-right">▾</span></summary>
+            <div class="acc-body">
+              <div class="cards">
+                <div class="card">
+                  <h3>Archives – Doctrine interne</h3>
+                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <a href="https://COLLE-ICI-ARCHIVES-GESTION">Accéder</a>
+                </div>
+              </div>
+            </div>
+          </details>
+
+        </div>
+      </details>
+
+      <a class="btn-or" href="documents-internes.html">← Retour à la page membres</a>
+
+      <div class="footer">
+        <div class="line">
+          <span>© OSD9TDJ Association Loi 1901, Tous droits réservés</span>
+          <span>·</span>
+          <a href="mentions.html">mentions légales</a>
+          <span>·</span>
+          <a href="cookies.html">cookies</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODALE ZOHO -->
+  <div class="modal" id="zohoModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Documents Zoho">
+      <div class="modal-head">
+        <div class="modal-title" id="zohoModalTitle">Documents</div>
+        <div class="modal-actions">
+          <a class="btn-mini" id="zohoOpenExternal" href="#" target="_blank" rel="noopener noreferrer">Ouvrir dans Zoho</a>
+          <button class="btn-mini" type="button" id="zohoClose">Fermer</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <iframe class="zoho-frame" id="zohoFrame" title="Zoho" src="about:blank"></iframe>
+      </div>
+      <div class="modal-hint">
+        Si Zoho refuse l’intégration (sécurité), l’iframe peut rester vide : utilisez “Ouvrir dans Zoho”.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("zohoModal");
+    const frame = document.getElementById("zohoFrame");
+    const closeBtn = document.getElementById("zohoClose");
+    const openExternal = document.getElementById("zohoOpenExternal");
+    const modalTitle = document.getElementById("zohoModalTitle");
+
+    function openZohoUrl(url, title){
+      if (!url) return;
+      modalTitle.textContent = title || "Documents";
+      frame.src = url;
+      openExternal.href = url;
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden","false");
+    }
+
+    function closeZoho(){
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden","true");
+      frame.src = "about:blank";
+    }
+
+    closeBtn.addEventListener("click", closeZoho);
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeZoho(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeZoho(); });
+
+    // Tous les liens Zoho => ouverture en modale (y compris tes futurs liens)
+    document.querySelectorAll('a[href*="zohopublic.eu"], a[href*="zoho"]').forEach(a => {
+      a.addEventListener("click", (e) => {
+        const url = a.getAttribute("href");
+        if (!url) return;
+
+        // Si c’est un lien interne du site, on laisse normal
+        if (url.endsWith(".html") || url.startsWith("index") || url.startsWith("documents-internes")) return;
+
+        e.preventDefault();
+
+        const title =
+          a.closest(".card")?.querySelector("h3")?.textContent?.trim()
+          || a.textContent.trim()
+          || "Documents";
+
+        openZohoUrl(url, title);
+      });
+    });
+  </script>
+
+</body>
+</html>
