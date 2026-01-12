@@ -354,6 +354,53 @@
       /* ✅ Sur mobile, on donne un peu plus de hauteur à eve13 en contain */
       .img-no-crop{ height:320px; }
     }
+    /* ===== FIX ESTHÉTIQUE MOBILE (cadre du haut) ===== */
+@media (max-width: 600px){
+
+  /* On descend légèrement le cadre */
+  .frame-fixed{
+    inset: 18px 12px 12px 12px;
+  }
+
+  /* On donne plus d’espace au scroll */
+  .viewport-scroll{
+    inset: 28px 20px 20px 20px;
+  }
+
+  /* On respire autour du logo */
+  .logo-box{
+    margin-top: 14px;
+    padding: 16px;
+  }
+
+  /* On évite l’effet "collé" sous l’encoche iOS */
+  .gold-title{
+    margin-top: 12px;
+  }
+/* ===== FIX ESTHÉTIQUE MOBILE (cadre du haut) ===== */
+@media (max-width: 600px){
+
+  /* On descend légèrement le cadre */
+  .frame-fixed{
+    inset: 18px 12px 12px 12px;
+  }
+
+  /* On donne plus d’espace au scroll */
+  .viewport-scroll{
+    inset: 28px 20px 20px 20px;
+  }
+
+  /* On respire autour du logo */
+  .logo-box{
+    margin-top: 14px;
+    padding: 16px;
+  }
+
+  /* On évite l’effet "collé" sous l’encoche iOS */
+  .gold-title{
+    margin-top: 12px;
+  }
+}
   </style>
 
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -450,10 +497,7 @@
             <div class="g-item"><a href="eve13.JPG" target="_blank" rel="noopener"><img class="img-no-crop" src="eve13.JPG" alt="Photo de l'évènement" loading="lazy"></a></div>
           </div>
 
-          <p class="g-note">
-            Par choix de discrétion, certaines présences ne sont pas nommées.
-          </p>
-        </div>
+          
       </div>
 
       <div class="tabs-center">
