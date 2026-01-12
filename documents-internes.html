@@ -464,6 +464,39 @@
 </head>
 
 <body>
+  <script>
+(function(){
+
+  /* ================================
+     🔑 CODES D’ACCÈS PAGE MEMBRES
+     👉 REMPLACE LES 3 CODES CI-DESSOUS
+     ================================ */
+  const CODES_AUTORISES = [
+    "CODE-MEMBRES-1",
+    "CODE-MEMBRES-2",
+    "CODE-MEMBRES-3"
+  ];
+
+  alert(
+    "🔒 ACCÈS RÉSERVÉ AUX MEMBRES 🔒\n\n" +
+    "Cette page est strictement interne.\n" +
+    "Toute diffusion ou accès non autorisé est interdit."
+  );
+
+  const saisie = prompt(
+    "Veuillez saisir le code d’accès membres :"
+  );
+
+  const codeOK = saisie && CODES_AUTORISES.includes(saisie.trim());
+
+  if (!codeOK) {
+    document.body.innerHTML = "";
+    alert("⛔ Accès refusé.");
+    window.location.href = "index.html";
+  }
+
+})();
+</script>
 
   <span class="wmk">OSD9TDJ::DOCUMENTS-INTERNES::WTRMK-OMEGA-2026</span>
 
