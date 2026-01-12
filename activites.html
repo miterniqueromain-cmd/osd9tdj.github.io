@@ -1,414 +1,440 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <!-- SEO ESSENTIEL -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-          content="Découvrez les évènements culturels, fraternels et chevaleresques de l’Ordre Sacré des Neuf Templiers de Jérusalem.">
-    <meta name="keywords"
-          content="Templiers, OSD9TDJ, Ordre du Temple, chevalerie, fraternité, culture, évènements">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://osd9tdj.org/activites.html">
+  <!-- SEO ESSENTIEL -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+        content="Découvrez les évènements culturels, fraternels et chevaleresques de l’Ordre Sacré des Neuf Templiers de Jérusalem.">
+  <meta name="keywords"
+        content="Templiers, OSD9TDJ, Ordre du Temple, chevalerie, fraternité, culture, évènements">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://osd9tdj.org/activites.html">
 
-    <!-- OPEN GRAPH (Facebook / Instagram / WhatsApp) -->
-    <meta property="og:title" content="Évènements – Ordre Sacré des Neuf Templiers de Jérusalem">
-    <meta property="og:description"
-          content="Retrouvez les prochains évènements culturels et fraternels de l’O.S.D.9.T.D.J.">
-    <meta property="og:image" content="https://osd9tdj.org/logo-ix.PNG">
-    <meta property="og:url" content="https://osd9tdj.org/activites.html">
-    <meta property="og:type" content="website">
+  <!-- OPEN GRAPH -->
+  <meta property="og:title" content="Évènements – Ordre Sacré des Neuf Templiers de Jérusalem">
+  <meta property="og:description"
+        content="Retrouvez les prochains évènements culturels et fraternels de l’O.S.D.9.T.D.J.">
+  <meta property="og:image" content="https://osd9tdj.org/logo-ix.PNG">
+  <meta property="og:url" content="https://osd9tdj.org/activites.html">
+  <meta property="og:type" content="website">
 
-    <!-- TWITTER CARD -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Évènements – Ordre Sacré des Neuf Templiers de Jérusalem">
-    <meta name="twitter:description"
-          content="Consultez les évènements à venir de l’O.S.D.9.T.D.J.">
-    <meta name="twitter:image" content="https://osd9tdj.org/logo-ix.PNG">
+  <!-- TWITTER CARD -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Évènements – Ordre Sacré des Neuf Templiers de Jérusalem">
+  <meta name="twitter:description"
+        content="Consultez les évènements à venir de l’O.S.D.9.T.D.J.">
+  <meta name="twitter:image" content="https://osd9tdj.org/logo-ix.PNG">
 
-    <!-- MANIFEST (Google + Mobile) -->
-    <link rel="manifest" href="manifest.json">
+  <!-- MANIFEST -->
+  <link rel="manifest" href="manifest.json">
 
-    <!-- WATERMARK INVISIBLE META -->
-    <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-ACTIVITES">
+  <!-- WATERMARK INVISIBLE META -->
+  <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-ACTIVITES">
 
-    <title>Évènements – O.S.D.9.T.D.J.</title>
+  <title>Évènements – O.S.D.9.T.D.J.</title>
 
-    <!-- Polices Google -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <!-- Polices Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --or: #ffd700;
-            --or-fonce: #d6a728;
-            --clair: #fdf7e5;
-        }
+  <style>
+    :root{
+      --or:#ffd700;
+      --or-fonce:#d6a728;
+      --clair:#fdf7e5;
+    }
 
-        *{ box-sizing:border-box; }
+    *{box-sizing:border-box;}
 
-        html, body{
-            height:100%;
-            margin:0;
-            padding:0;
-            overflow:hidden;
-            font-family:'Lato', Arial, sans-serif;
-            color: var(--clair);
-            text-align:center;
-            background: radial-gradient(circle at top, #191919, #050506 70%);
-        }
+    html,body{
+      height:100%;
+      margin:0;
+      padding:0;
+      overflow:hidden;
+      font-family:'Lato', Arial, sans-serif;
+      color:var(--clair);
+      text-align:center;
+      background:radial-gradient(circle at top,#191919,#050506 70%);
+    }
 
-        .frame-fixed{
-            position: fixed;
-            inset: 14px;
-            border-radius: 22px;
-            border: 2px solid rgba(214,167,40,0.55);
-            box-shadow:
-              0 0 0 1px rgba(253,247,229,0.16) inset,
-              0 0 38px rgba(0,0,0,0.35);
-            pointer-events: none;
-            z-index: 40;
-        }
+    /* Cadre fixe */
+    .frame-fixed{
+      position:fixed;
+      inset:14px;
+      border-radius:22px;
+      border:2px solid rgba(214,167,40,0.55);
+      box-shadow:
+        0 0 0 1px rgba(253,247,229,0.16) inset,
+        0 0 38px rgba(0,0,0,0.35);
+      pointer-events:none;
+      z-index:40;
+    }
 
-        .viewport-scroll{
-            position: fixed;
-            inset: 22px;
-            overflow-y: auto;
-            overflow-x: hidden;
-            -webkit-overflow-scrolling: touch;
-            z-index: 1;
-        }
+    /* Zone scroll */
+    .viewport-scroll{
+      position:fixed;
+      inset:22px;
+      overflow-y:auto;
+      overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      z-index:1;
+    }
 
-        .top-menu{
-            position: fixed;
-            top: 26px;
-            right: 26px;
-            z-index: 60;
-            pointer-events: auto;
-        }
-        .top-menu details{ position: relative; }
-        .top-menu summary{
-            list-style: none;
-            cursor: pointer;
-            user-select: none;
-            width: 46px;
-            height: 34px;
-            display: grid;
-            place-items: center;
-            border-radius: 999px;
-            border: 1px solid rgba(214,167,40,0.55);
-            background: rgba(0,0,0,0.22);
-            backdrop-filter: blur(6px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-            font-family:'Cinzel',serif;
-            color: var(--or-fonce);
-            font-size: 22px;
-            line-height: 1;
-        }
-        .top-menu summary::-webkit-details-marker{ display:none; }
+    /* Menu 3 points */
+    .top-menu{
+      position:fixed;
+      top:26px;
+      right:26px;
+      z-index:60;
+      pointer-events:auto;
+    }
+    .top-menu details{position:relative;}
+    .top-menu summary{
+      list-style:none;
+      cursor:pointer;
+      user-select:none;
+      width:46px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:999px;
+      border:1px solid rgba(214,167,40,0.55);
+      background:rgba(0,0,0,0.22);
+      backdrop-filter:blur(6px);
+      box-shadow:0 6px 16px rgba(0,0,0,0.35);
+      font-family:'Cinzel',serif;
+      color:var(--or-fonce);
+      font-size:22px;
+      line-height:1;
+    }
+    .top-menu summary::-webkit-details-marker{display:none;}
 
-        .menu-panel{
-            position: absolute;
-            right: 0;
-            margin-top: 10px;
-            width: 260px;
-            max-width: calc(100vw - 60px);
-            border-radius: 14px;
-            border: 1px solid rgba(214,167,40,0.45);
-            background: rgba(0,0,0,0.70);
-            box-shadow: 0 18px 40px rgba(0,0,0,0.55);
-            overflow: hidden;
-        }
-        .menu-panel a{
-            display:block;
-            padding: 11px 12px;
-            text-decoration:none;
-            color: rgba(253,247,229,0.92);
-            font-family:'Cinzel',serif;
-            font-weight:700;
-            font-size: 0.92rem;
-            border-bottom: 1px solid rgba(214,167,40,0.18);
-            white-space: nowrap;
-        }
-        .menu-panel a:hover{
-            background: rgba(214,167,40,0.12);
-            color: #fff;
-        }
-        .menu-panel a:last-child{ border-bottom: none; }
+    .menu-panel{
+      position:absolute;
+      right:0;
+      margin-top:10px;
+      width:260px;
+      max-width:calc(100vw - 60px);
+      border-radius:14px;
+      border:1px solid rgba(214,167,40,0.45);
+      background:rgba(0,0,0,0.70);
+      box-shadow:0 18px 40px rgba(0,0,0,0.55);
+      overflow:hidden;
+    }
+    .menu-panel a{
+      display:block;
+      padding:11px 12px;
+      text-decoration:none;
+      color:rgba(253,247,229,0.92);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size:0.92rem;
+      border-bottom:1px solid rgba(214,167,40,0.18);
+      white-space:nowrap;
+    }
+    .menu-panel a:hover{
+      background:rgba(214,167,40,0.12);
+      color:#fff;
+    }
+    .menu-panel a:last-child{border-bottom:none;}
 
-        .container {
-            min-height: 100vh;
-            box-sizing: border-box;
-            padding: 35px 15px 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-        }
+    .container{
+      min-height:100vh;
+      padding:35px 15px 25px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+    }
 
-        .logo-box {
-            padding: 20px;
-            border-radius: 20px;
-            background: radial-gradient(circle at top,
-                                        rgba(255, 215, 0, 0.25),
-                                        rgba(0, 0, 0, 0.95));
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
-            border: 2px solid var(--or-fonce);
-            margin-bottom: 25px;
-        }
+    .logo-box{
+      padding:20px;
+      border-radius:20px;
+      background:radial-gradient(circle at top, rgba(255,215,0,0.25), rgba(0,0,0,0.95));
+      box-shadow:0 0 30px rgba(0,0,0,0.8);
+      border:2px solid var(--or-fonce);
+      margin-bottom:25px;
+    }
+    .logo-img{
+      max-width:90vw;
+      width:520px;
+      height:auto;
+      display:block;
+    }
 
-        .logo-img {
-            max-width: 90vw;
-            width: 520px;
-            height: auto;
-            display: block;
-        }
+    .gold-title{
+      font-family:'Cinzel', serif;
+      font-size:2rem;
+      margin:5px 0 15px;
+      background:linear-gradient(180deg,#ffe99a,#d6a728);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      text-shadow:0 0 12px rgba(0,0,0,0.8);
+      letter-spacing:2px;
+    }
 
-        .gold-title {
-            font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            margin: 5px 0 15px;
-            background: linear-gradient(180deg, #ffe99a, #d6a728);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 12px rgba(0,0,0,0.8);
-            letter-spacing: 2px;
-        }
+    p{
+      max-width:760px;
+      margin:6px auto;
+      font-size:1rem;
+      line-height:1.45;
+    }
 
-        p {
-            max-width: 700px;
-            margin: 6px auto;
-            font-size: 1rem;
-            line-height: 1.4;
-        }
+    .events-section{
+      margin-top:35px;
+      padding:20px;
+      width:100%;
+      max-width:900px;
+      border:1px solid rgba(214,167,40,0.4);
+      border-radius:12px;
+      background:rgba(0,0,0,0.45);
+      backdrop-filter:blur(4px);
+      min-height:150px;
+    }
 
-        .events-section {
-            margin-top: 35px;
-            padding: 20px;
-            width: 100%;
-            max-width: 800px;
-            border: 1px solid rgba(214, 167, 40, 0.4);
-            border-radius: 12px;
-            background: rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(4px);
-            min-height: 150px;
-        }
+    .events-title{
+      font-family:'Cinzel', serif;
+      font-size:1.3rem;
+      color:var(--or);
+      margin-bottom:10px;
+      letter-spacing:0.5px;
+    }
 
-        .events-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.3rem;
-            color: var(--or);
-            margin-bottom: 10px;
-        }
+    /* Bloc événement passé */
+    .event-card{
+      text-align:left;
+      margin-top:14px;
+      padding:18px;
+      border-radius:14px;
+      border:1px solid rgba(214,167,40,0.35);
+      background:linear-gradient(180deg, rgba(255,215,0,0.06), rgba(0,0,0,0.22) 40%, rgba(0,0,0,0.28));
+      box-shadow:0 14px 34px rgba(0,0,0,0.35);
+    }
+    .event-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:baseline;
+      justify-content:space-between;
+      margin-bottom:10px;
+    }
+    .event-name{
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size:1.12rem;
+      color:var(--or);
+      margin:0;
+    }
+    .event-date{
+      font-family:'Cinzel',serif;
+      font-size:0.96rem;
+      color:rgba(253,247,229,0.88);
+      margin:0;
+    }
 
-        /* ✅ NOUVEAU : bloc événement passé (même style, un peu plus riche) */
-        .event-card{
-            text-align:left;
-            margin-top: 14px;
-            padding: 16px;
-            border-radius: 12px;
-            border: 1px solid rgba(214,167,40,0.35);
-            background: rgba(0,0,0,0.35);
-        }
-        .event-meta{
-            display:flex;
-            flex-wrap:wrap;
-            gap:10px;
-            align-items: baseline;
-            margin-bottom: 8px;
-        }
-        .event-name{
-            font-family:'Cinzel',serif;
-            font-weight:700;
-            font-size: 1.08rem;
-            color: var(--or);
-            margin:0;
-        }
-        .event-date{
-            font-family:'Cinzel',serif;
-            font-size: 0.95rem;
-            color: rgba(253,247,229,0.88);
-            margin:0;
-        }
-        .event-desc{
-            margin: 10px 0 14px;
-            color: rgba(253,247,229,0.92);
-            font-size: 0.98rem;
-            line-height: 1.5;
-        }
+    .badge-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:10px 0 14px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(214,167,40,0.28);
+      background:rgba(0,0,0,0.28);
+      color:rgba(253,247,229,0.92);
+      font-size:0.90rem;
+      white-space:nowrap;
+    }
+    .badge b{
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      letter-spacing:0.4px;
+      font-size:0.88rem;
+    }
 
-        /* ✅ Affiche */
-        .poster-wrap{
-            margin: 12px 0 16px;
-            display:flex;
-            justify-content:center;
-        }
-        .poster{
-            width: 100%;
-            max-width: 520px;
-            height: auto;
-            border-radius: 12px;
-            border: 1px solid rgba(214,167,40,0.35);
-            box-shadow: 0 10px 26px rgba(0,0,0,0.45);
-            display:block;
-        }
-        .poster-link{
-            display:inline-block;
-            text-decoration:none;
-        }
+    .event-desc{
+      margin:10px 0 16px;
+      color:rgba(253,247,229,0.92);
+      font-size:1rem;
+      line-height:1.55;
+    }
+    .event-desc a{ color: var(--clair); text-decoration: underline; }
 
-        /* ✅ Galerie (toutes les photos) */
-        .gallery{
-            display:grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .g-item{
-            border-radius: 12px;
-            overflow:hidden;
-            border: 1px solid rgba(214,167,40,0.22);
-            background: rgba(0,0,0,0.25);
-        }
-        .g-item img{
-            width:100%;
-            height: 170px;
-            object-fit: cover;
-            display:block;
-            transform: scale(1.001);
-        }
-        .g-item img:hover{
-            filter: brightness(1.06);
-        }
-        .g-note{
-            margin-top: 10px;
-            font-size: 0.92rem;
-            color: rgba(253,247,229,0.86);
-        }
+    /* Affiche */
+    .poster-wrap{
+      margin:14px 0 14px;
+      display:flex;
+      justify-content:center;
+    }
+    .poster-link{
+      display:inline-block;
+      text-decoration:none;
+      outline:none;
+    }
+    .poster{
+      width:100%;
+      max-width:560px;
+      height:auto;
+      border-radius:14px;
+      border:1px solid rgba(214,167,40,0.35);
+      box-shadow:0 12px 30px rgba(0,0,0,0.45);
+      display:block;
+      transition:transform 0.18s ease, filter 0.18s ease;
+    }
+    .poster:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.05);
+    }
 
-        .back-link,
-        .shop-link,
-        .call-link {
-            text-decoration: none;
-            color: #fdf7e5;
-            font-size: 0.95rem;
-            padding: 8px 16px;
-            border-radius: 999px;
-            border: 1px solid var(--or-fonce);
-            background: transparent;
-            transition: background 0.2s ease, color 0.2s ease;
-            font-family: 'Cinzel', serif;
-        }
+    /* Galerie */
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:10px;
+      margin-top:10px;
+    }
+    .g-item{
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid rgba(214,167,40,0.22);
+      background:rgba(0,0,0,0.25);
+      position:relative;
+    }
+    .g-item a{
+      display:block;
+      text-decoration:none;
+      color:inherit;
+      outline:none;
+    }
+    .g-item img{
+      width:100%;
+      height:175px;
+      object-fit:cover;
+      object-position:center;
+      display:block;
+      transform:scale(1.001);
+      transition:transform 0.18s ease, filter 0.18s ease;
+    }
+    .g-item:hover img{
+      transform:scale(1.02);
+      filter:brightness(1.06);
+    }
 
-        .back-link:hover,
-        .shop-link:hover,
-        .call-link:hover {
-            background: var(--or-fonce);
-            color: #1a1205;
-        }
+    /* ✅ Fix ciblé : évite la tête coupée sur la dernière photo */
+    .img-focus-top{
+      object-position: top center;
+    }
 
-        .buttons-bottom {
-            margin-top: auto;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
+    .g-note{
+      margin-top:12px;
+      font-size:0.94rem;
+      color:rgba(253,247,229,0.86);
+      text-align:center;
+    }
 
-        .tabs{
-            margin:18px auto 8px;
-            display:inline-flex;
-            max-width:100%;
-            overflow-x:auto;
-            -webkit-overflow-scrolling:touch;
-            scrollbar-width:none;
-            border-radius:999px;
-            overflow-y:hidden;
-            border:1px solid rgba(214,167,40,0.55);
-            backdrop-filter: blur(6px);
-            background:rgba(0,0,0,0.18);
-        }
-        .tabs::-webkit-scrollbar{display:none;}
-        .tab{
-            flex:0 0 auto;
-            padding:10px 16px;
-            text-decoration:none;
-            color:var(--clair);
-            font-size:0.92rem;
-            font-weight:700;
-            font-family:'Cinzel',serif;
-            background:rgba(0,0,0,0.42);
-            transition:background 0.2s ease, color 0.2s ease;
-            white-space:nowrap;
-        }
-        .tab + .tab{
-            border-left:1px solid rgba(214,167,40,0.35);
-        }
-        .tab:hover{
-            background:rgba(214,167,40,0.20);
-            color:#fff;
-        }
+    /* Menu bas */
+    .tabs{
+      margin:18px auto 8px;
+      display:inline-flex;
+      max-width:100%;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      border-radius:999px;
+      overflow-y:hidden;
+      border:1px solid rgba(214,167,40,0.55);
+      backdrop-filter:blur(6px);
+      background:rgba(0,0,0,0.18);
+    }
+    .tabs::-webkit-scrollbar{display:none;}
+    .tab{
+      flex:0 0 auto;
+      padding:10px 16px;
+      text-decoration:none;
+      color:var(--clair);
+      font-size:0.92rem;
+      font-weight:700;
+      font-family:'Cinzel',serif;
+      background:rgba(0,0,0,0.42);
+      transition:background 0.2s ease, color 0.2s ease;
+      white-space:nowrap;
+    }
+    .tab + .tab{
+      border-left:1px solid rgba(214,167,40,0.35);
+    }
+    .tab:hover{
+      background:rgba(214,167,40,0.20);
+      color:#fff;
+    }
+    .tabs-center{text-align:center;}
 
-        .tabs-center{ text-align:center; }
+    .footer{
+      margin-top:12px;
+      font-size:0.85rem;
+      opacity:0.85;
+    }
+    .footer a{
+      color:var(--clair);
+      text-decoration:underline;
+      opacity:0.92;
+    }
+    .footer a:hover{opacity:1;}
 
-        .footer{
-            margin-top: 12px;
-            font-size: 0.85rem;
-            opacity: 0.85;
-        }
-        .footer a{
-            color: var(--clair);
-            text-decoration: underline;
-            opacity: 0.92;
-        }
-        .footer a:hover{ opacity: 1; }
+    @media (max-width: 900px){
+      .gallery{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .g-item img{ height: 190px; }
+    }
+    @media (max-width: 600px){
+      .top-menu{ top:22px; right:22px; }
+      .menu-panel{ width:240px; }
+      .frame-fixed{ inset:12px; }
+      .viewport-scroll{ inset:20px; }
+      .tab{ padding:9px 14px; font-size:0.86rem; }
+      .gallery{ grid-template-columns: 1fr; }
+      .g-item img{ height: 240px; }
+    }
+  </style>
 
-        @media (max-width: 900px){
-            .gallery{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .g-item img{ height: 180px; }
-        }
-        @media (max-width: 600px){
-            .top-menu{ top:22px; right:22px; }
-            .menu-panel{ width:240px; }
-            .frame-fixed{ inset:12px; }
-            .viewport-scroll{ inset:20px; }
-            .tab{padding:9px 14px;font-size:0.86rem;}
-            .gallery{ grid-template-columns: 1fr; }
-            .g-item img{ height: 220px; }
-        }
-    </style>
-
-    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
-    <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 
 <body>
 
-<div class="frame-fixed" aria-hidden="true"></div>
+  <!-- Cadre fixe doré -->
+  <div class="frame-fixed" aria-hidden="true"></div>
 
-<div class="top-menu" aria-label="Menu du site">
-  <details>
-    <summary title="Menu">⋯</summary>
-    <div class="menu-panel" role="menu" aria-label="Navigation">
-      <a href="index.html">Accueil</a>
-      <a href="quinoussommes.html">Qui nous sommes</a>
-      <a href="notre-mission.html">Notre mission</a>
-      <a href="histoire.html">Notre histoire</a>
-      <a href="faq.html">FAQ</a>
-      <a href="boutique.html">Boutique</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </details>
-</div>
+  <!-- Menu 3 points -->
+  <div class="top-menu" aria-label="Menu du site">
+    <details>
+      <summary title="Menu">⋯</summary>
+      <div class="menu-panel" role="menu" aria-label="Navigation">
+        <a href="index.html">Accueil</a>
+        <a href="quinoussommes.html">Qui nous sommes</a>
+        <a href="notre-mission.html">Notre mission</a>
+        <a href="histoire.html">Notre histoire</a>
+        <a href="faq.html">FAQ</a>
+        <a href="boutique.html">Boutique</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </details>
+  </div>
 
-<div class="viewport-scroll">
+  <!-- Tout scrolle dans le cadre -->
+  <div class="viewport-scroll">
 
-  <div class="container">
+    <div class="container">
       <div class="logo-box">
-          <img src="logo-ix.PNG"
-               alt="Emblème de l’Ordre Sacré des Neuf Templiers de Jérusalem"
-               class="logo-img">
+        <img src="logo-ix.PNG"
+             alt="Emblème de l’Ordre Sacré des Neuf Templiers de Jérusalem"
+             class="logo-img">
       </div>
 
       <h1 class="gold-title">ÉVÈNEMENTS</h1>
@@ -418,62 +444,83 @@
       <p><em>In Veritate et Honore.</em></p>
 
       <div class="events-section">
-          <div class="events-title">Évènements à venir</div>
-          <!-- espace vide pour les futurs évènements -->
+        <div class="events-title">Évènements à venir</div>
+        <!-- espace vide pour les futurs évènements -->
       </div>
 
-      <!-- ✅ NOUVEAU : Évènement passé -->
+      <!-- Évènement passé -->
       <div class="events-section" aria-label="Évènement passé">
-          <div class="events-title">Évènement passé</div>
+        <div class="events-title">Évènement passé</div>
 
-          <div class="event-card">
-              <div class="event-meta">
-                  <h2 class="event-name" style="margin:0;">Rencontre culturelle & soirée de gala</h2>
-                  <p class="event-date" style="margin:0;">— Samedi 23 novembre 2024 • Château d’Avully</p>
-              </div>
-
-              <p class="event-desc">
-                  Cet évènement a marqué un temps fort de notre démarche en France&nbsp;: une rencontre ouverte au public,
-                  suivie d’une soirée de gala, rassemblant des invités venus de différents horizons.
-                  La journée a proposé une vente et dédicaces d’ouvrages, ainsi qu’une dégustation et vente de vins.
-                  En soirée, un dîner, un bal et un spectacle ont prolongé ce moment fraternel.
-                  <br><br>
-                  Une cérémonie d’investiture a également été célébrée à cette occasion pour l’accueil des chevaliers français,
-                  dans un esprit de tradition, de transmission et de dignité.
-                  L’organisation s’est inscrite, à l’époque, dans un cadre de coopération associative et internationale,
-                  en continuité avec les éléments présentés sur la page <a href="histoire.html" style="color: var(--clair); text-decoration: underline;">Notre histoire</a>.
-              </p>
-
-              <!-- Affiche -->
-              <div class="poster-wrap">
-                  <a class="poster-link" href="eveaffiche.PNG" target="_blank" rel="noopener" aria-label="Ouvrir l'affiche de l'évènement">
-                      <img class="poster" src="eveaffiche.PNG" alt="Affiche de l'évènement – 23 novembre 2024 – Château d’Avully">
-                  </a>
-              </div>
-
-              <!-- Galerie (toutes les photos fournies) -->
-              <div class="gallery" aria-label="Galerie photos de l'évènement">
-                  <div class="g-item"><img src="eve1.JPG" alt="Photo de l'évènement – Salle et tables"></div>
-                  <div class="g-item"><img src="eve2.PNG" alt="Photo de l'évènement – Détails et ambiance"></div>
-                  <div class="g-item"><img src="eve3.PNG" alt="Photo de l'évènement – Cérémonie"></div>
-
-                  <div class="g-item"><img src="eve4.PNG" alt="Photo de l'évènement – Décor et lieu"></div>
-                  <div class="g-item"><img src="eve5.JPG" alt="Photo de l'évènement – Table dressée"></div>
-                  <div class="g-item"><img src="eve6.JPG" alt="Photo de l'évènement – Ambiance et participants"></div>
-
-                  <div class="g-item"><img src="eve7.JPG" alt="Photo de l'évènement – Procession"></div>
-                  <div class="g-item"><img src="eve8.PNG" alt="Photo de l'évènement – Salle et chandeliers"></div>
-                  <div class="g-item"><img src="eve11.PNG" alt="Photo de l'évènement – Cérémonie aux cierges"></div>
-
-                  <div class="g-item"><img src="eve13.JPG" alt="Photo de l'évènement – Cérémonie et lecture"></div>
-              </div>
-
-              <p class="g-note">
-                  Ces images témoignent d’un moment solennel et chaleureux, fidèle à l’esprit de nos engagements.
-              </p>
+        <div class="event-card">
+          <div class="event-meta">
+            <h2 class="event-name">Rencontre culturelle & soirée de gala</h2>
+            <p class="event-date">Samedi 23 novembre 2024 • Château d’Avully</p>
           </div>
+
+          <div class="badge-row" aria-label="Repères">
+            <span class="badge"><b>Temps fort</b> • lancement</span>
+            <span class="badge"><b>Tradition</b> • investiture</span>
+            <span class="badge"><b>Culture</b> • ouvrages</span>
+            <span class="badge"><b>Convivialité</b> • dégustation</span>
+            <span class="badge"><b>Présences</b> • invités de renom</span>
+          </div>
+
+          <p class="event-desc">
+            Cet évènement a marqué un temps fort de notre démarche en France&nbsp;: une rencontre ouverte au public,
+            suivie d’une soirée de gala, dans un cadre historique d’exception, rassemblant de nombreux invités,
+            dont plusieurs personnalités et invités de renom (non cités par choix de discrétion).
+            <br><br>
+            La journée a proposé une vente et dédicaces d’ouvrages, ainsi qu’une dégustation et vente de vins.
+            La soirée a été l’occasion de célébrer officiellement le lancement de notre association et le début de cette aventure,
+            dans un esprit de tradition, de transmission et de fraternité.
+            <br><br>
+            Une cérémonie d’investiture a également été célébrée à cette occasion pour l’accueil des chevaliers français.
+            Nous adressons enfin nos remerciements à toutes les personnes, soutiens et partenaires qui ont contribué à la réussite
+            de cette journée et de cette soirée.
+            L’organisation s’est inscrite, à l’époque, dans un cadre de coopération associative et internationale, en continuité
+            avec les éléments présentés sur la page <a href="histoire.html">Notre histoire</a>.
+          </p>
+
+          <!-- Affiche -->
+          <div class="poster-wrap">
+            <a class="poster-link" href="eveaffiche.PNG" target="_blank" rel="noopener" aria-label="Ouvrir l'affiche de l'évènement">
+              <img class="poster" src="eveaffiche.PNG"
+                   alt="Affiche de l'évènement – 23 novembre 2024 – Château d’Avully"
+                   loading="lazy">
+            </a>
+          </div>
+
+          <!-- Galerie (cliquable) -->
+          <div class="gallery" aria-label="Galerie photos de l'évènement">
+            <div class="g-item"><a href="eve1.JPG" target="_blank" rel="noopener"><img src="eve1.JPG" alt="Photo de l'évènement" loading="lazy"></a></div>
+            <div class="g-item"><a href="eve2.PNG" target="_blank" rel="noopener"><img src="eve2.PNG" alt="Photo de l'évènement" loading="lazy"></a></div>
+            <div class="g-item"><a href="eve3.PNG" target="_blank" rel="noopener"><img src="eve3.PNG" alt="Photo de l'évènement" loading="lazy"></a></div>
+
+            <div class="g-item"><a href="eve4.PNG" target="_blank" rel="noopener"><img src="eve4.PNG" alt="Photo de l'évènement" loading="lazy"></a></div>
+            <div class="g-item"><a href="eve5.JPG" target="_blank" rel="noopener"><img src="eve5.JPG" alt="Photo de l'évènement" loading="lazy"></a></div>
+            <div class="g-item"><a href="eve6.JPG" target="_blank" rel="noopener"><img src="eve6.JPG" alt="Photo de l'évènement" loading="lazy"></a></div>
+
+            <div class="g-item"><a href="eve7.JPG" target="_blank" rel="noopener"><img src="eve7.JPG" alt="Photo de l'évènement" loading="lazy"></a></div>
+            <div class="g-item"><a href="eve8.PNG" target="_blank" rel="noopener"><img src="eve8.PNG" alt="Photo de l'évènement" loading="lazy"></a></div>
+            <div class="g-item"><a href="eve11.PNG" target="_blank" rel="noopener"><img src="eve11.PNG" alt="Photo de l'évènement" loading="lazy"></a></div>
+
+            <!-- ✅ Dernière photo : focus en haut pour éviter tête coupée -->
+            <div class="g-item"><a href="eve13.JPG" target="_blank" rel="noopener"><img class="img-focus-top" src="eve13.JPG" alt="Photo de l'évènement" loading="lazy"></a></div>
+
+            <!-- Si tu as aussi cette photo dans ton repo, décommente la ligne :
+            <div class="g-item"><a href="3103BC0F-0333-4448-A2BF-73076C86E054.jpeg" target="_blank" rel="noopener"><img src="3103BC0F-0333-4448-A2BF-73076C86E054.jpeg" alt="Photo de l'évènement" loading="lazy"></a></div>
+            -->
+          </div>
+
+          <p class="g-note">
+            Par choix de discrétion, certaines présences ne sont pas nommées&nbsp;— mais cet album en conserve l’atmosphère,
+            la qualité du cadre et l’intensité du moment.
+          </p>
+        </div>
       </div>
 
+      <!-- Menu bas -->
       <div class="tabs-center">
         <nav class="tabs" aria-label="Navigation bas de page">
           <a class="tab" href="index.html">Accueil</a>
@@ -482,24 +529,25 @@
         </nav>
       </div>
 
+      <!-- Footer -->
       <div class="footer">
         © O.S.D.9.T.D.J. Association Loi 1901 – Tous droits réservés •
         <a href="mentions.html">mentions légales</a> •
         <a href="cookies.html">cookies</a>
       </div>
-  </div>
+    </div>
 
-  <div style="
+    <!-- WATERMARK INVISIBLE – PROTECTION ANTI-COPIE -->
+    <div style="
       position: fixed;
       bottom: -9999px;
       opacity: 0.0001;
       pointer-events: none;
       user-select: none;
-  ">
-  OSD9TDJ-©2024-IX-TEMPLIERS-PROTECTED-EVENTS-PAGE
+    ">
+      OSD9TDJ-©2024-IX-TEMPLIERS-PROTECTED-EVENTS-PAGE
+    </div>
+
   </div>
-
-</div>
-
 </body>
 </html>
