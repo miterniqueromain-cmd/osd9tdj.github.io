@@ -452,6 +452,49 @@
       .viewport-scroll{ inset:20px; }
       h1{ font-size:1.6rem; }
     }
+    /* =====================================================
+   PATCH RESPONSIVE – CENTRAGE DES BOUTONS (ALL DEVICES)
+   Mobile + Tablette + Accordéons
+   ===================================================== */
+
+/* Boutons principaux */
+.btn-or{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+
+/* Boutons dans les cartes (ACCÉDER) */
+.card a{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
+}
+
+/* Ajustements largeur par device */
+@media (max-width: 600px){
+  .btn-or{ max-width:320px; width:100%; }
+  .card a{ max-width:220px; width:100%; }
+}
+
+@media (min-width: 601px) and (max-width: 1024px){
+  /* TABLETTE */
+  .btn-or{ max-width:340px; }
+  .card a{ max-width:240px; }
+}
+
+/* Accordéons (administration) */
+.accordion .card a,
+.subacc .card a{
+  margin-left:auto;
+  margin-right:auto;
+}
   </style>
 
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -470,7 +513,9 @@
   const CODES_AUTORISES = [
     "kgb2025@",
     "CODE-ADMIN-2",
-    "CODE-ADMIN-3"
+    "panpan2025@",
+    "CODE-ADMIN-2",
+    "bambi2025@"
   ];
 
   alert(
