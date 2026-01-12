@@ -3,8 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Documents internes – Accès réservé aux membres | OSD9TDJ</title>
-
-  <!-- IMPORTANT: on autorise l’iframe Zoho + scripts inline pour la modale -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO (page interne) -->
@@ -31,13 +29,10 @@
 
   <!-- WATERMARKS (internes) -->
   <meta name="osd9tdj-signature" content="WTRMK-DOCS-INTERNES-OMEGA-2026-OSD9TDJ-ACCESS-RESERVE-MEMBRES" />
-  <meta name="osd9tdj-integrity" content="HASH-LOCK-FRAME-SCROLL-MENU-FOOTER-NNDNN-ETUDES" />
   <meta name="osd9tdj-origin" content="osd9tdj.org / documents-internes.html" />
-
-  <!-- Hardening -->
   <meta name="referrer" content="no-referrer">
 
-  <!-- CSP (corrigée pour permettre Zoho en iframe + script inline) -->
+  <!-- CSP : autorise Zoho en iframe + script inline (modale) -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
     base-uri 'self';
@@ -53,550 +48,498 @@
     upgrade-insecure-requests;
   ">
 
-  <!-- Données structurées (JSON-LD) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebPage",
-    "name":"Documents internes – Accès réservé aux membres",
-    "url":"https://osd9tdj.org/documents-internes.html",
-    "inLanguage":"fr",
-    "isPartOf":{
-      "@type":"WebSite",
-      "name":"OSD9TDJ",
-      "url":"https://osd9tdj.org/"
-    },
-    "about":[
-      {"@type":"Thing","name":"Documents internes"},
-      {"@type":"Thing","name":"Organisation associative"},
-      {"@type":"Thing","name":"Statuts et administration"},
-      {"@type":"Thing","name":"Convocations"},
-      {"@type":"Thing","name":"Études"},
-      {"@type":"Thing","name":"Planches d’étude"},
-      {"@type":"Thing","name":"Bibliothèque d’étude"},
-      {"@type":"Thing","name":"Procès-verbaux"},
-      {"@type":"Thing","name":"Archives internes"}
-    ]
-  }
-  </script>
-
-  <!-- Polices Google -->
+  <!-- Polices -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
-  :root{
-    --or:#ffd700;
-    --clair:#fdf7e5;
-  }
+    :root{
+      --or:#ffd700;
+      --clair:#fdf7e5;
+    }
+    *{ box-sizing:border-box; }
 
-  html, body{
-    height:100%;
-    margin:0;
-    padding:0;
-    overflow:hidden; /* pas de scroll body */
-    font-family:'Lato', Arial, sans-serif;
-    color:#ffffff;
-    text-align:center;
-    min-height:100vh;
-  }
+    html, body{
+      height:100%;
+      margin:0;
+      padding:0;
+      overflow:hidden;
+      font-family:'Lato', Arial, sans-serif;
+      color:#fff;
+      text-align:center;
+      min-height:100vh;
+    }
 
-  /* Fond drapeau */
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:url("drapeau-osd9tdj.PNG") no-repeat center center fixed;
-    background-size:cover;
-    z-index:-2;
-  }
+    /* ✅ Fond = fond-membre.PNG (drapeau supprimé) */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:url("fond-membre.PNG") no-repeat center center fixed;
+      background-size:cover;
+      z-index:-2;
+    }
 
-  /* Cadre fixe */
-  .frame-fixed{
-    position:fixed;
-    inset:14px;
-    border-radius:22px;
-    border:2px solid rgba(255,215,0,0.55);
-    box-shadow:
-      0 0 0 1px rgba(253,247,229,0.16) inset,
-      0 0 38px rgba(0,0,0,0.35);
-    pointer-events:none;
-    z-index:40;
-  }
+    /* Cadre fixe */
+    .frame-fixed{
+      position:fixed;
+      inset:14px;
+      border-radius:22px;
+      border:2px solid rgba(255,215,0,0.55);
+      box-shadow:
+        0 0 0 1px rgba(253,247,229,0.16) inset,
+        0 0 38px rgba(0,0,0,0.35);
+      pointer-events:none;
+      z-index:40;
+    }
 
-  /* Zone scroll interne */
-  .viewport-scroll{
-    position:fixed;
-    inset:22px;
-    overflow-y:auto;
-    overflow-x:hidden;
-    -webkit-overflow-scrolling:touch;
-    z-index:1;
-  }
+    /* Scroll interne */
+    .viewport-scroll{
+      position:fixed;
+      inset:22px;
+      overflow-y:auto;
+      overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      z-index:1;
+    }
 
-  /* Menu 3 points */
-  .top-menu{
-    position:fixed;
-    top:26px;
-    right:26px;
-    z-index:60;
-    pointer-events:auto;
-  }
-  .top-menu details{ position:relative; }
-  .top-menu summary{
-    list-style:none;
-    cursor:pointer;
-    user-select:none;
-    width:46px;
-    height:34px;
-    display:grid;
-    place-items:center;
-    border-radius:999px;
-    border:1px solid rgba(255,215,0,0.55);
-    background:rgba(0,0,0,0.22);
-    backdrop-filter: blur(6px);
-    box-shadow:0 6px 16px rgba(0,0,0,0.35);
-    font-family:'Cinzel',serif;
-    color:var(--or);
-    font-size:22px;
-    line-height:1;
-  }
-  .top-menu summary::-webkit-details-marker{ display:none; }
+    /* Menu 3 points */
+    .top-menu{
+      position:fixed;
+      top:26px;
+      right:26px;
+      z-index:60;
+      pointer-events:auto;
+    }
+    .top-menu details{ position:relative; }
+    .top-menu summary{
+      list-style:none;
+      cursor:pointer;
+      user-select:none;
+      width:46px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:999px;
+      border:1px solid rgba(255,215,0,0.55);
+      background:rgba(0,0,0,0.22);
+      backdrop-filter: blur(6px);
+      box-shadow:0 6px 16px rgba(0,0,0,0.35);
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-size:22px;
+      line-height:1;
+    }
+    .top-menu summary::-webkit-details-marker{ display:none; }
 
-  .menu-panel{
-    position:absolute;
-    right:0;
-    margin-top:10px;
-    width:260px;
-    max-width:calc(100vw - 60px);
-    border-radius:14px;
-    border:1px solid rgba(255,215,0,0.45);
-    background:rgba(0,0,0,0.70);
-    box-shadow:0 18px 40px rgba(0,0,0,0.55);
-    overflow:hidden;
-  }
-  .menu-panel a{
-    display:block;
-    padding:11px 12px;
-    text-decoration:none;
-    color:rgba(253,247,229,0.92);
-    font-family:'Cinzel',serif;
-    font-weight:700;
-    font-size:0.92rem;
-    border-bottom:1px solid rgba(255,215,0,0.18);
-  }
-  .menu-panel a:hover{
-    background:rgba(255,215,0,0.12);
-    color:#fff;
-  }
-  .menu-panel a:last-child{ border-bottom:none; }
+    .menu-panel{
+      position:absolute;
+      right:0;
+      margin-top:10px;
+      width:260px;
+      max-width:calc(100vw - 60px);
+      border-radius:14px;
+      border:1px solid rgba(255,215,0,0.45);
+      background:rgba(0,0,0,0.75);
+      box-shadow:0 18px 40px rgba(0,0,0,0.55);
+      overflow:hidden;
+    }
+    .menu-panel a{
+      display:block;
+      padding:11px 12px;
+      text-decoration:none;
+      color:rgba(253,247,229,0.92);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size:0.92rem;
+      border-bottom:1px solid rgba(255,215,0,0.18);
+    }
+    .menu-panel a:hover{
+      background:rgba(255,215,0,0.12);
+      color:#fff;
+    }
+    .menu-panel a:last-child{ border-bottom:none; }
 
-  /* Voile noir */
-  .overlay{
-    min-height:100vh;
-    padding:30px 15px 28px;
-    box-sizing:border-box;
-    background: radial-gradient(circle at top,
-      rgba(0, 0, 0, 0.25),
-      rgba(0, 0, 0, 0.85));
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-  }
+    /* ✅ Voile noir sur le fond */
+    .overlay{
+      min-height:100vh;
+      padding:30px 15px 28px;
+      box-sizing:border-box;
+      background: radial-gradient(circle at top,
+        rgba(0,0,0,0.45),
+        rgba(0,0,0,0.90));
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
 
-  /* Badge cadenas */
-  .lock-badge{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 20px;
-    border-radius:999px;
-    border:1px solid rgba(255,215,0,0.65);
-    background:rgba(255,215,0,0.18);
-    font-family:'Cinzel',serif;
-    font-weight:700;
-    color:var(--or);
-    margin:10px auto 14px;
-    box-shadow:0 0 18px rgba(0,0,0,0.6);
-  }
+    /* Badge cadenas */
+    .lock-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 20px;
+      border-radius:999px;
+      border:1px solid rgba(255,215,0,0.65);
+      background:rgba(255,215,0,0.18);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      color:var(--or);
+      margin:8px auto 14px;
+      box-shadow:0 0 18px rgba(0,0,0,0.6);
+    }
 
-  /* ✅ Image membres en haut (fond-membre.PNG) */
-  .member-hero{
-    width:100%;
-    max-width:980px;
-    margin:0 auto 16px;
-    padding:14px;
-    border-radius:18px;
-    border:1px solid rgba(255,215,0,0.45);
-    background:rgba(0,0,0,0.50);
-    backdrop-filter:blur(4px);
-    box-shadow:0 18px 40px rgba(0,0,0,0.55);
-    overflow:hidden;
-  }
-  .member-hero-inner{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:10px 0;
-  }
-  .member-icon{
-    width:min(520px, 92vw);
-    height:auto;
-    display:block;
-    border-radius:18px;
-    border:1px solid rgba(255,215,0,0.55);
-    box-shadow:
-      0 0 0 1px rgba(253,247,229,0.12) inset,
-      0 0 22px rgba(255,215,0,0.10),
-      0 18px 46px rgba(0,0,0,0.55);
-  }
+    h1{
+      font-family:'Cinzel',serif;
+      font-size:1.9rem;
+      margin:6px 0 6px;
+      text-shadow:0 0 8px rgba(0,0,0,0.7);
+    }
+    .subtitle{
+      font-size:0.95rem;
+      opacity:0.95;
+      margin:0 0 12px;
+      max-width:980px;
+    }
 
-  h1{
-    font-family:'Cinzel',serif;
-    font-size:1.9rem;
-    margin:10px 0 6px;
-    text-shadow:0 0 8px rgba(0,0,0,0.7);
-  }
+    .btn-or{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 14px;
+      border-radius:999px;
+      background: linear-gradient(135deg, #ffd700, #e6c200);
+      color:#111;
+      text-decoration:none;
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size:0.86rem;
+      box-shadow:
+        0 0 0 1px rgba(255,215,0,0.75) inset,
+        0 6px 14px rgba(0,0,0,0.45);
+      margin:10px 0 10px;
+      border:0;
+      cursor:pointer;
+    }
+    .btn-or:hover{
+      background: linear-gradient(135deg, #ffe066, #f0d000);
+    }
 
-  .subtitle{
-    font-size:0.95rem;
-    opacity:0.95;
-    margin:0 0 12px;
-    max-width:980px;
-  }
+    /* Bloc adhésion */
+    .adhesion{
+      width:100%;
+      max-width:980px;
+      margin:10px auto 16px;
+      padding:16px 14px;
+      background:rgba(0,0,0,0.62);
+      border:1px solid rgba(255,215,0,0.45);
+      border-radius:18px;
+      box-shadow:0 0 22px rgba(0,0,0,0.6);
+      text-align:left;
+    }
+    .adhesion h2{
+      margin:0 0 8px;
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-size:1.05rem;
+      letter-spacing:0.04em;
+    }
+    .adhesion p{
+      margin:0 0 12px;
+      font-size:0.92rem;
+      opacity:0.92;
+      line-height:1.45;
+    }
 
-  /* Bouton principal */
-  .btn-or{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:9px 14px;
-    border-radius:999px;
-    background: linear-gradient(135deg, #ffd700, #e6c200);
-    color:#111;
-    text-decoration:none;
-    font-family:'Cinzel',serif;
-    font-weight:700;
-    font-size:0.86rem;
-    box-shadow:
-      0 0 0 1px rgba(255,215,0,0.75) inset,
-      0 6px 14px rgba(0,0,0,0.45);
-    margin:10px 0 10px;
-    border:0;
-    cursor:pointer;
-  }
-  .btn-or:hover{
-    background: linear-gradient(135deg, #ffe066, #f0d000);
-  }
+    /* ✅ Accordéons */
+    .accordion{
+      width:100%;
+      max-width:980px;
+      margin:12px auto 0;
+      background:rgba(0,0,0,0.60);
+      border:1px solid rgba(255,215,0,0.35);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 0 22px rgba(0,0,0,0.6);
+      text-align:left;
+    }
+    .accordion summary{
+      cursor:pointer;
+      list-style:none;
+      user-select:none;
+      padding:14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-weight:700;
+      letter-spacing:0.04em;
+      background:rgba(0,0,0,0.40);
+      border-bottom:1px solid rgba(255,215,0,0.18);
+    }
+    .accordion summary::-webkit-details-marker{ display:none; }
+    .acc-right{
+      color:rgba(255,215,0,0.85);
+      font-size:1.1rem;
+    }
+    .acc-body{ padding:14px; }
 
-  /* Section “adhésion” */
-  .adhesion{
-    width:100%;
-    max-width:980px;
-    margin:12px auto 14px;
-    padding:16px 14px;
-    background:rgba(0,0,0,0.62);
-    border:1px solid rgba(255,215,0,0.45);
-    border-radius:18px;
-    box-shadow:0 0 22px rgba(0,0,0,0.6);
-    text-align:left;
-  }
-  .adhesion h2{
-    margin:0 0 8px;
-    font-family:'Cinzel',serif;
-    color:var(--or);
-    font-size:1.05rem;
-    letter-spacing:0.04em;
-  }
-  .adhesion p{
-    margin:0 0 12px;
-    font-size:0.92rem;
-    opacity:0.92;
-    line-height:1.45;
-  }
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(1, minmax(0, 1fr));
+      gap:18px;
+      width:100%;
+      margin:0;
+    }
+    @media (min-width: 700px){
+      .cards{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+    }
+    @media (min-width: 1000px){
+      .cards{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
+    }
 
-  .section-title{
-    width:100%;
-    max-width:980px;
-    margin:18px auto 10px;
-    font-family:'Cinzel',serif;
-    color:var(--or);
-    font-size:1.05rem;
-    letter-spacing:0.06em;
-    opacity:0.95;
-    text-align:left;
-  }
+    .card{
+      background:rgba(0,0,0,0.62);
+      border:1px solid rgba(255,215,0,0.45);
+      border-radius:18px;
+      padding:18px 16px;
+      box-shadow:0 0 22px rgba(0,0,0,0.6);
+    }
+    .card h2{
+      font-family:'Cinzel',serif;
+      font-size:1.05rem;
+      color:var(--or);
+      margin:0 0 8px;
+    }
+    .card p{
+      font-size:0.9rem;
+      opacity:0.92;
+      margin:0 0 14px;
+      line-height:1.45;
+    }
+    .card a{
+      display:inline-block;
+      padding:9px 14px;
+      border-radius:999px;
+      background:rgba(255,215,0,0.18);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      border:1px solid rgba(255,215,0,0.55);
+      font-family:'Cinzel',serif;
+      font-size:0.84rem;
+      max-width:100%;
+    }
+    .card a:hover{ background:rgba(255,215,0,0.35); }
 
-  .cards{
-    display:grid;
-    grid-template-columns:repeat(1, minmax(0, 1fr));
-    gap:18px;
-    max-width:980px;
-    width:100%;
-    margin:0 auto 12px;
-  }
-  @media (min-width: 700px){
-    .cards{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
-  }
-  @media (min-width: 1000px){
-    .cards{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
-  }
+    /* Contacts */
+    .contacts-grid{
+      display:grid;
+      grid-template-columns:repeat(1, minmax(0,1fr));
+      gap:12px;
+    }
+    @media (min-width: 700px){
+      .contacts-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+    }
+    @media (min-width: 1000px){
+      .contacts-grid{ grid-template-columns:repeat(3, minmax(0,1fr)); }
+    }
+    .contact-item{
+      background:rgba(0,0,0,0.55);
+      border:1px solid rgba(255,215,0,0.35);
+      border-radius:14px;
+      padding:12px 12px;
+      box-shadow:0 0 18px rgba(0,0,0,0.55);
+      overflow-wrap:anywhere;
+      word-break:break-word;
+    }
+    .contact-item strong{
+      color:var(--or);
+      font-family:'Cinzel',serif;
+    }
+    .contact-item a{
+      color:#fff;
+      text-decoration:none;
+      border-bottom:1px dotted rgba(255,215,0,0.55);
+    }
 
-  .card{
-    background:rgba(0,0,0,0.65);
-    border:1px solid rgba(255,215,0,0.45);
-    border-radius:18px;
-    padding:18px 16px;
-    box-shadow:0 0 22px rgba(0,0,0,0.6);
-    text-align:left;
-  }
-  .card h2{
-    font-family:'Cinzel',serif;
-    font-size:1.05rem;
-    color:var(--or);
-    margin:0 0 8px;
-  }
-  .card p{
-    font-size:0.9rem;
-    opacity:0.92;
-    margin:0 0 14px;
-    line-height:1.45;
-  }
-  .card a{
-    display:inline-block;
-    padding:9px 14px;
-    border-radius:999px;
-    background:rgba(255,215,0,0.18);
-    color:#fff;
-    text-decoration:none;
-    font-weight:700;
-    border:1px solid rgba(255,215,0,0.55);
-    font-family:'Cinzel',serif;
-    font-size:0.84rem;
-    max-width:100%;
-  }
-  .card a:hover{ background:rgba(255,215,0,0.35); }
+    /* Signature nnDnn */
+    .nndnn-banner{
+      margin: 26px auto 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+      flex-wrap:nowrap;
+      text-align:center;
+    }
+    .nndnn-banner img{
+      height:48px;
+      width:auto;
+      display:block;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.85));
+      opacity:0.96;
+    }
+    .nndnn-text{
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-weight:700;
+      letter-spacing:0.18em;
+      font-size:2.05rem;
+      line-height:1;
+      text-shadow:0 0 14px rgba(0,0,0,0.9);
+      white-space:nowrap;
+    }
 
-  /* Contacts */
-  .contacts{
-    width:100%;
-    max-width:980px;
-    margin:18px auto 0;
-    padding-top:18px;
-    border-top:1px solid rgba(255,215,0,0.22);
-  }
-  .contacts-grid{
-    display:grid;
-    grid-template-columns:repeat(1, minmax(0,1fr));
-    gap:12px;
-    margin-top:10px;
-    text-align:left;
-  }
-  @media (min-width: 700px){
-    .contacts-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
-  }
-  @media (min-width: 1000px){
-    .contacts-grid{ grid-template-columns:repeat(3, minmax(0,1fr)); }
-  }
-  .contact-item{
-    background:rgba(0,0,0,0.55);
-    border:1px solid rgba(255,215,0,0.35);
-    border-radius:14px;
-    padding:12px 12px;
-    box-shadow:0 0 18px rgba(0,0,0,0.55);
-    overflow-wrap:anywhere;
-    word-break:break-word;
-  }
-  .contact-item strong{
-    color:var(--or);
-    font-family:'Cinzel',serif;
-  }
-  .contact-item a{
-    color:#fff;
-    text-decoration:none;
-    border-bottom:1px dotted rgba(255,215,0,0.55);
-  }
+    /* Footer */
+    .footer {
+      margin-top: 18px;
+      padding-top: 15px;
+      font-size: 0.8rem;
+      opacity: 0.92;
+      line-height: 1.35rem;
+      width:100%;
+      max-width: 980px;
+      border-top: 1px solid rgba(255,215,0,0.22);
+    }
+    .footer .line{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      font-size:0.78rem;
+      color: rgba(253,247,229,0.88);
+    }
+    .footer a{
+      color: rgba(253,247,229,0.85) !important;
+      text-decoration:none !important;
+      border-bottom: 1px dotted rgba(255,215,0,0.55);
+      padding-bottom: 1px;
+      font-size:0.72rem;
+      letter-spacing:0.02em;
+      text-transform: lowercase;
+    }
+    .footer a:hover{
+      color:#fff !important;
+      border-bottom-color: rgba(255,215,0,0.95);
+    }
+    .sep{ opacity:0.55; }
 
-  /* Signature nnDnn */
-  .nndnn-banner{
-    margin: 26px auto 10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:16px;
-    flex-wrap:nowrap;
-    text-align:center;
-  }
-  .nndnn-banner img{
-    height:48px;
-    width:auto;
-    display:block;
-    filter: drop-shadow(0 0 10px rgba(0,0,0,0.85));
-    opacity:0.96;
-  }
-  .nndnn-text{
-    font-family:'Cinzel',serif;
-    color:var(--or);
-    font-weight:700;
-    letter-spacing:0.18em;
-    font-size:2.05rem;
-    line-height:1;
-    text-shadow:0 0 14px rgba(0,0,0,0.9);
-    white-space:nowrap;
-  }
+    .legal-line{
+      margin-top: 14px;
+      font-size: 0.75rem;
+      opacity: 0.92;
+      line-height: 1.35rem;
+      text-align:center;
+    }
+    .legal-line a{
+      color:#ffffff !important;
+      border-bottom: 1px dotted rgba(255,215,0,0.55);
+    }
 
-  /* Footer */
-  .footer {
-    margin-top: 18px;
-    padding-top: 15px;
-    font-size: 0.8rem;
-    opacity: 0.92;
-    line-height: 1.35rem;
-    width:100%;
-    max-width: 980px;
-    border-top: 1px solid rgba(255,215,0,0.22);
-  }
-  .footer .line{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    align-items:center;
-    justify-content:center;
-    font-size:0.78rem;
-    color: rgba(253,247,229,0.88);
-  }
-  .footer a{
-    color: rgba(253,247,229,0.85) !important;
-    text-decoration:none !important;
-    border-bottom: 1px dotted rgba(255,215,0,0.55);
-    padding-bottom: 1px;
-    font-size:0.72rem;
-    letter-spacing:0.02em;
-    text-transform: lowercase;
-  }
-  .footer a:hover{
-    color:#fff !important;
-    border-bottom-color: rgba(255,215,0,0.95);
-  }
-  .sep{ opacity:0.55; }
+    .wmk{
+      position:fixed;
+      left:-9999px;
+      top:-9999px;
+      opacity:0;
+      pointer-events:none;
+      user-select:none;
+    }
 
-  .legal-line{
-    margin-top: 14px;
-    font-size: 0.75rem;
-    opacity: 0.92;
-    line-height: 1.35rem;
-    text-align:center;
-  }
-  .legal-line a{
-    color:#ffffff !important;
-    border-bottom: 1px dotted rgba(255,215,0,0.55);
-  }
+    /* Modal Zoho */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.78);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+      padding:18px;
+    }
+    .modal.open{ display:flex; }
+    .modal-card{
+      width:min(1100px, 96vw);
+      height:min(760px, 88vh);
+      background:rgba(0,0,0,0.92);
+      border:1px solid rgba(255,215,0,0.55);
+      border-radius:18px;
+      box-shadow:0 20px 60px rgba(0,0,0,0.75);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+    }
+    .modal-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 12px;
+      border-bottom:1px solid rgba(255,215,0,0.18);
+      background:rgba(0,0,0,0.65);
+    }
+    .modal-title{
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-weight:700;
+      font-size:0.95rem;
+      letter-spacing:0.04em;
+      text-align:left;
+    }
+    .modal-actions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .btn-mini{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,215,0,0.16);
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      border:1px solid rgba(255,215,0,0.45);
+      font-family:'Cinzel',serif;
+      font-size:0.78rem;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .btn-mini:hover{ background:rgba(255,215,0,0.28); }
 
-  /* Watermark invisible */
-  .wmk{
-    position:fixed;
-    left:-9999px;
-    top:-9999px;
-    opacity:0;
-    pointer-events:none;
-    user-select:none;
-  }
+    .modal-body{ flex:1 1 auto; }
+    .zoho-frame{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+      background:#000;
+    }
+    .modal-hint{
+      padding:10px 12px;
+      border-top:1px solid rgba(255,215,0,0.18);
+      font-size:0.82rem;
+      opacity:0.88;
+      line-height:1.35;
+      text-align:left;
+    }
 
-  /* ✅ MODAL IFRAME pour Zoho */
-  .modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.78);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:9999;
-    padding:18px;
-  }
-  .modal.open{ display:flex; }
-  .modal-card{
-    width:min(1100px, 96vw);
-    height:min(760px, 88vh);
-    background:rgba(0,0,0,0.92);
-    border:1px solid rgba(255,215,0,0.55);
-    border-radius:18px;
-    box-shadow:0 20px 60px rgba(0,0,0,0.75);
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-  }
-  .modal-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    padding:10px 12px;
-    border-bottom:1px solid rgba(255,215,0,0.18);
-    background:rgba(0,0,0,0.65);
-  }
-  .modal-title{
-    font-family:'Cinzel',serif;
-    color:var(--or);
-    font-weight:700;
-    font-size:0.95rem;
-    letter-spacing:0.04em;
-    text-align:left;
-  }
-  .modal-actions{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    align-items:center;
-    justify-content:flex-end;
-  }
-  .btn-mini{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    padding:8px 12px;
-    border-radius:999px;
-    background:rgba(255,215,0,0.16);
-    color:#fff;
-    text-decoration:none;
-    font-weight:700;
-    border:1px solid rgba(255,215,0,0.45);
-    font-family:'Cinzel',serif;
-    font-size:0.78rem;
-    cursor:pointer;
-    white-space:nowrap;
-  }
-  .btn-mini:hover{ background:rgba(255,215,0,0.28); }
-
-  .modal-body{
-    flex:1 1 auto;
-    position:relative;
-  }
-  .zoho-frame{
-    width:100%;
-    height:100%;
-    border:0;
-    display:block;
-    background:#000;
-  }
-  .modal-hint{
-    padding:10px 12px;
-    border-top:1px solid rgba(255,215,0,0.18);
-    font-size:0.82rem;
-    opacity:0.88;
-    line-height:1.35;
-    text-align:left;
-  }
-
-  @media (max-width: 480px){
-    .top-menu{ top:22px; right:22px; }
-    .menu-panel{ width:240px; }
-    .frame-fixed{ inset:12px; }
-    .viewport-scroll{ inset:20px; }
-    h1{ font-size:1.6rem; }
-    .nndnn-banner{ gap:10px; }
-    .nndnn-banner img{ height:42px; }
-    .nndnn-text{ font-size:1.55rem; }
-    .member-hero{ padding:12px; border-radius:16px; }
-  }
+    @media (max-width: 480px){
+      .top-menu{ top:22px; right:22px; }
+      .menu-panel{ width:240px; }
+      .frame-fixed{ inset:12px; }
+      .viewport-scroll{ inset:20px; }
+      h1{ font-size:1.6rem; }
+      .nndnn-banner{ gap:10px; }
+      .nndnn-banner img{ height:42px; }
+      .nndnn-text{ font-size:1.55rem; }
+    }
   </style>
 
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -606,7 +549,6 @@
 
 <body>
 
-  <!-- WATERMARK -->
   <span class="wmk">OSD9TDJ::DOCUMENTS-INTERNES::WTRMK-OMEGA-2026</span>
 
   <div class="frame-fixed" aria-hidden="true"></div>
@@ -631,25 +573,16 @@
 
       <div class="lock-badge">🔒 Accès réservé aux membres</div>
 
-      <!-- ✅ Image membres -->
-      <div class="member-hero" aria-label="Emblème membres">
-        <div class="member-hero-inner">
-          <img class="member-icon" src="fond-membre.PNG" alt="Emblème membres OSD9TDJ" loading="eager">
-        </div>
-      </div>
-
       <h1>Documents internes</h1>
       <p class="subtitle">Espace réservé aux membres de l’Ordre</p>
 
-      <!-- Retour site public -->
       <a class="btn-or" href="index.html">← Retour au site public</a>
 
-      <!-- ✅ Préparer entretien d’adhésion (tu colles ton lien Zoho ici) -->
+      <!-- Préparer entretien d’adhésion -->
       <div class="adhesion" id="adhesion" aria-label="Préparer votre entretien d’adhésion">
         <h2>Préparer votre entretien d’adhésion</h2>
         <p>Accès au dossier d’admission (formulaire, statuts, documents). Zoho demandera le code.</p>
 
-        <!-- IMPORTANT : remplace data-url par TON lien Zoho du dossier “Entretien d’adhésion” -->
         <button
           class="btn-or zoho-open"
           type="button"
@@ -659,144 +592,113 @@
         </button>
       </div>
 
-      <!-- ORGANISATION / ADMIN -->
-      <div class="section-title" id="organisation">Organisation & administratif</div>
-      <div class="cards">
-
-        <div class="card">
-          <h2>Statuts & règlements</h2>
-          <p>Statuts, règlement intérieur, chartes, documents officiels.</p>
-          <a href="https://workdrive.zohopublic.eu/external/899010c7ad078512cb00050de5500774d14a7eea8c24a6c73178a860309678fb">Accéder</a>
-        </div>
-
-        <div class="card">
-          <h2>Procès-verbaux & comptes annuels</h2>
-          <p>Procès-verbaux des assemblées, comptes annuels, bilans et documents financiers officiels de l’association.</p>
-          <a href="https://workdrive.zohopublic.eu/external/41a251aea4b9633def10969fd70c4ed7b265cefde53c749594e63b6ad8d969ba">Accéder</a>
-        </div>
-
-        <div class="card">
-          <h2>Documents Préfecture</h2>
-          <p>Déclarations, récépissés, courriers et pièces administratives.</p>
-          <a href="https://workdrive.zohopublic.eu/external/52a5579789f6993023b3da01a4af2d39ed984856a014a99af6faa2d06f0cfe5b">Accéder</a>
-        </div>
-
-        <div class="card">
-          <h2>Convocations</h2>
-          <p>Convocations officielles pour chaque réunion (documents à jour).</p>
-          <a href="https://workdrive.zohopublic.eu/external/2f2eb0fd6a7a358092b6fb86b2e5eef40170c984ab607e46889f208972965d08">Accéder</a>
-        </div>
-
-        <div class="card">
-          <h2>Organisation des événements</h2>
-          <p>Dossiers, check-lists, logistique, informations internes.</p>
-          <a href="https://workdrive.zohopublic.eu/external/746f7ad5412531d19cc8898b92f623212679eac25a221df9edb861f9d274ae6f">Accéder</a>
-        </div>
-
-        <div class="card">
-          <h2>Planning annuel</h2>
-          <p>Planning des rencontres, thèmes, dates et informations.</p>
-          <a href="https://workdrive.zohopublic.eu/external/ec5d28d66f17f417ddde709923620c438566b179e57c416e189447e663bfbb90">Accéder</a>
-        </div>
-
-      </div>
-
-      <!-- ÉTUDES -->
-      <div class="section-title" id="etudes">Études</div>
-      <div class="cards">
-
-        <div class="card">
-          <h2>Documents d’étude</h2>
-          <p>Documents de travail, lectures, supports et synthèses.</p>
-          <a href="https://workdrive.zohopublic.eu/external/c2ea74b32aa49c6578e211a605c6228ee6fcf7cbbfe5c2167723685ed4092039">Accéder</a>
-        </div>
-
-        <div class="card">
-          <h2>Planches d’étude</h2>
-          <p>Planches, travaux d’étude et documents d’approfondissement.</p>
-          <a href="https://workdrive.zohopublic.eu/external/c8ce36c12a29901fb2123498779d11da18b11a27b3fb5be26b9d646896ba48a3">Accéder</a>
-        </div>
-
-        <div class="card">
-          <h2>Procès-verbaux</h2>
-          <p>Comptes rendus, PV scannés, documents associés.</p>
-          <a href="https://workdrive.zohopublic.eu/external/411dabd98ceeb4768118f60a6c11b40684b7f817f480023ce28a6b846c00fe90">Accéder</a>
-        </div>
-
-        <div class="card">
-          <h2>Travaux & documents</h2>
-          <p>Travaux, documents internes, éléments de suivi.</p>
-          <a href="https://workdrive.zohopublic.eu/external/ee2de27f715abc734e652fd7f16a634fb713af76df91344bcf3f632f3f296f0d">Accéder</a>
-        </div>
-
-        <div class="card">
-          <h2>Bibliothèque d’étude (références)</h2>
-          <p>Ouvrages et documents de référence (accès restreint).</p>
-          <a href="https://workdrive.zohopublic.eu/external/d00e500b02f0e541e759b58d089901aa8ae741d55969776e5677ca3829301a6a">Accéder</a>
-        </div>
-
-      </div>
-
-      <!-- CONTACTS -->
-      <div class="contacts" id="contacts">
-        <div class="section-title">Contacts internes</div>
-
-        <div class="contacts-grid">
-          <div class="contact-item">
-            <strong>Contact général</strong><br>
-            <a href="mailto:contact@osd9tdj.org">contact@osd9tdj.org</a>
-          </div>
-
-          <div class="contact-item">
-            <strong>Interne membres</strong><br>
-            <a href="mailto:interne@osd9tdj.org">interne@osd9tdj.org</a>
-          </div>
-
-          <div class="contact-item">
-            <strong>Trésorerie</strong><br>
-            <a href="mailto:tresorier@osd9tdj.org">tresorier@osd9tdj.org</a>
-          </div>
-
-          <div class="contact-item">
-            <strong>Secrétariat</strong><br>
-            <a href="mailto:secretariat@osd9tdj.org">secretariat@osd9tdj.org</a>
-          </div>
-
-          <div class="contact-item">
-            <strong>Téléphone officiel (WhatsApp)</strong><br>
-            <a href="https://wa.me/33744828970" target="_blank" rel="noopener noreferrer">
-              +33 7 44 82 89 70
-            </a>
-          </div>
-
-          <div class="contact-item">
-            <strong>Localisation</strong><br>
-            Haute-Savoie, France
+      <!-- MENUS DÉROULANTS -->
+      <details class="accordion" id="organisation" open>
+        <summary><span>Organisation & administratif</span><span class="acc-right">▾</span></summary>
+        <div class="acc-body">
+          <div class="cards">
+            <div class="card">
+              <h2>Statuts & règlements</h2>
+              <p>Statuts, règlement intérieur, chartes, documents officiels.</p>
+              <a href="https://workdrive.zohopublic.eu/external/899010c7ad078512cb00050de5500774d14a7eea8c24a6c73178a860309678fb">Accéder</a>
+            </div>
+            <div class="card">
+              <h2>Procès-verbaux & comptes annuels</h2>
+              <p>PV, comptes annuels, bilans et documents financiers officiels.</p>
+              <a href="https://workdrive.zohopublic.eu/external/41a251aea4b9633def10969fd70c4ed7b265cefde53c749594e63b6ad8d969ba">Accéder</a>
+            </div>
+            <div class="card">
+              <h2>Documents Préfecture</h2>
+              <p>Déclarations, récépissés, courriers et pièces administratives.</p>
+              <a href="https://workdrive.zohopublic.eu/external/52a5579789f6993023b3da01a4af2d39ed984856a014a99af6faa2d06f0cfe5b">Accéder</a>
+            </div>
+            <div class="card">
+              <h2>Convocations</h2>
+              <p>Convocations officielles pour chaque réunion (documents à jour).</p>
+              <a href="https://workdrive.zohopublic.eu/external/2f2eb0fd6a7a358092b6fb86b2e5eef40170c984ab607e46889f208972965d08">Accéder</a>
+            </div>
+            <div class="card">
+              <h2>Organisation des événements</h2>
+              <p>Dossiers, check-lists, logistique, informations internes.</p>
+              <a href="https://workdrive.zohopublic.eu/external/746f7ad5412531d19cc8898b92f623212679eac25a221df9edb861f9d274ae6f">Accéder</a>
+            </div>
+            <div class="card">
+              <h2>Planning annuel</h2>
+              <p>Planning des rencontres, thèmes, dates et informations.</p>
+              <a href="https://workdrive.zohopublic.eu/external/ec5d28d66f17f417ddde709923620c438566b179e57c416e189447e663bfbb90">Accéder</a>
+            </div>
           </div>
         </div>
-      </div>
+      </details>
 
-      <!-- ARCHIVES -->
-      <div class="section-title" id="archives">Archives</div>
-      <div class="cards">
-        <div class="card">
-          <h2>Archives – Doctrine interne</h2>
-          <p>Archives internes protégées.</p>
-          <a href="https://workdrive.zohopublic.eu/external/9ef517340ff897d63b6fd3081d546423549bbefa2dab96e9aceba65bbcfa5ef8">Accéder</a>
+      <details class="accordion" id="etudes">
+        <summary><span>Études</span><span class="acc-right">▾</span></summary>
+        <div class="acc-body">
+          <div class="cards">
+            <div class="card">
+              <h2>Documents d’étude</h2>
+              <p>Documents de travail, lectures, supports et synthèses.</p>
+              <a href="https://workdrive.zohopublic.eu/external/c2ea74b32aa49c6578e211a605c6228ee6fcf7cbbfe5c2167723685ed4092039">Accéder</a>
+            </div>
+            <div class="card">
+              <h2>Planches d’étude</h2>
+              <p>Planches, travaux d’étude et documents d’approfondissement.</p>
+              <a href="https://workdrive.zohopublic.eu/external/c8ce36c12a29901fb2123498779d11da18b11a27b3fb5be26b9d646896ba48a3">Accéder</a>
+            </div>
+            <div class="card">
+              <h2>Procès-verbaux</h2>
+              <p>Comptes rendus, PV scannés, documents associés.</p>
+              <a href="https://workdrive.zohopublic.eu/external/411dabd98ceeb4768118f60a6c11b40684b7f817f480023ce28a6b846c00fe90">Accéder</a>
+            </div>
+            <div class="card">
+              <h2>Travaux & documents</h2>
+              <p>Travaux, documents internes, éléments de suivi.</p>
+              <a href="https://workdrive.zohopublic.eu/external/ee2de27f715abc734e652fd7f16a634fb713af76df91344bcf3f632f3f296f0d">Accéder</a>
+            </div>
+            <div class="card">
+              <h2>Bibliothèque d’étude</h2>
+              <p>Ouvrages et documents de référence.</p>
+              <a href="https://workdrive.zohopublic.eu/external/d00e500b02f0e541e759b58d089901aa8ae741d55969776e5677ca3829301a6a">Accéder</a>
+            </div>
+          </div>
         </div>
-      </div>
+      </details>
 
-      <!-- Retour site public -->
+      <details class="accordion" id="contacts">
+        <summary><span>Contacts internes</span><span class="acc-right">▾</span></summary>
+        <div class="acc-body">
+          <div class="contacts-grid">
+            <div class="contact-item"><strong>Contact général</strong><br><a href="mailto:contact@osd9tdj.org">contact@osd9tdj.org</a></div>
+            <div class="contact-item"><strong>Interne membres</strong><br><a href="mailto:interne@osd9tdj.org">interne@osd9tdj.org</a></div>
+            <div class="contact-item"><strong>Trésorerie</strong><br><a href="mailto:tresorier@osd9tdj.org">tresorier@osd9tdj.org</a></div>
+            <div class="contact-item"><strong>Secrétariat</strong><br><a href="mailto:secretariat@osd9tdj.org">secretariat@osd9tdj.org</a></div>
+            <div class="contact-item"><strong>Téléphone officiel (WhatsApp)</strong><br><a href="https://wa.me/33744828970" target="_blank" rel="noopener noreferrer">+33 7 44 82 89 70</a></div>
+            <div class="contact-item"><strong>Localisation</strong><br>Haute-Savoie, France</div>
+          </div>
+        </div>
+      </details>
+
+      <details class="accordion" id="archives">
+        <summary><span>Archives</span><span class="acc-right">▾</span></summary>
+        <div class="acc-body">
+          <div class="cards">
+            <div class="card">
+              <h2>Archives – Doctrine interne</h2>
+              <p>Archives internes protégées.</p>
+              <a href="https://workdrive.zohopublic.eu/external/9ef517340ff897d63b6fd3081d546423549bbefa2dab96e9aceba65bbcfa5ef8">Accéder</a>
+            </div>
+          </div>
+        </div>
+      </details>
+
       <a class="btn-or" href="index.html">← Retour au site public</a>
 
-      <!-- Signature nnDnn -->
       <div class="nndnn-banner" aria-label="Signature templière nnDnn">
         <img src="croix.epee.PNG" alt="Épée – symbole">
         <div class="nndnn-text">nnDnn</div>
         <img src="croix.epee.PNG" alt="Épée – symbole">
       </div>
 
-      <!-- Footer -->
       <div class="footer">
         <div class="line">
           <span>© OSD9TDJ Association Loi 1901, Tous droits réservés</span>
@@ -805,27 +707,20 @@
           <span class="sep">·</span>
           <a href="mentions.html">mentions légales</a>
         </div>
-
         <div class="legal-line">
           <strong>SIREN :</strong>
-          <a href="https://www.societe.com/societe/939461133" target="_blank" rel="noopener noreferrer">
-            939&nbsp;461&nbsp;133
-          </a><br>
-          <strong>SIRET (siège) :</strong>
-          939&nbsp;461&nbsp;133&nbsp;00034<br>
-          <strong>Code APE :</strong>
-          94.99Z<br>
-          <strong>N° RNA :</strong>
-          W744007354<br>
-          <strong>Nature :</strong>
-          Organisation à vocation internationale<br>
+          <a href="https://www.societe.com/societe/939461133" target="_blank" rel="noopener noreferrer">939&nbsp;461&nbsp;133</a><br>
+          <strong>SIRET (siège) :</strong> 939&nbsp;461&nbsp;133&nbsp;00034<br>
+          <strong>Code APE :</strong> 94.99Z<br>
+          <strong>N° RNA :</strong> W744007354<br>
+          <strong>Nature :</strong> Organisation à vocation internationale<br>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- ✅ MODALE ZOHO (iframe) -->
+  <!-- MODALE ZOHO -->
   <div class="modal" id="zohoModal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-label="Documents Zoho">
       <div class="modal-head">
@@ -870,7 +765,7 @@
     modal.addEventListener("click", (e) => { if (e.target === modal) closeZoho(); });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeZoho(); });
 
-    // ✅ 1) Bouton “Entretien d’adhésion”
+    // Bouton “Entretien d’adhésion”
     document.querySelectorAll(".zoho-open").forEach(btn => {
       btn.addEventListener("click", () => {
         const url = btn.getAttribute("data-url");
@@ -883,7 +778,7 @@
       });
     });
 
-    // ✅ 2) Tous les liens Zoho existants (workdrive.zohopublic.eu) => ouverture dans la modale
+    // Tous les liens Zoho existants => modale
     document.querySelectorAll('a[href*="workdrive.zohopublic.eu"]').forEach(a => {
       a.addEventListener("click", (e) => {
         const url = a.getAttribute("href");
