@@ -57,7 +57,7 @@
       background:radial-gradient(circle at top,#191919,#050506 70%);
     }
 
-    /* Cadre fixe */
+    /* ✅ Cadre fixe (DERNIÈRE CORRECTION : derrière le contenu) */
     .frame-fixed{
       position:fixed;
       inset:14px;
@@ -67,10 +67,10 @@
         0 0 0 1px rgba(253,247,229,0.16) inset,
         0 0 38px rgba(0,0,0,0.35);
       pointer-events:none;
-      z-index:40;
+      z-index:0; /* ✅ IMPORTANT: ne coupe plus les images */
     }
 
-    /* Zone scroll */
+    /* ✅ Zone scroll au-dessus du cadre */
     .viewport-scroll{
       position:fixed;
       inset:22px;
@@ -80,7 +80,7 @@
       z-index:1;
     }
 
-    /* Menu 3 points */
+    /* ✅ Menu 3 points (au-dessus de tout) */
     .top-menu{
       position:fixed;
       top:26px;
@@ -200,7 +200,7 @@
       letter-spacing:0.5px;
     }
 
-    /* Bloc événement passé */
+    /* Évènement passé */
     .event-card{
       text-align:left;
       margin-top:14px;
@@ -275,8 +275,6 @@
       object-position:center;
       display:block;
     }
-
-    /* eve13 jamais coupée */
     .img-no-crop{
       object-fit:contain;
       background:rgba(0,0,0,0.55);
@@ -333,26 +331,12 @@
       .g-item img{ height:190px; }
     }
 
-    /* ✅ MOBILE PROPRE + encoche iPhone */
     @media (max-width: 600px){
       .top-menu{ top:22px; right:22px; }
       .menu-panel{ width:240px; }
+      .frame-fixed{ inset:12px; }       /* ✅ simple */
+      .viewport-scroll{ inset:20px; }   /* ✅ simple */
       .tab{ padding:9px 14px; font-size:0.86rem; }
-
-      .frame-fixed{
-        inset: calc(12px + env(safe-area-inset-top)) 12px 12px 12px;
-      }
-      .viewport-scroll{
-        inset: calc(20px + env(safe-area-inset-top)) 20px 20px 20px;
-      }
-
-      .logo-box{
-        margin-top: 10px;
-        padding: 16px;
-      }
-      .gold-title{
-        margin-top: 10px;
-      }
 
       .gallery{ grid-template-columns:1fr; }
       .g-item img{ height:240px; }
