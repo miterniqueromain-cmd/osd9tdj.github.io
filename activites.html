@@ -47,7 +47,6 @@
 
         *{ box-sizing:border-box; }
 
-        /* ✅ CADRE FIXE + SCROLL DEDANS (comme les autres pages) */
         html, body{
             height:100%;
             margin:0;
@@ -59,7 +58,6 @@
             background: radial-gradient(circle at top, #191919, #050506 70%);
         }
 
-        /* ✅ Cadre fixe doré */
         .frame-fixed{
             position: fixed;
             inset: 14px;
@@ -72,7 +70,6 @@
             z-index: 40;
         }
 
-        /* ✅ Zone scroll interne */
         .viewport-scroll{
             position: fixed;
             inset: 22px;
@@ -82,7 +79,6 @@
             z-index: 1;
         }
 
-        /* ✅ Menu 3 points doré + menu déroulant (SANS icône) */
         .top-menu{
             position: fixed;
             top: 26px;
@@ -139,8 +135,6 @@
             color: #fff;
         }
         .menu-panel a:last-child{ border-bottom: none; }
-
-        /* ================== TON CSS EXISTANT (inchangé) ================== */
 
         .container {
             min-height: 100vh;
@@ -207,6 +201,91 @@
             margin-bottom: 10px;
         }
 
+        /* ✅ NOUVEAU : bloc événement passé (même style, un peu plus riche) */
+        .event-card{
+            text-align:left;
+            margin-top: 14px;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(214,167,40,0.35);
+            background: rgba(0,0,0,0.35);
+        }
+        .event-meta{
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+        .event-name{
+            font-family:'Cinzel',serif;
+            font-weight:700;
+            font-size: 1.08rem;
+            color: var(--or);
+            margin:0;
+        }
+        .event-date{
+            font-family:'Cinzel',serif;
+            font-size: 0.95rem;
+            color: rgba(253,247,229,0.88);
+            margin:0;
+        }
+        .event-desc{
+            margin: 10px 0 14px;
+            color: rgba(253,247,229,0.92);
+            font-size: 0.98rem;
+            line-height: 1.5;
+        }
+
+        /* ✅ Affiche */
+        .poster-wrap{
+            margin: 12px 0 16px;
+            display:flex;
+            justify-content:center;
+        }
+        .poster{
+            width: 100%;
+            max-width: 520px;
+            height: auto;
+            border-radius: 12px;
+            border: 1px solid rgba(214,167,40,0.35);
+            box-shadow: 0 10px 26px rgba(0,0,0,0.45);
+            display:block;
+        }
+        .poster-link{
+            display:inline-block;
+            text-decoration:none;
+        }
+
+        /* ✅ Galerie (toutes les photos) */
+        .gallery{
+            display:grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .g-item{
+            border-radius: 12px;
+            overflow:hidden;
+            border: 1px solid rgba(214,167,40,0.22);
+            background: rgba(0,0,0,0.25);
+        }
+        .g-item img{
+            width:100%;
+            height: 170px;
+            object-fit: cover;
+            display:block;
+            transform: scale(1.001);
+        }
+        .g-item img:hover{
+            filter: brightness(1.06);
+        }
+        .g-note{
+            margin-top: 10px;
+            font-size: 0.92rem;
+            color: rgba(253,247,229,0.86);
+        }
+
         .back-link,
         .shop-link,
         .call-link {
@@ -236,7 +315,6 @@
             justify-content: center;
         }
 
-        /* ✅ Menu déroulant bas (glissant) + centré tablette/iPad */
         .tabs{
             margin:18px auto 8px;
             display:inline-flex;
@@ -285,14 +363,21 @@
         }
         .footer a:hover{ opacity: 1; }
 
+        @media (max-width: 900px){
+            .gallery{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .g-item img{ height: 180px; }
+        }
         @media (max-width: 600px){
             .top-menu{ top:22px; right:22px; }
             .menu-panel{ width:240px; }
             .frame-fixed{ inset:12px; }
             .viewport-scroll{ inset:20px; }
             .tab{padding:9px 14px;font-size:0.86rem;}
+            .gallery{ grid-template-columns: 1fr; }
+            .g-item img{ height: 220px; }
         }
     </style>
+
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
     <link rel="apple-touch-icon" href="icon-192.png">
@@ -300,26 +385,23 @@
 
 <body>
 
-<!-- ✅ Cadre fixe doré -->
 <div class="frame-fixed" aria-hidden="true"></div>
 
-<!-- ✅ Menu 3 points (doré) -->
 <div class="top-menu" aria-label="Menu du site">
   <details>
     <summary title="Menu">⋯</summary>
     <div class="menu-panel" role="menu" aria-label="Navigation">
       <a href="index.html">Accueil</a>
       <a href="quinoussommes.html">Qui nous sommes</a>
-        <a href="notre-mission.html"> Notre mission</a>
+      <a href="notre-mission.html">Notre mission</a>
       <a href="histoire.html">Notre histoire</a>
-       <a href="faq.html"> FAQ</a>
-      <a href="boutique.html">Boutique</a
+      <a href="faq.html">FAQ</a>
+      <a href="boutique.html">Boutique</a>
       <a href="contact.html">Contact</a>
     </div>
   </details>
 </div>
 
-<!-- ✅ Tout scrolle dans le cadre -->
 <div class="viewport-scroll">
 
   <div class="container">
@@ -340,7 +422,58 @@
           <!-- espace vide pour les futurs évènements -->
       </div>
 
-      <!-- ✅ Menu déroulant bas (glissant) + centré tablette -->
+      <!-- ✅ NOUVEAU : Évènement passé -->
+      <div class="events-section" aria-label="Évènement passé">
+          <div class="events-title">Évènement passé</div>
+
+          <div class="event-card">
+              <div class="event-meta">
+                  <h2 class="event-name" style="margin:0;">Rencontre culturelle & soirée de gala</h2>
+                  <p class="event-date" style="margin:0;">— Samedi 23 novembre 2024 • Château d’Avully</p>
+              </div>
+
+              <p class="event-desc">
+                  Cet évènement a marqué un temps fort de notre démarche en France&nbsp;: une rencontre ouverte au public,
+                  suivie d’une soirée de gala, rassemblant des invités venus de différents horizons.
+                  La journée a proposé une vente et dédicaces d’ouvrages, ainsi qu’une dégustation et vente de vins.
+                  En soirée, un dîner, un bal et un spectacle ont prolongé ce moment fraternel.
+                  <br><br>
+                  Une cérémonie d’investiture a également été célébrée à cette occasion pour l’accueil des chevaliers français,
+                  dans un esprit de tradition, de transmission et de dignité.
+                  L’organisation s’est inscrite, à l’époque, dans un cadre de coopération associative et internationale,
+                  en continuité avec les éléments présentés sur la page <a href="histoire.html" style="color: var(--clair); text-decoration: underline;">Notre histoire</a>.
+              </p>
+
+              <!-- Affiche -->
+              <div class="poster-wrap">
+                  <a class="poster-link" href="eveaffiche.PNG" target="_blank" rel="noopener" aria-label="Ouvrir l'affiche de l'évènement">
+                      <img class="poster" src="eveaffiche.PNG" alt="Affiche de l'évènement – 23 novembre 2024 – Château d’Avully">
+                  </a>
+              </div>
+
+              <!-- Galerie (toutes les photos fournies) -->
+              <div class="gallery" aria-label="Galerie photos de l'évènement">
+                  <div class="g-item"><img src="eve1.JPG" alt="Photo de l'évènement – Salle et tables"></div>
+                  <div class="g-item"><img src="eve2.PNG" alt="Photo de l'évènement – Détails et ambiance"></div>
+                  <div class="g-item"><img src="eve3.PNG" alt="Photo de l'évènement – Cérémonie"></div>
+
+                  <div class="g-item"><img src="eve4.PNG" alt="Photo de l'évènement – Décor et lieu"></div>
+                  <div class="g-item"><img src="eve5.JPG" alt="Photo de l'évènement – Table dressée"></div>
+                  <div class="g-item"><img src="eve6.JPG" alt="Photo de l'évènement – Ambiance et participants"></div>
+
+                  <div class="g-item"><img src="eve7.JPG" alt="Photo de l'évènement – Procession"></div>
+                  <div class="g-item"><img src="eve8.PNG" alt="Photo de l'évènement – Salle et chandeliers"></div>
+                  <div class="g-item"><img src="eve11.PNG" alt="Photo de l'évènement – Cérémonie aux cierges"></div>
+
+                  <div class="g-item"><img src="eve13.JPG" alt="Photo de l'évènement – Cérémonie et lecture"></div>
+              </div>
+
+              <p class="g-note">
+                  Ces images témoignent d’un moment solennel et chaleureux, fidèle à l’esprit de nos engagements.
+              </p>
+          </div>
+      </div>
+
       <div class="tabs-center">
         <nav class="tabs" aria-label="Navigation bas de page">
           <a class="tab" href="index.html">Accueil</a>
@@ -349,7 +482,6 @@
         </nav>
       </div>
 
-      <!-- ✅ Footer conforme -->
       <div class="footer">
         © O.S.D.9.T.D.J. Association Loi 1901 – Tous droits réservés •
         <a href="mentions.html">mentions légales</a> •
@@ -357,7 +489,6 @@
       </div>
   </div>
 
-  <!-- WATERMARK INVISIBLE – PROTECTION ANTI-COPIE -->
   <div style="
       position: fixed;
       bottom: -9999px;
