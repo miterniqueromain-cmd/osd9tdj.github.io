@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Documents internes – Accès réservé aux membres | OSD9TDJ</title>
+
+  <!-- IMPORTANT: on autorise l’iframe Zoho + scripts inline pour la modale -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO (page interne) -->
@@ -32,8 +34,10 @@
   <meta name="osd9tdj-integrity" content="HASH-LOCK-FRAME-SCROLL-MENU-FOOTER-NNDNN-ETUDES" />
   <meta name="osd9tdj-origin" content="osd9tdj.org / documents-internes.html" />
 
-  <!-- Hardening (défensif / anti-embedding / anti-leak) -->
+  <!-- Hardening -->
   <meta name="referrer" content="no-referrer">
+
+  <!-- CSP (corrigée pour permettre Zoho en iframe + script inline) -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
     base-uri 'self';
@@ -44,7 +48,8 @@
     img-src 'self' https: data:;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     font-src https://fonts.gstatic.com;
-    script-src 'self';
+    script-src 'self' 'unsafe-inline';
+    frame-src https://workdrive.zohopublic.eu https://*.zohopublic.eu https://*.zoho.com https://*.zoho.eu;
     upgrade-insecure-requests;
   ">
 
@@ -84,7 +89,6 @@
     --clair:#fdf7e5;
   }
 
-  /* ✅ CADRE FIXE + SCROLL DEDANS */
   html, body{
     height:100%;
     margin:0;
@@ -106,7 +110,7 @@
     z-index:-2;
   }
 
-  /* ✅ Cadre fixe */
+  /* Cadre fixe */
   .frame-fixed{
     position:fixed;
     inset:14px;
@@ -119,7 +123,7 @@
     z-index:40;
   }
 
-  /* ✅ Zone scroll interne */
+  /* Zone scroll interne */
   .viewport-scroll{
     position:fixed;
     inset:22px;
@@ -129,7 +133,7 @@
     z-index:1;
   }
 
-  /* ✅ Menu 3 points */
+  /* Menu 3 points */
   .top-menu{
     position:fixed;
     top:26px;
@@ -186,7 +190,7 @@
   }
   .menu-panel a:last-child{ border-bottom:none; }
 
-  /* ✅ Voile noir (classique) */
+  /* Voile noir */
   .overlay{
     min-height:100vh;
     padding:30px 15px 28px;
@@ -211,8 +215,39 @@
     font-family:'Cinzel',serif;
     font-weight:700;
     color:var(--or);
-    margin:10px auto 18px;
+    margin:10px auto 14px;
     box-shadow:0 0 18px rgba(0,0,0,0.6);
+  }
+
+  /* ✅ Image membres en haut (fond-membre.PNG) */
+  .member-hero{
+    width:100%;
+    max-width:980px;
+    margin:0 auto 16px;
+    padding:14px;
+    border-radius:18px;
+    border:1px solid rgba(255,215,0,0.45);
+    background:rgba(0,0,0,0.50);
+    backdrop-filter:blur(4px);
+    box-shadow:0 18px 40px rgba(0,0,0,0.55);
+    overflow:hidden;
+  }
+  .member-hero-inner{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:10px 0;
+  }
+  .member-icon{
+    width:min(520px, 92vw);
+    height:auto;
+    display:block;
+    border-radius:18px;
+    border:1px solid rgba(255,215,0,0.55);
+    box-shadow:
+      0 0 0 1px rgba(253,247,229,0.12) inset,
+      0 0 22px rgba(255,215,0,0.10),
+      0 18px 46px rgba(0,0,0,0.55);
   }
 
   h1{
@@ -229,29 +264,54 @@
     max-width:980px;
   }
 
-  /* Bouton jaune (ovale) */
+  /* Bouton principal */
   .btn-or{
     display:inline-flex;
     align-items:center;
     gap:8px;
-    padding:10px 18px;
+    padding:9px 14px;
     border-radius:999px;
     background: linear-gradient(135deg, #ffd700, #e6c200);
     color:#111;
     text-decoration:none;
     font-family:'Cinzel',serif;
     font-weight:700;
-    font-size:0.9rem;
+    font-size:0.86rem;
     box-shadow:
       0 0 0 1px rgba(255,215,0,0.75) inset,
       0 6px 14px rgba(0,0,0,0.45);
-    margin:12px 0 18px;
+    margin:10px 0 10px;
+    border:0;
+    cursor:pointer;
   }
   .btn-or:hover{
     background: linear-gradient(135deg, #ffe066, #f0d000);
-    box-shadow:
-      0 0 0 1px rgba(255,215,0,0.95) inset,
-      0 8px 18px rgba(0,0,0,0.55);
+  }
+
+  /* Section “adhésion” */
+  .adhesion{
+    width:100%;
+    max-width:980px;
+    margin:12px auto 14px;
+    padding:16px 14px;
+    background:rgba(0,0,0,0.62);
+    border:1px solid rgba(255,215,0,0.45);
+    border-radius:18px;
+    box-shadow:0 0 22px rgba(0,0,0,0.6);
+    text-align:left;
+  }
+  .adhesion h2{
+    margin:0 0 8px;
+    font-family:'Cinzel',serif;
+    color:var(--or);
+    font-size:1.05rem;
+    letter-spacing:0.04em;
+  }
+  .adhesion p{
+    margin:0 0 12px;
+    font-size:0.92rem;
+    opacity:0.92;
+    line-height:1.45;
   }
 
   .section-title{
@@ -263,22 +323,22 @@
     font-size:1.05rem;
     letter-spacing:0.06em;
     opacity:0.95;
+    text-align:left;
   }
 
-  /* ✅ Grille responsive béton (évite le hors-champ) */
   .cards{
     display:grid;
-    grid-template-columns:repeat(1, minmax(0, 1fr)); /* mobile */
+    grid-template-columns:repeat(1, minmax(0, 1fr));
     gap:18px;
     max-width:980px;
     width:100%;
     margin:0 auto 12px;
   }
   @media (min-width: 700px){
-    .cards{ grid-template-columns:repeat(2, minmax(0, 1fr)); } /* tablette */
+    .cards{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
   }
   @media (min-width: 1000px){
-    .cards{ grid-template-columns:repeat(3, minmax(0, 1fr)); } /* PC */
+    .cards{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
   }
 
   .card{
@@ -287,6 +347,7 @@
     border-radius:18px;
     padding:18px 16px;
     box-shadow:0 0 22px rgba(0,0,0,0.6);
+    text-align:left;
   }
   .card h2{
     font-family:'Cinzel',serif;
@@ -302,7 +363,7 @@
   }
   .card a{
     display:inline-block;
-    padding:10px 16px;
+    padding:9px 14px;
     border-radius:999px;
     background:rgba(255,215,0,0.18);
     color:#fff;
@@ -310,7 +371,7 @@
     font-weight:700;
     border:1px solid rgba(255,215,0,0.55);
     font-family:'Cinzel',serif;
-    font-size:0.88rem;
+    font-size:0.84rem;
     max-width:100%;
   }
   .card a:hover{ background:rgba(255,215,0,0.35); }
@@ -325,9 +386,10 @@
   }
   .contacts-grid{
     display:grid;
-    grid-template-columns:repeat(1, minmax(0,1fr)); /* mobile */
+    grid-template-columns:repeat(1, minmax(0,1fr));
     gap:12px;
     margin-top:10px;
+    text-align:left;
   }
   @media (min-width: 700px){
     .contacts-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
@@ -354,7 +416,7 @@
     border-bottom:1px dotted rgba(255,215,0,0.55);
   }
 
-  /* ✅ Signature nnDnn */
+  /* Signature nnDnn */
   .nndnn-banner{
     margin: 26px auto 10px;
     display:flex;
@@ -382,7 +444,7 @@
     white-space:nowrap;
   }
 
-  /* ✅ Footer identique index */
+  /* Footer */
   .footer {
     margin-top: 18px;
     padding-top: 15px;
@@ -439,16 +501,101 @@
     user-select:none;
   }
 
+  /* ✅ MODAL IFRAME pour Zoho */
+  .modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.78);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    padding:18px;
+  }
+  .modal.open{ display:flex; }
+  .modal-card{
+    width:min(1100px, 96vw);
+    height:min(760px, 88vh);
+    background:rgba(0,0,0,0.92);
+    border:1px solid rgba(255,215,0,0.55);
+    border-radius:18px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.75);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .modal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:10px 12px;
+    border-bottom:1px solid rgba(255,215,0,0.18);
+    background:rgba(0,0,0,0.65);
+  }
+  .modal-title{
+    font-family:'Cinzel',serif;
+    color:var(--or);
+    font-weight:700;
+    font-size:0.95rem;
+    letter-spacing:0.04em;
+    text-align:left;
+  }
+  .modal-actions{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:flex-end;
+  }
+  .btn-mini{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:8px 12px;
+    border-radius:999px;
+    background:rgba(255,215,0,0.16);
+    color:#fff;
+    text-decoration:none;
+    font-weight:700;
+    border:1px solid rgba(255,215,0,0.45);
+    font-family:'Cinzel',serif;
+    font-size:0.78rem;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .btn-mini:hover{ background:rgba(255,215,0,0.28); }
+
+  .modal-body{
+    flex:1 1 auto;
+    position:relative;
+  }
+  .zoho-frame{
+    width:100%;
+    height:100%;
+    border:0;
+    display:block;
+    background:#000;
+  }
+  .modal-hint{
+    padding:10px 12px;
+    border-top:1px solid rgba(255,215,0,0.18);
+    font-size:0.82rem;
+    opacity:0.88;
+    line-height:1.35;
+    text-align:left;
+  }
+
   @media (max-width: 480px){
     .top-menu{ top:22px; right:22px; }
     .menu-panel{ width:240px; }
     .frame-fixed{ inset:12px; }
     .viewport-scroll{ inset:20px; }
     h1{ font-size:1.6rem; }
-    .btn-or{ font-size:0.85rem; }
     .nndnn-banner{ gap:10px; }
     .nndnn-banner img{ height:42px; }
     .nndnn-text{ font-size:1.55rem; }
+    .member-hero{ padding:12px; border-radius:16px; }
   }
   </style>
 
@@ -459,7 +606,7 @@
 
 <body>
 
-  <!-- WATERMARK (interne) -->
+  <!-- WATERMARK -->
   <span class="wmk">OSD9TDJ::DOCUMENTS-INTERNES::WTRMK-OMEGA-2026</span>
 
   <div class="frame-fixed" aria-hidden="true"></div>
@@ -468,10 +615,12 @@
     <details>
       <summary title="Menu">⋯</summary>
       <div class="menu-panel" role="menu" aria-label="Navigation interne">
+        <a href="#adhesion"> Préparer l’adhésion</a>
         <a href="#organisation"> Organisation</a>
         <a href="#etudes"> Études</a>
         <a href="#contacts"> Contacts</a>
         <a href="#archives"> Archives</a>
+        <a href="administration.html">🔒 Administration</a>
         <a href="index.html">← Retour site public</a>
       </div>
     </details>
@@ -482,11 +631,33 @@
 
       <div class="lock-badge">🔒 Accès réservé aux membres</div>
 
+      <!-- ✅ Image membres -->
+      <div class="member-hero" aria-label="Emblème membres">
+        <div class="member-hero-inner">
+          <img class="member-icon" src="fond-membre.PNG" alt="Emblème membres OSD9TDJ" loading="eager">
+        </div>
+      </div>
+
       <h1>Documents internes</h1>
       <p class="subtitle">Espace réservé aux membres de l’Ordre</p>
 
-      <!-- Retour site public (EN HAUT) -->
+      <!-- Retour site public -->
       <a class="btn-or" href="index.html">← Retour au site public</a>
+
+      <!-- ✅ Préparer entretien d’adhésion (tu colles ton lien Zoho ici) -->
+      <div class="adhesion" id="adhesion" aria-label="Préparer votre entretien d’adhésion">
+        <h2>Préparer votre entretien d’adhésion</h2>
+        <p>Accès au dossier d’admission (formulaire, statuts, documents). Zoho demandera le code.</p>
+
+        <!-- IMPORTANT : remplace data-url par TON lien Zoho du dossier “Entretien d’adhésion” -->
+        <button
+          class="btn-or zoho-open"
+          type="button"
+          data-title="Préparer votre entretien d’adhésion"
+          data-url="https://REMPLACE-MOI-PAR-TON-LIEN-ZOHO">
+          Accéder aux documents
+        </button>
+      </div>
 
       <!-- ORGANISATION / ADMIN -->
       <div class="section-title" id="organisation">Organisation & administratif</div>
@@ -495,43 +666,37 @@
         <div class="card">
           <h2>Statuts & règlements</h2>
           <p>Statuts, règlement intérieur, chartes, documents officiels.</p>
-          <a href="https://workdrive.zohopublic.eu/external/899010c7ad078512cb00050de5500774d14a7eea8c24a6c73178a860309678fb"
-             target="_blank" rel="noopener noreferrer">Accéder</a>
+          <a href="https://workdrive.zohopublic.eu/external/899010c7ad078512cb00050de5500774d14a7eea8c24a6c73178a860309678fb">Accéder</a>
         </div>
 
         <div class="card">
           <h2>Procès-verbaux & comptes annuels</h2>
           <p>Procès-verbaux des assemblées, comptes annuels, bilans et documents financiers officiels de l’association.</p>
-          <a href="https://workdrive.zohopublic.eu/external/41a251aea4b9633def10969fd70c4ed7b265cefde53c749594e63b6ad8d969ba"
-             target="_blank" rel="noopener noreferrer">Accéder</a>
+          <a href="https://workdrive.zohopublic.eu/external/41a251aea4b9633def10969fd70c4ed7b265cefde53c749594e63b6ad8d969ba">Accéder</a>
         </div>
 
         <div class="card">
           <h2>Documents Préfecture</h2>
           <p>Déclarations, récépissés, courriers et pièces administratives.</p>
-          <a href="https://workdrive.zohopublic.eu/external/52a5579789f6993023b3da01a4af2d39ed984856a014a99af6faa2d06f0cfe5b"
-             target="_blank" rel="noopener noreferrer">Accéder</a>
+          <a href="https://workdrive.zohopublic.eu/external/52a5579789f6993023b3da01a4af2d39ed984856a014a99af6faa2d06f0cfe5b">Accéder</a>
         </div>
 
         <div class="card">
           <h2>Convocations</h2>
           <p>Convocations officielles pour chaque réunion (documents à jour).</p>
-          <a href="https://workdrive.zohopublic.eu/external/2f2eb0fd6a7a358092b6fb86b2e5eef40170c984ab607e46889f208972965d08"
-             target="_blank" rel="noopener noreferrer">Accéder</a>
+          <a href="https://workdrive.zohopublic.eu/external/2f2eb0fd6a7a358092b6fb86b2e5eef40170c984ab607e46889f208972965d08">Accéder</a>
         </div>
 
         <div class="card">
           <h2>Organisation des événements</h2>
           <p>Dossiers, check-lists, logistique, informations internes.</p>
-          <a href="https://workdrive.zohopublic.eu/external/746f7ad5412531d19cc8898b92f623212679eac25a221df9edb861f9d274ae6f"
-             target="_blank" rel="noopener noreferrer">Accéder</a>
+          <a href="https://workdrive.zohopublic.eu/external/746f7ad5412531d19cc8898b92f623212679eac25a221df9edb861f9d274ae6f">Accéder</a>
         </div>
 
         <div class="card">
           <h2>Planning annuel</h2>
           <p>Planning des rencontres, thèmes, dates et informations.</p>
-          <a href="https://workdrive.zohopublic.eu/external/ec5d28d66f17f417ddde709923620c438566b179e57c416e189447e663bfbb90"
-             target="_blank" rel="noopener noreferrer">Accéder</a>
+          <a href="https://workdrive.zohopublic.eu/external/ec5d28d66f17f417ddde709923620c438566b179e57c416e189447e663bfbb90">Accéder</a>
         </div>
 
       </div>
@@ -543,36 +708,31 @@
         <div class="card">
           <h2>Documents d’étude</h2>
           <p>Documents de travail, lectures, supports et synthèses.</p>
-          <a href="https://workdrive.zohopublic.eu/external/c2ea74b32aa49c6578e211a605c6228ee6fcf7cbbfe5c2167723685ed4092039"
-             target="_blank" rel="noopener noreferrer">Accéder</a>
+          <a href="https://workdrive.zohopublic.eu/external/c2ea74b32aa49c6578e211a605c6228ee6fcf7cbbfe5c2167723685ed4092039">Accéder</a>
         </div>
 
         <div class="card">
           <h2>Planches d’étude</h2>
           <p>Planches, travaux d’étude et documents d’approfondissement.</p>
-          <a href="https://workdrive.zohopublic.eu/external/c8ce36c12a29901fb2123498779d11da18b11a27b3fb5be26b9d646896ba48a3"
-             target="_blank" rel="noopener noreferrer">Accéder</a>
+          <a href="https://workdrive.zohopublic.eu/external/c8ce36c12a29901fb2123498779d11da18b11a27b3fb5be26b9d646896ba48a3">Accéder</a>
         </div>
 
         <div class="card">
           <h2>Procès-verbaux</h2>
           <p>Comptes rendus, PV scannés, documents associés.</p>
-          <a href="https://workdrive.zohopublic.eu/external/411dabd98ceeb4768118f60a6c11b40684b7f817f480023ce28a6b846c00fe90"
-             target="_blank" rel="noopener noreferrer">Accéder</a>
+          <a href="https://workdrive.zohopublic.eu/external/411dabd98ceeb4768118f60a6c11b40684b7f817f480023ce28a6b846c00fe90">Accéder</a>
         </div>
 
         <div class="card">
           <h2>Travaux & documents</h2>
           <p>Travaux, documents internes, éléments de suivi.</p>
-          <a href="https://workdrive.zohopublic.eu/external/ee2de27f715abc734e652fd7f16a634fb713af76df91344bcf3f632f3f296f0d"
-             target="_blank" rel="noopener noreferrer">Accéder</a>
+          <a href="https://workdrive.zohopublic.eu/external/ee2de27f715abc734e652fd7f16a634fb713af76df91344bcf3f632f3f296f0d">Accéder</a>
         </div>
 
         <div class="card">
           <h2>Bibliothèque d’étude (références)</h2>
           <p>Ouvrages et documents de référence (accès restreint).</p>
-          <a href="https://workdrive.zohopublic.eu/external/d00e500b02f0e541e759b58d089901aa8ae741d55969776e5677ca3829301a6a"
-             target="_blank" rel="noopener noreferrer">Accéder</a>
+          <a href="https://workdrive.zohopublic.eu/external/d00e500b02f0e541e759b58d089901aa8ae741d55969776e5677ca3829301a6a">Accéder</a>
         </div>
 
       </div>
@@ -616,28 +776,27 @@
         </div>
       </div>
 
-      <!-- ARCHIVES (À LA FIN) -->
+      <!-- ARCHIVES -->
       <div class="section-title" id="archives">Archives</div>
       <div class="cards">
         <div class="card">
           <h2>Archives – Doctrine interne</h2>
           <p>Archives internes protégées.</p>
-          <a href="https://workdrive.zohopublic.eu/external/9ef517340ff897d63b6fd3081d546423549bbefa2dab96e9aceba65bbcfa5ef8"
-             target="_blank" rel="noopener noreferrer">Accéder</a>
+          <a href="https://workdrive.zohopublic.eu/external/9ef517340ff897d63b6fd3081d546423549bbefa2dab96e9aceba65bbcfa5ef8">Accéder</a>
         </div>
       </div>
 
-      <!-- Retour site public (EN BAS) -->
+      <!-- Retour site public -->
       <a class="btn-or" href="index.html">← Retour au site public</a>
 
-      <!-- Signature nnDnn (EN BAS) -->
+      <!-- Signature nnDnn -->
       <div class="nndnn-banner" aria-label="Signature templière nnDnn">
         <img src="croix.epee.PNG" alt="Épée – symbole">
         <div class="nndnn-text">nnDnn</div>
         <img src="croix.epee.PNG" alt="Épée – symbole">
       </div>
 
-      <!-- Footer identique index -->
+      <!-- Footer -->
       <div class="footer">
         <div class="line">
           <span>© OSD9TDJ Association Loi 1901, Tous droits réservés</span>
@@ -665,6 +824,80 @@
 
     </div>
   </div>
+
+  <!-- ✅ MODALE ZOHO (iframe) -->
+  <div class="modal" id="zohoModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Documents Zoho">
+      <div class="modal-head">
+        <div class="modal-title" id="zohoModalTitle">Documents</div>
+        <div class="modal-actions">
+          <a class="btn-mini" id="zohoOpenExternal" href="#" target="_blank" rel="noopener noreferrer">Ouvrir dans Zoho</a>
+          <button class="btn-mini" type="button" id="zohoClose">Fermer</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <iframe class="zoho-frame" id="zohoFrame" title="Zoho" src="about:blank"></iframe>
+      </div>
+      <div class="modal-hint">
+        Si Zoho refuse l’intégration (sécurité), l’iframe peut rester vide : utilisez “Ouvrir dans Zoho”.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("zohoModal");
+    const frame = document.getElementById("zohoFrame");
+    const closeBtn = document.getElementById("zohoClose");
+    const openExternal = document.getElementById("zohoOpenExternal");
+    const modalTitle = document.getElementById("zohoModalTitle");
+
+    function openZohoUrl(url, title){
+      if (!url) return;
+      modalTitle.textContent = title || "Documents";
+      frame.src = url;
+      openExternal.href = url;
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden","false");
+    }
+
+    function closeZoho(){
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden","true");
+      frame.src = "about:blank";
+    }
+
+    closeBtn.addEventListener("click", closeZoho);
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeZoho(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeZoho(); });
+
+    // ✅ 1) Bouton “Entretien d’adhésion”
+    document.querySelectorAll(".zoho-open").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const url = btn.getAttribute("data-url");
+        const title = btn.getAttribute("data-title") || "Documents";
+        if (!url || url.includes("REMPLACE-MOI")) {
+          alert("⚠️ Colle ton lien Zoho du dossier “Entretien d’adhésion” dans data-url.");
+          return;
+        }
+        openZohoUrl(url, title);
+      });
+    });
+
+    // ✅ 2) Tous les liens Zoho existants (workdrive.zohopublic.eu) => ouverture dans la modale
+    document.querySelectorAll('a[href*="workdrive.zohopublic.eu"]').forEach(a => {
+      a.addEventListener("click", (e) => {
+        const url = a.getAttribute("href");
+        if (!url) return;
+        e.preventDefault();
+
+        const title =
+          a.closest(".card")?.querySelector("h2")?.textContent?.trim()
+          || "Documents";
+
+        openZohoUrl(url, title);
+      });
+    });
+  </script>
 
 </body>
 </html>
