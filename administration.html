@@ -460,6 +460,42 @@
 </head>
 
 <body>
+  <script>
+(function(){
+
+  /* ======================================
+     🔑 CODES D’ACCÈS ADMINISTRATION
+     👉 REMPLACE LES 3 CODES CI-DESSOUS
+     ====================================== */
+  const CODES_AUTORISES = [
+    "kgb2025@",
+    "CODE-ADMIN-2",
+    "CODE-ADMIN-3"
+  ];
+
+  alert(
+    "⚠️ ACCÈS STRICTEMENT RÉSERVÉ À L’ADMINISTRATION ⚠️\n\n" +
+    "Toute tentative d’accès non autorisée,\n" +
+    "intrusion ou utilisation frauduleuse\n" +
+    "fera l’objet de poursuites judiciaires\n" +
+    "(articles 323-1 et suivants du Code pénal)."
+  );
+
+  const saisie = prompt(
+    "🔒 Administration O.S.D.9.T.D.J.\n\n" +
+    "Veuillez saisir le code d’accès :"
+  );
+
+  const codeOK = saisie && CODES_AUTORISES.includes(saisie.trim());
+
+  if (!codeOK) {
+    document.body.innerHTML = "";
+    alert("⛔ Accès refusé.");
+    window.location.href = "index.html";
+  }
+
+})();
+</script>
   <div class="frame-fixed" aria-hidden="true"></div>
 
   <div class="top-menu" aria-label="Menu administration">
