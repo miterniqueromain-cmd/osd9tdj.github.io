@@ -44,7 +44,6 @@
       --or-fonce:#d6a728;
       --clair:#fdf7e5;
     }
-
     *{ box-sizing:border-box; }
 
     html,body{
@@ -201,7 +200,7 @@
       letter-spacing:0.5px;
     }
 
-    /* Bloc événement passé (simple) */
+    /* Bloc événement passé */
     .event-card{
       text-align:left;
       margin-top:14px;
@@ -277,17 +276,10 @@
       display:block;
     }
 
-    /* ✅ LA SOLUTION: sur mobile, eve13 en "contain" => rien n’est coupé */
+    /* eve13 jamais coupée */
     .img-no-crop{
       object-fit:contain;
       background:rgba(0,0,0,0.55);
-    }
-
-    .g-note{
-      margin-top:12px;
-      font-size:0.94rem;
-      color:rgba(253,247,229,0.86);
-      text-align:center;
     }
 
     /* Menu bas */
@@ -341,66 +333,36 @@
       .g-item img{ height:190px; }
     }
 
+    /* ✅ MOBILE PROPRE + encoche iPhone */
     @media (max-width: 600px){
       .top-menu{ top:22px; right:22px; }
       .menu-panel{ width:240px; }
-      .frame-fixed{ inset:12px; }
-      .viewport-scroll{ inset:20px; }
       .tab{ padding:9px 14px; font-size:0.86rem; }
+
+      .frame-fixed{
+        inset: calc(12px + env(safe-area-inset-top)) 12px 12px 12px;
+      }
+      .viewport-scroll{
+        inset: calc(20px + env(safe-area-inset-top)) 20px 20px 20px;
+      }
+
+      .logo-box{
+        margin-top: 10px;
+        padding: 16px;
+      }
+      .gold-title{
+        margin-top: 10px;
+      }
 
       .gallery{ grid-template-columns:1fr; }
       .g-item img{ height:240px; }
 
-      /* ✅ Sur mobile, on donne un peu plus de hauteur à eve13 en contain */
-      .img-no-crop{ height:320px; }
+      .img-no-crop{
+        height:320px;
+        object-fit:contain;
+        background:rgba(0,0,0,0.55);
+      }
     }
-    /* ===== FIX ESTHÉTIQUE MOBILE (cadre du haut) ===== */
-@media (max-width: 600px){
-
-  /* On descend légèrement le cadre */
-  .frame-fixed{
-    inset: 18px 12px 12px 12px;
-  }
-
-  /* On donne plus d’espace au scroll */
-  .viewport-scroll{
-    inset: 28px 20px 20px 20px;
-  }
-
-  /* On respire autour du logo */
-  .logo-box{
-    margin-top: 14px;
-    padding: 16px;
-  }
-
-  /* On évite l’effet "collé" sous l’encoche iOS */
-  .gold-title{
-    margin-top: 12px;
-  }
-/* ===== FIX ESTHÉTIQUE MOBILE (cadre du haut) ===== */
-@media (max-width: 600px){
-
-  /* On descend légèrement le cadre */
-  .frame-fixed{
-    inset: 18px 12px 12px 12px;
-  }
-
-  /* On donne plus d’espace au scroll */
-  .viewport-scroll{
-    inset: 28px 20px 20px 20px;
-  }
-
-  /* On respire autour du logo */
-  .logo-box{
-    margin-top: 14px;
-    padding: 16px;
-  }
-
-  /* On évite l’effet "collé" sous l’encoche iOS */
-  .gold-title{
-    margin-top: 12px;
-  }
-}
   </style>
 
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -455,22 +417,22 @@
           <p class="event-date">Samedi 23 novembre 2024 • Château d’Avully</p>
 
           <p class="event-desc">
-  Cet évènement a marqué un temps fort de notre démarche en France&nbsp;: une rencontre ouverte au public,
-  suivie d’une soirée de gala, rassemblant de nombreux invités, dont plusieurs invités de renom.
-  <br><br>
-  Cette soirée s’inscrivait également dans le cadre d’un jubilé célébré par l’ordre d’origine
-  <em>Souverain et Auguste, Ordre des Chevaliers Templiers de Notre-Dame de Sion</em>, mentionné ici à titre historique.
-  <br><br>
-  La journée a proposé une vente et dédicaces d’ouvrages, ainsi qu’une dégustation et vente de vins.
-  La soirée a été l’occasion de célébrer officiellement le lancement de notre association et le début de cette aventure,
-  dans un esprit de tradition, de transmission et de fraternité.
-  <br><br>
-  Une cérémonie d’investiture a été célébrée à cette occasion pour l’accueil des chevaliers français.
-  Nous adressons enfin nos remerciements à toutes les personnes, soutiens et partenaires qui ont contribué à la réussite
-  de cette journée et de cette soirée.
-  L’organisation s’est inscrite, à l’époque, dans un cadre de coopération associative et internationale, en continuité
-  avec les éléments présentés sur la page <a href="histoire.html">Notre histoire</a>.
-</p>
+            Cet évènement a marqué un temps fort de notre démarche en France&nbsp;: une rencontre ouverte au public,
+            suivie d’une soirée de gala, rassemblant de nombreux invités, dont plusieurs invités de renom.
+            <br><br>
+            Cette soirée s’inscrivait également dans le cadre d’un jubilé célébré par l’ordre d’origine
+            <em>Souverain et Auguste, Ordre des Chevaliers Templiers de Notre-Dame de Sion</em>, mentionné ici à titre historique.
+            <br><br>
+            La journée a proposé une vente et dédicaces d’ouvrages, ainsi qu’une dégustation et vente de vins.
+            La soirée a été l’occasion de célébrer officiellement le lancement de notre association et le début de cette aventure,
+            dans un esprit de tradition, de transmission et de fraternité.
+            <br><br>
+            Une cérémonie d’investiture a été célébrée à cette occasion pour l’accueil des chevaliers français.
+            Nous adressons enfin nos remerciements à toutes les personnes, soutiens et partenaires qui ont contribué à la réussite
+            de cette journée et de cette soirée.
+            L’organisation s’est inscrite, à l’époque, dans un cadre de coopération associative et internationale, en continuité
+            avec les éléments présentés sur la page <a href="histoire.html">Notre histoire</a>.
+          </p>
 
           <div class="poster-wrap">
             <a class="poster-link" href="eveaffiche.PNG" target="_blank" rel="noopener" aria-label="Ouvrir l'affiche de l'évènement">
@@ -493,11 +455,10 @@
             <div class="g-item"><a href="eve8.PNG" target="_blank" rel="noopener"><img src="eve8.PNG" alt="Photo de l'évènement" loading="lazy"></a></div>
             <div class="g-item"><a href="eve11.PNG" target="_blank" rel="noopener"><img src="eve11.PNG" alt="Photo de l'évènement" loading="lazy"></a></div>
 
-            <!-- ✅ Celle-ci ne sera JAMAIS coupée sur mobile -->
             <div class="g-item"><a href="eve13.JPG" target="_blank" rel="noopener"><img class="img-no-crop" src="eve13.JPG" alt="Photo de l'évènement" loading="lazy"></a></div>
           </div>
 
-          
+        </div>
       </div>
 
       <div class="tabs-center">
