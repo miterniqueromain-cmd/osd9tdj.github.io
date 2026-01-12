@@ -57,7 +57,7 @@
       background:radial-gradient(circle at top,#191919,#050506 70%);
     }
 
-    /* ✅ Cadre fixe (DERNIÈRE CORRECTION : derrière le contenu) */
+    /* ✅ Cadre fixe (derrière le contenu) */
     .frame-fixed{
       position:fixed;
       inset:14px;
@@ -67,24 +67,33 @@
         0 0 0 1px rgba(253,247,229,0.16) inset,
         0 0 38px rgba(0,0,0,0.35);
       pointer-events:none;
-      z-index:0; /* ✅ IMPORTANT: ne coupe plus les images */
+      z-index:0;
     }
 
-    /* ✅ Zone scroll au-dessus du cadre */
+    /* ✅ Zone scroll (avec safe-area iPhone) */
     .viewport-scroll{
       position:fixed;
-      inset:22px;
+      left:22px;
+      right:22px;
+      bottom:22px;
+
+      /* IMPORTANT : le haut tient compte du notch */
+      top: calc(22px + env(safe-area-inset-top));
+
       overflow-y:auto;
       overflow-x:hidden;
       -webkit-overflow-scrolling:touch;
       z-index:1;
     }
 
-    /* ✅ Menu 3 points (au-dessus de tout) */
+    /* ✅ Menu 3 points (ne recouvre plus le logo sur mobile) */
     .top-menu{
       position:fixed;
-      top:26px;
       right:26px;
+
+      /* IMPORTANT : safe-area iPhone */
+      top: calc(26px + env(safe-area-inset-top));
+
       z-index:60;
       pointer-events:auto;
     }
@@ -140,7 +149,8 @@
 
     .container{
       min-height:100vh;
-      padding:35px 15px 25px;
+      /* ✅ On réserve une zone en haut pour éviter tout recouvrement par le menu */
+      padding: calc(35px + env(safe-area-inset-top)) 15px 25px;
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -154,10 +164,14 @@
       box-shadow:0 0 30px rgba(0,0,0,0.8);
       border:2px solid var(--or-fonce);
       margin-bottom:25px;
+
+      /* ✅ Empêche tout “dépassement” visuel sur mobile */
+      overflow:hidden;
     }
     .logo-img{
-      max-width:90vw;
-      width:520px;
+      /* ✅ plus robuste sur mobile */
+      width:100%;
+      max-width:520px;
       height:auto;
       display:block;
     }
@@ -200,7 +214,6 @@
       letter-spacing:0.5px;
     }
 
-    /* Évènement passé */
     .event-card{
       text-align:left;
       margin-top:14px;
@@ -233,7 +246,6 @@
     }
     .event-desc a{ color: var(--clair); text-decoration: underline; }
 
-    /* Affiche */
     .poster-wrap{
       margin:14px 0 16px;
       display:flex;
@@ -250,7 +262,6 @@
       display:block;
     }
 
-    /* Galerie */
     .gallery{
       display:grid;
       grid-template-columns:repeat(3, minmax(0, 1fr));
@@ -280,7 +291,6 @@
       background:rgba(0,0,0,0.55);
     }
 
-    /* Menu bas */
     .tabs{
       margin:18px auto 8px;
       display:inline-flex;
@@ -332,10 +342,22 @@
     }
 
     @media (max-width: 600px){
-      .top-menu{ top:22px; right:22px; }
+      .top-menu{ right:22px; }
+
       .menu-panel{ width:240px; }
-      .frame-fixed{ inset:12px; }       /* ✅ simple */
-      .viewport-scroll{ inset:20px; }   /* ✅ simple */
+      .frame-fixed{ inset:12px; }
+
+      /* ✅ On garde le même principe avec safe-area */
+      .viewport-scroll{
+        left:20px; right:20px; bottom:20px;
+        top: calc(20px + env(safe-area-inset-top));
+      }
+
+      /* ✅ Plus d’air en haut pour éviter l’effet “ça touche le cadre” */
+      .container{
+        padding-top: calc(62px + env(safe-area-inset-top));
+      }
+
       .tab{ padding:9px 14px; font-size:0.86rem; }
 
       .gallery{ grid-template-columns:1fr; }
@@ -390,7 +412,6 @@
 
       <div class="events-section">
         <div class="events-title">Évènements à venir</div>
-        <!-- espace vide pour les futurs évènements -->
       </div>
 
       <div class="events-section" aria-label="Évènement passé">
