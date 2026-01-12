@@ -30,9 +30,9 @@
   <!-- WATERMARKS (internes) -->
   <meta name="osd9tdj-signature" content="WTRMK-DOCS-INTERNES-OMEGA-2026-OSD9TDJ-ACCESS-RESERVE-MEMBRES" />
   <meta name="osd9tdj-origin" content="osd9tdj.org / documents-internes.html" />
-  <meta name="referrer" content="no-referrer">
 
-  <!-- CSP : autorise Zoho en iframe + script inline (modale) -->
+  <!-- Hardening -->
+  <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
     base-uri 'self';
@@ -48,13 +48,15 @@
     upgrade-insecure-requests;
   ">
 
-  <!-- Polices -->
+  <!-- Polices Google -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --or:#ffd700;
       --clair:#fdf7e5;
+      --orLine: rgba(255,215,0,0.45);
+      --orSoft: rgba(255,215,0,0.28);
     }
     *{ box-sizing:border-box; }
 
@@ -64,22 +66,30 @@
       padding:0;
       overflow:hidden;
       font-family:'Lato', Arial, sans-serif;
-      color:#fff;
+      color:#ffffff;
       text-align:center;
       min-height:100vh;
     }
 
-    /* ✅ Fond = fond-membre.PNG (drapeau supprimé) */
+    /* ✅ FOND = fond-membre.PNG (adapté mobile/tablette) */
     body::before{
       content:"";
       position:fixed;
       inset:0;
-      background:url("fond-membre.PNG") no-repeat center center fixed;
+      background:url("fond-membre.PNG") no-repeat center center;
       background-size:cover;
+      background-attachment:fixed;
       z-index:-2;
     }
+    /* iOS/Android : fixed peut “bugger” => scroll + cadrage stable */
+    @media (max-width: 1024px){
+      body::before{
+        background-attachment:scroll;
+        background-position:center top;
+      }
+    }
 
-    /* Cadre fixe */
+    /* ✅ Cadre fixe */
     .frame-fixed{
       position:fixed;
       inset:14px;
@@ -92,7 +102,7 @@
       z-index:40;
     }
 
-    /* Scroll interne */
+    /* ✅ Zone scroll interne */
     .viewport-scroll{
       position:fixed;
       inset:22px;
@@ -102,7 +112,7 @@
       z-index:1;
     }
 
-    /* Menu 3 points */
+    /* ✅ Menu 3 points */
     .top-menu{
       position:fixed;
       top:26px;
@@ -159,41 +169,42 @@
     }
     .menu-panel a:last-child{ border-bottom:none; }
 
-    /* ✅ Voile noir sur le fond */
+    /* ✅ Voile noir */
     .overlay{
       min-height:100vh;
       padding:30px 15px 28px;
       box-sizing:border-box;
       background: radial-gradient(circle at top,
-        rgba(0,0,0,0.45),
-        rgba(0,0,0,0.90));
+        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.92));
       display:flex;
       flex-direction:column;
       align-items:center;
     }
 
-    /* Badge cadenas */
+    /* ✅ BADGE : plus de fond jaune (fond noir + bord doré) */
     .lock-badge{
       display:inline-flex;
       align-items:center;
       gap:10px;
       padding:10px 20px;
       border-radius:999px;
-      border:1px solid rgba(255,215,0,0.65);
-      background:rgba(255,215,0,0.18);
+      border:1px solid var(--orLine);
+      background:rgba(0,0,0,0.55);
       font-family:'Cinzel',serif;
       font-weight:700;
       color:var(--or);
-      margin:8px auto 14px;
+      margin:10px auto 18px;
       box-shadow:0 0 18px rgba(0,0,0,0.6);
     }
 
     h1{
       font-family:'Cinzel',serif;
       font-size:1.9rem;
-      margin:6px 0 6px;
+      margin:10px 0 6px;
       text-shadow:0 0 8px rgba(0,0,0,0.7);
     }
+
     .subtitle{
       font-size:0.95rem;
       opacity:0.95;
@@ -201,56 +212,40 @@
       max-width:980px;
     }
 
+    /* Bouton */
     .btn-or{
       display:inline-flex;
       align-items:center;
       gap:8px;
-      padding:9px 14px;
+      padding:10px 18px;
       border-radius:999px;
       background: linear-gradient(135deg, #ffd700, #e6c200);
       color:#111;
       text-decoration:none;
       font-family:'Cinzel',serif;
       font-weight:700;
-      font-size:0.86rem;
+      font-size:0.9rem;
       box-shadow:
         0 0 0 1px rgba(255,215,0,0.75) inset,
         0 6px 14px rgba(0,0,0,0.45);
-      margin:10px 0 10px;
+      margin:12px 0 18px;
       border:0;
       cursor:pointer;
     }
-    .btn-or:hover{
-      background: linear-gradient(135deg, #ffe066, #f0d000);
-    }
 
-    /* Bloc adhésion */
-    .adhesion{
+    .section-title{
       width:100%;
       max-width:980px;
-      margin:10px auto 16px;
-      padding:16px 14px;
-      background:rgba(0,0,0,0.62);
-      border:1px solid rgba(255,215,0,0.45);
-      border-radius:18px;
-      box-shadow:0 0 22px rgba(0,0,0,0.6);
-      text-align:left;
-    }
-    .adhesion h2{
-      margin:0 0 8px;
+      margin:18px auto 10px;
       font-family:'Cinzel',serif;
       color:var(--or);
       font-size:1.05rem;
-      letter-spacing:0.04em;
-    }
-    .adhesion p{
-      margin:0 0 12px;
-      font-size:0.92rem;
-      opacity:0.92;
-      line-height:1.45;
+      letter-spacing:0.06em;
+      opacity:0.95;
+      text-align:left;
     }
 
-    /* ✅ Accordéons */
+    /* Accordéons */
     .accordion{
       width:100%;
       max-width:980px;
@@ -279,18 +274,16 @@
       border-bottom:1px solid rgba(255,215,0,0.18);
     }
     .accordion summary::-webkit-details-marker{ display:none; }
-    .acc-right{
-      color:rgba(255,215,0,0.85);
-      font-size:1.1rem;
-    }
+    .acc-right{ color:rgba(255,215,0,0.85); font-size:1.1rem; }
     .acc-body{ padding:14px; }
 
     .cards{
       display:grid;
       grid-template-columns:repeat(1, minmax(0, 1fr));
       gap:18px;
+      max-width:980px;
       width:100%;
-      margin:0;
+      margin:0 auto 12px;
     }
     @media (min-width: 700px){
       .cards{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
@@ -300,7 +293,7 @@
     }
 
     .card{
-      background:rgba(0,0,0,0.62);
+      background:rgba(0,0,0,0.65);
       border:1px solid rgba(255,215,0,0.45);
       border-radius:18px;
       padding:18px 16px;
@@ -320,7 +313,7 @@
     }
     .card a{
       display:inline-block;
-      padding:9px 14px;
+      padding:10px 16px;
       border-radius:999px;
       background:rgba(255,215,0,0.18);
       color:#fff;
@@ -328,69 +321,10 @@
       font-weight:700;
       border:1px solid rgba(255,215,0,0.55);
       font-family:'Cinzel',serif;
-      font-size:0.84rem;
+      font-size:0.88rem;
       max-width:100%;
     }
     .card a:hover{ background:rgba(255,215,0,0.35); }
-
-    /* Contacts */
-    .contacts-grid{
-      display:grid;
-      grid-template-columns:repeat(1, minmax(0,1fr));
-      gap:12px;
-    }
-    @media (min-width: 700px){
-      .contacts-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
-    }
-    @media (min-width: 1000px){
-      .contacts-grid{ grid-template-columns:repeat(3, minmax(0,1fr)); }
-    }
-    .contact-item{
-      background:rgba(0,0,0,0.55);
-      border:1px solid rgba(255,215,0,0.35);
-      border-radius:14px;
-      padding:12px 12px;
-      box-shadow:0 0 18px rgba(0,0,0,0.55);
-      overflow-wrap:anywhere;
-      word-break:break-word;
-    }
-    .contact-item strong{
-      color:var(--or);
-      font-family:'Cinzel',serif;
-    }
-    .contact-item a{
-      color:#fff;
-      text-decoration:none;
-      border-bottom:1px dotted rgba(255,215,0,0.55);
-    }
-
-    /* Signature nnDnn */
-    .nndnn-banner{
-      margin: 26px auto 10px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:16px;
-      flex-wrap:nowrap;
-      text-align:center;
-    }
-    .nndnn-banner img{
-      height:48px;
-      width:auto;
-      display:block;
-      filter: drop-shadow(0 0 10px rgba(0,0,0,0.85));
-      opacity:0.96;
-    }
-    .nndnn-text{
-      font-family:'Cinzel',serif;
-      color:var(--or);
-      font-weight:700;
-      letter-spacing:0.18em;
-      font-size:2.05rem;
-      line-height:1;
-      text-shadow:0 0 14px rgba(0,0,0,0.9);
-      white-space:nowrap;
-    }
 
     /* Footer */
     .footer {
@@ -402,6 +336,7 @@
       width:100%;
       max-width: 980px;
       border-top: 1px solid rgba(255,215,0,0.22);
+      text-align:center;
     }
     .footer .line{
       display:flex;
@@ -418,34 +353,7 @@
       border-bottom: 1px dotted rgba(255,215,0,0.55);
       padding-bottom: 1px;
       font-size:0.72rem;
-      letter-spacing:0.02em;
       text-transform: lowercase;
-    }
-    .footer a:hover{
-      color:#fff !important;
-      border-bottom-color: rgba(255,215,0,0.95);
-    }
-    .sep{ opacity:0.55; }
-
-    .legal-line{
-      margin-top: 14px;
-      font-size: 0.75rem;
-      opacity: 0.92;
-      line-height: 1.35rem;
-      text-align:center;
-    }
-    .legal-line a{
-      color:#ffffff !important;
-      border-bottom: 1px dotted rgba(255,215,0,0.55);
-    }
-
-    .wmk{
-      position:fixed;
-      left:-9999px;
-      top:-9999px;
-      opacity:0;
-      pointer-events:none;
-      user-select:none;
     }
 
     /* Modal Zoho */
@@ -530,15 +438,23 @@
       text-align:left;
     }
 
+    /* Watermark invisible */
+    .wmk{
+      position:fixed;
+      left:-9999px;
+      top:-9999px;
+      opacity:0;
+      pointer-events:none;
+      user-select:none;
+    }
+
     @media (max-width: 480px){
       .top-menu{ top:22px; right:22px; }
       .menu-panel{ width:240px; }
       .frame-fixed{ inset:12px; }
       .viewport-scroll{ inset:20px; }
       h1{ font-size:1.6rem; }
-      .nndnn-banner{ gap:10px; }
-      .nndnn-banner img{ height:42px; }
-      .nndnn-text{ font-size:1.55rem; }
+      .btn-or{ font-size:0.85rem; }
     }
   </style>
 
@@ -579,141 +495,102 @@
       <a class="btn-or" href="index.html">← Retour au site public</a>
 
       <!-- Préparer entretien d’adhésion -->
-      <div class="adhesion" id="adhesion" aria-label="Préparer votre entretien d’adhésion">
-        <h2>Préparer votre entretien d’adhésion</h2>
-        <p>Accès au dossier d’admission (formulaire, statuts, documents). Zoho demandera le code.</p>
-
-        <button
-          class="btn-or zoho-open"
-          type="button"
+      <div class="warning" id="adhesion" style="max-width:980px; text-align:left;">
+        <strong style="font-family:'Cinzel',serif; color:var(--or);">Préparer votre entretien d’adhésion</strong>
+        <p style="margin:8px 0 12px; font-size:0.92rem; opacity:0.92; line-height:1.45;">
+          Accès au dossier d’admission (formulaire, statuts, documents). Zoho demandera le code.
+        </p>
+        <button class="btn-or zoho-open" type="button"
           data-title="Préparer votre entretien d’adhésion"
           data-url="https://REMPLACE-MOI-PAR-TON-LIEN-ZOHO">
           Accéder aux documents
         </button>
       </div>
 
-      <!-- MENUS DÉROULANTS -->
+      <!-- ORGANISATION -->
       <details class="accordion" id="organisation" open>
         <summary><span>Organisation & administratif</span><span class="acc-right">▾</span></summary>
         <div class="acc-body">
           <div class="cards">
-            <div class="card">
-              <h2>Statuts & règlements</h2>
-              <p>Statuts, règlement intérieur, chartes, documents officiels.</p>
-              <a href="https://workdrive.zohopublic.eu/external/899010c7ad078512cb00050de5500774d14a7eea8c24a6c73178a860309678fb">Accéder</a>
-            </div>
-            <div class="card">
-              <h2>Procès-verbaux & comptes annuels</h2>
-              <p>PV, comptes annuels, bilans et documents financiers officiels.</p>
-              <a href="https://workdrive.zohopublic.eu/external/41a251aea4b9633def10969fd70c4ed7b265cefde53c749594e63b6ad8d969ba">Accéder</a>
-            </div>
-            <div class="card">
-              <h2>Documents Préfecture</h2>
-              <p>Déclarations, récépissés, courriers et pièces administratives.</p>
-              <a href="https://workdrive.zohopublic.eu/external/52a5579789f6993023b3da01a4af2d39ed984856a014a99af6faa2d06f0cfe5b">Accéder</a>
-            </div>
-            <div class="card">
-              <h2>Convocations</h2>
-              <p>Convocations officielles pour chaque réunion (documents à jour).</p>
-              <a href="https://workdrive.zohopublic.eu/external/2f2eb0fd6a7a358092b6fb86b2e5eef40170c984ab607e46889f208972965d08">Accéder</a>
-            </div>
-            <div class="card">
-              <h2>Organisation des événements</h2>
-              <p>Dossiers, check-lists, logistique, informations internes.</p>
-              <a href="https://workdrive.zohopublic.eu/external/746f7ad5412531d19cc8898b92f623212679eac25a221df9edb861f9d274ae6f">Accéder</a>
-            </div>
-            <div class="card">
-              <h2>Planning annuel</h2>
-              <p>Planning des rencontres, thèmes, dates et informations.</p>
-              <a href="https://workdrive.zohopublic.eu/external/ec5d28d66f17f417ddde709923620c438566b179e57c416e189447e663bfbb90">Accéder</a>
-            </div>
+            <div class="card"><h2>Statuts & règlements</h2><p>Statuts, règlement intérieur, chartes, documents officiels.</p>
+              <a href="https://workdrive.zohopublic.eu/external/899010c7ad078512cb00050de5500774d14a7eea8c24a6c73178a860309678fb">Accéder</a></div>
+
+            <div class="card"><h2>Procès-verbaux & comptes annuels</h2><p>PV, comptes annuels, bilans et documents financiers.</p>
+              <a href="https://workdrive.zohopublic.eu/external/41a251aea4b9633def10969fd70c4ed7b265cefde53c749594e63b6ad8d969ba">Accéder</a></div>
+
+            <div class="card"><h2>Documents Préfecture</h2><p>Déclarations, récépissés, courriers et pièces administratives.</p>
+              <a href="https://workdrive.zohopublic.eu/external/52a5579789f6993023b3da01a4af2d39ed984856a014a99af6faa2d06f0cfe5b">Accéder</a></div>
+
+            <div class="card"><h2>Convocations</h2><p>Convocations officielles pour chaque réunion.</p>
+              <a href="https://workdrive.zohopublic.eu/external/2f2eb0fd6a7a358092b6fb86b2e5eef40170c984ab607e46889f208972965d08">Accéder</a></div>
+
+            <div class="card"><h2>Organisation des événements</h2><p>Dossiers, check-lists, logistique, informations internes.</p>
+              <a href="https://workdrive.zohopublic.eu/external/746f7ad5412531d19cc8898b92f623212679eac25a221df9edb861f9d274ae6f">Accéder</a></div>
+
+            <div class="card"><h2>Planning annuel</h2><p>Planning des rencontres, thèmes, dates et informations.</p>
+              <a href="https://workdrive.zohopublic.eu/external/ec5d28d66f17f417ddde709923620c438566b179e57c416e189447e663bfbb90">Accéder</a></div>
           </div>
         </div>
       </details>
 
+      <!-- ÉTUDES -->
       <details class="accordion" id="etudes">
         <summary><span>Études</span><span class="acc-right">▾</span></summary>
         <div class="acc-body">
           <div class="cards">
-            <div class="card">
-              <h2>Documents d’étude</h2>
-              <p>Documents de travail, lectures, supports et synthèses.</p>
-              <a href="https://workdrive.zohopublic.eu/external/c2ea74b32aa49c6578e211a605c6228ee6fcf7cbbfe5c2167723685ed4092039">Accéder</a>
-            </div>
-            <div class="card">
-              <h2>Planches d’étude</h2>
-              <p>Planches, travaux d’étude et documents d’approfondissement.</p>
-              <a href="https://workdrive.zohopublic.eu/external/c8ce36c12a29901fb2123498779d11da18b11a27b3fb5be26b9d646896ba48a3">Accéder</a>
-            </div>
-            <div class="card">
-              <h2>Procès-verbaux</h2>
-              <p>Comptes rendus, PV scannés, documents associés.</p>
-              <a href="https://workdrive.zohopublic.eu/external/411dabd98ceeb4768118f60a6c11b40684b7f817f480023ce28a6b846c00fe90">Accéder</a>
-            </div>
-            <div class="card">
-              <h2>Travaux & documents</h2>
-              <p>Travaux, documents internes, éléments de suivi.</p>
-              <a href="https://workdrive.zohopublic.eu/external/ee2de27f715abc734e652fd7f16a634fb713af76df91344bcf3f632f3f296f0d">Accéder</a>
-            </div>
-            <div class="card">
-              <h2>Bibliothèque d’étude</h2>
-              <p>Ouvrages et documents de référence.</p>
-              <a href="https://workdrive.zohopublic.eu/external/d00e500b02f0e541e759b58d089901aa8ae741d55969776e5677ca3829301a6a">Accéder</a>
-            </div>
+            <div class="card"><h2>Documents d’étude</h2><p>Documents de travail, lectures, supports et synthèses.</p>
+              <a href="https://workdrive.zohopublic.eu/external/c2ea74b32aa49c6578e211a605c6228ee6fcf7cbbfe5c2167723685ed4092039">Accéder</a></div>
+
+            <div class="card"><h2>Planches d’étude</h2><p>Planches, travaux d’étude et approfondissements.</p>
+              <a href="https://workdrive.zohopublic.eu/external/c8ce36c12a29901fb2123498779d11da18b11a27b3fb5be26b9d646896ba48a3">Accéder</a></div>
+
+            <div class="card"><h2>Procès-verbaux</h2><p>Comptes rendus, PV scannés, documents associés.</p>
+              <a href="https://workdrive.zohopublic.eu/external/411dabd98ceeb4768118f60a6c11b40684b7f817f480023ce28a6b846c00fe90">Accéder</a></div>
+
+            <div class="card"><h2>Travaux & documents</h2><p>Travaux, documents internes, éléments de suivi.</p>
+              <a href="https://workdrive.zohopublic.eu/external/ee2de27f715abc734e652fd7f16a634fb713af76df91344bcf3f632f3f296f0d">Accéder</a></div>
+
+            <div class="card"><h2>Bibliothèque d’étude</h2><p>Ouvrages et documents de référence.</p>
+              <a href="https://workdrive.zohopublic.eu/external/d00e500b02f0e541e759b58d089901aa8ae741d55969776e5677ca3829301a6a">Accéder</a></div>
           </div>
         </div>
       </details>
 
+      <!-- CONTACTS -->
       <details class="accordion" id="contacts">
         <summary><span>Contacts internes</span><span class="acc-right">▾</span></summary>
         <div class="acc-body">
-          <div class="contacts-grid">
-            <div class="contact-item"><strong>Contact général</strong><br><a href="mailto:contact@osd9tdj.org">contact@osd9tdj.org</a></div>
-            <div class="contact-item"><strong>Interne membres</strong><br><a href="mailto:interne@osd9tdj.org">interne@osd9tdj.org</a></div>
-            <div class="contact-item"><strong>Trésorerie</strong><br><a href="mailto:tresorier@osd9tdj.org">tresorier@osd9tdj.org</a></div>
-            <div class="contact-item"><strong>Secrétariat</strong><br><a href="mailto:secretariat@osd9tdj.org">secretariat@osd9tdj.org</a></div>
-            <div class="contact-item"><strong>Téléphone officiel (WhatsApp)</strong><br><a href="https://wa.me/33744828970" target="_blank" rel="noopener noreferrer">+33 7 44 82 89 70</a></div>
-            <div class="contact-item"><strong>Localisation</strong><br>Haute-Savoie, France</div>
+          <div class="cards">
+            <div class="card"><h2>Contact général</h2><p><a href="mailto:contact@osd9tdj.org">contact@osd9tdj.org</a></p><a href="mailto:contact@osd9tdj.org">Écrire</a></div>
+            <div class="card"><h2>Interne membres</h2><p><a href="mailto:interne@osd9tdj.org">interne@osd9tdj.org</a></p><a href="mailto:interne@osd9tdj.org">Écrire</a></div>
+            <div class="card"><h2>Trésorerie</h2><p><a href="mailto:tresorier@osd9tdj.org">tresorier@osd9tdj.org</a></p><a href="mailto:tresorier@osd9tdj.org">Écrire</a></div>
+            <div class="card"><h2>Secrétariat</h2><p><a href="mailto:secretariat@osd9tdj.org">secretariat@osd9tdj.org</a></p><a href="mailto:secretariat@osd9tdj.org">Écrire</a></div>
+            <div class="card"><h2>Téléphone officiel</h2><p><a href="https://wa.me/33744828970" target="_blank" rel="noopener noreferrer">+33 7 44 82 89 70</a></p><a href="https://wa.me/33744828970" target="_blank" rel="noopener noreferrer">Ouvrir</a></div>
+            <div class="card"><h2>Localisation</h2><p>Haute-Savoie, France</p><a href="#contacts">OK</a></div>
           </div>
         </div>
       </details>
 
+      <!-- ARCHIVES -->
       <details class="accordion" id="archives">
         <summary><span>Archives</span><span class="acc-right">▾</span></summary>
         <div class="acc-body">
           <div class="cards">
-            <div class="card">
-              <h2>Archives – Doctrine interne</h2>
-              <p>Archives internes protégées.</p>
-              <a href="https://workdrive.zohopublic.eu/external/9ef517340ff897d63b6fd3081d546423549bbefa2dab96e9aceba65bbcfa5ef8">Accéder</a>
-            </div>
+            <div class="card"><h2>Archives – Doctrine interne</h2><p>Archives internes protégées.</p>
+              <a href="https://workdrive.zohopublic.eu/external/9ef517340ff897d63b6fd3081d546423549bbefa2dab96e9aceba65bbcfa5ef8">Accéder</a></div>
           </div>
         </div>
       </details>
 
       <a class="btn-or" href="index.html">← Retour au site public</a>
 
-      <div class="nndnn-banner" aria-label="Signature templière nnDnn">
-        <img src="croix.epee.PNG" alt="Épée – symbole">
-        <div class="nndnn-text">nnDnn</div>
-        <img src="croix.epee.PNG" alt="Épée – symbole">
-      </div>
-
       <div class="footer">
         <div class="line">
           <span>© OSD9TDJ Association Loi 1901, Tous droits réservés</span>
-          <span class="sep">·</span>
+          <span>·</span>
           <a href="cookies.html">cookies</a>
-          <span class="sep">·</span>
+          <span>·</span>
           <a href="mentions.html">mentions légales</a>
-        </div>
-        <div class="legal-line">
-          <strong>SIREN :</strong>
-          <a href="https://www.societe.com/societe/939461133" target="_blank" rel="noopener noreferrer">939&nbsp;461&nbsp;133</a><br>
-          <strong>SIRET (siège) :</strong> 939&nbsp;461&nbsp;133&nbsp;00034<br>
-          <strong>Code APE :</strong> 94.99Z<br>
-          <strong>N° RNA :</strong> W744007354<br>
-          <strong>Nature :</strong> Organisation à vocation internationale<br>
         </div>
       </div>
 
@@ -778,13 +655,16 @@
       });
     });
 
-    // Tous les liens Zoho existants => modale
+    // Tous les liens Zoho => modale
     document.querySelectorAll('a[href*="workdrive.zohopublic.eu"]').forEach(a => {
       a.addEventListener("click", (e) => {
         const url = a.getAttribute("href");
         if (!url) return;
-        e.preventDefault();
 
+        // liens mailto/whatsapp => on laisse
+        if (url.startsWith("mailto:") || url.startsWith("https://wa.me/")) return;
+
+        e.preventDefault();
         const title =
           a.closest(".card")?.querySelector("h2")?.textContent?.trim()
           || "Documents";
