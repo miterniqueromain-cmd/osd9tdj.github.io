@@ -1,10 +1,9 @@
-name: Zoho - Refresh Access Token (hourly)
+name: Zoho - Refresh Access Token (every 30 min)
 
 on:
   workflow_dispatch:
   schedule:
-    -  schedule:
-  - cron: "*/30 * * * *" #
+    - cron: "*/30 * * * *"
 
 jobs:
   token:
@@ -29,7 +28,6 @@ jobs:
             --data-urlencode "client_secret=$CLIENT_SECRET" \
             --data-urlencode "refresh_token=$REFRESH_TOKEN")
 
-          # (debug) show response
           echo "===== ZOHO RESPONSE (JSON) ====="
           echo "$RESPONSE"
           echo "===== END RESPONSE ====="
@@ -52,5 +50,4 @@ PY
         run: |
           set -euo pipefail
           echo "Access token is set (masked). Now call your WorkDrive endpoints here."
-          # Exemple (à adapter à ton endpoint réel) :
           # curl -sS -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" "https://www.zohoapis.eu/workdrive/api/v1/users/me"
