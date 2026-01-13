@@ -1,0 +1,29 @@
+name: Backup site (ZIP)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * *"   # tous les jours à 02:00 UTC
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create ZIP backup
+        run: |
+          DATE=$(date +"%Y-%m-%d_%H-%M")
+          zip -r backup_site_$DATE.zip . -x ".git/*" ".github/*"
+
+      - name: Keep only last 5 backups
+        run: |
+          ls -1t backup_site_*.zip | tail -n +6 | xargs -r rm --
+
+      - name: Upload backup artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-backup
+          path: backup_site_*.zip
