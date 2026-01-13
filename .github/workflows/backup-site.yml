@@ -1,4 +1,4 @@
-name: Backup site (ZIP)
+name: Backup site (ZIP) -> Zoho WorkDrive
 
 on:
   workflow_dispatch:
@@ -13,17 +13,79 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 1) Crée le ZIP dans un dossier dédié
       - name: Create ZIP backup
         run: |
-          DATE=$(date +"%Y-%m-%d_%H-%M")
-          zip -r backup_site_$DATE.zip . -x ".git/*" ".github/*"
+          set -euo pipefail
+          mkdir -p backups
+          DATE=$(date -u +"%Y-%m-%d_%H-%M")
+          ZIP="backups/backup_site_${DATE}.zip"
+          zip -r "$ZIP" . -x ".git/*" ".github/*" "backups/*"
+          echo "ZIP_FILE=$ZIP" >> $GITHUB_ENV
 
-      - name: Keep only last 5 backups
+      # 2) Garde seulement les 5 derniers ZIP (dans le runner)
+      - name: Keep only last 5 backups (runner)
         run: |
-          ls -1t backup_site_*.zip | tail -n +6 | xargs -r rm --
+          set -euo pipefail
+          ls -1t backups/backup_site_*.zip 2>/dev/null | tail -n +6 | xargs -r rm --
 
-      - name: Upload backup artifact
+      # 3) Récupère un access_token via refresh_token (Zoho)
+      - name: Get Zoho access token (refresh_token)
+        env:
+          CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.ZOHO_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          RESPONSE=$(curl -sS -X POST "https://accounts.zoho.eu/oauth/v2/token" \
+            -H "Content-Type: application/x-www-form-urlencoded" \
+            --data-urlencode "grant_type=refresh_token" \
+            --data-urlencode "client_id=$CLIENT_ID" \
+            --data-urlencode "client_secret=$CLIENT_SECRET" \
+            --data-urlencode "refresh_token=$REFRESH_TOKEN")
+
+          ACCESS_TOKEN=$(python - <<'PY'
+import json,sys
+d=json.loads(sys.stdin.read())
+print(d.get("access_token",""))
+PY
+          <<<"$RESPONSE")
+
+          if [ -z "$ACCESS_TOKEN" ]; then
+            echo "ERROR: no access_token in Zoho response"
+            echo "$RESPONSE"
+            exit 1
+          fi
+
+          echo "::add-mask::$ACCESS_TOKEN"
+          echo "ACCESS_TOKEN=$ACCESS_TOKEN" >> "$GITHUB_ENV"
+
+      # 4) Upload vers WorkDrive dans TON dossier cible
+      - name: Upload ZIP to Zoho WorkDrive
+        env:
+          ACCESS_TOKEN: ${{ env.ACCESS_TOKEN }}
+          FOLDER_ID: ${{ secrets.ZOHO_TARGET_FOLDER_ID }}
+          ZIP_FILE: ${{ env.ZIP_FILE }}
+        run: |
+          set -euo pipefail
+
+          if [ ! -f "$ZIP_FILE" ]; then
+            echo "ERROR: ZIP not found: $ZIP_FILE"
+            ls -lah backups || true
+            exit 1
+          fi
+
+          echo "Uploading $ZIP_FILE to WorkDrive folder_id=$FOLDER_ID"
+
+          curl -sS -X POST "https://www.zohoapis.eu/workdrive/api/v1/upload" \
+            -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
+            -F "parent_id=$FOLDER_ID" \
+            -F "content=@$ZIP_FILE"
+
+      # 5) (Optionnel) garde aussi un artifact GitHub (au cas où)
+      - name: Upload backup artifact (GitHub)
         uses: actions/upload-artifact@v4
         with:
           name: site-backup
-          path: backup_site_*.zip
+          path: backups/backup_site_*.zip
