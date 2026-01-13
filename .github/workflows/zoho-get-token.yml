@@ -13,14 +13,17 @@ jobs:
     steps:
       - name: Exchange code for token
         env:
-          CLIENT_ID: ${{ 1000.QAU0PI6LILOFZ5S1VUW26YXO40NEAU }}
-          CLIENT_SECRET: ${{  e6361b0f585260f902ee6d9caf4667eb1389f92cc5 }}
+          CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
           CODE: ${{ github.event.inputs.code }}
         run: |
+          set -e
+
           echo "::add-mask::$CLIENT_ID"
           echo "::add-mask::$CLIENT_SECRET"
           echo "::add-mask::$CODE"
 
+          echo "Requesting token..."
           curl -sS -X POST "https://accounts.zoho.eu/oauth/v2/token" \
             -H "Content-Type: application/x-www-form-urlencoded" \
             --data-urlencode "grant_type=authorization_code" \
@@ -28,3 +31,7 @@ jobs:
             --data-urlencode "client_secret=$CLIENT_SECRET" \
             --data-urlencode "redirect_uri=https://localhost/" \
             --data-urlencode "code=$CODE" | tee response.json
+
+          echo ""
+          echo "Response JSON:"
+          cat response.json
