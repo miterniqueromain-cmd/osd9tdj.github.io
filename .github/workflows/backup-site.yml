@@ -3,7 +3,7 @@ name: Backup site (ZIP) -> Zoho WorkDrive
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 2 * * *"   # tous les jours à 02:00 UTC
+    - cron: "0 2 * * *" # tous les jours à 02:00 UTC
 
 jobs:
   backup:
@@ -21,7 +21,7 @@ jobs:
           DATE=$(date -u +"%Y-%m-%d_%H-%M")
           ZIP="backups/backup_site_${DATE}.zip"
           zip -r "$ZIP" . -x ".git/*" ".github/*" "backups/*"
-          echo "ZIP_FILE=$ZIP" >> $GITHUB_ENV
+          echo "ZIP_FILE=$ZIP" >> "$GITHUB_ENV"
 
       # 2) Garde seulement les 5 derniers ZIP (dans le runner)
       - name: Keep only last 5 backups (runner)
@@ -37,6 +37,10 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.ZOHO_REFRESH_TOKEN }}
         run: |
           set -euo pipefail
+
+          echo "::add-mask::$CLIENT_ID"
+          echo "::add-mask::$CLIENT_SECRET"
+          echo "::add-mask::$REFRESH_TOKEN"
 
           RESPONSE=$(curl -sS -X POST "https://accounts.zoho.eu/oauth/v2/token" \
             -H "Content-Type: application/x-www-form-urlencoded" \
@@ -70,6 +74,11 @@ PY
         run: |
           set -euo pipefail
 
+          if [ -z "$FOLDER_ID" ]; then
+            echo "ERROR: Missing ZOHO_TARGET_FOLDER_ID secret"
+            exit 1
+          fi
+
           if [ ! -f "$ZIP_FILE" ]; then
             echo "ERROR: ZIP not found: $ZIP_FILE"
             ls -lah backups || true
@@ -78,10 +87,17 @@ PY
 
           echo "Uploading $ZIP_FILE to WorkDrive folder_id=$FOLDER_ID"
 
-          curl -sS -X POST "https://www.zohoapis.eu/workdrive/api/v1/upload" \
+          RESP=$(curl -sS -X POST "https://www.zohoapis.eu/workdrive/api/v1/upload" \
             -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
             -F "parent_id=$FOLDER_ID" \
-            -F "content=@$ZIP_FILE"
+            -F "override-name=$(basename "$ZIP_FILE")" \
+            -F "filename=@$ZIP_FILE")
+
+          echo "===== WORKDRIVE RESPONSE ====="
+          echo "$RESP"
+          echo "=============================="
+
+          echo "$RESP" | grep -qi '"data"' || (echo "Upload seems failed (no data in response)"; exit 1)
 
       # 5) (Optionnel) garde aussi un artifact GitHub (au cas où)
       - name: Upload backup artifact (GitHub)
