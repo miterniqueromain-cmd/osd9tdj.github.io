@@ -28,20 +28,19 @@ jobs:
             --data-urlencode "client_secret=$CLIENT_SECRET" \
             --data-urlencode "refresh_token=$REFRESH_TOKEN")
 
-          echo "===== ZOHO RESPONSE (JSON) ====="
-          echo "$RESPONSE"
-          echo "===== END RESPONSE ====="
+          echo "$RESPONSE" > response.json
 
-          ACCESS_TOKEN=$(python - <<'PY' <<<"$RESPONSE"
-import json,sys
-d=json.load(sys.stdin)
-print(d.get("access_token",""))
-PY
-          )
+          ACCESS_TOKEN=$(python3 -c "import json; d=json.load(open('response.json')); print(d.get('access_token',''))")
 
           if [ -z "$ACCESS_TOKEN" ]; then
-            echo "ERROR: no access_token in response"; exit 1
+            echo "ERROR: no access_token in response"
+            cat response.json
+            exit 1
           fi
 
           echo "::add-mask::$ACCESS_TOKEN"
           echo "ACCESS_TOKEN=$ACCESS_TOKEN" >> "$GITHUB_ENV"
+
+      - name: Done
+        run: |
+          echo "✅ Zoho access token refreshed (token masked in logs)"
