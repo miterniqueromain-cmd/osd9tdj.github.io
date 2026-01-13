@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       code:
-        description: "Zoho authorization code (1000.xxxx)"
+        description: "Zoho grant token (starts with 1000...) valid ~10 min, one-time use"
         required: true
 
 jobs:
@@ -17,15 +17,30 @@ jobs:
           CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
           CODE: ${{ github.event.inputs.code }}
         run: |
-          echo "===== ZOHO TOKEN RESPONSE ====="
+          set -euo pipefail
 
-          curl -X POST "https://accounts.zoho.eu/oauth/v2/token" \
+          if [ -z "${CLIENT_ID}" ] || [ -z "${CLIENT_SECRET}" ] || [ -z "${CODE}" ]; then
+            echo "ERROR: Missing CLIENT_ID / CLIENT_SECRET / CODE"
+            exit 1
+          fi
+
+          echo "Calling Zoho token endpoint..."
+          RESPONSE="$(curl -sS -X POST "https://accounts.zoho.eu/oauth/v2/token" \
             -H "Content-Type: application/x-www-form-urlencoded" \
             --data-urlencode "grant_type=authorization_code" \
-            --data-urlencode "client_id=$CLIENT_ID" \
-            --data-urlencode "client_secret=$CLIENT_SECRET" \
+            --data-urlencode "client_id=${CLIENT_ID}" \
+            --data-urlencode "client_secret=${CLIENT_SECRET}" \
             --data-urlencode "redirect_uri=https://localhost/" \
-            --data-urlencode "code=$CODE"
+            --data-urlencode "code=${CODE}")"
 
           echo ""
+          echo "===== ZOHO RESPONSE (JSON) ====="
+          echo "${RESPONSE}"
           echo "===== END RESPONSE ====="
+          echo ""
+
+          # Fail the job if Zoho returns an error
+          if echo "${RESPONSE}" | grep -q '"error"'; then
+            echo "Zoho returned an error. See JSON above."
+            exit 2
+          fi
