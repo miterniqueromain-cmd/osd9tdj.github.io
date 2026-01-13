@@ -1,0 +1,55 @@
+name: Zoho - Refresh Access Token (hourly)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"  # every hour
+
+jobs:
+  token:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get access token via refresh_token
+        env:
+          CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.ZOHO_REFRESH_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          echo "::add-mask::$CLIENT_ID"
+          echo "::add-mask::$CLIENT_SECRET"
+          echo "::add-mask::$REFRESH_TOKEN"
+
+          RESPONSE=$(curl -sS -X POST "https://accounts.zoho.eu/oauth/v2/token" \
+            -H "Content-Type: application/x-www-form-urlencoded" \
+            --data-urlencode "grant_type=refresh_token" \
+            --data-urlencode "client_id=$CLIENT_ID" \
+            --data-urlencode "client_secret=$CLIENT_SECRET" \
+            --data-urlencode "refresh_token=$REFRESH_TOKEN")
+
+          # (debug) show response
+          echo "===== ZOHO RESPONSE (JSON) ====="
+          echo "$RESPONSE"
+          echo "===== END RESPONSE ====="
+
+          ACCESS_TOKEN=$(python - <<'PY'
+import json,sys
+d=json.loads(sys.stdin.read())
+print(d.get("access_token",""))
+PY
+          <<<"$RESPONSE")
+
+          if [ -z "$ACCESS_TOKEN" ]; then
+            echo "ERROR: no access_token in response"; exit 1
+          fi
+
+          echo "::add-mask::$ACCESS_TOKEN"
+          echo "ACCESS_TOKEN=$ACCESS_TOKEN" >> "$GITHUB_ENV"
+
+      - name: (Example) Call WorkDrive API with the token
+        run: |
+          set -euo pipefail
+          echo "Access token is set (masked). Now call your WorkDrive endpoints here."
+          # Exemple (à adapter à ton endpoint réel) :
+          # curl -sS -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" "https://www.zohoapis.eu/workdrive/api/v1/users/me"
