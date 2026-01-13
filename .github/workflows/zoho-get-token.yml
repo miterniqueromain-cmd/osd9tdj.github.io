@@ -4,33 +4,48 @@ on:
   workflow_dispatch:
     inputs:
       code:
-        description: "Zoho authorization code (1000....)"
+        description: "Zoho authorization code (the 1000.... from https://localhost/?code=...)"
         required: true
 
 jobs:
   token:
     runs-on: ubuntu-latest
     steps:
-      - name: Exchange code for token
+      - name: Exchange code for token (print response)
         env:
           CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
           CODE: ${{ github.event.inputs.code }}
-          REDIRECT_URI: https://localhost/
         run: |
-          set -e
+          set -euo pipefail
+
+          if [ -z "${CLIENT_ID}" ] || [ -z "${CLIENT_SECRET}" ]; then
+            echo "ERROR: Missing secrets. Add Actions secrets:"
+            echo " - ZOHO_CLIENT_ID"
+            echo " - ZOHO_CLIENT_SECRET"
+            exit 1
+          fi
+
+          if [ -z "${CODE}" ]; then
+            echo "ERROR: Missing workflow input: code"
+            exit 1
+          fi
+
           echo "::add-mask::$CLIENT_ID"
           echo "::add-mask::$CLIENT_SECRET"
           echo "::add-mask::$CODE"
 
-          curl -sS -X POST "https://accounts.zoho.eu/oauth/v2/token" \
+          echo "Calling Zoho OAuth token endpoint..."
+
+          RESPONSE="$(curl -sS -X POST "https://accounts.zoho.eu/oauth/v2/token" \
             -H "Content-Type: application/x-www-form-urlencoded" \
             --data-urlencode "grant_type=authorization_code" \
             --data-urlencode "client_id=$CLIENT_ID" \
             --data-urlencode "client_secret=$CLIENT_SECRET" \
-            --data-urlencode "redirect_uri=$REDIRECT_URI" \
-            --data-urlencode "code=$CODE" \
-            | tee response.json
+            --data-urlencode "redirect_uri=https://localhost/" \
+            --data-urlencode "code=$CODE")"
 
-          echo "----- ZOHO RESPONSE -----"
-          cat response.json
+          echo ""
+          echo "----- ZOHO RESPONSE (JSON) -----"
+          echo "$RESPONSE"
+          echo "-------------------------------"
