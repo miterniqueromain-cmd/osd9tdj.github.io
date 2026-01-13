@@ -3,7 +3,8 @@ name: Zoho - Refresh Access Token (hourly)
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 * * * *"  # every hour
+    -  schedule:
+  - cron: "*/30 * * * *" #
 
 jobs:
   token:
