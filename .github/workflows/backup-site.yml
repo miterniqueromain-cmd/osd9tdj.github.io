@@ -3,7 +3,7 @@ name: Backup site (ZIP) -> Zoho WorkDrive
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 2 * * *" # tous les jours à 02:00 UTC
+    - cron: "0 2 * * *"   # tous les jours à 02:00 UTC
 
 jobs:
   backup:
@@ -13,6 +13,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Ensure zip is installed
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y zip
+
       # 1) Crée le ZIP dans un dossier dédié
       - name: Create ZIP backup
         run: |
@@ -20,16 +26,14 @@ jobs:
           mkdir -p backups
           DATE=$(date -u +"%Y-%m-%d_%H-%M")
           ZIP="backups/backup_site_${DATE}.zip"
+
+          # zip du repo (sans .git/.github et sans ré-inclure backups)
           zip -r "$ZIP" . -x ".git/*" ".github/*" "backups/*"
+
           echo "ZIP_FILE=$ZIP" >> "$GITHUB_ENV"
+          echo "ZIP_BASENAME=$(basename "$ZIP")" >> "$GITHUB_ENV"
 
-      # 2) Garde seulement les 5 derniers ZIP (dans le runner)
-      - name: Keep only last 5 backups (runner)
-        run: |
-          set -euo pipefail
-          ls -1t backups/backup_site_*.zip 2>/dev/null | tail -n +6 | xargs -r rm --
-
-      # 3) Récupère un access_token via refresh_token (Zoho)
+      # 2) Récupère un access_token via refresh_token (Zoho)
       - name: Get Zoho access token (refresh_token)
         env:
           CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
@@ -42,12 +46,12 @@ jobs:
           echo "::add-mask::$CLIENT_SECRET"
           echo "::add-mask::$REFRESH_TOKEN"
 
-          RESPONSE=$(curl -sS -X POST "https://accounts.zoho.eu/oauth/v2/token" \
+          RESPONSE="$(curl -sS --fail-with-body -X POST "https://accounts.zoho.eu/oauth/v2/token" \
             -H "Content-Type: application/x-www-form-urlencoded" \
             --data-urlencode "grant_type=refresh_token" \
             --data-urlencode "client_id=$CLIENT_ID" \
             --data-urlencode "client_secret=$CLIENT_SECRET" \
-            --data-urlencode "refresh_token=$REFRESH_TOKEN")
+            --data-urlencode "refresh_token=$REFRESH_TOKEN")"
 
           ACCESS_TOKEN=$(python - <<'PY'
 import json,sys
@@ -65,19 +69,15 @@ PY
           echo "::add-mask::$ACCESS_TOKEN"
           echo "ACCESS_TOKEN=$ACCESS_TOKEN" >> "$GITHUB_ENV"
 
-      # 4) Upload vers WorkDrive dans TON dossier cible
+      # 3) Upload vers WorkDrive dans TON dossier cible
       - name: Upload ZIP to Zoho WorkDrive
         env:
           ACCESS_TOKEN: ${{ env.ACCESS_TOKEN }}
           FOLDER_ID: ${{ secrets.ZOHO_TARGET_FOLDER_ID }}
           ZIP_FILE: ${{ env.ZIP_FILE }}
+          ZIP_BASENAME: ${{ env.ZIP_BASENAME }}
         run: |
           set -euo pipefail
-
-          if [ -z "$FOLDER_ID" ]; then
-            echo "ERROR: Missing ZOHO_TARGET_FOLDER_ID secret"
-            exit 1
-          fi
 
           if [ ! -f "$ZIP_FILE" ]; then
             echo "ERROR: ZIP not found: $ZIP_FILE"
@@ -85,23 +85,83 @@ PY
             exit 1
           fi
 
-          echo "Uploading $ZIP_FILE to WorkDrive folder_id=$FOLDER_ID"
+          echo "Uploading $ZIP_BASENAME to WorkDrive folder_id=$FOLDER_ID"
 
-          RESP=$(curl -sS -X POST "https://www.zohoapis.eu/workdrive/api/v1/upload" \
+          # paramètres attendus par l'API : filename, parent_id, content (+ override-name-exist optionnel)
+          UPLOAD_RESPONSE="$(curl -sS --fail-with-body -X POST "https://www.zohoapis.eu/workdrive/api/v1/upload" \
             -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
+            -F "filename=$ZIP_BASENAME" \
             -F "parent_id=$FOLDER_ID" \
-            -F "override-name=$(basename "$ZIP_FILE")" \
-            -F "filename=@$ZIP_FILE")
+            -F "override-name-exist=true" \
+            -F "content=@$ZIP_FILE")"
 
-          echo "===== WORKDRIVE RESPONSE ====="
-          echo "$RESP"
-          echo "=============================="
+          echo "===== WORKDRIVE UPLOAD RESPONSE ====="
+          echo "$UPLOAD_RESPONSE"
+          echo "===== END ====="
 
-          echo "$RESP" | grep -qi '"data"' || (echo "Upload seems failed (no data in response)"; exit 1)
+      # 4) Garder seulement les 5 derniers backups dans WorkDrive (on met les anciens à la corbeille)
+      - name: Keep only last 5 backups in WorkDrive
+        env:
+          ACCESS_TOKEN: ${{ env.ACCESS_TOKEN }}
+          FOLDER_ID: ${{ secrets.ZOHO_TARGET_FOLDER_ID }}
+        run: |
+          set -euo pipefail
 
-      # 5) (Optionnel) garde aussi un artifact GitHub (au cas où)
+          LIST_RESPONSE="$(curl -sS --fail-with-body \
+            -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
+            "https://www.zohoapis.eu/workdrive/api/v1/files/$FOLDER_ID/files?filter[type]=all&page[limit]=200")"
+
+          # On garde uniquement les fichiers qui commencent par "backup_site_" et finissent par ".zip"
+          # On trie par nom décroissant (vu que ton nom contient la date YYYY-MM-DD_HH-MM)
+          TO_TRASH_IDS=$(python - <<'PY'
+import json,sys,re
+d=json.loads(sys.stdin.read())
+items=d.get("data",[]) or []
+backups=[]
+for it in items:
+    attrs=it.get("attributes",{}) or {}
+    name=attrs.get("name","")
+    if re.match(r"^backup_site_\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}\\.zip$", name):
+        backups.append((name, it.get("id","")))
+backups.sort(reverse=True)  # newest first by filename
+trash = [fid for _,fid in backups[5:] if fid]
+print(" ".join(trash))
+PY
+          <<<"$LIST_RESPONSE")
+
+          if [ -z "$TO_TRASH_IDS" ]; then
+            echo "Nothing to trash (<= 5 backups)."
+            exit 0
+          fi
+
+          echo "Trashing old backups: $TO_TRASH_IDS"
+
+          # WorkDrive ne supprime pas directement un fichier actif : on le met à la corbeille via status=61
+          PATCH_BODY=$(python - <<'PY'
+import sys,json
+ids=sys.stdin.read().strip().split()
+payload={"data":[]}
+for fid in ids:
+    payload["data"].append({
+        "attributes":{"status":"61"},
+        "id":fid,
+        "type":"files"
+    })
+print(json.dumps(payload))
+PY
+          <<<"$TO_TRASH_IDS")
+
+          curl -sS --fail-with-body -X PATCH "https://www.zohoapis.eu/workdrive/api/v1/files" \
+            -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d "$PATCH_BODY"
+
+          echo "Old backups moved to trash."
+
+      # 5) Optionnel : artifact GitHub (secours)
       - name: Upload backup artifact (GitHub)
         uses: actions/upload-artifact@v4
         with:
           name: site-backup
           path: backups/backup_site_*.zip
+          if-no-files-found: error
