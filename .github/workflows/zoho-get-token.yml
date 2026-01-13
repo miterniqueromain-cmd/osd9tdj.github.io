@@ -13,8 +13,8 @@ jobs:
     steps:
       - name: Exchange code for token
         env:
-          CLIENT_ID: ${{ secrets.ZOHO_CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.ZOHO_CLIENT_SECRET }}
+          CLIENT_ID: ${{ 1000.QAU0PI6LILOFZ5S1VUW26YXO40NEAU }}
+          CLIENT_SECRET: ${{  e6361b0f585260f902ee6d9caf4667eb1389f92cc5 }}
           CODE: ${{ github.event.inputs.code }}
         run: |
           echo "::add-mask::$CLIENT_ID"
