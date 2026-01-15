@@ -326,6 +326,42 @@
     }
     .card a:hover{ background:rgba(255,215,0,0.35); }
 
+    /* ✅ (AJOUT) Champ matricule */
+    .matricule-form{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:stretch;
+      margin-top:10px;
+    }
+    .matricule-input{
+      width:100%;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid rgba(255,215,0,0.45);
+      background:rgba(0,0,0,0.35);
+      color:rgba(253,247,229,0.95);
+      font-weight:700;
+      letter-spacing:0.06em;
+      outline:none;
+    }
+    .matricule-input::placeholder{
+      color:rgba(253,247,229,0.65);
+      font-weight:600;
+      letter-spacing:0.04em;
+    }
+    .matricule-btn{
+      margin:0;
+      width:100%;
+      justify-content:center;
+    }
+    .matricule-hint{
+      font-size:0.82rem;
+      opacity:0.86;
+      margin-top:8px;
+      line-height:1.35;
+    }
+
     /* Footer */
     .footer {
       margin-top: 18px;
@@ -561,8 +597,8 @@
 
       <a class="btn-or" href="index.html">← Retour au site public</a>
 
-      <!-- PRÉPARER ENTRETIEN D’ADHÉSION (menu déroulant + 2 boutons + mention RGPD) -->
-      <details class="accordion" id="adhesion" open>
+      <!-- PRÉPARER ENTRETIEN D’ADHÉSION (1 lien dossier + 1 champ matricule) -->
+      <details class="accordion" id="adhesion">
         <summary><span>Préparer votre entretien d’adhésion</span><span class="acc-right">▾</span></summary>
         <div class="acc-body">
 
@@ -586,9 +622,27 @@
             </div>
 
             <div class="card">
-              <h2>Déposer vos pièces</h2>
-              <p>Déposez ici le dossier complété et les pièces demandées (PDF). Aucun autre candidat ne voit vos documents.</p>
-              <a href="https://workdrive.zohopublic.eu/external/f7c15a52d44e65ba4d3fe2e3dd237c03f46afeae08dc7173508f812f4dd49ef8">Déposer</a>
+              <h2>Accès à votre dossier (matricule)</h2>
+              <p>Entrez votre matricule pour ouvrir votre dossier personnel. Zoho demandera votre code.</p>
+
+              <form class="matricule-form" id="matriculeForm" autocomplete="off">
+                <input
+                  class="matricule-input"
+                  id="matriculeInput"
+                  type="text"
+                  inputmode="text"
+                  autocapitalize="characters"
+                  spellcheck="false"
+                  placeholder="Ex : OSD9TDJ-HT-0001"
+                  aria-label="Matricule"
+                  required
+                >
+                <button class="btn-or matricule-btn" type="submit">Ouvrir mon dossier</button>
+              </form>
+
+              <div class="matricule-hint">
+                Astuce : vous pouvez taper en minuscules/majuscules, avec ou sans espaces — le système normalise.
+              </div>
             </div>
           </div>
         </div>
@@ -736,6 +790,73 @@
     closeBtn.addEventListener("click", closeZoho);
     modal.addEventListener("click", (e) => { if (e.target === modal) closeZoho(); });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeZoho(); });
+
+    // ✅ Matricules -> liens Zoho (30 dossiers)
+    const DOSSIERS = {
+      // HT (Haute-Savoie) 0001-0012
+      "OSD9TDJ-HT-0001": "https://workdrive.zohopublic.eu/external/635517088a4ce6fce0f1e2c1b0e6998ae6c38257a1da3958372aef71e28f7665",
+      "OSD9TDJ-HT-0002": "https://workdrive.zohopublic.eu/external/572d578c580ea50faee8745771494a2e9fdc38aa708e33b451c3610b338fe6d1",
+      "OSD9TDJ-HT-0003": "https://workdrive.zohopublic.eu/external/a80781fa14442afb91e066659ed0b24bb687355e7d3b12dfa3777a198204550e",
+      "OSD9TDJ-HT-0004": "https://workdrive.zohopublic.eu/external/a52ef3ea797ba11ac7fba34d74cd93d154a80b8fbb887d4899ac0b8efb1c3a40",
+      "OSD9TDJ-HT-0005": "https://workdrive.zohopublic.eu/external/53a41395eebb38d3a2ad8dc0de06d35aa1d5aae980b1dd6e3e260eb15a9245e3",
+      "OSD9TDJ-HT-0006": "https://workdrive.zohopublic.eu/external/0d685740ba2022d319874f50b3c8a78ccfe53c11d39c0a5c9623702126ec3fc8",
+      "OSD9TDJ-HT-0007": "https://workdrive.zohopublic.eu/external/f553d911e6009902a9067d2651749e2f38cc2e4cd39ba3db94bbc8b3d55c937a",
+      "OSD9TDJ-HT-0008": "https://workdrive.zohopublic.eu/external/ef5148edb460f78c943cb5cca581bab9c96c92498ac1d42ade12bb29d558cc30",
+      "OSD9TDJ-HT-0009": "https://workdrive.zohopublic.eu/external/447cf9f81c4b3e241d5a764f9fc990f7775f36d8ea478845536c74a466378c56",
+      "OSD9TDJ-HT-0010": "https://workdrive.zohopublic.eu/external/252f3512d75aedcd39ff15f75b96ef5b4bb567c506c1d3a7c8dd11e0dbd15a64",
+      "OSD9TDJ-HT-0011": "https://workdrive.zohopublic.eu/external/16897b2b62219bc3bc1ee3b3eb09dad32d3d98ce5329b85c30fea77bb32b3cf2",
+      "OSD9TDJ-HT-0012": "https://workdrive.zohopublic.eu/external/acc09fce25701919437189a55ca2b3465c2526815ccd7e83019a991aa2e67c34",
+
+      // NP (Nord) 0001-0010
+      "OSD9TDJ-NP-0001": "https://workdrive.zohopublic.eu/external/3be65e26921837bcc00f2ba68495f8a0f91c7fb852f20311e85440af4a30c539",
+      "OSD9TDJ-NP-0002": "https://workdrive.zohopublic.eu/external/b26930a87ac8b66aba8d2461df2cfed675af527dbea2dabc15bfbcf84df307cd",
+      "OSD9TDJ-NP-0003": "https://workdrive.zohopublic.eu/external/2205294dbaa634e644477e8daacdda7d6f1c7e963957fd8fd46a8d4ca3c70d8b",
+      "OSD9TDJ-NP-0004": "https://workdrive.zohopublic.eu/external/9aad765458363f9bb928c8065ef43cac8b3428345536f082a005eb64d3101e23",
+      "OSD9TDJ-NP-0005": "https://workdrive.zohopublic.eu/external/acda4ca031a7bd31bf919c3a268700f23c38aa2a42ad2aba625a7c27fec2b993",
+      "OSD9TDJ-NP-0006": "https://workdrive.zohopublic.eu/external/2f0282b60f89cec6b3ea9925142076cd68232b6409c22286284d64747810daa6",
+      "OSD9TDJ-NP-0007": "https://workdrive.zohopublic.eu/external/26d71e2f074cbb487b54b7d32c25bda98f5bbc57f6138f6f97e0aaf60f094273",
+      "OSD9TDJ-NP-0008": "https://workdrive.zohopublic.eu/external/08f02022c8057b7f8141bf23f2d5ad756d515b8b2c1ac561e8a060b5dabe24f2",
+      "OSD9TDJ-NP-0009": "https://workdrive.zohopublic.eu/external/4d0eb1ed4efe97278484215d61430604b3c11bdde9b6b27086311f8519e24761",
+      "OSD9TDJ-NP-0010": "https://workdrive.zohopublic.eu/external/35fd14fa8812fe39d0c816d193eac966c7fa11850733b643e9b6f697b21e8849",
+
+      // EXT (Externes) 0001-0008
+      "OSD9TDJ-EXT-0001": "https://workdrive.zohopublic.eu/external/1982757f2e9664af7544c5b9899c06834d1decc3bec0f9789003c7b78cece2a4",
+      "OSD9TDJ-EXT-0002": "https://workdrive.zohopublic.eu/external/5816ffe7e962f88daa3b5205d741099ce02c4e86cd3cb9ea6b280e7b4381b107",
+      "OSD9TDJ-EXT-0003": "https://workdrive.zohopublic.eu/external/2d38135c2e096c66afc69ff675fe3ee19f1716c78240557727704bd700243ca9",
+      "OSD9TDJ-EXT-0004": "https://workdrive.zohopublic.eu/external/4bbf79ec52d1b195eeb18fd571c5391b07bfc190e1eba77647fe774c1953d938",
+      "OSD9TDJ-EXT-0005": "https://workdrive.zohopublic.eu/external/199306dececd3cf7424efaea69654d014caa81170229182df531f4fd5465a305",
+      "OSD9TDJ-EXT-0006": "https://workdrive.zohopublic.eu/external/a629501151ef57847554b08823345c10693f8253257ec6e10da274f3faf1e3b5",
+      "OSD9TDJ-EXT-0007": "https://workdrive.zohopublic.eu/external/d15d756200d2a855542da68efe92841db8c6721990a846fd246384d1652fc666",
+      "OSD9TDJ-EXT-0008": "https://workdrive.zohopublic.eu/external/26557dda71e8588a41265cbe13dd700f335da17efba7dea414ccab423fa3f2c5"
+    };
+
+    function normalizeMatricule(raw){
+      if (!raw) return "";
+      // Remplace les tirets “exotiques” par "-"
+      const cleaned = raw
+        .trim()
+        .toUpperCase()
+        .replace(/[‐-‒–—−]/g, "-")
+        .replace(/\s+/g, "");
+      return cleaned;
+    }
+
+    const form = document.getElementById("matriculeForm");
+    const input = document.getElementById("matriculeInput");
+
+    if (form && input){
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const key = normalizeMatricule(input.value);
+        const url = DOSSIERS[key];
+
+        if (!url){
+          alert("⚠️ Matricule introuvable. Vérifie le format (ex : OSD9TDJ-HT-0001).");
+          return;
+        }
+        openZohoUrl(url, "Dossier – " + key);
+      });
+    }
 
     // Bouton “Entretien d’adhésion”
     document.querySelectorAll(".zoho-open").forEach(btn => {
