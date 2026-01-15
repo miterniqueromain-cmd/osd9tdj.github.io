@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Administration – Accès réservé (Bureau) | OSD9TDJ</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
 
   <!-- Interne : anti-indexation / anti-cache -->
   <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
@@ -13,7 +14,7 @@
   <!-- Sécurité -->
   <meta name="referrer" content="no-referrer">
 
-  <!-- CSP : autorise Zoho en iframe + JS inline (modale) -->
+  <!-- CSP : autorise Zoho en iframe + JS inline -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
     base-uri 'self';
@@ -34,7 +35,13 @@
   <meta name="osd9tdj-origin" content="osd9tdj.org / administration.html" />
 
   <!-- Polices -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
 
   <style>
     :root{
@@ -58,7 +65,7 @@
       min-height:100vh;
     }
 
-    /* ✅ Fond admin (cadre bien sur mobile) */
+    /* Fond admin */
     body::before{
       content:"";
       position:fixed;
@@ -70,7 +77,6 @@
       background-attachment:fixed;
       z-index:-2;
     }
-    /* iOS/Android : fixed parfois “bizarre”, on passe en scroll */
     @media (max-width: 900px){
       body::before{ background-attachment:scroll; }
     }
@@ -124,8 +130,12 @@
       color:var(--or);
       font-size:22px;
       line-height:1;
+      outline:none;
     }
     .top-menu summary::-webkit-details-marker{ display:none; }
+    .top-menu summary:focus-visible{
+      box-shadow:0 0 0 3px rgba(255,215,0,0.25), 0 6px 16px rgba(0,0,0,0.35);
+    }
 
     .menu-panel{
       position:absolute;
@@ -155,20 +165,18 @@
     }
     .menu-panel a:last-child{ border-bottom:none; }
 
-    /* ✅ Voile noir plus noir */
+    /* Voile */
     .overlay{
       min-height:100vh;
       padding:30px 15px 28px;
       box-sizing:border-box;
-      background: radial-gradient(circle at top,
-        rgba(0,0,0,0.38),
-        rgba(0,0,0,0.48));
+      background: radial-gradient(circle at top, rgba(0,0,0,0.38), rgba(0,0,0,0.48));
       display:flex;
       flex-direction:column;
       align-items:center;
     }
 
-    /* ✅ Badge joli (pas jaune) */
+    /* Badge */
     .lock-badge{
       display:inline-flex;
       align-items:center;
@@ -221,8 +229,10 @@
       opacity:0.92;
     }
 
+    /* Bouton or (centré) */
     .btn-or{
-      display:inline-flex;
+      display:flex;
+      justify-content:center;
       align-items:center;
       gap:8px;
       padding:9px 14px;
@@ -236,10 +246,14 @@
       box-shadow:
         0 0 0 1px rgba(255,215,0,0.75) inset,
         0 6px 14px rgba(0,0,0,0.45);
-      margin:10px 0 10px;
+      margin:10px auto;
       border:0;
       cursor:pointer;
+      width:100%;
+      max-width:340px;
+      text-align:center;
     }
+    .btn-or:focus-visible{ outline:3px solid rgba(255,215,0,0.35); outline-offset:2px; }
 
     /* Accordéons */
     .accordion{
@@ -268,8 +282,10 @@
       letter-spacing:0.04em;
       background:rgba(0,0,0,0.45);
       border-bottom:1px solid rgba(255,215,0,0.14);
+      outline:none;
     }
     .accordion summary::-webkit-details-marker{ display:none; }
+    .accordion summary:focus-visible{ outline:3px solid rgba(255,215,0,0.28); outline-offset:-3px; }
     .acc-right{ color:rgba(255,215,0,0.85); font-size:1.1rem; }
     .acc-body{ padding:14px; }
 
@@ -321,7 +337,12 @@
       line-height:1.45;
     }
     .card a{
-      display:inline-block;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      margin-left:auto;
+      margin-right:auto;
+      text-align:center;
       padding:9px 14px;
       border-radius:999px;
       background:rgba(255,215,0,0.16);
@@ -331,11 +352,13 @@
       border:1px solid rgba(255,215,0,0.45);
       font-family:'Cinzel',serif;
       font-size:0.82rem;
-      max-width:100%;
+      max-width:240px;
+      width:100%;
     }
     .card a:hover{ background:rgba(255,215,0,0.28); }
+    .card a:focus-visible{ outline:3px solid rgba(255,215,0,0.28); outline-offset:2px; }
 
-    /* Footer simple */
+    /* Footer */
     .footer{
       margin-top: 18px;
       padding-top: 15px;
@@ -364,7 +387,25 @@
       text-transform: lowercase;
     }
 
-    /* Modal Zoho */
+    @media (max-width: 480px){
+      .top-menu{ top:22px; right:22px; }
+      .menu-panel{ width:240px; }
+      .frame-fixed{ inset:12px; }
+      .viewport-scroll{ inset:20px; }
+      h1{ font-size:1.6rem; }
+    }
+    @media (max-width: 600px){
+      .btn-or{ max-width:320px; }
+      .card a{ max-width:220px; }
+    }
+    @media (min-width: 601px) and (max-width: 1024px){
+      .btn-or{ max-width:340px; }
+      .card a{ max-width:240px; }
+    }
+
+    /* =====================================================
+       MODALE ZOHO "ULTRA COCKPIT" (menu+recherche+favoris+recents+tabs+split view)
+       ===================================================== */
     .modal{
       position:fixed;
       inset:0;
@@ -376,9 +417,10 @@
       padding:18px;
     }
     .modal.open{ display:flex; }
+
     .modal-card{
-      width:min(1100px, 96vw);
-      height:min(760px, 88vh);
+      width:min(1350px, 96vw);
+      height:min(860px, 90vh);
       background:rgba(0,0,0,0.92);
       border:1px solid rgba(255,215,0,0.55);
       border-radius:18px;
@@ -387,6 +429,7 @@
       display:flex;
       flex-direction:column;
     }
+
     .modal-head{
       display:flex;
       align-items:center;
@@ -411,6 +454,7 @@
       align-items:center;
       justify-content:flex-end;
     }
+
     .btn-mini{
       display:inline-flex;
       align-items:center;
@@ -426,96 +470,355 @@
       font-size:0.78rem;
       cursor:pointer;
       white-space:nowrap;
+      user-select:none;
     }
     .btn-mini:hover{ background:rgba(255,215,0,0.24); }
-    .modal-body{ flex:1 1 auto; }
-    .zoho-frame{
+    .btn-mini[aria-pressed="true"]{
+      background:rgba(255,215,0,0.22);
+      border-color:rgba(255,215,0,0.55);
+    }
+
+    .modal-content{
+      flex:1 1 auto;
+      display:flex;
+      min-height:0;
+      position:relative;
+    }
+
+    /* Sidebar */
+    .modal-sidebar{
+      width:360px;
+      min-width:260px;
+      max-width:48vw;
+      border-right:1px solid rgba(255,215,0,0.18);
+      background:rgba(0,0,0,0.76);
+      display:flex;
+      flex-direction:column;
+      min-height:0;
+      z-index:2;
+    }
+
+    .sidebar-top{
+      padding:10px 10px 8px;
+      border-bottom:1px solid rgba(255,215,0,0.16);
+      background:rgba(0,0,0,0.55);
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .sidebar-title{
+      font-family:'Cinzel',serif;
+      color:rgba(255,215,0,0.92);
+      font-weight:700;
+      letter-spacing:0.03em;
+      font-size:0.92rem;
+      text-align:left;
+    }
+    .sidebar-sub{
+      font-size:0.78rem;
+      opacity:0.88;
+      text-align:left;
+      line-height:1.25;
+    }
+
+    .sidebar-tools{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:flex-start;
+    }
+
+    .sidebar-search{
       width:100%;
-      height:100%;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,215,0,0.25);
+      background:rgba(0,0,0,0.55);
+      color:rgba(253,247,229,0.92);
+      outline:none;
+    }
+    .sidebar-search::placeholder{ color:rgba(253,247,229,0.55); }
+
+    .sidebar-list{
+      padding:10px;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      min-height:0;
+    }
+    .sidebar-group{
+      margin:12px 0 6px;
+      font-family:'Cinzel',serif;
+      color:rgba(255,215,0,0.88);
+      font-weight:700;
+      font-size:0.80rem;
+      letter-spacing:0.03em;
+      opacity:0.95;
+      text-align:left;
+    }
+
+    .sidebar-item{
+      display:flex;
+      gap:8px;
+      align-items:stretch;
+      margin:6px 0;
+    }
+    .sidebar-link{
+      flex:1 1 auto;
+      text-align:left;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,215,0,0.18);
+      background:rgba(0,0,0,0.35);
+      color:rgba(253,247,229,0.92);
+      cursor:pointer;
+      font-weight:700;
+      font-family:'Lato', Arial, sans-serif;
+      line-height:1.15;
+    }
+    .sidebar-link:hover{ background:rgba(255,215,0,0.10); }
+    .sidebar-link.active{
+      border-color:rgba(255,215,0,0.45);
+      background:rgba(255,215,0,0.10);
+    }
+
+    .sidebar-mini{
+      width:44px;
+      min-width:44px;
+      border-radius:12px;
+      border:1px solid rgba(255,215,0,0.18);
+      background:rgba(0,0,0,0.35);
+      color:rgba(253,247,229,0.92);
+      cursor:pointer;
+      font-weight:900;
+      display:grid;
+      place-items:center;
+      font-family:'Cinzel',serif;
+      user-select:none;
+    }
+    .sidebar-mini:hover{ background:rgba(255,215,0,0.10); }
+
+    .sidebar-footer{
+      padding:10px;
+      border-top:1px solid rgba(255,215,0,0.18);
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:center;
+      background:rgba(0,0,0,0.55);
+    }
+
+    /* Main */
+    .modal-main{
+      flex:1 1 auto;
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+      min-height:0;
+    }
+
+    /* Tabs */
+    .modal-tabs{
+      display:flex;
+      gap:8px;
+      padding:10px;
+      border-bottom:1px solid rgba(255,215,0,0.14);
+      background:rgba(0,0,0,0.55);
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    .tab{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      border:1px solid rgba(255,215,0,0.18);
+      background:rgba(0,0,0,0.35);
+      color:rgba(253,247,229,0.92);
+      border-radius:999px;
+      padding:8px 12px;
+      cursor:pointer;
+      white-space:nowrap;
+      font-weight:700;
+      user-select:none;
+    }
+    .tab.active{
+      border-color:rgba(255,215,0,0.45);
+      background:rgba(255,215,0,0.10);
+    }
+    .tab .x{
+      font-weight:900;
+      opacity:0.85;
+      border:1px solid rgba(255,215,0,0.18);
+      width:18px; height:18px;
+      display:grid; place-items:center;
+      border-radius:999px;
+    }
+    .tab .x:hover{ background:rgba(255,215,0,0.10); }
+
+    /* Split area */
+    .modal-body{
+      flex:1 1 auto;
+      min-height:0;
+      position:relative;
+      background:#000;
+    }
+
+    .split-wrap{
+      position:absolute;
+      inset:0;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+      padding:10px;
+    }
+    .split-wrap.split{
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .pane{
+      position:relative;
+      border:1px solid rgba(255,215,0,0.18);
+      border-radius:14px;
+      overflow:hidden;
+      background:#000;
+      min-height:0;
+    }
+    .pane-head{
+      position:absolute;
+      top:0; left:0; right:0;
+      z-index:2;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:8px 10px;
+      background:rgba(0,0,0,0.55);
+      border-bottom:1px solid rgba(255,215,0,0.14);
+    }
+    .pane-title{
+      font-family:'Cinzel',serif;
+      color:rgba(255,215,0,0.92);
+      font-weight:700;
+      font-size:0.82rem;
+      text-align:left;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .pane-actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+
+    .zoho-frame{
+      position:absolute;
+      inset:36px 0 0 0;
+      width:100%;
+      height:calc(100% - 36px);
       border:0;
       display:block;
       background:#000;
     }
+
     .modal-hint{
       padding:10px 12px;
       border-top:1px solid rgba(255,215,0,0.18);
       font-size:0.82rem;
-      opacity:0.88;
+      opacity:0.90;
       line-height:1.35;
       text-align:left;
+      background:rgba(0,0,0,0.55);
     }
 
-    @media (max-width: 480px){
-      .top-menu{ top:22px; right:22px; }
-      .menu-panel{ width:240px; }
-      .frame-fixed{ inset:12px; }
-      .viewport-scroll{ inset:20px; }
-      h1{ font-size:1.6rem; }
+    /* Fallback overlay */
+    .zoho-fallback{
+      position:absolute;
+      inset:36px 0 0 0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:16px;
+      background:rgba(0,0,0,0.82);
+      z-index:3;
     }
-    /* =====================================================
-   PATCH RESPONSIVE – CENTRAGE DES BOUTONS (ALL DEVICES)
-   Mobile + Tablette + Accordéons
-   ===================================================== */
+    .fallback-card{
+      width:min(600px, 100%);
+      border-radius:16px;
+      border:1px solid rgba(255,215,0,0.35);
+      background:rgba(0,0,0,0.92);
+      box-shadow:0 20px 60px rgba(0,0,0,0.75);
+      padding:14px;
+      text-align:left;
+    }
+    .fallback-title{
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-weight:700;
+      margin-bottom:8px;
+    }
+    .fallback-text{
+      font-size:0.9rem;
+      opacity:0.92;
+      line-height:1.45;
+    }
+    .fallback-actions{
+      margin-top:12px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
 
-/* Boutons principaux */
-.btn-or{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin-left:auto;
-  margin-right:auto;
-  text-align:center;
-}
+    /* Sidebar mobile */
+    .modal-sidebar-backdrop{
+      display:none;
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.35);
+      z-index:1;
+    }
 
-/* Boutons dans les cartes (ACCÉDER) */
-.card a{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin-left:auto;
-  margin-right:auto;
-  text-align:center;
-}
+    @media (max-width: 820px){
+      .modal-card{ width:min(1100px, 96vw); }
+      .modal-sidebar{ width:330px; }
+    }
 
-/* Ajustements largeur par device */
-@media (max-width: 600px){
-  .btn-or{ max-width:320px; width:100%; }
-  .card a{ max-width:220px; width:100%; }
-}
+    @media (max-width: 760px){
+      .modal-sidebar{
+        position:absolute;
+        left:0; top:0; bottom:0;
+        transform:translateX(-102%);
+        transition:transform 180ms ease;
+        width:min(88vw, 360px);
+      }
+      .modal-sidebar.open{ transform:translateX(0); }
+      .modal-sidebar-backdrop.open{ display:block; }
+      .split-wrap.split{ grid-template-columns: 1fr; } /* en mobile, split => empile */
+    }
 
-@media (min-width: 601px) and (max-width: 1024px){
-  /* TABLETTE */
-  .btn-or{ max-width:340px; }
-  .card a{ max-width:240px; }
-}
-
-/* Accordéons (administration) */
-.accordion .card a,
-.subacc .card a{
-  margin-left:auto;
-  margin-right:auto;
-}
+    @media (prefers-reduced-motion: reduce){
+      .modal-sidebar{ transition:none !important; }
+    }
   </style>
-
-  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
-  <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 
 <body>
   <script>window.ACCESS_GROUP="BUREAU_ADMIN"</script>
-<script src="js/membres-lock.js"></script>
- 
+  <script src="js/membres-lock.js" defer></script>
+
   <div class="frame-fixed" aria-hidden="true"></div>
 
   <div class="top-menu" aria-label="Menu administration">
     <details>
-      <summary title="Menu">⋯</summary>
+      <summary title="Menu" aria-label="Ouvrir le menu">⋯</summary>
       <div class="menu-panel" role="menu" aria-label="Navigation admin">
-        <a href="#bureau"> Bureau (privé)</a>
-        <a href="#membres"> Membres (gestion)</a>
-        <a href="documents-internes.html">← Page membres</a>
-        <a href="index.html">← Retour site public</a>
+        <a href="#bureau" role="menuitem"> Bureau (privé)</a>
+        <a href="#membres" role="menuitem"> Membres (gestion)</a>
+        <a href="documents-internes.html" role="menuitem">← Page membres</a>
+        <a href="index.html" role="menuitem">← Retour site public</a>
       </div>
     </details>
   </div>
@@ -540,16 +843,16 @@
 
       <!-- 1) BUREAU (PRIVÉ) -->
       <details class="accordion" id="bureau" open>
-        <summary><span>Documents Bureau (privé)</span><span class="acc-right">▾</span></summary>
+        <summary><span>Documents Bureau (privé)</span><span class="acc-right" aria-hidden="true">▾</span></summary>
         <div class="acc-body">
 
           <details class="subacc">
-            <summary><span>Grand Maître</span><span class="acc-right">▾</span></summary>
+            <summary><span>Grand Maître</span><span class="acc-right" aria-hidden="true">▾</span></summary>
             <div class="acc-body">
               <div class="cards">
                 <div class="card">
                   <h3>Dossier Grand Maître</h3>
-                  <p>COLLE TON LIEN ZOHO ICI (droits Bureau).</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/51a1d98123ea4b58e1fdebf5a8cbeb28d927b6b9ed2d0694bd35df882d51d680">Accéder</a>
                 </div>
               </div>
@@ -557,12 +860,12 @@
           </details>
 
           <details class="subacc">
-            <summary><span>Secrétariat</span><span class="acc-right">▾</span></summary>
+            <summary><span>Secrétariat</span><span class="acc-right" aria-hidden="true">▾</span></summary>
             <div class="acc-body">
               <div class="cards">
                 <div class="card">
                   <h3>Dossier Secrétariat</h3>
-                  <p>COLLE TON LIEN ZOHO ICI (droits Bureau).</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/b0ed872395e698603ed3217aa8244717fe756cd7a9b9635c1412a7cdfe5aaf79">Accéder</a>
                 </div>
               </div>
@@ -570,12 +873,12 @@
           </details>
 
           <details class="subacc">
-            <summary><span>Trésorerie</span><span class="acc-right">▾</span></summary>
+            <summary><span>Trésorerie</span><span class="acc-right" aria-hidden="true">▾</span></summary>
             <div class="acc-body">
               <div class="cards">
                 <div class="card">
                   <h3>Dossier Trésorerie</h3>
-                  <p>COLLE TON LIEN ZOHO ICI (droits Bureau).</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/64aade6f8518560e79dc7f32ee0e74fc63d9fb98c4bdafab34cfb5cb05943447">Accéder</a>
                 </div>
               </div>
@@ -583,12 +886,12 @@
           </details>
 
           <details class="subacc">
-            <summary><span>Archives (Bureau)</span><span class="acc-right">▾</span></summary>
+            <summary><span>Archives (Bureau)</span><span class="acc-right" aria-hidden="true">▾</span></summary>
             <div class="acc-body">
               <div class="cards">
                 <div class="card">
                   <h3>Dossier Archives (Bureau)</h3>
-                  <p>COLLE TON LIEN ZOHO ICI (droits Bureau).</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/ac5bcfc0c99200759e63f52a0645b7669df2a0c679dd0428c84d708ce0412da9">Accéder</a>
                 </div>
               </div>
@@ -598,106 +901,102 @@
         </div>
       </details>
 
-      <!-- 2) MEMBRES (GESTION) : mêmes sections que documents-internes -->
+      <!-- 2) MEMBRES (GESTION) -->
       <details class="accordion" id="membres">
-        <summary><span>Membres (gestion – liens avec droits dépôt/édition)</span><span class="acc-right">▾</span></summary>
+        <summary><span>Membres (gestion – liens avec droits dépôt/édition)</span><span class="acc-right" aria-hidden="true">▾</span></summary>
         <div class="acc-body">
 
-          <!-- Nouveaux adhérents -->
           <details class="subacc" open>
-            <summary><span>Nouveaux adhérents (dépôt)</span><span class="acc-right">▾</span></summary>
+            <summary><span>Nouveaux adhérents (dépôt)</span><span class="acc-right" aria-hidden="true">▾</span></summary>
             <div class="acc-body">
               <div class="cards">
                 <div class="card">
                   <h3>Dossier “Nouveaux adhérents”</h3>
-                  <p>COLLE TON LIEN ZOHO ICI (droits dépôt).</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/c908e2e93ed4c53b28193edf2ccd0e5f8ae9e6ad6da69b1103cdfead38110232">Accéder</a>
                 </div>
               </div>
             </div>
           </details>
 
-          <!-- Organisation & administratif COMPLET -->
           <details class="subacc" open>
-            <summary><span>Organisation & administratif (gestion)</span><span class="acc-right">▾</span></summary>
+            <summary><span>Organisation & administratif (gestion)</span><span class="acc-right" aria-hidden="true">▾</span></summary>
             <div class="acc-body">
               <div class="cards">
                 <div class="card">
                   <h3>Statuts & règlements</h3>
-                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/bbef14e164079f93e6d88eb08493afc8b65962984d1c4e95d3d157e6e6aacb54">Accéder</a>
                 </div>
                 <div class="card">
                   <h3>Procès-verbaux & comptes annuels</h3>
-                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/c89bc0b3c3c962a816fda411040256fdfbfefbb0d28f5252cbbdc0b9bfd4af9b">Accéder</a>
                 </div>
                 <div class="card">
                   <h3>Documents Préfecture</h3>
-                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/6e035cbdb2d328f5ba7e109cfddec59fab7660d3b86d8d553e15c3f972fb261f">Accéder</a>
                 </div>
                 <div class="card">
                   <h3>Convocations</h3>
-                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/0e178282709b8d3facd6c91d6031c6edd3fb535335cdb5d4e0a538cfa28a6293">Accéder</a>
                 </div>
                 <div class="card">
                   <h3>Organisation des événements</h3>
-                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/87b22a0ae0f1f4a527536ae6fbb85b50ba8fe9aa4c02d6fc246150ac26320a75">Accéder</a>
                 </div>
                 <div class="card">
                   <h3>Planning annuel</h3>
-                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/9d5321250fedd941495981ea972a17d4dc5481e91867796086c832a319118aab">Accéder</a>
                 </div>
               </div>
             </div>
           </details>
 
-          <!-- Études -->
           <details class="subacc">
-            <summary><span>Études (gestion)</span><span class="acc-right">▾</span></summary>
+            <summary><span>Études (gestion)</span><span class="acc-right" aria-hidden="true">▾</span></summary>
             <div class="acc-body">
               <div class="cards">
                 <div class="card">
                   <h3>Documents d’étude</h3>
-                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/9b7e1c9f22f75fa5052043249d083584b7a71ed1eb614e50baf4e08a0108c277">Accéder</a>
                 </div>
                 <div class="card">
                   <h3>Planches d’étude</h3>
-                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/4242791467f71f9782fd92e6a59b35d7d6b52272be0a5eb4811bfe0fbb7220ca">Accéder</a>
                 </div>
                 <div class="card">
                   <h3>Procès-verbaux (Études)</h3>
-                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/c91963d5a302cd8f69bb52ac308f1d5b82535f8006034238966e5f0f57ea785f">Accéder</a>
                 </div>
                 <div class="card">
                   <h3>Travaux & documents</h3>
-                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/49fbeba7065a33191da058278d3abfbc27a4a64905c497df7c9da1837aad78f2">Accéder</a>
                 </div>
                 <div class="card">
                   <h3>Bibliothèque d’étude</h3>
-                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/b671cad53f794c23d87ab80e01f71bfd993d40fb60c36b2d512efb13d72c4ad5">Accéder</a>
                 </div>
               </div>
             </div>
           </details>
 
-          <!-- Archives -->
           <details class="subacc">
-            <summary><span>Archives (gestion)</span><span class="acc-right">▾</span></summary>
+            <summary><span>Archives (gestion)</span><span class="acc-right" aria-hidden="true">▾</span></summary>
             <div class="acc-body">
               <div class="cards">
                 <div class="card">
                   <h3>Archives – Doctrine interne</h3>
-                  <p>COLLE TON LIEN ZOHO ICI.</p>
+                  <p>&nbsp;</p>
                   <a href="https://workdrive.zohopublic.eu/external/fdd8772d8fa8be5bb31e7a86e79e8f5448ee6259863b9644e60510e66c263ea3">Accéder</a>
                 </div>
               </div>
@@ -722,71 +1021,723 @@
     </div>
   </div>
 
-  <!-- MODALE ZOHO -->
+  <!-- MODALE ZOHO – ULTRA COCKPIT -->
   <div class="modal" id="zohoModal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-label="Documents Zoho">
+
       <div class="modal-head">
         <div class="modal-title" id="zohoModalTitle">Documents</div>
         <div class="modal-actions">
-          <a class="btn-mini" id="zohoOpenExternal" href="#" target="_blank" rel="noopener noreferrer">Ouvrir dans Zoho</a>
+          <button class="btn-mini" type="button" id="zohoToggleMenu">Menu</button>
+          <button class="btn-mini" type="button" id="zohoSplit" aria-pressed="false" title="Activer/désactiver la vue double">Split</button>
+          <button class="btn-mini" type="button" id="zohoCopyLink">Copier</button>
+          <button class="btn-mini" type="button" id="zohoClearTabs" title="Fermer tous les onglets">Tout fermer</button>
+          <a class="btn-mini" id="zohoOpenExternal" href="#" target="_blank" rel="noopener noreferrer">Ouvrir Zoho</a>
+          <button class="btn-mini" type="button" id="zohoReload">Recharger</button>
           <button class="btn-mini" type="button" id="zohoClose">Fermer</button>
         </div>
       </div>
-      <div class="modal-body">
-        <iframe class="zoho-frame" id="zohoFrame" title="Zoho" src="about:blank"></iframe>
-      </div>
-      <div class="modal-hint">
-        Si Zoho refuse l’intégration (sécurité), l’iframe peut rester vide : utilisez “Ouvrir dans Zoho”.
+
+      <div class="modal-content">
+        <div class="modal-sidebar-backdrop" id="zohoSidebarBackdrop" aria-hidden="true"></div>
+
+        <aside class="modal-sidebar" id="zohoSidebar" aria-label="Menu documents">
+          <div class="sidebar-top">
+            <div class="sidebar-title">📁 Dossiers</div>
+            <div class="sidebar-sub" id="zohoSideStatus">
+              Cliquer = ouvre/active. <strong>A</strong>=Pane A · <strong>B</strong>=Pane B · <strong>+</strong>=nouveau tab · <strong>⭐</strong>=favori
+            </div>
+
+            <div class="sidebar-tools">
+              <button class="btn-mini" type="button" id="viewAll" aria-pressed="true">Tous</button>
+              <button class="btn-mini" type="button" id="viewFav" aria-pressed="false">⭐ Favoris</button>
+              <button class="btn-mini" type="button" id="viewRecent" aria-pressed="false">🕘 Récents</button>
+              <button class="btn-mini" type="button" id="clearRecent" title="Vider les récents">Vider 🕘</button>
+            </div>
+
+            <input class="sidebar-search" id="zohoSearch" type="search" placeholder="Rechercher un document…" />
+          </div>
+
+          <div class="sidebar-list" id="zohoSidebarList"></div>
+
+          <div class="sidebar-footer">
+            <a class="btn-mini" href="documents-internes.html">← Page membres</a>
+            <a class="btn-mini" href="index.html">← Site public</a>
+          </div>
+        </aside>
+
+        <main class="modal-main">
+          <div class="modal-tabs" id="zohoTabs" aria-label="Onglets"></div>
+
+          <div class="modal-body">
+            <div class="split-wrap" id="splitWrap">
+              <!-- Pane A -->
+              <div class="pane" id="paneA">
+                <div class="pane-head">
+                  <div class="pane-title" id="paneATitle">Pane A</div>
+                  <div class="pane-actions">
+                    <a class="btn-mini" id="paneAOpen" href="#" target="_blank" rel="noopener noreferrer">↗</a>
+                    <button class="btn-mini" type="button" id="paneAReload">⟳</button>
+                  </div>
+                </div>
+                <iframe class="zoho-frame" id="zohoFrameA" title="Zoho A" src="about:blank"></iframe>
+
+                <div class="zoho-fallback" id="fallbackA" hidden>
+                  <div class="fallback-card">
+                    <div class="fallback-title">⚠️ Pane A : iframe bloquée</div>
+                    <div class="fallback-text">Zoho peut refuser l’intégration. Utilise ↗ ou change de doc.</div>
+                    <div class="fallback-actions">
+                      <a class="btn-mini" id="fallbackAOpen" href="#" target="_blank" rel="noopener noreferrer">Ouvrir Zoho</a>
+                      <button class="btn-mini" type="button" data-hide="fallbackA">Rester</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pane B -->
+              <div class="pane" id="paneB" style="display:none;">
+                <div class="pane-head">
+                  <div class="pane-title" id="paneBTitle">Pane B</div>
+                  <div class="pane-actions">
+                    <a class="btn-mini" id="paneBOpen" href="#" target="_blank" rel="noopener noreferrer">↗</a>
+                    <button class="btn-mini" type="button" id="paneBReload">⟳</button>
+                  </div>
+                </div>
+                <iframe class="zoho-frame" id="zohoFrameB" title="Zoho B" src="about:blank"></iframe>
+
+                <div class="zoho-fallback" id="fallbackB" hidden>
+                  <div class="fallback-card">
+                    <div class="fallback-title">⚠️ Pane B : iframe bloquée</div>
+                    <div class="fallback-text">Zoho peut refuser l’intégration. Utilise ↗ ou change de doc.</div>
+                    <div class="fallback-actions">
+                      <a class="btn-mini" id="fallbackBOpen" href="#" target="_blank" rel="noopener noreferrer">Ouvrir Zoho</a>
+                      <button class="btn-mini" type="button" data-hide="fallbackB">Rester</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-hint">
+            Astuces :
+            <strong>Split</strong> = 2 docs côte à côte · Dans le menu gauche :
+            <strong>A</strong> ouvre dans Pane A, <strong>B</strong> dans Pane B,
+            <strong>+</strong> force un nouvel onglet interne,
+            <strong>↗</strong> ouvre Zoho direct, <strong>⭐</strong> ajoute aux favoris.
+            Tout est mémorisé (tabs/favoris/récents) sur l’appareil.
+          </div>
+        </main>
       </div>
     </div>
   </div>
 
   <script>
+    // =========================
+    // ZOHO ULTRA COCKPIT ENGINE
+    // =========================
+
+    // Elements
     const modal = document.getElementById("zohoModal");
-    const frame = document.getElementById("zohoFrame");
+
     const closeBtn = document.getElementById("zohoClose");
+    const reloadBtn = document.getElementById("zohoReload");
     const openExternal = document.getElementById("zohoOpenExternal");
+    const copyBtn = document.getElementById("zohoCopyLink");
+    const clearTabsBtn = document.getElementById("zohoClearTabs");
+    const splitBtn = document.getElementById("zohoSplit");
+
     const modalTitle = document.getElementById("zohoModalTitle");
 
-    function openZohoUrl(url, title){
-      if (!url) return;
-      modalTitle.textContent = title || "Documents";
-      frame.src = url;
-      openExternal.href = url;
+    const sidebar = document.getElementById("zohoSidebar");
+    const sidebarList = document.getElementById("zohoSidebarList");
+    const sidebarBackdrop = document.getElementById("zohoSidebarBackdrop");
+    const toggleMenuBtn = document.getElementById("zohoToggleMenu");
+    const searchInput = document.getElementById("zohoSearch");
+    const sideStatus = document.getElementById("zohoSideStatus");
+
+    const tabsBar = document.getElementById("zohoTabs");
+    const splitWrap = document.getElementById("splitWrap");
+
+    const paneA = document.getElementById("paneA");
+    const paneB = document.getElementById("paneB");
+
+    const frameA = document.getElementById("zohoFrameA");
+    const frameB = document.getElementById("zohoFrameB");
+
+    const paneATitle = document.getElementById("paneATitle");
+    const paneBTitle = document.getElementById("paneBTitle");
+
+    const paneAOpen = document.getElementById("paneAOpen");
+    const paneBOpen = document.getElementById("paneBOpen");
+
+    const paneAReload = document.getElementById("paneAReload");
+    const paneBReload = document.getElementById("paneBReload");
+
+    const fallbackA = document.getElementById("fallbackA");
+    const fallbackB = document.getElementById("fallbackB");
+    const fallbackAOpen = document.getElementById("fallbackAOpen");
+    const fallbackBOpen = document.getElementById("fallbackBOpen");
+
+    // Sidebar view buttons
+    const viewAllBtn = document.getElementById("viewAll");
+    const viewFavBtn = document.getElementById("viewFav");
+    const viewRecentBtn = document.getElementById("viewRecent");
+    const clearRecentBtn = document.getElementById("clearRecent");
+
+    // Storage keys
+    const LS_TABS = "osd9tdj_zoho_tabs_v1";
+    const LS_ACTIVE = "osd9tdj_zoho_active_v1";
+    const LS_FAV = "osd9tdj_zoho_fav_v1";
+    const LS_RECENT = "osd9tdj_zoho_recent_v1";
+    const LS_SPLIT = "osd9tdj_zoho_split_v1";
+    const LS_PANE_A = "osd9tdj_zoho_paneA_v1";
+    const LS_PANE_B = "osd9tdj_zoho_paneB_v1";
+
+    // State
+    let allItems = []; // {title,url,group}
+    let tabs = [];     // {id,title,url}
+    let activeTabId = null;
+    let split = false;
+
+    let paneAState = { url:null, title:"Pane A" };
+    let paneBState = { url:null, title:"Pane B" };
+
+    let fav = new Set();     // urls
+    let recent = [];         // [{url,title,ts}...]
+
+    let sidebarMode = "all"; // all | fav | recent
+
+    // Helpers
+    const isInternalLink = (url) => {
+      if (!url) return true;
+      return (
+        url.startsWith("#") ||
+        url.endsWith(".html") ||
+        url.startsWith("index") ||
+        url.startsWith("documents-internes")
+      );
+    };
+    const isZoho = (url) => /zoho|zohopublic\.eu/i.test(url || "");
+
+    function escapeHtml(s){
+      return (s || "").replace(/[&<>"']/g, (c) => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[c]));
+    }
+
+    function safeParse(json, fallback){
+      try{ return JSON.parse(json); }catch(e){ return fallback; }
+    }
+
+    function saveState(){
+      try{
+        localStorage.setItem(LS_TABS, JSON.stringify(tabs));
+        localStorage.setItem(LS_ACTIVE, JSON.stringify(activeTabId));
+        localStorage.setItem(LS_FAV, JSON.stringify(Array.from(fav)));
+        localStorage.setItem(LS_RECENT, JSON.stringify(recent));
+        localStorage.setItem(LS_SPLIT, JSON.stringify(split));
+        localStorage.setItem(LS_PANE_A, JSON.stringify(paneAState));
+        localStorage.setItem(LS_PANE_B, JSON.stringify(paneBState));
+      }catch(e){}
+    }
+
+    function loadState(){
+      tabs = safeParse(localStorage.getItem(LS_TABS), []);
+      activeTabId = safeParse(localStorage.getItem(LS_ACTIVE), null);
+      fav = new Set(safeParse(localStorage.getItem(LS_FAV), []));
+      recent = safeParse(localStorage.getItem(LS_RECENT), []);
+      split = !!safeParse(localStorage.getItem(LS_SPLIT), false);
+      paneAState = safeParse(localStorage.getItem(LS_PANE_A), { url:null, title:"Pane A" });
+      paneBState = safeParse(localStorage.getItem(LS_PANE_B), { url:null, title:"Pane B" });
+    }
+
+    function openModal(){
       modal.classList.add("open");
       modal.setAttribute("aria-hidden","false");
     }
-
-    function closeZoho(){
+    function closeModal(){
       modal.classList.remove("open");
       modal.setAttribute("aria-hidden","true");
-      frame.src = "about:blank";
+      closeSidebarMobile();
     }
 
-    closeBtn.addEventListener("click", closeZoho);
-    modal.addEventListener("click", (e) => { if (e.target === modal) closeZoho(); });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeZoho(); });
+    function openSidebarMobile(){
+      sidebar.classList.add("open");
+      sidebarBackdrop.classList.add("open");
+      sidebarBackdrop.setAttribute("aria-hidden","false");
+    }
+    function closeSidebarMobile(){
+      sidebar.classList.remove("open");
+      sidebarBackdrop.classList.remove("open");
+      sidebarBackdrop.setAttribute("aria-hidden","true");
+    }
 
-    // Tous les liens Zoho => ouverture en modale (y compris tes futurs liens)
-    document.querySelectorAll('a[href*="zohopublic.eu"], a[href*="zoho"]').forEach(a => {
-      a.addEventListener("click", (e) => {
-        const url = a.getAttribute("href");
-        if (!url) return;
-
-        // Si c’est un lien interne du site, on laisse normal
-        if (url.endsWith(".html") || url.startsWith("index") || url.startsWith("documents-internes")) return;
-
-        e.preventDefault();
-
-        const title =
-          a.closest(".card")?.querySelector("h3")?.textContent?.trim()
-          || a.textContent.trim()
-          || "Documents";
-
-        openZohoUrl(url, title);
-      });
+    toggleMenuBtn.addEventListener("click", () => {
+      if (sidebar.classList.contains("open")) closeSidebarMobile();
+      else openSidebarMobile();
     });
-  </script>
+    sidebarBackdrop.addEventListener("click", closeSidebarMobile);
 
+    // Split toggle
+    function applySplit(){
+      splitBtn.setAttribute("aria-pressed", split ? "true" : "false");
+      if (split){
+        splitWrap.classList.add("split");
+        paneB.style.display = "";
+      }else{
+        splitWrap.classList.remove("split");
+        paneB.style.display = "none";
+      }
+
+function updatePane(which){
+  const st = (which === "A") ? paneAState : paneBState;
+
+  const titleEl = (which === "A") ? paneATitle : paneBTitle;
+  const openEl  = (which === "A") ? paneAOpen  : paneBOpen;
+  const fbOpen  = (which === "A") ? fallbackAOpen : fallbackBOpen;
+
+  titleEl.textContent = st.title || ("Pane " + which);
+  openEl.href = st.url || "#";
+  fbOpen.href = st.url || "#";
+}
+
+// --- Fallback (heuristique iframe bloquée) ---
+let timerA = null;
+let timerB = null;
+
+function scheduleFallback(which){
+  const st = (which === "A") ? paneAState : paneBState;
+  const fb = (which === "A") ? fallbackA : fallbackB;
+
+  if (which === "A") clearTimeout(timerA);
+  else clearTimeout(timerB);
+
+  if (!st.url || !isZoho(st.url)){
+    fb.hidden = true;
+    return;
+  }
+
+  const t = setTimeout(() => {
+    // On ne peut pas lire l’iframe cross-domain : on propose un fallback au bout d’un délai.
+    fb.hidden = false;
+  }, 1500);
+
+  if (which === "A") timerA = t;
+  else timerB = t;
+}
+
+frameA.addEventListener("load", () => {
+  clearTimeout(timerA);
+  setTimeout(() => { fallbackA.hidden = true; }, 450);
+});
+frameB.addEventListener("load", () => {
+  clearTimeout(timerB);
+  setTimeout(() => { fallbackB.hidden = true; }, 450);
+});
+
+// Boutons "Rester" des fallbacks
+document.addEventListener("click", (e) => {
+  const hideId = e.target?.getAttribute?.("data-hide");
+  if (hideId){
+    const el = document.getElementById(hideId);
+    if (el) el.hidden = true;
+  }
+});
+
+// --- Ouverture dans une pane ---
+function setPane(which, url, title){
+  if (!url) return;
+
+  const st = (which === "A") ? paneAState : paneBState;
+  const fr = (which === "A") ? frameA : frameB;
+  const fb = (which === "A") ? fallbackA : fallbackB;
+
+  st.url = url;
+  st.title = title || ("Pane " + which);
+
+  fb.hidden = true;
+  fr.src = url;
+
+  updatePane(which);
+  scheduleFallback(which);
+
+  // Bouton “Ouvrir Zoho” (toujours sur ce qu’on vient d’ouvrir)
+  openExternal.href = url;
+
+  // Modal ouverte
+  openModal();
+
+  // Récents
+  touchRecent(url, title);
+
+  // Save
+  saveState();
+}
+
+// Reload panes
+paneAReload.addEventListener("click", () => {
+  if (!paneAState.url) return;
+  fallbackA.hidden = true;
+  frameA.src = paneAState.url;
+  scheduleFallback("A");
+});
+paneBReload.addEventListener("click", () => {
+  if (!paneBState.url) return;
+  fallbackB.hidden = true;
+  frameB.src = paneBState.url;
+  scheduleFallback("B");
+});
+
+// Reload global
+reloadBtn.addEventListener("click", () => {
+  if (paneAState.url){
+    fallbackA.hidden = true;
+    frameA.src = paneAState.url;
+    scheduleFallback("A");
+  }
+  if (split && paneBState.url){
+    fallbackB.hidden = true;
+    frameB.src = paneBState.url;
+    scheduleFallback("B");
+  }
+});
+
+// --- Tabs ---
+function makeId(str){
+  return (str || "").toLowerCase()
+    .replace(/\s+/g,"-")
+    .replace(/[^a-z0-9\-]/g,"")
+    .slice(0,60) || ("doc-"+Math.random().toString(16).slice(2));
+}
+
+function addOrActivateTab(url, title, forceNew=false){
+  if (!url) return;
+
+  if (!forceNew){
+    const existing = tabs.find(t => t.url === url);
+    if (existing){
+      activeTabId = existing.id;
+      setPane("A", existing.url, existing.title);
+      renderTabs();
+      highlightSidebarActive();
+      return;
+    }
+  }
+
+  const id = makeId(title + "-" + url + "-" + (forceNew ? Date.now() : ""));
+  tabs.unshift({ id, title: title || "Document", url });
+  activeTabId = id;
+
+  setPane("A", url, title);
+  renderTabs();
+  highlightSidebarActive();
+}
+
+function removeTab(id){
+  const idx = tabs.findIndex(t => t.id === id);
+  if (idx < 0) return;
+
+  const wasActive = tabs[idx].id === activeTabId;
+  tabs.splice(idx, 1);
+
+  if (!tabs.length){
+    activeTabId = null;
+    renderTabs();
+    highlightSidebarActive();
+    saveState();
+    return;
+  }
+
+  if (wasActive){
+    activeTabId = tabs[0].id;
+    setPane("A", tabs[0].url, tabs[0].title);
+  }
+
+  renderTabs();
+  highlightSidebarActive();
+  saveState();
+}
+
+function renderTabs(){
+  tabsBar.innerHTML = "";
+  tabs.forEach(t => {
+    const el = document.createElement("div");
+    el.className = "tab" + (t.id === activeTabId ? " active" : "");
+    el.setAttribute("role","button");
+    el.setAttribute("tabindex","0");
+    el.innerHTML = `<span>${escapeHtml(t.title)}</span><span class="x" title="Fermer">×</span>`;
+
+    el.addEventListener("click", (e) => {
+      if (e.target && e.target.classList.contains("x")){
+        e.stopPropagation();
+        removeTab(t.id);
+        return;
+      }
+      activeTabId = t.id;
+      setPane("A", t.url, t.title);
+      renderTabs();
+      highlightSidebarActive();
+      saveState();
+    });
+
+    el.addEventListener("keydown",(e)=>{
+      if(e.key==="Enter" || e.key===" "){
+        e.preventDefault();
+        activeTabId = t.id;
+        setPane("A", t.url, t.title);
+        renderTabs();
+        highlightSidebarActive();
+        saveState();
+      }
+    });
+
+    tabsBar.appendChild(el);
+  });
+}
+
+clearTabsBtn.addEventListener("click", () => {
+  tabs = [];
+  activeTabId = null;
+  renderTabs();
+  highlightSidebarActive();
+  saveState();
+});
+
+// --- Favoris / Récents ---
+function touchRecent(url, title){
+  if (!url) return;
+  const now = Date.now();
+  recent = recent.filter(x => x.url !== url);
+  recent.unshift({ url, title: title || "Document", ts: now });
+  recent = recent.slice(0, 20);
+  saveState();
+  if (sidebarMode === "recent") renderSidebar();
+}
+
+function toggleFav(url){
+  if (!url) return;
+  if (fav.has(url)) fav.delete(url);
+  else fav.add(url);
+  saveState();
+  renderSidebar();
+}
+
+clearRecentBtn.addEventListener("click", () => {
+  recent = [];
+  saveState();
+  if (sidebarMode === "recent") renderSidebar();
+});
+
+function setMode(mode){
+  sidebarMode = mode;
+  viewAllBtn.setAttribute("aria-pressed", mode === "all" ? "true" : "false");
+  viewFavBtn.setAttribute("aria-pressed", mode === "fav" ? "true" : "false");
+  viewRecentBtn.setAttribute("aria-pressed", mode === "recent" ? "true" : "false");
+  renderSidebar();
+}
+viewAllBtn.addEventListener("click", () => setMode("all"));
+viewFavBtn.addEventListener("click", () => setMode("fav"));
+viewRecentBtn.addEventListener("click", () => setMode("recent"));
+
+// --- Sidebar : collecte & rendu ---
+function collectAllItems(){
+  const links = Array.from(document.querySelectorAll('a[href]'))
+    .map(a => ({ el: a, url: a.getAttribute("href") }))
+    .filter(x => x.url && isZoho(x.url) && !isInternalLink(x.url));
+
+  allItems = links.map(x => {
+    const card = x.el.closest(".card");
+    const title =
+      card?.querySelector("h3")?.textContent?.trim() ||
+      x.el.textContent?.trim() ||
+      "Document";
+
+    const sub = x.el.closest(".subacc")?.querySelector("summary span")?.textContent?.trim() || "";
+    const acc = x.el.closest(".accordion")?.querySelector("summary span")?.textContent?.trim() || "";
+    const group = [acc, sub].filter(Boolean).join(" · ") || "Documents";
+
+    return { title, url: x.url, group };
+  });
+}
+
+function filteredItems(){
+  const q = (searchInput.value || "").trim().toLowerCase();
+
+  if (sidebarMode === "fav"){
+    return allItems.filter(it => fav.has(it.url))
+      .filter(it => !q || (it.title || "").toLowerCase().includes(q));
+  }
+
+  if (sidebarMode === "recent"){
+    const out = [];
+    recent.forEach(r => {
+      const it = allItems.find(x => x.url === r.url) || { title:r.title, url:r.url, group:"Récents" };
+      if (!q || (it.title || "").toLowerCase().includes(q)) out.push(it);
+    });
+    return out;
+  }
+
+  return allItems
+    .filter(it => !q || (it.title || "").toLowerCase().includes(q));
+}
+
+function renderSidebar(){
+  const items = filteredItems();
+
+  const byGroup = new Map();
+  items.forEach(it => {
+    const g = it.group || "Documents";
+    if (!byGroup.has(g)) byGroup.set(g, []);
+    byGroup.get(g).push(it);
+  });
+
+  sidebarList.innerHTML = "";
+
+  for (const [group, arr] of byGroup.entries()){
+    const gEl = document.createElement("div");
+    gEl.className = "sidebar-group";
+    gEl.textContent = group;
+    sidebarList.appendChild(gEl);
+
+    arr.forEach(it => {
+      const row = document.createElement("div");
+      row.className = "sidebar-item";
+
+      const main = document.createElement("button");
+      main.type = "button";
+      main.className = "sidebar-link";
+      main.dataset.url = it.url;
+      main.dataset.title = it.title;
+
+      const star = fav.has(it.url) ? "⭐" : "☆";
+      main.innerHTML = `${escapeHtml(it.title)} <span style="opacity:0.75; font-weight:900;">${star}</span>`;
+      main.addEventListener("click", () => {
+        addOrActivateTab(it.url, it.title, false);
+        closeSidebarMobile();
+      });
+
+      const btnA = document.createElement("button");
+      btnA.type = "button";
+      btnA.className = "sidebar-mini";
+      btnA.title = "Ouvrir dans Pane A";
+      btnA.textContent = "A";
+      btnA.addEventListener("click", (e) => {
+        e.stopPropagation();
+        setPane("A", it.url, it.title);
+        addOrActivateTab(it.url, it.title, false);
+        closeSidebarMobile();
+      });
+
+      const btnB = document.createElement("button");
+      btnB.type = "button";
+      btnB.className = "sidebar-mini";
+      btnB.title = split ? "Ouvrir dans Pane B" : "Active Split pour Pane B";
+      btnB.textContent = "B";
+      btnB.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (!split){
+          split = true;
+          applySplit();
+        }
+        setPane("B", it.url, it.title);
+        closeSidebarMobile();
+      });
+
+      const plus = document.createElement("button");
+      plus.type = "button";
+      plus.className = "sidebar-mini";
+      plus.title = "Ouvrir en + onglet interne";
+      plus.textContent = "+";
+      plus.addEventListener("click", (e) => {
+        e.stopPropagation();
+        addOrActivateTab(it.url, it.title, true);
+        closeSidebarMobile();
+      });
+
+      const ext = document.createElement("button");
+      ext.type = "button";
+      ext.className = "sidebar-mini";
+      ext.title = "Ouvrir Zoho direct (nouvelle fenêtre)";
+      ext.textContent = "↗";
+      ext.addEventListener("click", (e) => {
+        e.stopPropagation();
+        window.open(it.url, "_blank", "noopener,noreferrer");
+      });
+
+      const favBtn = document.createElement("button");
+      favBtn.type = "button";
+      favBtn.className = "sidebar-mini";
+      favBtn.title = "Ajouter/retirer des favoris";
+      favBtn.textContent = fav.has(it.url) ? "⭐" : "☆";
+      favBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        toggleFav(it.url);
+      });
+
+      row.appendChild(main);
+      row.appendChild(btnA);
+      row.appendChild(btnB);
+      row.appendChild(plus);
+      row.appendChild(ext);
+      row.appendChild(favBtn);
+
+      sidebarList.appendChild(row);
+    });
+  }
+
+  highlightSidebarActive();
+}
+
+function highlightSidebarActive(){
+  const activeUrl =
+    (tabs.find(t => t.id === activeTabId)?.url) ||
+    paneAState.url ||
+    null;
+
+  sidebarList.querySelectorAll(".sidebar-link").forEach(btn => {
+    btn.classList.toggle("active", !!activeUrl && btn.dataset.url === activeUrl);
+  });
+}
+
+searchInput.addEventListener("input", renderSidebar);
+
+// Interception des liens Zoho des cartes
+document.querySelectorAll('a[href*="zohopublic.eu"], a[href*="zoho"]').forEach(a => {
+  const url = a.getAttribute("href");
+  if (!url || isInternalLink(url)) return;
+
+  a.addEventListener("click", (e) => {
+    e.preventDefault();
+    const title =
+      a.closest(".card")?.querySelector("h3")?.textContent?.trim()
+      || a.textContent.trim()
+      || "Documents";
+
+    addOrActivateTab(url, title, false);
+  });
+});
+
+// --- Init ---
+loadState();
+collectAllItems();
+applySplit();
+
+updatePane("A");
+updatePane("B");
+renderTabs();
+setMode("all");
+renderSidebar();
+highlightSidebarActive();
+
+// Optionnel : restaurer dernière vue
+if (paneAState.url) setPane("A", paneAState.url, paneAState.title);
+if (split && paneBState.url) setPane("B", paneBState.url, paneBState.title);
+
+// On ferme la modale après restauration auto (sinon elle s’ouvre au chargement)
+closeModal();
+
+window.addEventListener("beforeunload", saveState);
+</script>
 </body>
 </html>
