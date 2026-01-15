@@ -561,18 +561,38 @@
 
       <a class="btn-or" href="index.html">← Retour au site public</a>
 
-      <!-- Préparer entretien d’adhésion -->
-      <div class="warning" id="adhesion" style="max-width:980px; text-align:left;">
-        <strong style="font-family:'Cinzel',serif; color:var(--or);">Préparer votre entretien d’adhésion</strong>
-        <p style="margin:8px 0 12px; font-size:0.92rem; opacity:0.92; line-height:1.45;">
-          Accès au dossier d’admission (formulaire, statuts, documents). Zoho demandera le code.
-        </p>
-        <button class="btn-or zoho-open" type="button"
-          data-title="Préparer votre entretien d’adhésion"
-          data-url="https://REMPLACE-MOI-PAR-TON-LIEN-ZOHO">
-          Accéder aux documents
-        </button>
-      </div>
+      <!-- PRÉPARER ENTRETIEN D’ADHÉSION (menu déroulant + 2 boutons + mention RGPD) -->
+      <details class="accordion" id="adhesion" open>
+        <summary><span>Préparer votre entretien d’adhésion</span><span class="acc-right">▾</span></summary>
+        <div class="acc-body">
+
+          <p style="margin:0 0 14px; font-size:0.9rem; opacity:0.92; line-height:1.45;">
+            <strong style="font-family:'Cinzel',serif; color:var(--or);">Protection des données (RGPD)</strong><br>
+            Les documents transmis sont utilisés uniquement dans le cadre de la procédure d’adhésion et de la gestion administrative des membres.
+            Ils sont accessibles exclusivement aux membres habilités du Bureau (dont Secrétariat, Présidence / Grand Maître).
+            Conformément à la réglementation en vigueur, vous disposez d’un droit d’accès, de rectification et de suppression des données vous concernant.
+          </p>
+
+          <p style="margin:0 0 14px; font-size:0.9rem; opacity:0.92; line-height:1.45;">
+            L’adhésion est renouvelée chaque année selon les règles de l’association. Des pièces peuvent être redemandées en cas de changement de situation
+            (ex. changement d’adresse) ou lorsque certains documents arrivent à échéance, afin de maintenir le dossier à jour.
+          </p>
+
+          <div class="cards">
+            <div class="card">
+              <h2>Dossier d’adhésion</h2>
+              <p>Formulaire d’adhésion prêt à imprimer, pièces à fournir, documents officiels.</p>
+              <a href="https://workdrive.zohopublic.eu/external/4b8d0a925d053400c1191b0d4280e7e9c069ca1223e19f1630a28a9b7f5dcdd8">Télécharger</a>
+            </div>
+
+            <div class="card">
+              <h2>Déposer vos pièces</h2>
+              <p>Déposez ici le dossier complété et les pièces demandées (PDF). Aucun autre candidat ne voit vos documents.</p>
+              <a href="https://workdrive.zohopublic.eu/external/9fa9e0d5ac6e13ee446123e738c1011e09cd8756ae7b21583bdbeadfb350c464/download">Déposer</a>
+            </div>
+          </div>
+        </div>
+      </details>
 
       <!-- ORGANISATION -->
       <details class="accordion" id="organisation" open>
