@@ -326,7 +326,7 @@
     }
     .card a:hover{ background:rgba(255,215,0,0.35); }
 
-    /* ✅ (AJOUT) Champ matricule */
+    /* ✅ AJOUT : champ matricule (loupe) */
     .matricule-form{
       display:flex;
       flex-direction:column;
@@ -566,7 +566,7 @@
 
 <body>
   <script>window.ACCESS_GROUP="MEMBRES_DOCS"</script>
-<script src="js/membres-lock.js"></script>
+  <script src="js/membres-lock.js"></script>
 
   <span class="wmk">OSD9TDJ::DOCUMENTS-INTERNES::WTRMK-OMEGA-2026</span>
 
@@ -597,8 +597,8 @@
 
       <a class="btn-or" href="index.html">← Retour au site public</a>
 
-      <!-- PRÉPARER ENTRETIEN D’ADHÉSION (1 lien dossier + 1 champ matricule) -->
-      <details class="accordion" id="adhesion">
+      <!-- PRÉPARER ENTRETIEN D’ADHÉSION -->
+      <details class="accordion" id="adhesion" open>
         <summary><span>Préparer votre entretien d’adhésion</span><span class="acc-right">▾</span></summary>
         <div class="acc-body">
 
@@ -621,9 +621,10 @@
               <a href="https://workdrive.zohopublic.eu/external/4b8d0a925d053400c1191b0d4280e7e9c069ca1223e19f1630a28a9b7f5dcdd8">Télécharger</a>
             </div>
 
+            <!-- ✅ LA “LOUPE” : on garde la page ouverte, on ouvre en MODALE -->
             <div class="card">
               <h2>Accès à votre dossier (matricule)</h2>
-              <p>Entrez votre matricule pour ouvrir votre dossier personnel. Zoho demandera votre code.</p>
+              <p>Entrez votre matricule. Vous serez redirigé vers votre dossier Zoho (code demandé par Zoho).</p>
 
               <form class="matricule-form" id="matriculeForm" autocomplete="off">
                 <input
@@ -641,7 +642,7 @@
               </form>
 
               <div class="matricule-hint">
-                Astuce : vous pouvez taper en minuscules/majuscules, avec ou sans espaces — le système normalise.
+                Astuce : majuscules/minuscules, espaces ou tirets → c’est normalisé automatiquement.
               </div>
             </div>
           </div>
@@ -791,7 +792,7 @@
     modal.addEventListener("click", (e) => { if (e.target === modal) closeZoho(); });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeZoho(); });
 
-    // ✅ Matricules -> liens Zoho (30 dossiers)
+    // ✅ Matricules -> liens Zoho (30 dossiers : HT + NP + EXT)
     const DOSSIERS = {
       // HT (Haute-Savoie) 0001-0012
       "OSD9TDJ-HT-0001": "https://workdrive.zohopublic.eu/external/635517088a4ce6fce0f1e2c1b0e6998ae6c38257a1da3958372aef71e28f7665",
@@ -832,13 +833,11 @@
 
     function normalizeMatricule(raw){
       if (!raw) return "";
-      // Remplace les tirets “exotiques” par "-"
-      const cleaned = raw
+      return raw
         .trim()
         .toUpperCase()
         .replace(/[‐-‒–—−]/g, "-")
         .replace(/\s+/g, "");
-      return cleaned;
     }
 
     const form = document.getElementById("matriculeForm");
@@ -858,26 +857,12 @@
       });
     }
 
-    // Bouton “Entretien d’adhésion”
-    document.querySelectorAll(".zoho-open").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const url = btn.getAttribute("data-url");
-        const title = btn.getAttribute("data-title") || "Documents";
-        if (!url || url.includes("REMPLACE-MOI")) {
-          alert("⚠️ Colle ton lien Zoho du dossier “Entretien d’adhésion” dans data-url.");
-          return;
-        }
-        openZohoUrl(url, title);
-      });
-    });
-
-    // Tous les liens Zoho => modale
+    // Tous les liens Zoho => modale (la page reste ouverte)
     document.querySelectorAll('a[href*="workdrive.zohopublic.eu"]').forEach(a => {
       a.addEventListener("click", (e) => {
         const url = a.getAttribute("href");
         if (!url) return;
 
-        // liens mailto/whatsapp => on laisse
         if (url.startsWith("mailto:") || url.startsWith("https://wa.me/")) return;
 
         e.preventDefault();
