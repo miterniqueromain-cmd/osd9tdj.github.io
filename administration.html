@@ -1133,611 +1133,625 @@
   </div>
 
   <script>
-    // =========================
-    // ZOHO ULTRA COCKPIT ENGINE
-    // =========================
+  // =========================
+  // ZOHO ULTRA COCKPIT ENGINE
+  // =========================
 
-    // Elements
-    const modal = document.getElementById("zohoModal");
+  // Elements
+  const modal = document.getElementById("zohoModal");
 
-    const closeBtn = document.getElementById("zohoClose");
-    const reloadBtn = document.getElementById("zohoReload");
-    const openExternal = document.getElementById("zohoOpenExternal");
-    const copyBtn = document.getElementById("zohoCopyLink");
-    const clearTabsBtn = document.getElementById("zohoClearTabs");
-    const splitBtn = document.getElementById("zohoSplit");
+  const closeBtn = document.getElementById("zohoClose");
+  const reloadBtn = document.getElementById("zohoReload");
+  const openExternal = document.getElementById("zohoOpenExternal");
+  const copyBtn = document.getElementById("zohoCopyLink");
+  const clearTabsBtn = document.getElementById("zohoClearTabs");
+  const splitBtn = document.getElementById("zohoSplit");
 
-    const modalTitle = document.getElementById("zohoModalTitle");
+  const modalTitle = document.getElementById("zohoModalTitle");
 
-    const sidebar = document.getElementById("zohoSidebar");
-    const sidebarList = document.getElementById("zohoSidebarList");
-    const sidebarBackdrop = document.getElementById("zohoSidebarBackdrop");
-    const toggleMenuBtn = document.getElementById("zohoToggleMenu");
-    const searchInput = document.getElementById("zohoSearch");
-    const sideStatus = document.getElementById("zohoSideStatus");
+  const sidebar = document.getElementById("zohoSidebar");
+  const sidebarList = document.getElementById("zohoSidebarList");
+  const sidebarBackdrop = document.getElementById("zohoSidebarBackdrop");
+  const toggleMenuBtn = document.getElementById("zohoToggleMenu");
+  const searchInput = document.getElementById("zohoSearch");
+  const sideStatus = document.getElementById("zohoSideStatus");
 
-    const tabsBar = document.getElementById("zohoTabs");
-    const splitWrap = document.getElementById("splitWrap");
+  const tabsBar = document.getElementById("zohoTabs");
+  const splitWrap = document.getElementById("splitWrap");
 
-    const paneA = document.getElementById("paneA");
-    const paneB = document.getElementById("paneB");
+  const paneA = document.getElementById("paneA");
+  const paneB = document.getElementById("paneB");
 
-    const frameA = document.getElementById("zohoFrameA");
-    const frameB = document.getElementById("zohoFrameB");
+  const frameA = document.getElementById("zohoFrameA");
+  const frameB = document.getElementById("zohoFrameB");
 
-    const paneATitle = document.getElementById("paneATitle");
-    const paneBTitle = document.getElementById("paneBTitle");
+  const paneATitle = document.getElementById("paneATitle");
+  const paneBTitle = document.getElementById("paneBTitle");
 
-    const paneAOpen = document.getElementById("paneAOpen");
-    const paneBOpen = document.getElementById("paneBOpen");
+  const paneAOpen = document.getElementById("paneAOpen");
+  const paneBOpen = document.getElementById("paneBOpen");
 
-    const paneAReload = document.getElementById("paneAReload");
-    const paneBReload = document.getElementById("paneBReload");
+  const paneAReload = document.getElementById("paneAReload");
+  const paneBReload = document.getElementById("paneBReload");
 
-    const fallbackA = document.getElementById("fallbackA");
-    const fallbackB = document.getElementById("fallbackB");
-    const fallbackAOpen = document.getElementById("fallbackAOpen");
-    const fallbackBOpen = document.getElementById("fallbackBOpen");
+  const fallbackA = document.getElementById("fallbackA");
+  const fallbackB = document.getElementById("fallbackB");
+  const fallbackAOpen = document.getElementById("fallbackAOpen");
+  const fallbackBOpen = document.getElementById("fallbackBOpen");
 
-    // Sidebar view buttons
-    const viewAllBtn = document.getElementById("viewAll");
-    const viewFavBtn = document.getElementById("viewFav");
-    const viewRecentBtn = document.getElementById("viewRecent");
-    const clearRecentBtn = document.getElementById("clearRecent");
+  // Sidebar view buttons
+  const viewAllBtn = document.getElementById("viewAll");
+  const viewFavBtn = document.getElementById("viewFav");
+  const viewRecentBtn = document.getElementById("viewRecent");
+  const clearRecentBtn = document.getElementById("clearRecent");
 
-    // Storage keys
-    const LS_TABS = "osd9tdj_zoho_tabs_v1";
-    const LS_ACTIVE = "osd9tdj_zoho_active_v1";
-    const LS_FAV = "osd9tdj_zoho_fav_v1";
-    const LS_RECENT = "osd9tdj_zoho_recent_v1";
-    const LS_SPLIT = "osd9tdj_zoho_split_v1";
-    const LS_PANE_A = "osd9tdj_zoho_paneA_v1";
-    const LS_PANE_B = "osd9tdj_zoho_paneB_v1";
+  // Storage keys
+  const LS_TABS = "osd9tdj_zoho_tabs_v1";
+  const LS_ACTIVE = "osd9tdj_zoho_active_v1";
+  const LS_FAV = "osd9tdj_zoho_fav_v1";
+  const LS_RECENT = "osd9tdj_zoho_recent_v1";
+  const LS_SPLIT = "osd9tdj_zoho_split_v1";
+  const LS_PANE_A = "osd9tdj_zoho_paneA_v1";
+  const LS_PANE_B = "osd9tdj_zoho_paneB_v1";
 
-    // State
-    let allItems = []; // {title,url,group}
-    let tabs = [];     // {id,title,url}
-    let activeTabId = null;
-    let split = false;
+  // State
+  let allItems = []; // {title,url,group}
+  let tabs = [];     // {id,title,url}
+  let activeTabId = null;
+  let split = false;
 
-    let paneAState = { url:null, title:"Pane A" };
-    let paneBState = { url:null, title:"Pane B" };
+  let paneAState = { url:null, title:"Pane A" };
+  let paneBState = { url:null, title:"Pane B" };
 
-    let fav = new Set();     // urls
-    let recent = [];         // [{url,title,ts}...]
+  let fav = new Set();     // urls
+  let recent = [];         // [{url,title,ts}...]
 
-    let sidebarMode = "all"; // all | fav | recent
+  let sidebarMode = "all"; // all | fav | recent
 
-    // Helpers
-    const isInternalLink = (url) => {
-      if (!url) return true;
-      return (
-        url.startsWith("#") ||
-        url.endsWith(".html") ||
-        url.startsWith("index") ||
-        url.startsWith("documents-internes")
-      );
-    };
-    const isZoho = (url) => /zoho|zohopublic\.eu/i.test(url || "");
+  // Helpers
+  const isInternalLink = (url) => {
+    if (!url) return true;
+    return (
+      url.startsWith("#") ||
+      url.endsWith(".html") ||
+      url.startsWith("index") ||
+      url.startsWith("documents-internes")
+    );
+  };
+  const isZoho = (url) => /zoho|zohopublic\.eu/i.test(url || "");
 
-    function escapeHtml(s){
-      return (s || "").replace(/[&<>"']/g, (c) => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-      }[c]));
+  function escapeHtml(s){
+    return (s || "").replace(/[&<>"']/g, (c) => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[c]));
+  }
+
+  function safeParse(json, fallback){
+    try{ return JSON.parse(json); }catch(e){ return fallback; }
+  }
+
+  function saveState(){
+    try{
+      localStorage.setItem(LS_TABS, JSON.stringify(tabs));
+      localStorage.setItem(LS_ACTIVE, JSON.stringify(activeTabId));
+      localStorage.setItem(LS_FAV, JSON.stringify(Array.from(fav)));
+      localStorage.setItem(LS_RECENT, JSON.stringify(recent));
+      localStorage.setItem(LS_SPLIT, JSON.stringify(split));
+      localStorage.setItem(LS_PANE_A, JSON.stringify(paneAState));
+      localStorage.setItem(LS_PANE_B, JSON.stringify(paneBState));
+    }catch(e){}
+  }
+
+  function loadState(){
+    tabs = safeParse(localStorage.getItem(LS_TABS), []);
+    activeTabId = safeParse(localStorage.getItem(LS_ACTIVE), null);
+    fav = new Set(safeParse(localStorage.getItem(LS_FAV), []));
+    recent = safeParse(localStorage.getItem(LS_RECENT), []);
+    split = !!safeParse(localStorage.getItem(LS_SPLIT), false);
+    paneAState = safeParse(localStorage.getItem(LS_PANE_A), { url:null, title:"Pane A" });
+    paneBState = safeParse(localStorage.getItem(LS_PANE_B), { url:null, title:"Pane B" });
+  }
+
+  function openModal(){
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden","false");
+  }
+  function closeModal(){
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden","true");
+    closeSidebarMobile();
+  }
+
+  function openSidebarMobile(){
+    sidebar.classList.add("open");
+    sidebarBackdrop.classList.add("open");
+    sidebarBackdrop.setAttribute("aria-hidden","false");
+  }
+  function closeSidebarMobile(){
+    sidebar.classList.remove("open");
+    sidebarBackdrop.classList.remove("open");
+    sidebarBackdrop.setAttribute("aria-hidden","true");
+  }
+
+  toggleMenuBtn.addEventListener("click", () => {
+    if (sidebar.classList.contains("open")) closeSidebarMobile();
+    else openSidebarMobile();
+  });
+  sidebarBackdrop.addEventListener("click", closeSidebarMobile);
+
+  // ✅ IMPORTANT : updatePane doit exister avant applySplit l’appelle
+  function updatePane(which){
+    const st = (which === "A") ? paneAState : paneBState;
+
+    const titleEl = (which === "A") ? paneATitle : paneBTitle;
+    const openEl  = (which === "A") ? paneAOpen  : paneBOpen;
+    const fbOpen  = (which === "A") ? fallbackAOpen : fallbackBOpen;
+
+    titleEl.textContent = st.title || ("Pane " + which);
+    openEl.href = st.url || "#";
+    fbOpen.href = st.url || "#";
+  }
+
+  // Split toggle
+  function applySplit(){
+    splitBtn.setAttribute("aria-pressed", split ? "true" : "false");
+    if (split){
+      splitWrap.classList.add("split");
+      paneB.style.display = "";
+    }else{
+      splitWrap.classList.remove("split");
+      paneB.style.display = "none";
     }
 
-    function safeParse(json, fallback){
-      try{ return JSON.parse(json); }catch(e){ return fallback; }
+    // ✅ mises à jour UI panes
+    updatePane("A");
+    updatePane("B");
+    saveState();
+  }
+
+  // --- Fallback (heuristique iframe bloquée) ---
+  let timerA = null;
+  let timerB = null;
+
+  function scheduleFallback(which){
+    const st = (which === "A") ? paneAState : paneBState;
+    const fb = (which === "A") ? fallbackA : fallbackB;
+
+    if (which === "A") clearTimeout(timerA);
+    else clearTimeout(timerB);
+
+    if (!st.url || !isZoho(st.url)){
+      fb.hidden = true;
+      return;
     }
 
-    function saveState(){
-      try{
-        localStorage.setItem(LS_TABS, JSON.stringify(tabs));
-        localStorage.setItem(LS_ACTIVE, JSON.stringify(activeTabId));
-        localStorage.setItem(LS_FAV, JSON.stringify(Array.from(fav)));
-        localStorage.setItem(LS_RECENT, JSON.stringify(recent));
-        localStorage.setItem(LS_SPLIT, JSON.stringify(split));
-        localStorage.setItem(LS_PANE_A, JSON.stringify(paneAState));
-        localStorage.setItem(LS_PANE_B, JSON.stringify(paneBState));
-      }catch(e){}
+    const t = setTimeout(() => {
+      fb.hidden = false;
+    }, 1500);
+
+    if (which === "A") timerA = t;
+    else timerB = t;
+  }
+
+  frameA.addEventListener("load", () => {
+    clearTimeout(timerA);
+    setTimeout(() => { fallbackA.hidden = true; }, 450);
+  });
+  frameB.addEventListener("load", () => {
+    clearTimeout(timerB);
+    setTimeout(() => { fallbackB.hidden = true; }, 450);
+  });
+
+  // Boutons "Rester" des fallbacks
+  document.addEventListener("click", (e) => {
+    const hideId = e.target?.getAttribute?.("data-hide");
+    if (hideId){
+      const el = document.getElementById(hideId);
+      if (el) el.hidden = true;
     }
+  });
 
-    function loadState(){
-      tabs = safeParse(localStorage.getItem(LS_TABS), []);
-      activeTabId = safeParse(localStorage.getItem(LS_ACTIVE), null);
-      fav = new Set(safeParse(localStorage.getItem(LS_FAV), []));
-      recent = safeParse(localStorage.getItem(LS_RECENT), []);
-      split = !!safeParse(localStorage.getItem(LS_SPLIT), false);
-      paneAState = safeParse(localStorage.getItem(LS_PANE_A), { url:null, title:"Pane A" });
-      paneBState = safeParse(localStorage.getItem(LS_PANE_B), { url:null, title:"Pane B" });
-    }
+  // --- Ouverture dans une pane ---
+  function setPane(which, url, title){
+    if (!url) return;
 
-    function openModal(){
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden","false");
-    }
-    function closeModal(){
-      modal.classList.remove("open");
-      modal.setAttribute("aria-hidden","true");
-      closeSidebarMobile();
-    }
+    const st = (which === "A") ? paneAState : paneBState;
+    const fr = (which === "A") ? frameA : frameB;
+    const fb = (which === "A") ? fallbackA : fallbackB;
 
-    function openSidebarMobile(){
-      sidebar.classList.add("open");
-      sidebarBackdrop.classList.add("open");
-      sidebarBackdrop.setAttribute("aria-hidden","false");
-    }
-    function closeSidebarMobile(){
-      sidebar.classList.remove("open");
-      sidebarBackdrop.classList.remove("open");
-      sidebarBackdrop.setAttribute("aria-hidden","true");
-    }
+    st.url = url;
+    st.title = title || ("Pane " + which);
 
-    toggleMenuBtn.addEventListener("click", () => {
-      if (sidebar.classList.contains("open")) closeSidebarMobile();
-      else openSidebarMobile();
-    });
-    sidebarBackdrop.addEventListener("click", closeSidebarMobile);
-
-    // Split toggle
-    function applySplit(){
-      splitBtn.setAttribute("aria-pressed", split ? "true" : "false");
-      if (split){
-        splitWrap.classList.add("split");
-        paneB.style.display = "";
-      }else{
-        splitWrap.classList.remove("split");
-        paneB.style.display = "none";
-      }
-
-function updatePane(which){
-  const st = (which === "A") ? paneAState : paneBState;
-
-  const titleEl = (which === "A") ? paneATitle : paneBTitle;
-  const openEl  = (which === "A") ? paneAOpen  : paneBOpen;
-  const fbOpen  = (which === "A") ? fallbackAOpen : fallbackBOpen;
-
-  titleEl.textContent = st.title || ("Pane " + which);
-  openEl.href = st.url || "#";
-  fbOpen.href = st.url || "#";
-}
-
-// --- Fallback (heuristique iframe bloquée) ---
-let timerA = null;
-let timerB = null;
-
-function scheduleFallback(which){
-  const st = (which === "A") ? paneAState : paneBState;
-  const fb = (which === "A") ? fallbackA : fallbackB;
-
-  if (which === "A") clearTimeout(timerA);
-  else clearTimeout(timerB);
-
-  if (!st.url || !isZoho(st.url)){
     fb.hidden = true;
-    return;
+    fr.src = url;
+
+    updatePane(which);
+    scheduleFallback(which);
+
+    openExternal.href = url;
+    openModal();
+
+    touchRecent(url, title);
+    saveState();
   }
 
-  const t = setTimeout(() => {
-    // On ne peut pas lire l’iframe cross-domain : on propose un fallback au bout d’un délai.
-    fb.hidden = false;
-  }, 1500);
-
-  if (which === "A") timerA = t;
-  else timerB = t;
-}
-
-frameA.addEventListener("load", () => {
-  clearTimeout(timerA);
-  setTimeout(() => { fallbackA.hidden = true; }, 450);
-});
-frameB.addEventListener("load", () => {
-  clearTimeout(timerB);
-  setTimeout(() => { fallbackB.hidden = true; }, 450);
-});
-
-// Boutons "Rester" des fallbacks
-document.addEventListener("click", (e) => {
-  const hideId = e.target?.getAttribute?.("data-hide");
-  if (hideId){
-    const el = document.getElementById(hideId);
-    if (el) el.hidden = true;
-  }
-});
-
-// --- Ouverture dans une pane ---
-function setPane(which, url, title){
-  if (!url) return;
-
-  const st = (which === "A") ? paneAState : paneBState;
-  const fr = (which === "A") ? frameA : frameB;
-  const fb = (which === "A") ? fallbackA : fallbackB;
-
-  st.url = url;
-  st.title = title || ("Pane " + which);
-
-  fb.hidden = true;
-  fr.src = url;
-
-  updatePane(which);
-  scheduleFallback(which);
-
-  // Bouton “Ouvrir Zoho” (toujours sur ce qu’on vient d’ouvrir)
-  openExternal.href = url;
-
-  // Modal ouverte
-  openModal();
-
-  // Récents
-  touchRecent(url, title);
-
-  // Save
-  saveState();
-}
-
-// Reload panes
-paneAReload.addEventListener("click", () => {
-  if (!paneAState.url) return;
-  fallbackA.hidden = true;
-  frameA.src = paneAState.url;
-  scheduleFallback("A");
-});
-paneBReload.addEventListener("click", () => {
-  if (!paneBState.url) return;
-  fallbackB.hidden = true;
-  frameB.src = paneBState.url;
-  scheduleFallback("B");
-});
-
-// Reload global
-reloadBtn.addEventListener("click", () => {
-  if (paneAState.url){
+  // Reload panes
+  paneAReload.addEventListener("click", () => {
+    if (!paneAState.url) return;
     fallbackA.hidden = true;
     frameA.src = paneAState.url;
     scheduleFallback("A");
-  }
-  if (split && paneBState.url){
+  });
+  paneBReload.addEventListener("click", () => {
+    if (!paneBState.url) return;
     fallbackB.hidden = true;
     frameB.src = paneBState.url;
     scheduleFallback("B");
-  }
-});
+  });
 
-// --- Tabs ---
-function makeId(str){
-  return (str || "").toLowerCase()
-    .replace(/\s+/g,"-")
-    .replace(/[^a-z0-9\-]/g,"")
-    .slice(0,60) || ("doc-"+Math.random().toString(16).slice(2));
-}
-
-function addOrActivateTab(url, title, forceNew=false){
-  if (!url) return;
-
-  if (!forceNew){
-    const existing = tabs.find(t => t.url === url);
-    if (existing){
-      activeTabId = existing.id;
-      setPane("A", existing.url, existing.title);
-      renderTabs();
-      highlightSidebarActive();
-      return;
+  // Reload global
+  reloadBtn.addEventListener("click", () => {
+    if (paneAState.url){
+      fallbackA.hidden = true;
+      frameA.src = paneAState.url;
+      scheduleFallback("A");
     }
+    if (split && paneBState.url){
+      fallbackB.hidden = true;
+      frameB.src = paneBState.url;
+      scheduleFallback("B");
+    }
+  });
+
+  // Modal close actions (si présents dans ton HTML)
+  closeBtn.addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+  // Copy
+  copyBtn?.addEventListener("click", async () => {
+    const url = paneAState.url || tabs.find(t => t.id === activeTabId)?.url || openExternal.href;
+    if (!url || url === "#") return;
+    try{ await navigator.clipboard.writeText(url); }catch(e){ prompt("Copie ce lien :", url); }
+  });
+
+  // --- Tabs ---
+  function makeId(str){
+    return (str || "").toLowerCase()
+      .replace(/\s+/g,"-")
+      .replace(/[^a-z0-9\-]/g,"")
+      .slice(0,60) || ("doc-"+Math.random().toString(16).slice(2));
   }
 
-  const id = makeId(title + "-" + url + "-" + (forceNew ? Date.now() : ""));
-  tabs.unshift({ id, title: title || "Document", url });
-  activeTabId = id;
+  function addOrActivateTab(url, title, forceNew=false){
+    if (!url) return;
 
-  setPane("A", url, title);
-  renderTabs();
-  highlightSidebarActive();
-}
-
-function removeTab(id){
-  const idx = tabs.findIndex(t => t.id === id);
-  if (idx < 0) return;
-
-  const wasActive = tabs[idx].id === activeTabId;
-  tabs.splice(idx, 1);
-
-  if (!tabs.length){
-    activeTabId = null;
-    renderTabs();
-    highlightSidebarActive();
-    saveState();
-    return;
-  }
-
-  if (wasActive){
-    activeTabId = tabs[0].id;
-    setPane("A", tabs[0].url, tabs[0].title);
-  }
-
-  renderTabs();
-  highlightSidebarActive();
-  saveState();
-}
-
-function renderTabs(){
-  tabsBar.innerHTML = "";
-  tabs.forEach(t => {
-    const el = document.createElement("div");
-    el.className = "tab" + (t.id === activeTabId ? " active" : "");
-    el.setAttribute("role","button");
-    el.setAttribute("tabindex","0");
-    el.innerHTML = `<span>${escapeHtml(t.title)}</span><span class="x" title="Fermer">×</span>`;
-
-    el.addEventListener("click", (e) => {
-      if (e.target && e.target.classList.contains("x")){
-        e.stopPropagation();
-        removeTab(t.id);
+    if (!forceNew){
+      const existing = tabs.find(t => t.url === url);
+      if (existing){
+        activeTabId = existing.id;
+        setPane("A", existing.url, existing.title);
+        renderTabs();
+        highlightSidebarActive();
         return;
       }
-      activeTabId = t.id;
-      setPane("A", t.url, t.title);
+    }
+
+    const id = makeId(title + "-" + url + "-" + (forceNew ? Date.now() : ""));
+    tabs.unshift({ id, title: title || "Document", url });
+    activeTabId = id;
+
+    setPane("A", url, title);
+    renderTabs();
+    highlightSidebarActive();
+  }
+
+  function removeTab(id){
+    const idx = tabs.findIndex(t => t.id === id);
+    if (idx < 0) return;
+
+    const wasActive = tabs[idx].id === activeTabId;
+    tabs.splice(idx, 1);
+
+    if (!tabs.length){
+      activeTabId = null;
       renderTabs();
       highlightSidebarActive();
       saveState();
-    });
+      return;
+    }
 
-    el.addEventListener("keydown",(e)=>{
-      if(e.key==="Enter" || e.key===" "){
-        e.preventDefault();
+    if (wasActive){
+      activeTabId = tabs[0].id;
+      setPane("A", tabs[0].url, tabs[0].title);
+    }
+
+    renderTabs();
+    highlightSidebarActive();
+    saveState();
+  }
+
+  function renderTabs(){
+    if (!tabsBar) return;
+    tabsBar.innerHTML = "";
+    tabs.forEach(t => {
+      const el = document.createElement("div");
+      el.className = "tab" + (t.id === activeTabId ? " active" : "");
+      el.setAttribute("role","button");
+      el.setAttribute("tabindex","0");
+      el.innerHTML = `<span>${escapeHtml(t.title)}</span><span class="x" title="Fermer">×</span>`;
+
+      el.addEventListener("click", (e) => {
+        if (e.target && e.target.classList.contains("x")){
+          e.stopPropagation();
+          removeTab(t.id);
+          return;
+        }
         activeTabId = t.id;
         setPane("A", t.url, t.title);
         renderTabs();
         highlightSidebarActive();
         saveState();
-      }
+      });
+
+      el.addEventListener("keydown",(e)=>{
+        if(e.key==="Enter" || e.key===" "){
+          e.preventDefault();
+          activeTabId = t.id;
+          setPane("A", t.url, t.title);
+          renderTabs();
+          highlightSidebarActive();
+          saveState();
+        }
+      });
+
+      tabsBar.appendChild(el);
     });
+  }
 
-    tabsBar.appendChild(el);
+  clearTabsBtn?.addEventListener("click", () => {
+    tabs = [];
+    activeTabId = null;
+    renderTabs();
+    highlightSidebarActive();
+    saveState();
   });
-}
 
-clearTabsBtn.addEventListener("click", () => {
-  tabs = [];
-  activeTabId = null;
-  renderTabs();
-  highlightSidebarActive();
-  saveState();
-});
+  // --- Favoris / Récents ---
+  function touchRecent(url, title){
+    if (!url) return;
+    const now = Date.now();
+    recent = recent.filter(x => x.url !== url);
+    recent.unshift({ url, title: title || "Document", ts: now });
+    recent = recent.slice(0, 20);
+    saveState();
+    if (sidebarMode === "recent") renderSidebar();
+  }
 
-// --- Favoris / Récents ---
-function touchRecent(url, title){
-  if (!url) return;
-  const now = Date.now();
-  recent = recent.filter(x => x.url !== url);
-  recent.unshift({ url, title: title || "Document", ts: now });
-  recent = recent.slice(0, 20);
-  saveState();
-  if (sidebarMode === "recent") renderSidebar();
-}
+  function toggleFav(url){
+    if (!url) return;
+    if (fav.has(url)) fav.delete(url);
+    else fav.add(url);
+    saveState();
+    renderSidebar();
+  }
 
-function toggleFav(url){
-  if (!url) return;
-  if (fav.has(url)) fav.delete(url);
-  else fav.add(url);
-  saveState();
-  renderSidebar();
-}
-
-clearRecentBtn.addEventListener("click", () => {
-  recent = [];
-  saveState();
-  if (sidebarMode === "recent") renderSidebar();
-});
-
-function setMode(mode){
-  sidebarMode = mode;
-  viewAllBtn.setAttribute("aria-pressed", mode === "all" ? "true" : "false");
-  viewFavBtn.setAttribute("aria-pressed", mode === "fav" ? "true" : "false");
-  viewRecentBtn.setAttribute("aria-pressed", mode === "recent" ? "true" : "false");
-  renderSidebar();
-}
-viewAllBtn.addEventListener("click", () => setMode("all"));
-viewFavBtn.addEventListener("click", () => setMode("fav"));
-viewRecentBtn.addEventListener("click", () => setMode("recent"));
-
-// --- Sidebar : collecte & rendu ---
-function collectAllItems(){
-  const links = Array.from(document.querySelectorAll('a[href]'))
-    .map(a => ({ el: a, url: a.getAttribute("href") }))
-    .filter(x => x.url && isZoho(x.url) && !isInternalLink(x.url));
-
-  allItems = links.map(x => {
-    const card = x.el.closest(".card");
-    const title =
-      card?.querySelector("h3")?.textContent?.trim() ||
-      x.el.textContent?.trim() ||
-      "Document";
-
-    const sub = x.el.closest(".subacc")?.querySelector("summary span")?.textContent?.trim() || "";
-    const acc = x.el.closest(".accordion")?.querySelector("summary span")?.textContent?.trim() || "";
-    const group = [acc, sub].filter(Boolean).join(" · ") || "Documents";
-
-    return { title, url: x.url, group };
+  clearRecentBtn?.addEventListener("click", () => {
+    recent = [];
+    saveState();
+    if (sidebarMode === "recent") renderSidebar();
   });
-}
 
-function filteredItems(){
-  const q = (searchInput.value || "").trim().toLowerCase();
+  function setMode(mode){
+    sidebarMode = mode;
+    viewAllBtn?.setAttribute("aria-pressed", mode === "all" ? "true" : "false");
+    viewFavBtn?.setAttribute("aria-pressed", mode === "fav" ? "true" : "false");
+    viewRecentBtn?.setAttribute("aria-pressed", mode === "recent" ? "true" : "false");
+    renderSidebar();
+  }
+  viewAllBtn?.addEventListener("click", () => setMode("all"));
+  viewFavBtn?.addEventListener("click", () => setMode("fav"));
+  viewRecentBtn?.addEventListener("click", () => setMode("recent"));
 
-  if (sidebarMode === "fav"){
-    return allItems.filter(it => fav.has(it.url))
+  // --- Sidebar : collecte & rendu ---
+  function collectAllItems(){
+    const links = Array.from(document.querySelectorAll('a[href]'))
+      .map(a => ({ el: a, url: a.getAttribute("href") }))
+      .filter(x => x.url && isZoho(x.url) && !isInternalLink(x.url));
+
+    allItems = links.map(x => {
+      const card = x.el.closest(".card");
+      const title =
+        card?.querySelector("h3")?.textContent?.trim() ||
+        x.el.textContent?.trim() ||
+        "Document";
+
+      const sub = x.el.closest(".subacc")?.querySelector("summary span")?.textContent?.trim() || "";
+      const acc = x.el.closest(".accordion")?.querySelector("summary span")?.textContent?.trim() || "";
+      const group = [acc, sub].filter(Boolean).join(" · ") || "Documents";
+
+      return { title, url: x.url, group };
+    });
+  }
+
+  function filteredItems(){
+    const q = (searchInput?.value || "").trim().toLowerCase();
+
+    if (sidebarMode === "fav"){
+      return allItems.filter(it => fav.has(it.url))
+        .filter(it => !q || (it.title || "").toLowerCase().includes(q));
+    }
+
+    if (sidebarMode === "recent"){
+      const out = [];
+      recent.forEach(r => {
+        const it = allItems.find(x => x.url === r.url) || { title:r.title, url:r.url, group:"Récents" };
+        if (!q || (it.title || "").toLowerCase().includes(q)) out.push(it);
+      });
+      return out;
+    }
+
+    return allItems
       .filter(it => !q || (it.title || "").toLowerCase().includes(q));
   }
 
-  if (sidebarMode === "recent"){
-    const out = [];
-    recent.forEach(r => {
-      const it = allItems.find(x => x.url === r.url) || { title:r.title, url:r.url, group:"Récents" };
-      if (!q || (it.title || "").toLowerCase().includes(q)) out.push(it);
+  function renderSidebar(){
+    if (!sidebarList) return;
+    const items = filteredItems();
+
+    const byGroup = new Map();
+    items.forEach(it => {
+      const g = it.group || "Documents";
+      if (!byGroup.has(g)) byGroup.set(g, []);
+      byGroup.get(g).push(it);
     });
-    return out;
+
+    sidebarList.innerHTML = "";
+
+    for (const [group, arr] of byGroup.entries()){
+      const gEl = document.createElement("div");
+      gEl.className = "sidebar-group";
+      gEl.textContent = group;
+      sidebarList.appendChild(gEl);
+
+      arr.forEach(it => {
+        const row = document.createElement("div");
+        row.className = "sidebar-item";
+
+        const main = document.createElement("button");
+        main.type = "button";
+        main.className = "sidebar-link";
+        main.dataset.url = it.url;
+        main.dataset.title = it.title;
+
+        const star = fav.has(it.url) ? "⭐" : "☆";
+        main.innerHTML = `${escapeHtml(it.title)} <span style="opacity:0.75; font-weight:900;">${star}</span>`;
+        main.addEventListener("click", () => {
+          addOrActivateTab(it.url, it.title, false);
+          closeSidebarMobile();
+        });
+
+        const btnA = document.createElement("button");
+        btnA.type = "button";
+        btnA.className = "sidebar-mini";
+        btnA.title = "Ouvrir dans Pane A";
+        btnA.textContent = "A";
+        btnA.addEventListener("click", (e) => {
+          e.stopPropagation();
+          setPane("A", it.url, it.title);
+          addOrActivateTab(it.url, it.title, false);
+          closeSidebarMobile();
+        });
+
+        const btnB = document.createElement("button");
+        btnB.type = "button";
+        btnB.className = "sidebar-mini";
+        btnB.title = split ? "Ouvrir dans Pane B" : "Active Split pour Pane B";
+        btnB.textContent = "B";
+        btnB.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (!split){
+            split = true;
+            applySplit();
+          }
+          setPane("B", it.url, it.title);
+          closeSidebarMobile();
+        });
+
+        const plus = document.createElement("button");
+        plus.type = "button";
+        plus.className = "sidebar-mini";
+        plus.title = "Ouvrir en + onglet interne";
+        plus.textContent = "+";
+        plus.addEventListener("click", (e) => {
+          e.stopPropagation();
+          addOrActivateTab(it.url, it.title, true);
+          closeSidebarMobile();
+        });
+
+        const ext = document.createElement("button");
+        ext.type = "button";
+        ext.className = "sidebar-mini";
+        ext.title = "Ouvrir Zoho direct (nouvelle fenêtre)";
+        ext.textContent = "↗";
+        ext.addEventListener("click", (e) => {
+          e.stopPropagation();
+          window.open(it.url, "_blank", "noopener,noreferrer");
+        });
+
+        const favBtn = document.createElement("button");
+        favBtn.type = "button";
+        favBtn.className = "sidebar-mini";
+        favBtn.title = "Ajouter/retirer des favoris";
+        favBtn.textContent = fav.has(it.url) ? "⭐" : "☆";
+        favBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          toggleFav(it.url);
+        });
+
+        row.appendChild(main);
+        row.appendChild(btnA);
+        row.appendChild(btnB);
+        row.appendChild(plus);
+        row.appendChild(ext);
+        row.appendChild(favBtn);
+
+        sidebarList.appendChild(row);
+      });
+    }
+
+    highlightSidebarActive();
   }
 
-  return allItems
-    .filter(it => !q || (it.title || "").toLowerCase().includes(q));
-}
+  function highlightSidebarActive(){
+    const activeUrl =
+      (tabs.find(t => t.id === activeTabId)?.url) ||
+      paneAState.url ||
+      null;
 
-function renderSidebar(){
-  const items = filteredItems();
+    sidebarList?.querySelectorAll(".sidebar-link").forEach(btn => {
+      btn.classList.toggle("active", !!activeUrl && btn.dataset.url === activeUrl);
+    });
+  }
 
-  const byGroup = new Map();
-  items.forEach(it => {
-    const g = it.group || "Documents";
-    if (!byGroup.has(g)) byGroup.set(g, []);
-    byGroup.get(g).push(it);
+  searchInput?.addEventListener("input", renderSidebar);
+
+  // Interception des liens Zoho des cartes
+  document.querySelectorAll('a[href*="zohopublic.eu"], a[href*="zoho"]').forEach(a => {
+    const url = a.getAttribute("href");
+    if (!url || isInternalLink(url)) return;
+
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      const title =
+        a.closest(".card")?.querySelector("h3")?.textContent?.trim()
+        || a.textContent.trim()
+        || "Documents";
+
+      addOrActivateTab(url, title, false);
+    });
   });
 
-  sidebarList.innerHTML = "";
+  // --- Init ---
+  loadState();
+  collectAllItems();
+  applySplit();
 
-  for (const [group, arr] of byGroup.entries()){
-    const gEl = document.createElement("div");
-    gEl.className = "sidebar-group";
-    gEl.textContent = group;
-    sidebarList.appendChild(gEl);
-
-    arr.forEach(it => {
-      const row = document.createElement("div");
-      row.className = "sidebar-item";
-
-      const main = document.createElement("button");
-      main.type = "button";
-      main.className = "sidebar-link";
-      main.dataset.url = it.url;
-      main.dataset.title = it.title;
-
-      const star = fav.has(it.url) ? "⭐" : "☆";
-      main.innerHTML = `${escapeHtml(it.title)} <span style="opacity:0.75; font-weight:900;">${star}</span>`;
-      main.addEventListener("click", () => {
-        addOrActivateTab(it.url, it.title, false);
-        closeSidebarMobile();
-      });
-
-      const btnA = document.createElement("button");
-      btnA.type = "button";
-      btnA.className = "sidebar-mini";
-      btnA.title = "Ouvrir dans Pane A";
-      btnA.textContent = "A";
-      btnA.addEventListener("click", (e) => {
-        e.stopPropagation();
-        setPane("A", it.url, it.title);
-        addOrActivateTab(it.url, it.title, false);
-        closeSidebarMobile();
-      });
-
-      const btnB = document.createElement("button");
-      btnB.type = "button";
-      btnB.className = "sidebar-mini";
-      btnB.title = split ? "Ouvrir dans Pane B" : "Active Split pour Pane B";
-      btnB.textContent = "B";
-      btnB.addEventListener("click", (e) => {
-        e.stopPropagation();
-        if (!split){
-          split = true;
-          applySplit();
-        }
-        setPane("B", it.url, it.title);
-        closeSidebarMobile();
-      });
-
-      const plus = document.createElement("button");
-      plus.type = "button";
-      plus.className = "sidebar-mini";
-      plus.title = "Ouvrir en + onglet interne";
-      plus.textContent = "+";
-      plus.addEventListener("click", (e) => {
-        e.stopPropagation();
-        addOrActivateTab(it.url, it.title, true);
-        closeSidebarMobile();
-      });
-
-      const ext = document.createElement("button");
-      ext.type = "button";
-      ext.className = "sidebar-mini";
-      ext.title = "Ouvrir Zoho direct (nouvelle fenêtre)";
-      ext.textContent = "↗";
-      ext.addEventListener("click", (e) => {
-        e.stopPropagation();
-        window.open(it.url, "_blank", "noopener,noreferrer");
-      });
-
-      const favBtn = document.createElement("button");
-      favBtn.type = "button";
-      favBtn.className = "sidebar-mini";
-      favBtn.title = "Ajouter/retirer des favoris";
-      favBtn.textContent = fav.has(it.url) ? "⭐" : "☆";
-      favBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        toggleFav(it.url);
-      });
-
-      row.appendChild(main);
-      row.appendChild(btnA);
-      row.appendChild(btnB);
-      row.appendChild(plus);
-      row.appendChild(ext);
-      row.appendChild(favBtn);
-
-      sidebarList.appendChild(row);
-    });
-  }
-
+  updatePane("A");
+  updatePane("B");
+  renderTabs();
+  setMode("all");
+  renderSidebar();
   highlightSidebarActive();
-}
 
-function highlightSidebarActive(){
-  const activeUrl =
-    (tabs.find(t => t.id === activeTabId)?.url) ||
-    paneAState.url ||
-    null;
+  // Optionnel : restaurer dernière vue
+  if (paneAState.url) setPane("A", paneAState.url, paneAState.title);
+  if (split && paneBState.url) setPane("B", paneBState.url, paneBState.title);
 
-  sidebarList.querySelectorAll(".sidebar-link").forEach(btn => {
-    btn.classList.toggle("active", !!activeUrl && btn.dataset.url === activeUrl);
-  });
-}
+  // On ferme la modale après restauration auto (sinon elle s’ouvre au chargement)
+  closeModal();
 
-searchInput.addEventListener("input", renderSidebar);
-
-// Interception des liens Zoho des cartes
-document.querySelectorAll('a[href*="zohopublic.eu"], a[href*="zoho"]').forEach(a => {
-  const url = a.getAttribute("href");
-  if (!url || isInternalLink(url)) return;
-
-  a.addEventListener("click", (e) => {
-    e.preventDefault();
-    const title =
-      a.closest(".card")?.querySelector("h3")?.textContent?.trim()
-      || a.textContent.trim()
-      || "Documents";
-
-    addOrActivateTab(url, title, false);
-  });
-});
-
-// --- Init ---
-loadState();
-collectAllItems();
-applySplit();
-
-updatePane("A");
-updatePane("B");
-renderTabs();
-setMode("all");
-renderSidebar();
-highlightSidebarActive();
-
-// Optionnel : restaurer dernière vue
-if (paneAState.url) setPane("A", paneAState.url, paneAState.title);
-if (split && paneBState.url) setPane("B", paneBState.url, paneBState.title);
-
-// On ferme la modale après restauration auto (sinon elle s’ouvre au chargement)
-closeModal();
-
-window.addEventListener("beforeunload", saveState);
+  window.addEventListener("beforeunload", saveState);
 </script>
 </body>
 </html>
