@@ -787,7 +787,7 @@
       modal.setAttribute("aria-hidden","true");
       frame.src = "about:blank";
     }
-
+    
     closeBtn.addEventListener("click", closeZoho);
     modal.addEventListener("click", (e) => { if (e.target === modal) closeZoho(); });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeZoho(); });
