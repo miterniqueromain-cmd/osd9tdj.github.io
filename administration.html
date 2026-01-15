@@ -1021,194 +1021,210 @@
     </div>
   </div>
 
-  <!-- MODALE ZOHO – ULTRA COCKPIT -->
-  <div class="modal" id="zohoModal" aria-hidden="true">
-    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Documents Zoho">
+  <!-- =========================
+     MODALE ZOHO ULTRA COCKPIT
+     ========================= -->
+<div class="modal" id="zohoModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-label="Documents Zoho">
 
-      <div class="modal-head">
-        <div class="modal-title" id="zohoModalTitle">Documents</div>
-        <div class="modal-actions">
-          <button class="btn-mini" type="button" id="zohoToggleMenu">Menu</button>
-          <button class="btn-mini" type="button" id="zohoSplit" aria-pressed="false" title="Activer/désactiver la vue double">Split</button>
-          <button class="btn-mini" type="button" id="zohoCopyLink">Copier</button>
-          <button class="btn-mini" type="button" id="zohoClearTabs" title="Fermer tous les onglets">Tout fermer</button>
-          <a class="btn-mini" id="zohoOpenExternal" href="#" target="_blank" rel="noopener noreferrer">Ouvrir Zoho</a>
-          <button class="btn-mini" type="button" id="zohoReload">Recharger</button>
-          <button class="btn-mini" type="button" id="zohoClose">Fermer</button>
-        </div>
-      </div>
-
-      <div class="modal-content">
-        <div class="modal-sidebar-backdrop" id="zohoSidebarBackdrop" aria-hidden="true"></div>
-
-        <aside class="modal-sidebar" id="zohoSidebar" aria-label="Menu documents">
-          <div class="sidebar-top">
-            <div class="sidebar-title">📁 Dossiers</div>
-            <div class="sidebar-sub" id="zohoSideStatus">
-              Cliquer = ouvre/active. <strong>A</strong>=Pane A · <strong>B</strong>=Pane B · <strong>+</strong>=nouveau tab · <strong>⭐</strong>=favori
-            </div>
-
-            <div class="sidebar-tools">
-              <button class="btn-mini" type="button" id="viewAll" aria-pressed="true">Tous</button>
-              <button class="btn-mini" type="button" id="viewFav" aria-pressed="false">⭐ Favoris</button>
-              <button class="btn-mini" type="button" id="viewRecent" aria-pressed="false">🕘 Récents</button>
-              <button class="btn-mini" type="button" id="clearRecent" title="Vider les récents">Vider 🕘</button>
-            </div>
-
-            <input class="sidebar-search" id="zohoSearch" type="search" placeholder="Rechercher un document…" />
-          </div>
-
-          <div class="sidebar-list" id="zohoSidebarList"></div>
-
-          <div class="sidebar-footer">
-            <a class="btn-mini" href="documents-internes.html">← Page membres</a>
-            <a class="btn-mini" href="index.html">← Site public</a>
-          </div>
-        </aside>
-
-        <main class="modal-main">
-          <div class="modal-tabs" id="zohoTabs" aria-label="Onglets"></div>
-
-          <div class="modal-body">
-            <div class="split-wrap" id="splitWrap">
-              <!-- Pane A -->
-              <div class="pane" id="paneA">
-                <div class="pane-head">
-                  <div class="pane-title" id="paneATitle">Pane A</div>
-                  <div class="pane-actions">
-                    <a class="btn-mini" id="paneAOpen" href="#" target="_blank" rel="noopener noreferrer">↗</a>
-                    <button class="btn-mini" type="button" id="paneAReload">⟳</button>
-                  </div>
-                </div>
-                <iframe class="zoho-frame" id="zohoFrameA" title="Zoho A" src="about:blank"></iframe>
-
-                <div class="zoho-fallback" id="fallbackA" hidden>
-                  <div class="fallback-card">
-                    <div class="fallback-title">⚠️ Pane A : iframe bloquée</div>
-                    <div class="fallback-text">Zoho peut refuser l’intégration. Utilise ↗ ou change de doc.</div>
-                    <div class="fallback-actions">
-                      <a class="btn-mini" id="fallbackAOpen" href="#" target="_blank" rel="noopener noreferrer">Ouvrir Zoho</a>
-                      <button class="btn-mini" type="button" data-hide="fallbackA">Rester</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Pane B -->
-              <div class="pane" id="paneB" style="display:none;">
-                <div class="pane-head">
-                  <div class="pane-title" id="paneBTitle">Pane B</div>
-                  <div class="pane-actions">
-                    <a class="btn-mini" id="paneBOpen" href="#" target="_blank" rel="noopener noreferrer">↗</a>
-                    <button class="btn-mini" type="button" id="paneBReload">⟳</button>
-                  </div>
-                </div>
-                <iframe class="zoho-frame" id="zohoFrameB" title="Zoho B" src="about:blank"></iframe>
-
-                <div class="zoho-fallback" id="fallbackB" hidden>
-                  <div class="fallback-card">
-                    <div class="fallback-title">⚠️ Pane B : iframe bloquée</div>
-                    <div class="fallback-text">Zoho peut refuser l’intégration. Utilise ↗ ou change de doc.</div>
-                    <div class="fallback-actions">
-                      <a class="btn-mini" id="fallbackBOpen" href="#" target="_blank" rel="noopener noreferrer">Ouvrir Zoho</a>
-                      <button class="btn-mini" type="button" data-hide="fallbackB">Rester</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal-hint">
-            Astuces :
-            <strong>Split</strong> = 2 docs côte à côte · Dans le menu gauche :
-            <strong>A</strong> ouvre dans Pane A, <strong>B</strong> dans Pane B,
-            <strong>+</strong> force un nouvel onglet interne,
-            <strong>↗</strong> ouvre Zoho direct, <strong>⭐</strong> ajoute aux favoris.
-            Tout est mémorisé (tabs/favoris/récents) sur l’appareil.
-          </div>
-        </main>
+    <!-- HEADER TOP -->
+    <div class="modal-head">
+      <div class="modal-title" id="zohoModalTitle">Documents</div>
+      <div class="modal-actions">
+        <button class="btn-mini" type="button" id="zohoToggleMenu">Menu</button>
+        <button class="btn-mini" type="button" id="zohoSplit" aria-pressed="false">Split</button>
+        <button class="btn-mini" type="button" id="zohoCopyLink">Copier lien</button>
+        <button class="btn-mini" type="button" id="zohoClearTabs">Vider tabs</button>
+        <a class="btn-mini" id="zohoOpenExternal" href="#" target="_blank" rel="noopener noreferrer">Ouvrir Zoho</a>
+        <button class="btn-mini" type="button" id="zohoReload">Recharger</button>
+        <button class="btn-mini" type="button" id="zohoClose">Fermer</button>
       </div>
     </div>
+
+    <!-- LAYOUT -->
+    <div class="modal-content" id="splitWrap">
+
+      <!-- BACKDROP MOBILE -->
+      <div class="modal-sidebar-backdrop" id="zohoSidebarBackdrop" aria-hidden="true"></div>
+
+      <!-- SIDEBAR -->
+      <aside class="modal-sidebar" id="zohoSidebar" aria-label="Menu documents">
+        <div class="sidebar-top">
+          <input class="sidebar-search" id="zohoSearch" type="search" placeholder="Rechercher…" />
+        </div>
+
+        <div class="sidebar-toolbar" style="display:flex;gap:8px;flex-wrap:wrap;padding:0 10px 10px;">
+          <button class="btn-mini" type="button" id="viewAll" aria-pressed="true">Tous</button>
+          <button class="btn-mini" type="button" id="viewFav" aria-pressed="false">⭐</button>
+          <button class="btn-mini" type="button" id="viewRecent" aria-pressed="false">Récents</button>
+          <button class="btn-mini" type="button" id="clearRecent">Vider récents</button>
+        </div>
+
+        <div class="sidebar-list" id="zohoSidebarList"></div>
+
+        <div class="modal-hint" id="zohoSideStatus" style="border-top:1px solid rgba(255,215,0,0.18);">
+          Cliquer = ouvre/active. <strong>A</strong>=Pane A · <strong>B</strong>=Pane B · <strong>+</strong>=nouveau tab · <strong>⭐</strong>=favori · <strong>↗</strong>=Zoho direct
+        </div>
+
+        <div class="side-footer" style="padding:10px;border-top:1px solid rgba(255,215,0,0.18);display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+          <a class="btn-mini" href="documents-internes.html">← Page membres</a>
+          <a class="btn-mini" href="index.html">← Site public</a>
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="modal-main">
+
+        <!-- Tabs -->
+        <div class="modal-tabs" id="zohoTabs" aria-label="Onglets"></div>
+
+        <!-- Panes -->
+        <div class="modal-body" style="display:flex;gap:10px;min-height:0;padding:10px;">
+          <!-- Pane A -->
+          <section class="pane" id="paneA" style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;border:1px solid rgba(255,215,0,0.25);border-radius:14px;overflow:hidden;background:rgba(0,0,0,0.35);">
+            <div class="pane-head" style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px;border-bottom:1px solid rgba(255,215,0,0.18);background:rgba(0,0,0,0.55);">
+              <div id="paneATitle" style="font-family:'Cinzel',serif;color:var(--or);font-weight:700;">Pane A</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+                <a class="btn-mini" id="paneAOpen" href="#" target="_blank" rel="noopener noreferrer">↗</a>
+                <button class="btn-mini" type="button" id="paneAReload">⟳</button>
+              </div>
+            </div>
+
+            <div style="position:relative;flex:1 1 auto;min-height:0;">
+              <iframe class="zoho-frame" id="zohoFrameA" title="Zoho A" src="about:blank"></iframe>
+
+              <div class="zoho-fallback" id="fallbackA" hidden
+                   style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,0.82);">
+                <div class="fallback-card"
+                     style="width:min(560px,100%);border-radius:16px;border:1px solid rgba(255,215,0,0.35);background:rgba(0,0,0,0.92);box-shadow:0 20px 60px rgba(0,0,0,0.75);padding:14px;text-align:left;">
+                  <div class="fallback-title" style="font-family:'Cinzel',serif;color:var(--or);font-weight:700;margin-bottom:8px;">
+                    ⚠️ Zoho bloque l’iframe
+                  </div>
+                  <div class="fallback-text" style="font-size:0.9rem;opacity:0.9;line-height:1.45;">
+                    Utilise “Ouvrir Zoho” ou ↗ pour ouvrir directement.
+                  </div>
+                  <div class="fallback-actions" style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+                    <a class="btn-mini" id="fallbackAOpen" href="#" target="_blank" rel="noopener noreferrer">Ouvrir Zoho</a>
+                    <button class="btn-mini" type="button" data-hide="fallbackA">Rester</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Pane B -->
+          <section class="pane" id="paneB" style="flex:1 1 0;min-width:0;display:none;flex-direction:column;border:1px solid rgba(255,215,0,0.25);border-radius:14px;overflow:hidden;background:rgba(0,0,0,0.35);">
+            <div class="pane-head" style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px;border-bottom:1px solid rgba(255,215,0,0.18);background:rgba(0,0,0,0.55);">
+              <div id="paneBTitle" style="font-family:'Cinzel',serif;color:var(--or);font-weight:700;">Pane B</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;">
+                <a class="btn-mini" id="paneBOpen" href="#" target="_blank" rel="noopener noreferrer">↗</a>
+                <button class="btn-mini" type="button" id="paneBReload">⟳</button>
+              </div>
+            </div>
+
+            <div style="position:relative;flex:1 1 auto;min-height:0;">
+              <iframe class="zoho-frame" id="zohoFrameB" title="Zoho B" src="about:blank"></iframe>
+
+              <div class="zoho-fallback" id="fallbackB" hidden
+                   style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,0.82);">
+                <div class="fallback-card"
+                     style="width:min(560px,100%);border-radius:16px;border:1px solid rgba(255,215,0,0.35);background:rgba(0,0,0,0.92);box-shadow:0 20px 60px rgba(0,0,0,0.75);padding:14px;text-align:left;">
+                  <div class="fallback-title" style="font-family:'Cinzel',serif;color:var(--or);font-weight:700;margin-bottom:8px;">
+                    ⚠️ Zoho bloque l’iframe
+                  </div>
+                  <div class="fallback-text" style="font-size:0.9rem;opacity:0.9;line-height:1.45;">
+                    Utilise ↗ pour ouvrir directement.
+                  </div>
+                  <div class="fallback-actions" style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+                    <a class="btn-mini" id="fallbackBOpen" href="#" target="_blank" rel="noopener noreferrer">Ouvrir Zoho</a>
+                    <button class="btn-mini" type="button" data-hide="fallbackB">Rester</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </main>
+    </div>
+
   </div>
+</div>
 
-  <script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
   // =========================
-  // ZOHO ULTRA COCKPIT ENGINE
+  // ZOHO ULTRA COCKPIT ENGINE (STABLE)
   // =========================
 
-  // Elements
-  const modal = document.getElementById("zohoModal");
+  const $ = (id) => document.getElementById(id);
 
-  const closeBtn = document.getElementById("zohoClose");
-  const reloadBtn = document.getElementById("zohoReload");
-  const openExternal = document.getElementById("zohoOpenExternal");
-  const copyBtn = document.getElementById("zohoCopyLink");
-  const clearTabsBtn = document.getElementById("zohoClearTabs");
-  const splitBtn = document.getElementById("zohoSplit");
+  const modal = $("zohoModal");
+  if (!modal) return;
 
-  const modalTitle = document.getElementById("zohoModalTitle");
+  const closeBtn = $("zohoClose");
+  const reloadBtn = $("zohoReload");
+  const openExternal = $("zohoOpenExternal");
+  const copyBtn = $("zohoCopyLink");
+  const clearTabsBtn = $("zohoClearTabs");
+  const splitBtn = $("zohoSplit");
+  const toggleMenuBtn = $("zohoToggleMenu");
 
-  const sidebar = document.getElementById("zohoSidebar");
-  const sidebarList = document.getElementById("zohoSidebarList");
-  const sidebarBackdrop = document.getElementById("zohoSidebarBackdrop");
-  const toggleMenuBtn = document.getElementById("zohoToggleMenu");
-  const searchInput = document.getElementById("zohoSearch");
-  const sideStatus = document.getElementById("zohoSideStatus");
+  const modalTitle = $("zohoModalTitle");
 
-  const tabsBar = document.getElementById("zohoTabs");
-  const splitWrap = document.getElementById("splitWrap");
+  const sidebar = $("zohoSidebar");
+  const sidebarList = $("zohoSidebarList");
+  const sidebarBackdrop = $("zohoSidebarBackdrop");
+  const searchInput = $("zohoSearch");
+  const sideStatus = $("zohoSideStatus");
 
-  const paneA = document.getElementById("paneA");
-  const paneB = document.getElementById("paneB");
+  const tabsBar = $("zohoTabs");
+  const splitWrap = $("splitWrap");
 
-  const frameA = document.getElementById("zohoFrameA");
-  const frameB = document.getElementById("zohoFrameB");
+  const paneB = $("paneB");
 
-  const paneATitle = document.getElementById("paneATitle");
-  const paneBTitle = document.getElementById("paneBTitle");
+  const frameA = $("zohoFrameA");
+  const frameB = $("zohoFrameB");
 
-  const paneAOpen = document.getElementById("paneAOpen");
-  const paneBOpen = document.getElementById("paneBOpen");
+  const paneATitle = $("paneATitle");
+  const paneBTitle = $("paneBTitle");
 
-  const paneAReload = document.getElementById("paneAReload");
-  const paneBReload = document.getElementById("paneBReload");
+  const paneAOpen = $("paneAOpen");
+  const paneBOpen = $("paneBOpen");
 
-  const fallbackA = document.getElementById("fallbackA");
-  const fallbackB = document.getElementById("fallbackB");
-  const fallbackAOpen = document.getElementById("fallbackAOpen");
-  const fallbackBOpen = document.getElementById("fallbackBOpen");
+  const paneAReload = $("paneAReload");
+  const paneBReload = $("paneBReload");
 
-  // Sidebar view buttons
-  const viewAllBtn = document.getElementById("viewAll");
-  const viewFavBtn = document.getElementById("viewFav");
-  const viewRecentBtn = document.getElementById("viewRecent");
-  const clearRecentBtn = document.getElementById("clearRecent");
+  const fallbackA = $("fallbackA");
+  const fallbackB = $("fallbackB");
+  const fallbackAOpen = $("fallbackAOpen");
+  const fallbackBOpen = $("fallbackBOpen");
 
-  // Storage keys
-  const LS_TABS = "osd9tdj_zoho_tabs_v1";
+  const viewAllBtn = $("viewAll");
+  const viewFavBtn = $("viewFav");
+  const viewRecentBtn = $("viewRecent");
+  const clearRecentBtn = $("clearRecent");
+
+  const LS_TABS   = "osd9tdj_zoho_tabs_v1";
   const LS_ACTIVE = "osd9tdj_zoho_active_v1";
-  const LS_FAV = "osd9tdj_zoho_fav_v1";
+  const LS_FAV    = "osd9tdj_zoho_fav_v1";
   const LS_RECENT = "osd9tdj_zoho_recent_v1";
-  const LS_SPLIT = "osd9tdj_zoho_split_v1";
+  const LS_SPLIT  = "osd9tdj_zoho_split_v1";
   const LS_PANE_A = "osd9tdj_zoho_paneA_v1";
   const LS_PANE_B = "osd9tdj_zoho_paneB_v1";
 
-  // State
-  let allItems = []; // {title,url,group}
-  let tabs = [];     // {id,title,url}
+  let allItems = [];
+  let tabs = [];
   let activeTabId = null;
   let split = false;
 
   let paneAState = { url:null, title:"Pane A" };
   let paneBState = { url:null, title:"Pane B" };
 
-  let fav = new Set();     // urls
-  let recent = [];         // [{url,title,ts}...]
+  let fav = new Set();
+  let recent = [];
+  let sidebarMode = "all";
 
-  let sidebarMode = "all"; // all | fav | recent
-
-  // Helpers
   const isInternalLink = (url) => {
     if (!url) return true;
     return (
@@ -1225,7 +1241,6 @@
       "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
     }[c]));
   }
-
   function safeParse(json, fallback){
     try{ return JSON.parse(json); }catch(e){ return fallback; }
   }
@@ -1241,7 +1256,6 @@
       localStorage.setItem(LS_PANE_B, JSON.stringify(paneBState));
     }catch(e){}
   }
-
   function loadState(){
     tabs = safeParse(localStorage.getItem(LS_TABS), []);
     activeTabId = safeParse(localStorage.getItem(LS_ACTIVE), null);
@@ -1263,23 +1277,22 @@
   }
 
   function openSidebarMobile(){
-    sidebar.classList.add("open");
-    sidebarBackdrop.classList.add("open");
-    sidebarBackdrop.setAttribute("aria-hidden","false");
+    sidebar?.classList.add("open");
+    sidebarBackdrop?.classList.add("open");
+    sidebarBackdrop?.setAttribute("aria-hidden","false");
   }
   function closeSidebarMobile(){
-    sidebar.classList.remove("open");
-    sidebarBackdrop.classList.remove("open");
-    sidebarBackdrop.setAttribute("aria-hidden","true");
+    sidebar?.classList.remove("open");
+    sidebarBackdrop?.classList.remove("open");
+    sidebarBackdrop?.setAttribute("aria-hidden","true");
   }
 
-  toggleMenuBtn.addEventListener("click", () => {
-    if (sidebar.classList.contains("open")) closeSidebarMobile();
+  toggleMenuBtn?.addEventListener("click", () => {
+    if (sidebar?.classList.contains("open")) closeSidebarMobile();
     else openSidebarMobile();
   });
-  sidebarBackdrop.addEventListener("click", closeSidebarMobile);
+  sidebarBackdrop?.addEventListener("click", closeSidebarMobile);
 
-  // ✅ IMPORTANT : updatePane doit exister avant applySplit l’appelle
   function updatePane(which){
     const st = (which === "A") ? paneAState : paneBState;
 
@@ -1287,62 +1300,49 @@
     const openEl  = (which === "A") ? paneAOpen  : paneBOpen;
     const fbOpen  = (which === "A") ? fallbackAOpen : fallbackBOpen;
 
-    titleEl.textContent = st.title || ("Pane " + which);
-    openEl.href = st.url || "#";
-    fbOpen.href = st.url || "#";
+    if (titleEl) titleEl.textContent = st.title || ("Pane " + which);
+    if (openEl) openEl.href = st.url || "#";
+    if (fbOpen) fbOpen.href = st.url || "#";
   }
 
-  // Split toggle
   function applySplit(){
-    splitBtn.setAttribute("aria-pressed", split ? "true" : "false");
-    if (split){
-      splitWrap.classList.add("split");
-      paneB.style.display = "";
-    }else{
-      splitWrap.classList.remove("split");
-      paneB.style.display = "none";
+    splitBtn?.setAttribute("aria-pressed", split ? "true" : "false");
+    if (split) {
+      splitWrap?.classList.add("split");
+      if (paneB) paneB.style.display = "";
+    } else {
+      splitWrap?.classList.remove("split");
+      if (paneB) paneB.style.display = "none";
     }
-
-    // ✅ mises à jour UI panes
     updatePane("A");
     updatePane("B");
     saveState();
   }
 
-  // --- Fallback (heuristique iframe bloquée) ---
-  let timerA = null;
-  let timerB = null;
+  splitBtn?.addEventListener("click", () => {
+    split = !split;
+    applySplit();
+  });
+
+  let timerA = null, timerB = null;
 
   function scheduleFallback(which){
     const st = (which === "A") ? paneAState : paneBState;
     const fb = (which === "A") ? fallbackA : fallbackB;
+    if (!fb) return;
 
     if (which === "A") clearTimeout(timerA);
     else clearTimeout(timerB);
 
-    if (!st.url || !isZoho(st.url)){
-      fb.hidden = true;
-      return;
-    }
+    if (!st.url || !isZoho(st.url)) { fb.hidden = true; return; }
 
-    const t = setTimeout(() => {
-      fb.hidden = false;
-    }, 1500);
-
-    if (which === "A") timerA = t;
-    else timerB = t;
+    const t = setTimeout(() => { fb.hidden = false; }, 1500);
+    if (which === "A") timerA = t; else timerB = t;
   }
 
-  frameA.addEventListener("load", () => {
-    clearTimeout(timerA);
-    setTimeout(() => { fallbackA.hidden = true; }, 450);
-  });
-  frameB.addEventListener("load", () => {
-    clearTimeout(timerB);
-    setTimeout(() => { fallbackB.hidden = true; }, 450);
-  });
+  frameA?.addEventListener("load", () => { clearTimeout(timerA); setTimeout(() => { if (fallbackA) fallbackA.hidden = true; }, 450); });
+  frameB?.addEventListener("load", () => { clearTimeout(timerB); setTimeout(() => { if (fallbackB) fallbackB.hidden = true; }, 450); });
 
-  // Boutons "Rester" des fallbacks
   document.addEventListener("click", (e) => {
     const hideId = e.target?.getAttribute?.("data-hide");
     if (hideId){
@@ -1351,7 +1351,16 @@
     }
   });
 
-  // --- Ouverture dans une pane ---
+  function touchRecent(url, title){
+    if (!url) return;
+    const now = Date.now();
+    recent = recent.filter(x => x.url !== url);
+    recent.unshift({ url, title: title || "Document", ts: now });
+    recent = recent.slice(0, 20);
+    saveState();
+    if (sidebarMode === "recent") renderSidebar();
+  }
+
   function setPane(which, url, title){
     if (!url) return;
 
@@ -1362,65 +1371,62 @@
     st.url = url;
     st.title = title || ("Pane " + which);
 
-    fb.hidden = true;
-    fr.src = url;
+    if (fb) fb.hidden = true;
+    if (fr) fr.src = url;
 
     updatePane(which);
     scheduleFallback(which);
 
-    openExternal.href = url;
-    openModal();
+    if (openExternal) openExternal.href = url;
+    if (modalTitle) modalTitle.textContent = title || "Documents";
 
+    openModal();
     touchRecent(url, title);
     saveState();
   }
 
-  // Reload panes
-  paneAReload.addEventListener("click", () => {
-    if (!paneAState.url) return;
-    fallbackA.hidden = true;
-    frameA.src = paneAState.url;
-    scheduleFallback("A");
-  });
-  paneBReload.addEventListener("click", () => {
-    if (!paneBState.url) return;
-    fallbackB.hidden = true;
-    frameB.src = paneBState.url;
-    scheduleFallback("B");
+  paneAReload?.addEventListener("click", () => { if (paneAState.url && frameA){ if (fallbackA) fallbackA.hidden = true; frameA.src = paneAState.url; scheduleFallback("A"); }});
+  paneBReload?.addEventListener("click", () => { if (paneBState.url && frameB){ if (fallbackB) fallbackB.hidden = true; frameB.src = paneBState.url; scheduleFallback("B"); }});
+
+  reloadBtn?.addEventListener("click", () => {
+    if (paneAState.url && frameA){ if (fallbackA) fallbackA.hidden = true; frameA.src = paneAState.url; scheduleFallback("A"); }
+    if (split && paneBState.url && frameB){ if (fallbackB) fallbackB.hidden = true; frameB.src = paneBState.url; scheduleFallback("B"); }
   });
 
-  // Reload global
-  reloadBtn.addEventListener("click", () => {
-    if (paneAState.url){
-      fallbackA.hidden = true;
-      frameA.src = paneAState.url;
-      scheduleFallback("A");
-    }
-    if (split && paneBState.url){
-      fallbackB.hidden = true;
-      frameB.src = paneBState.url;
-      scheduleFallback("B");
-    }
-  });
-
-  // Modal close actions (si présents dans ton HTML)
-  closeBtn.addEventListener("click", closeModal);
+  closeBtn?.addEventListener("click", closeModal);
   modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
-  // Copy
   copyBtn?.addEventListener("click", async () => {
-    const url = paneAState.url || tabs.find(t => t.id === activeTabId)?.url || openExternal.href;
+    const url = paneAState.url || openExternal?.href;
     if (!url || url === "#") return;
-    try{ await navigator.clipboard.writeText(url); }catch(e){ prompt("Copie ce lien :", url); }
+    try{ await navigator.clipboard.writeText(url); sideStatus && (sideStatus.textContent = "✅ Lien copié."); }
+    catch(e){ prompt("Copie ce lien :", url); }
   });
 
-  // --- Tabs ---
   function makeId(str){
-    return (str || "").toLowerCase()
-      .replace(/\s+/g,"-")
-      .replace(/[^a-z0-9\-]/g,"")
-      .slice(0,60) || ("doc-"+Math.random().toString(16).slice(2));
+    return (str || "").toLowerCase().replace(/\s+/g,"-").replace(/[^a-z0-9\-]/g,"").slice(0,60) || ("doc-"+Math.random().toString(16).slice(2));
+  }
+
+  function renderTabs(){
+    if (!tabsBar) return;
+    tabsBar.innerHTML = "";
+    tabs.forEach(t => {
+      const el = document.createElement("div");
+      el.className = "tab" + (t.id === activeTabId ? " active" : "");
+      el.innerHTML = `<span>${escapeHtml(t.title)}</span><span class="x" title="Fermer">×</span>`;
+      el.addEventListener("click", (e) => {
+        if (e.target && e.target.classList.contains("x")){
+          tabs = tabs.filter(x => x.id !== t.id);
+          if (activeTabId === t.id) activeTabId = tabs[0]?.id || null;
+          saveState(); renderTabs(); return;
+        }
+        activeTabId = t.id;
+        setPane("A", t.url, t.title);
+        renderTabs(); saveState();
+      });
+      tabsBar.appendChild(el);
+    });
   }
 
   function addOrActivateTab(url, title, forceNew=false){
@@ -1432,7 +1438,6 @@
         activeTabId = existing.id;
         setPane("A", existing.url, existing.title);
         renderTabs();
-        highlightSidebarActive();
         return;
       }
     }
@@ -1443,117 +1448,10 @@
 
     setPane("A", url, title);
     renderTabs();
-    highlightSidebarActive();
   }
 
-  function removeTab(id){
-    const idx = tabs.findIndex(t => t.id === id);
-    if (idx < 0) return;
+  clearTabsBtn?.addEventListener("click", () => { tabs = []; activeTabId = null; saveState(); renderTabs(); });
 
-    const wasActive = tabs[idx].id === activeTabId;
-    tabs.splice(idx, 1);
-
-    if (!tabs.length){
-      activeTabId = null;
-      renderTabs();
-      highlightSidebarActive();
-      saveState();
-      return;
-    }
-
-    if (wasActive){
-      activeTabId = tabs[0].id;
-      setPane("A", tabs[0].url, tabs[0].title);
-    }
-
-    renderTabs();
-    highlightSidebarActive();
-    saveState();
-  }
-
-  function renderTabs(){
-    if (!tabsBar) return;
-    tabsBar.innerHTML = "";
-    tabs.forEach(t => {
-      const el = document.createElement("div");
-      el.className = "tab" + (t.id === activeTabId ? " active" : "");
-      el.setAttribute("role","button");
-      el.setAttribute("tabindex","0");
-      el.innerHTML = `<span>${escapeHtml(t.title)}</span><span class="x" title="Fermer">×</span>`;
-
-      el.addEventListener("click", (e) => {
-        if (e.target && e.target.classList.contains("x")){
-          e.stopPropagation();
-          removeTab(t.id);
-          return;
-        }
-        activeTabId = t.id;
-        setPane("A", t.url, t.title);
-        renderTabs();
-        highlightSidebarActive();
-        saveState();
-      });
-
-      el.addEventListener("keydown",(e)=>{
-        if(e.key==="Enter" || e.key===" "){
-          e.preventDefault();
-          activeTabId = t.id;
-          setPane("A", t.url, t.title);
-          renderTabs();
-          highlightSidebarActive();
-          saveState();
-        }
-      });
-
-      tabsBar.appendChild(el);
-    });
-  }
-
-  clearTabsBtn?.addEventListener("click", () => {
-    tabs = [];
-    activeTabId = null;
-    renderTabs();
-    highlightSidebarActive();
-    saveState();
-  });
-
-  // --- Favoris / Récents ---
-  function touchRecent(url, title){
-    if (!url) return;
-    const now = Date.now();
-    recent = recent.filter(x => x.url !== url);
-    recent.unshift({ url, title: title || "Document", ts: now });
-    recent = recent.slice(0, 20);
-    saveState();
-    if (sidebarMode === "recent") renderSidebar();
-  }
-
-  function toggleFav(url){
-    if (!url) return;
-    if (fav.has(url)) fav.delete(url);
-    else fav.add(url);
-    saveState();
-    renderSidebar();
-  }
-
-  clearRecentBtn?.addEventListener("click", () => {
-    recent = [];
-    saveState();
-    if (sidebarMode === "recent") renderSidebar();
-  });
-
-  function setMode(mode){
-    sidebarMode = mode;
-    viewAllBtn?.setAttribute("aria-pressed", mode === "all" ? "true" : "false");
-    viewFavBtn?.setAttribute("aria-pressed", mode === "fav" ? "true" : "false");
-    viewRecentBtn?.setAttribute("aria-pressed", mode === "recent" ? "true" : "false");
-    renderSidebar();
-  }
-  viewAllBtn?.addEventListener("click", () => setMode("all"));
-  viewFavBtn?.addEventListener("click", () => setMode("fav"));
-  viewRecentBtn?.addEventListener("click", () => setMode("recent"));
-
-  // --- Sidebar : collecte & rendu ---
   function collectAllItems(){
     const links = Array.from(document.querySelectorAll('a[href]'))
       .map(a => ({ el: a, url: a.getAttribute("href") }))
@@ -1569,30 +1467,23 @@
       const sub = x.el.closest(".subacc")?.querySelector("summary span")?.textContent?.trim() || "";
       const acc = x.el.closest(".accordion")?.querySelector("summary span")?.textContent?.trim() || "";
       const group = [acc, sub].filter(Boolean).join(" · ") || "Documents";
-
       return { title, url: x.url, group };
     });
   }
 
   function filteredItems(){
     const q = (searchInput?.value || "").trim().toLowerCase();
-
-    if (sidebarMode === "fav"){
-      return allItems.filter(it => fav.has(it.url))
-        .filter(it => !q || (it.title || "").toLowerCase().includes(q));
-    }
-
+    let base = allItems;
+    if (sidebarMode === "fav") base = allItems.filter(it => fav.has(it.url));
     if (sidebarMode === "recent"){
       const out = [];
       recent.forEach(r => {
         const it = allItems.find(x => x.url === r.url) || { title:r.title, url:r.url, group:"Récents" };
-        if (!q || (it.title || "").toLowerCase().includes(q)) out.push(it);
+        out.push(it);
       });
-      return out;
+      base = out;
     }
-
-    return allItems
-      .filter(it => !q || (it.title || "").toLowerCase().includes(q));
+    return base.filter(it => !q || (it.title || "").toLowerCase().includes(q));
   }
 
   function renderSidebar(){
@@ -1621,73 +1512,28 @@
         const main = document.createElement("button");
         main.type = "button";
         main.className = "sidebar-link";
-        main.dataset.url = it.url;
-        main.dataset.title = it.title;
-
-        const star = fav.has(it.url) ? "⭐" : "☆";
-        main.innerHTML = `${escapeHtml(it.title)} <span style="opacity:0.75; font-weight:900;">${star}</span>`;
-        main.addEventListener("click", () => {
-          addOrActivateTab(it.url, it.title, false);
-          closeSidebarMobile();
-        });
+        main.textContent = it.title;
+        main.addEventListener("click", () => { addOrActivateTab(it.url, it.title, false); closeSidebarMobile(); });
 
         const btnA = document.createElement("button");
-        btnA.type = "button";
-        btnA.className = "sidebar-mini";
-        btnA.title = "Ouvrir dans Pane A";
-        btnA.textContent = "A";
-        btnA.addEventListener("click", (e) => {
-          e.stopPropagation();
-          setPane("A", it.url, it.title);
-          addOrActivateTab(it.url, it.title, false);
-          closeSidebarMobile();
-        });
+        btnA.type = "button"; btnA.className = "sidebar-mini"; btnA.textContent = "A";
+        btnA.addEventListener("click", (e) => { e.stopPropagation(); setPane("A", it.url, it.title); closeSidebarMobile(); });
 
         const btnB = document.createElement("button");
-        btnB.type = "button";
-        btnB.className = "sidebar-mini";
-        btnB.title = split ? "Ouvrir dans Pane B" : "Active Split pour Pane B";
-        btnB.textContent = "B";
-        btnB.addEventListener("click", (e) => {
-          e.stopPropagation();
-          if (!split){
-            split = true;
-            applySplit();
-          }
-          setPane("B", it.url, it.title);
-          closeSidebarMobile();
-        });
+        btnB.type = "button"; btnB.className = "sidebar-mini"; btnB.textContent = "B";
+        btnB.addEventListener("click", (e) => { e.stopPropagation(); if (!split){ split = true; applySplit(); } setPane("B", it.url, it.title); closeSidebarMobile(); });
 
         const plus = document.createElement("button");
-        plus.type = "button";
-        plus.className = "sidebar-mini";
-        plus.title = "Ouvrir en + onglet interne";
-        plus.textContent = "+";
-        plus.addEventListener("click", (e) => {
-          e.stopPropagation();
-          addOrActivateTab(it.url, it.title, true);
-          closeSidebarMobile();
-        });
+        plus.type = "button"; plus.className = "sidebar-mini"; plus.textContent = "+";
+        plus.addEventListener("click", (e) => { e.stopPropagation(); addOrActivateTab(it.url, it.title, true); closeSidebarMobile(); });
 
         const ext = document.createElement("button");
-        ext.type = "button";
-        ext.className = "sidebar-mini";
-        ext.title = "Ouvrir Zoho direct (nouvelle fenêtre)";
-        ext.textContent = "↗";
-        ext.addEventListener("click", (e) => {
-          e.stopPropagation();
-          window.open(it.url, "_blank", "noopener,noreferrer");
-        });
+        ext.type = "button"; ext.className = "sidebar-mini"; ext.textContent = "↗";
+        ext.addEventListener("click", (e) => { e.stopPropagation(); window.open(it.url, "_blank", "noopener,noreferrer"); });
 
         const favBtn = document.createElement("button");
-        favBtn.type = "button";
-        favBtn.className = "sidebar-mini";
-        favBtn.title = "Ajouter/retirer des favoris";
-        favBtn.textContent = fav.has(it.url) ? "⭐" : "☆";
-        favBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          toggleFav(it.url);
-        });
+        favBtn.type = "button"; favBtn.className = "sidebar-mini"; favBtn.textContent = fav.has(it.url) ? "⭐" : "☆";
+        favBtn.addEventListener("click", (e) => { e.stopPropagation(); fav.has(it.url) ? fav.delete(it.url) : fav.add(it.url); saveState(); renderSidebar(); });
 
         row.appendChild(main);
         row.appendChild(btnA);
@@ -1699,59 +1545,46 @@
         sidebarList.appendChild(row);
       });
     }
-
-    highlightSidebarActive();
   }
 
-  function highlightSidebarActive(){
-    const activeUrl =
-      (tabs.find(t => t.id === activeTabId)?.url) ||
-      paneAState.url ||
-      null;
-
-    sidebarList?.querySelectorAll(".sidebar-link").forEach(btn => {
-      btn.classList.toggle("active", !!activeUrl && btn.dataset.url === activeUrl);
-    });
+  function setMode(mode){
+    sidebarMode = mode;
+    viewAllBtn?.setAttribute("aria-pressed", mode === "all" ? "true" : "false");
+    viewFavBtn?.setAttribute("aria-pressed", mode === "fav" ? "true" : "false");
+    viewRecentBtn?.setAttribute("aria-pressed", mode === "recent" ? "true" : "false");
+    renderSidebar();
   }
+
+  viewAllBtn?.addEventListener("click", () => setMode("all"));
+  viewFavBtn?.addEventListener("click", () => setMode("fav"));
+  viewRecentBtn?.addEventListener("click", () => setMode("recent"));
+  clearRecentBtn?.addEventListener("click", () => { recent = []; saveState(); if (sidebarMode === "recent") renderSidebar(); });
 
   searchInput?.addEventListener("input", renderSidebar);
 
-  // Interception des liens Zoho des cartes
+  // Interception des liens Zoho des cartes (Accéder)
   document.querySelectorAll('a[href*="zohopublic.eu"], a[href*="zoho"]').forEach(a => {
     const url = a.getAttribute("href");
     if (!url || isInternalLink(url)) return;
-
     a.addEventListener("click", (e) => {
       e.preventDefault();
-      const title =
-        a.closest(".card")?.querySelector("h3")?.textContent?.trim()
-        || a.textContent.trim()
-        || "Documents";
-
+      const title = a.closest(".card")?.querySelector("h3")?.textContent?.trim() || a.textContent.trim() || "Documents";
       addOrActivateTab(url, title, false);
     });
   });
 
-  // --- Init ---
+  // INIT
   loadState();
   collectAllItems();
   applySplit();
-
-  updatePane("A");
-  updatePane("B");
   renderTabs();
   setMode("all");
   renderSidebar();
-  highlightSidebarActive();
 
-  // Optionnel : restaurer dernière vue
-  if (paneAState.url) setPane("A", paneAState.url, paneAState.title);
-  if (split && paneBState.url) setPane("B", paneBState.url, paneBState.title);
-
-  // On ferme la modale après restauration auto (sinon elle s’ouvre au chargement)
   closeModal();
-
   window.addEventListener("beforeunload", saveState);
+});
 </script>
+
 </body>
 </html>
