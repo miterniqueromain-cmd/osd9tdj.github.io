@@ -557,6 +557,121 @@
   margin-left:auto;
   margin-right:auto;
 }
+ /* ===== MENU ⋯ DANS LA MODALE ZOHO ===== */
+.modal-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+
+.zoho-nav{ position:relative; }
+.zoho-nav summary{
+  list-style:none;
+  cursor:pointer;
+  user-select:none;
+  width:46px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  border:1px solid rgba(255,215,0,0.55);
+  background:rgba(0,0,0,0.22);
+  backdrop-filter: blur(6px);
+  box-shadow:0 6px 16px rgba(0,0,0,0.35);
+  font-family:'Cinzel',serif;
+  color:var(--or);
+  font-size:22px;
+  line-height:1;
+}
+.zoho-nav summary::-webkit-details-marker{ display:none; }
+
+.zoho-nav-panel{
+  position:absolute;
+  left:0;
+  margin-top:10px;
+  width:280px;
+  max-width:calc(100vw - 60px);
+  border-radius:14px;
+  border:1px solid rgba(255,215,0,0.45);
+  background:rgba(0,0,0,0.90);
+  box-shadow:0 18px 40px rgba(0,0,0,0.55);
+  overflow:auto;
+  max-height:min(60vh, 520px);
+  z-index:20;
+}
+
+.zoho-nav-panel .group-title{
+  padding:10px 12px;
+  font-family:'Cinzel',serif;
+  font-weight:800;
+  color:var(--or);
+  border-bottom:1px solid rgba(255,215,0,0.18);
+  background:rgba(255,215,0,0.06);
+  text-align:left;
+}
+
+.zoho-nav-link{
+  width:100%;
+  display:block;
+  padding:10px 12px;
+  border:0;
+  background:transparent;
+  text-align:left;
+  cursor:pointer;
+  color:rgba(253,247,229,0.92);
+  font-family:'Lato', Arial, sans-serif;
+  font-weight:800;
+  font-size:0.92rem;
+  border-bottom:1px solid rgba(255,215,0,0.12);
+}
+.zoho-nav-link:hover{
+  background:rgba(255,215,0,0.12);
+  color:#fff;
+}
+
+/* ===== ONGLETs (multi pages) DANS LA MODALE ===== */
+.zoho-tabs{
+  display:none;
+  gap:8px;
+  flex-wrap:wrap;
+  padding:10px 12px;
+  border-bottom:1px solid rgba(255,215,0,0.18);
+  background:rgba(0,0,0,0.55);
+}
+.zoho-tabs.open{ display:flex; }
+
+.zoho-tab{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid rgba(255,215,0,0.35);
+  background:rgba(255,215,0,0.10);
+  color:rgba(253,247,229,0.95);
+  font-weight:800;
+  font-family:'Cinzel',serif;
+  font-size:0.75rem;
+  cursor:pointer;
+  max-width:100%;
+}
+.zoho-tab[aria-selected="true"]{
+  background:rgba(255,215,0,0.22);
+  border-color:rgba(255,215,0,0.55);
+  color:#fff;
+}
+.zoho-tab .x{
+  display:inline-grid;
+  place-items:center;
+  width:20px;
+  height:20px;
+  border-radius:999px;
+  border:1px solid rgba(255,215,0,0.35);
+  background:rgba(0,0,0,0.35);
+  font-size:0.9rem;
+  line-height:1;
+}
   </style>
 
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -750,12 +865,33 @@
   <div class="modal" id="zohoModal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-label="Documents Zoho">
       <div class="modal-head">
-        <div class="modal-title" id="zohoModalTitle">Documents</div>
-        <div class="modal-actions">
-          <a class="btn-mini" id="zohoOpenExternal" href="#" target="_blank" rel="noopener noreferrer">Ouvrir dans Zoho</a>
-          <button class="btn-mini" type="button" id="zohoClose">Fermer</button>
-        </div>
+  <div class="modal-left">
+    <details class="zoho-nav" id="zohoNav">
+      <summary title="Menu">⋯</summary>
+      <div class="zoho-nav-panel" id="zohoNavPanel" role="menu" aria-label="Navigation Zoho">
+        <div class="group-title">Aller à une section</div>
+        <button type="button" class="zoho-nav-link" data-jump="#adhesion">Préparer entretien</button>
+        <button type="button" class="zoho-nav-link" data-jump="#organisation">Vie de l'association</button>
+        <button type="button" class="zoho-nav-link" data-jump="#etudes">Études</button>
+        <button type="button" class="zoho-nav-link" data-jump="#contacts">Contacts</button>
+        <button type="button" class="zoho-nav-link" data-jump="#archives">Archives</button>
+
+        <div class="group-title">Ouvrir un dossier Zoho</div>
+        <!-- Cette liste sera auto-remplie par le JS avec tous les liens workdrive du HTML -->
+        <div id="zohoLinksList"></div>
       </div>
+    </details>
+
+    <div class="modal-title" id="zohoModalTitle">Documents</div>
+  </div>
+
+  <div class="modal-actions">
+    <a class="btn-mini" id="zohoOpenExternal" href="#" target="_blank" rel="noopener noreferrer">Ouvrir dans Zoho</a>
+    <button class="btn-mini" type="button" id="zohoClose">Fermer</button>
+  </div>
+</div>
+
+<div class="zoho-tabs" id="zohoTabs" aria-label="Onglets Zoho"></div>
       <div class="modal-body">
         <iframe class="zoho-frame" id="zohoFrame" title="Zoho" src="about:blank"></iframe>
       </div>
@@ -872,6 +1008,162 @@
         openZohoUrl(url, title);
       });
     });
+    // ====== Onglets Zoho (multi-pages) ======
+const tabsBar = document.getElementById("zohoTabs");
+let ZOHO_TABS = []; // {id, title, url}
+let ACTIVE_ID = null;
+
+function renderTabs(){
+  if (!tabsBar) return;
+  tabsBar.innerHTML = "";
+  if (ZOHO_TABS.length === 0){
+    tabsBar.classList.remove("open");
+    return;
+  }
+  tabsBar.classList.add("open");
+
+  ZOHO_TABS.forEach(t => {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "zoho-tab";
+    b.setAttribute("aria-selected", t.id === ACTIVE_ID ? "true" : "false");
+
+    const label = document.createElement("span");
+    label.textContent = t.title;
+
+    const x = document.createElement("span");
+    x.className = "x";
+    x.textContent = "×";
+
+    b.appendChild(label);
+    b.appendChild(x);
+
+    b.addEventListener("click", (e) => {
+      // clic sur X -> fermer l'onglet
+      if (e.target === x){
+        e.stopPropagation();
+        ZOHO_TABS = ZOHO_TABS.filter(tt => tt.id !== t.id);
+        if (ACTIVE_ID === t.id){
+          ACTIVE_ID = ZOHO_TABS.length ? ZOHO_TABS[ZOHO_TABS.length - 1].id : null;
+          const next = ZOHO_TABS.find(tt => tt.id === ACTIVE_ID);
+          if (next){
+            frame.src = next.url;
+            openExternal.href = next.url;
+            modalTitle.textContent = next.title;
+          } else {
+            frame.src = "about:blank";
+          }
+        }
+        renderTabs();
+        return;
+      }
+
+      // sinon -> activer l'onglet
+      ACTIVE_ID = t.id;
+      frame.src = t.url;
+      openExternal.href = t.url;
+      modalTitle.textContent = t.title;
+      renderTabs();
+    });
+
+    tabsBar.appendChild(b);
+  });
+}
+
+// ✅ Remplace ton openZohoUrl par une version qui ouvre en onglet
+const _openZohoUrl_old = openZohoUrl;
+openZohoUrl = function(url, title){
+  if (!url) return;
+  const tTitle = title || "Documents";
+  const existing = ZOHO_TABS.find(t => t.url === url);
+
+  if (existing){
+    ACTIVE_ID = existing.id;
+    frame.src = existing.url;
+    openExternal.href = existing.url;
+    modalTitle.textContent = existing.title;
+  } else {
+    const id = "t_" + Date.now() + "_" + Math.random().toString(16).slice(2);
+    const tab = { id, title: tTitle, url };
+    ZOHO_TABS.push(tab);
+    ACTIVE_ID = id;
+
+    frame.src = url;
+    openExternal.href = url;
+    modalTitle.textContent = tTitle;
+  }
+
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
+  renderTabs();
+};
+
+// À la fermeture: on garde les onglets (pour réouvrir la modale) ?
+// -> si tu veux tout vider à chaque fermeture, décommente les 2 lignes.
+const _closeZoho_old = closeZoho;
+closeZoho = function(){
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden","true");
+  frame.src = "about:blank";
+  // ZOHO_TABS = []; ACTIVE_ID = null; renderTabs();
+};
+
+// ====== Menu ⋯ dans la modale : "Aller à une section" ======
+document.querySelectorAll(".zoho-nav-link[data-jump]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const target = btn.getAttribute("data-jump");
+    const scroller = document.querySelector(".viewport-scroll");
+    const el = document.querySelector(target);
+    if (scroller && el){
+      scroller.scrollTo({ top: el.offsetTop - 20, behavior: "smooth" });
+    }
+    // fermer le menu
+    const nav = document.getElementById("zohoNav");
+    if (nav) nav.open = false;
+  });
+});
+
+// ====== Auto-lister tous les liens Zoho du HTML dans le menu de la modale ======
+const list = document.getElementById("zohoLinksList");
+if (list){
+  const seen = new Set();
+  const links = Array.from(document.querySelectorAll('a[href*="workdrive.zohopublic.eu"]'));
+
+  links.forEach(a => {
+    const url = a.getAttribute("href");
+    if (!url || seen.has(url)) return;
+    seen.add(url);
+
+    const title =
+      a.closest(".card")?.querySelector("h2")?.textContent?.trim()
+      || a.closest(".card")?.querySelector("h3")?.textContent?.trim()
+      || a.textContent.trim()
+      || "Documents";
+
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "zoho-nav-link";
+    b.textContent = title;
+
+    b.addEventListener("click", () => {
+      openZohoUrl(url, title);
+      const nav = document.getElementById("zohoNav");
+      if (nav) nav.open = false;
+    });
+
+    list.appendChild(b);
+  });
+
+  // Si aucun lien
+  if (seen.size === 0){
+    const p = document.createElement("div");
+    p.style.padding = "10px 12px";
+    p.style.opacity = "0.85";
+    p.style.textAlign = "left";
+    p.textContent = "Aucun lien Zoho détecté sur cette page.";
+    list.appendChild(p);
+  }
+}
   </script>
 
 </body>
