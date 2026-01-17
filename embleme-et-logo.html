@@ -178,6 +178,8 @@
       z-index: 1;
     }
 
+    /* ✅ HERO templier en haut  (CORRECTION demandée : remplit le cadre + un peu plus petit) */
+/* ✅ HERO AFFICHE (portrait) — même système que les pages QUI MARCHENT */
 .hero{
   margin-top: 6px;
   margin-bottom: 18px;
@@ -187,7 +189,7 @@
   border: 2px solid rgba(214,167,40,0.90);
   overflow:hidden;
   width:100%;
-  max-width: 920px;
+  max-width: 920px; /* ← réduis à 880px si tu veux encore plus petit */
   box-sizing:border-box;
 }
 
@@ -195,7 +197,7 @@
   display:block;
   width:100%;
   max-width:100%;
-  height:auto;
+  height:auto;   /* ✅ AFFICHE JAMAIS COUPÉE */
 }
 
     h1 {
@@ -225,7 +227,7 @@
     .section-card{
       width: 100%;
       max-width: 920px;
-      max-width: min(920px, 100%);
+      max-width: min(920px, 100%); /* ✅ évite tout dépassement mobile */
       margin: 22px auto;
       padding: 22px 22px;
       text-align: justify;
@@ -289,6 +291,35 @@
       transform: translateY(-50%);
     }
 
+    a.inline-link {
+      position: relative;
+      display: inline-block;
+      padding: 0 3px 2px;
+      margin: 0 2px;
+      color: var(--or);
+      font-family: 'Cinzel', serif;
+      font-size: 0.96rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    a.inline-link::after { content: " ⟶"; font-size: 0.82rem; }
+    a.inline-link::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: linear-gradient(to right, #fff2b2, #d6a728);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.18s ease-out;
+      opacity: 0.70;
+    }
+    a.inline-link:hover::before { transform: scaleX(1); }
+    a.inline-link:hover { color: #ffeeb5; }
+
     figure.inner-img{
       margin:10px auto 14px;
       border-radius:16px;
@@ -348,6 +379,108 @@
       position: relative;
     }
 
+    .sep{ opacity:0.55; }
+
+    .nndnn-banner{
+      margin:26px auto 6px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+      flex-wrap:nowrap;
+      text-align:center;
+    }
+    .nndnn-banner img{
+      height:48px;
+      width:auto;
+      display:block;
+      filter: drop-shadow(0 0 10px rgba(0,0,0,0.85));
+      opacity:0.96;
+    }
+    .nndnn-text{
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-weight:700;
+      letter-spacing:0.18em;
+      text-transform:none;
+      font-size:2.05rem;
+      line-height:1;
+      text-shadow:0 0 14px rgba(0,0,0,0.9);
+      white-space:nowrap;
+    }
+
+    .big-history-wrap{ margin-top: 22px; width: 100%; display: flex; justify-content: center; }
+    .big-history-slider{
+      display: inline-flex;
+      align-items: center;
+      gap: 26px;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #f3d98b, #d6a728);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+      margin: 0 auto;
+    }
+    .big-history-slider::-webkit-scrollbar{ display:none; }
+    .big-history-btn{
+      display:inline-block;
+      padding: 0;
+      border-radius: 0;
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      letter-spacing:0.04em;
+      text-decoration:none;
+      color:#120702;
+      background: transparent;
+      box-shadow: none;
+      white-space: nowrap;
+      flex: 0 0 auto;
+    }
+    .big-history-btn:hover{ text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.6rem; }
+      h2 { font-size: 1.05rem; }
+      .section-card{ padding: 18px 14px; border-radius: 18px; margin: 20px auto; }
+      .section-card p{ font-size: 1.02rem; line-height: 1.70; margin: 16px auto; }
+      details.section-card > summary{ padding: 18px 14px; font-size: 0.98rem; }
+      .soft-sep::after{ left: 6%; right: 6%; }
+      .nndnn-banner{gap:10px;}
+      .nndnn-banner img{height:42px;}
+      .nndnn-text{font-size:1.55rem;}
+      .top-menu{ top:22px; right:22px; }
+      .menu-panel{ width: 240px; }
+      .frame-fixed{ inset: calc(12px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left)); }
+      .viewport-scroll{ inset: calc(20px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left)); }
+    }
+
+.rings-showcase{
+  margin: 18px auto 8px;
+  width: 100%;
+}
+.rings-wrap{
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+  padding: 18px 18px 10px;
+  border-radius: 18px;
+  border: 1px solid rgba(214,167,40,0.28);
+  background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.12));
+  box-shadow: 0 0 26px rgba(0,0,0,0.62);
+}
+.rings-title{
+  margin: 0 0 6px;
+  font-size: clamp(1.15rem, 1.5vw + 0.9rem, 1.55rem);
+  letter-spacing: 0.02em;
+}
+.rings-sub{
+  margin: 0 0 14px;
+  opacity: 0.92;
+  line-height: 1.55;
+}
 .rings-grid{
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -372,9 +505,11 @@
   .rings-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 520px){
+  .rings-wrap{ padding: 16px 14px 10px; }
   .rings-grid{ grid-template-columns: 1fr; }
 }
 
+.media-gap-top{ margin-top: 10px; }
 .media-grid-2{
   display:grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -400,6 +535,7 @@
   .media-grid-2{ grid-template-columns: 1fr; }
 }
 
+/* ================== ✅ TABS (bas) — MODIF CHIRURGICALE : plus court ================== */
 .tabs{
   margin:10px auto 18px;
   display:inline-flex;
@@ -437,6 +573,7 @@
   }
 }
 
+/* ✅ BOUTON JAUNE UNIQUE + COULISSANT INTERNE */
 .cta-ordres{
   margin: 18px auto 6px;
   text-align:center;
@@ -527,8 +664,10 @@
 </head>
 
 <body>
+<!-- ✅ Cadre fixe (sans lys) -->
 <div aria-hidden="true" class="frame-fixed"></div>
 
+<!-- ✅ Menu 3 points avec toutes les pages -->
 <div aria-label="Menu du site" class="top-menu">
   <details>
     <summary title="Menu">⋯</summary>
@@ -547,9 +686,11 @@
   </details>
 </div>
 
+<!-- ✅ Tout défile dedans -->
 <div class="viewport-scroll">
   <div class="container">
 
+    <!-- ✅ HERO templier en haut -->
     <div class="hero">
       <img src="templier.jpg" alt="Templier – continuité et avenir" onerror="this.onerror=null; this.src='templier.jpeg';">
     </div>
@@ -573,16 +714,16 @@
         </p>
         <div class="rings-grid media-gap-top">
           <figure class="ring-card">
-            <img alt="Bague O.S.D.9.T.D.J. — croix et marque IX" data-src="bague1.PNG" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+            <img alt="Bague O.S.D.9.T.D.J. — croix et marque IX" loading="lazy" src="bague1.PNG"/>
           </figure>
           <figure class="ring-card">
-            <img alt="Bague O.S.D.9.T.D.J. — anneau et gravure interne" data-src="bague2.PNG" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+            <img alt="Bague O.S.D.9.T.D.J. — anneau et gravure interne" loading="lazy" src="bague2.PNG"/>
           </figure>
           <figure class="ring-card">
-            <img alt="Bague O.S.D.9.T.D.J. — face principale avec IX" data-src="bague3.PNG" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+            <img alt="Bague O.S.D.9.T.D.J. — face principale avec IX" loading="lazy" src="bague3.PNG"/>
           </figure>
           <figure class="ring-card">
-            <img alt="Bague O.S.D.9.T.D.J. — variante sombre et croix" data-src="bague4.PNG" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+            <img alt="Bague O.S.D.9.T.D.J. — variante sombre et croix" loading="lazy" src="bague4.PNG"/>
           </figure>
         </div>
 
@@ -596,16 +737,16 @@
         </p>
         <div class="rings-grid media-gap-top">
           <figure class="ring-card">
-            <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 1" data-src="manteaux.PNG" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+            <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 1" loading="lazy" src="manteaux.PNG"/>
           </figure>
           <figure class="ring-card">
-            <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 2" data-src="manteaux2.PNG" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+            <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 2" loading="lazy" src="manteaux2.PNG"/>
           </figure>
           <figure class="ring-card">
-            <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 3" data-src="manteaux3.PNG" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+            <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 3" loading="lazy" src="manteaux3.PNG"/>
           </figure>
           <figure class="ring-card">
-            <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 4" data-src="manteaux4.PNG" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+            <img alt="Manteau de représentation O.S.D.9.T.D.J. — modèle 4" loading="lazy" src="manteaux4.PNG"/>
           </figure>
         </div>
 
@@ -619,10 +760,10 @@
         </p>
         <div class="media-grid-2">
           <figure class="media-card">
-            <img alt="Médaille O.S.D.9.T.D.J. — modèle 1" data-src="medaille1.PNG" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+            <img alt="Médaille O.S.D.9.T.D.J. — modèle 1" loading="lazy" src="medaille1.PNG"/>
           </figure>
           <figure class="media-card">
-            <img alt="Médaille O.S.D.9.T.D.J. — modèle 2" data-src="medaille2.jpg" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+            <img alt="Médaille O.S.D.9.T.D.J. — modèle 2" loading="lazy" src="medaille2.jpg"/>
           </figure>
         </div>
 
@@ -635,7 +776,7 @@
           la force n’a de sens qu’orientée vers le bien, la justice, et la vérité.
         </p>
         <figure class="inner-img">
-          <img alt="Épée symbolique O.S.D.9.T.D.J." data-src="epee.PNG" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+          <img alt="Épée symbolique O.S.D.9.T.D.J." loading="lazy" src="epee.PNG"/>
         </figure>
 
         <div aria-label="Note d'usage" class="notice" role="note">
@@ -644,6 +785,7 @@
         </div>
       </div>
     </details>
+
     <h1>ORDRE SACRÉ DES NEUF TEMPLIERS DE JÉRUSALEM</h1>
     <h2>Emblème &amp; Logo</h2>
 
@@ -676,7 +818,7 @@
       <summary>Notre blason : une « table d’étude » en langage héraldique</summary>
       <div class="acc-body">
         <figure class="inner-img">
-          <img alt="Blason officiel de l’O.S.D.9.T.D.J." data-src="blason-osd9tdj.PNG" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+          <img alt="Blason officiel de l’O.S.D.9.T.D.J." loading="lazy" src="blason-osd9tdj.PNG"/>
         </figure>
         <p class="legal-note" role="note" aria-label="Protection des signes distinctifs">
           <strong>Protection &amp; droits :</strong> l’ensemble de nos <strong>logos, blasons, sceaux, signes, devises</strong> et éléments graphiques
@@ -733,7 +875,7 @@
       <summary>Notre croix : tradition templière, « IX » et sens du Nom</summary>
       <div class="details-inner">
         <figure class="inner-img">
-          <img alt="Croix de l’O.S.D.9.T.D.J. avec monogramme IX (présentée sur le drapeau)" data-src="drapeau-osd9tdj.PNG" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+          <img alt="Croix de l’O.S.D.9.T.D.J. avec monogramme IX (présentée sur le drapeau)" src="drapeau-osd9tdj.PNG"/>
         </figure>
         <p>
           La croix que nous utilisons s’inscrit dans la forme <strong>pattée</strong>,
@@ -782,7 +924,7 @@
       <summary>Notre sceau : deux cavaliers, une seule monture — fraternité et dépouillement</summary>
       <div class="details-inner">
         <figure class="inner-img">
-          <img alt="Sceau de l’O.S.D.9.T.D.J. inspiré du symbole templier : deux cavaliers sur un cheval" data-src="sceau-osd9tdj.PNG" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="/>
+          <img alt="Sceau de l’O.S.D.9.T.D.J. inspiré du symbole templier : deux cavaliers sur un cheval" src="sceau-osd9tdj.PNG"/>
         </figure>
         <p>
           Le sceau de l’O.S.D.9.T.D.J. est un sceau <strong>général</strong> de l’Ordre :
@@ -850,20 +992,5 @@
 
   </div>
 </div>
-
-<!-- ✅ UNIQUE AJOUT : script de chargement des images au moment où le menu s'ouvre -->
-<script>
-document.querySelectorAll('details').forEach(d=>{
-  d.addEventListener('toggle', ()=>{
-    if(!d.open) return;
-    d.querySelectorAll('img[data-src]').forEach(img=>{
-      img.loading = "eager";
-      img.src = img.dataset.src;
-      img.removeAttribute('data-src');
-    });
-  });
-});
-</script>
-
 </body>
 </html>
