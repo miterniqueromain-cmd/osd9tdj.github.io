@@ -991,6 +991,67 @@
     </div>
 
   </div>
+    
 </div>
+    <!-- ✅ FIX iPad Safari : charge les images UNIQUEMENT quand un menu déroulant s’ouvre -->
+<script>
+(function () {
+  const PLACEHOLDER =
+    "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+
+  function isInContentDetails(img) {
+    // On cible uniquement les menus déroulants de contenu, pas le menu 3 points du haut
+    const d = img.closest('details.section-card');
+    return d && !d.closest('.top-menu');
+  }
+
+  function prepare() {
+    // Prépare uniquement les <details class="section-card"> (tes menus déroulants)
+    document.querySelectorAll('details.section-card').forEach(details => {
+      if (details.closest('.top-menu')) return;
+
+      details.querySelectorAll('img').forEach(img => {
+        // Ne pas casser si déjà préparé
+        if (img.dataset && img.dataset.src) return;
+
+        const src = img.getAttribute('src');
+        if (!src) return;
+
+        // Safari iPad + conteneur scroll : lazy peut bugger -> on retire
+        img.removeAttribute('loading');
+
+        // Met en attente
+        img.dataset.src = src;
+        img.src = PLACEHOLDER;
+      });
+    });
+  }
+
+  function loadStaggered(details) {
+    const imgs = Array.from(details.querySelectorAll('img[data-src]'));
+    imgs.forEach((img, i) => {
+      setTimeout(() => {
+        if (!img.dataset.src) return;
+        img.loading = "eager";
+        img.decoding = "async";
+        img.src = img.dataset.src;
+        img.removeAttribute('data-src');
+      }, i * 120); // charge 1 par 1 -> évite que Safari bloque
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    prepare();
+
+    document.querySelectorAll('details.section-card').forEach(details => {
+      if (details.closest('.top-menu')) return;
+
+      details.addEventListener('toggle', () => {
+        if (details.open) loadStaggered(details);
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
