@@ -183,17 +183,15 @@
       padding:26px 16px 60px;
     }
 
-    /* ✅ HERO : DOUBLE CADRE RECTANGULAIRE (16:9) + IMAGE ENTIÈRE */
+    /* ✅ HERO : DOUBLE CADRE RECTANGULAIRE (16:9) + IMAGE PLEIN CADRE */
     .hero{
       position: relative;
       margin:10px auto 22px;
 
-      /* rectangle maître */
       aspect-ratio: 16 / 9;
       width: 100%;
       max-width: min(1000px, 100%);
 
-      /* double cadre */
       padding: 10px;
       border-radius: 20px;
       border: 2px solid rgba(214,167,40,0.90);
@@ -202,7 +200,6 @@
       background: rgba(0,0,0,0.45);
       overflow: hidden;
     }
-    /* cadre intérieur */
     .hero::before{
       content:"";
       position:absolute;
@@ -212,18 +209,14 @@
       pointer-events:none;
       z-index:2;
     }
-    /* image centrée, jamais déformée */
+    /* ✅ MODIF DEMANDÉE : l’affiche prend TOUT le cadre */
     .hero img{
       position:absolute;
       inset:0;
-      margin:auto;
-
-      max-width:100%;
-      max-height:100%;
-      width:auto;
-      height:auto;
-
-      object-fit: contain;
+      width:100%;
+      height:100%;
+      object-fit: cover; /* ✅ remplit le rectangle */
+      object-position: center;
       z-index:1;
       display:block;
       background: rgba(0,0,0,0.20);
@@ -255,7 +248,6 @@
     }
     .motto strong{color:var(--or);}
 
-    /* ✅ FIX FINAL : nav noir du bas CENTRÉE et NON pleine largeur */
     .tabs{
       margin:10px auto 26px;
       display:flex;
@@ -424,7 +416,6 @@
       }
     }
 
-    /* ✅ BOUTON JAUNE COULISSANT (inchangé) */
     .cta-ordres{
       margin: 18px auto 6px;
       text-align:center;
@@ -510,6 +501,7 @@
       <div class="hero">
         <img src="sophia.PNG" alt="Illustration – Histoire de l’Association">
       </div>
+
       <div class="title">Histoire de l’Association</div>
       <div class="subtitle">Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</div>
       <div class="motto">« <strong>Per Crucem, Veritas</strong> »</div>
