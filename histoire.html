@@ -61,44 +61,33 @@
       height:100%;
       margin:0;
       padding:0;
-      overflow:hidden; /* ✅ important */
+      overflow:hidden;
       font-family:'Lato',Arial,sans-serif;
       color:var(--clair);
-
-      /* ✅ AJOUT: image de fond */
       background: url("fonds-nh.jpg") center / cover no-repeat fixed;
     }
 
-    /* ✅ AJOUT: voile noir qui coulisse par-dessus l'image de fond */
-    body{
-      position: relative;
-    }
+    body{ position: relative; }
+
     body::before{
       content:"";
       position:fixed;
       inset:0;
       pointer-events:none;
-
-      /* noir + tes effets dorés (au-dessus de l'image) */
       background:
         linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.75)),
         radial-gradient(circle at 10% 0%, rgba(214,167,40,0.08), transparent 35%),
         radial-gradient(circle at 90% 0%, rgba(214,167,40,0.06), transparent 40%);
-
-      /* effet coulisse */
       transform: translateX(-100%);
       animation: veilSlide 900ms ease forwards;
-
       z-index: 0;
     }
-    @keyframes veilSlide{
-      to{ transform: translateX(0); }
-    }
+    @keyframes veilSlide{ to{ transform: translateX(0); } }
 
     /* ✅ Cadre fixe */
     .frame-fixed{
       position: fixed;
-      inset: 14px;
+      inset: calc(14px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left));
       border-radius: 22px;
       border: 2px solid rgba(214,167,40,0.55);
       box-shadow:
@@ -126,11 +115,11 @@
     /* ✅ Zone scroll interne */
     .viewport-scroll{
       position: fixed;
-      inset: 22px;
+      inset: calc(22px + env(safe-area-inset-top)) calc(22px + env(safe-area-inset-right)) calc(22px + env(safe-area-inset-bottom)) calc(22px + env(safe-area-inset-left));
       overflow-y: auto;
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
-      z-index: 1; /* ✅ contenu au-dessus du voile */
+      z-index: 1;
     }
 
     /* ✅ Menu 3 points */
@@ -183,10 +172,7 @@
       font-size: 0.92rem;
       border-bottom: 1px solid rgba(214,167,40,0.18);
     }
-    .menu-panel a:hover{
-      background: rgba(214,167,40,0.12);
-      color: #fff;
-    }
+    .menu-panel a:hover{ background: rgba(214,167,40,0.12); color: #fff; }
     .menu-panel a:last-child{ border-bottom: none; }
 
     /* ================== TON CSS EXISTANT (inchangé) ================== */
@@ -197,21 +183,45 @@
       padding:26px 16px 60px;
     }
 
+    /* ✅ HERO : DOUBLE CADRE + IMAGE ENTIÈRE (CONTAIN) */
     .hero{
+      position: relative;
       margin:10px auto 22px;
       border-radius:18px;
       overflow:hidden;
-      border:2px solid rgba(214,167,40,0.9);
+
+      /* cadre extérieur */
+      border:2px solid rgba(214,167,40,0.90);
       box-shadow:0 0 40px rgba(0,0,0,0.92);
-      background:rgba(0,0,0,0.35);
+
+      background: rgba(0,0,0,0.35);
+      padding: 8px; /* espace entre les 2 cadres */
+    }
+    /* cadre intérieur */
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset: 6px;
+      border-radius: 14px;
+      border:1px solid rgba(248,232,200,0.22);
+      pointer-events:none;
+      z-index: 2;
     }
 
     .hero img{
       display:block;
       width:100%;
-      height:320px;
-      object-fit:cover;
-      object-position:center bottom;
+      height:auto;
+
+      /* ✅ IMPORTANT : image entière, pas coupée */
+      object-fit: contain;
+
+      /* surface propre */
+      border-radius: 12px;
+      background: rgba(0,0,0,0.20);
+
+      /* hauteur responsive (iPhone/iPad/PC) */
+      max-height: clamp(220px, 36vh, 460px);
     }
 
     .title{
@@ -239,12 +249,12 @@
     }
     .motto strong{color:var(--or);}
 
-    /* ✅ FIX FINAL : nav noir du bas (Accueil/Contact) CENTRÉE et NON pleine largeur */
+    /* ✅ FIX FINAL : nav noir du bas CENTRÉE et NON pleine largeur */
     .tabs{
       margin:10px auto 26px;
-      display:flex;                 /* ✅ important (pas inline-flex) */
-      justify-content:center;       /* ✅ centre les boutons */
-      width:fit-content;            /* ✅ pas pleine largeur */
+      display:flex;
+      justify-content:center;
+      width:fit-content;
       max-width:100%;
       overflow-x:auto;
       -webkit-overflow-scrolling:touch;
@@ -397,44 +407,19 @@
       p{font-size:0.95rem;}
       h2{font-size:1.12rem;}
       h3{font-size:1.02rem;}
-      .tab{padding:9px 14px;font-size:0.86rem;}
-      .hero img{ height:220px; object-position:center bottom; }
-      .nndnn-banner{gap:10px;}
-      .nndnn-banner img{height:58px;}
-      .nndnn-text{font-size:1.55rem;}
+      .tab{padding:9px 14px compiler-size:0.86rem;}
       .top-menu{ top:22px; right:22px; }
       .menu-panel{ width: 240px; }
-      .frame-fixed{ inset: 12px; }
-      .viewport-scroll{ inset: 20px; }
+      .frame-fixed{
+        inset: calc(12px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left));
+      }
+      .viewport-scroll{
+        inset: calc(20px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left));
+      }
+      .hero img{ max-height: 320px; }
     }
 
-    /* ================== ✅ SEULS AJOUTS (TABLETTE/PC) ==================
-       1) HERO moins “dégueulasse” sur grands écrans
-       2) TABS (boutons du bas) centrés sur tablette/PC
-       3) ✅ IMAGE TEMPLIER RÉTRÉCIE SUR iPAD/PC (pour éviter le flou)
-       ================================================================ */
-
-    /* ✅ Centrage des tabs sur tablette/PC (sans toucher au mobile) */
-    @media (min-width: 700px){
-      .tabs{
-        display:flex;
-        width:fit-content;
-        justify-content:center;
-      }
-
-      .image-inline{
-        max-width: 520px;
-      }
-    }
-
-    @media (min-width: 900px){
-      .hero img{
-        height:420px;
-        object-position:center 60%;
-      }
-    }
-
-    /* ================== ✅ BOUTON JAUNE COULISSANT ================== */
+    /* ✅ BOUTON JAUNE COULISSANT (inchangé) */
     .cta-ordres{
       margin: 18px auto 6px;
       text-align:center;
@@ -518,7 +503,7 @@
 
       <!-- Image haut de page -->
       <div class="hero">
-        <img src="sophia.PNG" >
+        <img src="sophia.PNG" alt="Illustration – Histoire de l’Association">
       </div>
 
       <div class="title">Histoire de l’Association</div>
