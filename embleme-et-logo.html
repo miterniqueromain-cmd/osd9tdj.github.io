@@ -178,7 +178,7 @@
       z-index: 1;
     }
 
-    /* ✅ HERO templier en haut */
+    /* ✅ HERO templier en haut  (CORRECTION demandée : remplit le cadre + un peu plus petit) */
     .hero{
       margin:10px auto 22px;
       border-radius:18px;
@@ -187,25 +187,24 @@
       box-shadow:0 0 40px rgba(0,0,0,0.92);
       background:rgba(0,0,0,0.35);
       width:100%;
-      max-width: min(1100px, 100%);
+      max-width: min(920px, 100%); /* ✅ réduit un peu (1100 -> 920) */
     }
     .hero img{
       display:block;
       width:100%;
-      height:auto;
-      object-fit:contain;
+      height:260px;            /* ✅ hauteur contrôlée */
+      object-fit:cover;        /* ✅ remplit le cadre */
       object-position:center;
       background:rgba(0,0,0,0.15);
-      max-height:320px;
     }
     @media (max-width: 600px){
-      .hero img{ max-height:220px; }
+      .hero img{ height:200px; }
     }
     @media (min-width: 700px) and (max-width: 899px){
-      .hero img{ max-height:280px; }
+      .hero img{ height:240px; }
     }
     @media (min-width: 900px){
-      .hero img{ max-height:360px; }
+      .hero img{ height:300px; }
     }
 
     h1 {
