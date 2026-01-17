@@ -202,28 +202,35 @@
     z-index:1;
   }
 
+  /* ✅ HERO (MODIF DEMANDÉE) : affiche entière + cadre propre, sans max-height */
   .hero{
+    position:relative;
     margin:10px auto 22px;
-    border-radius:18px;
+    border-radius:24px;
     overflow:hidden;
-    border:2px solid rgba(214,167,40,0.9);
+    border:2px solid rgba(214,167,40,0.90);
     box-shadow:0 0 40px rgba(0,0,0,0.92);
     background:rgba(0,0,0,0.35);
     width:100%;
     max-width:min(1100px, 100%);
   }
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:10px;
+    border-radius:18px;
+    border:1px solid rgba(248,232,200,0.22);
+    pointer-events:none;
+    z-index:2;
+  }
   .hero img{
     display:block;
     width:100%;
     height:auto;
-    object-fit:contain;
-    object-position:center;
+    max-width:100%;
     background:rgba(0,0,0,0.15);
-    max-height:320px;
+    z-index:1;
   }
-  @media (max-width:600px){ .hero img{ max-height:220px; } }
-  @media (min-width:700px) and (max-width:899px){ .hero img{ max-height:280px; } }
-  @media (min-width:900px){ .hero img{ max-height:360px; } }
 
   h1{
     font-family:'Cinzel',serif;
