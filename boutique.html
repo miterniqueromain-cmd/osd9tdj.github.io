@@ -1,853 +1,284 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Boutique en ligne – O.S.D.9.T.D.J.</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>Boutique en ligne – O.S.D.9.T.D.J.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- SEO -->
-  <meta name="description" content="Boutique en ligne officielle de l’Ordre Sacré des Neuf Templiers de Jérusalem – cotisations, dons, évènements et supports pédagogiques (mise en place avec notre partenaire bancaire)." />
-  <meta name="keywords" content="Templiers, OSD9TDJ, boutique templière, cotisation, dons, chevalerie moderne, paiement sécurisé, Ordre Sacré des Neuf Templiers de Jérusalem" />
-  <link rel="canonical" href="https://osd9tdj.org/boutique.html" />
+<!-- SEO -->
+<meta name="description" content="Paiement sécurisé officiel de l’Ordre Sacré des Neuf Templiers de Jérusalem – cotisations, dons, évènements et règlements via notre partenaire bancaire.">
+<meta name="keywords" content="OSD9TDJ, Templiers, paiement sécurisé, cotisation, dons, chevalerie moderne">
+<link rel="canonical" href="https://osd9tdj.org/boutique.html">
 
-  <!-- OpenGraph -->
-  <meta property="og:title" content="Boutique en ligne – O.S.D.9.T.D.J." />
-  <meta property="og:description" content="Boutique officielle de l’Ordre Sacré des Neuf Templiers de Jérusalem : cotisations, dons, évènements et documents de l’Ordre." />
-  <meta property="og:image" content="https://osd9tdj.org/blason-osd9tdj.PNG" />
-  <meta property="og:url" content="https://osd9tdj.org/boutique.html" />
-  <meta property="og:type" content="website" />
+<!-- OpenGraph -->
+<meta property="og:title" content="Paiement sécurisé – O.S.D.9.T.D.J.">
+<meta property="og:description" content="Accès à la plateforme bancaire sécurisée de l’Ordre Sacré des Neuf Templiers de Jérusalem.">
+<meta property="og:image" content="https://osd9tdj.org/blason-osd9tdj.PNG">
+<meta property="og:url" content="https://osd9tdj.org/boutique.html">
+<meta property="og:type" content="website">
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Boutique en ligne – O.S.D.9.T.D.J." />
-  <meta name="twitter:description" content="Paiements sécurisés : cotisations, dons, évènements et supports pédagogiques de l’Ordre." />
-  <meta name="twitter:image" content="https://osd9tdj.org/blason-osd9tdj.PNG" />
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Paiement sécurisé – O.S.D.9.T.D.J.">
+<meta name="twitter:description" content="Paiement sécurisé via partenaire bancaire officiel.">
+<meta name="twitter:image" content="https://osd9tdj.org/blason-osd9tdj.PNG">
 
-  <!-- WATERMARK INVISIBLE -->
-  <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-BOUTIQUE-PROTECTION-TEMPLIERS" />
+<!-- WATERMARK -->
+<meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-PAYMENT-PROTECTION">
 
-  <!-- Polices -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Lato&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --or:#ffd700;
-      --clair:#fdf7e5;
-      --or-line:rgba(255,215,0,0.55);
-      --panel: rgba(0,0,0,0.75);
-      --panel2: rgba(0,0,0,0.88);
-      --txt: rgba(253,247,229,0.92);
-      --muted: rgba(253,247,229,0.70);
-      --shadow: 0 18px 40px rgba(0,0,0,0.55);
-      --radius: 16px;
-    }
+<style>
+:root{
+  --or:#ffd700;
+  --clair:#fdf7e5;
+  --or-line:rgba(255,215,0,.55);
+}
 
-    html, body{
-      height:100%;
-      margin:0;
-      padding:0;
-      overflow:hidden;
-      font-family:'Lato', Arial, sans-serif;
-      color:#fff;
-      text-align:center;
-      min-height:100vh;
-      overflow-x:hidden;
-    }
+html,body{
+  margin:0;
+  height:100%;
+  overflow:hidden;
+  font-family:'Lato',Arial,sans-serif;
+  color:#fff;
+}
 
-    /* Fond drapeau + voile sombre */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      background:url("drapeau-osd9tdj.PNG") no-repeat center center fixed;
-      background-size:cover;
-      z-index:-2;
-    }
-    body::after{
-      content:"";
-      position:fixed;
-      inset:0;
-      background: radial-gradient(circle at top, rgba(0,0,0,0.25), rgba(0,0,0,0.9));
-      z-index:-1;
-    }
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("drapeau-osd9tdj.PNG") center/cover fixed;
+  z-index:-2;
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top, rgba(0,0,0,.25), rgba(0,0,0,.9));
+  z-index:-1;
+}
 
-    /* Cadre doré fixe */
-    .frame-fixed{
-      position:fixed;
-      inset:14px;
-      border-radius:22px;
-      border:2px solid var(--or-line);
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.08) inset,
-                  0 0 38px rgba(0,0,0,0.40);
-      pointer-events:none;
-      z-index:40;
-    }
+.frame-fixed{
+  position:fixed;
+  inset:14px;
+  border-radius:22px;
+  border:2px solid var(--or-line);
+  pointer-events:none;
+  z-index:40;
+}
 
-    /* Tout défile dedans */
-    .viewport-scroll{
-      position:fixed;
-      inset:22px;
-      overflow-y:auto;
-      overflow-x:hidden;
-      -webkit-overflow-scrolling:touch;
-      z-index:1;
-      padding:30px 15px 20px;
-      box-sizing:border-box;
-    }
+.viewport-scroll{
+  position:fixed;
+  inset:22px;
+  overflow-y:auto;
+  padding:30px 15px 20px;
+  box-sizing:border-box;
+}
 
-    .overlay{
-      min-height:100vh;
-      padding:0;
-      box-sizing:border-box;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-    }
+/* MENU 3 POINTS – INCHANGÉ */
+.top-menu{
+  position:fixed;
+  top:26px;
+  right:26px;
+  z-index:60;
+}
+.top-menu summary{
+  list-style:none;
+  cursor:pointer;
+  width:46px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  border:1px solid var(--or-line);
+  background:rgba(0,0,0,.25);
+  font-family:'Cinzel',serif;
+  color:var(--or);
+  font-size:22px;
+}
+.top-menu summary::-webkit-details-marker{display:none}
+.menu-panel{
+  position:absolute;
+  right:0;
+  margin-top:10px;
+  width:260px;
+  background:rgba(0,0,0,.75);
+  border:1px solid var(--or-line);
+  border-radius:14px;
+}
+.menu-panel a{
+  display:block;
+  padding:11px 12px;
+  color:var(--clair);
+  font-family:'Cinzel',serif;
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,215,0,.2);
+}
+.menu-panel a:last-child{border-bottom:none}
 
-    /* Menu 3 points (déroulant) */
-    .top-menu{
-      position:fixed;
-      top:26px;
-      right:26px;
-      z-index:60;
-      pointer-events:auto;
-    }
-    .top-menu details{ position:relative; }
-    .top-menu summary{
-      list-style:none;
-      cursor:pointer;
-      user-select:none;
-      width:46px;
-      height:34px;
-      display:grid;
-      place-items:center;
-      border-radius:999px;
-      border:1px solid rgba(255,215,0,0.55);
-      background:rgba(0,0,0,0.22);
-      backdrop-filter: blur(6px);
-      box-shadow:0 6px 16px rgba(0,0,0,0.35);
-      font-family:'Cinzel',serif;
-      color:var(--or);
-      font-size:22px;
-      line-height:1;
-    }
-    .top-menu summary::-webkit-details-marker{ display:none; }
+.card{
+  max-width:900px;
+  margin:0 auto;
+  background:rgba(0,0,0,.75);
+  border:2px solid var(--or);
+  border-radius:18px;
+  padding:20px;
+  text-align:center;
+}
 
-    .menu-panel{
-      position:absolute;
-      right:0;
-      margin-top:10px;
-      width:260px;
-      max-width:calc(100vw - 60px);
-      border-radius:14px;
-      border:1px solid rgba(255,215,0,0.45);
-      background:rgba(0,0,0,0.70);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .menu-panel a{
-      display:block;
-      padding:11px 12px;
-      text-decoration:none;
-      color:var(--txt);
-      font-family:'Cinzel',serif;
-      font-weight:700;
-      font-size:0.92rem;
-      border-bottom:1px solid rgba(255,215,0,0.18);
-      white-space:nowrap;
-    }
-    .menu-panel a:hover{
-      background:rgba(255,215,0,0.12);
-      color:#fff;
-    }
-    .menu-panel a:last-child{ border-bottom:none; }
+.bank-logo{
+  background:#fff;
+  padding:12px 20px;
+  border-radius:14px;
+  width:min(320px,90%);
+}
 
-    h1{
-      font-family:'Cinzel', serif;
-      font-size:1.7rem;
-      margin: 10px 0 8px;
-      text-shadow:0 0 8px rgba(0,0,0,0.7);
-    }
-    p{
-      max-width:720px;
-      margin:10px auto;
-      line-height:1.6;
-      font-size:1rem;
-      color: var(--txt);
-    }
+.spinner{
+  width:46px;height:46px;
+  border:4px solid rgba(255,215,0,.25);
+  border-top-color:var(--or);
+  border-radius:50%;
+  margin:16px auto 6px;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-    .card{
-      margin-top:25px;
-      padding:20px 18px 22px;
-      background: var(--panel);
-      border-radius: var(--radius);
-      border:2px solid var(--or);
-      box-shadow: 0 0 26px rgba(0,0,0,0.8);
-      width: min(980px, 100%);
-      box-sizing:border-box;
-    }
+.countdown{
+  font-family:'Cinzel',serif;
+  font-size:1.1rem;
+}
 
-    .section-title{
-      font-family:'Cinzel',serif;
-      font-weight:700;
-      letter-spacing:0.2px;
-      color:var(--clair);
-      margin:14px 0 6px;
-      font-size:1.02rem;
-      opacity:0.98;
-    }
+/* MODALE BANQUE */
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.88);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:200;
+}
+.modal{
+  width:95%;
+  max-width:1100px;
+  height:92vh;
+  background:#000;
+  border:2px solid var(--or);
+  border-radius:20px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+.modal-header{
+  background:#111;
+  padding:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.modal-header img{
+  background:#fff;
+  padding:6px 10px;
+  border-radius:8px;
+  height:42px;
+}
+.modal-header a,
+.modal-header button{
+  background:var(--or);
+  color:#000;
+  border:none;
+  padding:8px 12px;
+  border-radius:999px;
+  font-family:'Cinzel',serif;
+  cursor:pointer;
+  text-decoration:none;
+}
+iframe{flex:1;border:none}
 
-    .list-box{
-      text-align:left;
-      display:inline-block;
-      margin:8px 0 6px;
-      padding-left:18px;
-      color: var(--txt);
-      max-width: 760px;
-    }
-    .list-box li{ margin:6px 0; }
-
-    .bank-block{
-      margin-top:12px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:10px;
-    }
-
-    /* Logo banque redimensionné proprement */
-    .bank-logo{
-      width:min(340px, 88vw);
-      height:auto;
-      background:#fff;
-      border-radius:12px;
-      padding:10px 16px;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.35);
-      border: 1px solid rgba(255,255,255,0.10);
-    }
-
-    .cta-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      justify-content:center;
-      margin-top:10px;
-    }
-
-    .btn{
-      appearance:none;
-      border:none;
-      cursor:pointer;
-      user-select:none;
-      padding:10px 16px;
-      border-radius:999px;
-      font-family:'Cinzel',serif;
-      font-weight:700;
-      letter-spacing:0.2px;
-      font-size:0.95rem;
-      transition: transform 0.12s ease, background 0.2s ease, border-color 0.2s ease;
-      background: rgba(0,0,0,0.55);
-      color: var(--clair);
-      border: 1px solid rgba(255,215,0,0.70);
-      box-shadow: 0 10px 22px rgba(0,0,0,0.25);
-    }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,215,0,0.12); }
-    .btn:active{ transform: translateY(0px); }
-
-    .btn-primary{
-      background: linear-gradient(180deg, rgba(255,215,0,0.22), rgba(0,0,0,0.55));
-      border-color: rgba(255,215,0,0.95);
-    }
-    .btn-primary:hover{
-      background: rgba(255,215,0,0.95);
-      color:#000;
-      border-color: rgba(255,215,0,1);
-    }
-
-    .btn-ghost{
-      background: rgba(0,0,0,0.35);
-      border-color: rgba(255,255,255,0.18);
-      color: rgba(253,247,229,0.88);
-    }
-
-    .note{
-      font-size:0.92rem;
-      color: var(--muted);
-      margin-top: 10px;
-    }
-    .fine{
-      font-size:0.85rem;
-      color: rgba(253,247,229,0.70);
-      margin-top: 8px;
-      max-width: 760px;
-    }
-
-    /* Boutons bas de page (déroulant) */
-    .bottom-drop{
-      margin-top:20px;
-      display:inline-block;
-    }
-    .bottom-drop summary{
-      cursor:pointer;
-      user-select:none;
-      text-decoration:none;
-      color:var(--clair);
-      font-size:0.95rem;
-      padding:8px 16px;
-      border-radius:999px;
-      border:1px solid var(--or);
-      background:rgba(0,0,0,0.6);
-      font-family:'Cinzel', serif;
-      transition:0.2s;
-      list-style:none;
-      display:inline-block;
-    }
-    .bottom-drop summary::-webkit-details-marker{ display:none; }
-    .bottom-drop summary:hover{ background:var(--or); color:#000; }
-
-    .bottom-panel{
-      margin:10px auto 0;
-      width:320px;
-      max-width:calc(100vw - 40px);
-      background:rgba(0,0,0,0.75);
-      border-radius:14px;
-      border:1px solid rgba(255,215,0,0.55);
-      overflow:hidden;
-      box-shadow:0 0 26px rgba(0,0,0,0.65);
-    }
-    .bottom-panel a{
-      display:block;
-      padding:11px 12px;
-      text-decoration:none;
-      color:var(--clair);
-      font-family:'Cinzel',serif;
-      font-weight:700;
-      font-size:0.92rem;
-      border-bottom:1px solid rgba(255,215,0,0.18);
-    }
-    .bottom-panel a:hover{ background:rgba(255,215,0,0.12); color:#fff; }
-    .bottom-panel a:last-child{ border-bottom:none; }
-
-    /* Footer */
-    .footer{
-      margin-top:22px;
-      padding-top:14px;
-      font-size:0.78rem;
-      opacity:0.9;
-      border-top:1px solid rgba(255,215,0,0.22);
-      width:100%;
-      max-width:980px;
-      color: rgba(253,247,229,0.84);
-    }
-    .footer a{
-      color:var(--clair);
-      text-decoration:none;
-      border-bottom:1px dotted rgba(255,215,0,0.55);
-      padding-bottom:1px;
-    }
-    .footer a:hover{
-      color:#fff;
-      border-bottom-color: rgba(255,215,0,0.95);
-    }
-    .sep{ opacity:0.55; padding:0 6px; }
-
-    /* ---------- MODAL PAIEMENT (INTÉGRÉ) ---------- */
-    .modal-backdrop{
-      position:fixed;
-      inset:0;
-      background: rgba(0,0,0,0.72);
-      backdrop-filter: blur(6px);
-      z-index: 200;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding: 18px;
-      box-sizing:border-box;
-    }
-    .modal{
-      width: min(1100px, 100%);
-      height: min(720px, 92vh);
-      background: rgba(0,0,0,0.86);
-      border: 1px solid rgba(255,215,0,0.55);
-      border-radius: 18px;
-      box-shadow: 0 30px 70px rgba(0,0,0,0.65);
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-    }
-    .modal-header{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding: 12px 12px;
-      background: rgba(0,0,0,0.55);
-      border-bottom: 1px solid rgba(255,215,0,0.20);
-    }
-    .modal-title{
-      font-family:'Cinzel',serif;
-      font-weight:700;
-      color: var(--clair);
-      font-size: 0.95rem;
-      letter-spacing:0.2px;
-      text-align:left;
-      padding-left: 6px;
-    }
-    .modal-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      justify-content:flex-end;
-    }
-    .modal-actions .btn{
-      padding:8px 12px;
-      font-size:0.86rem;
-      box-shadow:none;
-    }
-    .modal-body{
-      position:relative;
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      min-height:0; /* important pour iframe */
-    }
-
-    /* Écran de pré-redirection */
-    .handoff{
-      position:absolute;
-      inset:0;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-      box-sizing:border-box;
-      text-align:center;
-      gap:10px;
-      background: rgba(0,0,0,0.74);
-      border-bottom: 1px solid rgba(255,215,0,0.12);
-      z-index:2;
-    }
-    .handoff h2{
-      font-family:'Cinzel',serif;
-      font-size: 1.15rem;
-      margin: 0;
-      color: var(--clair);
-    }
-    .handoff p{
-      margin: 0;
-      color: var(--txt);
-      max-width: 780px;
-      font-size: 0.98rem;
-    }
-    .spinner{
-      width: 46px;
-      height: 46px;
-      border-radius: 999px;
-      border: 3px solid rgba(255,215,0,0.25);
-      border-top-color: rgba(255,215,0,0.95);
-      animation: spin 0.9s linear infinite;
-      margin-top: 8px;
-      box-shadow: 0 10px 22px rgba(0,0,0,0.35);
-    }
-    @keyframes spin{ to { transform: rotate(360deg); } }
-
-    .countdown{
-      font-family:'Cinzel',serif;
-      color: var(--clair);
-      font-weight:700;
-      margin-top: 2px;
-      opacity:0.95;
-    }
-
-    .handoff-actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      justify-content:center;
-      margin-top: 10px;
-    }
-
-    /* Iframe banque */
-    .bank-frame{
-      position:absolute;
-      inset:0;
-      width:100%;
-      height:100%;
-      border:0;
-      background: #0b0b0b;
-      z-index:1;
-    }
-
-    /* Bandeau d'erreur / fallback */
-    .fallback{
-      display:none;
-      position:absolute;
-      left: 12px;
-      right: 12px;
-      bottom: 12px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      background: rgba(0,0,0,0.78);
-      border: 1px solid rgba(255,215,0,0.35);
-      box-shadow: 0 20px 45px rgba(0,0,0,0.55);
-      z-index: 3;
-      text-align:left;
-      color: var(--txt);
-    }
-    .fallback strong{
-      font-family:'Cinzel',serif;
-      color: var(--clair);
-    }
-    .fallback .row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:10px;
-    }
-
-    /* Accessibilité */
-    .sr-only{
-      position:absolute !important;
-      width:1px !important;
-      height:1px !important;
-      padding:0 !important;
-      margin:-1px !important;
-      overflow:hidden !important;
-      clip:rect(0,0,0,0) !important;
-      white-space:nowrap !important;
-      border:0 !important;
-    }
-
-    @media (max-width: 480px){
-      h1{ font-size:1.5rem; }
-      .top-menu{ top:22px; right:22px; }
-      .frame-fixed{ inset:12px; }
-      .viewport-scroll{ inset:20px; }
-      .modal{ height: 92vh; }
-      .modal-actions{ justify-content: center; }
-      .modal-title{ font-size: 0.9rem; }
-    }
-  </style>
-
-  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
-  <link rel="apple-touch-icon" href="icon-192.png">
+/* FOOTER SEUL */
+.footer{
+  margin-top:22px;
+  padding-top:14px;
+  font-size:.78rem;
+  opacity:.9;
+  border-top:1px solid rgba(255,215,0,.22);
+}
+.footer a{color:var(--clair);text-decoration:none}
+</style>
 </head>
 
 <body>
-  <!-- Cadre fixe doré -->
-  <div class="frame-fixed" aria-hidden="true"></div>
 
-  <!-- Menu 3 points -->
-  <div class="top-menu" aria-label="Menu du site">
-    <details>
-      <summary title="Menu">⋯</summary>
-      <div class="menu-panel" role="menu" aria-label="Navigation">
-        <a href="index.html">Accueil</a>
-        <a href="activites.html">Nos évènements</a>
-        <a href="quinoussommes.html">Qui nous sommes</a>
-        <a href="histoire.html">Notre histoire</a>
-        <a href="ordres-historiques.html">Ordres historiques</a>
-        <a href="faq.html">FAQ</a>
-        <a href="vocation.html">Vocation historique</a>
-        <a href="adhesion.html">Adhésion</a>
-        <a href="boutique.html">Boutique en ligne</a>
-        <a href="statuts.html">Statuts</a>
-        <a href="contact.html">Contact</a>
-        <a href="mentions.html">Informations officielles</a>
-        <a href="cookies.html">Cookies</a>
-      </div>
-    </details>
-  </div>
+<div class="frame-fixed"></div>
 
-  <!-- Tout défile dedans -->
-  <div class="viewport-scroll">
-    <div class="overlay">
+<div class="top-menu">
+  <details>
+    <summary>⋯</summary>
+    <div class="menu-panel">
+      <a href="index.html">Accueil</a>
+      <a href="activites.html">Nos évènements</a>
+      <a href="quinoussommes.html">Qui nous sommes</a>
+      <a href="histoire.html">Notre histoire</a>
+      <a href="adhesion.html">Adhésion</a>
+      <a href="contact.html">Contact</a>
+      <a href="mentions.html">Informations officielles</a>
+    </div>
+  </details>
+</div>
 
-      <div class="card">
-        <h1>Boutique en ligne O.S.D.9.T.D.J.</h1>
+<div class="viewport-scroll">
+  <div class="card">
+    <img src="banque.jpg" class="bank-logo" alt="Partenaire bancaire">
+    <p>Vous allez être dirigé vers la page sécurisée de notre partenaire bancaire.</p>
+    <div class="spinner"></div>
+    <div class="countdown" id="countdown">Ouverture sécurisée… 5</div>
 
-        <p>
-          Notre boutique en ligne est désormais reliée à une plateforme de paiement <strong>sécurisée</strong>
-          opérée par notre partenaire bancaire. Elle permet de régler notamment&nbsp;:
-        </p>
-
-        <ul class="list-box">
-          <li>les cotisations annuelles&nbsp;;</li>
-          <li>les dons ou contributions volontaires&nbsp;;</li>
-          <li>les galas, banquets, cérémonies et repas fraternels&nbsp;;</li>
-          <li>les évènements futurs (rencontres, sorties, voyages culturels)&nbsp;;</li>
-          <li>les ouvrages, livrets, supports pédagogiques et documents officiels&nbsp;;</li>
-          <li>les tickets-repas lors de nos rassemblements&nbsp;;</li>
-          <li>tout règlement lié aux activités culturelles et chevaleresques de l’Ordre.</li>
-        </ul>
-
-        <p class="note">
-          Pour votre sécurité, le paiement est effectué sur l’environnement sécurisé de notre partenaire.
-          Vous pouvez l’ouvrir <strong>dans cette page</strong> (fenêtre intégrée) ou <strong>dans un nouvel onglet</strong>.
-        </p>
-
-        <div class="bank-block" aria-label="Partenaire bancaire">
-          <div class="section-title">Plateforme de paiement sécurisée – partenaire bancaire</div>
-          <img src="banque.jpg" alt="Logo du partenaire bancaire" class="bank-logo" />
-        </div>
-
-        <div class="cta-row" role="group" aria-label="Accès paiement">
-          <button class="btn btn-primary" id="btnOpenIntegrated" type="button">
-            Accéder au paiement sécurisé
-          </button>
-          <a class="btn" id="btnOpenNewTab" href="https://www.payasso.fr/ordre-sacre-templiers-jerusalem/paiement" target="_blank" rel="noopener noreferrer">
-            Ouvrir dans un nouvel onglet
-          </a>
-          <a class="btn btn-ghost" href="contact.html">
-            Besoin d’aide
-          </a>
-        </div>
-
-        <p class="fine">
-          Si l’affichage intégré ne fonctionne pas (certains navigateurs ou réglages de sécurité peuvent le bloquer),
-          utilisez le bouton <strong>« Ouvrir dans un nouvel onglet »</strong>.
-        </p>
-      </div>
-
-      <!-- Boutons bas de page -->
-      <details class="bottom-drop" aria-label="Navigation bas de page">
-        <summary>Navigation</summary>
-        <div class="bottom-panel">
-          <a href="contact.html">Contact</a>
-          <a href="index.html">← Retour à l’accueil</a>
-        </div>
-      </details>
-
-      <!-- Footer -->
-      <div class="footer">
-        © OSD9TDJ Association Loi 1901, Tous droits réservés
-        <span class="sep">·</span>
-        <a href="cookies.html">cookies</a>
-        <span class="sep">·</span>
-        <a href="mentions.html">mentions légales</a>
-      </div>
-
+    <div class="footer">
+      © OSD9TDJ Association Loi 1901 ·
+      <a href="cookies.html">cookies</a> ·
+      <a href="mentions.html">mentions légales</a>
     </div>
   </div>
+</div>
 
-  <!-- ---------- MODAL / FENÊTRE INTÉGRÉE ---------- -->
-  <div class="modal-backdrop" id="payModal" role="dialog" aria-modal="true" aria-label="Paiement sécurisé">
-    <div class="modal" role="document">
-      <div class="modal-header">
-        <div class="modal-title">
-          Paiement sécurisé – partenaire bancaire
-        </div>
-
-        <div class="modal-actions" aria-label="Actions">
-          <a class="btn btn-ghost" id="modalOpenNewTab"
-             href="https://www.payasso.fr/ordre-sacre-templiers-jerusalem/paiement"
-             target="_blank" rel="noopener noreferrer">
-            Nouvel onglet
-          </a>
-          <button class="btn" id="modalBackSite" type="button">Retour au site</button>
-          <button class="btn btn-primary" id="modalClose" type="button">Fermer</button>
-        </div>
-      </div>
-
-      <div class="modal-body">
-        <!-- Écran de pré-redirection (choix + spinner + compteur) -->
-        <div class="handoff" id="handoffScreen">
-          <h2>Vous allez être dirigé vers la page sécurisée</h2>
-          <p>
-            Pour protéger vos informations, le paiement est opéré sur la plateforme sécurisée de notre partenaire bancaire.
-            Vous pouvez continuer vers l’affichage intégré, ou choisir l’ouverture dans un nouvel onglet.
-          </p>
-
-          <div class="spinner" aria-hidden="true"></div>
-          <div class="countdown" id="countdownText" aria-live="polite">
-            Chargement… (5)
-          </div>
-
-          <div class="handoff-actions" role="group" aria-label="Choix de redirection">
-            <button class="btn btn-primary" id="btnContinue" type="button">Continuer</button>
-            <button class="btn" id="btnCancel" type="button">Annuler</button>
-            <a class="btn" href="https://www.payasso.fr/ordre-sacre-templiers-jerusalem/paiement" target="_blank" rel="noopener noreferrer">
-              Ouvrir en nouvel onglet
-            </a>
-          </div>
-
-          <div class="fine">
-            Si l’affichage intégré est bloqué, nous vous proposerons automatiquement une alternative.
-          </div>
-        </div>
-
-        <!-- Iframe (sera activée après consentement / compte à rebours) -->
-        <iframe
-          id="bankIframe"
-          class="bank-frame"
-          title="Paiement sécurisé partenaire bancaire"
-          loading="eager"
-          referrerpolicy="no-referrer"
-          sandbox="allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation">
-        </iframe>
-
-        <!-- Fallback si l’iframe est bloquée -->
-        <div class="fallback" id="fallbackBox" role="alert" aria-live="polite">
-          <div>
-            <strong>Affichage intégré indisponible.</strong><br>
-            Il est possible que la plateforme bancaire empêche l’intégration dans une page (sécurité).
-            Vous pouvez ouvrir la page de paiement dans un nouvel onglet, puis revenir ensuite sur notre site.
-          </div>
-          <div class="row">
-            <a class="btn btn-primary"
-               href="https://www.payasso.fr/ordre-sacre-templiers-jerusalem/paiement"
-               target="_blank" rel="noopener noreferrer">
-              Ouvrir le paiement (nouvel onglet)
-            </a>
-            <button class="btn" id="fallbackClose" type="button">Fermer</button>
-            <button class="btn btn-ghost" id="fallbackBack" type="button">Retour au site</button>
-          </div>
-        </div>
-
+<!-- MODALE -->
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <img src="banque.jpg">
+      <div>
+        <a href="https://www.payasso.fr/ordre-sacre-templiers-jerusalem/paiement" target="_blank">
+          Ouvrir la banque
+        </a>
+        <button onclick="closeModal()">Retour au site</button>
       </div>
     </div>
+    <iframe id="bankFrame"></iframe>
   </div>
+</div>
 
-  <script>
-    (function(){
-      const PAY_URL = "https://www.payasso.fr/ordre-sacre-templiers-jerusalem/paiement";
+<script>
+const BANK_URL="https://www.payasso.fr/ordre-sacre-templiers-jerusalem/paiement";
+let s=5;
+const cd=document.getElementById("countdown");
+const modal=document.getElementById("modal");
+const frame=document.getElementById("bankFrame");
 
-      const btnOpenIntegrated = document.getElementById("btnOpenIntegrated");
-      const payModal = document.getElementById("payModal");
-      const modalClose = document.getElementById("modalClose");
-      const modalBackSite = document.getElementById("modalBackSite");
+const t=setInterval(()=>{
+  s--;
+  cd.textContent="Ouverture sécurisée… "+s;
+  if(s<=0){
+    clearInterval(t);
+    modal.style.display="flex";
+    frame.src=BANK_URL;
+  }
+},1000);
 
-      const handoffScreen = document.getElementById("handoffScreen");
-      const countdownText = document.getElementById("countdownText");
-      const btnContinue = document.getElementById("btnContinue");
-      const btnCancel = document.getElementById("btnCancel");
-
-      const bankIframe = document.getElementById("bankIframe");
-      const fallbackBox = document.getElementById("fallbackBox");
-      const fallbackClose = document.getElementById("fallbackClose");
-      const fallbackBack = document.getElementById("fallbackBack");
-
-      let countdownTimer = null;
-      let seconds = 5;
-      let loadingStarted = false;
-
-      function openModal(){
-        payModal.style.display = "flex";
-        document.body.style.overflow = "hidden";
-
-        // Reset UI
-        seconds = 5;
-        loadingStarted = false;
-        fallbackBox.style.display = "none";
-        handoffScreen.style.display = "flex";
-        countdownText.textContent = "Chargement… (" + seconds + ")";
-        bankIframe.removeAttribute("src");
-
-        startCountdown();
-        // Accessibilité : focus sur bouton principal
-        setTimeout(() => btnContinue.focus(), 60);
-      }
-
-      function closeModal(){
-        stopCountdown();
-        payModal.style.display = "none";
-        document.body.style.overflow = "hidden"; // on garde le scroll interne du site
-        bankIframe.removeAttribute("src");
-        fallbackBox.style.display = "none";
-        handoffScreen.style.display = "flex";
-      }
-
-      function backToSite(){
-        closeModal();
-        // Remonte en haut du scroll interne (optionnel, propre)
-        const scroller = document.querySelector(".viewport-scroll");
-        if(scroller) scroller.scrollTo({ top: 0, behavior: "smooth" });
-      }
-
-      function stopCountdown(){
-        if(countdownTimer){
-          clearInterval(countdownTimer);
-          countdownTimer = null;
-        }
-      }
-
-      function startCountdown(){
-        stopCountdown();
-        countdownTimer = setInterval(() => {
-          seconds -= 1;
-          countdownText.textContent = "Chargement… (" + Math.max(seconds,0) + ")";
-          if(seconds <= 0){
-            stopCountdown();
-            // Auto-continue après 5s, mais l’utilisateur peut aussi cliquer avant
-            beginLoadIframe();
-          }
-        }, 1000);
-      }
-
-      function beginLoadIframe(){
-        if(loadingStarted) return;
-        loadingStarted = true;
-
-        // Lance l’iframe
-        bankIframe.src = PAY_URL;
-
-        // Cache l'écran d’attente après un court délai (effet propre)
-        setTimeout(() => {
-          handoffScreen.style.display = "none";
-        }, 350);
-
-        // Détection simple : si l’iframe ne charge pas correctement (souvent bloquée),
-        // on affiche une alternative au bout de quelques secondes.
-        // (On ne peut pas lire le contenu cross-domain, donc fallback temps + événements.)
-        let loaded = false;
-
-        const onLoad = () => { loaded = true; /* si ça charge, on laisse */ };
-        bankIframe.addEventListener("load", onLoad, { once: true });
-
-        setTimeout(() => {
-          if(!loaded){
-            // Possiblement bloqué / refus d’embed
-            fallbackBox.style.display = "block";
-          }
-        }, 4500);
-      }
-
-      // Events
-      btnOpenIntegrated.addEventListener("click", openModal);
-
-      modalClose.addEventListener("click", closeModal);
-      modalBackSite.addEventListener("click", backToSite);
-
-      btnContinue.addEventListener("click", () => {
-        stopCountdown();
-        beginLoadIframe();
-      });
-
-      btnCancel.addEventListener("click", () => {
-        // L'utilisateur ne veut pas être dirigé
-        backToSite();
-      });
-
-      fallbackClose.addEventListener("click", closeModal);
-      fallbackBack.addEventListener("click", backToSite);
-
-      // Fermer avec ESC
-      document.addEventListener("keydown", (e) => {
-        if(e.key === "Escape" && payModal.style.display === "flex"){
-          closeModal();
-        }
-      });
-
-      // Click hors de la modal -> fermer
-      payModal.addEventListener("click", (e) => {
-        if(e.target === payModal){
-          closeModal();
-        }
-      });
-    })();
-  </script>
+function closeModal(){
+  modal.style.display="none";
+  frame.src="";
+}
+</script>
 
 </body>
 </html>
