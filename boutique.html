@@ -71,7 +71,7 @@ body::after{
   flex-direction:column;
 }
 
-/* MENU 3 POINTS */
+/* MENU 3 POINTS (général) */
 .top-menu{
   position:fixed;
   top:26px;
@@ -91,6 +91,7 @@ body::after{
   font-family:'Cinzel',serif;
   color:var(--or);
   font-size:22px;
+  line-height:1;
 }
 .top-menu summary::-webkit-details-marker{display:none}
 
@@ -102,6 +103,7 @@ body::after{
   background:rgba(0,0,0,.75);
   border:1px solid var(--or-line);
   border-radius:14px;
+  overflow:hidden;
 }
 .menu-panel a{
   display:block;
@@ -183,7 +185,7 @@ body::after{
   flex-direction:column;
 }
 
-/* MODALE HEADER */
+/* MODALE HEADER : logo + bouton + ⋯ (à droite) */
 .modal-header{
   display:flex;
   align-items:center;
@@ -207,17 +209,8 @@ body::after{
   font-size:.8rem;
   cursor:pointer;
 }
-.modal-header .top-menu{
-  position:relative;
-  margin-left:auto;
-}
 
-/* PRIORITÉ CLIC MENU ⋯ DANS LA MODALE */
-.modal .top-menu{z-index:1000}
-.modal .menu-panel{z-index:1001}
-.modal-header .back-btn{z-index:10}
-
-/* MODALE INFO */
+/* INFO + LIEN */
 .modal-info{
   font-size:.78rem;
   opacity:.85;
@@ -233,6 +226,24 @@ body::after{
 iframe{
   flex:1;
   border:none;
+}
+
+/* ✅ FIX DEFINITIF: ⋯ DANS LA MODALE = PAS FIXED + DROPDOWN PRIORITAIRE */
+.modal .modal-header details.top-menu{
+  position:relative !important;
+  top:auto !important;
+  right:auto !important;
+  margin-left:auto;   /* le ⋯ reste bien à droite dans le header */
+  z-index:1000;
+}
+.modal .modal-header details.top-menu .menu-panel{
+  position:absolute;
+  right:0;
+  z-index:1001;
+}
+.modal .modal-header .back-btn{
+  position:relative;
+  z-index:10;
 }
 </style>
 </head>
@@ -260,7 +271,7 @@ iframe{
 <div class="viewport">
 
   <div class="main">
-    <img src="banque.jpg" class="bank-logo">
+    <img src="banque.jpg" class="bank-logo" alt="Partenaire bancaire">
 
     <p id="infoText">Vous allez être dirigé vers la page sécurisée de notre partenaire bancaire.</p>
     <div class="spinner" id="spinner"></div>
@@ -287,6 +298,7 @@ iframe{
       <img src="banque.jpg" alt="Banque">
       <button class="back-btn" onclick="closeModal()">Retour au site</button>
 
+      <!-- MENU ⋯ DANS LA MODALE (reste en haut à droite + prioritaire au clic) -->
       <details class="top-menu">
         <summary>⋯</summary>
         <div class="menu-panel">
