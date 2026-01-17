@@ -148,6 +148,11 @@
       --silver-bg: rgba(255,255,255,0.04);
     }
 
+    /* ✅ FIX anti-débordement mobile (padding inclus dans la largeur) */
+    *, *::before, *::after{
+      box-sizing: border-box;
+    }
+
     /* ✅ CADRE FIXE + SCROLL DEDANS */
     html, body{
       height:100%;
@@ -258,6 +263,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: 100%;
     }
 
     .sceau-box {
@@ -380,6 +386,7 @@
 
     .ip-alert {
       max-width: 950px;
+      width: 100%;
       margin: 0 auto 18px;
       padding: 14px 14px 12px;
       border-radius: 14px;
@@ -452,7 +459,7 @@
         <a href="boutique.html"> Boutique</a>
         <a href="statuts.html"> Statuts</a>
         <a href="contact.html"> Contact</a>
-        <a href="mentions.html"> Informations officielles</a
+        <a href="mentions.html"> Informations officielles</a>
       </div>
     </details>
   </div>
