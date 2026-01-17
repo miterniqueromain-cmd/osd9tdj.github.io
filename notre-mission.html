@@ -104,6 +104,22 @@
     z-index:40;
   }
 
+  /* ✅ 4 fleurs de lys aux 4 angles */
+  .lys{
+    position:absolute;
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:18px;
+    color:var(--or);
+    opacity:0.55;
+    text-shadow:0 0 12px rgba(0,0,0,0.65);
+    pointer-events:none;
+  }
+  .lys.tl{ top:10px; left:12px; }
+  .lys.tr{ top:10px; right:12px; }
+  .lys.bl{ bottom:10px; left:12px; }
+  .lys.br{ bottom:10px; right:12px; }
+
   .viewport-scroll{
     position:fixed;
     inset: calc(22px + env(safe-area-inset-top)) calc(22px + env(safe-area-inset-right)) calc(22px + env(safe-area-inset-bottom)) calc(22px + env(safe-area-inset-left));
@@ -628,7 +644,12 @@
 
 <body>
 
-<div aria-hidden="true" class="frame-fixed"></div>
+<div class="frame-fixed" aria-hidden="true">
+  <div class="lys tl">⚜️</div>
+  <div class="lys tr">⚜️</div>
+  <div class="lys bl">⚜️</div>
+  <div class="lys br">⚜️</div>
+</div>
 
 <div aria-label="Menu du site" class="top-menu">
   <details>
