@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- SEO -->
-<meta name="description" content="Paiement sécurisé officiel de l’Ordre Sacré des Neuf Templiers de Jérusalem – cotisations, dons, évènements et règlements via notre partenaire bancaire.">
+<meta name="description" content="Paiement sécurisé officiel de l’Ordre Sacré des Neuf Templiers de Jérusalem – cotisations, dons et évènements via notre partenaire bancaire.">
 <meta name="keywords" content="OSD9TDJ, Templiers, paiement sécurisé, cotisation, dons, chevalerie moderne">
 <link rel="canonical" href="https://osd9tdj.org/boutique.html">
 
@@ -67,15 +67,15 @@ body::after{
   z-index:40;
 }
 
-.viewport-scroll{
+.viewport{
   position:fixed;
   inset:22px;
-  overflow-y:auto;
-  padding:30px 15px 20px;
-  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  z-index:1;
 }
 
-/* MENU 3 POINTS – INCHANGÉ */
+/* MENU 3 POINTS */
 .top-menu{
   position:fixed;
   top:26px;
@@ -116,13 +116,13 @@ body::after{
 }
 .menu-panel a:last-child{border-bottom:none}
 
-.card{
-  max-width:900px;
-  margin:0 auto;
-  background:rgba(0,0,0,.75);
-  border:2px solid var(--or);
-  border-radius:18px;
-  padding:20px;
+/* CONTENU CENTRÉ */
+.main{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
   text-align:center;
 }
 
@@ -148,62 +148,58 @@ body::after{
   font-size:1.1rem;
 }
 
-/* MODALE BANQUE */
+/* FOOTER */
+.footer{
+  text-align:center;
+  font-size:.78rem;
+  opacity:.9;
+  border-top:1px solid rgba(255,215,0,.22);
+  padding:10px 0;
+}
+.footer a{color:var(--clair);text-decoration:none}
+
+/* MODALE */
 .modal-bg{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.88);
+  background:rgba(0,0,0,.9);
   display:none;
-  justify-content:center;
-  align-items:center;
   z-index:200;
 }
 .modal{
-  width:95%;
-  max-width:1100px;
-  height:92vh;
+  position:absolute;
+  inset:22px;
   background:#000;
-  border:2px solid var(--or);
-  border-radius:20px;
+  border-radius:18px;
   overflow:hidden;
   display:flex;
   flex-direction:column;
 }
+
+/* MODALE HEADER DISCRET */
 .modal-header{
-  background:#111;
-  padding:10px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+  padding:8px 12px;
+  background:rgba(0,0,0,.5);
 }
 .modal-header img{
   background:#fff;
-  padding:6px 10px;
+  padding:4px 8px;
   border-radius:8px;
-  height:42px;
+  height:36px;
 }
-.modal-header a,
-.modal-header button{
-  background:var(--or);
-  color:#000;
-  border:none;
-  padding:8px 12px;
-  border-radius:999px;
-  font-family:'Cinzel',serif;
-  cursor:pointer;
+.modal-header .actions a{
+  color:var(--clair);
+  font-size:.8rem;
+  margin-left:10px;
   text-decoration:none;
+  opacity:.8;
 }
-iframe{flex:1;border:none}
+.modal-header .actions a:hover{opacity:1}
 
-/* FOOTER SEUL */
-.footer{
-  margin-top:22px;
-  padding-top:14px;
-  font-size:.78rem;
-  opacity:.9;
-  border-top:1px solid rgba(255,215,0,.22);
-}
-.footer a{color:var(--clair);text-decoration:none}
+iframe{flex:1;border:none}
 </style>
 </head>
 
@@ -211,6 +207,7 @@ iframe{flex:1;border:none}
 
 <div class="frame-fixed"></div>
 
+<!-- MENU -->
 <div class="top-menu">
   <details>
     <summary>⋯</summary>
@@ -226,19 +223,21 @@ iframe{flex:1;border:none}
   </details>
 </div>
 
-<div class="viewport-scroll">
-  <div class="card">
-    <img src="banque.jpg" class="bank-logo" alt="Partenaire bancaire">
-    <p>Vous allez être dirigé vers la page sécurisée de notre partenaire bancaire.</p>
-    <div class="spinner"></div>
-    <div class="countdown" id="countdown">Ouverture sécurisée… 5</div>
+<div class="viewport">
 
-    <div class="footer">
-      © OSD9TDJ Association Loi 1901 ·
-      <a href="cookies.html">cookies</a> ·
-      <a href="mentions.html">mentions légales</a>
-    </div>
+  <div class="main" id="main">
+    <img src="banque.jpg" class="bank-logo">
+    <p id="infoText">Vous allez être dirigé vers la page sécurisée de notre partenaire bancaire.</p>
+    <div class="spinner" id="spinner"></div>
+    <div class="countdown" id="countdown">Ouverture sécurisée… 5</div>
   </div>
+
+  <div class="footer">
+    © OSD9TDJ Association Loi 1901 ·
+    <a href="cookies.html">cookies</a> ·
+    <a href="mentions.html">mentions légales</a>
+  </div>
+
 </div>
 
 <!-- MODALE -->
@@ -246,11 +245,9 @@ iframe{flex:1;border:none}
   <div class="modal">
     <div class="modal-header">
       <img src="banque.jpg">
-      <div>
-        <a href="https://www.payasso.fr/ordre-sacre-templiers-jerusalem/paiement" target="_blank">
-          Ouvrir la banque
-        </a>
-        <button onclick="closeModal()">Retour au site</button>
+      <div class="actions">
+        <a href="https://www.payasso.fr/ordre-sacre-templiers-jerusalem/paiement" target="_blank">ouvrir la banque</a>
+        <a href="#" onclick="closeModal()">retour au site</a>
       </div>
     </div>
     <iframe id="bankFrame"></iframe>
@@ -259,24 +256,36 @@ iframe{flex:1;border:none}
 
 <script>
 const BANK_URL="https://www.payasso.fr/ordre-sacre-templiers-jerusalem/paiement";
-let s=5;
+let seconds=5;
+let alreadyOpened=false;
+
 const cd=document.getElementById("countdown");
+const spinner=document.getElementById("spinner");
 const modal=document.getElementById("modal");
 const frame=document.getElementById("bankFrame");
 
-const t=setInterval(()=>{
-  s--;
-  cd.textContent="Ouverture sécurisée… "+s;
-  if(s<=0){
-    clearInterval(t);
-    modal.style.display="flex";
-    frame.src=BANK_URL;
-  }
-},1000);
+if(!alreadyOpened){
+  const timer=setInterval(()=>{
+    seconds--;
+    cd.textContent="Ouverture sécurisée… "+seconds;
+    if(seconds<=0){
+      clearInterval(timer);
+      openModal();
+    }
+  },1000);
+}
+
+function openModal(){
+  alreadyOpened=true;
+  modal.style.display="block";
+  frame.src=BANK_URL;
+}
 
 function closeModal(){
   modal.style.display="none";
   frame.src="";
+  spinner.style.display="none";
+  cd.style.display="none";
 }
 </script>
 
