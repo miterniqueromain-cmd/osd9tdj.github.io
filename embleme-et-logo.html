@@ -179,52 +179,26 @@
     }
 
     /* ✅ HERO templier en haut  (CORRECTION demandée : remplit le cadre + un peu plus petit) */
+/* ✅ HERO AFFICHE (portrait) — même système que les pages QUI MARCHENT */
 .hero{
-  position: relative;
-  margin:10px auto 22px;
-
-  aspect-ratio: 16 / 9;
-  width:100%;
-  max-width: min(1100px, 100%);
-
-  padding:10px;
-  border-radius:20px;
-  border:2px solid rgba(214,167,40,0.90);
-  box-shadow:0 0 40px rgba(0,0,0,0.92);
-
-  background: rgba(0,0,0,0.45);
+  margin-top: 6px;
+  margin-bottom: 18px;
+  border-radius: 24px;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.06), rgba(0,0,0,0.96));
+  box-shadow: 0 0 35px rgba(0,0,0,0.85);
+  border: 2px solid rgba(214,167,40,0.90);
   overflow:hidden;
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:8px;
-  border-radius:14px;
-  border:1px solid rgba(248,232,200,0.22);
-  pointer-events:none;
-  z-index:2;
+  width:100%;
+  max-width: 920px; /* ← réduis à 880px si tu veux encore plus petit */
+  box-sizing:border-box;
 }
 
 .hero img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit: cover;
-  object-position: center;
-  z-index:1;
   display:block;
+  width:100%;
+  max-width:100%;
+  height:auto;   /* ✅ AFFICHE JAMAIS COUPÉE */
 }
-    @media (max-width: 600px){
-      .hero img{ height:200px; }
-    }
-    @media (min-width: 700px) and (max-width: 899px){
-      .hero img{ height:240px; }
-    }
-    @media (min-width: 900px){
-      .hero img{ height:300px; }
-    }
 
     h1 {
       font-family: 'Cinzel', serif;
