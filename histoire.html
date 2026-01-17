@@ -183,45 +183,51 @@
       padding:26px 16px 60px;
     }
 
-    /* ✅ HERO : DOUBLE CADRE + IMAGE ENTIÈRE (CONTAIN) */
+    /* ✅ HERO : DOUBLE CADRE RECTANGULAIRE (16:9) + IMAGE ENTIÈRE */
     .hero{
       position: relative;
       margin:10px auto 22px;
-      border-radius:18px;
-      overflow:hidden;
 
-      /* cadre extérieur */
-      border:2px solid rgba(214,167,40,0.90);
-      box-shadow:0 0 40px rgba(0,0,0,0.92);
+      /* rectangle maître */
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      max-width: min(1000px, 100%);
 
-      background: rgba(0,0,0,0.35);
-      padding: 8px; /* espace entre les 2 cadres */
+      /* double cadre */
+      padding: 10px;
+      border-radius: 20px;
+      border: 2px solid rgba(214,167,40,0.90);
+      box-shadow: 0 0 40px rgba(0,0,0,0.92);
+
+      background: rgba(0,0,0,0.45);
+      overflow: hidden;
     }
     /* cadre intérieur */
     .hero::before{
       content:"";
       position:absolute;
-      inset: 6px;
+      inset: 8px;
       border-radius: 14px;
-      border:1px solid rgba(248,232,200,0.22);
+      border: 1px solid rgba(248,232,200,0.22);
       pointer-events:none;
-      z-index: 2;
+      z-index:2;
     }
-
+    /* image centrée, jamais déformée */
     .hero img{
-      display:block;
-      width:100%;
+      position:absolute;
+      inset:0;
+      margin:auto;
+
+      max-width:100%;
+      max-height:100%;
+      width:auto;
       height:auto;
 
-      /* ✅ IMPORTANT : image entière, pas coupée */
       object-fit: contain;
-
-      /* surface propre */
-      border-radius: 12px;
+      z-index:1;
+      display:block;
       background: rgba(0,0,0,0.20);
-
-      /* hauteur responsive (iPhone/iPad/PC) */
-      max-height: clamp(220px, 36vh, 460px);
+      border-radius: 12px;
     }
 
     .title{
@@ -407,7 +413,7 @@
       p{font-size:0.95rem;}
       h2{font-size:1.12rem;}
       h3{font-size:1.02rem;}
-      .tab{padding:9px 14px compiler-size:0.86rem;}
+      .tab{padding:9px 14px; font-size:0.86rem;}
       .top-menu{ top:22px; right:22px; }
       .menu-panel{ width: 240px; }
       .frame-fixed{
@@ -416,7 +422,6 @@
       .viewport-scroll{
         inset: calc(20px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left));
       }
-      .hero img{ max-height: 320px; }
     }
 
     /* ✅ BOUTON JAUNE COULISSANT (inchangé) */
@@ -505,7 +510,6 @@
       <div class="hero">
         <img src="sophia.PNG" alt="Illustration – Histoire de l’Association">
       </div>
-
       <div class="title">Histoire de l’Association</div>
       <div class="subtitle">Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</div>
       <div class="motto">« <strong>Per Crucem, Veritas</strong> »</div>
