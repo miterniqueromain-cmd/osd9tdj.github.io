@@ -56,9 +56,7 @@ body::after{
   display:flex;flex-direction:column;
 }
 
-.top-menu{
-  position:fixed;top:26px;right:26px;z-index:60;
-}
+/* MENU 3 POINTS */
 .top-menu summary{
   list-style:none;cursor:pointer;width:46px;height:34px;
   display:grid;place-items:center;border-radius:999px;
@@ -78,7 +76,7 @@ body::after{
 }
 .menu-panel a:last-child{border-bottom:none}
 
-/* PAGE */
+/* PAGE PRINCIPALE */
 .main{
   flex:1;display:flex;flex-direction:column;
   justify-content:center;align-items:center;text-align:center;
@@ -101,6 +99,13 @@ body::after{
   font-family:'Cinzel',serif;text-decoration:none;
 }
 
+/* FOOTER */
+.footer{
+  text-align:center;font-size:.78rem;opacity:.9;
+  border-top:1px solid rgba(255,215,0,.22);padding:10px 0;
+}
+.footer a{color:var(--clair);text-decoration:none}
+
 /* MODALE */
 .modal-bg{
   position:fixed;inset:0;background:rgba(0,0,0,.9);
@@ -111,9 +116,14 @@ body::after{
   border-radius:18px;overflow:hidden;
   display:flex;flex-direction:column;
 }
+
+/* MODALE HEADER */
 .modal-header{
-  display:flex;justify-content:space-between;align-items:center;
+  display:flex;align-items:center;gap:12px;
   padding:10px 14px;background:rgba(0,0,0,.6);
+}
+.modal-header img{
+  background:#fff;padding:6px 10px;border-radius:8px;height:36px;
 }
 .back-btn{
   background:rgba(255,215,0,.15);
@@ -122,7 +132,9 @@ body::after{
   border-radius:999px;font-family:'Cinzel',serif;
   font-size:.8rem;cursor:pointer;
 }
-.modal-header .top-menu{position:static}
+.modal-header .top-menu{margin-left:auto}
+
+/* MODALE INFO */
 .modal-info{
   font-size:.78rem;opacity:.85;
   padding:8px 14px;text-align:center;
@@ -130,14 +142,8 @@ body::after{
 .modal-info a{
   color:var(--or);text-decoration:underline;font-weight:600;
 }
-iframe{flex:1;border:none}
 
-/* FOOTER */
-.footer{
-  text-align:center;font-size:.78rem;opacity:.9;
-  border-top:1px solid rgba(255,215,0,.22);padding:10px 0;
-}
-.footer a{color:var(--clair);text-decoration:none}
+iframe{flex:1;border:none}
 </style>
 </head>
 
@@ -146,7 +152,7 @@ iframe{flex:1;border:none}
 <div class="frame-fixed"></div>
 
 <!-- MENU PAGE -->
-<div class="top-menu">
+<div class="top-menu" style="position:fixed;top:26px;right:26px;z-index:60">
   <details>
     <summary>⋯</summary>
     <div class="menu-panel">
@@ -188,6 +194,7 @@ iframe{flex:1;border:none}
   <div class="modal">
 
     <div class="modal-header">
+      <img src="banque.jpg" alt="Banque">
       <button class="back-btn" onclick="closeModal()">Retour au site</button>
 
       <details class="top-menu">
@@ -213,14 +220,19 @@ iframe{flex:1;border:none}
     </div>
 
     <iframe id="bankFrame"></iframe>
+
+    <div class="footer">
+      © OSD9TDJ Association Loi 1901 ·
+      <a href="cookies.html">cookies</a> ·
+      <a href="mentions.html">mentions légales</a>
+    </div>
+
   </div>
 </div>
 
 <script>
 const BANK_URL="https://www.payasso.fr/ordre-sacre-templiers-jerusalem/paiement";
-
 let seconds=5;
-let opened=false;
 
 const modal=document.getElementById("modal");
 const frame=document.getElementById("bankFrame");
@@ -239,7 +251,6 @@ const timer=setInterval(()=>{
 },1000);
 
 function openModal(){
-  opened=true;
   modal.style.display="block";
   frame.src=BANK_URL;
 }
