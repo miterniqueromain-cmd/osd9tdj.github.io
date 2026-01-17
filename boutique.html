@@ -7,7 +7,7 @@
 
 <!-- SEO -->
 <meta name="description" content="Paiement sécurisé officiel de l’Ordre Sacré des Neuf Templiers de Jérusalem.">
-<meta name="keywords" content="OSD9TDJ, Templiers, paiement sécurisé, cotisation, don">
+<meta name="keywords" content="OSD9TDJ, Templiers, paiement sécurisé">
 <link rel="canonical" href="https://osd9tdj.org/boutique.html">
 
 <!-- OpenGraph -->
@@ -19,12 +19,9 @@
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Paiement sécurisé – O.S.D.9.T.D.J.">
-<meta name="twitter:description" content="Paiement sécurisé via partenaire bancaire.">
-<meta name="twitter:image" content="https://osd9tdj.org/blason-osd9tdj.PNG">
 
 <!-- WATERMARK -->
-<meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-PAYMENT-PROTECTION">
+<meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-PAYMENT">
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Lato&display=swap" rel="stylesheet">
 
@@ -34,10 +31,12 @@
   --clair:#fdf7e5;
   --or-line:rgba(255,215,0,.55);
 }
+
 html,body{
   margin:0;height:100%;overflow:hidden;
   font-family:'Lato',Arial,sans-serif;color:#fff;
 }
+
 body::before{
   content:"";position:fixed;inset:0;
   background:url("drapeau-osd9tdj.PNG") center/cover fixed;z-index:-2;
@@ -46,13 +45,17 @@ body::after{
   content:"";position:fixed;inset:0;
   background:radial-gradient(circle at top, rgba(0,0,0,.25), rgba(0,0,0,.9));z-index:-1;
 }
+
 .frame-fixed{
   position:fixed;inset:14px;border-radius:22px;
   border:2px solid var(--or-line);pointer-events:none;z-index:40;
 }
+
 .viewport{
-  position:fixed;inset:22px;display:flex;flex-direction:column;
+  position:fixed;inset:22px;
+  display:flex;flex-direction:column;
 }
+
 .top-menu{
   position:fixed;top:26px;right:26px;z-index:60;
 }
@@ -75,6 +78,7 @@ body::after{
 }
 .menu-panel a:last-child{border-bottom:none}
 
+/* PAGE */
 .main{
   flex:1;display:flex;flex-direction:column;
   justify-content:center;align-items:center;text-align:center;
@@ -86,22 +90,16 @@ body::after{
 .spinner{
   width:46px;height:46px;border:4px solid rgba(255,215,0,.25);
   border-top-color:var(--or);border-radius:50%;
-  margin:16px auto 6px;animation:spin 1s linear infinite;
+  margin:16px auto;animation:spin 1s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
-.countdown{font-family:'Cinzel',serif;font-size:1.1rem}
-.action-btn{
-  margin-top:14px;padding:8px 16px;border-radius:999px;
-  border:1px solid var(--or-line);background:rgba(0,0,0,.6);
-  color:var(--clair);font-family:'Cinzel',serif;
-  cursor:pointer;text-decoration:none;
-}
 
-.footer{
-  text-align:center;font-size:.78rem;opacity:.9;
-  border-top:1px solid rgba(255,215,0,.22);padding:10px 0;
+.action-btn{
+  margin-top:16px;padding:8px 18px;
+  border-radius:999px;border:1px solid var(--or-line);
+  background:rgba(0,0,0,.6);color:var(--clair);
+  font-family:'Cinzel',serif;text-decoration:none;
 }
-.footer a{color:var(--clair);text-decoration:none}
 
 /* MODALE */
 .modal-bg{
@@ -115,20 +113,31 @@ body::after{
 }
 .modal-header{
   display:flex;justify-content:space-between;align-items:center;
-  padding:8px 12px;background:rgba(0,0,0,.5);
+  padding:10px 14px;background:rgba(0,0,0,.6);
 }
-.modal-header img{
-  background:#fff;padding:4px 8px;border-radius:8px;height:36px;
+.back-btn{
+  background:rgba(255,215,0,.15);
+  border:1px solid rgba(255,215,0,.5);
+  color:var(--clair);padding:6px 14px;
+  border-radius:999px;font-family:'Cinzel',serif;
+  font-size:.8rem;cursor:pointer;
 }
-.modal-header .actions a{
-  color:var(--clair);font-size:.8rem;margin-left:12px;
-  text-decoration:none;opacity:.8;
-}
-.modal-header .actions a:hover{opacity:1}
-iframe{flex:1;border:none}
+.modal-header .top-menu{position:static}
 .modal-info{
-  font-size:.75rem;opacity:.75;padding:6px 12px;
+  font-size:.78rem;opacity:.85;
+  padding:8px 14px;text-align:center;
 }
+.modal-info a{
+  color:var(--or);text-decoration:underline;font-weight:600;
+}
+iframe{flex:1;border:none}
+
+/* FOOTER */
+.footer{
+  text-align:center;font-size:.78rem;opacity:.9;
+  border-top:1px solid rgba(255,215,0,.22);padding:10px 0;
+}
+.footer a{color:var(--clair);text-decoration:none}
 </style>
 </head>
 
@@ -136,7 +145,7 @@ iframe{flex:1;border:none}
 
 <div class="frame-fixed"></div>
 
-<!-- MENU PRINCIPAL -->
+<!-- MENU PAGE -->
 <div class="top-menu">
   <details>
     <summary>⋯</summary>
@@ -154,11 +163,12 @@ iframe{flex:1;border:none}
 
 <div class="viewport">
 
-  <div class="main" id="main">
+  <div class="main">
     <img src="banque.jpg" class="bank-logo">
+
     <p id="infoText">Vous allez être dirigé vers la page sécurisée de notre partenaire bancaire.</p>
     <div class="spinner" id="spinner"></div>
-    <div class="countdown" id="countdown">Ouverture sécurisée… 5</div>
+    <div id="countdown">Ouverture sécurisée… 5</div>
 
     <a href="#" id="returnBtn" class="action-btn" style="display:none">
       Retourner à la page sécurisée
@@ -173,13 +183,14 @@ iframe{flex:1;border:none}
 
 </div>
 
-<!-- MODALE BANQUE -->
+<!-- MODALE -->
 <div class="modal-bg" id="modal">
   <div class="modal">
 
-    <!-- MENU 3 POINTS DANS LA MODALE -->
-    <div class="top-menu">
-      <details>
+    <div class="modal-header">
+      <button class="back-btn" onclick="closeModal()">Retour au site</button>
+
+      <details class="top-menu">
         <summary>⋯</summary>
         <div class="menu-panel">
           <a href="index.html">Accueil</a>
@@ -193,18 +204,12 @@ iframe{flex:1;border:none}
       </details>
     </div>
 
-    <div class="modal-header">
-      <img src="banque.jpg">
-      <div class="actions">
-        <a href="https://www.payasso.fr/ordre-sacre-templiers-jerusalem/paiement" target="_blank">
-          Aller sur le site de la banque
-        </a>
-        <a href="#" onclick="closeModal()">Retour au site</a>
-      </div>
-    </div>
-
     <div class="modal-info">
-      Si l’affichage sécurisé ne fonctionne pas correctement, utilisez le lien ci-dessus.
+      Si l’affichage sécurisé ne fonctionne pas correctement,
+      <a href="https://www.payasso.fr/ordre-sacre-templiers-jerusalem/paiement"
+         target="_blank" rel="noopener">
+        utilisez le lien ci-dessous
+      </a>.
     </div>
 
     <iframe id="bankFrame"></iframe>
@@ -213,18 +218,20 @@ iframe{flex:1;border:none}
 
 <script>
 const BANK_URL="https://www.payasso.fr/ordre-sacre-templiers-jerusalem/paiement";
+
 let seconds=5;
 let opened=false;
 
-const cd=document.getElementById("countdown");
-const spinner=document.getElementById("spinner");
 const modal=document.getElementById("modal");
 const frame=document.getElementById("bankFrame");
+const spinner=document.getElementById("spinner");
+const countdown=document.getElementById("countdown");
+const infoText=document.getElementById("infoText");
 const returnBtn=document.getElementById("returnBtn");
 
 const timer=setInterval(()=>{
   seconds--;
-  cd.textContent="Ouverture sécurisée… "+seconds;
+  countdown.textContent="Ouverture sécurisée… "+seconds;
   if(seconds<=0){
     clearInterval(timer);
     openModal();
@@ -241,11 +248,12 @@ function closeModal(){
   modal.style.display="none";
   frame.src="";
   spinner.style.display="none";
-  cd.style.display="none";
+  countdown.style.display="none";
+  infoText.style.display="none";
   returnBtn.style.display="inline-block";
 }
 
-returnBtn.addEventListener("click", e=>{
+returnBtn.addEventListener("click",e=>{
   e.preventDefault();
   openModal();
 });
