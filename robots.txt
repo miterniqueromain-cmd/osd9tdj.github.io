@@ -21,7 +21,6 @@ Allow: /
 
 # =====================================================================
 # MOTEURS DE RECHERCHE — AUTORISÉS
-# (Google regroupe plusieurs produits derrière Googlebot)  [oai_citation:1‡Google for Developers](https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers?utm_source=chatgpt.com)
 # =====================================================================
 
 # Google
@@ -74,7 +73,7 @@ Allow: /
 # IA / AGENTS — AUTORISÉS (maximum de compat)
 # =====================================================================
 
-# OpenAI (bots officiels : GPTBot + OAI-SearchBot + ChatGPT-User)  [oai_citation:2‡OpenAI](https://platform.openai.com/docs/bots?utm_source=chatgpt.com)
+# OpenAI bots : GPTBot + OAI-SearchBot + ChatGPT-User
 User-agent: GPTBot
 Allow: /
 
@@ -84,7 +83,7 @@ Allow: /
 User-agent: ChatGPT-User
 Allow: /
 
-# Anthropic (noms rencontrés)  [oai_citation:3‡Webmasters Stack Exchange](https://webmasters.stackexchange.com/questions/148260/blocking-claude-searchbot-with-robots-txt?utm_source=chatgpt.com)
+# Anthropic bots
 User-agent: anthropic-ai
 Allow: /
 
@@ -105,29 +104,29 @@ Allow: /
 User-agent: Amazonbot
 Allow: /
 
-# Common Crawl (utilisé par de nombreuses IA)  [oai_citation:4‡commoncrawl.org](https://commoncrawl.org/faq?utm_source=chatgpt.com)
+# Common Crawl (utilisé par de nombreuses IA)
 User-agent: CCBot
 Allow: /
 
-# Perplexity (souvent vu)
+# Perplexity
 User-agent: PerplexityBot
 Allow: /
 
 User-agent: Perplexity-User
 Allow: /
 
-# You.com (souvent vu)
+# You.com
 User-agent: YouBot
 Allow: /
 
-# Divers “AI / RAG / agents” vus dans les listes publiques (tolérance max)  [oai_citation:5‡GitHub](https://github.com/ai-robots-txt/ai.robots.txt/blob/main/robots.txt?utm_source=chatgpt.com)
+# Divers bots IA / agents (tolérance max)
 User-agent: Bytespider
 Allow: /
 
 
 # =====================================================================
 # CRAWL-DELAY (BONUS)
-# ⚠️ Google/Bing ignorent Crawl-delay ; Common Crawl le respecte.  [oai_citation:6‡commoncrawl.org](https://commoncrawl.org/faq?utm_source=chatgpt.com)
+# NOTE : Google/Bing ignorent Crawl-delay ; Common Crawl le respecte.
 # =====================================================================
 User-agent: CCBot
 Crawl-delay: 2
@@ -145,7 +144,6 @@ Crawl-delay: 2
 # =====================================================================
 # CRAWLERS SEO COMMERCIAUX / AGRESSIFS — BLOQUÉS
 # (évite le scraping, l’audit concurrentiel, la consommation de crawl)
-# Liste étendue inspirée de listes publiques de bots connus.  [oai_citation:7‡HUMAN Security](https://www.humansecurity.com/learn/blog/crawlers-list-known-bots-guide/?utm_source=chatgpt.com)
 # =====================================================================
 
 # Ahrefs
