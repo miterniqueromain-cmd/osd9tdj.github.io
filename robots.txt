@@ -1,60 +1,228 @@
-# =========================================================
-# robots.txt — O.S.D.9.T.D.J.
-# Site officiel — Association Loi 1901
-# =========================================================
+# =====================================================================
+# robots.txt — osd9tdj.org
+# O.S.D.9.T.D.J. — Site public (indexation + IA autorisées)
+# Objectif : visibilité maximale (Search + IA) + blocage crawlers SEO commerciaux
+# Date : 2026-01-25
+# =====================================================================
 
-# Règle générale (site public)
-User-agent: *
-Allow: /
-
-# Sitemap officiel
+# -------------------------
+# SITEMAPS (découverte)
+# -------------------------
+Sitemap: https://osd9tdj.org/sitemap-pages.xml
 Sitemap: https://osd9tdj.org/sitemap.xml
 
 
-# =========================================================
-# Moteurs de recherche majeurs
-# =========================================================
+# =====================================================================
+# RÈGLE GÉNÉRALE (SITE PUBLIC)
+# =====================================================================
+User-agent: *
+Allow: /
 
+
+# =====================================================================
+# MOTEURS DE RECHERCHE — AUTORISÉS
+# (Google regroupe plusieurs produits derrière Googlebot)  [oai_citation:1‡Google for Developers](https://developers.google.com/crawling/docs/crawlers-fetchers/google-common-crawlers?utm_source=chatgpt.com)
+# =====================================================================
+
+# Google
 User-agent: Googlebot
 Allow: /
 
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+# Microsoft / Bing
 User-agent: Bingbot
 Allow: /
 
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
 
-# =========================================================
-# IA & agents d'analyse autorisés
-# =========================================================
+# Apple
+User-agent: Applebot
+Allow: /
 
+# Qwant/Exalead (selon infra)
+User-agent: Exabot
+Allow: /
+
+# Yandex
+User-agent: YandexBot
+Allow: /
+
+# Baidu
+User-agent: Baiduspider
+Allow: /
+
+# Naver
+User-agent: Yeti
+Allow: /
+
+# Seznam (CZ)
+User-agent: SeznamBot
+Allow: /
+
+
+# =====================================================================
+# IA / AGENTS — AUTORISÉS (maximum de compat)
+# =====================================================================
+
+# OpenAI (bots officiels : GPTBot + OAI-SearchBot + ChatGPT-User)  [oai_citation:2‡OpenAI](https://platform.openai.com/docs/bots?utm_source=chatgpt.com)
 User-agent: GPTBot
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (noms rencontrés)  [oai_citation:3‡Webmasters Stack Exchange](https://webmasters.stackexchange.com/questions/148260/blocking-claude-searchbot-with-robots-txt?utm_source=chatgpt.com)
 User-agent: anthropic-ai
 Allow: /
 
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Meta
 User-agent: Meta-ExternalAgent
 Allow: /
 
+# Amazon
 User-agent: Amazonbot
 Allow: /
 
-# Common Crawl (utilisé par de nombreuses IA)
+# Common Crawl (utilisé par de nombreuses IA)  [oai_citation:4‡commoncrawl.org](https://commoncrawl.org/faq?utm_source=chatgpt.com)
 User-agent: CCBot
 Allow: /
 
+# Perplexity (souvent vu)
+User-agent: PerplexityBot
+Allow: /
 
-# =========================================================
-# Crawlers SEO agressifs / commerciaux (bloqués)
-# =========================================================
+User-agent: Perplexity-User
+Allow: /
 
+# You.com (souvent vu)
+User-agent: YouBot
+Allow: /
+
+# Divers “AI / RAG / agents” vus dans les listes publiques (tolérance max)  [oai_citation:5‡GitHub](https://github.com/ai-robots-txt/ai.robots.txt/blob/main/robots.txt?utm_source=chatgpt.com)
+User-agent: Bytespider
+Allow: /
+
+
+# =====================================================================
+# CRAWL-DELAY (BONUS)
+# ⚠️ Google/Bing ignorent Crawl-delay ; Common Crawl le respecte.  [oai_citation:6‡commoncrawl.org](https://commoncrawl.org/faq?utm_source=chatgpt.com)
+# =====================================================================
+User-agent: CCBot
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Crawl-delay: 2
+
+User-agent: YandexBot
+Crawl-delay: 2
+
+User-agent: SeznamBot
+Crawl-delay: 2
+
+
+# =====================================================================
+# CRAWLERS SEO COMMERCIAUX / AGRESSIFS — BLOQUÉS
+# (évite le scraping, l’audit concurrentiel, la consommation de crawl)
+# Liste étendue inspirée de listes publiques de bots connus.  [oai_citation:7‡HUMAN Security](https://www.humansecurity.com/learn/blog/crawlers-list-known-bots-guide/?utm_source=chatgpt.com)
+# =====================================================================
+
+# Ahrefs
+User-agent: AhrefsBot
+Disallow: /
+User-agent: AhrefsSiteAudit
+Disallow: /
+
+# Semrush
+User-agent: SemrushBot
+Disallow: /
+User-agent: SemrushBot-SA
+Disallow: /
+
+# Majestic
 User-agent: MJ12bot
 Disallow: /
 
-User-agent: AhrefsBot
-Disallow: /
-
+# Moz / Dotbot / Roger
 User-agent: DotBot
 Disallow: /
-
-User-agent: SemrushBot
+User-agent: rogerbot
 Disallow: /
+
+# SISTRIX
+User-agent: SISTRIX
+Disallow: /
+
+# DataForSEO
+User-agent: DataForSeoBot
+Disallow: /
+
+# BLEX (scraper)
+User-agent: BLEXBot
+Disallow: /
+
+# Serpstat / SE Ranking / Ubersuggest
+User-agent: SerpstatBot
+Disallow: /
+User-agent: SeRankBot
+Disallow: /
+User-agent: Ubersuggest
+Disallow: /
+
+# Site audit tools
+User-agent: Screaming Frog SEO Spider
+Disallow: /
+User-agent: Sitebulb
+Disallow: /
+
+# Autres bots SEO / “analyse”
+User-agent: AspiegelBot
+Disallow: /
+User-agent: MojeekBot
+Disallow: /
+User-agent: NetcraftSurveyAgent
+Disallow: /
+User-agent: LinkdexBot
+Disallow: /
+User-agent: MegaIndex.ru
+Disallow: /
+User-agent: XoviBot
+Disallow: /
+User-agent: SEOdiver
+Disallow: /
+User-agent: SEOkicks
+Disallow: /
+User-agent: zoominfo
+Disallow: /
+User-agent: TurnitinBot
+Disallow: /
+
+# Petal (souvent très crawler)
+User-agent: PetalBot
+Disallow: /
+
+
+# =====================================================================
+# FIN
+# =====================================================================
