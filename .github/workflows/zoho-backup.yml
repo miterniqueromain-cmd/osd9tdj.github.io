@@ -1,13 +1,24 @@
-name: Zoho - Refresh Access Token (every 45 min)
+name: Zoho - Refresh Access Token (2 tries before 02:00 UTC)
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/45 * * * *"
+    # 2 tentatives avant le backup (qui est à 02:00 UTC)
+    - cron: "45 0 * * *"   # 00:45 UTC
+    - cron: "45 1 * * *"   # 01:45 UTC
 
 jobs:
   token:
     runs-on: ubuntu-latest
+
+    # Empêche les runs de s'empiler / se chevaucher
+    concurrency:
+      group: zoho-refresh-token
+      cancel-in-progress: true
+
+    # Évite qu'un run reste bloqué (et limite les effets de panne)
+    timeout-minutes: 5
+
     steps:
       - name: Get access token via refresh_token
         env:
