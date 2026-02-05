@@ -9,7 +9,6 @@ jobs:
   backup:
     runs-on: ubuntu-latest
 
-    # Évite qu'un run se superpose avec un autre (rare mais utile)
     concurrency:
       group: site-backup
       cancel-in-progress: true
@@ -102,7 +101,7 @@ jobs:
           echo "$UPLOAD_RESPONSE"
           echo "===== END RESPONSE ====="
 
-      # 4) Nettoyage WorkDrive: garder seulement les 20 derniers ZIP
+      # 4) Nettoyage WorkDrive: garder seulement les 20 derniers ZIP (FIX ICI)
       - name: Cleanup WorkDrive (keep last 20)
         shell: bash
         env:
@@ -114,11 +113,16 @@ jobs:
 
           echo "Listing files in folder_id=$FOLDER_ID (keeping last $KEEP)…"
 
-          LIST_RESPONSE="$(curl -sS --fail-with-body -X GET \
-            "https://www.zohoapis.eu/workdrive/api/v1/files?parent_id=$FOLDER_ID" \
+          LIST_URL="https://www.zohoapis.eu/workdrive/api/v1/files/$FOLDER_ID/files?filter[type]=all&page[limit]=200"
+
+          # On n'utilise PAS --fail-with-body ici pour afficher le JSON d'erreur Zoho si ça rate
+          LIST_RESPONSE="$(curl -sS -X GET "$LIST_URL" \
             -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN")"
 
-          # Cible uniquement tes backups ZIP: backup_site_YYYY-MM-DD_HH-MM.zip
+          echo "===== WORKDRIVE LIST RESPONSE (debug) ====="
+          echo "$LIST_RESPONSE"
+          echo "===== END RESPONSE ====="
+
           TO_DELETE_IDS="$(
             echo "$LIST_RESPONSE" | jq -r '
               .data[]
@@ -138,7 +142,7 @@ jobs:
           while read -r FILE_ID; do
             [ -z "$FILE_ID" ] && continue
             echo "Deleting $FILE_ID …"
-            curl -sS --fail-with-body -X DELETE \
+            curl -sS -X DELETE \
               "https://www.zohoapis.eu/workdrive/api/v1/files/$FILE_ID" \
               -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
               >/dev/null
