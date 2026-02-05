@@ -113,15 +113,21 @@ jobs:
 
           echo "Listing files in folder_id=$FOLDER_ID (keeping last $KEEP)…"
 
-          LIST_URL="https://www.zohoapis.eu/workdrive/api/v1/files/$FOLDER_ID/files?filter[type]=all&page[limit]=200"
+          LIST_URL="https://www.zohoapis.eu/workdrive/api/v1/files/$FOLDER_ID"
 
-          # -g = désactive l'interprétation des crochets [] par curl
-          LIST_RESPONSE="$(curl -g -sS -X GET "$LIST_URL" \
-            -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN")"
+          LIST_RESPONSE="$(curl -sS -X GET "$LIST_URL" \
+            -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
+            -H "Accept: application/json")"
 
           echo "===== WORKDRIVE LIST RESPONSE (debug) ====="
           echo "$LIST_RESPONSE"
           echo "===== END RESPONSE ====="
+
+          # Si Zoho ne renvoie pas du JSON → stop propre
+          if ! echo "$LIST_RESPONSE" | jq . >/dev/null 2>&1; then
+            echo "ERROR: Zoho did not return JSON (bad folder id / scope / region)"
+            exit 1
+          fi
 
           TO_DELETE_IDS="$(
             echo "$LIST_RESPONSE" | jq -r '
