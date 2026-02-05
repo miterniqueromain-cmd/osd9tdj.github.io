@@ -115,8 +115,8 @@ jobs:
 
           LIST_URL="https://www.zohoapis.eu/workdrive/api/v1/files/$FOLDER_ID/files?filter[type]=all&page[limit]=200"
 
-          # On n'utilise PAS --fail-with-body ici pour afficher le JSON d'erreur Zoho si ça rate
-          LIST_RESPONSE="$(curl -sS -X GET "$LIST_URL" \
+          # -g = désactive l'interprétation des crochets [] par curl
+          LIST_RESPONSE="$(curl -g -sS -X GET "$LIST_URL" \
             -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN")"
 
           echo "===== WORKDRIVE LIST RESPONSE (debug) ====="
@@ -149,7 +149,6 @@ jobs:
           done <<< "$TO_DELETE_IDS"
 
           echo "Cleanup done."
-
       # 5) (Optionnel) Artifact GitHub en secours
       - name: Upload backup artifact (GitHub)
         uses: actions/upload-artifact@v4
