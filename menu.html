@@ -314,7 +314,24 @@
   .seal.show{
     opacity:1;
   }
+.seal::before{
+  content:"";
+  position:absolute;
+  inset: -28px;
+  border-radius: 999px;
+  pointer-events:none;
+  z-index: -1;
 
+  background: radial-gradient(
+    circle at 50% 55%,
+    rgba(238,230,214,.95) 0%,
+    rgba(238,230,214,.70) 38%,
+    rgba(238,230,214,.25) 62%,
+    rgba(238,230,214,0) 78%
+  );
+
+  filter: blur(6px);
+}
   .wm{
     position:absolute;
     left:-9999px;
