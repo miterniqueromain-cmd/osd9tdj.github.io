@@ -28,6 +28,11 @@
   <meta name="application-name" content="OSD9TDJ" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
+  <!-- ✅ Police médiévale (même couleur, style plus médiéval) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
+
   <!-- ✅ JSON-LD (jslon) : WebSite + Organization + WebPage -->
   <script type="application/ld+json">
   {
@@ -83,7 +88,7 @@
 
     html,body{height:100%; margin:0;}
     body{
-      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif; /* 👈 plus médiéval */
       color: var(--ink);
       background: url("parchemin.jpg") center/cover no-repeat fixed;
       overflow:hidden;
@@ -97,7 +102,7 @@
       z-index:10;
     }
 
-    /* ✅ MODIF 1 : glissement plus doux (durée + easing plus "smooth") */
+    /* ✅ MODIF 1 : glissement plus lent */
     .panel{
       position:fixed;
       top: 50%;
@@ -115,7 +120,7 @@
       outline: 1px solid rgba(0,0,0,.12);
     }
     .panel.open{
-      animation: slideIn 1.25s cubic-bezier(.18,.92,.18,1) forwards; /* 👈 plus lent */
+      animation: slideIn 2.2s cubic-bezier(.18,.92,.18,1) forwards; /* 👈 encore plus lent */
     }
     @keyframes slideIn{
       to{ transform: translate(0, -50%); }
@@ -156,6 +161,7 @@
       font-weight: 700;
       cursor:pointer;
       user-select:none;
+      font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif; /* 👈 cohérent */
     }
     .btn.close{
       width: 42px; height: 42px;
@@ -168,7 +174,7 @@
     .scroll{
       height: calc(var(--panelH) - 84px);
       overflow:auto;
-      padding: 14px 16px calc(190px + env(safe-area-inset-bottom)) 16px; /* 👈 plus de marge bas */
+      padding: 14px 16px calc(210px + env(safe-area-inset-bottom)) 16px; /* 👈 plus de marge bas */
       scrollbar-width: thin;
       scrollbar-color: rgba(60,45,35,.45) transparent;
     }
@@ -252,20 +258,20 @@
       clip-path: inset(0 100% 0 0);
     }
 
-    /* ✅ MODIF 1 bis : écriture plus douce aussi */
+    /* ✅ MODIF 1 bis : écriture encore plus lente */
     .write.reveal{
-      animation: inkReveal var(--dur, 1400ms) linear forwards; /* 👈 plus lent + fluide */
+      animation: inkReveal var(--dur, 2200ms) linear forwards; /* 👈 encore plus lent */
     }
     @keyframes inkReveal{
       to{ clip-path: inset(0 0 0 0); }
     }
 
-    /* ✅ MODIF 3 : sceau fixé en bas (en bas à droite), plus gros, ne bouge pas au scroll */
+    /* ✅ MODIF 3 : sceau FIXE en bas à droite, plus gros, et SANS coulissement */
     .sealDock{
       position:absolute;
       left:0; right:0;
       bottom: calc(10px + env(safe-area-inset-bottom));
-      height: 170px;                 /* zone réservée */
+      height: 190px;                 /* zone réservée */
       pointer-events:none;
       z-index: 50;
       display:block;
@@ -274,16 +280,14 @@
       position:absolute;
       right: 18px;                   /* 👈 bas à droite */
       bottom: 0;
-      width: clamp(110px, 16vw, 170px); /* 👈 plus gros */
+      width: clamp(150px, 20vw, 220px); /* 👈 plus gros */
       height:auto;
-      opacity:0;
-      transform: translateY(14px) scale(.98);
-      transition: opacity .45s ease, transform .65s cubic-bezier(.2,.9,.2,1);
+      opacity:0;                     /* 👈 uniquement fondu */
+      transition: opacity .9s ease;  /* 👈 plus lent, sans glisser */
       filter: drop-shadow(0 14px 26px rgba(0,0,0,.40));
     }
     .seal.show{
       opacity:1;
-      transform: translateY(0) scale(1);
     }
 
     .wm{
@@ -543,14 +547,14 @@
         el.appendChild(wrap);
 
         const text = wrap.textContent.trim();
-        const dur = Math.max(1200, Math.min(2400, text.length * 55)); // 👈 plus doux
+        const dur = Math.max(2200, Math.min(5200, text.length * 95)); // 👈 encore plus lent
         wrap.style.setProperty("--dur", dur + "ms");
       });
 
       setTimeout(() => {
         document.querySelectorAll(".write").forEach(w => w.classList.add("reveal"));
         playSafe(aPlume);
-      }, 700); // 👈 démarre un peu plus tard (plus doux)
+      }, 1100); // 👈 démarre plus tard (plus lent)
     }
 
     const panel = document.getElementById("panel");
@@ -568,7 +572,7 @@
       setTimeout(() => {
         seal.classList.add("show");
         playSafe(aTampon);
-      }, 1700); // 👈 un peu plus tard (plus doux)
+      }, 2300); // 👈 plus tard (plus lent)
     }
 
     document.getElementById("btnBack").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
