@@ -281,23 +281,22 @@
       pointer-events:none;
     }
 
+ 
     .sealDock::before{
-      content:"";
-      position:absolute;
-      left: 0; right: 0;
-
-      top: 6px;           /* ✅ bandeau plus bas (pas sous le bouton) */
-      height: 150px;      /* ✅ couvre bien la zone “peinte” */
-
-      border-radius: 18px;
-      background: linear-gradient(
-        to bottom,
-        rgba(255,255,255,.82),  /* ✅ BEAUCOUP plus clair */
-        rgba(255,255,255,.62) 55%,
-        rgba(255,255,255,0)    /* fondu propre */
-      );
-      pointer-events:none;
-    }
+  content:"";
+  position:absolute;
+  left: 0; right: 0;
+  top: 6px;
+  height: 150px;
+  border-radius: 18px;
+  background: linear-gradient(
+    to top,
+    rgba(255,255,255,.90),
+    rgba(255,255,255,.65) 55%,
+    rgba(255,255,255,0)
+  );
+  pointer-events:none;
+}
 
     .seal{
       position: relative;
