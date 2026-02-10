@@ -106,7 +106,6 @@
       z-index:10;
     }
 
-    /* ✅ glissement encore plus long */
     .panel{
       position:fixed;
       top: 50%;
@@ -127,7 +126,7 @@
       outline: 1px solid rgba(0,0,0,.12);
     }
     .panel.open{
-      animation: slideIn 2.6s cubic-bezier(.18,.92,.18,1) forwards; /* ✅ encore plus long */
+      animation: slideIn 2.6s cubic-bezier(.18,.92,.18,1) forwards;
     }
     @keyframes slideIn{
       to{ transform: translate(0, -50%); }
@@ -264,33 +263,39 @@
       clip-path: inset(0 100% 0 0);
     }
 
-    /* ✅ écriture encore plus longue */
     .write.reveal{
-      animation: inkReveal var(--dur, 2600ms) linear forwards; /* ✅ plus lent */
+      animation: inkReveal var(--dur, 2600ms) linear forwards;
     }
     @keyframes inkReveal{
       to{ clip-path: inset(0 0 0 0); }
     }
 
-    /* ✅ SCEAU : sous le bouton, en bas à droite */
+    /* ✅ SCEAU : descendu + bandeau beaucoup plus clair, sans chevauchement */
     .sealDock{
       position: relative;
       display:flex;
       justify-content:flex-end;
-      margin: 10px 0 0 0;
-      padding: 0 2px calc(12px + env(safe-area-inset-bottom)) 0;
+
+      margin: 34px 0 0 0; /* ✅ descend l'ensemble (évite chevauchement avec le bouton) */
+      padding: 18px 2px calc(14px + env(safe-area-inset-bottom)) 0; /* ✅ décale encore vers le bas */
       pointer-events:none;
     }
 
-    /* ✅ petit bandeau clair derrière (pour masquer la "peinte") */
     .sealDock::before{
       content:"";
       position:absolute;
       left: 0; right: 0;
-      top: -18px;
-      height: 120px;
-      border-radius: 16px;
-      background: linear-gradient(to bottom, rgba(255,255,255,.42), rgba(255,255,255,0));
+
+      top: 6px;           /* ✅ bandeau plus bas (pas sous le bouton) */
+      height: 150px;      /* ✅ couvre bien la zone “peinte” */
+
+      border-radius: 18px;
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,.82),  /* ✅ BEAUCOUP plus clair */
+        rgba(255,255,255,.62) 55%,
+        rgba(255,255,255,0)    /* fondu propre */
+      );
       pointer-events:none;
     }
 
@@ -562,14 +567,14 @@
         el.appendChild(wrap);
 
         const text = wrap.textContent.trim();
-        const dur = Math.max(2400, Math.min(7200, text.length * 140)); /* ✅ encore plus long */
+        const dur = Math.max(2400, Math.min(7200, text.length * 140));
         wrap.style.setProperty("--dur", dur + "ms");
       });
 
       setTimeout(() => {
         document.querySelectorAll(".write").forEach(w => w.classList.add("reveal"));
         playSafe(aPlume);
-      }, 1400); /* ✅ démarre plus tard */
+      }, 1400);
     }
 
     const panel = document.getElementById("panel");
@@ -587,7 +592,7 @@
       setTimeout(() => {
         seal.classList.add("show");
         playSafe(aTampon);
-      }, 2600); /* ✅ plus tard (accord avec slide + écriture) */
+      }, 2600);
     }
 
     document.getElementById("btnBack").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
