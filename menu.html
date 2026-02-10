@@ -26,17 +26,12 @@
   <meta name="twitter:description" content="Navigation par rubriques – présentation parchemin." />
 
   <!-- Watermark invisible -->
-  <meta name="generator" content="OSD9TDJ-MenuParchemin-vFinal" />
+  <meta name="generator" content="OSD9TDJ-MenuParchemin-vUltimate" />
   <meta name="author" content="OSD9TDJ" />
-  <meta name="x-watermark" content="OSD9TDJ|nnDnn|menu|parchemin|final" />
-  <!-- OSD9TDJ • nnDnn • Menu parchemin • watermark:final -->
+  <meta name="x-watermark" content="OSD9TDJ|nnDnn|menu|parchemin|ultimate" />
+  <!-- OSD9TDJ • nnDnn • Menu parchemin • watermark:ultimate -->
 
-  <!-- Fonts médiévales -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
-
-  <!-- JSON-LD (propre, URLs relatives => zéro erreur domaine) -->
+  <!-- JSON-LD propre (URLs relatives => pas d’erreur domaine) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -72,29 +67,39 @@
   }
   </script>
 
+  <!-- Fonts médiévales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --ink:#24160c;
       --ink2:#3a2412;
       --red:#a30000;
-      --shadow: rgba(0,0,0,.55);
+      --shadow: rgba(0,0,0,.60);
 
-      /* tes fichiers */
+      /* fichiers */
       --parchment-img: url("parchemin.PNG");
+
+      /* Zone “écrivable” relative à l’image (ajuste si tu veux) */
+      --safe-top: 0.16;
+      --safe-left: 0.12;
+      --safe-right: 0.12;
+      --safe-bottom: 0.18;
+
+      /* Ces variables seront CALCULÉES en JS (zone réelle de l’image affichée en contain) */
+      --img-left: 0px;
+      --img-top: 0px;
+      --img-w: 100%;
+      --img-h: 100%;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{ margin:0; background:#0b0b0c; font-family:"Cinzel", serif; }
 
-    /* watermark texte invisible */
-    .wm-hidden{
-      position:absolute; left:-9999px; top:auto;
-      width:1px; height:1px; overflow:hidden;
-      white-space:nowrap; opacity:0; pointer-events:none;
-    }
-
-    /* ✅ L’ancienne page “reste derrière” : voile + flou */
+    /* page précédente visible derrière */
     .backdrop{
       position:fixed; inset:0;
       background:rgba(0,0,0,.45);
@@ -104,48 +109,65 @@
       padding:14px;
     }
 
-    /* ✅ Parchemin un peu plus petit, centré */
+    /* le parchemin (image en contain, mais on calcule sa zone réelle) */
     .parchment{
-      width:min(980px, 92vw);
-      height:min(88vh, 980px);
+      width:min(1040px, 94vw);
+      height:min(90vh, 980px);
       position:relative;
       border-radius:18px;
       box-shadow:0 26px 90px var(--shadow);
       overflow:hidden;
-
-      background-image: var(--parchment-img);
-      background-repeat:no-repeat;
-      background-position:center;
-      background-size: contain; /* ✅ on voit le parchemin entier */
       transform-origin: top center;
       animation: unfurl 820ms ease-out forwards;
     }
-
-    /* animation “déroulage” (simple et propre) */
     @keyframes unfurl{
       0%{ transform: scaleY(.10); opacity:0; }
       35%{ opacity:1; }
       100%{ transform: scaleY(1); opacity:1; }
     }
 
-    /* ✅ zone écrivable (tout dedans) */
-    .wrap{
+    /* l’image est dans un pseudo-élément : on garde la zone réelle en JS */
+    .parchment::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image: var(--parchment-img);
+      background-repeat:no-repeat;
+      background-position:center;
+      background-size: contain;
+    }
+
+    /* CLIC DEHORS => retour ; clic dedans => stop */
+    .parchment{ pointer-events:auto; }
+
+    /* ✅ Le “cadre intérieur” est POSITIONNÉ DANS LA ZONE RÉELLE DE L’IMAGE */
+    .sheet{
       position:absolute;
-      top:14%;
-      left:11%;
-      right:11%;
-      bottom:14%;
+
+      /* zone réelle de l’image (contain) */
+      left: var(--img-left);
+      top: var(--img-top);
+      width: var(--img-w);
+      height: var(--img-h);
+
+      /* on centre un peu le contenu en respectant la “zone écrivable” */
+      padding:
+        calc(var(--img-h) * var(--safe-top))
+        calc(var(--img-w) * var(--safe-right))
+        calc(var(--img-h) * var(--safe-bottom))
+        calc(var(--img-w) * var(--safe-left));
+
       display:flex;
       flex-direction:column;
+      gap:8px;
     }
 
     header{
       display:flex;
       align-items:center;
       gap:10px;
-      padding:2px 0 8px;
+      margin:0;
+      padding:0 2px;
     }
-
     .title{
       font-family:"Uncial Antiqua", serif;
       font-size:20px;
@@ -164,16 +186,16 @@
       font-family:"Cinzel", serif;
       white-space:nowrap;
     }
-    .btn:focus{ outline:2px solid rgba(163,0,0,.35); }
 
-    /* contenu scrollable (dans le parchemin) */
+    /* contenu scrollable MAIS dans la feuille */
     .content{
       flex:1;
+      min-height:0; /* important iOS */
       overflow:auto;
-      padding:4px 0 0;
+      padding:2px 2px 0;
     }
 
-    /* ✅ transparent : pas de blocs gris */
+    /* transparent : pas de blocs gris */
     details.section{
       margin:10px 0;
       border-radius:14px;
@@ -181,7 +203,6 @@
       border:1px solid rgba(36,22,12,.18);
       overflow:hidden;
     }
-
     /* quinconce rubriques */
     details.section:nth-of-type(even){ transform: translateX(10px); }
 
@@ -193,8 +214,8 @@
       font-size:16px;
       color:var(--ink2);
       letter-spacing:.3px;
-      background: transparent;
       border-bottom:1px dashed rgba(36,22,12,.22);
+      background: transparent;
     }
     summary::-webkit-details-marker{ display:none; }
 
@@ -221,7 +242,7 @@
       box-shadow: 0 6px 18px rgba(0,0,0,.10);
     }
 
-    /* quinconce sous-menus (plus décalé) */
+    /* quinconce sous-menus (plus décalés) */
     a.nav-link.sub{
       font-weight:600;
       opacity:.92;
@@ -231,7 +252,7 @@
 
     a.nav-link:hover{ outline:2px solid rgba(163,0,0,.22); }
 
-    /* plume : curseur */
+    /* plume */
     .quill-cursor{
       display:inline-block;
       width:10px;
@@ -242,18 +263,22 @@
     }
     @keyframes blink{ 50%{ opacity:0; } }
 
-    /* ✅ footer FIXE DANS le parchemin (reste visible quand tu scroll) */
-    .footer-fixed{
-      flex:0 0 auto;
-      margin-top:8px;
+    /* ✅ footer sticky EN BAS de la feuille (donc TOUJOURS DANS LE PARCHEMIN) */
+    .footer{
+      position:sticky;
+      bottom:0;
+      padding:10px 2px 0;
+      background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0));
+    }
+
+    .footer-row{
       display:flex;
       align-items:flex-end;
       justify-content:space-between;
       gap:12px;
-      padding:2px 0 0;
     }
 
-    /* signature centrée bouton noir */
+    /* signature bouton noir centrée */
     .sig-btn{
       margin:0 auto;
       display:flex;
@@ -273,8 +298,14 @@
       pointer-events:none;
       white-space:nowrap;
     }
-    .sig-btn img{ width:34px; height:auto; filter: drop-shadow(0 6px 10px rgba(0,0,0,.35)); opacity:.95; }
-    .sig-btn.show{ animation: sigIn 360ms ease-out forwards, microShake 220ms ease-out 120ms; }
+    .sig-btn img{
+      width:34px; height:auto;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.35));
+      opacity:.95;
+    }
+    .sig-btn.show{
+      animation: sigIn 360ms ease-out forwards, microShake 220ms ease-out 120ms;
+    }
     @keyframes sigIn{ to{ opacity:1; transform: translateY(0);} }
     @keyframes microShake{
       0%{ transform: translateX(0) translateY(0); }
@@ -283,7 +314,7 @@
       100%{ transform: translateX(0) translateY(0); }
     }
 
-    /* sceau bas droite (dans le parchemin) */
+    /* sceau bas droite */
     .seal{
       width:min(190px, 28vw);
       height:auto;
@@ -293,7 +324,9 @@
       mix-blend-mode: multiply;
       pointer-events:none;
     }
-    .seal.stamp{ animation: stampIn 560ms cubic-bezier(.2,.85,.2,1) forwards; }
+    .seal.stamp{
+      animation: stampIn 560ms cubic-bezier(.2,.85,.2,1) forwards;
+    }
     @keyframes stampIn{
       0%{ opacity:0; transform: translateY(-80px) rotate(-6deg) scale(1.08); }
       70%{ opacity:1; transform: translateY(8px) rotate(0deg) scale(1.02); }
@@ -301,21 +334,21 @@
       100%{ opacity:1; transform: translateY(0) rotate(0deg) scale(1.00); }
     }
 
-    /* bouton bas “revenir” (dans le parchemin) */
     .bottom-bar{
       display:flex;
       justify-content:center;
       padding:10px 0 0;
     }
 
-    /* responsive */
+    /* iOS: améliore scroll */
+    .content{ -webkit-overflow-scrolling: touch; }
+
     @media (max-width:520px){
       .title{ font-size:18px; }
       details.section:nth-of-type(even){ transform: translateX(6px); }
       a.nav-link.sub{ margin-left:10px; }
       .sig-btn{ font-size:18px; }
       .seal{ width:min(170px, 46vw); }
-      .wrap{ top:13%; left:9%; right:9%; bottom:13%; }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -329,9 +362,9 @@
 <body>
   <div class="backdrop" id="backdrop" aria-label="Retour page précédente">
     <div class="parchment" id="parchment" role="dialog" aria-modal="true" aria-label="Menu de navigation">
-      <div class="wrap" id="wrap">
-
-        <div class="wm-hidden">OSD9TDJ nnDnn menu parchemin navigation officiel</div>
+      <div class="sheet" id="sheet">
+        <!-- Watermark texte invisible -->
+        <span style="position:absolute;left:-9999px;opacity:0;">OSD9TDJ nnDnn menu parchemin navigation officiel</span>
 
         <header>
           <div class="title" data-animate="true">Menu de navigation</div>
@@ -341,7 +374,6 @@
         </header>
 
         <div class="content" id="content">
-          <!-- Menus ouverts -->
           <details class="section" open>
             <summary data-animate="true">Général</summary>
             <div class="links">
@@ -425,24 +457,25 @@
           </noscript>
         </div>
 
-        <!-- ✅ Tout DANS le parchemin -->
-        <div class="footer-fixed">
-          <div style="width:min(190px,28vw);"></div>
+        <!-- ✅ footer sticky => reste dans le parchemin -->
+        <div class="footer">
+          <div class="footer-row">
+            <div style="width:min(190px,28vw);"></div>
 
-          <div class="sig-btn" id="sigBtn" aria-label="Signature nnDnn">
-            <img src="croix.epee.PNG" alt="Épée – symbole">
-            <span>nnDnn</span>
-            <img src="croix.epee.PNG" alt="Épée – symbole">
+            <div class="sig-btn" id="sigBtn" aria-label="Signature nnDnn">
+              <img src="croix.epee.PNG" alt="Épée – symbole">
+              <span>nnDnn</span>
+              <img src="croix.epee.PNG" alt="Épée – symbole">
+            </div>
+
+            <img class="seal" id="seal" src="sceaudeux.PNG" alt="" aria-hidden="true">
           </div>
-
-          <img class="seal" id="seal" src="sceaudeux.PNG" alt="" aria-hidden="true">
         </div>
 
-        <!-- Sons (à mettre à la racine : plume.mp3, epee.mp3, tampon.mp3) -->
+        <!-- Sons (à mettre à la racine) -->
         <audio id="sndQuill" src="plume.mp3" preload="auto"></audio>
         <audio id="sndSword" src="epee.mp3" preload="auto"></audio>
         <audio id="sndStamp" src="tampon.mp3" preload="auto"></audio>
-
       </div>
     </div>
   </div>
@@ -450,7 +483,7 @@
   <script>
     const backdrop = document.getElementById('backdrop');
     const parchment = document.getElementById('parchment');
-    const wrap = document.getElementById('wrap');
+    const sheet = document.getElementById('sheet');
 
     const backBtn = document.getElementById('backBtn');
     const closeBtn = document.getElementById('closeBtn');
@@ -469,18 +502,17 @@
       location.href = 'index.html';
     }
 
-    // clic dehors => retour
+    // clic dehors => retour ; clic dedans => stop
     backdrop.addEventListener('click', goBack);
     parchment.addEventListener('click', (e)=> e.stopPropagation());
-    wrap.addEventListener('click', (e)=> e.stopPropagation());
+    sheet.addEventListener('click', (e)=> e.stopPropagation());
 
     backBtn.addEventListener('click', goBack);
     closeBtn.addEventListener('click', goBack);
     bottomBackBtn.addEventListener('click', goBack);
-
     document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') goBack(); });
 
-    // Autoriser les sons après une interaction utilisateur (Safari)
+    // Audio iOS : armement après interaction
     let audioArmed = false;
     function armAudio(){
       audioArmed = true;
@@ -490,7 +522,43 @@
     window.addEventListener('pointerdown', armAudio, { once:true });
     window.addEventListener('keydown', armAudio, { once:true });
 
-    // plume : écrit lettre par lettre
+    // ✅ Calcul de la zone réelle de l’image affichée en "contain"
+    function computeContainBox(containerW, containerH, imgW, imgH){
+      const containerRatio = containerW / containerH;
+      const imgRatio = imgW / imgH;
+
+      let w, h, left, top;
+      if(imgRatio > containerRatio){
+        // image limitée par la largeur
+        w = containerW;
+        h = w / imgRatio;
+        left = 0;
+        top = (containerH - h) / 2;
+      }else{
+        // image limitée par la hauteur
+        h = containerH;
+        w = h * imgRatio;
+        top = 0;
+        left = (containerW - w) / 2;
+      }
+      return { left, top, w, h };
+    }
+
+    async function layoutSheet(){
+      const img = new Image();
+      img.src = "parchemin.PNG";
+      await img.decode().catch(()=>{});
+
+      const rect = parchment.getBoundingClientRect();
+      const box = computeContainBox(rect.width, rect.height, img.naturalWidth || 1200, img.naturalHeight || 800);
+
+      parchment.style.setProperty('--img-left', box.left + 'px');
+      parchment.style.setProperty('--img-top', box.top + 'px');
+      parchment.style.setProperty('--img-w', box.w + 'px');
+      parchment.style.setProperty('--img-h', box.h + 'px');
+    }
+
+    // plume
     function typewrite(el, text, speed = 14){
       el.textContent = "";
       const cursor = document.createElement("span");
@@ -516,8 +584,7 @@
     async function animateAll(){
       const items = Array.from(document.querySelectorAll('[data-animate="true"]'));
 
-      // petit son de plume (si dispo)
-      if(audioArmed) { try{ sndQuill.currentTime = 0; sndQuill.play(); }catch(e){} }
+      if(audioArmed){ try{ sndQuill.currentTime=0; sndQuill.play(); }catch(e){} }
 
       for(const el of items){
         const original = (el.getAttribute('data-original') || el.textContent).trim();
@@ -527,23 +594,26 @@
         await new Promise(r => setTimeout(r, 26));
       }
 
-      // stop plume
-      if(audioArmed) { try{ sndQuill.pause(); sndQuill.currentTime = 0; }catch(e){} }
+      if(audioArmed){ try{ sndQuill.pause(); sndQuill.currentTime=0; }catch(e){} }
 
-      // signature (son épée)
       sigBtn.classList.add('show');
-      if(audioArmed) { try{ sndSword.currentTime = 0; sndSword.play(); }catch(e){} }
+      if(audioArmed){ try{ sndSword.currentTime=0; sndSword.play(); }catch(e){} }
 
-      // tampon (son “paf”)
       setTimeout(() => {
         seal.classList.add('stamp');
-        if(audioArmed) { try{ sndStamp.currentTime = 0; sndStamp.play(); }catch(e){} }
+        if(audioArmed){ try{ sndStamp.currentTime=0; sndStamp.play(); }catch(e){} }
       }, 650);
     }
 
-    // après déroulage
-    setTimeout(animateAll, 900);
-    closeBtn.focus();
+    // init
+    (async ()=>{
+      await layoutSheet();
+      // recalcul si rotation / resize
+      window.addEventListener('resize', layoutSheet, { passive:true });
+
+      setTimeout(animateAll, 900);
+      closeBtn.focus();
+    })();
   </script>
 </body>
 </html>
