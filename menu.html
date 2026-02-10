@@ -2,533 +2,642 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+  <!-- ✅ SEO -->
   <title>Menu de navigation | OSD9TDJ</title>
-  <meta name="description" content="Menu de navigation du site OSD9TDJ — accès rapide aux rubriques et sous-pages." />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
-  <meta name="theme-color" content="#0b0b0b" />
-
-  <!-- Canonical : adapte si tu as un domaine -->
+  <meta name="description" content="Menu de navigation du site O.S.D.9.T.D.J. : accès rapide aux pages principales, aux informations officielles et aux pages encyclopédiques en cours de création." />
+  <meta name="keywords" content="OSD9TDJ, ordre templier, association loi 1901, templiers, histoire du Temple, adhésion, événements, boutique, membres, statuts, mentions légales, cookies, FAQ" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="O.S.D.9.T.D.J." />
   <link rel="canonical" href="https://osd9tdj.org/menu.html" />
 
-  <!-- OpenGraph -->
-  <meta property="og:title" content="Menu de navigation | OSD9TDJ" />
-  <meta property="og:description" content="Accès rapide aux rubriques et sous-pages du site OSD9TDJ." />
+  <!-- ✅ OpenGraph / Twitter -->
   <meta property="og:type" content="website" />
-  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:title" content="Menu de navigation | OSD9TDJ" />
+  <meta property="og:description" content="Accès rapide à l’arborescence du site O.S.D.9.T.D.J." />
+  <meta property="og:url" content="https://osd9tdj.org/menu.html" />
+  <meta property="og:site_name" content="OSD9TDJ" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Menu de navigation | OSD9TDJ" />
+  <meta name="twitter:description" content="Accès rapide à l’arborescence du site O.S.D.9.T.D.J." />
 
-  <!-- ✅ JSON-LD (SEO propre) -->
+  <!-- ✅ Watermark invisible / empreinte -->
+  <meta name="generator" content="OSD9TDJ - Menu de navigation" />
+  <meta name="application-name" content="OSD9TDJ" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- ✅ JSON-LD (jslon) : WebSite + Organization + WebPage -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@graph": [
+    "@context":"https://schema.org",
+    "@graph":[
       {
-        "@type": "Organization",
-        "name": "OSD9TDJ",
-        "url": "https://osd9tdj.org/",
-        "logo": "https://osd9tdj.org/sceau.png"
+        "@type":"Organization",
+        "@id":"https://osd9tdj.org/#org",
+        "name":"O.S.D.9.T.D.J.",
+        "url":"https://osd9tdj.org/",
+        "logo":"https://osd9tdj.org/sceaudeux.PNG",
+        "description":"Association loi 1901 – site officiel O.S.D.9.T.D.J."
       },
       {
-        "@type": "WebSite",
-        "name": "OSD9TDJ",
-        "url": "https://osd9tdj.org/",
-        "inLanguage": "fr"
+        "@type":"WebSite",
+        "@id":"https://osd9tdj.org/#website",
+        "url":"https://osd9tdj.org/",
+        "name":"OSD9TDJ",
+        "publisher":{"@id":"https://osd9tdj.org/#org"},
+        "inLanguage":"fr-FR"
       },
       {
-        "@type": "WebPage",
-        "name": "Menu de navigation",
-        "url": "https://osd9tdj.org/menu.html",
-        "inLanguage": "fr",
-        "isPartOf": { "@id": "https://osd9tdj.org/#website" }
+        "@type":"WebPage",
+        "@id":"https://osd9tdj.org/menu.html#webpage",
+        "url":"https://osd9tdj.org/menu.html",
+        "name":"Menu de navigation | OSD9TDJ",
+        "isPartOf":{"@id":"https://osd9tdj.org/#website"},
+        "about":{"@id":"https://osd9tdj.org/#org"},
+        "inLanguage":"fr-FR"
+      },
+      {
+        "@type":"SiteNavigationElement",
+        "@id":"https://osd9tdj.org/menu.html#nav",
+        "name":"Menu de navigation",
+        "url":"https://osd9tdj.org/menu.html",
+        "inLanguage":"fr-FR"
       }
     ]
   }
   </script>
 
-  <!-- Police médiévale : tu peux remplacer par ta police locale si tu veux -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet" />
-
   <style>
     :root{
-      --bg:#070707;
       --veil: rgba(0,0,0,.72);
-      --panelW: min(760px, 86vw);       /* ✅ plus petit */
+      --panelW: min(560px, 92vw);
       --panelH: min(92vh, 920px);
       --radius: 18px;
-      --ink:#1c1410;
-      --accent:#8a0b0b;
-      --line: rgba(70,50,35,.22);
-      --btn: rgba(255,255,255,.10);
-      --btnBorder: rgba(255,255,255,.18);
+      --ink: #2b1b12;
+      --red: #a11212;
+      --line: rgba(70,50,35,.24);
+      --glass: rgba(255,255,255,.12);
+      --btn: rgba(255,255,255,.18);
+      --btn2: rgba(0,0,0,.20);
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    /* ✅ Page entière : parchemin en plein écran (pas de zones noires) */
+    html,body{height:100%; margin:0;}
     body{
-      margin:0;
-      background: var(--bg);
-      color:#eee;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      overflow:hidden; /* page menu = overlay plein écran */
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        url("parchemin.jpg") center/cover no-repeat fixed;
+      overflow:hidden;
     }
 
-    /* ✅ watermark discret (non intrusif, pas de texte caché “spam”) */
-    meta, script{ /* rien */ }
-    /* (Marque “invisible” via commentaire + attributs data : safe) */
-
-    /* Overlay derrière (page précédente) */
+    /* ✅ voile noir + flou "derrière" */
     .veil{
       position:fixed; inset:0;
       background: var(--veil);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      opacity:0;
-      transition: opacity .28s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index:10;
     }
-    .veil.show{opacity:1}
 
-    /* Panel “parchemin” */
+    /* ✅ panneau menu qui glisse de gauche -> droite */
     .panel{
       position:fixed;
       top: 50%;
-      left: 0;
-      transform: translate(-110%, -50%); /* ✅ départ hors écran à gauche */
+      left: clamp(10px, 3vw, 28px);
+      transform: translate(-120%, -50%);
       width: var(--panelW);
       height: var(--panelH);
+      z-index: 20;
+
       border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 30px 90px rgba(0,0,0,.65);
-      will-change: transform, opacity;
-      opacity:0;
-      transition: transform .55s cubic-bezier(.2,.9,.2,1), opacity .25s ease;
-      background: transparent;
-    }
-    .panel.show{
-      transform: translate(7vw, -50%);  /* ✅ posé un peu à droite = on voit la page derrière */
-      opacity:1;
-    }
-    @media (max-width: 560px){
-      .panel.show{ transform: translate(4vw, -50%); }
+      box-shadow: 0 26px 80px rgba(0,0,0,.55);
+      overflow:hidden;
+
+      /* fond interne = même parchemin, mais stable */
+      background:
+        url("parchemin.jpg") center/cover no-repeat;
+      outline: 1px solid rgba(0,0,0,.12);
     }
 
-    /* Fond parchemin (pleine page à l’intérieur du panel) */
-    .parchment{
-      position:absolute; inset:0;
-      background: url("parchemin.jpg") center/cover no-repeat;
-      filter: saturate(1.02) contrast(1.02);
+    .panel.open{
+      animation: slideIn .55s cubic-bezier(.2,.9,.2,1) forwards;
+    }
+    @keyframes slideIn{
+      to{ transform: translate(0, -50%); }
     }
 
-    /* Zone de contenu (scroll) + footer fixe */
-    .layout{
-      position:absolute; inset:0;
-      display:flex;
-      flex-direction:column;
-      padding: 22px 22px 14px 22px;
-      gap: 14px;
-    }
-
-    /* Header */
-    .topbar{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
+    /* ✅ header */
+    .header{
+      position:sticky; top:0;
+      padding: 18px 18px 12px 18px;
+      display:flex; align-items:flex-start; justify-content:space-between;
       gap: 12px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.55), rgba(255,255,255,.18));
+      border-bottom: 1px solid var(--line);
+      z-index: 30;
     }
-    h1{
+
+    .title{
+      font-size: 28px;
+      line-height:1.05;
+      letter-spacing:.4px;
       margin:0;
-      font-family: "Uncial Antiqua", serif;
-      font-size: clamp(22px, 3.4vw, 34px);
-      letter-spacing: .5px;
-      color: #2a1b14;
-      text-shadow: 0 1px 0 rgba(255,255,255,.35);
+      text-shadow: 0 1px 0 rgba(255,255,255,.5);
     }
+
+    /* ✅ 1ère lettre rouge (sans casser les mots) */
+    .first{
+      color: var(--red);
+      font-weight: 700;
+      margin-right: 0; /* IMPORTANT: aucune séparation */
+    }
+
     .actions{
-      display:flex;
-      gap: 10px;
-      align-items:center;
+      display:flex; gap:10px; align-items:center;
     }
     .btn{
-      border: 1px solid rgba(60,45,35,.35);
-      background: rgba(255,255,255,.18);
-      color: #2a1b14;
-      border-radius: 12px;
+      appearance:none; border:0;
       padding: 10px 12px;
-      font-weight:700;
+      border-radius: 12px;
+      background: var(--btn);
+      outline: 1px solid rgba(0,0,0,.18);
+      color: #2a1a12;
+      font-weight: 700;
       cursor:pointer;
       user-select:none;
-      -webkit-tap-highlight-color: transparent;
     }
-    .btn:active{ transform: translateY(1px); }
+    .btn:hover{ background: rgba(255,255,255,.22); }
     .btn.close{
-      width: 44px;
-      text-align:center;
-      padding: 10px 0;
+      width: 42px; height: 42px;
+      display:grid; place-items:center;
       font-size: 18px;
+      padding:0;
     }
 
-    /* Scroll zone */
+    /* ✅ zone scroll interne (on laisse de la place pour le sceau fixé) */
     .scroll{
-      flex: 1 1 auto;
+      height: calc(var(--panelH) - 84px);
       overflow:auto;
-      padding: 10px 6px 70px 6px; /* laisse la place au sceau */
+      padding: 14px 16px calc(150px + env(safe-area-inset-bottom)) 16px; /* ✅ anti-superposition */
       scrollbar-width: thin;
       scrollbar-color: rgba(60,45,35,.45) transparent;
     }
-    .scroll::-webkit-scrollbar{ width: 10px; }
-    .scroll::-webkit-scrollbar-thumb{ background: rgba(60,45,35,.35); border-radius: 10px; }
-    .scroll::-webkit-scrollbar-track{ background: transparent; }
 
-    /* Accordéons */
-    details{
-      border: 1px solid rgba(60,45,35,.18);
+    /* ✅ blocs/menus */
+    details.group{
+      border-radius: 16px;
       background: rgba(255,255,255,.14);
-      border-radius: 14px;
+      outline: 1px solid rgba(0,0,0,.12);
       margin: 10px 0;
       overflow:hidden;
     }
+
     summary{
       list-style:none;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
       padding: 14px 14px;
       cursor:pointer;
-      font-family: "Uncial Antiqua", serif;
-      color: #2a1b14;
       user-select:none;
+      background: rgba(255,255,255,.10);
+      border-bottom: 1px dashed rgba(70,50,35,.22);
     }
-    summary::-webkit-details-marker{display:none}
+    summary::-webkit-details-marker{ display:none; }
+
     .label{
-      font-size: clamp(16px, 2.2vw, 22px);
-      letter-spacing: .3px;
-      display:flex;
-      gap: .15em;
-      flex-wrap:wrap;
-      line-height:1.1;
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing:.3px;
+      text-shadow: 0 1px 0 rgba(255,255,255,.45);
     }
-    /* ✅ première lettre rouge collée au mot (pas séparée) */
-    .label .first{
-      color: var(--accent);
-      text-shadow: 0 1px 0 rgba(255,255,255,.25);
-      margin-right: .02em;
-    }
+
     .chev{
-      width: 36px;
-      height: 36px;
+      width: 34px; height: 34px;
       border-radius: 12px;
-      border: 1px solid rgba(60,45,35,.22);
-      background: rgba(255,255,255,.12);
-      display:grid;
-      place-items:center;
+      background: rgba(0,0,0,.10);
+      outline: 1px solid rgba(0,0,0,.16);
+      display:grid; place-items:center;
       flex: 0 0 auto;
     }
-    .chev svg{ width:18px; height:18px; opacity:.85 }
-    details[open] .chev svg{ transform: rotate(180deg); transition: transform .2s ease; }
-    .group{
-      padding: 8px 12px 14px 12px;
-      border-top: 1px dashed rgba(60,45,35,.18);
-      display:flex;
-      flex-direction:column;
+    .chev svg{ width:18px; height:18px; opacity:.85; }
+
+    details[open] .chev svg{
+      transform: rotate(180deg);
+      transition: transform .22s ease;
+    }
+
+    .items{
+      padding: 10px 12px 12px 12px;
+      display:grid;
       gap: 10px;
     }
+
     a.item{
-      text-decoration:none;
-      color: #241710;
-      font-weight:800;
+      display:flex; align-items:center; justify-content:space-between;
+      gap: 12px;
       padding: 12px 12px;
-      border-radius: 12px;
-      border: 1px solid rgba(60,45,35,.18);
-      background: rgba(255,255,255,.12);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 10px;
-    }
-    a.item:hover{ background: rgba(255,255,255,.18); }
-    .sub{
-      font-family: "Uncial Antiqua", serif;
-      letter-spacing:.2px;
-      font-size: 18px;
-    }
-    .lock{
-      opacity:.85;
-      font-size: 18px;
-    }
-
-    /* Bouton retour dans le contenu (optionnel, tu l’avais) */
-    .backline{
-      display:flex;
-      justify-content:center;
-      margin: 18px 0 6px;
-    }
-    .backbig{
-      border: 1px solid rgba(60,45,35,.28);
-      background: rgba(255,255,255,.16);
-      color: #2a1b14;
       border-radius: 14px;
-      padding: 12px 16px;
-      font-weight:900;
-      cursor:pointer;
+      text-decoration:none;
+      color: var(--ink);
+      background: rgba(255,255,255,.10);
+      outline: 1px solid rgba(0,0,0,.10);
+    }
+    a.item:hover{ background: rgba(255,255,255,.16); }
+
+    .sub{
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing:.2px;
     }
 
-    /* ✅ Sceau centré en bas, fixe dans le panel (pas dans la page) */
+    /* ✅ cadenas (fiable, pas emoji) */
+    .lock{
+      width: 20px; height: 20px; flex:0 0 auto;
+      opacity:.9;
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,.25));
+    }
+
+    /* ✅ animation plume (révélateur) */
+    .write{
+      display:inline-block;
+      overflow:hidden;
+      vertical-align:bottom;
+      clip-path: inset(0 100% 0 0);
+    }
+    .write.reveal{
+      animation: inkReveal var(--dur, 900ms) steps(var(--steps, 18), end) forwards;
+    }
+    @keyframes inkReveal{
+      to{ clip-path: inset(0 0 0 0); }
+    }
+
+    /* ✅ sceau fixé en bas au centre (reste en bas même si on scroll) */
     .sealDock{
       position:absolute;
       left:0; right:0;
-      bottom: 10px;
+      bottom: calc(12px + env(safe-area-inset-bottom));
       display:flex;
       justify-content:center;
       pointer-events:none;
+      z-index: 40;
     }
     .seal{
-      width: clamp(64px, 9vw, 96px);
-      height: auto;
-      opacity: 0;
-      transform: translateY(10px) scale(.98);
+      width: clamp(76px, 11vw, 120px);
+      height:auto;
+      opacity:0;
+      transform: translateY(12px) scale(.98);
       transition: opacity .35s ease, transform .45s cubic-bezier(.2,.9,.2,1);
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+      filter: drop-shadow(0 12px 22px rgba(0,0,0,.40));
     }
     .seal.show{
-      opacity: 1;
+      opacity:1;
       transform: translateY(0) scale(1);
     }
 
-    /* Accessibilité */
-    .sr-only{
-      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
-      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    /* ✅ watermark invisible (texte réel mais invisible) */
+    .wm{
+      position:absolute;
+      left:-9999px;
+      top:auto;
+      width:1px; height:1px;
+      overflow:hidden;
+      opacity:0.001;
+      pointer-events:none;
+      user-select:none;
+    }
+
+    /* ✅ responsive: paysage */
+    @media (orientation: landscape){
+      :root{
+        --panelW: min(620px, 70vw);
+        --panelH: min(88vh, 720px);
+      }
+      .title{ font-size: 26px; }
+      .label{ font-size: 19px; }
+      .sub{ font-size: 17px; }
     }
   </style>
 </head>
 
-<body data-site="OSD9TDJ" data-purpose="menu-overlay">
-  <!-- Voile + flou (cliquable pour revenir) -->
+<body>
+  <!-- watermark invisible -->
+  <div class="wm" aria-hidden="true">
+    O.S.D.9.T.D.J. — osd9tdj.org — Menu de navigation — Association loi 1901 — contenus originaux — empreinte site.
+  </div>
+
+  <!-- voile (clic dehors = retour page précédente) -->
   <div class="veil" id="veil" aria-hidden="true"></div>
 
-  <!-- Panel -->
+  <!-- panneau -->
   <main class="panel" id="panel" role="dialog" aria-modal="true" aria-label="Menu de navigation">
-    <div class="parchment" aria-hidden="true"></div>
-
-    <div class="layout">
-      <div class="topbar">
-        <div>
-          <h1><span style="color:var(--accent)">M</span>enu de navigation</h1>
-          <div class="sr-only">Choisissez une rubrique puis un lien.</div>
-        </div>
-
-        <div class="actions">
-          <button class="btn" id="btnBack" type="button">← Revenir</button>
-          <button class="btn close" id="btnClose" type="button" aria-label="Fermer">×</button>
-        </div>
+    <header class="header">
+      <h1 class="title" id="menuTitle">Menu de navigation</h1>
+      <div class="actions">
+        <button class="btn" id="btnBack" type="button">← Revenir</button>
+        <button class="btn close" id="btnClose" type="button" aria-label="Fermer">✕</button>
       </div>
+    </header>
 
-      <section class="scroll" id="scrollZone" aria-label="Arborescence du site">
-        <!-- === ACCORDEONS : remplace/complète les liens ici === -->
-        <details>
-          <summary>
-            <div class="label"><span class="first">G</span>énéral</div>
-            <div class="chev" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            </div>
-          </summary>
-          <div class="group">
-            <a class="item" href="index.html"><span class="sub"><span class="first">A</span>ccueil</span></a>
-            <a class="item" href="quinoussommes.html"><span class="sub"><span class="first">Q</span>ui nous sommes</span></a>
-            <a class="item" href="notre-mission.html"><span class="sub"><span class="first">N</span>otre mission</span></a>
-            <a class="item" href="histoire.html"><span class="sub"><span class="first">N</span>otre histoire</span></a>
-            <a class="item" href="contact.html"><span class="sub"><span class="first">C</span>ontact</span></a>
+    <section class="scroll" id="scroll">
+      <!-- ✅ GÉNÉRAL -->
+      <details class="group" open>
+        <summary>
+          <div class="label js-write">Général</div>
+          <div class="chev" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="label"><span class="first">H</span>istoire templière</div>
-            <div class="chev" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            </div>
-          </summary>
-          <div class="group">
-            <a class="item" href="ordres-historiques.html"><span class="sub"><span class="first">O</span>rdres historiques</span></a>
-            <a class="item" href="vocation.html"><span class="sub"><span class="first">H</span>istoire du Temple</span></a>
-            <a class="item" href="bernard.html"><span class="sub"><span class="first">B</span>ernard de Clairvaux</span></a>
-          </div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="label"><span class="first">A</span>ctivités &amp; événements</div>
-            <div class="chev" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            </div>
-          </summary>
-          <div class="group">
-            <a class="item" href="activites.html"><span class="sub"><span class="first">N</span>os événements</span></a>
-          </div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="label"><span class="first">A</span>dhésion</div>
-            <div class="chev" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            </div>
-          </summary>
-          <div class="group">
-            <a class="item" href="adhesion.html"><span class="sub"><span class="first">A</span>dhésion</span></a>
-            <a class="item" href="cotisations.html"><span class="sub"><span class="first">C</span>otisations</span></a>
-            <a class="item" href="notice-adhesion.html"><span class="sub"><span class="first">P</span>rocédure / notice d’adhésion</span></a>
-            <a class="item" href="assurance.html"><span class="sub"><span class="first">A</span>ssurance</span></a>
-          </div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="label"><span class="first">B</span>outique</div>
-            <div class="chev" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            </div>
-          </summary>
-          <div class="group">
-            <a class="item" href="boutique.html"><span class="sub"><span class="first">B</span>outique</span></a>
-          </div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="label"><span class="first">M</span>embres</div>
-            <div class="chev" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            </div>
-          </summary>
-          <div class="group">
-            <!-- 🔒 cadenas : affichage garanti -->
-            <a class="item" href="documents-internes.html"><span class="sub"><span class="first">A</span>ccès réservé aux membres</span><span class="lock" aria-hidden="true">🔒</span></a>
-            <a class="item" href="administration.html"><span class="sub"><span class="first">A</span>dministration</span><span class="lock" aria-hidden="true">🔒</span></a>
-          </div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="label"><span class="first">I</span>nformations officielles &amp; aide</div>
-            <div class="chev" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            </div>
-          </summary>
-          <div class="group">
-            <a class="item" href="statuts.html"><span class="sub"><span class="first">S</span>tatuts</span></a>
-            <a class="item" href="mentions.html"><span class="sub"><span class="first">M</span>entions / informations officielles</span></a>
-            <a class="item" href="cookies.html"><span class="sub"><span class="first">C</span>ookies</span></a>
-            <a class="item" href="faq.html"><span class="sub"><span class="first">F</span>AQ</span></a>
-          </div>
-        </details>
-
-        <details>
-          <summary>
-            <div class="label"><span class="first">E</span>ncyclopédique (en cours de création)</div>
-            <div class="chev" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            </div>
-          </summary>
-          <div class="group">
-            <a class="item" href="Wikipedia.html"><span class="sub"><span class="first">P</span>age encyclopédique</span></a>
-            <a class="item" href="Utilisateur_Wikipedia.html"><span class="sub"><span class="first">F</span>iche utilisateur (projet)</span></a>
-          </div>
-        </details>
-
-        <div class="backline">
-          <button class="backbig" id="btnBack2" type="button">← Revenir à la page précédente</button>
+        </summary>
+        <div class="items">
+          <a class="item" href="index.html"><span class="sub js-write">Accueil</span></a>
+          <a class="item" href="quinoussommes.html"><span class="sub js-write">Qui nous sommes</span></a>
+          <a class="item" href="notre-mission.html"><span class="sub js-write">Notre mission</span></a>
+          <a class="item" href="histoire.html"><span class="sub js-write">Notre histoire</span></a>
+          <a class="item" href="contact.html"><span class="sub js-write">Contact</span></a>
         </div>
+      </details>
 
-        <!-- Commentaire watermark (technique, non visible) :
-             OSD9TDJ / menu overlay / version 2026-02 -->
-      </section>
-    </div>
+      <!-- ✅ HISTOIRE TEMPLIÈRE -->
+      <details class="group">
+        <summary>
+          <div class="label js-write">Histoire templière</div>
+          <div class="chev" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </summary>
+        <div class="items">
+          <a class="item" href="ordres-historiques.html"><span class="sub js-write">Ordres historiques</span></a>
+          <a class="item" href="vocation.html"><span class="sub js-write">Histoire du Temple</span></a>
+          <a class="item" href="commanders.html"><span class="sub js-write">Dignitaires de l’Ordre</span></a>
+          <a class="item" href="bernard.html"><span class="sub js-write">Bernard de Clairvaux</span></a>
+        </div>
+      </details>
 
-    <!-- ✅ Sceau centré en bas (et qui reste en bas) -->
+      <!-- ✅ ACTIVITÉS -->
+      <details class="group">
+        <summary>
+          <div class="label js-write">Activités &amp; événements</div>
+          <div class="chev" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </summary>
+        <div class="items">
+          <a class="item" href="activites.html"><span class="sub js-write">Nos événements</span></a>
+        </div>
+      </details>
+
+      <!-- ✅ ADHÉSION -->
+      <details class="group">
+        <summary>
+          <div class="label js-write">Adhésion</div>
+          <div class="chev" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </summary>
+        <div class="items">
+          <a class="item" href="adhesion.html"><span class="sub js-write">Adhésion</span></a>
+          <a class="item" href="cotisations.html"><span class="sub js-write">Cotisations</span></a>
+          <a class="item" href="notice-adhesion.html"><span class="sub js-write">Procédure d’adhésion</span></a>
+        </div>
+      </details>
+
+      <!-- ✅ BOUTIQUE -->
+      <details class="group">
+        <summary>
+          <div class="label js-write">Boutique</div>
+          <div class="chev" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </summary>
+        <div class="items">
+          <a class="item" href="boutique.html"><span class="sub js-write">Boutique</span></a>
+        </div>
+      </details>
+
+      <!-- ✅ MEMBRES -->
+      <details class="group">
+        <summary>
+          <div class="label js-write">Membres</div>
+          <div class="chev" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </summary>
+        <div class="items">
+          <a class="item" href="documents-internes.html">
+            <span class="sub js-write">Accès réservé aux membres</span>
+            <!-- lock svg -->
+            <svg class="lock" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 11V8a5 5 0 0 1 10 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M6 11h12v10H6V11Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M12 15v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </a>
+
+          <a class="item" href="administration.html">
+            <span class="sub js-write">Administration</span>
+            <svg class="lock" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7 11V8a5 5 0 0 1 10 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M6 11h12v10H6V11Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M12 15v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </a>
+        </div>
+      </details>
+
+      <!-- ✅ INFOS OFFICIELLES -->
+      <details class="group">
+        <summary>
+          <div class="label js-write">Informations officielles &amp; aide</div>
+          <div class="chev" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </summary>
+        <div class="items">
+          <a class="item" href="statuts.html"><span class="sub js-write">Statuts</span></a>
+          <a class="item" href="mentions.html"><span class="sub js-write">Mentions / informations officielles</span></a>
+          <a class="item" href="cookies.html"><span class="sub js-write">Cookies</span></a>
+          <a class="item" href="faq.html"><span class="sub js-write">FAQ</span></a>
+        </div>
+      </details>
+
+      <!-- ✅ ENCYCLOPÉDIQUE -->
+      <details class="group">
+        <summary>
+          <div class="label js-write">Encyclopédique (en cours de création)</div>
+          <div class="chev" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </summary>
+        <div class="items">
+          <a class="item" href="Wikipedia.html"><span class="sub js-write">Page encyclopédique</span></a>
+          <a class="item" href="Utilisateur_Wikipedia.html"><span class="sub js-write">Fiche utilisateur (projet)</span></a>
+        </div>
+      </details>
+
+      <!-- ✅ Retour bas -->
+      <div style="display:flex; justify-content:center; margin: 14px 0 8px 0;">
+        <button class="btn" id="btnBack2" type="button" style="background:rgba(0,0,0,.14); color:#23150f;">
+          ← Revenir à la page précédente
+        </button>
+      </div>
+    </section>
+
+    <!-- ✅ Sceau fixe bas-centre -->
     <div class="sealDock" aria-hidden="true">
-      <img id="seal" class="seal" src="sceau.png" alt="">
+      <img id="seal" class="seal" src="sceaudeux.PNG" alt="Sceau OSD9TDJ">
     </div>
   </main>
 
   <script>
-    // ============================
-    // CONFIG
-    // ============================
-    const PARCHEMIN_BG = "parchemin.jpg"; // fond du panel (déjà dans le CSS)
-    const SEAL_SRC = "sceau.png";         // ✅ change ici si ton sceau a un autre nom
+    // =========================================================
+    // ✅ Sons (mets tes fichiers à la racine si tu veux)
+    // NOMS CONSEILLÉS : plume.mp3, epee.mp3, tampon.mp3
+    // =========================================================
+    const SOUND_PLUME  = "plume.mp3";
+    const SOUND_EPEE   = "epee.mp3";
+    const SOUND_TAMPON = "tampon.mp3";
 
-    // ============================
-    // ELEMENTS
-    // ============================
-    const veil  = document.getElementById("veil");
-    const panel = document.getElementById("panel");
-    const seal  = document.getElementById("seal");
-    const btnBack  = document.getElementById("btnBack");
-    const btnBack2 = document.getElementById("btnBack2");
-    const btnClose = document.getElementById("btnClose");
+    let audioReady = false;
+    let aPlume, aEpee, aTampon;
 
-    // Forcer src du sceau (évite erreurs de casse)
-    seal.src = SEAL_SRC;
+    function initAudioOnce(){
+      if (audioReady) return;
+      try{
+        aPlume  = new Audio(SOUND_PLUME);
+        aEpee   = new Audio(SOUND_EPEE);
+        aTampon = new Audio(SOUND_TAMPON);
+        [aPlume,aEpee,aTampon].forEach(a => { a.preload = "auto"; a.volume = 0.85; });
+        audioReady = true;
+      }catch(e){}
+    }
+    function playSafe(a){
+      if(!audioReady || !a) return;
+      try{ a.currentTime = 0; a.play().catch(()=>{}); }catch(e){}
+    }
 
-    // ============================
-    // OPEN (auto)
-    // ============================
-    function openMenu(){
-      veil.classList.add("show");
-      panel.classList.add("show");
+    // =========================================================
+    // ✅ Retour page précédente (clic dehors, bouton, X)
+    // =========================================================
+    function goBack(){
+      // si pas d'historique, fallback:
+      if (history.length > 1) history.back();
+      else location.href = "index.html";
+    }
 
-      // Sceau apparaît après l’arrivée du panneau
+    // =========================================================
+    // ✅ Écriture plume (sans casser SEO)
+    // + 1ère lettre rouge SANS espacements
+    // =========================================================
+    function makeFirstLetterRed(node){
+      const txt = (node.textContent || "").trim();
+      if(!txt) return;
+
+      // évite double application
+      if(node.dataset.firstDone) return;
+      node.dataset.firstDone = "1";
+
+      // reconstruit sans espaces parasites
+      const first = txt[0];
+      const rest  = txt.slice(1);
+
+      node.textContent = "";
+      const s1 = document.createElement("span");
+      s1.className = "first";
+      s1.textContent = first;
+
+      const s2 = document.createElement("span");
+      s2.textContent = rest;
+
+      node.appendChild(s1);
+      node.appendChild(s2);
+    }
+
+    function applyWriting(){
+      const els = document.querySelectorAll(".js-write, .title");
+      els.forEach(el => {
+        // 1ère lettre rouge propre
+        makeFirstLetterRed(el);
+
+        // wrap pour animation plume
+        if(el.dataset.writeDone) return;
+        el.dataset.writeDone = "1";
+
+        const wrap = document.createElement("span");
+        wrap.className = "write";
+        while(el.firstChild) wrap.appendChild(el.firstChild);
+        el.appendChild(wrap);
+
+        const text = wrap.textContent.trim();
+        const steps = Math.max(12, Math.min(44, text.length));
+        const dur = Math.max(700, Math.min(1700, text.length * 42));
+        wrap.style.setProperty("--steps", steps);
+        wrap.style.setProperty("--dur", dur + "ms");
+      });
+
+      // déclenche l'animation
       setTimeout(() => {
-        seal.classList.add("show");
+        document.querySelectorAll(".write").forEach(w => w.classList.add("reveal"));
+        playSafe(aPlume);
       }, 520);
     }
 
-    // ============================
-    // CLOSE = retour page précédente
-    // ============================
-    function goBack(){
-      // Si l’utilisateur vient d’une autre page : retour
-      if (history.length > 1) {
-        history.back();
-        return;
-      }
-      // Sinon : fallback vers l’accueil
-      location.href = "index.html";
+    // =========================================================
+    // ✅ Ouverture anim + sceau bas fixe (après)
+    // =========================================================
+    const panel = document.getElementById("panel");
+    const veil  = document.getElementById("veil");
+    const seal  = document.getElementById("seal");
+
+    function openMenu(){
+      panel.classList.add("open");
+
+      // audio seulement après interaction utilisateur
+      const unlock = () => { initAudioOnce(); document.removeEventListener("pointerdown", unlock); };
+      document.addEventListener("pointerdown", unlock, { once:true });
+
+      // plume + sceau
+      applyWriting();
+
+      // sceau arrive après écriture
+      setTimeout(() => {
+        seal.classList.add("show");
+        playSafe(aTampon);
+      }, 1400);
     }
 
-    function closeMenu(){
-      // animation inverse
-      seal.classList.remove("show");
-      panel.classList.remove("show");
-      veil.classList.remove("show");
-      setTimeout(goBack, 180);
-    }
+    // =========================================================
+    // ✅ Events
+    // =========================================================
+    document.getElementById("btnBack").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
+    document.getElementById("btnBack2").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
+    document.getElementById("btnClose").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
 
-    // Click sur voile = revenir
-    veil.addEventListener("click", closeMenu);
-    btnClose.addEventListener("click", closeMenu);
-    btnBack.addEventListener("click", closeMenu);
-    btnBack2.addEventListener("click", closeMenu);
+    // clic dehors = retour
+    veil.addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
 
-    // ESC = fermer
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeMenu();
-    });
+    // Empêche clic à travers
+    panel.addEventListener("click", (e) => e.stopPropagation());
 
-    // Au chargement
-    window.addEventListener("load", openMenu);
-
-    // Sécurité iOS : empêcher “scroll de fond”
-    document.addEventListener("touchmove", (e) => {
-      // autoriser scroll uniquement dans .scroll
-      const sc = e.target.closest && e.target.closest(".scroll");
-      if (!sc) e.preventDefault();
-    }, { passive: false });
+    // Au chargement : ouverture
+    window.addEventListener("load", () => openMenu());
   </script>
 </body>
 </html>
