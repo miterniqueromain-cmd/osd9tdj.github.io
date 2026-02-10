@@ -78,22 +78,17 @@
       --ink: #2b1b12;
       --red: #a11212;
       --line: rgba(70,50,35,.24);
-      --glass: rgba(255,255,255,.12);
       --btn: rgba(255,255,255,.18);
-      --btn2: rgba(0,0,0,.20);
     }
 
-    /* ✅ Page entière : parchemin en plein écran (pas de zones noires) */
     html,body{height:100%; margin:0;}
     body{
       font-family: ui-serif, Georgia, "Times New Roman", serif;
       color: var(--ink);
-      background:
-        url("parchemin.jpg") center/cover no-repeat fixed;
+      background: url("parchemin.jpg") center/cover no-repeat fixed;
       overflow:hidden;
     }
 
-    /* ✅ voile noir + flou "derrière" */
     .veil{
       position:fixed; inset:0;
       background: var(--veil);
@@ -102,7 +97,7 @@
       z-index:10;
     }
 
-    /* ✅ panneau menu qui glisse de gauche -> droite */
+    /* ✅ MODIF 1 : glissement plus doux (durée + easing plus "smooth") */
     .panel{
       position:fixed;
       top: 50%;
@@ -116,20 +111,16 @@
       box-shadow: 0 26px 80px rgba(0,0,0,.55);
       overflow:hidden;
 
-      /* fond interne = même parchemin, mais stable */
-      background:
-        url("parchemin.jpg") center/cover no-repeat;
+      background: url("parchemin.jpg") center/cover no-repeat;
       outline: 1px solid rgba(0,0,0,.12);
     }
-
     .panel.open{
-      animation: slideIn .55s cubic-bezier(.2,.9,.2,1) forwards;
+      animation: slideIn 1.25s cubic-bezier(.18,.92,.18,1) forwards; /* 👈 plus lent */
     }
     @keyframes slideIn{
       to{ transform: translate(0, -50%); }
     }
 
-    /* ✅ header */
     .header{
       position:sticky; top:0;
       padding: 18px 18px 12px 18px;
@@ -148,16 +139,13 @@
       text-shadow: 0 1px 0 rgba(255,255,255,.5);
     }
 
-    /* ✅ 1ère lettre rouge (sans casser les mots) */
     .first{
       color: var(--red);
       font-weight: 700;
-      margin-right: 0; /* IMPORTANT: aucune séparation */
+      margin-right: 0;
     }
 
-    .actions{
-      display:flex; gap:10px; align-items:center;
-    }
+    .actions{ display:flex; gap:10px; align-items:center; }
     .btn{
       appearance:none; border:0;
       padding: 10px 12px;
@@ -169,7 +157,6 @@
       cursor:pointer;
       user-select:none;
     }
-    .btn:hover{ background: rgba(255,255,255,.22); }
     .btn.close{
       width: 42px; height: 42px;
       display:grid; place-items:center;
@@ -177,16 +164,15 @@
       padding:0;
     }
 
-    /* ✅ zone scroll interne (on laisse de la place pour le sceau fixé) */
+    /* ✅ MODIF 2 : on garde de la place pour le sceau fixé en bas */
     .scroll{
       height: calc(var(--panelH) - 84px);
       overflow:auto;
-      padding: 14px 16px calc(150px + env(safe-area-inset-bottom)) 16px; /* ✅ anti-superposition */
+      padding: 14px 16px calc(190px + env(safe-area-inset-bottom)) 16px; /* 👈 plus de marge bas */
       scrollbar-width: thin;
       scrollbar-color: rgba(60,45,35,.45) transparent;
     }
 
-    /* ✅ blocs/menus */
     details.group{
       border-radius: 16px;
       background: rgba(255,255,255,.14);
@@ -253,51 +239,53 @@
       letter-spacing:.2px;
     }
 
-    /* ✅ cadenas (fiable, pas emoji) */
     .lock{
       width: 20px; height: 20px; flex:0 0 auto;
       opacity:.9;
       filter: drop-shadow(0 2px 2px rgba(0,0,0,.25));
     }
 
-    /* ✅ animation plume (révélateur) */
     .write{
       display:inline-block;
       overflow:hidden;
       vertical-align:bottom;
       clip-path: inset(0 100% 0 0);
     }
+
+    /* ✅ MODIF 1 bis : écriture plus douce aussi */
     .write.reveal{
-      animation: inkReveal var(--dur, 900ms) steps(var(--steps, 18), end) forwards;
+      animation: inkReveal var(--dur, 1400ms) linear forwards; /* 👈 plus lent + fluide */
     }
     @keyframes inkReveal{
       to{ clip-path: inset(0 0 0 0); }
     }
 
-    /* ✅ sceau fixé en bas au centre (reste en bas même si on scroll) */
+    /* ✅ MODIF 3 : sceau fixé en bas (en bas à droite), plus gros, ne bouge pas au scroll */
     .sealDock{
       position:absolute;
       left:0; right:0;
-      bottom: calc(12px + env(safe-area-inset-bottom));
-      display:flex;
-      justify-content:center;
+      bottom: calc(10px + env(safe-area-inset-bottom));
+      height: 170px;                 /* zone réservée */
       pointer-events:none;
-      z-index: 40;
+      z-index: 50;
+      display:block;
     }
     .seal{
-      width: clamp(76px, 11vw, 120px);
+      position:absolute;
+      right: 18px;                   /* 👈 bas à droite */
+      bottom: 0;
+      width: clamp(110px, 16vw, 170px); /* 👈 plus gros */
       height:auto;
       opacity:0;
-      transform: translateY(12px) scale(.98);
-      transition: opacity .35s ease, transform .45s cubic-bezier(.2,.9,.2,1);
-      filter: drop-shadow(0 12px 22px rgba(0,0,0,.40));
+      transform: translateY(14px) scale(.98);
+      transition: opacity .45s ease, transform .65s cubic-bezier(.2,.9,.2,1);
+      filter: drop-shadow(0 14px 26px rgba(0,0,0,.40));
     }
     .seal.show{
       opacity:1;
       transform: translateY(0) scale(1);
     }
 
-    /* ✅ watermark invisible (texte réel mais invisible) */
     .wm{
       position:absolute;
       left:-9999px;
@@ -309,7 +297,6 @@
       user-select:none;
     }
 
-    /* ✅ responsive: paysage */
     @media (orientation: landscape){
       :root{
         --panelW: min(620px, 70vw);
@@ -323,15 +310,12 @@
 </head>
 
 <body>
-  <!-- watermark invisible -->
   <div class="wm" aria-hidden="true">
     O.S.D.9.T.D.J. — osd9tdj.org — Menu de navigation — Association loi 1901 — contenus originaux — empreinte site.
   </div>
 
-  <!-- voile (clic dehors = retour page précédente) -->
   <div class="veil" id="veil" aria-hidden="true"></div>
 
-  <!-- panneau -->
   <main class="panel" id="panel" role="dialog" aria-modal="true" aria-label="Menu de navigation">
     <header class="header">
       <h1 class="title" id="menuTitle">Menu de navigation</h1>
@@ -342,7 +326,6 @@
     </header>
 
     <section class="scroll" id="scroll">
-      <!-- ✅ GÉNÉRAL -->
       <details class="group" open>
         <summary>
           <div class="label js-write">Général</div>
@@ -361,7 +344,6 @@
         </div>
       </details>
 
-      <!-- ✅ HISTOIRE TEMPLIÈRE -->
       <details class="group">
         <summary>
           <div class="label js-write">Histoire templière</div>
@@ -379,7 +361,6 @@
         </div>
       </details>
 
-      <!-- ✅ ACTIVITÉS -->
       <details class="group">
         <summary>
           <div class="label js-write">Activités &amp; événements</div>
@@ -394,7 +375,6 @@
         </div>
       </details>
 
-      <!-- ✅ ADHÉSION -->
       <details class="group">
         <summary>
           <div class="label js-write">Adhésion</div>
@@ -411,7 +391,6 @@
         </div>
       </details>
 
-      <!-- ✅ BOUTIQUE -->
       <details class="group">
         <summary>
           <div class="label js-write">Boutique</div>
@@ -426,7 +405,6 @@
         </div>
       </details>
 
-      <!-- ✅ MEMBRES -->
       <details class="group">
         <summary>
           <div class="label js-write">Membres</div>
@@ -439,7 +417,6 @@
         <div class="items">
           <a class="item" href="documents-internes.html">
             <span class="sub js-write">Accès réservé aux membres</span>
-            <!-- lock svg -->
             <svg class="lock" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M7 11V8a5 5 0 0 1 10 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               <path d="M6 11h12v10H6V11Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
@@ -458,7 +435,6 @@
         </div>
       </details>
 
-      <!-- ✅ INFOS OFFICIELLES -->
       <details class="group">
         <summary>
           <div class="label js-write">Informations officielles &amp; aide</div>
@@ -476,7 +452,6 @@
         </div>
       </details>
 
-      <!-- ✅ ENCYCLOPÉDIQUE -->
       <details class="group">
         <summary>
           <div class="label js-write">Encyclopédique (en cours de création)</div>
@@ -492,7 +467,6 @@
         </div>
       </details>
 
-      <!-- ✅ Retour bas -->
       <div style="display:flex; justify-content:center; margin: 14px 0 8px 0;">
         <button class="btn" id="btnBack2" type="button" style="background:rgba(0,0,0,.14); color:#23150f;">
           ← Revenir à la page précédente
@@ -500,17 +474,13 @@
       </div>
     </section>
 
-    <!-- ✅ Sceau fixe bas-centre -->
+    <!-- ✅ Sceau fixe bas-droite -->
     <div class="sealDock" aria-hidden="true">
       <img id="seal" class="seal" src="sceaudeux.PNG" alt="Sceau OSD9TDJ">
     </div>
   </main>
 
   <script>
-    // =========================================================
-    // ✅ Sons (mets tes fichiers à la racine si tu veux)
-    // NOMS CONSEILLÉS : plume.mp3, epee.mp3, tampon.mp3
-    // =========================================================
     const SOUND_PLUME  = "plume.mp3";
     const SOUND_EPEE   = "epee.mp3";
     const SOUND_TAMPON = "tampon.mp3";
@@ -533,28 +503,17 @@
       try{ a.currentTime = 0; a.play().catch(()=>{}); }catch(e){}
     }
 
-    // =========================================================
-    // ✅ Retour page précédente (clic dehors, bouton, X)
-    // =========================================================
     function goBack(){
-      // si pas d'historique, fallback:
       if (history.length > 1) history.back();
       else location.href = "index.html";
     }
 
-    // =========================================================
-    // ✅ Écriture plume (sans casser SEO)
-    // + 1ère lettre rouge SANS espacements
-    // =========================================================
     function makeFirstLetterRed(node){
       const txt = (node.textContent || "").trim();
       if(!txt) return;
-
-      // évite double application
       if(node.dataset.firstDone) return;
       node.dataset.firstDone = "1";
 
-      // reconstruit sans espaces parasites
       const first = txt[0];
       const rest  = txt.slice(1);
 
@@ -573,10 +532,8 @@
     function applyWriting(){
       const els = document.querySelectorAll(".js-write, .title");
       els.forEach(el => {
-        // 1ère lettre rouge propre
         makeFirstLetterRed(el);
 
-        // wrap pour animation plume
         if(el.dataset.writeDone) return;
         el.dataset.writeDone = "1";
 
@@ -586,22 +543,16 @@
         el.appendChild(wrap);
 
         const text = wrap.textContent.trim();
-        const steps = Math.max(12, Math.min(44, text.length));
-        const dur = Math.max(700, Math.min(1700, text.length * 42));
-        wrap.style.setProperty("--steps", steps);
+        const dur = Math.max(1200, Math.min(2400, text.length * 55)); // 👈 plus doux
         wrap.style.setProperty("--dur", dur + "ms");
       });
 
-      // déclenche l'animation
       setTimeout(() => {
         document.querySelectorAll(".write").forEach(w => w.classList.add("reveal"));
         playSafe(aPlume);
-      }, 520);
+      }, 700); // 👈 démarre un peu plus tard (plus doux)
     }
 
-    // =========================================================
-    // ✅ Ouverture anim + sceau bas fixe (après)
-    // =========================================================
     const panel = document.getElementById("panel");
     const veil  = document.getElementById("veil");
     const seal  = document.getElementById("seal");
@@ -609,34 +560,24 @@
     function openMenu(){
       panel.classList.add("open");
 
-      // audio seulement après interaction utilisateur
       const unlock = () => { initAudioOnce(); document.removeEventListener("pointerdown", unlock); };
       document.addEventListener("pointerdown", unlock, { once:true });
 
-      // plume + sceau
       applyWriting();
 
-      // sceau arrive après écriture
       setTimeout(() => {
         seal.classList.add("show");
         playSafe(aTampon);
-      }, 1400);
+      }, 1700); // 👈 un peu plus tard (plus doux)
     }
 
-    // =========================================================
-    // ✅ Events
-    // =========================================================
     document.getElementById("btnBack").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
     document.getElementById("btnBack2").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
     document.getElementById("btnClose").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
 
-    // clic dehors = retour
     veil.addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
-
-    // Empêche clic à travers
     panel.addEventListener("click", (e) => e.stopPropagation());
 
-    // Au chargement : ouverture
     window.addEventListener("load", () => openMenu());
   </script>
 </body>
