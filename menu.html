@@ -28,11 +28,6 @@
   <meta name="application-name" content="OSD9TDJ" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-  <!-- ✅ Police médiévale (même couleur, style plus médiéval) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
-
   <!-- ✅ JSON-LD (jslon) : WebSite + Organization + WebPage -->
   <script type="application/ld+json">
   {
@@ -88,7 +83,7 @@
 
     html,body{height:100%; margin:0;}
     body{
-      font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif;
+      font-family: ui-serif, Georgia, "Times New Roman", serif;
       color: var(--ink);
       background: url("parchemin.jpg") center/cover no-repeat fixed;
       overflow:hidden;
@@ -102,7 +97,7 @@
       z-index:10;
     }
 
-    /* ✅ MODIF 1 : glissement plus lent */
+    /* ✅ MODIF 1 : glissement plus doux (durée + easing plus "smooth") */
     .panel{
       position:fixed;
       top: 50%;
@@ -120,7 +115,7 @@
       outline: 1px solid rgba(0,0,0,.12);
     }
     .panel.open{
-      animation: slideIn 2.2s cubic-bezier(.18,.92,.18,1) forwards;
+      animation: slideIn 1.25s cubic-bezier(.18,.92,.18,1) forwards; /* 👈 plus lent */
     }
     @keyframes slideIn{
       to{ transform: translate(0, -50%); }
@@ -161,7 +156,6 @@
       font-weight: 700;
       cursor:pointer;
       user-select:none;
-      font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif;
     }
     .btn.close{
       width: 42px; height: 42px;
@@ -174,7 +168,7 @@
     .scroll{
       height: calc(var(--panelH) - 84px);
       overflow:auto;
-      padding: 14px 16px calc(260px + env(safe-area-inset-bottom)) 16px; /* 👈 réserve bas plus grande */
+      padding: 14px 16px calc(240px + env(safe-area-inset-bottom)) 16px; /* ✅ + de marge bas */
       scrollbar-width: thin;
       scrollbar-color: rgba(60,45,35,.45) transparent;
     }
@@ -258,27 +252,27 @@
       clip-path: inset(0 100% 0 0);
     }
 
-    /* ✅ MODIF 1 bis : écriture encore plus lente */
+    /* ✅ MODIF 1 bis : écriture plus douce aussi */
     .write.reveal{
-      animation: inkReveal var(--dur, 2200ms) linear forwards;
+      animation: inkReveal var(--dur, 1400ms) linear forwards; /* 👈 plus lent + fluide */
     }
     @keyframes inkReveal{
       to{ clip-path: inset(0 0 0 0); }
     }
 
-    /* ✅ CORRECTIF : sceau VRAIMENT FIXE AU PANNEAU (comme le titre), bas-droite, plus gros */
+    /* ✅ CORRECTION UNIQUE : sceau FIXE en bas à droite du PANNEAU (pas dans le scroll) */
     .sealDock{
-      position:absolute; /* 👈 ancré au panneau (panel est fixed), donc ne bouge pas au scroll */
+      position:absolute;
       right: 18px;
-      bottom: calc(14px + env(safe-area-inset-bottom));
+      bottom: calc(10px + env(safe-area-inset-bottom));
       pointer-events:none;
       z-index: 60;
     }
     .seal{
       display:block;
-      width: clamp(190px, 24vw, 280px); /* 👈 plus gros */
+      width: clamp(200px, 24vw, 290px); /* ✅ plus gros */
       height:auto;
-      opacity:0;                        /* 👈 uniquement fondu */
+      opacity:0;
       transition: opacity 1s ease;
       filter: drop-shadow(0 16px 28px rgba(0,0,0,.45));
     }
@@ -474,7 +468,7 @@
       </div>
     </section>
 
-    <!-- ✅ Sceau FIXE (au panneau), bas-droite -->
+    <!-- ✅ Sceau FIXE bas-droite, sous "Revenir à la page précédente" -->
     <div class="sealDock" aria-hidden="true">
       <img id="seal" class="seal" src="sceaudeux.PNG" alt="Sceau OSD9TDJ">
     </div>
@@ -543,14 +537,14 @@
         el.appendChild(wrap);
 
         const text = wrap.textContent.trim();
-        const dur = Math.max(2200, Math.min(5200, text.length * 95));
+        const dur = Math.max(1200, Math.min(2400, text.length * 55)); // 👈 plus doux
         wrap.style.setProperty("--dur", dur + "ms");
       });
 
       setTimeout(() => {
         document.querySelectorAll(".write").forEach(w => w.classList.add("reveal"));
         playSafe(aPlume);
-      }, 1100);
+      }, 700); // 👈 démarre un peu plus tard (plus doux)
     }
 
     const panel = document.getElementById("panel");
@@ -568,7 +562,7 @@
       setTimeout(() => {
         seal.classList.add("show");
         playSafe(aTampon);
-      }, 2300);
+      }, 1700); // 👈 un peu plus tard (plus doux)
     }
 
     document.getElementById("btnBack").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
