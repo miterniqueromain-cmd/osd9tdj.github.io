@@ -88,10 +88,9 @@
 
     html,body{height:100%; margin:0;}
     body{
-      font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif; /* ✅ médiéval */
+      font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif;
       color: var(--ink);
 
-      /* ✅ fond un peu plus foncé + dégradé (haut plus sombre, bas plus clair) */
       background:
         linear-gradient(to bottom, rgba(0,0,0,.38), rgba(0,0,0,.10)),
         url("parchemin.jpg") center/cover no-repeat fixed;
@@ -107,7 +106,7 @@
       z-index:10;
     }
 
-    /* ✅ MODIF 1 : glissement plus doux (durée + easing plus "smooth") */
+    /* ✅ glissement encore plus long */
     .panel{
       position:fixed;
       top: 50%;
@@ -121,7 +120,6 @@
       box-shadow: 0 26px 80px rgba(0,0,0,.55);
       overflow:hidden;
 
-      /* ✅ panneau un peu plus foncé + dégradé (haut plus sombre, bas plus clair) */
       background:
         linear-gradient(to bottom, rgba(0,0,0,.26), rgba(0,0,0,.06)),
         url("parchemin.jpg") center/cover no-repeat;
@@ -129,7 +127,7 @@
       outline: 1px solid rgba(0,0,0,.12);
     }
     .panel.open{
-      animation: slideIn 1.25s cubic-bezier(.18,.92,.18,1) forwards; /* 👈 plus lent */
+      animation: slideIn 2.6s cubic-bezier(.18,.92,.18,1) forwards; /* ✅ encore plus long */
     }
     @keyframes slideIn{
       to{ transform: translate(0, -50%); }
@@ -170,7 +168,7 @@
       font-weight: 700;
       cursor:pointer;
       user-select:none;
-      font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif; /* ✅ médiéval */
+      font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif;
     }
     .btn.close{
       width: 42px; height: 42px;
@@ -179,11 +177,10 @@
       padding:0;
     }
 
-    /* ✅ MODIF 2 : on garde de la place pour le sceau fixé en bas */
     .scroll{
       height: calc(var(--panelH) - 84px);
       overflow:auto;
-      padding: 14px 16px calc(190px + env(safe-area-inset-bottom)) 16px; /* 👈 plus de marge bas */
+      padding: 14px 16px calc(190px + env(safe-area-inset-bottom)) 16px;
       scrollbar-width: thin;
       scrollbar-color: rgba(60,45,35,.45) transparent;
     }
@@ -267,9 +264,9 @@
       clip-path: inset(0 100% 0 0);
     }
 
-    /* ✅ MODIF 1 bis : écriture plus douce aussi */
+    /* ✅ écriture encore plus longue */
     .write.reveal{
-      animation: inkReveal var(--dur, 1400ms) linear forwards; /* 👈 plus lent + fluide */
+      animation: inkReveal var(--dur, 2600ms) linear forwards; /* ✅ plus lent */
     }
     @keyframes inkReveal{
       to{ clip-path: inset(0 0 0 0); }
@@ -277,13 +274,28 @@
 
     /* ✅ SCEAU : sous le bouton, en bas à droite */
     .sealDock{
+      position: relative;
       display:flex;
       justify-content:flex-end;
       margin: 10px 0 0 0;
       padding: 0 2px calc(12px + env(safe-area-inset-bottom)) 0;
       pointer-events:none;
     }
+
+    /* ✅ petit bandeau clair derrière (pour masquer la "peinte") */
+    .sealDock::before{
+      content:"";
+      position:absolute;
+      left: 0; right: 0;
+      top: -18px;
+      height: 120px;
+      border-radius: 16px;
+      background: linear-gradient(to bottom, rgba(255,255,255,.42), rgba(255,255,255,0));
+      pointer-events:none;
+    }
+
     .seal{
+      position: relative;
       width: clamp(160px, 22vw, 240px);
       height:auto;
       opacity:0;
@@ -550,14 +562,14 @@
         el.appendChild(wrap);
 
         const text = wrap.textContent.trim();
-        const dur = Math.max(1200, Math.min(2400, text.length * 55)); // 👈 plus doux
+        const dur = Math.max(2400, Math.min(7200, text.length * 140)); /* ✅ encore plus long */
         wrap.style.setProperty("--dur", dur + "ms");
       });
 
       setTimeout(() => {
         document.querySelectorAll(".write").forEach(w => w.classList.add("reveal"));
         playSafe(aPlume);
-      }, 700); // 👈 démarre un peu plus tard (plus doux)
+      }, 1400); /* ✅ démarre plus tard */
     }
 
     const panel = document.getElementById("panel");
@@ -575,7 +587,7 @@
       setTimeout(() => {
         seal.classList.add("show");
         playSafe(aTampon);
-      }, 1700); // 👈 un peu plus tard (plus doux)
+      }, 2600); /* ✅ plus tard (accord avec slide + écriture) */
     }
 
     document.getElementById("btnBack").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
