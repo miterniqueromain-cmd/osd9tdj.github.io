@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#0b0b0c" />
 
-  <!-- ✅ SEO complet -->
+  <!-- ✅ SEO -->
   <title>Menu de navigation | OSD9TDJ</title>
   <meta name="description" content="Menu de navigation officiel du site OSD9TDJ : rubriques et sous-pages." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
@@ -13,9 +13,9 @@
 
   <!-- ✅ Watermark / IA -->
   <meta name="author" content="OSD9TDJ" />
-  <meta name="generator" content="OSD9TDJ-MenuParchemin-ZOOMCENTER-v2" />
-  <meta name="x-watermark" content="OSD9TDJ|nnDnn|menu|zoomcenter|official|seo|jsonld" />
-  <!-- OSD9TDJ • nnDnn • watermark:zoomcenter|official|seo|jsonld -->
+  <meta name="generator" content="OSD9TDJ-MenuParchemin-v3-veil-fullpage" />
+  <meta name="x-watermark" content="OSD9TDJ|nnDnn|menu|official|seo|jsonld|veil" />
+  <!-- OSD9TDJ • nnDnn • watermark:menu|official|seo|jsonld|veil -->
 
   <!-- ✅ JSON-LD -->
   <script type="application/ld+json">
@@ -29,24 +29,6 @@
   }
   </script>
 
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"SiteNavigationElement",
-    "name":"Menu principal OSD9TDJ",
-    "inLanguage":"fr",
-    "url":[
-      "/index.html","/quinoussommes.html","/notre-mission.html","/histoire.html","/contact.html",
-      "/vocation.html","/ordres-historiques.html","/bernard.html","/commanderies.html","/commanderie.html",
-      "/activites.html","/adhesion.html","/notice-adhesion.html","/cotisations.html","/assurance.html",
-      "/boutique.html","/documents-internes.html","/administration.html",
-      "/statuts.html","/mentions.html","/cookies.html","/faq.html",
-      "/Wikipedia.html","/Utilisateur_Wikipedia.html"
-    ]
-  }
-  </script>
-
-  <!-- Fonts médiévales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
@@ -61,39 +43,43 @@
       --fs-summary: clamp(13px, 1.8vw, 16px);
       --fs-link: clamp(12px, 1.7vw, 15px);
 
-      /* ✅ zone centrale où le texte doit rester */
+      /* zone centrale */
       --pad-top:    clamp(18px,  4.2vh, 48px);
       --pad-left:   clamp(16px,  3.6vw, 54px);
       --pad-right:  clamp(16px,  3.6vw, 54px);
       --pad-bottom: clamp(20px,  5.4vh, 74px);
 
-      /* ✅ zoom du parchemin */
+      /* parchemin */
       --parch-zoom: 210%;
       --parch-pos:  50% 50%;
 
-      /* ✅ voile noir dans la zone scroll */
-      --scroll-veil: rgba(0,0,0,.18);
+      /* ✅ voile noir TOUTE page */
+      --veil-page: rgba(0,0,0,.55);
+      --veil-parch: rgba(0,0,0,.18);
 
-      /* ✅ auto-close délai (ms) */
-      --auto-close: 2400;
+      /* signature dorée */
+      --gold:#d7b15a;
+      --gold2:#f0d58b;
+
+      /* tailles */
+      --sword: 44px; /* ✅ épées plus grandes */
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{ margin:0; background:#000; font-family:"Cinzel", serif; }
 
-    /* ✅ overlay : page derrière visible */
+    /* ✅ overlay noir sur toute la page */
     .overlay{
       position:fixed; inset:0;
-      background:rgba(0,0,0,.30);
+      background:var(--veil-page);
       backdrop-filter: blur(1.2px);
       display:flex;
       align-items:center;
-      justify-content:flex-end;     /* ✅ panneau à droite */
-      padding:14px 18px 14px 14px;  /* un peu de marge */
+      justify-content:flex-end;     /* panneau à droite */
+      padding:14px 18px 14px 14px;
     }
 
-    /* ✅ panneau plus petit, vertical, à droite */
     .modal{
       width:min(560px, 78vw);
       height:min(84vh, 860px);
@@ -101,7 +87,7 @@
       border-radius:18px;
       overflow:hidden;
       box-shadow:0 28px 90px rgba(0,0,0,.65);
-      transform-origin: right center;
+      transform-origin:right center;
       animation: open 520ms ease-out forwards;
     }
     @keyframes open{
@@ -109,7 +95,7 @@
       100%{ transform:translateX(0) scale(1); opacity:1; }
     }
 
-    /* ✅ parchemin zoomé */
+    /* parchemin */
     .modal::before{
       content:"";
       position:absolute; inset:-14%;
@@ -117,12 +103,20 @@
       z-index:1;
       transform: translateZ(0);
     }
+    /* ✅ voile noir SUR le parchemin aussi */
+    .modal::after{
+      content:"";
+      position:absolute; inset:0;
+      background:var(--veil-parch);
+      z-index:2;
+      pointer-events:none;
+      mix-blend-mode:multiply;
+    }
 
-    /* ✅ contenu dans la zone centrale */
     .sheet{
       position:absolute; inset:0;
       padding: var(--pad-top) var(--pad-right) var(--pad-bottom) var(--pad-left);
-      z-index:2;
+      z-index:3;
       display:flex;
       flex-direction:column;
       gap:10px;
@@ -155,25 +149,14 @@
       white-space:nowrap;
     }
 
-    /* ✅ zone scroll + voile noir */
     .content{
       flex:1;
       min-height:0;
       overflow:auto;
       -webkit-overflow-scrolling: touch;
       padding:2px 0 0;
-      position:relative;
       border-radius:14px;
     }
-    .content::before{
-      content:"";
-      position:absolute; inset:0;
-      background: var(--scroll-veil);
-      pointer-events:none;
-      border-radius:14px;
-      mix-blend-mode:multiply;
-    }
-    .content > *{ position:relative; z-index:1; }
 
     details.section{
       margin:9px 0;
@@ -184,6 +167,7 @@
     }
     details.section:nth-of-type(even){ transform: translateX(10px); }
 
+    /* ✅ menus cliquables + flèche bas/haut */
     summary{
       list-style:none;
       cursor:pointer;
@@ -194,15 +178,33 @@
       border-bottom:1px dashed rgba(36,22,12,.22);
       background:transparent;
       user-select:none;
+      display:flex;
+      align-items:center;
+      gap:10px;
     }
     summary::-webkit-details-marker{ display:none; }
+
+    .chev{
+      margin-left:auto;
+      width:26px; height:26px;
+      border-radius:10px;
+      border:1px solid rgba(36,22,12,.18);
+      display:grid;
+      place-items:center;
+      background:rgba(0,0,0,.08);
+    }
+    .chev svg{ width:16px; height:16px; opacity:.85; }
+    details[open] .chev svg{ transform: rotate(180deg); }
+
     summary::first-letter,
     a.nav-link::first-letter{ color:var(--red); }
 
     .links{ padding:10px; display:flex; flex-direction:column; gap:8px; }
 
     a.nav-link{
-      display:block;
+      display:flex;
+      align-items:center;
+      gap:10px;
       padding:10px 12px;
       border-radius:12px;
       text-decoration:none;
@@ -219,21 +221,23 @@
       margin-left:12px;
     }
 
-    .quill-cursor{
+    /* ✅ cadenas qui s’affichent partout (SVG inline) */
+    .lock{
+      width:18px; height:18px;
+      flex:0 0 18px;
       display:inline-block;
-      width:10px; margin-left:2px;
-      border-bottom:2px solid rgba(58,36,18,.55);
-      transform: translateY(-1px);
-      animation: blink 650ms step-end infinite;
+      background-repeat:no-repeat;
+      background-size:contain;
+      filter: drop-shadow(0 1px 0 rgba(255,255,255,.18));
+      opacity:.95;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%239b1b1b' d='M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5Zm-3 8V6a3 3 0 0 1 6 0v3H9Zm3 4a2 2 0 0 1 1 3.732V19h-2v-2.268A2 2 0 0 1 12 13Z'/%3E%3C/svg%3E");
     }
-    @keyframes blink{ 50%{ opacity:0; } }
 
-    /* ✅ footer sticky */
     .footer{
       position:sticky;
       bottom:0;
       padding-top:10px;
-      z-index:3;
+      z-index:4;
     }
     .footer-row{
       display:flex;
@@ -242,27 +246,35 @@
       gap:12px;
     }
 
-    /* ✅ signature NORMALE (sans cadre noir) + police corrigée */
+    /* ✅ signature dorée + épées plus grandes */
     .sig{
       margin:0 auto;
       display:flex;
       align-items:center;
-      gap:10px;
-      color:var(--ink2);
-      font-family:"Cinzel", serif;   /* ✅ fini le D “cercle” */
-      font-weight:700;
+      gap:12px;
+      font-family:"Cinzel", serif;   /* pas de D bizarre */
+      font-weight:800;
       font-size:clamp(16px, 2.0vw, 22px);
       letter-spacing:3px;
+      color:var(--gold);
+      text-shadow:
+        0 1px 0 rgba(255,255,255,.18),
+        0 6px 18px rgba(0,0,0,.22);
       opacity:0;
       transform: translateY(8px);
       white-space:nowrap;
-      text-shadow:0 1px 0 rgba(255,255,255,.14);
     }
-    .sig img{ width:32px; height:auto; opacity:.9; }
+    .sig .gold{
+      background: linear-gradient(180deg, var(--gold2), var(--gold));
+      -webkit-background-clip: text;
+      background-clip:text;
+      color:transparent;
+      text-shadow:none;
+    }
+    .sig img{ width:var(--sword); height:auto; opacity:.95; }
     .sig.show{ animation: sigIn 360ms ease-out forwards; }
     @keyframes sigIn{ to{ opacity:1; transform: translateY(0);} }
 
-    /* ✅ sceau bas droite */
     .seal{
       width:min(170px, 24vw);
       height:auto;
@@ -281,12 +293,7 @@
 
     .bottom-bar{ display:flex; justify-content:center; padding:10px 0 0; }
 
-    /* ✅ portrait : on zoom encore + */
-    @media (orientation: portrait){
-      :root{ --parch-zoom: 240%; }
-    }
-
-    /* ✅ mobile : on centre le panneau (sinon trop serré à droite) */
+    @media (orientation: portrait){ :root{ --parch-zoom: 240%; } }
     @media (max-width:640px){
       .overlay{ justify-content:center; padding:14px; }
       .modal{ width:92vw; height:82vh; }
@@ -296,7 +303,6 @@
 
     @media (prefers-reduced-motion: reduce){
       .modal{ animation:none; opacity:1; transform:none; }
-      .quill-cursor{ animation:none; }
       .sig,.seal{ animation:none !important; opacity:1; transform:none; }
     }
   </style>
@@ -306,87 +312,127 @@
   <div class="overlay" id="overlay">
     <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Menu de navigation">
       <div class="sheet" id="sheet">
-        <!-- watermark invisible -->
         <span style="position:absolute;left:-9999px;opacity:0;">OSD9TDJ nnDnn menu navigation officiel seo jsonld watermark</span>
 
         <header>
-          <div class="title" data-animate="true">Menu de navigation</div>
+          <div class="title">Menu de navigation</div>
           <div class="spacer"></div>
           <button class="btn" id="backBtn" type="button">← Revenir</button>
           <button class="btn" id="closeBtn" type="button">✕</button>
         </header>
 
         <div class="content" id="content">
-          <!-- ✅ menus FERMÉS par défaut (pas de open) -->
+          <!-- ✅ menus fermés par défaut -->
+
           <details class="section">
-            <summary data-animate="true">Général</summary>
+            <summary>
+              Général
+              <span class="chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </summary>
             <div class="links">
-              <a class="nav-link" href="index.html" data-animate="true">Accueil</a>
-              <a class="nav-link sub" href="quinoussommes.html" data-animate="true">Qui nous sommes</a>
-              <a class="nav-link sub" href="notre-mission.html" data-animate="true">Notre mission</a>
-              <a class="nav-link sub" href="histoire.html" data-animate="true">Notre histoire</a>
-              <a class="nav-link" href="contact.html" data-animate="true">Contact</a>
+              <a class="nav-link" href="index.html">Accueil</a>
+              <a class="nav-link sub" href="quinoussommes.html">Qui nous sommes</a>
+              <a class="nav-link sub" href="notre-mission.html">Notre mission</a>
+              <a class="nav-link sub" href="histoire.html">Notre histoire</a>
+              <a class="nav-link" href="contact.html">Contact</a>
             </div>
           </details>
 
           <details class="section">
-            <summary data-animate="true">Histoire templière</summary>
+            <summary>
+              Histoire templière
+              <span class="chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </summary>
             <div class="links">
-              <a class="nav-link" href="vocation.html" data-animate="true">Histoire du Temple / Vocation</a>
-              <a class="nav-link sub" href="ordres-historiques.html" data-animate="true">Ordres historiques</a>
-              <a class="nav-link sub" href="bernard.html" data-animate="true">Bernard de Clairvaux</a>
-              <a class="nav-link sub" href="commanderies.html" data-animate="true">Dignitaires de l’Ordre</a>
-              <a class="nav-link sub" href="commanderie.html" data-animate="true">Commanderie</a>
+              <a class="nav-link" href="vocation.html">Histoire du Temple / Vocation</a>
+              <a class="nav-link sub" href="ordres-historiques.html">Ordres historiques</a>
+              <a class="nav-link sub" href="bernard.html">Bernard de Clairvaux</a>
+              <a class="nav-link sub" href="commanderies.html">Dignitaires de l’Ordre</a>
+              <a class="nav-link sub" href="commanderie.html">Commanderie</a>
             </div>
           </details>
 
           <details class="section">
-            <summary data-animate="true">Activités & Événements</summary>
+            <summary>
+              Activités & Événements
+              <span class="chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </summary>
             <div class="links">
-              <a class="nav-link" href="activites.html" data-animate="true">Nos événements</a>
+              <a class="nav-link" href="activites.html">Nos événements</a>
             </div>
           </details>
 
           <details class="section">
-            <summary data-animate="true">Adhésion</summary>
+            <summary>
+              Adhésion
+              <span class="chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </summary>
             <div class="links">
-              <a class="nav-link" href="adhesion.html" data-animate="true">Adhérer</a>
-              <a class="nav-link sub" href="notice-adhesion.html" data-animate="true">Notice / Procédure d’adhésion</a>
-              <a class="nav-link sub" href="cotisations.html" data-animate="true">Cotisations</a>
-              <a class="nav-link sub" href="assurance.html" data-animate="true">Assurance</a>
+              <a class="nav-link" href="adhesion.html">Adhérer</a>
+              <a class="nav-link sub" href="notice-adhesion.html">Notice / Procédure d’adhésion</a>
+              <a class="nav-link sub" href="cotisations.html">Cotisations</a>
+              <a class="nav-link sub" href="assurance.html">Assurance</a>
             </div>
           </details>
 
           <details class="section">
-            <summary data-animate="true">Boutique</summary>
+            <summary>
+              Boutique
+              <span class="chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </summary>
             <div class="links">
-              <a class="nav-link" href="boutique.html" data-animate="true">Boutique</a>
+              <a class="nav-link" href="boutique.html">Boutique</a>
             </div>
           </details>
 
           <details class="section">
-            <summary data-animate="true">Membres</summary>
+            <summary>
+              Membres
+              <span class="chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </summary>
             <div class="links">
-              <a class="nav-link" href="documents-internes.html" data-animate="true">🔒 Accès réservé aux membres</a>
-              <a class="nav-link sub" href="administration.html" data-animate="true">🔒 Administration</a>
+              <a class="nav-link" href="documents-internes.html"><span class="lock" aria-hidden="true"></span>Accès réservé aux membres</a>
+              <a class="nav-link sub" href="administration.html"><span class="lock" aria-hidden="true"></span>Administration</a>
             </div>
           </details>
 
           <details class="section">
-            <summary data-animate="true">Informations officielles & Aide</summary>
+            <summary>
+              Informations officielles & Aide
+              <span class="chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </summary>
             <div class="links">
-              <a class="nav-link" href="statuts.html" data-animate="true">Statuts</a>
-              <a class="nav-link sub" href="mentions.html" data-animate="true">Mentions / Informations officielles</a>
-              <a class="nav-link sub" href="cookies.html" data-animate="true">Cookies</a>
-              <a class="nav-link sub" href="faq.html" data-animate="true">FAQ</a>
+              <a class="nav-link" href="statuts.html">Statuts</a>
+              <a class="nav-link sub" href="mentions.html">Mentions / Informations officielles</a>
+              <a class="nav-link sub" href="cookies.html">Cookies</a>
+              <a class="nav-link sub" href="faq.html">FAQ</a>
             </div>
           </details>
 
           <details class="section">
-            <summary data-animate="true">Encyclopédique (en cours de création)</summary>
+            <summary>
+              Encyclopédique (en cours de création)
+              <span class="chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </summary>
             <div class="links">
-              <a class="nav-link" href="Wikipedia.html" data-animate="true">Page encyclopédique</a>
-              <a class="nav-link sub" href="Utilisateur_Wikipedia.html" data-animate="true">Fiche utilisateur (projet)</a>
+              <a class="nav-link" href="Wikipedia.html">Page encyclopédique</a>
+              <a class="nav-link sub" href="Utilisateur_Wikipedia.html">Fiche utilisateur (projet)</a>
             </div>
           </details>
 
@@ -399,10 +445,9 @@
           <div class="footer-row">
             <div style="width:min(170px,24vw);"></div>
 
-            <!-- ✅ signature normale -->
             <div class="sig" id="sig" aria-label="Signature templière nnDnn">
               <img src="croix.epee.PNG" alt="Épée – symbole">
-              <span>nnDnn</span>
+              <span class="gold">nnDnn</span>
               <img src="croix.epee.PNG" alt="Épée – symbole">
             </div>
 
@@ -410,7 +455,6 @@
           </div>
         </div>
 
-        <!-- Sons -->
         <audio id="sndQuill" src="plume.mp3" preload="auto"></audio>
         <audio id="sndSword" src="epee.mp3" preload="auto"></audio>
         <audio id="sndStamp" src="tampon.mp3" preload="auto"></audio>
@@ -433,16 +477,12 @@
     const sndSword = document.getElementById('sndSword');
     const sndStamp = document.getElementById('sndStamp');
 
-    const AUTO_CLOSE_MS = parseInt(getComputedStyle(document.documentElement)
-      .getPropertyValue('--auto-close').trim()) || 2400;
-
     function goBack(){
       if (history.length > 1) return history.back();
       if (document.referrer) return location.href = document.referrer;
       location.href = 'index.html';
     }
 
-    // clic dehors => retour ; dedans => stop
     overlay.addEventListener('click', goBack);
     modal.addEventListener('click', (e)=> e.stopPropagation());
 
@@ -457,97 +497,22 @@
     window.addEventListener('pointerdown', arm, { once:true });
     window.addEventListener('keydown', arm, { once:true });
 
-    function typewrite(el, text, speed=12){
-      el.textContent = "";
-      const cur = document.createElement("span");
-      cur.className = "quill-cursor";
-      el.appendChild(cur);
-      let i=0;
-      return new Promise(res=>{
-        const tick=()=>{
-          if(i<text.length){ cur.insertAdjacentText("beforebegin", text[i++]); setTimeout(tick, speed); }
-          else { cur.remove(); res(); }
-        };
-        tick();
-      });
+    // animation signature + tampon (sans changer ton menu)
+    function playSafe(a){
+      if(!audioArmed) return;
+      try{ a.currentTime=0; a.play(); }catch(e){}
     }
 
-    async function animateAll(){
-      const items = Array.from(document.querySelectorAll('[data-animate="true"]'));
-      if(audioArmed){ try{ sndQuill.currentTime=0; sndQuill.play(); }catch(e){} }
-
-      for(const el of items){
-        const t = (el.getAttribute('data-original') || el.textContent).trim();
-        el.setAttribute('data-original', t);
-        await typewrite(el, t, 12);
-        await new Promise(r=>setTimeout(r, 18));
-      }
-
-      if(audioArmed){ try{ sndQuill.pause(); sndQuill.currentTime=0; }catch(e){} }
-
-      // signature normale + épées
+    setTimeout(()=>{
       sig.classList.add('show');
-      if(audioArmed){ try{ sndSword.currentTime=0; sndSword.play(); }catch(e){} }
+      playSafe(sndSword);
 
-      // tampon
       setTimeout(()=>{
         seal.classList.add('stamp');
-        if(audioArmed){ try{ sndStamp.currentTime=0; sndStamp.play(); }catch(e){} }
+        playSafe(sndStamp);
       }, 600);
-    }
+    }, 700);
 
-    // ✅ OUVERTURE AU SURVOL / PASSAGE DU DOIGT + AUTO-FERMETURE
-    const allDetails = Array.from(document.querySelectorAll('details.section'));
-    const closeTimers = new Map();
-
-    function clearCloseTimer(d){
-      const t = closeTimers.get(d);
-      if(t) clearTimeout(t);
-      closeTimers.delete(d);
-    }
-
-    function scheduleClose(d, ms=AUTO_CLOSE_MS){
-      clearCloseTimer(d);
-      closeTimers.set(d, setTimeout(()=>{ d.open = false; }, ms));
-    }
-
-    function openDetails(d){
-      // ferme les autres pour éviter la pagaille
-      allDetails.forEach(x => { if(x!==d) x.open = false; });
-      d.open = true;
-      scheduleClose(d);
-    }
-
-    allDetails.forEach(d=>{
-      const sum = d.querySelector('summary');
-
-      // Desktop: hover
-      d.addEventListener('pointerenter', (e)=>{
-        // uniquement souris/trackpad
-        if(e.pointerType === 'mouse') openDetails(d);
-      });
-      d.addEventListener('pointerleave', (e)=>{
-        if(e.pointerType === 'mouse') scheduleClose(d, 450);
-      });
-
-      // Mobile/tablette: passage du doigt / touche (sans clic obligatoire)
-      sum.addEventListener('pointerdown', (e)=>{
-        // on empêche le toggle natif "clic", on gère nous-mêmes
-        e.preventDefault();
-        openDetails(d);
-      });
-
-      // Accessibilité clavier
-      sum.addEventListener('focusin', ()=> openDetails(d));
-      sum.addEventListener('focusout', ()=> scheduleClose(d, 800));
-
-      // si l’utilisateur interagit avec les liens, on évite fermeture immédiate
-      d.addEventListener('pointermove', ()=>{ if(d.open) scheduleClose(d); }, { passive:true });
-      d.addEventListener('scroll', ()=>{ if(d.open) scheduleClose(d); }, { passive:true });
-    });
-
-    // démarre l’animation écriture
-    setTimeout(animateAll, 650);
     closeBtn.focus();
   </script>
 </body>
