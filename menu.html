@@ -4,10 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="color-scheme" content="light" />
-  <title>Plan du site – Parchemin de navigation</title>
+  <title>Menu de navigation</title>
 
-  <!-- SEO -->
-  <meta name="description" content="Plan du site sous forme de parchemin animé : navigation par rubriques." />
+  <meta name="description" content="Menu de navigation du site (rubriques et sous-pages)." />
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="menu.html" />
 
@@ -18,25 +17,22 @@
 
   <style>
     :root{
-      --ink:#2a1b0f;
-      --ink2:#5a3b20;
+      --ink:#24160c;
+      --ink2:#3a2412;
+      --red:#a30000;
       --gold:#c7a45a;
-      --red:#b30000;
-      --shadow:rgba(0,0,0,.55);
-      --paper1:#f7ebcf;
-      --paper2:#ead8ad;
-      --paper3:#d8bf8a;
+
+      /* parchemin (plus chaud) */
+      --p1:#f7edcf;
+      --p2:#ecd9ac;
+      --p3:#d9bf86;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
-    body{
-      margin:0;
-      background:#0b0b0c;
-      font-family:"Cinzel", serif;
-    }
+    body{ margin:0; background:#0b0b0c; font-family:"Cinzel",serif; }
 
-    /* voile sombre (la page précédente est derrière dans l’historique du navigateur) */
+    /* fond sombre (page derrière) */
     .backdrop{
       position:fixed; inset:0;
       background:rgba(0,0,0,.45);
@@ -46,48 +42,36 @@
       padding:16px;
     }
 
-    /* PARCHEMIN + rouleaux */
+    /* parchemin déroulé (rouleaux) */
     .scroll{
-      width:min(920px, 94vw);
-      max-height:min(90vh, 940px);
+      width:min(940px, 94vw);
+      height:min(90vh, 940px);
       border-radius:18px;
-      border:1px solid rgba(140,110,60,.35);
-      box-shadow:0 25px 85px var(--shadow);
+      border:1px solid rgba(120,90,50,.35);
+      box-shadow:0 26px 90px rgba(0,0,0,.55);
       overflow:hidden;
       position:relative;
-      transform-origin: top center;
 
-      /* texture “papier” (fibres + lumière + ombre) */
+      /* texture parchemin plus “naturelle” et moins grise */
       background:
-        repeating-linear-gradient(
-          90deg,
-          rgba(120,90,50,.06) 0px,
-          rgba(120,90,50,.06) 1px,
-          rgba(255,255,255,0) 7px,
-          rgba(255,255,255,0) 12px
-        ),
-        radial-gradient(1100px 700px at 15% 12%, rgba(255,255,255,.42), transparent 60%),
+        radial-gradient(1200px 700px at 15% 12%, rgba(255,255,255,.45), transparent 60%),
         radial-gradient(900px 700px at 90% 30%, rgba(0,0,0,.14), transparent 58%),
-        linear-gradient(135deg, var(--paper1), var(--paper2) 45%, var(--paper3));
-
-      /* déroulage */
-      height:0;
-      opacity:0;
-      transform: scaleY(.10);
-      animation: unfurlScroll 920ms ease-out forwards;
+        linear-gradient(135deg, var(--p1), var(--p2) 45%, var(--p3));
+      transform-origin: top center;
+      animation: unfurl 820ms ease-out forwards;
     }
 
-    @keyframes unfurlScroll{
-      0%{ height:0; opacity:0; transform:scaleY(.10); }
-      70%{ height:72vh; opacity:1; transform:scaleY(1); }
-      100%{ height:min(90vh, 940px); opacity:1; transform:scaleY(1); }
+    @keyframes unfurl{
+      0%{ transform: scaleY(.12); opacity:0; }
+      40%{ opacity:1; }
+      100%{ transform: scaleY(1); opacity:1; }
     }
 
     .scroll::before,
     .scroll::after{
       content:"";
       position:absolute;
-      left:-10px; right:-10px;
+      left:-12px; right:-12px;
       height:34px;
       border-radius:999px;
       background:
@@ -102,23 +86,24 @@
     .scroll::before{ top:-18px; }
     .scroll::after{ bottom:-18px; }
 
+    /* layout interne : header + contenu scroll + footer fixe */
+    .wrap{
+      position:relative;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      z-index:2;
+    }
+
     header{
-      position:sticky; top:0;
-      z-index:5;
       display:flex;
       align-items:center;
       gap:10px;
       padding:14px 14px 10px;
-      border-bottom:1px dashed rgba(42,27,15,.35);
-      background:linear-gradient(180deg, rgba(247,235,207,.96), rgba(247,235,207,.70));
-      backdrop-filter: blur(2px);
+      border-bottom:1px dashed rgba(36,22,12,.28);
+      background:linear-gradient(180deg, rgba(247,237,207,.96), rgba(247,237,207,.70));
     }
 
-    .brand{
-      display:flex;
-      flex-direction:column;
-      min-width:0;
-    }
     .title{
       font-family:"Uncial Antiqua", serif;
       font-size:20px;
@@ -126,21 +111,12 @@
       letter-spacing:.3px;
       line-height:1.1;
     }
-    .sub{
-      font-size:12px;
-      opacity:.85;
-      color:var(--ink);
-      margin-top:2px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
 
     .spacer{ flex:1; }
 
     .btn{
-      border:1px solid rgba(42,27,15,.22);
-      background:rgba(255,255,255,.30);
+      border:1px solid rgba(36,22,12,.22);
+      background:rgba(255,255,255,.28);
       color:var(--ink2);
       border-radius:12px;
       padding:8px 10px;
@@ -148,42 +124,49 @@
       font-family:"Cinzel", serif;
       white-space:nowrap;
     }
-    .btn:focus{ outline:2px solid rgba(179,0,0,.35); }
+    .btn:focus{ outline:2px solid rgba(163,0,0,.35); }
 
-    main{
-      position:relative;
-      z-index:2;
-    }
-
-    /* zone menu */
-    nav{
-      padding:14px 12px 230px; /* place signature + sceau */
+    /* zone menu scrollable */
+    .content{
+      flex:1;
       overflow:auto;
-      max-height:calc(min(90vh, 940px) - 70px);
+      padding:14px 12px 10px;
     }
 
-    /* Rubriques */
-    .section{
+    /* sections (menus déroulants ouverts) */
+    details.section{
       margin:12px 0;
-      border:1px solid rgba(42,27,15,.16);
+      border:1px solid rgba(36,22,12,.15);
       border-radius:16px;
-      background:rgba(255,255,255,.18);
+      background:rgba(255,255,255,.16);
       overflow:hidden;
     }
 
-    .section-title{
+    /* quinconce léger */
+    details.section:nth-of-type(odd){ transform: translateX(0); }
+    details.section:nth-of-type(even){ transform: translateX(10px); }
+
+    summary{
+      list-style:none;
+      cursor:pointer;
       padding:12px 12px 10px;
       font-family:"Uncial Antiqua", serif;
       font-size:16px;
       color:var(--ink2);
       letter-spacing:.3px;
-      border-bottom:1px dashed rgba(42,27,15,.22);
-      background:rgba(255,255,255,.12);
+      border-bottom:1px dashed rgba(36,22,12,.20);
+      background:rgba(255,255,255,.10);
+    }
+    summary::-webkit-details-marker{ display:none; }
+
+    /* première lettre rouge (rubrique + liens) */
+    summary::first-letter,
+    a.nav-link::first-letter{
+      color:var(--red);
     }
 
-    /* liens */
     .links{
-      padding:10px 10px 6px;
+      padding:10px 10px 12px;
       display:flex;
       flex-direction:column;
       gap:8px;
@@ -195,114 +178,88 @@
       border-radius:14px;
       text-decoration:none;
       color:var(--ink);
-      border:1px solid rgba(42,27,15,.12);
-      background:rgba(255,255,255,.22);
+      border:1px solid rgba(36,22,12,.12);
+      background:rgba(255,255,255,.20);
 
       font-family:"Cinzel", serif;
       font-weight:700;
-      letter-spacing:.2px;
-      position:relative;
+      letter-spacing:.15px;
       overflow:hidden;
     }
-    a.nav-link:hover{ outline:2px solid rgba(179,0,0,.25); }
-    a.nav-link:focus{ outline:2px solid rgba(179,0,0,.45); }
+    /* sous-titres moins appuyés */
+    a.nav-link.sub{
+      font-weight:600;
+      opacity:.92;
+      background:rgba(255,255,255,.16);
+    }
 
-    /* Animation “plume qui écrit” : curseur */
+    a.nav-link:hover{ outline:2px solid rgba(163,0,0,.22); }
+    a.nav-link:focus{ outline:2px solid rgba(163,0,0,.40); }
+
+    /* plume : curseur */
     .quill-cursor{
       display:inline-block;
       width:10px;
       margin-left:2px;
-      border-bottom:2px solid rgba(90,59,32,.65);
+      border-bottom:2px solid rgba(58,36,18,.55);
       transform: translateY(-1px);
       animation: blink 650ms step-end infinite;
     }
     @keyframes blink{ 50%{ opacity:0; } }
 
-    /* Signature nnDnn */
-    .signature-zone{
-      position:absolute;
-      left:0; right:0;
-      bottom:115px;
+    /* footer “fixe” dans le parchemin (ne bouge pas quand on scroll) */
+    .footer-fixed{
+      position:relative;
+      padding:10px 14px 14px;
+      border-top:1px dashed rgba(36,22,12,.20);
+      background:linear-gradient(180deg, rgba(247,237,207,.10), rgba(247,237,207,.45));
       display:flex;
-      justify-content:center;
-      padding:0 16px;
-      pointer-events:none;
-      z-index:6;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      min-height:110px;
     }
 
-    .nndnn-banner{
+    /* signature bouton NOIR */
+    .sig-btn{
       display:flex;
       align-items:center;
-      gap:14px;
+      gap:12px;
       padding:10px 14px;
       border-radius:16px;
-      border:1px solid rgba(42,27,15,.16);
-      background:rgba(255,255,255,.16);
-      box-shadow:0 10px 28px rgba(0,0,0,.18);
-      opacity:0;
-      transform: translateY(14px) scale(.95);
-    }
-
-    .nndnn-banner img{
-      width:34px;
-      height:auto;
-      opacity:.95;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,.18));
-    }
-
-    .nndnn-text{
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(0,0,0,.78);
+      box-shadow:0 12px 30px rgba(0,0,0,.35);
+      color:#f1d27a;
       font-family:"Uncial Antiqua", serif;
-      font-size:22px;
+      font-size:20px;
       letter-spacing:2px;
-      color:var(--ink2);
-      text-shadow:
-        0 1px 0 rgba(255,255,255,.35),
-        0 -1px 0 rgba(0,0,0,.16);
-      position:relative;
-    }
-
-    /* “coup d’épée” */
-    .slash{
-      position:absolute;
-      left:10%;
-      bottom:-7px;
-      width:0;
-      height:2px;
       opacity:0;
-      background:linear-gradient(90deg, transparent, rgba(179,0,0,.55), transparent);
+      transform: translateY(10px);
+      pointer-events:none;
     }
-
-    .nndnn-banner.strike{
-      animation: bannerIn 360ms ease-out forwards, microShake 220ms ease-out 120ms;
+    .sig-btn img{
+      width:34px; height:auto;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.35));
+      opacity:.95;
     }
-    .nndnn-banner.strike .slash{
-      animation: slash 420ms ease-out 120ms forwards;
+    .sig-btn.show{
+      animation: sigIn 360ms ease-out forwards, microShake 220ms ease-out 120ms;
     }
-    @keyframes bannerIn{
-      to{ opacity:1; transform: translateY(0) scale(1); }
-    }
+    @keyframes sigIn{ to{ opacity:1; transform: translateY(0);} }
     @keyframes microShake{
-      0%{ transform: translateX(0) translateY(0) scale(1); }
-      30%{ transform: translateX(-2px) translateY(0) scale(1); }
-      60%{ transform: translateX(2px) translateY(0) scale(1); }
-      100%{ transform: translateX(0) translateY(0) scale(1); }
-    }
-    @keyframes slash{
-      0%{ width:0; opacity:0; }
-      35%{ width:80%; opacity:1; }
-      100%{ width:80%; opacity:.25; }
+      0%{ transform: translateX(0) translateY(0); }
+      30%{ transform: translateX(-2px) translateY(0); }
+      60%{ transform: translateX(2px) translateY(0); }
+      100%{ transform: translateX(0) translateY(0); }
     }
 
-    /* Sceau (tampon) */
+    /* sceau : arrive frappé puis reste en bas */
     .seal{
-      position:absolute;
-      right:16px;
-      bottom:14px;
-      width:min(240px, 44vw);
+      width:min(220px, 38vw);
       height:auto;
-      z-index:7;
       opacity:0;
-      transform: translateY(-180px) rotate(-8deg) scale(1.06);
+      transform: translateY(-120px) rotate(-6deg) scale(1.05);
       filter: drop-shadow(0 16px 16px rgba(0,0,0,.28));
       mix-blend-mode: multiply;
       pointer-events:none;
@@ -311,145 +268,130 @@
       animation: stampIn 560ms cubic-bezier(.2,.85,.2,1) forwards;
     }
     @keyframes stampIn{
-      0%{ opacity:0; transform: translateY(-180px) rotate(-8deg) scale(1.08); }
-      70%{ opacity:1; transform: translateY(10px) rotate(0deg) scale(1.02); }
-      86%{ opacity:1; transform: translateY(-8px) rotate(0deg) scale(1.00); }
+      0%{ opacity:0; transform: translateY(-120px) rotate(-6deg) scale(1.08); }
+      70%{ opacity:1; transform: translateY(8px) rotate(0deg) scale(1.02); }
+      86%{ opacity:1; transform: translateY(-6px) rotate(0deg) scale(1.00); }
       100%{ opacity:1; transform: translateY(0) rotate(0deg) scale(1.00); }
     }
 
-    /* responsive */
     @media (max-width:520px){
       .title{ font-size:18px; }
-      .seal{ width:min(210px, 56vw); }
-      .signature-zone{ bottom:118px; }
-      .nndnn-text{ font-size:20px; }
-      a.nav-link{ font-size:14px; }
+      details.section:nth-of-type(even){ transform: translateX(6px); }
+      .sig-btn{ font-size:18px; }
+      .seal{ width:min(190px, 52vw); }
     }
 
-    /* accessibilité : si l’utilisateur réduit les animations */
     @media (prefers-reduced-motion: reduce){
-      .scroll{ animation:none; height:min(90vh, 940px); opacity:1; transform:none; }
-      .seal, .nndnn-banner{ animation:none !important; opacity:1; transform:none; }
+      .scroll{ animation:none; transform:none; opacity:1; }
       .quill-cursor{ animation:none; }
+      .sig-btn, .seal{ animation:none !important; opacity:1; transform:none; }
     }
   </style>
 </head>
 
 <body>
   <div class="backdrop" id="backdrop" aria-label="Fermer le menu">
-    <div class="scroll" id="scroll" role="dialog" aria-modal="true" aria-label="Plan du site (menu)">
-      <header>
-        <div class="brand">
-          <div class="title">Parchemin de Navigation</div>
-          <div class="sub">Choisissez un lien — cliquez dehors pour revenir</div>
-        </div>
+    <div class="scroll" id="scroll" role="dialog" aria-modal="true" aria-label="Menu de navigation">
+      <div class="wrap">
+        <header>
+          <div class="title" id="pageTitle">Menu de navigation</div>
+          <div class="spacer"></div>
+          <button class="btn" id="backBtn" type="button" aria-label="Retour page précédente">← Retour</button>
+          <button class="btn" id="closeBtn" type="button" aria-label="Fermer">✕</button>
+        </header>
 
-        <div class="spacer"></div>
-
-        <button class="btn" id="backBtn" type="button" aria-label="Revenir à la page précédente">← Retour</button>
-        <button class="btn" id="closeBtn" type="button" aria-label="Fermer le menu">✕</button>
-      </header>
-
-      <main>
-        <nav aria-label="Arborescence du site">
-          <!-- IMPORTANT : le texte est présent pour le SEO.
-               JS l’anime en “plume qui écrit” après chargement. -->
-
-          <section class="section">
-            <div class="section-title" data-animate="true">Général</div>
+        <div class="content" id="content">
+          <!-- OUVERT par défaut (tu voulais ouvert) -->
+          <details class="section" open>
+            <summary data-animate="true">Général</summary>
             <div class="links">
               <a class="nav-link" href="index.html" data-animate="true">Accueil</a>
-              <a class="nav-link" href="quinoussommes.html" data-animate="true">Qui nous sommes</a>
-              <a class="nav-link" href="notre-mission.html" data-animate="true">Notre mission</a>
-              <a class="nav-link" href="histoire.html" data-animate="true">Notre histoire</a>
+              <a class="nav-link sub" href="quinoussommes.html" data-animate="true">Qui nous sommes</a>
+              <a class="nav-link sub" href="notre-mission.html" data-animate="true">Notre mission</a>
+              <a class="nav-link sub" href="histoire.html" data-animate="true">Notre histoire</a>
               <a class="nav-link" href="contact.html" data-animate="true">Contact</a>
             </div>
-          </section>
+          </details>
 
-          <section class="section">
-            <div class="section-title" data-animate="true">Histoire templière</div>
+          <details class="section" open>
+            <summary data-animate="true">Histoire templière</summary>
             <div class="links">
               <a class="nav-link" href="vocation.html" data-animate="true">Histoire du Temple / Vocation</a>
-              <a class="nav-link" href="ordres-historiques.html" data-animate="true">Ordres historiques</a>
-              <a class="nav-link" href="bernard.html" data-animate="true">Bernard de Clairvaux</a>
-              <a class="nav-link" href="commanderies.html" data-animate="true">Dignitaires de l’Ordre</a>
-              <a class="nav-link" href="commanderie.html" data-animate="true">Commanderie</a>
+              <a class="nav-link sub" href="ordres-historiques.html" data-animate="true">Ordres historiques</a>
+              <a class="nav-link sub" href="bernard.html" data-animate="true">Bernard de Clairvaux</a>
+              <a class="nav-link sub" href="commanderies.html" data-animate="true">Dignitaires de l’Ordre</a>
+              <a class="nav-link sub" href="commanderie.html" data-animate="true">Commanderie</a>
             </div>
-          </section>
+          </details>
 
-          <section class="section">
-            <div class="section-title" data-animate="true">Activités & Événements</div>
+          <details class="section" open>
+            <summary data-animate="true">Activités & Événements</summary>
             <div class="links">
               <a class="nav-link" href="activites.html" data-animate="true">Nos événements</a>
             </div>
-          </section>
+          </details>
 
-          <section class="section">
-            <div class="section-title" data-animate="true">Adhésion</div>
+          <details class="section" open>
+            <summary data-animate="true">Adhésion</summary>
             <div class="links">
               <a class="nav-link" href="adhesion.html" data-animate="true">Adhérer</a>
-              <a class="nav-link" href="notice-adhesion.html" data-animate="true">Notice / Procédure d’adhésion</a>
-              <a class="nav-link" href="cotisations.html" data-animate="true">Cotisations</a>
-              <a class="nav-link" href="assurance.html" data-animate="true">Assurance</a>
+              <a class="nav-link sub" href="notice-adhesion.html" data-animate="true">Notice / Procédure d’adhésion</a>
+              <a class="nav-link sub" href="cotisations.html" data-animate="true">Cotisations</a>
+              <a class="nav-link sub" href="assurance.html" data-animate="true">Assurance</a>
             </div>
-          </section>
+          </details>
 
-          <section class="section">
-            <div class="section-title" data-animate="true">Boutique</div>
+          <details class="section" open>
+            <summary data-animate="true">Boutique</summary>
             <div class="links">
               <a class="nav-link" href="boutique.html" data-animate="true">Boutique</a>
             </div>
-          </section>
+          </details>
 
-          <section class="section">
-            <div class="section-title" data-animate="true">Membres</div>
+          <details class="section" open>
+            <summary data-animate="true">Membres</summary>
             <div class="links">
               <a class="nav-link" href="documents-internes.html" data-animate="true">🔒 Accès réservé aux membres</a>
-              <a class="nav-link" href="administration.html" data-animate="true">🔒 Administration</a>
+              <a class="nav-link sub" href="administration.html" data-animate="true">🔒 Administration</a>
             </div>
-          </section>
+          </details>
 
-          <section class="section">
-            <div class="section-title" data-animate="true">Informations officielles & Aide</div>
+          <details class="section" open>
+            <summary data-animate="true">Informations officielles & Aide</summary>
             <div class="links">
               <a class="nav-link" href="statuts.html" data-animate="true">Statuts</a>
-              <a class="nav-link" href="mentions.html" data-animate="true">Mentions / Informations officielles</a>
-              <a class="nav-link" href="cookies.html" data-animate="true">Cookies</a>
-              <a class="nav-link" href="faq.html" data-animate="true">FAQ</a>
+              <a class="nav-link sub" href="mentions.html" data-animate="true">Mentions / Informations officielles</a>
+              <a class="nav-link sub" href="cookies.html" data-animate="true">Cookies</a>
+              <a class="nav-link sub" href="faq.html" data-animate="true">FAQ</a>
             </div>
-          </section>
+          </details>
 
-          <section class="section">
-            <div class="section-title" data-animate="true">Encyclopédique (en cours de création)</div>
+          <details class="section" open>
+            <summary data-animate="true">Encyclopédique (en cours de création)</summary>
             <div class="links">
               <a class="nav-link" href="Wikipedia.html" data-animate="true">Page encyclopédique</a>
-              <a class="nav-link" href="Utilisateur_Wikipedia.html" data-animate="true">Fiche utilisateur (projet)</a>
+              <a class="nav-link sub" href="Utilisateur_Wikipedia.html" data-animate="true">Fiche utilisateur (projet)</a>
             </div>
-          </section>
+          </details>
 
           <noscript>
-            <div style="margin:12px 0;padding:12px;border:1px solid rgba(42,27,15,.16);border-radius:16px;background:rgba(255,255,255,.18);">
-              JavaScript est désactivé : l’animation “plume” ne s’affichera pas. Les liens restent utilisables.
+            <div style="margin:12px 0;padding:12px;border:1px solid rgba(36,22,12,.15);border-radius:16px;background:rgba(255,255,255,.16);color:#24160c;">
+              JavaScript est désactivé : pas d’animation “plume”. Les liens restent utilisables.
             </div>
           </noscript>
-        </nav>
-      </main>
+        </div>
 
-      <!-- ✅ Signature nnDnn -->
-      <div class="signature-zone" aria-label="Signature nnDnn">
-        <div class="nndnn-banner" id="nndnnBanner" aria-label="Signature templière nnDnn">
-          <img src="croix.epee.PNG" alt="Épée – symbole">
-          <div class="nndnn-text">nnDnn<div class="slash" aria-hidden="true"></div></div>
-          <img src="croix.epee.PNG" alt="Épée – symbole">
+        <!-- FIXE EN BAS DU PARCHEMIN (ne bouge pas quand tu scroll) -->
+        <div class="footer-fixed">
+          <div class="sig-btn" id="sigBtn" aria-label="Signature nnDnn">
+            <img src="croix.epee.PNG" alt="Épée – symbole">
+            <span>nnDnn</span>
+            <img src="croix.epee.PNG" alt="Épée – symbole">
+          </div>
+
+          <img class="seal" id="seal" src="sceaudeux.PNG" alt="" aria-hidden="true">
         </div>
       </div>
-
-      <!-- ✅ Sceau -->
-      <img class="seal" id="seal" src="sceaudeux.PNG" alt="" aria-hidden="true">
-
-      <!-- Sons (optionnel) : mets epee.mp3 et tampon.mp3 à la racine si tu veux -->
-      <!-- <audio id="swordSound" src="epee.mp3" preload="auto"></audio> -->
-      <!-- <audio id="stampSound" src="tampon.mp3" preload="auto"></audio> -->
     </div>
   </div>
 
@@ -458,11 +400,8 @@
     const scroll = document.getElementById('scroll');
     const backBtn = document.getElementById('backBtn');
     const closeBtn = document.getElementById('closeBtn');
-    const nndnnBanner = document.getElementById('nndnnBanner');
+    const sigBtn = document.getElementById('sigBtn');
     const seal = document.getElementById('seal');
-
-    // const swordSound = document.getElementById('swordSound');
-    // const stampSound = document.getElementById('stampSound');
 
     function goBack(){
       if (history.length > 1) return history.back();
@@ -470,19 +409,19 @@
       location.href = 'index.html';
     }
 
-    // Fermer / retour
+    // clic dehors => retour
     backdrop.addEventListener('click', goBack);
+    // clic dedans => ne ferme pas
     scroll.addEventListener('click', (e)=> e.stopPropagation());
+
     backBtn.addEventListener('click', goBack);
     closeBtn.addEventListener('click', goBack);
     document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') goBack(); });
 
-    // Focus accessibilité
     closeBtn.focus();
 
-    // ---- Animation “plume qui écrit” ----
-    // On garde le texte pour SEO, puis on l’anime.
-    function typewrite(el, text, speed = 18){
+    // Animation “plume” (écrit lettre par lettre)
+    function typewrite(el, text, speed = 16){
       el.textContent = '';
       const cursor = document.createElement('span');
       cursor.className = 'quill-cursor';
@@ -495,7 +434,7 @@
             cursor.insertAdjacentText('beforebegin', text[i]);
             i++;
             setTimeout(tick, speed);
-          }else{
+          } else {
             cursor.remove();
             resolve();
           }
@@ -504,39 +443,23 @@
       });
     }
 
-    async function animateMenu(){
+    async function animateAll(){
       const items = Array.from(document.querySelectorAll('[data-animate="true"]'));
-      // Ordre naturel du DOM => écriture “ta ta ta…”
       for(const el of items){
-        const original = el.textContent.trim();
-        // accessibilité : garder ce que c’était
+        const original = (el.getAttribute('data-original') || el.textContent).trim();
+        el.setAttribute('data-original', original);
         if(!el.getAttribute('aria-label')) el.setAttribute('aria-label', original);
-        await typewrite(el, original, 16);
-        await new Promise(r => setTimeout(r, 40));
+        await typewrite(el, original, 15);
+        await new Promise(r => setTimeout(r, 30));
       }
+
+      // ensuite signature puis sceau (à la fin)
+      sigBtn.classList.add('show');
+      setTimeout(() => seal.classList.add('stamp'), 650);
     }
 
-    // Timing global :
-    // 1) déroulage 920ms
-    // 2) écriture des rubriques/liens
-    // 3) signature nnDnn
-    // 4) sceau “frappé”
-    const UNFURL_MS = 920;
-
-    setTimeout(async () => {
-      await animateMenu();
-
-      // Signature
-      nndnnBanner.classList.add('strike');
-      // swordSound?.play().catch(()=>{});
-
-      // Tampon après signature
-      setTimeout(() => {
-        seal.classList.add('stamp');
-        // stampSound?.play().catch(()=>{});
-      }, 600);
-
-    }, UNFURL_MS + 120);
+    // après le déroulé
+    setTimeout(animateAll, 860);
   </script>
 </body>
 </html>
