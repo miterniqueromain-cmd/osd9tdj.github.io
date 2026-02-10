@@ -28,6 +28,11 @@
   <meta name="application-name" content="OSD9TDJ" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
+  <!-- ✅ Police médiévale -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
+
   <!-- ✅ JSON-LD (jslon) : WebSite + Organization + WebPage -->
   <script type="application/ld+json">
   {
@@ -83,9 +88,14 @@
 
     html,body{height:100%; margin:0;}
     body{
-      font-family: ui-serif, Georgia, "Times New Roman", serif;
+      font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif; /* ✅ médiéval */
       color: var(--ink);
-      background: url("parchemin.jpg") center/cover no-repeat fixed;
+
+      /* ✅ fond un peu plus foncé + dégradé (haut plus sombre, bas plus clair) */
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,.38), rgba(0,0,0,.10)),
+        url("parchemin.jpg") center/cover no-repeat fixed;
+
       overflow:hidden;
     }
 
@@ -111,7 +121,11 @@
       box-shadow: 0 26px 80px rgba(0,0,0,.55);
       overflow:hidden;
 
-      background: url("parchemin.jpg") center/cover no-repeat;
+      /* ✅ panneau un peu plus foncé + dégradé (haut plus sombre, bas plus clair) */
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,.26), rgba(0,0,0,.06)),
+        url("parchemin.jpg") center/cover no-repeat;
+
       outline: 1px solid rgba(0,0,0,.12);
     }
     .panel.open{
@@ -156,6 +170,7 @@
       font-weight: 700;
       cursor:pointer;
       user-select:none;
+      font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif; /* ✅ médiéval */
     }
     .btn.close{
       width: 42px; height: 42px;
@@ -260,7 +275,7 @@
       to{ clip-path: inset(0 0 0 0); }
     }
 
-    /* ✅ SEULE MODIFICATION : le sceau est en BAS du contenu (sous le bouton), à droite, plus gros */
+    /* ✅ SCEAU : sous le bouton, en bas à droite */
     .sealDock{
       display:flex;
       justify-content:flex-end;
@@ -269,7 +284,7 @@
       pointer-events:none;
     }
     .seal{
-      width: clamp(160px, 22vw, 240px); /* 👈 plus gros */
+      width: clamp(160px, 22vw, 240px);
       height:auto;
       opacity:0;
       transition: opacity .45s ease;
@@ -466,7 +481,6 @@
         </button>
       </div>
 
-      <!-- ✅ SCEAU : maintenant sous le bouton, en bas à droite (ne flotte plus au milieu) -->
       <div class="sealDock" aria-hidden="true">
         <img id="seal" class="seal" src="sceaudeux.PNG" alt="Sceau OSD9TDJ">
       </div>
