@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Plan du site – Parchemin de navigation</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Plan du site sous forme de parchemin animé : navigation par rubriques (présentation, histoire templière, adhésion, activités, informations officielles, encyclopédique en cours)." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="menu.html" />
+
+  <!-- Open Graph (optionnel mais utile) -->
+  <meta property="og:title" content="Plan du site – Parchemin de navigation" />
+  <meta property="og:description" content="Navigation claire et structurée, sous forme de parchemin animé." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts (médiéval/solennel) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+
+  <!-- Données structurées (Google) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Plan du site",
+    "description":"Plan du site sous forme de parchemin animé : navigation par rubriques.",
+    "inLanguage":"fr",
+    "isPartOf":{"@type":"WebSite","name":"Site de l'association","url":"index.html"},
+    "mainEntity":{
+      "@type":"SiteNavigationElement",
+      "name":"Menu principal",
+      "url":"menu.html"
+    }
+  }
+  </script>
+
+  <style>
+    :root{
+      --ink:#2a1b0f;
+      --ink2:#5a3b20;
+      --red:#b30000;
+      --gold:#c7a45a;
+      --shadow: rgba(0,0,0,.55);
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{ height:100%; }
+    body{
+      margin:0;
+      font-family:"Cinzel",serif;
+      color:var(--ink);
+      background:#0b0b0c;
+    }
+
+    /* Fond sombre : page d'origine “visible” derrière (simulé) */
+    .backdrop{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.45);
+      backdrop-filter: blur(2px);
+      display:grid;
+      place-items:center;
+      padding:18px;
+    }
+
+    /* Parchemin (conteneur animé) */
+    .scroll{
+      width:min(900px, 92vw);
+      max-height:min(88vh, 920px);
+      border-radius:22px;
+      border:1px solid rgba(199,164,90,.55);
+      box-shadow:0 22px 90px var(--shadow);
+      overflow:hidden;
+      position:relative;
+      transform-origin: top center;
+
+      /* Fond parchemin */
+      background:
+        radial-gradient(900px 500px at 20% 10%, rgba(255,255,255,.35), transparent 60%),
+        radial-gradient(700px 500px at 90% 30%, rgba(0,0,0,.18), transparent 55%),
+        linear-gradient(135deg, #f2e6c8, #e3d2a7 45%, #d2bc8b);
+
+      /* état fermé = “roulé” */
+      height:0;
+      opacity:0;
+      transform: translateY(-10px) scaleX(.98);
+      animation: unfurl 720ms ease-out forwards;
+    }
+
+    /* Effet “rouleaux” (visuel) */
+    .scroll::before,
+    .scroll::after{
+      content:"";
+      position:absolute;
+      left:10px; right:10px;
+      height:18px;
+      border-radius:999px;
+      background:
+        radial-gradient(80px 16px at 10% 50%, rgba(0,0,0,.18), transparent 60%),
+        radial-gradient(80px 16px at 90% 50%, rgba(0,0,0,.18), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.30), rgba(0,0,0,.08));
+      opacity:.55;
+      z-index:1;
+      pointer-events:none;
+    }
+    .scroll::before{ top:10px; }
+    .scroll::after{ bottom:10px; }
+
+    @keyframes unfurl{
+      0%   { height:0; opacity:0; transform:translateY(-10px) scaleX(.98); }
+      60%  { height:72vh; opacity:1; transform:translateY(0) scaleX(1); }
+      100% { height:min(88vh, 920px); opacity:1; transform:translateY(0) scaleX(1); }
+    }
+
+    header{
+      position:sticky; top:0;
+      display:flex; align-items:center; gap:12px;
+      padding:14px 14px 10px;
+      border-bottom:1px dashed rgba(42,27,15,.35);
+      background:linear-gradient(180deg, rgba(242,230,200,.92), rgba(242,230,200,.60));
+      backdrop-filter: blur(2px);
+      z-index:5;
+    }
+
+    .title{
+      font-family:"Uncial Antiqua",serif;
+      font-size:19px;
+      color:var(--ink2);
+      letter-spacing:.3px;
+    }
+    .sub{
+      font-size:12px;
+      opacity:.85;
+      margin-top:2px;
+    }
+
+    .close{
+      margin-left:auto;
+      border:1px solid rgba(42,27,15,.25);
+      background:rgba(255,255,255,.35);
+      border-radius:12px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-family:"Cinzel", serif;
+    }
+    .close:focus{ outline:2px solid rgba(179,0,0,.35); }
+
+    nav{
+      padding:12px 12px 190px; /* espace pour signature + sceau */
+      overflow:auto;
+      max-height:calc(min(88vh, 920px) - 70px);
+      position:relative;
+      z-index:2;
+    }
+
+    details{
+      margin:10px 0;
+      border:1px solid rgba(42,27,15,.18);
+      border-radius:16px;
+      background:rgba(255,255,255,.22);
+    }
+    summary{
+      list-style:none;
+      cursor:pointer;
+      padding:10px 12px;
+      font-weight:700;
+      color:var(--ink2);
+    }
+    summary::-webkit-details-marker{ display:none; }
+
+    a{
+      display:block;
+      padding:9px 12px;
+      margin:0 8px 8px;
+      border-radius:12px;
+      text-decoration:none;
+      color:var(--ink);
+      background:rgba(255,255,255,.25);
+      border:1px solid rgba(42,27,15,.12);
+    }
+    a:hover{ outline:2px solid rgba(179,0,0,.30); }
+    a:focus{ outline:2px solid rgba(179,0,0,.45); }
+
+    /* --- Signature + “frappée” --- */
+    .signature-zone{
+      position:absolute;
+      left:0; right:0;
+      bottom:92px; /* avant le sceau */
+      padding:0 18px;
+      z-index:4;
+      pointer-events:none;
+      display:flex;
+      justify-content:center;
+    }
+
+    .nndnn-banner{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:10px 14px;
+      border-radius:16px;
+      border:1px solid rgba(42,27,15,.18);
+      background:rgba(255,255,255,.18);
+      box-shadow:0 10px 28px rgba(0,0,0,.22);
+      opacity:0;
+      transform: translateY(18px);
+    }
+
+    .nndnn-banner img{
+      width:34px;
+      height:auto;
+      opacity:.95;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,.22));
+    }
+
+    /* Texte “gravé” */
+    .nndnn-text{
+      font-family:"Uncial Antiqua", serif;
+      font-size:22px;
+      letter-spacing:2px;
+      color:var(--ink2);
+
+      /* effet “frappé/gravé” */
+      text-shadow:
+        0 1px 0 rgba(255,255,255,.35),
+        0 -1px 0 rgba(0,0,0,.18),
+        1px 0 0 rgba(0,0,0,.12),
+        -1px 0 0 rgba(0,0,0,.12);
+      position:relative;
+    }
+
+    /* animation “frappe à l’épée” : petite secousse + apparition */
+    .nndnn-banner.strike{
+      animation: riseIn 420ms ease-out forwards, bladeShake 260ms ease-out 120ms;
+    }
+    @keyframes riseIn{
+      from{ opacity:0; transform: translateY(18px); }
+      to  { opacity:1; transform: translateY(0); }
+    }
+    @keyframes bladeShake{
+      0%{ transform: translateY(0) translateX(0); }
+      30%{ transform: translateY(0) translateX(-2px); }
+      60%{ transform: translateY(0) translateX(2px); }
+      100%{ transform: translateY(0) translateX(0); }
+    }
+
+    /* Trait “coup d’épée” (petite lueur) */
+    .slash{
+      position:absolute;
+      width:0;
+      height:2px;
+      background:linear-gradient(90deg, transparent, rgba(179,0,0,.65), transparent);
+      bottom:-6px;
+      left:10%;
+      opacity:0;
+    }
+    .nndnn-banner.strike .slash{
+      animation: slash 420ms ease-out 140ms forwards;
+    }
+    @keyframes slash{
+      0%{ width:0; opacity:0; }
+      40%{ width:80%; opacity:1; }
+      100%{ width:80%; opacity:.25; }
+    }
+
+    /* --- Sceau (tampon) --- */
+    .seal{
+      position:absolute;
+      right:18px;
+      bottom:14px;
+      width:min(200px, 40vw);
+      height:auto;
+      z-index:5;
+
+      opacity:0;
+      transform: translateY(-160px) rotate(-8deg) scale(1.06);
+      filter: drop-shadow(0 18px 16px rgba(0,0,0,.35));
+      pointer-events:none;
+    }
+    .seal.stamp{
+      animation: stampIn 560ms cubic-bezier(.2,.85,.2,1) forwards;
+    }
+    @keyframes stampIn{
+      0%   { opacity:0; transform: translateY(-160px) rotate(-8deg) scale(1.08); }
+      70%  { opacity:1; transform: translateY(10px) rotate(0deg) scale(1.02); }
+      86%  { opacity:1; transform: translateY(-8px) rotate(0deg) scale(1.00); }
+      100% { opacity:1; transform: translateY(0) rotate(0deg) scale(1.00); }
+    }
+
+    /* Accessibilité : réduire animations si demandé */
+    @media (prefers-reduced-motion: reduce){
+      .scroll{ animation:none; height:min(88vh, 920px); opacity:1; transform:none; }
+      .nndnn-banner, .seal{ animation:none !important; opacity:1; transform:none; }
+      .slash{ display:none; }
+    }
+
+    @media (max-width:520px){
+      .seal{ right:12px; bottom:10px; width:min(170px, 48vw); }
+      .signature-zone{ bottom:88px; }
+      .nndnn-text{ font-size:20px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- IMPORTANT : cliquer en dehors => retour -->
+  <div class="backdrop" id="backdrop" aria-label="Fermer le menu">
+    <!-- IMPORTANT : cliquer dedans => ne ferme pas -->
+    <div class="scroll" id="scroll" role="dialog" aria-modal="true" aria-label="Plan du site (menu)">
+      <header>
+        <div>
+          <div class="title">Parchemin de Navigation</div>
+          <div class="sub">Choisissez un lien — cliquez dehors pour revenir</div>
+        </div>
+
+        <button class="close" id="closeBtn" aria-label="Fermer le menu">✕</button>
+      </header>
+
+      <main>
+        <nav aria-label="Arborescence du site">
+          <!-- ✅ Général : tu as demandé “Notre histoire” ici -->
+          <details open>
+            <summary>Général</summary>
+            <a href="index.html">Accueil</a>
+            <a href="quinoussommes.html">Qui nous sommes</a>
+            <a href="notre-mission.html">Notre mission</a>
+            <a href="histoire.html">Notre histoire</a>
+            <a href="contact.html">Contact</a>
+          </details>
+
+          <details>
+            <summary>Histoire templière</summary>
+            <a href="vocation.html">Histoire du Temple / Vocation</a>
+            <a href="ordres-historiques.html">Ordres historiques</a>
+            <a href="bernard.html">Bernard de Clairvaux</a>
+            <a href="commanderies.html">Dignitaires de l’Ordre</a>
+            <a href="commanderie.html">Commanderie</a>
+          </details>
+
+          <details>
+            <summary>Activités & Événements</summary>
+            <a href="activites.html">Nos événements</a>
+          </details>
+
+          <details>
+            <summary>Adhésion</summary>
+            <a href="adhesion.html">Adhérer</a>
+            <a href="notice-adhesion.html">Notice / Procédure d’adhésion</a>
+            <a href="cotisations.html">Cotisations</a>
+            <a href="assurance.html">Assurance</a>
+          </details>
+
+          <details>
+            <summary>Boutique</summary>
+            <a href="boutique.html">Boutique</a>
+          </details>
+
+          <details>
+            <summary>Membres</summary>
+            <a href="documents-internes.html">🔒 Accès réservé aux membres</a>
+            <a href="administration.html">🔒 Administration</a>
+          </details>
+
+          <details>
+            <summary>Informations officielles & Aide</summary>
+            <a href="statuts.html">Statuts</a>
+            <a href="mentions.html">Mentions / Informations officielles</a>
+            <a href="cookies.html">Cookies</a>
+            <a href="faq.html">FAQ</a>
+          </details>
+
+          <details>
+            <summary>Encyclopédique (en cours de création)</summary>
+            <a href="Wikipedia.html">Page encyclopédique</a>
+            <a href="Utilisateur_Wikipedia.html">Fiche utilisateur (projet)</a>
+          </details>
+
+          <noscript>
+            <p style="padding:10px 12px; margin:10px 0; border:1px solid rgba(42,27,15,.18); border-radius:16px; background:rgba(255,255,255,.22);">
+              JavaScript est désactivé : le bouton “retour” automatique au clic dehors peut ne pas fonctionner. Utilisez le bouton retour du navigateur.
+            </p>
+          </noscript>
+        </nav>
+      </main>
+
+      <!-- ✅ Signature nnDnn (avant le tampon) -->
+      <div class="signature-zone" aria-label="Signature nnDnn">
+        <div class="nndnn-banner" id="nndnnBanner" aria-label="Signature templière nnDnn">
+          <img src="croix.epee.PNG" alt="Épée – symbole">
+          <div class="nndnn-text">nnDnn</div>
+          <img src="croix.epee.PNG" alt="Épée – symbole">
+          <div class="slash" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <!-- ✅ Sceau (ton fichier exact) -->
+      <img class="seal" id="seal" src="sceaudeux.PNG" alt="" aria-hidden="true">
+
+      <!-- Sons (facultatif) : mets tes mp3 si tu veux -->
+      <!--
+      <audio id="swordSound" src="epee.mp3" preload="auto"></audio>
+      <audio id="stampSound" src="tampon.mp3" preload="auto"></audio>
+      -->
+    </div>
+  </div>
+
+  <script>
+    const backdrop = document.getElementById('backdrop');
+    const scroll = document.getElementById('scroll');
+    const closeBtn = document.getElementById('closeBtn');
+
+    const nndnnBanner = document.getElementById('nndnnBanner');
+    const seal = document.getElementById('seal');
+
+    // const swordSound = document.getElementById('swordSound');
+    // const stampSound = document.getElementById('stampSound');
+
+    function goBack(){
+      if (history.length > 1) return history.back();
+      if (document.referrer) return location.href = document.referrer;
+      location.href = 'index.html';
+    }
+
+    // clic en dehors => retour
+    backdrop.addEventListener('click', goBack);
+    // clic dedans => ne ferme pas
+    scroll.addEventListener('click', (e)=> e.stopPropagation());
+    // bouton fermer
+    closeBtn.addEventListener('click', goBack);
+    // touche Echap
+    document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') goBack(); });
+
+    // Focus pour accessibilité
+    closeBtn.focus();
+
+    // Timing des animations :
+    // 1) le parchemin se déroule (720ms)
+    // 2) signature “frappée” (épées) un peu après
+    // 3) sceau “PAF” à la fin
+    const UNFURL_MS = 720;
+
+    setTimeout(() => {
+      nndnnBanner.classList.add('strike');
+
+      // Son d’épée (attention : certains navigateurs bloquent l’audio sans action utilisateur)
+      // swordSound?.play().catch(()=>{});
+    }, UNFURL_MS + 180);
+
+    setTimeout(() => {
+      seal.classList.add('stamp');
+
+      // Son tampon (idem)
+      // stampSound?.play().catch(()=>{});
+    }, UNFURL_MS + 760);
+  </script>
+</body>
+</html>
