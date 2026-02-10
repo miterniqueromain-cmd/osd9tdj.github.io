@@ -168,7 +168,7 @@
     .scroll{
       height: calc(var(--panelH) - 84px);
       overflow:auto;
-      padding: 14px 16px calc(240px + env(safe-area-inset-bottom)) 16px; /* ✅ + de marge bas */
+      padding: 14px 16px calc(190px + env(safe-area-inset-bottom)) 16px; /* 👈 plus de marge bas */
       scrollbar-width: thin;
       scrollbar-color: rgba(60,45,35,.45) transparent;
     }
@@ -260,21 +260,20 @@
       to{ clip-path: inset(0 0 0 0); }
     }
 
-    /* ✅ CORRECTION UNIQUE : sceau FIXE en bas à droite du PANNEAU (pas dans le scroll) */
+    /* ✅ SEULE MODIFICATION : le sceau est en BAS du contenu (sous le bouton), à droite, plus gros */
     .sealDock{
-      position:absolute;
-      right: 18px;
-      bottom: calc(10px + env(safe-area-inset-bottom));
+      display:flex;
+      justify-content:flex-end;
+      margin: 10px 0 0 0;
+      padding: 0 2px calc(12px + env(safe-area-inset-bottom)) 0;
       pointer-events:none;
-      z-index: 60;
     }
     .seal{
-      display:block;
-      width: clamp(200px, 24vw, 290px); /* ✅ plus gros */
+      width: clamp(160px, 22vw, 240px); /* 👈 plus gros */
       height:auto;
       opacity:0;
-      transition: opacity 1s ease;
-      filter: drop-shadow(0 16px 28px rgba(0,0,0,.45));
+      transition: opacity .45s ease;
+      filter: drop-shadow(0 14px 26px rgba(0,0,0,.40));
     }
     .seal.show{
       opacity:1;
@@ -466,12 +465,12 @@
           ← Revenir à la page précédente
         </button>
       </div>
-    </section>
 
-    <!-- ✅ Sceau FIXE bas-droite, sous "Revenir à la page précédente" -->
-    <div class="sealDock" aria-hidden="true">
-      <img id="seal" class="seal" src="sceaudeux.PNG" alt="Sceau OSD9TDJ">
-    </div>
+      <!-- ✅ SCEAU : maintenant sous le bouton, en bas à droite (ne flotte plus au milieu) -->
+      <div class="sealDock" aria-hidden="true">
+        <img id="seal" class="seal" src="sceaudeux.PNG" alt="Sceau OSD9TDJ">
+      </div>
+    </section>
   </main>
 
   <script>
