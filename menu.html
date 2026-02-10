@@ -5,19 +5,19 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#0b0b0c" />
 
-  <!-- ✅ SEO -->
+  <!-- SEO -->
   <title>Menu de navigation | OSD9TDJ</title>
   <meta name="description" content="Menu de navigation officiel du site OSD9TDJ : rubriques et sous-pages." />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <link rel="canonical" href="https://osd9tdj.org/menu.html" />
 
-  <!-- ✅ Watermark -->
+  <!-- Watermark -->
   <meta name="author" content="OSD9TDJ" />
-  <meta name="generator" content="OSD9TDJ-MenuParchemin-v4-quill-redcaps-responsive" />
-  <meta name="x-watermark" content="OSD9TDJ|nnDnn|menu|official|seo|jsonld|quill|redcaps" />
-  <!-- OSD9TDJ • nnDnn • watermark:menu|official|seo|jsonld|quill|redcaps -->
+  <meta name="generator" content="OSD9TDJ-MenuParchemin-v6-veil82-sigPadOnly" />
+  <meta name="x-watermark" content="OSD9TDJ|nnDnn|menu|official|seo|jsonld|sigPadOnly" />
+  <!-- OSD9TDJ • nnDnn • watermark:menu|official|seo|jsonld|sigPadOnly -->
 
-  <!-- ✅ JSON-LD -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -29,7 +29,7 @@
   }
   </script>
 
-  <!-- Fonts médiévales -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Uncial+Antiqua&display=swap" rel="stylesheet">
@@ -43,43 +43,46 @@
       --gold:#d7b15a;
       --gold2:#f0d58b;
 
-      /* ✅ voile global */
-      --veil-page: rgba(0,0,0,.62);
-      /* ✅ voile sur parchemin */
+      /* ✅ voile noir total */
+      --veil-page: rgba(0,0,0,.82);
+
+      /* ✅ fond “parchemin” sous PNG (évite noir si PNG transparent) */
+      --paper-base: #d9c7a2;
+
+      /* voile léger sur parchemin */
       --veil-parch: rgba(0,0,0,.14);
 
-      /* tailles texte */
       --fs-title: clamp(16px, 2.2vw, 22px);
       --fs-summary: clamp(13px, 1.8vw, 16px);
       --fs-link: clamp(12px, 1.7vw, 15px);
 
-      /* ✅ parchemin zoom */
-      --parch-zoom: 215%;
-      --parch-pos: 50% 52%;
-
-      /* ✅ zone “utile” (tout doit rester dedans) */
-      --pad-top: clamp(18px, 4vh, 44px);
-      --pad-lr:  clamp(16px, 3.4vw, 48px);
-      --pad-bottom: clamp(86px, 14vh, 140px); /* laisse la place au sceau + signature */
-
-      /* ✅ sceau / signature responsive */
       --sealW: clamp(86px, 16vw, 140px);
-      --sword: clamp(32px, 5vw, 44px);
+      --sword: clamp(34px, 5.4vw, 50px);
 
-      /* ✅ panneau (overlay) */
       --panelW: min(560px, 78vw);
       --panelH: min(84vh, 860px);
+
+      --pad-top: clamp(18px, 4vh, 44px);
+      --pad-lr:  clamp(16px, 3.4vw, 48px);
+      --pad-bottom: 12px;
+
+      /* footer interne pour réserver l’espace scroll */
+      --footerH: clamp(90px, 14vh, 150px);
+
+      /* ✅ zone sombre UNIQUEMENT derrière la signature (pas le sceau) */
+      --sigPadH: clamp(70px, 10vh, 110px);
+      --sigPadW: clamp(230px, 44vw, 360px);
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{ margin:0; background:#000; font-family:"Cinzel", serif; }
 
-    /* ✅ la page précédente reste visible derrière */
+    /* ancienne page visible derrière (mais sombre) */
     .overlay{
       position:fixed; inset:0;
       background:var(--veil-page);
-      backdrop-filter: blur(1.2px);
+      backdrop-filter: blur(2.6px);
       display:flex;
       align-items:center;
       justify-content:flex-end;
@@ -95,21 +98,22 @@
       box-shadow:0 28px 90px rgba(0,0,0,.65);
       transform-origin:right center;
       animation: open 520ms ease-out forwards;
+
+      background: var(--paper-base);
     }
     @keyframes open{
       0%{ transform:translateX(18px) scale(.95); opacity:0; }
       100%{ transform:translateX(0) scale(1); opacity:1; }
     }
 
-    /* parchemin image */
+    /* ✅ parchemin en cover */
     .modal::before{
       content:"";
-      position:absolute; inset:-14%;
-      background:url("parchemin.PNG") no-repeat var(--parch-pos) / var(--parch-zoom);
+      position:absolute; inset:0;
+      background: url("parchemin.PNG") no-repeat center / cover;
       z-index:1;
       transform: translateZ(0);
     }
-    /* voile sur parchemin */
     .modal::after{
       content:"";
       position:absolute; inset:0;
@@ -121,10 +125,10 @@
 
     .sheet{
       position:absolute; inset:0;
-      padding: var(--pad-top) var(--pad-lr) var(--pad-bottom) var(--pad-lr);
       z-index:3;
       display:flex;
       flex-direction:column;
+      padding: var(--pad-top) var(--pad-lr) var(--pad-bottom) var(--pad-lr);
       gap:10px;
     }
 
@@ -132,16 +136,19 @@
       display:flex;
       align-items:center;
       gap:10px;
-      padding-bottom:6px;
       flex:0 0 auto;
     }
+
     .title{
       font-family:"Uncial Antiqua", serif;
       font-size:var(--fs-title);
       color:var(--ink2);
       text-shadow:0 1px 0 rgba(255,255,255,.18);
       white-space:nowrap;
+      font-kerning: normal;
+      text-rendering: optimizeLegibility;
     }
+
     .spacer{ flex:1; }
 
     .btn{
@@ -155,22 +162,22 @@
       white-space:nowrap;
     }
 
-    /* ✅ zone scroll */
     .content{
       flex:1 1 auto;
       min-height:0;
       overflow:auto;
       -webkit-overflow-scrolling: touch;
+      padding-bottom: calc(var(--footerH) + 10px);
       border-radius:14px;
-      padding:2px 0 0;
     }
 
     details.section{
       margin:9px 0;
       border-radius:14px;
-      background:transparent;
       border:1px solid rgba(36,22,12,.16);
       overflow:hidden;
+      background:rgba(255,255,255,.10);
+      backdrop-filter: blur(0.8px);
     }
     details.section:nth-of-type(even){ transform: translateX(10px); }
 
@@ -182,11 +189,12 @@
       font-size:var(--fs-summary);
       color:var(--ink2);
       border-bottom:1px dashed rgba(36,22,12,.22);
-      background:transparent;
       user-select:none;
       display:flex;
       align-items:center;
       gap:10px;
+      font-kerning: normal;
+      text-rendering: optimizeLegibility;
     }
     summary::-webkit-details-marker{ display:none; }
 
@@ -206,6 +214,7 @@
     .links{ padding:10px; display:flex; flex-direction:column; gap:8px; }
 
     a.nav-link{
+      position:relative;
       display:flex;
       align-items:center;
       gap:10px;
@@ -214,119 +223,109 @@
       text-decoration:none;
       color:var(--ink);
       border:1px solid rgba(36,22,12,.16);
-      background:transparent;
+      background:rgba(255,255,255,.10);
       font-weight:700;
       font-size:var(--fs-link);
       box-shadow:0 6px 16px rgba(0,0,0,.09);
+      font-kerning: normal;
+      text-rendering: optimizeLegibility;
     }
-    a.nav-link.sub{
-      font-weight:600;
-      opacity:.92;
-      margin-left:12px;
-    }
+    a.nav-link.sub{ font-weight:600; opacity:.92; margin-left:12px; }
 
-    /* ✅ red cap sur chaque mot */
-    .rc{ color:var(--red); font-weight:800; }
-
-    /* cadenas (SVG inline via background) */
+    /* cadenas */
     .lock{
-      width:18px; height:18px;
-      flex:0 0 18px;
-      display:inline-block;
-      background-repeat:no-repeat;
-      background-size:contain;
-      opacity:.95;
+      width:18px; height:18px; flex:0 0 18px;
+      background-repeat:no-repeat; background-size:contain; opacity:.95;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%239b1b1b' d='M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5Zm-3 8V6a3 3 0 0 1 6 0v3H9Zm3 4a2 2 0 0 1 1 3.732V19h-2v-2.268A2 2 0 0 1 12 13Z'/%3E%3C/svg%3E");
     }
 
-    /* ✅ footer TOUJOURS en bas du parchemin (dans le panneau) */
+    /* ✅ Redcaps overlay : ne casse pas les mots */
+    .rcw{ position:relative; display:inline-block; }
+    .rcw .rccap{
+      position:absolute; left:0; top:0;
+      color:var(--red);
+      font-weight:900;
+      pointer-events:none;
+      text-shadow: 0 1px 0 rgba(255,255,255,.18);
+    }
+    .rcw .rcword{ color:inherit; }
+
+    /* footer interne */
     .footer{
       position:absolute;
       left:0; right:0;
-      bottom: max(10px, env(safe-area-inset-bottom));
+      bottom:0;
+      height: var(--footerH);
       z-index:4;
-      padding: 8px var(--pad-lr) 8px var(--pad-lr);
+      padding: 12px var(--pad-lr) max(12px, env(safe-area-inset-bottom)) var(--pad-lr);
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
       pointer-events:none;
     }
-    .footer-row{
-      display:grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items:end;
-      gap:12px;
+
+    /* ✅ pad sombre UNIQUEMENT sous la signature (pas sous le sceau) */
+    .sig-pad{
+      position:absolute;
+      left:50%;
+      bottom: max(10px, env(safe-area-inset-bottom));
+      width: var(--sigPadW);
+      height: var(--sigPadH);
+      transform: translateX(-50%);
+      border-radius: 18px;
+      background:
+        radial-gradient(120% 120% at 50% 120%, rgba(0,0,0,.78), rgba(0,0,0,0) 64%),
+        linear-gradient(to top, rgba(0,0,0,.70), rgba(0,0,0,0) 75%);
+      backdrop-filter: blur(1.6px);
+      z-index:4;
+      pointer-events:none;
     }
 
-    /* signature dorée */
     .sig{
-      justify-self:center;
       display:flex;
       align-items:center;
+      justify-content:center;
       gap:12px;
       font-family:"Cinzel", serif;
       font-weight:800;
       font-size:clamp(16px, 2vw, 22px);
-      letter-spacing:3px;
-      opacity:0;
-      transform: translateY(6px);
+      letter-spacing:2px;
       white-space:nowrap;
-      pointer-events:none;
+      margin:0 auto;
+      z-index:5;
+      position:relative;
     }
     .sig .gold{
-      background: linear-gradient(180deg, var(--gold2), var(--gold));
+      background: linear-gradient(180deg, #fff1c7 0%, #f0d58b 35%, #d7b15a 70%, #a97a1f 100%);
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
-      text-shadow:0 10px 22px rgba(0,0,0,.18);
+      text-shadow:
+        0 1px 0 rgba(255,255,255,.18),
+        0 10px 22px rgba(0,0,0,.55);
     }
-    .sig img{ width:var(--sword); height:auto; opacity:.95; }
-    .sig.show{ animation: sigIn 360ms ease-out forwards; }
-    @keyframes sigIn{ to{ opacity:1; transform: translateY(0);} }
+    .sig img{ width:var(--sword); height:auto; opacity:.98; filter: drop-shadow(0 8px 10px rgba(0,0,0,.35)); }
 
-    /* sceau bas droite, plus propre et toujours dedans */
     .seal{
-      justify-self:end;
       width:var(--sealW);
       height:auto;
-      opacity:0;
-      transform: translateY(-60px) rotate(-4deg) scale(1.03);
       filter: drop-shadow(0 14px 18px rgba(0,0,0,.30));
       mix-blend-mode: multiply;
-      pointer-events:none;
-      margin-right: 2px;
-    }
-    .seal.stamp{ animation: stampIn 560ms cubic-bezier(.2,.85,.2,1) forwards; }
-    @keyframes stampIn{
-      0%{ opacity:0; transform: translateY(-60px) rotate(-4deg) scale(1.05); }
-      75%{ opacity:1; transform: translateY(6px) rotate(0deg) scale(1.01); }
-      100%{ opacity:1; transform: translateY(0) rotate(0deg) scale(1); }
+      transform: rotate(-2deg);
+      z-index:5;
+      position:relative;
     }
 
     .bottom-bar{ display:flex; justify-content:center; padding:10px 0 0; }
 
-    /* curseur plume */
-    .quill-cursor{
-      display:inline-block;
-      width:10px; margin-left:2px;
-      border-bottom:2px solid rgba(58,36,18,.55);
-      transform: translateY(-1px);
-      animation: blink 650ms step-end infinite;
-    }
-    @keyframes blink{ 50%{ opacity:0; } }
-
-    /* ✅ portrait : un peu plus zoom */
-    @media (orientation: portrait){
-      :root{ --parch-zoom: 238%; --parch-pos: 50% 55%; }
-    }
-
-    /* ✅ mobile : panneau centré */
     @media (max-width:640px){
       .overlay{ justify-content:center; padding:14px; }
-      :root{ --panelW: 92vw; --panelH: 82vh; --parch-zoom: 250%; --parch-pos: 50% 56%; }
+      :root{ --panelW: 92vw; --panelH: 82vh; }
     }
 
     @media (prefers-reduced-motion: reduce){
       .modal{ animation:none; opacity:1; transform:none; }
-      .quill-cursor{ animation:none; }
-      .sig,.seal{ animation:none !important; opacity:1; transform:none; }
     }
   </style>
 </head>
@@ -334,118 +333,117 @@
 <body>
   <div class="overlay" id="overlay">
     <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Menu de navigation">
-      <div class="sheet" id="sheet">
-        <span style="position:absolute;left:-9999px;opacity:0;">OSD9TDJ nnDnn menu navigation officiel seo jsonld watermark</span>
-
+      <div class="sheet">
         <header>
-          <div class="title" data-animate="true">Menu de navigation</div>
+          <div class="title rc-target">Menu de navigation</div>
           <div class="spacer"></div>
           <button class="btn" id="backBtn" type="button">← Revenir</button>
           <button class="btn" id="closeBtn" type="button">✕</button>
         </header>
 
         <div class="content" id="content">
+
           <details class="section">
-            <summary data-animate="true">Général
+            <summary class="rc-target">Général
               <span class="chev" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="index.html" data-animate="true">Accueil</a>
-              <a class="nav-link sub" href="quinoussommes.html" data-animate="true">Qui nous sommes</a>
-              <a class="nav-link sub" href="notre-mission.html" data-animate="true">Notre mission</a>
-              <a class="nav-link sub" href="histoire.html" data-animate="true">Notre histoire</a>
-              <a class="nav-link" href="contact.html" data-animate="true">Contact</a>
+              <a class="nav-link rc-target" href="index.html">Accueil</a>
+              <a class="nav-link sub rc-target" href="quinoussommes.html">Qui nous sommes</a>
+              <a class="nav-link sub rc-target" href="notre-mission.html">Notre mission</a>
+              <a class="nav-link sub rc-target" href="histoire.html">Notre histoire</a>
+              <a class="nav-link rc-target" href="contact.html">Contact</a>
             </div>
           </details>
 
           <details class="section">
-            <summary data-animate="true">Histoire templière
+            <summary class="rc-target">Histoire templière
               <span class="chev" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="vocation.html" data-animate="true">Histoire du Temple / Vocation</a>
-              <a class="nav-link sub" href="ordres-historiques.html" data-animate="true">Ordres historiques</a>
-              <a class="nav-link sub" href="bernard.html" data-animate="true">Bernard de Clairvaux</a>
-              <a class="nav-link sub" href="commanderies.html" data-animate="true">Dignitaires de l’Ordre</a>
-              <a class="nav-link sub" href="commanderie.html" data-animate="true">Commanderie</a>
+              <a class="nav-link rc-target" href="vocation.html">Histoire du Temple / Vocation</a>
+              <a class="nav-link sub rc-target" href="ordres-historiques.html">Ordres historiques</a>
+              <a class="nav-link sub rc-target" href="bernard.html">Bernard de Clairvaux</a>
+              <a class="nav-link sub rc-target" href="commanderies.html">Dignitaires de l’Ordre</a>
+              <a class="nav-link sub rc-target" href="commanderie.html">Commanderie</a>
             </div>
           </details>
 
           <details class="section">
-            <summary data-animate="true">Activités & Événements
+            <summary class="rc-target">Activités & Événements
               <span class="chev" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="activites.html" data-animate="true">Nos événements</a>
+              <a class="nav-link rc-target" href="activites.html">Nos événements</a>
             </div>
           </details>
 
           <details class="section">
-            <summary data-animate="true">Adhésion
+            <summary class="rc-target">Adhésion
               <span class="chev" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="adhesion.html" data-animate="true">Adhérer</a>
-              <a class="nav-link sub" href="notice-adhesion.html" data-animate="true">Notice / Procédure d’adhésion</a>
-              <a class="nav-link sub" href="cotisations.html" data-animate="true">Cotisations</a>
-              <a class="nav-link sub" href="assurance.html" data-animate="true">Assurance</a>
+              <a class="nav-link rc-target" href="adhesion.html">Adhérer</a>
+              <a class="nav-link sub rc-target" href="notice-adhesion.html">Notice / Procédure d’adhésion</a>
+              <a class="nav-link sub rc-target" href="cotisations.html">Cotisations</a>
+              <a class="nav-link sub rc-target" href="assurance.html">Assurance</a>
             </div>
           </details>
 
           <details class="section">
-            <summary data-animate="true">Boutique
+            <summary class="rc-target">Boutique
               <span class="chev" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="boutique.html" data-animate="true">Boutique</a>
+              <a class="nav-link rc-target" href="boutique.html">Boutique</a>
             </div>
           </details>
 
           <details class="section">
-            <summary data-animate="true">Membres
+            <summary class="rc-target">Membres
               <span class="chev" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="documents-internes.html" data-animate="true"><span class="lock" aria-hidden="true"></span>Accès réservé aux membres</a>
-              <a class="nav-link sub" href="administration.html" data-animate="true"><span class="lock" aria-hidden="true"></span>Administration</a>
+              <a class="nav-link rc-target" href="documents-internes.html"><span class="lock" aria-hidden="true"></span>Accès réservé aux membres</a>
+              <a class="nav-link sub rc-target" href="administration.html"><span class="lock" aria-hidden="true"></span>Administration</a>
             </div>
           </details>
 
           <details class="section">
-            <summary data-animate="true">Informations officielles & Aide
+            <summary class="rc-target">Informations officielles & Aide
               <span class="chev" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="statuts.html" data-animate="true">Statuts</a>
-              <a class="nav-link sub" href="mentions.html" data-animate="true">Mentions / Informations officielles</a>
-              <a class="nav-link sub" href="cookies.html" data-animate="true">Cookies</a>
-              <a class="nav-link sub" href="faq.html" data-animate="true">FAQ</a>
+              <a class="nav-link rc-target" href="statuts.html">Statuts</a>
+              <a class="nav-link sub rc-target" href="mentions.html">Mentions / Informations officielles</a>
+              <a class="nav-link sub rc-target" href="cookies.html">Cookies</a>
+              <a class="nav-link sub rc-target" href="faq.html">FAQ</a>
             </div>
           </details>
 
           <details class="section">
-            <summary data-animate="true">Encyclopédique (en cours de création)
+            <summary class="rc-target">Encyclopédique (en cours de création)
               <span class="chev" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="Wikipedia.html" data-animate="true">Page encyclopédique</a>
-              <a class="nav-link sub" href="Utilisateur_Wikipedia.html" data-animate="true">Fiche utilisateur (projet)</a>
+              <a class="nav-link rc-target" href="Wikipedia.html">Page encyclopédique</a>
+              <a class="nav-link sub rc-target" href="Utilisateur_Wikipedia.html">Fiche utilisateur (projet)</a>
             </div>
           </details>
 
@@ -455,22 +453,23 @@
         </div>
       </div>
 
-      <!-- ✅ footer ABSOLU (corrige l’orientation) -->
-      <div class="footer" aria-hidden="false">
-        <div class="footer-row">
-          <div></div>
+      <!-- ✅ zone sombre uniquement sous la signature -->
+      <div class="sig-pad" aria-hidden="true"></div>
 
-          <div class="sig" id="sig" aria-label="Signature templière nnDnn">
-            <img src="croix.epee.PNG" alt="Épée – symbole">
-            <span class="gold">nnDnn</span>
-            <img src="croix.epee.PNG" alt="Épée – symbole">
-          </div>
+      <!-- footer : signature au centre + sceau à droite (sans pad sombre dessous) -->
+      <div class="footer">
+        <div style="width:var(--sealW)"></div>
 
-          <img class="seal" id="seal" src="sceaudeux.PNG" alt="" aria-hidden="true">
+        <div class="sig" id="sig" aria-label="Signature templière nnDnn">
+          <img src="croix.epee.PNG" alt="Épée – symbole">
+          <span class="gold">nnDnn</span>
+          <img src="croix.epee.PNG" alt="Épée – symbole">
         </div>
+
+        <img class="seal" src="sceaudeux.PNG" alt="Sceau officiel OSD9TDJ">
       </div>
 
-      <!-- Sons -->
+      <!-- Sons (tu mettras les mp3 à la racine) -->
       <audio id="sndQuill" src="plume.mp3" preload="auto"></audio>
       <audio id="sndSword" src="epee.mp3" preload="auto"></audio>
       <audio id="sndStamp" src="tampon.mp3" preload="auto"></audio>
@@ -480,17 +479,9 @@
   <script>
     const overlay = document.getElementById('overlay');
     const modal = document.getElementById('modal');
-
     const backBtn = document.getElementById('backBtn');
     const closeBtn = document.getElementById('closeBtn');
     const bottomBackBtn = document.getElementById('bottomBackBtn');
-
-    const sig = document.getElementById('sig');
-    const seal = document.getElementById('seal');
-
-    const sndQuill = document.getElementById('sndQuill');
-    const sndSword = document.getElementById('sndSword');
-    const sndStamp = document.getElementById('sndStamp');
 
     function goBack(){
       if (history.length > 1) return history.back();
@@ -505,90 +496,40 @@
     bottomBackBtn.addEventListener('click', goBack);
     document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') goBack(); });
 
-    // iOS audio arm
-    let audioArmed = false;
-    const arm = ()=>{ audioArmed=true; window.removeEventListener('pointerdown', arm); window.removeEventListener('keydown', arm); };
-    window.addEventListener('pointerdown', arm, { once:true });
-    window.addEventListener('keydown', arm, { once:true });
+    // ✅ Redcaps overlay (ne casse pas les mots)
+    function redcapsOverlay(el){
+      const chev = el.querySelector?.('.chev');
+      const text = (el.getAttribute('data-raw') || el.textContent).trim();
+      el.setAttribute('data-raw', text);
 
-    function playSafe(a){
-      if(!audioArmed) return;
-      try{ a.currentTime=0; a.play(); }catch(e){}
-    }
+      const container = document.createElement('span');
+      container.style.whiteSpace = 'normal';
 
-    // ✅ redcaps : première lettre ROUGE de chaque mot
-    function applyRedCaps(el){
-      const txt = (el.getAttribute('data-original') || el.textContent || "").trim();
-      if(!txt) return;
-      // on évite de casser la flèche/chev des summary
-      const keepChev = el.querySelector('.chev');
-      const raw = txt.replace(/\s+/g,' ');
-      const parts = raw.split(' ').map(w=>{
-        if(!w) return "";
-        const m = w.match(/^([«"(]*)(.)(.*)$/);
-        if(!m) return w;
-        const lead = m[1] || "";
-        const first = m[2] || "";
-        const rest = m[3] || "";
-        return `${lead}<span class="rc">${first}</span>${rest}`;
-      });
-      el.innerHTML = parts.join(' ');
-      if(keepChev) el.appendChild(keepChev);
-    }
+      const tokens = text.split(/(\s+)/);
+      tokens.forEach(tok=>{
+        if(tok.trim()===""){ container.append(tok); return; }
+        const w = document.createElement('span');
+        w.className = 'rcw';
 
-    // ✅ animation plume (écriture)
-    function typewrite(el, text, speed=10){
-      el.textContent = "";
-      const cur = document.createElement("span");
-      cur.className = "quill-cursor";
-      el.appendChild(cur);
-      let i=0;
-      return new Promise(res=>{
-        const tick=()=>{
-          if(i<text.length){ cur.insertAdjacentText("beforebegin", text[i++]); setTimeout(tick, speed); }
-          else { cur.remove(); res(); }
-        };
-        tick();
-      });
-    }
+        const wordSpan = document.createElement('span');
+        wordSpan.className = 'rcword';
+        wordSpan.textContent = tok;
 
-    async function animateAll(){
-      const items = Array.from(document.querySelectorAll('[data-animate="true"]'));
-      // sauvegarde textes
-      items.forEach(el=>{
-        if(!el.getAttribute('data-original')) el.setAttribute('data-original', el.textContent.trim());
+        const cap = document.createElement('span');
+        cap.className = 'rccap';
+        cap.textContent = tok[0];
+
+        w.appendChild(wordSpan);
+        w.appendChild(cap);
+        container.appendChild(w);
       });
 
-      playSafe(sndQuill);
-      for(const el of items){
-        const t = el.getAttribute('data-original');
-        // pour summary : on retire visuellement la flèche pendant l’écriture (puis on la remet)
-        const chev = el.querySelector('.chev');
-        if(chev) chev.remove();
-        await typewrite(el, t, 10);
-        applyRedCaps(el);
-        if(chev) el.appendChild(chev);
-        await new Promise(r=>setTimeout(r, 25));
-      }
-      try{ sndQuill.pause(); sndQuill.currentTime=0; }catch(e){}
-
-      // signature + sceau
-      sig.classList.add('show');
-      playSafe(sndSword);
-
-      setTimeout(()=>{
-        seal.classList.add('stamp');
-        playSafe(sndStamp);
-      }, 600);
+      el.textContent = '';
+      el.appendChild(container);
+      if(chev) el.appendChild(chev);
     }
 
-    // ✅ au chargement
-    setTimeout(()=>{ 
-      // redcaps immédiat (au cas où reduced motion)
-      document.querySelectorAll('summary, a.nav-link, .title').forEach(applyRedCaps);
-      animateAll();
-    }, 450);
-
+    document.querySelectorAll('.rc-target').forEach(redcapsOverlay);
     closeBtn.focus();
   </script>
 </body>
