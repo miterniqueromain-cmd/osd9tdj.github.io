@@ -11,11 +11,11 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <link rel="canonical" href="https://osd9tdj.org/menu.html" />
 
-  <!-- ✅ Watermark / IA -->
+  <!-- ✅ Watermark -->
   <meta name="author" content="OSD9TDJ" />
-  <meta name="generator" content="OSD9TDJ-MenuParchemin-v3-veil-fullpage" />
-  <meta name="x-watermark" content="OSD9TDJ|nnDnn|menu|official|seo|jsonld|veil" />
-  <!-- OSD9TDJ • nnDnn • watermark:menu|official|seo|jsonld|veil -->
+  <meta name="generator" content="OSD9TDJ-MenuParchemin-v4-quill-redcaps-responsive" />
+  <meta name="x-watermark" content="OSD9TDJ|nnDnn|menu|official|seo|jsonld|quill|redcaps" />
+  <!-- OSD9TDJ • nnDnn • watermark:menu|official|seo|jsonld|quill|redcaps -->
 
   <!-- ✅ JSON-LD -->
   <script type="application/ld+json">
@@ -29,9 +29,10 @@
   }
   </script>
 
+  <!-- Fonts médiévales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Uncial+Antiqua&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -39,50 +40,55 @@
       --ink2:#3a2412;
       --red:#a30000;
 
+      --gold:#d7b15a;
+      --gold2:#f0d58b;
+
+      /* ✅ voile global */
+      --veil-page: rgba(0,0,0,.62);
+      /* ✅ voile sur parchemin */
+      --veil-parch: rgba(0,0,0,.14);
+
+      /* tailles texte */
       --fs-title: clamp(16px, 2.2vw, 22px);
       --fs-summary: clamp(13px, 1.8vw, 16px);
       --fs-link: clamp(12px, 1.7vw, 15px);
 
-      /* zone centrale */
-      --pad-top:    clamp(18px,  4.2vh, 48px);
-      --pad-left:   clamp(16px,  3.6vw, 54px);
-      --pad-right:  clamp(16px,  3.6vw, 54px);
-      --pad-bottom: clamp(20px,  5.4vh, 74px);
+      /* ✅ parchemin zoom */
+      --parch-zoom: 215%;
+      --parch-pos: 50% 52%;
 
-      /* parchemin */
-      --parch-zoom: 210%;
-      --parch-pos:  50% 50%;
+      /* ✅ zone “utile” (tout doit rester dedans) */
+      --pad-top: clamp(18px, 4vh, 44px);
+      --pad-lr:  clamp(16px, 3.4vw, 48px);
+      --pad-bottom: clamp(86px, 14vh, 140px); /* laisse la place au sceau + signature */
 
-      /* ✅ voile noir TOUTE page */
-      --veil-page: rgba(0,0,0,.55);
-      --veil-parch: rgba(0,0,0,.18);
+      /* ✅ sceau / signature responsive */
+      --sealW: clamp(86px, 16vw, 140px);
+      --sword: clamp(32px, 5vw, 44px);
 
-      /* signature dorée */
-      --gold:#d7b15a;
-      --gold2:#f0d58b;
-
-      /* tailles */
-      --sword: 44px; /* ✅ épées plus grandes */
+      /* ✅ panneau (overlay) */
+      --panelW: min(560px, 78vw);
+      --panelH: min(84vh, 860px);
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{ margin:0; background:#000; font-family:"Cinzel", serif; }
 
-    /* ✅ overlay noir sur toute la page */
+    /* ✅ la page précédente reste visible derrière */
     .overlay{
       position:fixed; inset:0;
       background:var(--veil-page);
       backdrop-filter: blur(1.2px);
       display:flex;
       align-items:center;
-      justify-content:flex-end;     /* panneau à droite */
+      justify-content:flex-end;
       padding:14px 18px 14px 14px;
     }
 
     .modal{
-      width:min(560px, 78vw);
-      height:min(84vh, 860px);
+      width: var(--panelW);
+      height: var(--panelH);
       position:relative;
       border-radius:18px;
       overflow:hidden;
@@ -95,7 +101,7 @@
       100%{ transform:translateX(0) scale(1); opacity:1; }
     }
 
-    /* parchemin */
+    /* parchemin image */
     .modal::before{
       content:"";
       position:absolute; inset:-14%;
@@ -103,7 +109,7 @@
       z-index:1;
       transform: translateZ(0);
     }
-    /* ✅ voile noir SUR le parchemin aussi */
+    /* voile sur parchemin */
     .modal::after{
       content:"";
       position:absolute; inset:0;
@@ -115,7 +121,7 @@
 
     .sheet{
       position:absolute; inset:0;
-      padding: var(--pad-top) var(--pad-right) var(--pad-bottom) var(--pad-left);
+      padding: var(--pad-top) var(--pad-lr) var(--pad-bottom) var(--pad-lr);
       z-index:3;
       display:flex;
       flex-direction:column;
@@ -127,12 +133,12 @@
       align-items:center;
       gap:10px;
       padding-bottom:6px;
+      flex:0 0 auto;
     }
     .title{
       font-family:"Uncial Antiqua", serif;
       font-size:var(--fs-title);
       color:var(--ink2);
-      letter-spacing:.25px;
       text-shadow:0 1px 0 rgba(255,255,255,.18);
       white-space:nowrap;
     }
@@ -149,13 +155,14 @@
       white-space:nowrap;
     }
 
+    /* ✅ zone scroll */
     .content{
-      flex:1;
+      flex:1 1 auto;
       min-height:0;
       overflow:auto;
       -webkit-overflow-scrolling: touch;
-      padding:2px 0 0;
       border-radius:14px;
+      padding:2px 0 0;
     }
 
     details.section{
@@ -167,7 +174,6 @@
     }
     details.section:nth-of-type(even){ transform: translateX(10px); }
 
-    /* ✅ menus cliquables + flèche bas/haut */
     summary{
       list-style:none;
       cursor:pointer;
@@ -186,18 +192,16 @@
 
     .chev{
       margin-left:auto;
-      width:26px; height:26px;
+      width:28px; height:28px;
       border-radius:10px;
       border:1px solid rgba(36,22,12,.18);
       display:grid;
       place-items:center;
       background:rgba(0,0,0,.08);
+      flex:0 0 28px;
     }
-    .chev svg{ width:16px; height:16px; opacity:.85; }
+    .chev svg{ width:16px; height:16px; opacity:.9; transition:transform .18s ease; }
     details[open] .chev svg{ transform: rotate(180deg); }
-
-    summary::first-letter,
-    a.nav-link::first-letter{ color:var(--red); }
 
     .links{ padding:10px; display:flex; flex-direction:column; gap:8px; }
 
@@ -221,88 +225,107 @@
       margin-left:12px;
     }
 
-    /* ✅ cadenas qui s’affichent partout (SVG inline) */
+    /* ✅ red cap sur chaque mot */
+    .rc{ color:var(--red); font-weight:800; }
+
+    /* cadenas (SVG inline via background) */
     .lock{
       width:18px; height:18px;
       flex:0 0 18px;
       display:inline-block;
       background-repeat:no-repeat;
       background-size:contain;
-      filter: drop-shadow(0 1px 0 rgba(255,255,255,.18));
       opacity:.95;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%239b1b1b' d='M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5Zm-3 8V6a3 3 0 0 1 6 0v3H9Zm3 4a2 2 0 0 1 1 3.732V19h-2v-2.268A2 2 0 0 1 12 13Z'/%3E%3C/svg%3E");
     }
 
+    /* ✅ footer TOUJOURS en bas du parchemin (dans le panneau) */
     .footer{
-      position:sticky;
-      bottom:0;
-      padding-top:10px;
+      position:absolute;
+      left:0; right:0;
+      bottom: max(10px, env(safe-area-inset-bottom));
       z-index:4;
+      padding: 8px var(--pad-lr) 8px var(--pad-lr);
+      pointer-events:none;
     }
     .footer-row{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items:end;
       gap:12px;
     }
 
-    /* ✅ signature dorée + épées plus grandes */
+    /* signature dorée */
     .sig{
-      margin:0 auto;
+      justify-self:center;
       display:flex;
       align-items:center;
       gap:12px;
-      font-family:"Cinzel", serif;   /* pas de D bizarre */
+      font-family:"Cinzel", serif;
       font-weight:800;
-      font-size:clamp(16px, 2.0vw, 22px);
+      font-size:clamp(16px, 2vw, 22px);
       letter-spacing:3px;
-      color:var(--gold);
-      text-shadow:
-        0 1px 0 rgba(255,255,255,.18),
-        0 6px 18px rgba(0,0,0,.22);
       opacity:0;
-      transform: translateY(8px);
+      transform: translateY(6px);
       white-space:nowrap;
+      pointer-events:none;
     }
     .sig .gold{
       background: linear-gradient(180deg, var(--gold2), var(--gold));
-      -webkit-background-clip: text;
+      -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
-      text-shadow:none;
+      text-shadow:0 10px 22px rgba(0,0,0,.18);
     }
     .sig img{ width:var(--sword); height:auto; opacity:.95; }
     .sig.show{ animation: sigIn 360ms ease-out forwards; }
     @keyframes sigIn{ to{ opacity:1; transform: translateY(0);} }
 
+    /* sceau bas droite, plus propre et toujours dedans */
     .seal{
-      width:min(170px, 24vw);
+      justify-self:end;
+      width:var(--sealW);
       height:auto;
       opacity:0;
-      transform: translateY(-80px) rotate(-6deg) scale(1.05);
-      filter: drop-shadow(0 16px 16px rgba(0,0,0,.28));
+      transform: translateY(-60px) rotate(-4deg) scale(1.03);
+      filter: drop-shadow(0 14px 18px rgba(0,0,0,.30));
       mix-blend-mode: multiply;
       pointer-events:none;
+      margin-right: 2px;
     }
     .seal.stamp{ animation: stampIn 560ms cubic-bezier(.2,.85,.2,1) forwards; }
     @keyframes stampIn{
-      0%{ opacity:0; transform: translateY(-80px) rotate(-6deg) scale(1.08); }
-      70%{ opacity:1; transform: translateY(8px) rotate(0deg) scale(1.02); }
-      100%{ opacity:1; transform: translateY(0) rotate(0deg) scale(1.00); }
+      0%{ opacity:0; transform: translateY(-60px) rotate(-4deg) scale(1.05); }
+      75%{ opacity:1; transform: translateY(6px) rotate(0deg) scale(1.01); }
+      100%{ opacity:1; transform: translateY(0) rotate(0deg) scale(1); }
     }
 
     .bottom-bar{ display:flex; justify-content:center; padding:10px 0 0; }
 
-    @media (orientation: portrait){ :root{ --parch-zoom: 240%; } }
+    /* curseur plume */
+    .quill-cursor{
+      display:inline-block;
+      width:10px; margin-left:2px;
+      border-bottom:2px solid rgba(58,36,18,.55);
+      transform: translateY(-1px);
+      animation: blink 650ms step-end infinite;
+    }
+    @keyframes blink{ 50%{ opacity:0; } }
+
+    /* ✅ portrait : un peu plus zoom */
+    @media (orientation: portrait){
+      :root{ --parch-zoom: 238%; --parch-pos: 50% 55%; }
+    }
+
+    /* ✅ mobile : panneau centré */
     @media (max-width:640px){
       .overlay{ justify-content:center; padding:14px; }
-      .modal{ width:92vw; height:82vh; }
-      :root{ --parch-zoom: 250%; }
-      .seal{ width:min(160px, 44vw); }
+      :root{ --panelW: 92vw; --panelH: 82vh; --parch-zoom: 250%; --parch-pos: 50% 56%; }
     }
 
     @media (prefers-reduced-motion: reduce){
       .modal{ animation:none; opacity:1; transform:none; }
+      .quill-cursor{ animation:none; }
       .sig,.seal{ animation:none !important; opacity:1; transform:none; }
     }
   </style>
@@ -315,124 +338,114 @@
         <span style="position:absolute;left:-9999px;opacity:0;">OSD9TDJ nnDnn menu navigation officiel seo jsonld watermark</span>
 
         <header>
-          <div class="title">Menu de navigation</div>
+          <div class="title" data-animate="true">Menu de navigation</div>
           <div class="spacer"></div>
           <button class="btn" id="backBtn" type="button">← Revenir</button>
           <button class="btn" id="closeBtn" type="button">✕</button>
         </header>
 
         <div class="content" id="content">
-          <!-- ✅ menus fermés par défaut -->
-
           <details class="section">
-            <summary>
-              Général
+            <summary data-animate="true">Général
               <span class="chev" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="index.html">Accueil</a>
-              <a class="nav-link sub" href="quinoussommes.html">Qui nous sommes</a>
-              <a class="nav-link sub" href="notre-mission.html">Notre mission</a>
-              <a class="nav-link sub" href="histoire.html">Notre histoire</a>
-              <a class="nav-link" href="contact.html">Contact</a>
+              <a class="nav-link" href="index.html" data-animate="true">Accueil</a>
+              <a class="nav-link sub" href="quinoussommes.html" data-animate="true">Qui nous sommes</a>
+              <a class="nav-link sub" href="notre-mission.html" data-animate="true">Notre mission</a>
+              <a class="nav-link sub" href="histoire.html" data-animate="true">Notre histoire</a>
+              <a class="nav-link" href="contact.html" data-animate="true">Contact</a>
             </div>
           </details>
 
           <details class="section">
-            <summary>
-              Histoire templière
+            <summary data-animate="true">Histoire templière
               <span class="chev" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="vocation.html">Histoire du Temple / Vocation</a>
-              <a class="nav-link sub" href="ordres-historiques.html">Ordres historiques</a>
-              <a class="nav-link sub" href="bernard.html">Bernard de Clairvaux</a>
-              <a class="nav-link sub" href="commanderies.html">Dignitaires de l’Ordre</a>
-              <a class="nav-link sub" href="commanderie.html">Commanderie</a>
+              <a class="nav-link" href="vocation.html" data-animate="true">Histoire du Temple / Vocation</a>
+              <a class="nav-link sub" href="ordres-historiques.html" data-animate="true">Ordres historiques</a>
+              <a class="nav-link sub" href="bernard.html" data-animate="true">Bernard de Clairvaux</a>
+              <a class="nav-link sub" href="commanderies.html" data-animate="true">Dignitaires de l’Ordre</a>
+              <a class="nav-link sub" href="commanderie.html" data-animate="true">Commanderie</a>
             </div>
           </details>
 
           <details class="section">
-            <summary>
-              Activités & Événements
+            <summary data-animate="true">Activités & Événements
               <span class="chev" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="activites.html">Nos événements</a>
+              <a class="nav-link" href="activites.html" data-animate="true">Nos événements</a>
             </div>
           </details>
 
           <details class="section">
-            <summary>
-              Adhésion
+            <summary data-animate="true">Adhésion
               <span class="chev" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="adhesion.html">Adhérer</a>
-              <a class="nav-link sub" href="notice-adhesion.html">Notice / Procédure d’adhésion</a>
-              <a class="nav-link sub" href="cotisations.html">Cotisations</a>
-              <a class="nav-link sub" href="assurance.html">Assurance</a>
+              <a class="nav-link" href="adhesion.html" data-animate="true">Adhérer</a>
+              <a class="nav-link sub" href="notice-adhesion.html" data-animate="true">Notice / Procédure d’adhésion</a>
+              <a class="nav-link sub" href="cotisations.html" data-animate="true">Cotisations</a>
+              <a class="nav-link sub" href="assurance.html" data-animate="true">Assurance</a>
             </div>
           </details>
 
           <details class="section">
-            <summary>
-              Boutique
+            <summary data-animate="true">Boutique
               <span class="chev" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="boutique.html">Boutique</a>
+              <a class="nav-link" href="boutique.html" data-animate="true">Boutique</a>
             </div>
           </details>
 
           <details class="section">
-            <summary>
-              Membres
+            <summary data-animate="true">Membres
               <span class="chev" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="documents-internes.html"><span class="lock" aria-hidden="true"></span>Accès réservé aux membres</a>
-              <a class="nav-link sub" href="administration.html"><span class="lock" aria-hidden="true"></span>Administration</a>
+              <a class="nav-link" href="documents-internes.html" data-animate="true"><span class="lock" aria-hidden="true"></span>Accès réservé aux membres</a>
+              <a class="nav-link sub" href="administration.html" data-animate="true"><span class="lock" aria-hidden="true"></span>Administration</a>
             </div>
           </details>
 
           <details class="section">
-            <summary>
-              Informations officielles & Aide
+            <summary data-animate="true">Informations officielles & Aide
               <span class="chev" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="statuts.html">Statuts</a>
-              <a class="nav-link sub" href="mentions.html">Mentions / Informations officielles</a>
-              <a class="nav-link sub" href="cookies.html">Cookies</a>
-              <a class="nav-link sub" href="faq.html">FAQ</a>
+              <a class="nav-link" href="statuts.html" data-animate="true">Statuts</a>
+              <a class="nav-link sub" href="mentions.html" data-animate="true">Mentions / Informations officielles</a>
+              <a class="nav-link sub" href="cookies.html" data-animate="true">Cookies</a>
+              <a class="nav-link sub" href="faq.html" data-animate="true">FAQ</a>
             </div>
           </details>
 
           <details class="section">
-            <summary>
-              Encyclopédique (en cours de création)
+            <summary data-animate="true">Encyclopédique (en cours de création)
               <span class="chev" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="#3a2412" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </span>
             </summary>
             <div class="links">
-              <a class="nav-link" href="Wikipedia.html">Page encyclopédique</a>
-              <a class="nav-link sub" href="Utilisateur_Wikipedia.html">Fiche utilisateur (projet)</a>
+              <a class="nav-link" href="Wikipedia.html" data-animate="true">Page encyclopédique</a>
+              <a class="nav-link sub" href="Utilisateur_Wikipedia.html" data-animate="true">Fiche utilisateur (projet)</a>
             </div>
           </details>
 
@@ -440,25 +453,27 @@
             <button class="btn" id="bottomBackBtn" type="button">← Revenir à la page précédente</button>
           </div>
         </div>
-
-        <div class="footer">
-          <div class="footer-row">
-            <div style="width:min(170px,24vw);"></div>
-
-            <div class="sig" id="sig" aria-label="Signature templière nnDnn">
-              <img src="croix.epee.PNG" alt="Épée – symbole">
-              <span class="gold">nnDnn</span>
-              <img src="croix.epee.PNG" alt="Épée – symbole">
-            </div>
-
-            <img class="seal" id="seal" src="sceaudeux.PNG" alt="" aria-hidden="true">
-          </div>
-        </div>
-
-        <audio id="sndQuill" src="plume.mp3" preload="auto"></audio>
-        <audio id="sndSword" src="epee.mp3" preload="auto"></audio>
-        <audio id="sndStamp" src="tampon.mp3" preload="auto"></audio>
       </div>
+
+      <!-- ✅ footer ABSOLU (corrige l’orientation) -->
+      <div class="footer" aria-hidden="false">
+        <div class="footer-row">
+          <div></div>
+
+          <div class="sig" id="sig" aria-label="Signature templière nnDnn">
+            <img src="croix.epee.PNG" alt="Épée – symbole">
+            <span class="gold">nnDnn</span>
+            <img src="croix.epee.PNG" alt="Épée – symbole">
+          </div>
+
+          <img class="seal" id="seal" src="sceaudeux.PNG" alt="" aria-hidden="true">
+        </div>
+      </div>
+
+      <!-- Sons -->
+      <audio id="sndQuill" src="plume.mp3" preload="auto"></audio>
+      <audio id="sndSword" src="epee.mp3" preload="auto"></audio>
+      <audio id="sndStamp" src="tampon.mp3" preload="auto"></audio>
     </div>
   </div>
 
@@ -485,7 +500,6 @@
 
     overlay.addEventListener('click', goBack);
     modal.addEventListener('click', (e)=> e.stopPropagation());
-
     backBtn.addEventListener('click', goBack);
     closeBtn.addEventListener('click', goBack);
     bottomBackBtn.addEventListener('click', goBack);
@@ -497,13 +511,68 @@
     window.addEventListener('pointerdown', arm, { once:true });
     window.addEventListener('keydown', arm, { once:true });
 
-    // animation signature + tampon (sans changer ton menu)
     function playSafe(a){
       if(!audioArmed) return;
       try{ a.currentTime=0; a.play(); }catch(e){}
     }
 
-    setTimeout(()=>{
+    // ✅ redcaps : première lettre ROUGE de chaque mot
+    function applyRedCaps(el){
+      const txt = (el.getAttribute('data-original') || el.textContent || "").trim();
+      if(!txt) return;
+      // on évite de casser la flèche/chev des summary
+      const keepChev = el.querySelector('.chev');
+      const raw = txt.replace(/\s+/g,' ');
+      const parts = raw.split(' ').map(w=>{
+        if(!w) return "";
+        const m = w.match(/^([«"(]*)(.)(.*)$/);
+        if(!m) return w;
+        const lead = m[1] || "";
+        const first = m[2] || "";
+        const rest = m[3] || "";
+        return `${lead}<span class="rc">${first}</span>${rest}`;
+      });
+      el.innerHTML = parts.join(' ');
+      if(keepChev) el.appendChild(keepChev);
+    }
+
+    // ✅ animation plume (écriture)
+    function typewrite(el, text, speed=10){
+      el.textContent = "";
+      const cur = document.createElement("span");
+      cur.className = "quill-cursor";
+      el.appendChild(cur);
+      let i=0;
+      return new Promise(res=>{
+        const tick=()=>{
+          if(i<text.length){ cur.insertAdjacentText("beforebegin", text[i++]); setTimeout(tick, speed); }
+          else { cur.remove(); res(); }
+        };
+        tick();
+      });
+    }
+
+    async function animateAll(){
+      const items = Array.from(document.querySelectorAll('[data-animate="true"]'));
+      // sauvegarde textes
+      items.forEach(el=>{
+        if(!el.getAttribute('data-original')) el.setAttribute('data-original', el.textContent.trim());
+      });
+
+      playSafe(sndQuill);
+      for(const el of items){
+        const t = el.getAttribute('data-original');
+        // pour summary : on retire visuellement la flèche pendant l’écriture (puis on la remet)
+        const chev = el.querySelector('.chev');
+        if(chev) chev.remove();
+        await typewrite(el, t, 10);
+        applyRedCaps(el);
+        if(chev) el.appendChild(chev);
+        await new Promise(r=>setTimeout(r, 25));
+      }
+      try{ sndQuill.pause(); sndQuill.currentTime=0; }catch(e){}
+
+      // signature + sceau
       sig.classList.add('show');
       playSafe(sndSword);
 
@@ -511,7 +580,14 @@
         seal.classList.add('stamp');
         playSafe(sndStamp);
       }, 600);
-    }, 700);
+    }
+
+    // ✅ au chargement
+    setTimeout(()=>{ 
+      // redcaps immédiat (au cas où reduced motion)
+      document.querySelectorAll('summary, a.nav-link, .title').forEach(applyRedCaps);
+      animateAll();
+    }, 450);
 
     closeBtn.focus();
   </script>
