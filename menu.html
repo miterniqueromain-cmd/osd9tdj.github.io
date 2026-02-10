@@ -75,262 +75,267 @@
   </script>
 
   <style>
+  :root{
+    --veil: rgba(0,0,0,.72);
+    --panelW: min(560px, 92vw);
+    --panelH: min(92vh, 920px);
+    --radius: 18px;
+    --ink: #2b1b12;
+    --red: #a11212;
+    --line: rgba(70,50,35,.24);
+    --btn: rgba(255,255,255,.18);
+  }
+
+  html,body{height:100%; margin:0;}
+  body{
+    font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif;
+    color: var(--ink);
+
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,.38), rgba(0,0,0,.10)),
+      url("parchemin.jpg") center/cover no-repeat fixed;
+
+    overflow:hidden;
+  }
+
+  .veil{
+    position:fixed; inset:0;
+    background: var(--veil);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index:10;
+  }
+
+  .panel{
+    position:fixed;
+    top: 50%;
+    left: clamp(10px, 3vw, 28px);
+    transform: translate(-120%, -50%);
+    width: var(--panelW);
+    height: var(--panelH);
+    z-index: 20;
+
+    border-radius: var(--radius);
+    box-shadow: 0 26px 80px rgba(0,0,0,.55);
+    overflow:hidden;
+
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,.26), rgba(0,0,0,.06)),
+      url("parchemin.jpg") center/cover no-repeat;
+
+    outline: 1px solid rgba(0,0,0,.12);
+  }
+  .panel.open{
+    animation: slideIn 2.6s cubic-bezier(.18,.92,.18,1) forwards;
+  }
+  @keyframes slideIn{
+    to{ transform: translate(0, -50%); }
+  }
+
+  .header{
+    position:sticky; top:0;
+    padding: 18px 18px 12px 18px;
+    display:flex; align-items:flex-start; justify-content:space-between;
+    gap: 12px;
+    background: linear-gradient(to bottom, rgba(255,255,255,.55), rgba(255,255,255,.18));
+    border-bottom: 1px solid var(--line);
+    z-index: 30;
+  }
+
+  .title{
+    font-size: 28px;
+    line-height:1.05;
+    letter-spacing:.4px;
+    margin:0;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  }
+
+  .first{
+    color: var(--red);
+    font-weight: 700;
+    margin-right: 0;
+  }
+
+  .actions{ display:flex; gap:10px; align-items:center; }
+  .btn{
+    appearance:none; border:0;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: var(--btn);
+    outline: 1px solid rgba(0,0,0,.18);
+    color: #2a1a12;
+    font-weight: 700;
+    cursor:pointer;
+    user-select:none;
+    font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif;
+  }
+  .btn.close{
+    width: 42px; height: 42px;
+    display:grid; place-items:center;
+    font-size: 18px;
+    padding:0;
+  }
+
+  .scroll{
+    height: calc(var(--panelH) - 84px);
+    overflow:auto;
+    padding: 14px 16px calc(190px + env(safe-area-inset-bottom)) 16px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(60,45,35,.45) transparent;
+  }
+
+  details.group{
+    border-radius: 16px;
+    background: rgba(255,255,255,.14);
+    outline: 1px solid rgba(0,0,0,.12);
+    margin: 10px 0;
+    overflow:hidden;
+  }
+
+  summary{
+    list-style:none;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:10px;
+    padding: 14px 14px;
+    cursor:pointer;
+    user-select:none;
+    background: rgba(255,255,255,.10);
+    border-bottom: 1px dashed rgba(70,50,35,.22);
+  }
+  summary::-webkit-details-marker{ display:none; }
+
+  .label{
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing:.3px;
+    text-shadow: 0 1px 0 rgba(255,255,255,.45);
+  }
+
+  .chev{
+    width: 34px; height: 34px;
+    border-radius: 12px;
+    background: rgba(0,0,0,.10);
+    outline: 1px solid rgba(0,0,0,.16);
+    display:grid; place-items:center;
+    flex: 0 0 auto;
+  }
+  .chev svg{ width:18px; height:18px; opacity:.85; }
+
+  details[open] .chev svg{
+    transform: rotate(180deg);
+    transition: transform .22s ease;
+  }
+
+  .items{
+    padding: 10px 12px 12px 12px;
+    display:grid;
+    gap: 10px;
+  }
+
+  a.item{
+    display:flex; align-items:center; justify-content:space-between;
+    gap: 12px;
+    padding: 12px 12px;
+    border-radius: 14px;
+    text-decoration:none;
+    color: var(--ink);
+    background: rgba(255,255,255,.10);
+    outline: 1px solid rgba(0,0,0,.10);
+  }
+  a.item:hover{ background: rgba(255,255,255,.16); }
+
+  .sub{
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing:.2px;
+  }
+
+  .lock{
+    width: 20px; height: 20px; flex:0 0 auto;
+    opacity:.9;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,.25));
+  }
+
+  .write{
+    display:inline-block;
+    overflow:hidden;
+    vertical-align:bottom;
+    clip-path: inset(0 100% 0 0);
+  }
+
+  .write.reveal{
+    animation: inkReveal var(--dur, 2600ms) linear forwards;
+  }
+  @keyframes inkReveal{
+    to{ clip-path: inset(0 0 0 0); }
+  }
+
+  /* ✅ SCEAU : descendu + centré + bandeau quasi invisible (plus de découpage visible) */
+  .sealDock{
+    position: relative;
+    display:flex;
+    justify-content:center; /* ✅ centré */
+
+    margin: 34px 0 0 0;
+    padding: 26px 2px calc(18px + env(safe-area-inset-bottom)) 2px; /* ✅ descend + équilibre */
+    pointer-events:none;
+  }
+
+  .sealDock::before{
+    content:"";
+    position:absolute;
+    left: 12px; right: 12px;
+    top: 14px;
+    height: 190px;
+
+    border-radius: 32px;
+    filter: blur(14px);
+    opacity: .85;
+
+    background: radial-gradient(
+      ellipse at center,
+      rgba(230,216,186,.42) 0%,
+      rgba(230,216,186,.22) 55%,
+      rgba(230,216,186,0) 100%
+    );
+
+    mix-blend-mode: multiply;
+    pointer-events:none;
+  }
+
+  .seal{
+    position: relative;
+    width: clamp(220px, 32vw, 320px); /* ✅ beaucoup plus gros */
+    height:auto;
+    opacity:0;
+    transition: opacity .45s ease;
+    filter: drop-shadow(0 14px 26px rgba(0,0,0,.40));
+  }
+  .seal.show{
+    opacity:1;
+  }
+
+  .wm{
+    position:absolute;
+    left:-9999px;
+    top:auto;
+    width:1px; height:1px;
+    overflow:hidden;
+    opacity:0.001;
+    pointer-events:none;
+    user-select:none;
+  }
+
+  @media (orientation: landscape){
     :root{
-      --veil: rgba(0,0,0,.72);
-      --panelW: min(560px, 92vw);
-      --panelH: min(92vh, 920px);
-      --radius: 18px;
-      --ink: #2b1b12;
-      --red: #a11212;
-      --line: rgba(70,50,35,.24);
-      --btn: rgba(255,255,255,.18);
+      --panelW: min(620px, 70vw);
+      --panelH: min(88vh, 720px);
     }
-
-    html,body{height:100%; margin:0;}
-    body{
-      font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif;
-      color: var(--ink);
-
-      background:
-        linear-gradient(to bottom, rgba(0,0,0,.38), rgba(0,0,0,.10)),
-        url("parchemin.jpg") center/cover no-repeat fixed;
-
-      overflow:hidden;
-    }
-
-    .veil{
-      position:fixed; inset:0;
-      background: var(--veil);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      z-index:10;
-    }
-
-    .panel{
-      position:fixed;
-      top: 50%;
-      left: clamp(10px, 3vw, 28px);
-      transform: translate(-120%, -50%);
-      width: var(--panelW);
-      height: var(--panelH);
-      z-index: 20;
-
-      border-radius: var(--radius);
-      box-shadow: 0 26px 80px rgba(0,0,0,.55);
-      overflow:hidden;
-
-      background:
-        linear-gradient(to bottom, rgba(0,0,0,.26), rgba(0,0,0,.06)),
-        url("parchemin.jpg") center/cover no-repeat;
-
-      outline: 1px solid rgba(0,0,0,.12);
-    }
-    .panel.open{
-      animation: slideIn 2.6s cubic-bezier(.18,.92,.18,1) forwards;
-    }
-    @keyframes slideIn{
-      to{ transform: translate(0, -50%); }
-    }
-
-    .header{
-      position:sticky; top:0;
-      padding: 18px 18px 12px 18px;
-      display:flex; align-items:flex-start; justify-content:space-between;
-      gap: 12px;
-      background: linear-gradient(to bottom, rgba(255,255,255,.55), rgba(255,255,255,.18));
-      border-bottom: 1px solid var(--line);
-      z-index: 30;
-    }
-
-    .title{
-      font-size: 28px;
-      line-height:1.05;
-      letter-spacing:.4px;
-      margin:0;
-      text-shadow: 0 1px 0 rgba(255,255,255,.5);
-    }
-
-    .first{
-      color: var(--red);
-      font-weight: 700;
-      margin-right: 0;
-    }
-
-    .actions{ display:flex; gap:10px; align-items:center; }
-    .btn{
-      appearance:none; border:0;
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: var(--btn);
-      outline: 1px solid rgba(0,0,0,.18);
-      color: #2a1a12;
-      font-weight: 700;
-      cursor:pointer;
-      user-select:none;
-      font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif;
-    }
-    .btn.close{
-      width: 42px; height: 42px;
-      display:grid; place-items:center;
-      font-size: 18px;
-      padding:0;
-    }
-
-    .scroll{
-      height: calc(var(--panelH) - 84px);
-      overflow:auto;
-      padding: 14px 16px calc(190px + env(safe-area-inset-bottom)) 16px;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(60,45,35,.45) transparent;
-    }
-
-    details.group{
-      border-radius: 16px;
-      background: rgba(255,255,255,.14);
-      outline: 1px solid rgba(0,0,0,.12);
-      margin: 10px 0;
-      overflow:hidden;
-    }
-
-    summary{
-      list-style:none;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px;
-      padding: 14px 14px;
-      cursor:pointer;
-      user-select:none;
-      background: rgba(255,255,255,.10);
-      border-bottom: 1px dashed rgba(70,50,35,.22);
-    }
-    summary::-webkit-details-marker{ display:none; }
-
-    .label{
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing:.3px;
-      text-shadow: 0 1px 0 rgba(255,255,255,.45);
-    }
-
-    .chev{
-      width: 34px; height: 34px;
-      border-radius: 12px;
-      background: rgba(0,0,0,.10);
-      outline: 1px solid rgba(0,0,0,.16);
-      display:grid; place-items:center;
-      flex: 0 0 auto;
-    }
-    .chev svg{ width:18px; height:18px; opacity:.85; }
-
-    details[open] .chev svg{
-      transform: rotate(180deg);
-      transition: transform .22s ease;
-    }
-
-    .items{
-      padding: 10px 12px 12px 12px;
-      display:grid;
-      gap: 10px;
-    }
-
-    a.item{
-      display:flex; align-items:center; justify-content:space-between;
-      gap: 12px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      text-decoration:none;
-      color: var(--ink);
-      background: rgba(255,255,255,.10);
-      outline: 1px solid rgba(0,0,0,.10);
-    }
-    a.item:hover{ background: rgba(255,255,255,.16); }
-
-    .sub{
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing:.2px;
-    }
-
-    .lock{
-      width: 20px; height: 20px; flex:0 0 auto;
-      opacity:.9;
-      filter: drop-shadow(0 2px 2px rgba(0,0,0,.25));
-    }
-
-    .write{
-      display:inline-block;
-      overflow:hidden;
-      vertical-align:bottom;
-      clip-path: inset(0 100% 0 0);
-    }
-
-    .write.reveal{
-      animation: inkReveal var(--dur, 2600ms) linear forwards;
-    }
-    @keyframes inkReveal{
-      to{ clip-path: inset(0 0 0 0); }
-    }
-
-    /* ✅ SCEAU : descendu + bandeau beaucoup plus clair, sans chevauchement */
-    .sealDock{
-      position: relative;
-      display:flex;
-      justify-content:flex-end;
-
-      margin: 34px 0 0 0; /* ✅ descend l'ensemble (évite chevauchement avec le bouton) */
-      padding: 18px 2px calc(14px + env(safe-area-inset-bottom)) 0; /* ✅ décale encore vers le bas */
-      pointer-events:none;
-    }
-
- 
-    .sealDock::before{
-  content:"";
-  position:absolute;
-  left: 0; right: 0;
-  top: 6px;
-  height: 150px;
-  border-radius: 18px;
-  background: linear-gradient(
-  to top,
-  rgba(236,224,198,.60),   /* beige parchemin clair en bas */
-  rgba(236,224,198,.38) 55%,
-  rgba(236,224,198,0)
-);
-  pointer-events:none;
-}
-
-    .seal{
-      position: relative;
-      width: clamp(160px, 22vw, 240px);
-      height:auto;
-      opacity:0;
-      transition: opacity .45s ease;
-      filter: drop-shadow(0 14px 26px rgba(0,0,0,.40));
-    }
-    .seal.show{
-      opacity:1;
-    }
-
-    .wm{
-      position:absolute;
-      left:-9999px;
-      top:auto;
-      width:1px; height:1px;
-      overflow:hidden;
-      opacity:0.001;
-      pointer-events:none;
-      user-select:none;
-    }
-
-    @media (orientation: landscape){
-      :root{
-        --panelW: min(620px, 70vw);
-        --panelH: min(88vh, 720px);
-      }
-      .title{ font-size: 26px; }
-      .label{ font-size: 19px; }
-      .sub{ font-size: 17px; }
-    }
-  </style>
+    .title{ font-size: 26px; }
+    .label{ font-size: 19px; }
+    .sub{ font-size: 17px; }
+  }
+</style>
 </head>
 
 <body>
