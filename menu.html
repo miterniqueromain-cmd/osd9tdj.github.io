@@ -5,15 +5,26 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#0b0b0c" />
 
+  <!-- SEO -->
   <title>Menu de navigation | OSD9TDJ</title>
   <meta name="description" content="Menu de navigation du site OSD9TDJ : rubriques et sous-pages (général, histoire templière, activités, adhésion, membres, informations officielles, pages encyclopédiques)." />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <link rel="canonical" href="https://osd9tdj.org/menu.html" />
 
-  <meta name="generator" content="OSD9TDJ-MenuParchemin-FixSafari" />
-  <meta name="x-watermark" content="OSD9TDJ|nnDnn|menu|parchemin|fix" />
-  <!-- OSD9TDJ • nnDnn • watermark:fix -->
+  <!-- Open Graph -->
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="OSD9TDJ" />
+  <meta property="og:title" content="Menu de navigation | OSD9TDJ" />
+  <meta property="og:description" content="Navigation par rubriques – parchemin animé." />
+  <meta property="og:url" content="https://osd9tdj.org/menu.html" />
 
+  <!-- Watermark invisible -->
+  <meta name="generator" content="OSD9TDJ-MenuParchemin-FINAL-iPadFix" />
+  <meta name="x-watermark" content="OSD9TDJ|nnDnn|menu|parchemin|ipadfix" />
+  <!-- OSD9TDJ • nnDnn • watermark:ipadfix -->
+
+  <!-- JSON-LD (URLs relatives = pas d’erreur domaine) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -31,6 +42,7 @@
   }
   </script>
 
+  <!-- Fonts médiévales -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
@@ -40,26 +52,27 @@
       --ink:#24160c;
       --ink2:#3a2412;
       --red:#a30000;
-      --shadow: rgba(0,0,0,.60);
+      --shadow: rgba(0,0,0,.62);
     }
+
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{ margin:0; background:#0b0b0c; font-family:"Cinzel", serif; }
 
-    /* ancienne page derrière */
+    /* Ancienne page visible derrière */
     .backdrop{
       position:fixed; inset:0;
-      background:rgba(0,0,0,.45);
-      backdrop-filter: blur(2px);
+      background:rgba(0,0,0,.40);
+      backdrop-filter: blur(1.6px);
       display:grid;
       place-items:center;
-      padding:14px;
+      padding:16px;
     }
 
-    /* boîte du parchemin (un peu plus petit que l'écran) */
+    /* ✅ Parchemin PLUS PETIT pour voir le fond */
     .parchment{
-      width:min(1040px, 94vw);
-      height:min(90vh, 980px);
+      width:min(920px, 86vw);     /* plus petit */
+      height:min(78vh, 820px);    /* plus petit */
       position:relative;
       border-radius:18px;
       box-shadow:0 26px 90px var(--shadow);
@@ -73,34 +86,40 @@
       100%{ transform: scaleY(1); opacity:1; }
     }
 
-    /* image du parchemin */
+    /* Image */
     .parchment::before{
       content:"";
       position:absolute; inset:0;
       background:url("parchemin.PNG") no-repeat center / contain;
+      z-index:1;
     }
 
-    /* ✅ cadre intérieur (positionné en PIXELS via JS) */
+    /* ✅ Cadre intérieur : placé EN PX via JS (robuste iPad) */
     .sheet{
       position:absolute;
-      left:0; top:0; right:0; bottom:0; /* sera remplacé par JS */
+      left:0; top:0; width:100%; height:100%;
+      padding:0; /* sera fixé en JS */
       display:flex;
       flex-direction:column;
       gap:8px;
-      padding:0; /* sera remplacé par JS */
       z-index:2;
     }
 
     header{
-      display:flex; align-items:center; gap:10px;
+      display:flex;
+      align-items:center;
+      gap:10px;
       padding:0 2px 6px;
     }
+
     .title{
       font-family:"Uncial Antiqua", serif;
-      font-size:20px; color:var(--ink2);
+      font-size:20px;
+      color:var(--ink2);
       letter-spacing:.3px;
     }
     .spacer{ flex:1; }
+
     .btn{
       border:1px solid rgba(36,22,12,.22);
       background:rgba(255,255,255,.22);
@@ -111,15 +130,17 @@
       font-family:"Cinzel", serif;
       white-space:nowrap;
     }
+    .btn:focus{ outline:2px solid rgba(163,0,0,.35); }
 
     .content{
       flex:1;
-      min-height:0;                 /* IMPORTANT iOS */
+      min-height:0; /* iOS */
       overflow:auto;
       -webkit-overflow-scrolling: touch;
       padding:2px 2px 0;
     }
 
+    /* Pas de blocs gris */
     details.section{
       margin:10px 0;
       border-radius:14px;
@@ -127,6 +148,8 @@
       border:1px solid rgba(36,22,12,.18);
       overflow:hidden;
     }
+
+    /* Quinconce rubriques */
     details.section:nth-of-type(even){ transform: translateX(10px); }
 
     summary{
@@ -141,6 +164,7 @@
       background:transparent;
     }
     summary::-webkit-details-marker{ display:none; }
+
     summary::first-letter,
     a.nav-link::first-letter{ color:var(--red); }
 
@@ -157,6 +181,8 @@
       font-weight:700;
       box-shadow:0 6px 18px rgba(0,0,0,.10);
     }
+
+    /* Quinconce sous-menus */
     a.nav-link.sub{
       font-weight:600;
       opacity:.92;
@@ -164,16 +190,18 @@
       box-shadow:0 6px 18px rgba(0,0,0,.08);
     }
 
+    /* Plume */
     .quill-cursor{
       display:inline-block;
-      width:10px; margin-left:2px;
+      width:10px;
+      margin-left:2px;
       border-bottom:2px solid rgba(58,36,18,.55);
       transform: translateY(-1px);
       animation: blink 650ms step-end infinite;
     }
     @keyframes blink{ 50%{ opacity:0; } }
 
-    /* footer toujours visible EN BAS du parchemin */
+    /* ✅ Footer sticky DANS le parchemin */
     .footer{
       position:sticky;
       bottom:0;
@@ -187,6 +215,7 @@
       gap:12px;
     }
 
+    /* Signature bouton noir */
     .sig-btn{
       margin:0 auto;
       display:flex;
@@ -210,6 +239,7 @@
     .sig-btn.show{ animation: sigIn 360ms ease-out forwards; }
     @keyframes sigIn{ to{ opacity:1; transform: translateY(0);} }
 
+    /* Sceau bas droite */
     .seal{
       width:min(190px, 28vw);
       height:auto;
@@ -234,12 +264,19 @@
       a.nav-link.sub{ margin-left:10px; }
       .sig-btn{ font-size:18px; }
       .seal{ width:min(170px, 46vw); }
+      .parchment{ width:92vw; height:82vh; } /* mobile */
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .parchment{ animation:none; transform:none; opacity:1; }
+      .quill-cursor{ animation:none; }
+      .sig-btn, .seal{ animation:none !important; opacity:1; transform:none; }
     }
   </style>
 </head>
 
 <body>
-  <div class="backdrop" id="backdrop">
+  <div class="backdrop" id="backdrop" aria-label="Retour page précédente">
     <div class="parchment" id="parchment" role="dialog" aria-modal="true" aria-label="Menu de navigation">
       <div class="sheet" id="sheet">
         <span style="position:absolute;left:-9999px;opacity:0;">OSD9TDJ nnDnn menu parchemin navigation officiel</span>
@@ -252,7 +289,6 @@
         </header>
 
         <div class="content" id="content">
-
           <details class="section" open>
             <summary data-animate="true">Général</summary>
             <div class="links">
@@ -344,6 +380,7 @@
           </div>
         </div>
 
+        <!-- Sons (noms à mettre à la racine) -->
         <audio id="sndQuill" src="plume.mp3" preload="auto"></audio>
         <audio id="sndSword" src="epee.mp3" preload="auto"></audio>
         <audio id="sndStamp" src="tampon.mp3" preload="auto"></audio>
@@ -373,6 +410,7 @@
       location.href = 'index.html';
     }
 
+    // clic dehors => retour ; clic dedans => stop
     backdrop.addEventListener('click', goBack);
     parchment.addEventListener('click', (e)=> e.stopPropagation());
     sheet.addEventListener('click', (e)=> e.stopPropagation());
@@ -384,11 +422,10 @@
 
     // iOS audio : armement
     let audioArmed = false;
-    const arm = ()=> { audioArmed = true; window.removeEventListener('pointerdown', arm); window.removeEventListener('keydown', arm); };
+    const arm = ()=>{ audioArmed = true; window.removeEventListener('pointerdown', arm); window.removeEventListener('keydown', arm); };
     window.addEventListener('pointerdown', arm, { once:true });
     window.addEventListener('keydown', arm, { once:true });
 
-    // ✅ calc zone contain + applique un cadre intérieur EN PX
     function computeContainBox(cw, ch, iw, ih){
       const cr = cw / ch, ir = iw / ih;
       let w, h, left, top;
@@ -397,6 +434,7 @@
       return {left, top, w, h};
     }
 
+    // ✅ Layout robuste iPad : AFTER animation (taille finale)
     async function layout(){
       const img = new Image();
       img.src = "parchemin.PNG";
@@ -405,17 +443,17 @@
       const r = parchment.getBoundingClientRect();
       const box = computeContainBox(r.width, r.height, img.naturalWidth || 1200, img.naturalHeight || 800);
 
-      // marges "zone écrivable" (en % de l'image)
-      const safeTop = 0.16, safeLeft = 0.12, safeRight = 0.12, safeBottom = 0.18;
+      // ✅ Marges réduites (cadre intérieur plus grand)
+      const safeTop = 0.11, safeLeft = 0.09, safeRight = 0.09, safeBottom = 0.14;
 
-      sheet.style.left = (box.left) + "px";
-      sheet.style.top = (box.top) + "px";
-      sheet.style.width = (box.w) + "px";
-      sheet.style.height = (box.h) + "px";
+      sheet.style.left   = box.left + "px";
+      sheet.style.top    = box.top + "px";
+      sheet.style.width  = box.w + "px";
+      sheet.style.height = box.h + "px";
 
-      sheet.style.paddingTop = (box.h * safeTop) + "px";
-      sheet.style.paddingLeft = (box.w * safeLeft) + "px";
-      sheet.style.paddingRight = (box.w * safeRight) + "px";
+      sheet.style.paddingTop    = (box.h * safeTop) + "px";
+      sheet.style.paddingLeft   = (box.w * safeLeft) + "px";
+      sheet.style.paddingRight  = (box.w * safeRight) + "px";
       sheet.style.paddingBottom = (box.h * safeBottom) + "px";
     }
 
@@ -436,6 +474,7 @@
 
     async function animateAll(){
       const items = Array.from(document.querySelectorAll('[data-animate="true"]'));
+
       if(audioArmed){ try{ sndQuill.currentTime=0; sndQuill.play(); }catch(e){} }
 
       for(const el of items){
@@ -456,12 +495,15 @@
       }, 650);
     }
 
-    (async ()=>{
-      await layout();
-      window.addEventListener('resize', layout, { passive:true });
-      setTimeout(animateAll, 900);
-      closeBtn.focus();
-    })();
+    // ✅ On attend la fin de l’animation pour calculer les bonnes tailles
+    parchment.addEventListener("animationend", () => layout(), { once:true });
+    setTimeout(layout, 1100); // sécurité iPad
+    window.addEventListener('resize', layout, { passive:true });
+
+    // animation texte
+    setTimeout(animateAll, 900);
+
+    closeBtn.focus();
   </script>
 </body>
 </html>
