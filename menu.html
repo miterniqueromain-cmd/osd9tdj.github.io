@@ -84,6 +84,9 @@
     --red: #a11212;
     --line: rgba(70,50,35,.24);
     --btn: rgba(255,255,255,.18);
+
+    /* ✅ Animation plus lente */
+    --slideDur: 4.2s;
   }
 
   html,body{height:100%; margin:0;}
@@ -130,7 +133,7 @@
   }
 
   .panel.open{
-    animation: slideIn 2.6s cubic-bezier(.18,.92,.18,1) forwards;
+    animation: slideIn var(--slideDur) cubic-bezier(.18,.92,.18,1) forwards;
   }
 
   /* ✅ Rectangle : droite -> centre (pause) -> tout à droite */
@@ -144,7 +147,7 @@
       transform: translate(0, -50%);
     }
 
-    /* petite stabilisation au centre */
+    /* stabilisation au centre */
     72%{
       transform: translate(0, -50%);
     }
@@ -376,7 +379,7 @@
     .label{ font-size: 19px; }
     .sub{ font-size: 17px; }
   }
-</style>
+  </style>
 </head>
 
 <body>
@@ -518,6 +521,7 @@
         <div class="items">
           <a class="item" href="statuts.html"><span class="sub js-write">Statuts</span></a>
           <a class="item" href="mentions.html"><span class="sub js-write">Mentions / informations officielles</span></a>
+          <a class="item" href="assurance.html"><span class="sub js-write">Assurance</span></a>
           <a class="item" href="cookies.html"><span class="sub js-write">Cookies</span></a>
           <a class="item" href="faq.html"><span class="sub js-write">FAQ</span></a>
         </div>
@@ -534,7 +538,7 @@
         </summary>
         <div class="items">
           <a class="item" href="Wikipedia.html"><span class="sub js-write">Page encyclopédique</span></a>
-          <a class="item" href="Utilisateur_Wikipedia.html"><span class="sub js-write">Fiche utilisateur (projet)</span></a>
+          <!-- ✅ supprimé : Utilisateur_Wikipedia.html -->
         </div>
       </details>
 
@@ -635,10 +639,11 @@
 
       applyWriting();
 
+      /* ✅ synchro approximative avec l’animation plus lente */
       setTimeout(() => {
         seal.classList.add("show");
         playSafe(aTampon);
-      }, 2600);
+      }, 4200);
     }
 
     document.getElementById("btnBack").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
