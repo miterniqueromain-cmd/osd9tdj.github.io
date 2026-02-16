@@ -207,6 +207,54 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
   }
   .menu-panel a:last-child{ border-bottom:none; }
 
+  /* ✅ MODIF : 3 points = lien vers menu.html (même style que summary) */
+  .top-menu .menu-link{
+    width:46px;
+    height:34px;
+    display:grid;
+    place-items:center;
+    border-radius:999px;
+    border:1px solid rgba(255,215,0,0.55);
+    background:rgba(0,0,0,0.22);
+    backdrop-filter: blur(6px);
+    box-shadow:0 6px 16px rgba(0,0,0,0.35);
+    font-family:'Cinzel',serif;
+    color:var(--or);
+    font-size:22px;
+    line-height:1;
+    text-decoration:none;
+    user-select:none;
+    cursor:pointer;
+  }
+
+  /* ✅ Boutons langues (solution 3 : traducteur externe) */
+  .lang-tools{
+    position: fixed;
+    top: 26px;
+    left: 26px;
+    z-index: 70;
+    display: flex;
+    gap: 8px;
+    pointer-events: auto;
+  }
+  .lang-btn{
+    appearance: none;
+    border: 1px solid rgba(255,215,0,0.55);
+    background: rgba(0,0,0,0.22);
+    color: var(--or);
+    padding: 8px 10px;
+    border-radius: 999px;
+    font-family:'Cinzel',serif;
+    font-weight: 800;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1;
+  }
+  .lang-btn:hover{
+    background: rgba(255,215,0,0.12);
+    color: #fff;
+  }
+
   /* Voile de lisibilité (inchangé) */
   .overlay {
     min-height: 100vh;
@@ -378,6 +426,10 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
     .nndnn-banner{ gap:10px; }
     .nndnn-banner img{ height:42px; }
     .nndnn-text{ font-size:1.55rem; }
+
+    /* boutons langues */
+    .lang-tools{ top:22px; left:22px; }
+    .lang-btn{ padding:7px 9px; }
   }
     /* 🔒 Badge Documents internes */
 .docs-internes-badge{
@@ -419,24 +471,17 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
   <!-- ✅ Cadre fixe (lys supprimées) -->
   <div class="frame-fixed" aria-hidden="true"></div>
 
-  <!-- ✅ Menu 3 points (tout le site) -->
+  <!-- ✅ Boutons langues (traducteur externe) -->
+  <div class="lang-tools" aria-label="Traduction de la page">
+    <button type="button" class="lang-btn" data-lang="en" title="Traduire en anglais">EN</button>
+    <button type="button" class="lang-btn" data-lang="es" title="Traducir al español">ES</button>
+    <button type="button" class="lang-btn" data-lang="it" title="Tradurre in italiano">IT</button>
+    <button type="button" class="lang-btn" data-lang="de" title="Auf Deutsch übersetzen">DE</button>
+  </div>
+
+  <!-- ✅ Menu 3 points => ouvre menu.html -->
   <div class="top-menu" aria-label="Menu du site">
-    <details>
-      <summary title="Menu">⋯</summary>
-      <div class="menu-panel" role="menu" aria-label="Navigation">
-        <a href="notre-mission.html"> Notre mission</a>
-        <a href="quinoussommes.html"> Qui nous sommes</a>
-        <a href="histoire.html"> Notre histoire</a>
-        <a href="faq.html"> FAQ</a>
-        <a href="activites.html"> Nos Evenements</a>
-        <a href="adhesion.html"> Adhésion</a>
-        <a href="boutique.html"> Boutique</a>
-        <a href="contact.html"> Contact</a>
-        <a href="documents-internes.html">🔒 Acces reserve aux membres</a>
-           <a href="administration.html">🔒 Administration</a>
-        
-      </div>
-    </details>
+    <a href="menu.html" id="openMenu" class="menu-link" title="Menu">⋯</a>
   </div>
 
   <!-- ✅ Tout défile dedans -->
@@ -452,7 +497,7 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
         <a href="boutique.html" class="tab">🛒 Boutique en ligne</a>
         <a href="contact.html" class="tab">📞 Contact</a>
       </nav>
-      
+
 
       <!-- BLASON -->
       <div class="blason-box">
@@ -504,6 +549,40 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
 
     </div>
   </div>
+
+  <!-- ✅ Scripts demandés : tablette (fond menu) + langues -->
+  <script>
+    // ✅ Tablette/iPad : mémorise la page actuelle pour que menu.html affiche le bon fond
+    try { sessionStorage.setItem("osd9tdj_lastPage", location.href); } catch(e) {}
+
+    // ✅ Langues : ouvre un traducteur externe (solution 3)
+    (function(){
+      function openTranslate(lang){
+        const url = encodeURIComponent(location.href);
+
+        // Google Translate (par défaut)
+        const g = "https://translate.google.com/translate?sl=fr&tl=" + encodeURIComponent(lang) + "&u=" + url;
+
+        // Si tu préfères DeepL, remplace window.open(g...) par window.open(deepl...)
+        // const deepl = "https://www.deepl.com/translator#fr/" + encodeURIComponent(lang) + "/" + url;
+
+        window.open(g, "_blank", "noopener,noreferrer");
+      }
+
+      document.querySelectorAll(".lang-btn").forEach(btn => {
+        btn.addEventListener("click", () => openTranslate(btn.dataset.lang));
+      });
+    })();
+
+    // ✅ Au clic sur les 3 points, on ré-enregistre (au cas où) puis on ouvre menu.html
+    (function(){
+      const btn = document.getElementById("openMenu");
+      if(!btn) return;
+      btn.addEventListener("click", function(){
+        try { sessionStorage.setItem("osd9tdj_lastPage", location.href); } catch(e) {}
+      });
+    })();
+  </script>
 
 </body>
 </html>
