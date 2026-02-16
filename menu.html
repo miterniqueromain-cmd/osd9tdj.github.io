@@ -85,8 +85,11 @@
     --line: rgba(70,50,35,.24);
     --btn: rgba(255,255,255,.18);
 
-    /* ✅ Animation plus lente */
-    --slideDur: 4.2s;
+    /* ✅ vitesse glissement (plus grand = plus lent) */
+    --slideDur: 4.8s;
+
+    /* ✅ marge “design” */
+    --edge: clamp(10px, 3vw, 28px);
   }
 
   html,body{height:100%; margin:0;}
@@ -112,10 +115,10 @@
   .panel{
     position:fixed;
     top: 50%;
-    left: clamp(10px, 3vw, 28px);
+    left: var(--edge);
 
-    /* ✅ départ hors écran à droite (aligné avec 0% de l'animation) */
-    transform: translate(120%, -50%);
+    /* ✅ caché à gauche */
+    transform: translate(-130%, -50%);
 
     width: var(--panelW);
     height: var(--panelH);
@@ -132,29 +135,39 @@
     outline: 1px solid rgba(0,0,0,.12);
   }
 
+  /* ✅ SEULE animation : gauche -> se colle à droite */
   .panel.open{
-    animation: slideIn var(--slideDur) cubic-bezier(.18,.92,.18,1) forwards;
+    animation: slideToRight var(--slideDur) cubic-bezier(.18,.92,.18,1) forwards;
   }
 
-  /* ✅ Rectangle : droite -> centre (pause) -> tout à droite */
-  @keyframes slideIn{
+  @keyframes slideToRight{
     0%{
-      transform: translate(120%, -50%);
+      transform: translate(-130%, -50%);
     }
-
-    /* arrive au centre */
-    58%{
-      transform: translate(0, -50%);
-    }
-
-    /* stabilisation au centre */
-    72%{
-      transform: translate(0, -50%);
-    }
-
-    /* finit tout à droite (marge = clamp(10px, 3vw, 28px)) */
     100%{
-      transform: translate(calc(100vw - var(--panelW) - clamp(10px, 3vw, 28px)), -50%);
+      transform: translate(calc(100vw - var(--panelW) - var(--edge)), -50%);
+    }
+  }
+
+  /* ✅ ORDI : plein haut-bas */
+  @media (min-width: 1024px){
+    :root{ --panelH: 100dvh; }
+
+    .panel{
+      top: 0;
+      transform: translate(-130%, 0);
+      height: var(--panelH);
+    }
+    .panel.open{
+      animation: slideToRightDesk var(--slideDur) cubic-bezier(.18,.92,.18,1) forwards;
+    }
+    @keyframes slideToRightDesk{
+      0%{
+        transform: translate(-130%, 0);
+      }
+      100%{
+        transform: translate(calc(100vw - var(--panelW) - var(--edge)), 0);
+      }
     }
   }
 
@@ -296,7 +309,6 @@
     to{ clip-path: inset(0 0 0 0); }
   }
 
-  /* ✅ SCEAU : descendu + centré + bandeau quasi invisible (plus de découpage visible) */
   .sealDock{
     position: relative;
     display:flex;
@@ -337,9 +349,8 @@
     transition: opacity .45s ease;
     filter: drop-shadow(0 14px 26px rgba(0,0,0,.40));
   }
-  .seal.show{
-    opacity:1;
-  }
+  .seal.show{ opacity:1; }
+
   .seal::before{
     content:"";
     position:absolute;
@@ -379,7 +390,7 @@
     .label{ font-size: 19px; }
     .sub{ font-size: 17px; }
   }
-  </style>
+</style>
 </head>
 
 <body>
@@ -538,7 +549,6 @@
         </summary>
         <div class="items">
           <a class="item" href="Wikipedia.html"><span class="sub js-write">Page encyclopédique</span></a>
-          <!-- ✅ supprimé : Utilisateur_Wikipedia.html -->
         </div>
       </details>
 
@@ -603,6 +613,7 @@
       node.appendChild(s2);
     }
 
+    /* ✅ ÉCRITURES : INCHANGÉ */
     function applyWriting(){
       const els = document.querySelectorAll(".js-write, .title");
       els.forEach(el => {
@@ -631,19 +642,36 @@
     const veil  = document.getElementById("veil");
     const seal  = document.getElementById("seal");
 
+    function cssVarToMs(varName, fallbackMs){
+      try{
+        const v = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+        if(!v) return fallbackMs;
+        if(v.endsWith("ms")) return parseFloat(v);
+        if(v.endsWith("s"))  return parseFloat(v) * 1000;
+        return fallbackMs;
+      }catch(e){
+        return fallbackMs;
+      }
+    }
+
     function openMenu(){
       panel.classList.add("open");
 
       const unlock = () => { initAudioOnce(); document.removeEventListener("pointerdown", unlock); };
       document.addEventListener("pointerdown", unlock, { once:true });
 
-      applyWriting();
+      /* ✅ écriture après la fin du glissement */
+      const slideMs = cssVarToMs("--slideDur", 4800);
 
-      /* ✅ synchro approximative avec l’animation plus lente */
       setTimeout(() => {
-        seal.classList.add("show");
-        playSafe(aTampon);
-      }, 4200);
+        applyWriting();
+
+        setTimeout(() => {
+          seal.classList.add("show");
+          playSafe(aTampon);
+        }, 2600);
+
+      }, slideMs + 60);
     }
 
     document.getElementById("btnBack").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
