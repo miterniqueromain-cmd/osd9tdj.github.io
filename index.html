@@ -12,30 +12,23 @@
         content="Ordre Sacré des Neuf Templiers de Jérusalem, OSD9TDJ, ordre templier, ordre templier français, Templiers, chevalerie moderne, ordre initiatique, ordre chevaleresque contemporain, association loi 1901, intérêt général, utilité publique, utilité sociale, économie sociale et solidaire, ESS principes, ONG au sens éthique et associatif, transmission des valeurs, accompagnement des jeunes, repères, fraternité, discipline intérieure, engagement, Hugues de Payns, neuf fondateurs, Per Crucem Veritas">
   <link rel="canonical" href="https://osd9tdj.org/">
 
-  <!-- Robots (indexation complète + autorisation de snippets étendus) -->
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
   <meta name="bingbot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 
-  <!-- Open Graph / Réseaux sociaux -->
   <meta property="og:title" content="Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J.">
   <meta property="og:description" content="Site officiel de l’Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J., association culturelle et chevaleresque à vocation internationale.">
   <meta property="og:image" content="https://osd9tdj.org/blason-osd9tdj.PNG">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://osd9tdj.org/">
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J.">
   <meta name="twitter:description" content="Site officiel de l’Ordre Sacré des Neuf Templiers de Jérusalem.">
   <meta name="twitter:image" content="https://osd9tdj.org/blason-osd9tdj.PNG">
 
-  <!-- WATERMARK INVISIBLE -->
   <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-INDEX-OFFICIAL-HOMEPAGE">
 
-  <!-- =========================================================
-       Données structurées (IA-friendly) : TEXTE COMPLET (non résumé)
-  ========================================================== -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -64,16 +57,17 @@
   }
   </script>
 
-  <!-- Polices Google -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
   :root {
     --or: #ffd700;
     --clair: #fdf7e5;
+
+    /* ✅ hauteur bar top (pour éviter chevauchement) */
+    --topBarH: 74px; /* valeur par défaut (mobile) */
   }
 
-  /* ✅ CADRE FIXE + SCROLL DEDANS */
   html, body{
     height:100%;
     margin:0;
@@ -106,6 +100,7 @@
     z-index:40;
   }
 
+  /* ✅ Zone qui défile à l'intérieur du cadre */
   .viewport-scroll{
     position:fixed;
     inset:22px;
@@ -121,7 +116,7 @@
     top: 22px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 80; /* au-dessus de tout */
+    z-index: 80;
     width: calc(100% - 44px);
     max-width: 980px;
 
@@ -144,14 +139,13 @@
     font-weight:700;
     color:rgba(253,247,229,0.92);
     font-size:0.92rem;
-    letter-spacing:0.02em;
     white-space:nowrap;
     margin-left: 2px;
   }
 
   .translate-bar .grow{
     flex: 1 1 auto;
-    min-width: 180px;
+    min-width: 240px;
     display:flex;
     gap:10px;
     align-items:center;
@@ -160,7 +154,8 @@
 
   .translate-bar select,
   .translate-bar button,
-  .translate-bar a.menu-dot{
+  .translate-bar a.menu-dot,
+  .translate-bar .quick button{
     font-family:'Cinzel',serif;
     font-weight:700;
     border-radius: 999px;
@@ -182,14 +177,24 @@
     max-width: min(92vw, 420px);
   }
 
-  .translate-bar button{
-    padding: 8px 14px;
-  }
-
   .translate-bar button:hover,
-  .translate-bar a.menu-dot:hover{
+  .translate-bar a.menu-dot:hover,
+  .translate-bar .quick button:hover{
     background: rgba(255,215,0,0.16);
     color:#fff;
+  }
+
+  /* ✅ Boutons rapides */
+  .translate-bar .quick{
+    display:inline-flex;
+    gap:8px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .translate-bar .quick button{
+    padding: 8px 10px;
+    font-size: 0.86rem;
+    gap:6px;
   }
 
   /* ⋯ à droite DANS la barre */
@@ -213,7 +218,7 @@
   /* Voile de lisibilité (inchangé) */
   .overlay {
     min-height: 100vh;
-    padding: 30px 15px 20px;
+    padding: calc(var(--topBarH) + 10px) 15px 20px; /* ✅ pousse le contenu sous la barre */
     box-sizing: border-box;
     background: radial-gradient(circle at top,
       rgba(0, 0, 0, 0.25),
@@ -367,25 +372,6 @@
     border-bottom: 1px dotted rgba(255,215,0,0.55);
   }
 
-  @media (max-width: 480px) {
-    h1 { font-size: 1.6rem; }
-    .subtitle { font-size: 0.95rem; }
-    .tab { padding: 8px 12px; font-size: 0.85rem; }
-    .frame-fixed{ inset:12px; }
-    .viewport-scroll{ inset:20px; }
-    .nndnn-banner{ gap:10px; }
-    .nndnn-banner img{ height:42px; }
-    .nndnn-text{ font-size:1.55rem; }
-
-    .translate-bar{
-      top: 18px;
-      width: calc(100% - 40px);
-    }
-    .translate-bar select{
-      max-width: 92vw;
-    }
-  }
-
   .docs-internes-badge{
     margin: 14px auto 6px;
   }
@@ -411,6 +397,39 @@
       0 0 0 1px rgba(255,215,0,0.95) inset,
       0 8px 18px rgba(0,0,0,0.55);
   }
+
+  /* ✅ Réglages tailles : mobile */
+  @media (max-width: 480px) {
+    :root{ --topBarH: 118px; } /* bar prend 2 lignes sur mobile */
+
+    h1 { font-size: 1.6rem; }
+    .subtitle { font-size: 0.95rem; }
+    .tab { padding: 8px 12px; font-size: 0.85rem; }
+    .frame-fixed{ inset:12px; }
+    .viewport-scroll{ inset:20px; }
+    .nndnn-banner{ gap:10px; }
+    .nndnn-banner img{ height:42px; }
+    .nndnn-text{ font-size:1.55rem; }
+
+    .translate-bar{
+      top: 18px;
+      width: calc(100% - 40px);
+    }
+    .translate-bar select{
+      max-width: 92vw;
+    }
+    .translate-bar .grow{ min-width: 200px; }
+  }
+
+  /* ✅ Réglages tablette : évite chevauchement propre */
+  @media (min-width: 481px) and (max-width: 1024px){
+    :root{ --topBarH: 96px; } /* bar souvent sur 2 lignes tablette */
+  }
+
+  /* ✅ PC : bar souvent sur 1 ligne */
+  @media (min-width: 1025px){
+    :root{ --topBarH: 78px; }
+  }
   </style>
 
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -420,18 +439,24 @@
 
 <body>
 
-  <!-- ✅ Cadre fixe (lys supprimées) -->
   <div class="frame-fixed" aria-hidden="true"></div>
 
-  <!-- ✅ Barre traduction + ⋯ intégré (tout en haut, au-dessus de tout) -->
+  <!-- ✅ Barre traduction + boutons rapides + ⋯ intégré -->
   <div class="translate-bar" aria-label="Traduction du site">
     <div class="tlabel">🌍 Autre langue</div>
 
     <div class="grow">
+      <!-- ✅ Boutons rapides -->
+      <div class="quick" aria-label="Traduction rapide">
+        <button type="button" class="quickLang" data-lang="en">🇬🇧 EN</button>
+        <button type="button" class="quickLang" data-lang="it">🇮🇹 IT</button>
+        <button type="button" class="quickLang" data-lang="es">🇪🇸 ES</button>
+        <button type="button" class="quickLang" data-lang="de">🇩🇪 DE</button>
+      </div>
+
       <select id="langSelect" aria-label="Choisir une langue">
         <option value="" selected disabled>— Choisir une langue —</option>
 
-        <!-- Alphabetique + drapeaux (très large) -->
         <option value="af">🇿🇦 Afrikaans</option>
         <option value="sq">🇦🇱 Albanian (Shqip)</option>
         <option value="am">🇪🇹 Amharic (አማርኛ)</option>
@@ -550,11 +575,9 @@
     </div>
   </div>
 
-  <!-- ✅ Tout défile dedans -->
   <div class="viewport-scroll">
     <div class="overlay">
 
-      <!-- MENU (ONGLETS) : inchangé -->
       <nav class="tabs">
         <a href="activites.html" class="tab">Nos évènements</a>
         <a href="quinoussommes.html" class="tab">Qui nous sommes</a>
@@ -564,7 +587,6 @@
         <a href="contact.html" class="tab">📞 Contact</a>
       </nav>
 
-      <!-- BLASON -->
       <div class="blason-box">
         <img src="blason-osd9tdj.PNG"
              alt="Blason de l’Ordre Sacré des Neuf Templiers de Jérusalem"
@@ -574,19 +596,16 @@
       <h1>Ordre Sacré des Neuf Templiers de Jérusalem</h1>
       <p class="subtitle">Site officiel de l’O.S.D.9.T.D.J.</p>
 
-      <!-- ✅ Signature nnDnn -->
       <div class="nndnn-banner" aria-label="Signature templière nnDnn">
         <img src="croix.epee.PNG" alt="Épée – symbole">
         <div class="nndnn-text">nnDnn</div>
         <img src="croix.epee.PNG" alt="Épée – symbole">
       </div>
 
-      <!-- 🔒 Accès Documents internes -->
       <div class="docs-internes-badge">
         <a href="documents-internes.html">🔒 Acces reserve aux membres</a>
       </div>
 
-      <!-- BAS DE PAGE -->
       <div class="footer">
         <div class="line">
           <span>© OSD9TDJ Association Loi 1901, Tous droits réservés</span>
@@ -617,20 +636,32 @@
 
   <script>
     (function(){
-      const btn = document.getElementById("translateBtn");
-      const langSelect = document.getElementById("langSelect");
-
       function googleTranslateUrl(lang){
         const pageUrl = window.location.href;
         const enc = encodeURIComponent(pageUrl);
         return "https://translate.google.com/translate?sl=fr&tl=" + encodeURIComponent(lang) + "&u=" + enc;
       }
 
+      function goLang(lang){
+        const url = googleTranslateUrl(lang);
+        window.open(url, "_blank", "noopener,noreferrer");
+      }
+
+      const btn = document.getElementById("translateBtn");
+      const langSelect = document.getElementById("langSelect");
+
       btn.addEventListener("click", function(){
         const lang = langSelect.value;
         if(!lang) return;
-        const url = googleTranslateUrl(lang);
-        window.open(url, "_blank", "noopener,noreferrer");
+        goLang(lang);
+      });
+
+      document.querySelectorAll(".quickLang").forEach(b => {
+        b.addEventListener("click", function(){
+          const lang = this.getAttribute("data-lang");
+          if(!lang) return;
+          goLang(lang);
+        });
       });
     })();
   </script>
