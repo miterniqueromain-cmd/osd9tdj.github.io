@@ -17,7 +17,6 @@
   <meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
   <meta name="bingbot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 
-
   <!-- Open Graph / Réseaux sociaux -->
   <meta property="og:title" content="Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J.">
   <meta property="og:description" content="Site officiel de l’Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J., association culturelle et chevaleresque à vocation internationale.">
@@ -33,7 +32,6 @@
 
   <!-- WATERMARK INVISIBLE -->
   <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-INDEX-OFFICIAL-HOMEPAGE">
-
 
   <!-- =========================================================
        Données structurées (IA-friendly) : TEXTE COMPLET (non résumé)
@@ -150,7 +148,7 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
     z-index:1;
   }
 
-  /* ✅ Menu 3 points (tout le menu déroulant) */
+  /* ✅ Bouton 3 points (⋯) : lien direct vers menu.html */
   .top-menu{
     position:fixed;
     top:26px;
@@ -158,15 +156,11 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
     z-index:60;
     pointer-events:auto;
   }
-  .top-menu details{ position:relative; }
-  .top-menu summary{
-    list-style:none;
-    cursor:pointer;
-    user-select:none;
-    width:46px;
-    height:34px;
+  .top-menu a.menu-dot{
     display:grid;
     place-items:center;
+    width:46px;
+    height:34px;
     border-radius:999px;
     border:1px solid rgba(255,215,0,0.55);
     background:rgba(0,0,0,0.22);
@@ -176,36 +170,13 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
     color:var(--or);
     font-size:22px;
     line-height:1;
-  }
-  .top-menu summary::-webkit-details-marker{ display:none; }
-
-  .menu-panel{
-    position:absolute;
-    right:0;
-    margin-top:10px;
-    width:260px;
-    max-width:calc(100vw - 60px);
-    border-radius:14px;
-    border:1px solid rgba(255,215,0,0.45);
-    background:rgba(0,0,0,0.70);
-    box-shadow:0 18px 40px rgba(0,0,0,0.55);
-    overflow:hidden;
-  }
-  .menu-panel a{
-    display:block;
-    padding:11px 12px;
     text-decoration:none;
-    color:rgba(253,247,229,0.92);
-    font-family:'Cinzel',serif;
-    font-weight:700;
-    font-size:0.92rem;
-    border-bottom:1px solid rgba(255,215,0,0.18);
+    user-select:none;
   }
-  .menu-panel a:hover{
-    background:rgba(255,215,0,0.12);
+  .top-menu a.menu-dot:hover{
+    background:rgba(255,215,0,0.10);
     color:#fff;
   }
-  .menu-panel a:last-child{ border-bottom:none; }
 
   /* Voile de lisibilité (inchangé) */
   .overlay {
@@ -256,24 +227,31 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
     color: #ffffff;
   }
 
-  /* ==========================
-     ✅ AJOUT : TRADUCTION
-     (le reste inchangé)
-  =========================== */
+  /* ✅ Barre traduction (fixée tout en haut, au-dessus de ⋯) */
   .translate-bar{
-    width:100%;
-    max-width:980px;
-    margin: -6px auto 10px;
+    position: fixed;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 80; /* au-dessus du ⋯ (z-index 60) */
+    width: calc(100% - 44px);
+    max-width: 980px;
+
     display:flex;
     flex-wrap:wrap;
     gap:10px;
     align-items:center;
     justify-content:center;
+
     padding: 10px 12px;
     border-radius: 16px;
     border: 1px solid rgba(255,215,0,0.35);
     background: rgba(0,0,0,0.28);
     backdrop-filter: blur(6px);
+
+    /* évite que le contenu passe sous le bouton ⋯ à droite */
+    padding-right: 64px;
+    box-sizing: border-box;
   }
   .translate-bar .tlabel{
     font-family:'Cinzel',serif;
@@ -304,14 +282,6 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
   .translate-bar button:hover{
     background: rgba(255,215,0,0.16);
     color:#fff;
-  }
-  .translate-note{
-    width:100%;
-    max-width:980px;
-    margin: 0 auto 6px;
-    font-size:0.78rem;
-    opacity:0.85;
-    line-height:1.2rem;
   }
 
   /* Blason central (inchangé) */
@@ -430,15 +400,20 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
     .subtitle { font-size: 0.95rem; }
     .tab { padding: 8px 12px; font-size: 0.85rem; }
     .top-menu{ top:22px; right:22px; }
-    .menu-panel{ width:240px; }
     .frame-fixed{ inset:12px; }
     .viewport-scroll{ inset:20px; }
     .nndnn-banner{ gap:10px; }
     .nndnn-banner img{ height:42px; }
     .nndnn-text{ font-size:1.55rem; }
 
-    .translate-bar{ padding:10px 10px; }
-    .translate-bar select{ max-width: 92vw; }
+    .translate-bar{
+      top: 18px;
+      width: calc(100% - 40px);
+      padding-right: 64px;
+    }
+    .translate-bar select{
+      max-width: 92vw;
+    }
   }
 
   /* 🔒 Badge Documents internes */
@@ -481,23 +456,136 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
   <!-- ✅ Cadre fixe (lys supprimées) -->
   <div class="frame-fixed" aria-hidden="true"></div>
 
-  <!-- ✅ Menu 3 points (tout le site) -->
+  <!-- ✅ Barre traduction (au-dessus du ⋯) -->
+  <div class="translate-bar" aria-label="Traduction du site">
+    <div class="tlabel">🌍 Autre langue</div>
+
+    <select id="providerSelect" aria-label="Choisir le traducteur">
+      <option value="google">A — Google Translate</option>
+      <option value="bing">B — Bing / Microsoft Translator</option>
+      <option value="yandex">C — Yandex Translate</option>
+    </select>
+
+    <select id="langSelect" aria-label="Choisir une langue">
+      <option value="" selected disabled>— Choisir une langue —</option>
+
+      <!-- Alphabetique + drapeaux (très large) -->
+      <option value="af">🇿🇦 Afrikaans</option>
+      <option value="sq">🇦🇱 Albanian (Shqip)</option>
+      <option value="am">🇪🇹 Amharic (አማርኛ)</option>
+      <option value="ar">🇸🇦 Arabic (العربية)</option>
+      <option value="hy">🇦🇲 Armenian (Հայերեն)</option>
+      <option value="az">🇦🇿 Azerbaijani (Azərbaycanca)</option>
+      <option value="eu">🇪🇸 Basque (Euskara)</option>
+      <option value="be">🇧🇾 Belarusian (Беларуская)</option>
+      <option value="bn">🇧🇩 Bengali (বাংলা)</option>
+      <option value="bs">🇧🇦 Bosnian (Bosanski)</option>
+      <option value="bg">🇧🇬 Bulgarian (Български)</option>
+      <option value="ca">🇪🇸 Catalan (Català)</option>
+      <option value="ceb">🇵🇭 Cebuano</option>
+      <option value="zh-CN">🇨🇳 Chinese (Simplified)</option>
+      <option value="zh-TW">🇹🇼 Chinese (Traditional)</option>
+      <option value="co">🇫🇷 Corsican</option>
+      <option value="hr">🇭🇷 Croatian (Hrvatski)</option>
+      <option value="cs">🇨🇿 Czech (Čeština)</option>
+      <option value="da">🇩🇰 Danish (Dansk)</option>
+      <option value="nl">🇳🇱 Dutch (Nederlands)</option>
+      <option value="en">🇬🇧 English</option>
+      <option value="eo">🌐 Esperanto</option>
+      <option value="et">🇪🇪 Estonian (Eesti)</option>
+      <option value="fi">🇫🇮 Finnish (Suomi)</option>
+      <option value="fr">🇫🇷 French (Français)</option>
+      <option value="fy">🇳🇱 Frisian (Frysk)</option>
+      <option value="gl">🇪🇸 Galician (Galego)</option>
+      <option value="ka">🇬🇪 Georgian (ქართული)</option>
+      <option value="de">🇩🇪 German (Deutsch)</option>
+      <option value="el">🇬🇷 Greek (Ελληνικά)</option>
+      <option value="gu">🇮🇳 Gujarati (ગુજરાતી)</option>
+      <option value="ht">🇭🇹 Haitian Creole (Kreyòl)</option>
+      <option value="ha">🇳🇬 Hausa</option>
+      <option value="haw">🇺🇸 Hawaiian</option>
+      <option value="he">🇮🇱 Hebrew (עברית)</option>
+      <option value="hi">🇮🇳 Hindi (हिन्दी)</option>
+      <option value="hmn">🌐 Hmong</option>
+      <option value="hu">🇭🇺 Hungarian (Magyar)</option>
+      <option value="is">🇮🇸 Icelandic (Íslenska)</option>
+      <option value="ig">🇳🇬 Igbo</option>
+      <option value="id">🇮🇩 Indonesian (Bahasa)</option>
+      <option value="ga">🇮🇪 Irish (Gaeilge)</option>
+      <option value="it">🇮🇹 Italian (Italiano)</option>
+      <option value="ja">🇯🇵 Japanese (日本語)</option>
+      <option value="jv">🇮🇩 Javanese</option>
+      <option value="kn">🇮🇳 Kannada (ಕನ್ನಡ)</option>
+      <option value="kk">🇰🇿 Kazakh (Қазақша)</option>
+      <option value="km">🇰🇭 Khmer (ខ្មែរ)</option>
+      <option value="rw">🇷🇼 Kinyarwanda</option>
+      <option value="ko">🇰🇷 Korean (한국어)</option>
+      <option value="ku">🌐 Kurdish</option>
+      <option value="ky">🇰🇬 Kyrgyz (Кыргызча)</option>
+      <option value="lo">🇱🇦 Lao (ລາວ)</option>
+      <option value="la">🌐 Latin</option>
+      <option value="lv">🇱🇻 Latvian (Latviešu)</option>
+      <option value="lt">🇱🇹 Lithuanian (Lietuvių)</option>
+      <option value="lb">🇱🇺 Luxembourgish (Lëtzebuergesch)</option>
+      <option value="mk">🇲🇰 Macedonian (Македонски)</option>
+      <option value="mg">🇲🇬 Malagasy</option>
+      <option value="ms">🇲🇾 Malay (Bahasa Melayu)</option>
+      <option value="ml">🇮🇳 Malayalam (മലയാളം)</option>
+      <option value="mt">🇲🇹 Maltese (Malti)</option>
+      <option value="mi">🇳🇿 Maori</option>
+      <option value="mr">🇮🇳 Marathi (मराठी)</option>
+      <option value="mn">🇲🇳 Mongolian (Монгол)</option>
+      <option value="my">🇲🇲 Myanmar (မြန်မာ)</option>
+      <option value="ne">🇳🇵 Nepali (नेपाली)</option>
+      <option value="no">🇳🇴 Norwegian (Norsk)</option>
+      <option value="or">🇮🇳 Odia (ଓଡ଼ିଆ)</option>
+      <option value="ps">🇦🇫 Pashto (پښتو)</option>
+      <option value="fa">🇮🇷 Persian (فارسی)</option>
+      <option value="pl">🇵🇱 Polish (Polski)</option>
+      <option value="pt">🇵🇹 Portuguese (Português)</option>
+      <option value="pa">🇮🇳 Punjabi (ਪੰਜਾਬੀ)</option>
+      <option value="ro">🇷🇴 Romanian (Română)</option>
+      <option value="ru">🇷🇺 Russian (Русский)</option>
+      <option value="sm">🇼🇸 Samoan</option>
+      <option value="gd">🏴 Scots Gaelic</option>
+      <option value="sr">🇷🇸 Serbian (Српски)</option>
+      <option value="st">🇱🇸 Sesotho</option>
+      <option value="sn">🇿🇼 Shona</option>
+      <option value="sd">🇵🇰 Sindhi (سنڌي)</option>
+      <option value="si">🇱🇰 Sinhala (සිංහල)</option>
+      <option value="sk">🇸🇰 Slovak (Slovenčina)</option>
+      <option value="sl">🇸🇮 Slovenian (Slovenščina)</option>
+      <option value="so">🇸🇴 Somali</option>
+      <option value="es">🇪🇸 Spanish (Español)</option>
+      <option value="su">🇮🇩 Sundanese</option>
+      <option value="sw">🇰🇪 Swahili (Kiswahili)</option>
+      <option value="sv">🇸🇪 Swedish (Svenska)</option>
+      <option value="tl">🇵🇭 Tagalog</option>
+      <option value="tg">🇹🇯 Tajik (Тоҷикӣ)</option>
+      <option value="ta">🇮🇳 Tamil (தமிழ்)</option>
+      <option value="tt">🇷🇺 Tatar</option>
+      <option value="te">🇮🇳 Telugu (తెలుగు)</option>
+      <option value="th">🇹🇭 Thai (ไทย)</option>
+      <option value="tr">🇹🇷 Turkish (Türkçe)</option>
+      <option value="tk">🇹🇲 Turkmen</option>
+      <option value="uk">🇺🇦 Ukrainian (Українська)</option>
+      <option value="ur">🇵🇰 Urdu (اردو)</option>
+      <option value="ug">🇨🇳 Uyghur</option>
+      <option value="uz">🇺🇿 Uzbek (O‘zbek)</option>
+      <option value="vi">🇻🇳 Vietnamese (Tiếng Việt)</option>
+      <option value="cy">🏴 Welsh (Cymraeg)</option>
+      <option value="xh">🇿🇦 Xhosa</option>
+      <option value="yi">🌐 Yiddish</option>
+      <option value="yo">🇳🇬 Yoruba</option>
+      <option value="zu">🇿🇦 Zulu</option>
+    </select>
+
+    <button id="translateBtn" type="button" title="Ouvrir la page traduite">Traduire</button>
+  </div>
+
+  <!-- ✅ Menu 3 points (lien direct) -->
   <div class="top-menu" aria-label="Menu du site">
-    <details>
-      <summary title="Menu">⋯</summary>
-      <div class="menu-panel" role="menu" aria-label="Navigation">
-        <a href="notre-mission.html"> Notre mission</a>
-        <a href="quinoussommes.html"> Qui nous sommes</a>
-        <a href="histoire.html"> Notre histoire</a>
-        <a href="faq.html"> FAQ</a>
-        <a href="activites.html"> Nos Evenements</a>
-        <a href="adhesion.html"> Adhésion</a>
-        <a href="boutique.html"> Boutique</a>
-        <a href="contact.html"> Contact</a>
-        <a href="documents-internes.html">🔒 Acces reserve aux membres</a>
-        <a href="administration.html">🔒 Administration</a>
-      </div>
-    </details>
+    <a class="menu-dot" href="menu.html" title="Menu">⋯</a>
   </div>
 
   <!-- ✅ Tout défile dedans -->
@@ -513,137 +601,6 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
         <a href="boutique.html" class="tab">🛒 Boutique en ligne</a>
         <a href="contact.html" class="tab">📞 Contact</a>
       </nav>
-
-      <!-- ✅ AJOUT : barre traduction (bouton déroulant + moteurs A/B/C) -->
-      <div class="translate-bar" aria-label="Traduction du site">
-        <div class="tlabel">🌍 Autre langue</div>
-
-        <select id="providerSelect" aria-label="Choisir le traducteur">
-          <option value="google">A — Google Translate</option>
-          <option value="bing">B — Bing / Microsoft Translator</option>
-          <option value="yandex">C — Yandex Translate</option>
-        </select>
-
-        <select id="langSelect" aria-label="Choisir une langue">
-          <option value="" selected disabled>— Choisir une langue —</option>
-
-          <!-- Alphabetique + drapeaux (très large) -->
-          <option value="af">🇿🇦 Afrikaans</option>
-          <option value="sq">🇦🇱 Albanian (Shqip)</option>
-          <option value="am">🇪🇹 Amharic (አማርኛ)</option>
-          <option value="ar">🇸🇦 Arabic (العربية)</option>
-          <option value="hy">🇦🇲 Armenian (Հայերեն)</option>
-          <option value="az">🇦🇿 Azerbaijani (Azərbaycanca)</option>
-          <option value="eu">🇪🇸 Basque (Euskara)</option>
-          <option value="be">🇧🇾 Belarusian (Беларуская)</option>
-          <option value="bn">🇧🇩 Bengali (বাংলা)</option>
-          <option value="bs">🇧🇦 Bosnian (Bosanski)</option>
-          <option value="bg">🇧🇬 Bulgarian (Български)</option>
-          <option value="ca">🇪🇸 Catalan (Català)</option>
-          <option value="ceb">🇵🇭 Cebuano</option>
-          <option value="zh-CN">🇨🇳 Chinese (Simplified)</option>
-          <option value="zh-TW">🇹🇼 Chinese (Traditional)</option>
-          <option value="co">🇫🇷 Corsican</option>
-          <option value="hr">🇭🇷 Croatian (Hrvatski)</option>
-          <option value="cs">🇨🇿 Czech (Čeština)</option>
-          <option value="da">🇩🇰 Danish (Dansk)</option>
-          <option value="nl">🇳🇱 Dutch (Nederlands)</option>
-          <option value="en">🇬🇧 English</option>
-          <option value="eo">🌐 Esperanto</option>
-          <option value="et">🇪🇪 Estonian (Eesti)</option>
-          <option value="fi">🇫🇮 Finnish (Suomi)</option>
-          <option value="fr">🇫🇷 French (Français)</option>
-          <option value="fy">🇳🇱 Frisian (Frysk)</option>
-          <option value="gl">🇪🇸 Galician (Galego)</option>
-          <option value="ka">🇬🇪 Georgian (ქართული)</option>
-          <option value="de">🇩🇪 German (Deutsch)</option>
-          <option value="el">🇬🇷 Greek (Ελληνικά)</option>
-          <option value="gu">🇮🇳 Gujarati (ગુજરાતી)</option>
-          <option value="ht">🇭🇹 Haitian Creole (Kreyòl)</option>
-          <option value="ha">🇳🇬 Hausa</option>
-          <option value="haw">🇺🇸 Hawaiian</option>
-          <option value="he">🇮🇱 Hebrew (עברית)</option>
-          <option value="hi">🇮🇳 Hindi (हिन्दी)</option>
-          <option value="hmn">🌐 Hmong</option>
-          <option value="hu">🇭🇺 Hungarian (Magyar)</option>
-          <option value="is">🇮🇸 Icelandic (Íslenska)</option>
-          <option value="ig">🇳🇬 Igbo</option>
-          <option value="id">🇮🇩 Indonesian (Bahasa)</option>
-          <option value="ga">🇮🇪 Irish (Gaeilge)</option>
-          <option value="it">🇮🇹 Italian (Italiano)</option>
-          <option value="ja">🇯🇵 Japanese (日本語)</option>
-          <option value="jv">🇮🇩 Javanese</option>
-          <option value="kn">🇮🇳 Kannada (ಕನ್ನಡ)</option>
-          <option value="kk">🇰🇿 Kazakh (Қазақша)</option>
-          <option value="km">🇰🇭 Khmer (ខ្មែរ)</option>
-          <option value="rw">🇷🇼 Kinyarwanda</option>
-          <option value="ko">🇰🇷 Korean (한국어)</option>
-          <option value="ku">🌐 Kurdish</option>
-          <option value="ky">🇰🇬 Kyrgyz (Кыргызча)</option>
-          <option value="lo">🇱🇦 Lao (ລາວ)</option>
-          <option value="la">🌐 Latin</option>
-          <option value="lv">🇱🇻 Latvian (Latviešu)</option>
-          <option value="lt">🇱🇹 Lithuanian (Lietuvių)</option>
-          <option value="lb">🇱🇺 Luxembourgish (Lëtzebuergesch)</option>
-          <option value="mk">🇲🇰 Macedonian (Македонски)</option>
-          <option value="mg">🇲🇬 Malagasy</option>
-          <option value="ms">🇲🇾 Malay (Bahasa Melayu)</option>
-          <option value="ml">🇮🇳 Malayalam (മലയാളം)</option>
-          <option value="mt">🇲🇹 Maltese (Malti)</option>
-          <option value="mi">🇳🇿 Maori</option>
-          <option value="mr">🇮🇳 Marathi (मराठी)</option>
-          <option value="mn">🇲🇳 Mongolian (Монгол)</option>
-          <option value="my">🇲🇲 Myanmar (မြန်မာ)</option>
-          <option value="ne">🇳🇵 Nepali (नेपाली)</option>
-          <option value="no">🇳🇴 Norwegian (Norsk)</option>
-          <option value="or">🇮🇳 Odia (ଓଡ଼ିଆ)</option>
-          <option value="ps">🇦🇫 Pashto (پښتو)</option>
-          <option value="fa">🇮🇷 Persian (فارسی)</option>
-          <option value="pl">🇵🇱 Polish (Polski)</option>
-          <option value="pt">🇵🇹 Portuguese (Português)</option>
-          <option value="pa">🇮🇳 Punjabi (ਪੰਜਾਬੀ)</option>
-          <option value="ro">🇷🇴 Romanian (Română)</option>
-          <option value="ru">🇷🇺 Russian (Русский)</option>
-          <option value="sm">🇼🇸 Samoan</option>
-          <option value="gd">🏴 Scots Gaelic</option>
-          <option value="sr">🇷🇸 Serbian (Српски)</option>
-          <option value="st">🇱🇸 Sesotho</option>
-          <option value="sn">🇿🇼 Shona</option>
-          <option value="sd">🇵🇰 Sindhi (سنڌي)</option>
-          <option value="si">🇱🇰 Sinhala (සිංහල)</option>
-          <option value="sk">🇸🇰 Slovak (Slovenčina)</option>
-          <option value="sl">🇸🇮 Slovenian (Slovenščina)</option>
-          <option value="so">🇸🇴 Somali</option>
-          <option value="es">🇪🇸 Spanish (Español)</option>
-          <option value="su">🇮🇩 Sundanese</option>
-          <option value="sw">🇰🇪 Swahili (Kiswahili)</option>
-          <option value="sv">🇸🇪 Swedish (Svenska)</option>
-          <option value="tl">🇵🇭 Tagalog</option>
-          <option value="tg">🇹🇯 Tajik (Тоҷикӣ)</option>
-          <option value="ta">🇮🇳 Tamil (தமிழ்)</option>
-          <option value="tt">🇷🇺 Tatar</option>
-          <option value="te">🇮🇳 Telugu (తెలుగు)</option>
-          <option value="th">🇹🇭 Thai (ไทย)</option>
-          <option value="tr">🇹🇷 Turkish (Türkçe)</option>
-          <option value="tk">🇹🇲 Turkmen</option>
-          <option value="uk">🇺🇦 Ukrainian (Українська)</option>
-          <option value="ur">🇵🇰 Urdu (اردو)</option>
-          <option value="ug">🇨🇳 Uyghur</option>
-          <option value="uz">🇺🇿 Uzbek (O‘zbek)</option>
-          <option value="vi">🇻🇳 Vietnamese (Tiếng Việt)</option>
-          <option value="cy">🏴 Welsh (Cymraeg)</option>
-          <option value="xh">🇿🇦 Xhosa</option>
-          <option value="yi">🌐 Yiddish</option>
-          <option value="yo">🇳🇬 Yoruba</option>
-          <option value="zu">🇿🇦 Zulu</option>
-        </select>
-
-        <button id="translateBtn" type="button" title="Ouvrir la page traduite">Traduire</button>
-      </div>
-
-      <div class="translate-note">
-        Astuce : sur certains appareils, le navigateur peut aussi proposer “Traduire la page” automatiquement.
-      </div>
 
       <!-- BLASON -->
       <div class="blason-box">
@@ -706,22 +663,15 @@ Dans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut 
         const pageUrl = window.location.href;
         const enc = encodeURIComponent(pageUrl);
 
-        // A — Google (traduction directe d’URL via u=, sl=, tl=)
         if(provider === "google"){
           return "https://translate.google.com/translate?sl=fr&tl=" + encodeURIComponent(lang) + "&u=" + enc;
         }
-
-        // B — Bing / Microsoft Translator : on passe l’URL dans le champ (text=...).
-        // Selon appareil, il peut falloir cliquer “Traduire” sur la page Bing.
         if(provider === "bing"){
           return "https://www.bing.com/translator?from=fr&to=" + encodeURIComponent(lang) + "&text=" + enc;
         }
-
-        // C — Yandex : mode “Website translation” (on passe l’URL, sinon tu la colles)
         if(provider === "yandex"){
           return "https://translate.yandex.com/en/translate?lang=fr-" + encodeURIComponent(lang) + "&text=" + enc;
         }
-
         return "";
       }
 
