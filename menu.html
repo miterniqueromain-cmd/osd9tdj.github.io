@@ -110,7 +110,10 @@
     position:fixed;
     top: 50%;
     left: clamp(10px, 3vw, 28px);
-    transform: translate(-120%, -50%);
+
+    /* ✅ départ hors écran à droite (aligné avec 0% de l'animation) */
+    transform: translate(120%, -50%);
+
     width: var(--panelW);
     height: var(--panelH);
     z-index: 20;
@@ -125,39 +128,30 @@
 
     outline: 1px solid rgba(0,0,0,.12);
   }
+
   .panel.open{
     animation: slideIn 2.6s cubic-bezier(.18,.92,.18,1) forwards;
   }
 
-  /* ✅ Animation corrigée :
-     - part réellement de la droite (état initial: -120%)
-     - arrive au centre et “stabilise”
-     - finit tout à gauche (left: 0) sans envoyer le panneau hors écran
-     - devient arrondi verticalement côté gauche (haut + bas) */
+  /* ✅ Rectangle : droite -> centre (pause) -> tout à droite */
   @keyframes slideIn{
     0%{
-      transform: translate(-120%, -50%);
-      left: clamp(10px, 3vw, 28px);
-      border-radius: var(--radius);
+      transform: translate(120%, -50%);
     }
 
-    /* centre + stabilisation */
+    /* arrive au centre */
     58%{
       transform: translate(0, -50%);
-      left: clamp(10px, 3vw, 28px);
-      border-radius: var(--radius);
-    }
-    72%{
-      transform: translate(0, -50%);
-      left: clamp(10px, 3vw, 28px);
-      border-radius: var(--radius);
     }
 
-    /* gauche + “tiers de rond” vertical sur le bord gauche */
-    100%{
+    /* petite stabilisation au centre */
+    72%{
       transform: translate(0, -50%);
-      left: 0px;
-      border-radius: 45vh var(--radius) var(--radius) 45vh;
+    }
+
+    /* finit tout à droite (marge = clamp(10px, 3vw, 28px)) */
+    100%{
+      transform: translate(calc(100vw - var(--panelW) - clamp(10px, 3vw, 28px)), -50%);
     }
   }
 
@@ -303,10 +297,10 @@
   .sealDock{
     position: relative;
     display:flex;
-    justify-content:center; /* ✅ centré */
+    justify-content:center;
 
     margin: 34px 0 0 0;
-    padding: 26px 2px calc(18px + env(safe-area-inset-bottom)) 2px; /* ✅ descend + équilibre */
+    padding: 26px 2px calc(18px + env(safe-area-inset-bottom)) 2px;
     pointer-events:none;
   }
 
@@ -334,7 +328,7 @@
 
   .seal{
     position: relative;
-    width: clamp(220px, 32vw, 320px); /* ✅ beaucoup plus gros */
+    width: clamp(220px, 32vw, 320px);
     height:auto;
     opacity:0;
     transition: opacity .45s ease;
@@ -361,6 +355,7 @@
 
     filter: blur(6px);
   }
+
   .wm{
     position:absolute;
     left:-9999px;
@@ -657,3 +652,4 @@
   </script>
 </body>
 </html>
+
