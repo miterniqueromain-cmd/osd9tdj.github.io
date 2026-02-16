@@ -101,6 +101,20 @@
     overflow:hidden;
   }
 
+  /* ✅ MODIF DEMANDÉE : ancienne page visible derrière (iframe flou) */
+  .bgFrame{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+    z-index:0;
+    filter: blur(10px);
+    transform: scale(1.03);
+    pointer-events:none; /* ✅ on ne clique jamais sur le fond */
+    background:#000;
+  }
+
   /* ✅ voile au-dessus du site : flou + blocage des clics */
   .veil{
     position:fixed; inset:0;
@@ -365,6 +379,9 @@
     O.S.D.9.T.D.J. — osd9tdj.org — Menu de navigation — Association loi 1901 — contenus originaux — empreinte site.
   </div>
 
+  <!-- ✅ MODIF DEMANDÉE : ancienne page visible derrière (iframe flou) -->
+  <iframe class="bgFrame" id="bgFrame" title="Page précédente (floutée)" aria-hidden="true"></iframe>
+
   <!-- ✅ le fond flou au-dessus du site (non cliquable derrière) -->
   <div class="veil" id="veil" aria-hidden="true"></div>
 
@@ -534,9 +551,8 @@
 
   <script>
     const SOUND_PLUME  = "sons/plume.mp3";
-const SOUND_EPEE   = "sons/epee.mp3";
-const SOUND_TAMPON = "sons/tampon.mp3";
-
+    const SOUND_EPEE   = "sons/epee.mp3";
+    const SOUND_TAMPON = "sons/tampon.mp3";
 
     let audioReady = false;
     let aPlume, aEpee, aTampon;
@@ -551,9 +567,25 @@ const SOUND_TAMPON = "sons/tampon.mp3";
         audioReady = true;
       }catch(e){}
     }
+
     function playSafe(a){
       if(!audioReady || !a) return;
       try{ a.currentTime = 0; a.play().catch(()=>{}); }catch(e){}
+    }
+
+    /* ✅ MODIF DEMANDÉE : plume uniquement pendant l’écriture puis stop */
+    function startPlumeFor(ms){
+      if(!audioReady || !aPlume) return;
+      try{
+        aPlume.currentTime = 0;
+        aPlume.play().catch(()=>{});
+        window.setTimeout(() => {
+          try{
+            aPlume.pause();
+            aPlume.currentTime = 0;
+          }catch(e){}
+        }, Math.max(0, ms) + 80);
+      }catch(e){}
     }
 
     function goBack(){
@@ -584,6 +616,8 @@ const SOUND_TAMPON = "sons/tampon.mp3";
 
     function applyWriting(){
       const els = document.querySelectorAll(".js-write, .title");
+      let maxDur = 2600;
+
       els.forEach(el => {
         makeFirstLetterRed(el);
 
@@ -598,17 +632,33 @@ const SOUND_TAMPON = "sons/tampon.mp3";
         const text = wrap.textContent.trim();
         const dur = Math.max(2400, Math.min(7200, text.length * 140));
         wrap.style.setProperty("--dur", dur + "ms");
+        if(dur > maxDur) maxDur = dur;
       });
 
       setTimeout(() => {
         document.querySelectorAll(".write").forEach(w => w.classList.add("reveal"));
-        playSafe(aPlume);
+
+        /* ✅ plume démarre au moment où les lettres se déroulent, et s’arrête à la fin */
+        startPlumeFor(maxDur);
+
       }, 1400);
     }
 
     const panel = document.getElementById("panel");
     const veil  = document.getElementById("veil");
     const seal  = document.getElementById("seal");
+    const bgFrame = document.getElementById("bgFrame");
+
+    /* ✅ MODIF DEMANDÉE : ancienne page derrière (referrer) */
+    (function setBackgroundPage(){
+      try{
+        const ref = document.referrer || "";
+        const sameOrigin = ref && ref.startsWith(location.origin);
+        bgFrame.src = sameOrigin ? ref : "index.html";
+      }catch(e){
+        bgFrame.src = "index.html";
+      }
+    })();
 
     function cssVarToMs(varName, fallbackMs){
       try{
@@ -625,8 +675,8 @@ const SOUND_TAMPON = "sons/tampon.mp3";
     function openMenu(){
       panel.classList.add("open");
 
-      const unlock = () => { initAudioOnce(); document.removeEventListener("pointerdown", unlock); };
-      document.addEventListener("pointerdown", unlock, { once:true });
+      /* ✅ on prépare l’audio tout de suite (création), sans lecture */
+      initAudioOnce();
 
       const slideMs = cssVarToMs("--slideDur", 4800);
 
@@ -641,12 +691,18 @@ const SOUND_TAMPON = "sons/tampon.mp3";
       }, slideMs + 60);
     }
 
-    document.getElementById("btnBack").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
-    document.getElementById("btnBack2").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
-    document.getElementById("btnClose").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
+    /* ✅ MODIF DEMANDÉE : épée à chaque clic n’importe où */
+    document.addEventListener("pointerdown", () => {
+      initAudioOnce();
+      playSafe(aEpee);
+    }, { capture:true });
+
+    document.getElementById("btnBack").addEventListener("click", () => { goBack(); });
+    document.getElementById("btnBack2").addEventListener("click", () => { goBack(); });
+    document.getElementById("btnClose").addEventListener("click", () => { goBack(); });
 
     /* ✅ clic sur le voile = retour (et ça empêche tout clic sur le fond) */
-    veil.addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
+    veil.addEventListener("click", () => { goBack(); });
 
     panel.addEventListener("click", (e) => e.stopPropagation());
 
