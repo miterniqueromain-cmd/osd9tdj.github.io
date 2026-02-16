@@ -76,7 +76,7 @@
 
   <style>
   :root{
-    --veil: rgba(0,0,0,.08);
+    --veil: rgba(0,0,0,.20); /* ✅ voile plus clair */
     --panelW: min(560px, 92vw);
     --panelH: min(92vh, 920px);
     --radius: 18px;
@@ -101,7 +101,7 @@
     overflow:hidden;
   }
 
-  /* ✅ MODIF DEMANDÉE : ancienne page visible derrière (iframe flou) */
+  /* ✅ ancienne page visible derrière (iframe flou léger) */
   .bgFrame{
     position:fixed;
     inset:0;
@@ -109,21 +109,19 @@
     height:100%;
     border:0;
     z-index:0;
-    filter: blur(10px);
-    transform: scale(1.03);
-    pointer-events:none; /* ✅ on ne clique jamais sur le fond */
+    filter: blur(1.5px);            /* ✅ beaucoup moins flouté */
+    transform: scale(1.01);
+    pointer-events:none;            /* ✅ fond jamais cliquable */
     background:#000;
   }
 
-  /* ✅ voile au-dessus du site : flou + blocage des clics */
+  /* ✅ voile au-dessus du site : flou léger + blocage des clics */
   .veil{
     position:fixed; inset:0;
     background: var(--veil);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(1.5px);   /* ✅ beaucoup moins flouté */
+    -webkit-backdrop-filter: blur(1.5px);
     z-index:10;
-
-    /* ✅ IMPORTANT : capte les clics, donc le fond n’est JAMAIS cliquable */
     pointer-events:auto;
   }
 
@@ -131,9 +129,7 @@
     position:fixed;
     top: 50%;
     left: var(--edge);
-
     transform: translate(-130%, -50%);
-
     width: var(--panelW);
     height: var(--panelH);
     z-index: 20;
@@ -379,10 +375,10 @@
     O.S.D.9.T.D.J. — osd9tdj.org — Menu de navigation — Association loi 1901 — contenus originaux — empreinte site.
   </div>
 
-  <!-- ✅ MODIF DEMANDÉE : ancienne page visible derrière (iframe flou) -->
+  <!-- ✅ ancienne page visible derrière (floutée léger) -->
   <iframe class="bgFrame" id="bgFrame" title="Page précédente (floutée)" aria-hidden="true"></iframe>
 
-  <!-- ✅ le fond flou au-dessus du site (non cliquable derrière) -->
+  <!-- ✅ voile au-dessus du fond -->
   <div class="veil" id="veil" aria-hidden="true"></div>
 
   <main class="panel" id="panel" role="dialog" aria-modal="true" aria-label="Menu de navigation">
@@ -553,9 +549,10 @@
     const SOUND_PLUME  = "sons/plume.mp3";
     const SOUND_EPEE   = "sons/epee.mp3";
     const SOUND_TAMPON = "sons/tampon.mp3";
+    const SOUND_MUSIC  = "sons/music.mp3";
 
     let audioReady = false;
-    let aPlume, aEpee, aTampon;
+    let aPlume, aEpee, aTampon, aMusic;
 
     function initAudioOnce(){
       if (audioReady) return;
@@ -563,7 +560,14 @@
         aPlume  = new Audio(SOUND_PLUME);
         aEpee   = new Audio(SOUND_EPEE);
         aTampon = new Audio(SOUND_TAMPON);
+        aMusic  = new Audio(SOUND_MUSIC);
+
         [aPlume,aEpee,aTampon].forEach(a => { a.preload = "auto"; a.volume = 0.85; });
+
+        aMusic.preload = "auto";
+        aMusic.loop = true;
+        aMusic.volume = 0.45;
+
         audioReady = true;
       }catch(e){}
     }
@@ -573,7 +577,6 @@
       try{ a.currentTime = 0; a.play().catch(()=>{}); }catch(e){}
     }
 
-    /* ✅ MODIF DEMANDÉE : plume uniquement pendant l’écriture puis stop */
     function startPlumeFor(ms){
       if(!audioReady || !aPlume) return;
       try{
@@ -589,8 +592,14 @@
     }
 
     function goBack(){
-      if (history.length > 1) history.back();
-      else location.href = "index.html";
+      /* ✅ tablette : retourne au vrai referrer si possible */
+      if (document.referrer && document.referrer.includes(location.hostname)) {
+        window.location.href = document.referrer;
+      } else if (history.length > 1) {
+        history.back();
+      } else {
+        window.location.href = "index.html";
+      }
     }
 
     function makeFirstLetterRed(node){
@@ -637,10 +646,7 @@
 
       setTimeout(() => {
         document.querySelectorAll(".write").forEach(w => w.classList.add("reveal"));
-
-        /* ✅ plume démarre au moment où les lettres se déroulent, et s’arrête à la fin */
-        startPlumeFor(maxDur);
-
+        startPlumeFor(maxDur); /* ✅ plume seulement pendant l'écriture */
       }, 1400);
     }
 
@@ -649,7 +655,6 @@
     const seal  = document.getElementById("seal");
     const bgFrame = document.getElementById("bgFrame");
 
-    /* ✅ MODIF DEMANDÉE : ancienne page derrière (referrer) */
     (function setBackgroundPage(){
       try{
         const ref = document.referrer || "";
@@ -674,9 +679,12 @@
 
     function openMenu(){
       panel.classList.add("open");
-
-      /* ✅ on prépare l’audio tout de suite (création), sans lecture */
       initAudioOnce();
+
+      /* ✅ musique : joue tant que la page est ouverte */
+      if(aMusic){
+        aMusic.play().catch(()=>{});
+      }
 
       const slideMs = cssVarToMs("--slideDur", 4800);
 
@@ -691,20 +699,29 @@
       }, slideMs + 60);
     }
 
-    /* ✅ MODIF DEMANDÉE : épée à chaque clic n’importe où */
+    /* ✅ épée : à chaque clic n'importe où */
     document.addEventListener("pointerdown", () => {
       initAudioOnce();
       playSafe(aEpee);
+
+      /* ✅ aide mobile/tablette : si musique bloquée, démarre au 1er clic */
+      if(aMusic && aMusic.paused){
+        aMusic.play().catch(()=>{});
+      }
     }, { capture:true });
 
     document.getElementById("btnBack").addEventListener("click", () => { goBack(); });
     document.getElementById("btnBack2").addEventListener("click", () => { goBack(); });
     document.getElementById("btnClose").addEventListener("click", () => { goBack(); });
 
-    /* ✅ clic sur le voile = retour (et ça empêche tout clic sur le fond) */
     veil.addEventListener("click", () => { goBack(); });
-
     panel.addEventListener("click", (e) => e.stopPropagation());
+
+    window.addEventListener("beforeunload", () => {
+      if(aMusic){
+        try{ aMusic.pause(); aMusic.currentTime = 0; }catch(e){}
+      }
+    });
 
     window.addEventListener("load", () => openMenu());
   </script>
