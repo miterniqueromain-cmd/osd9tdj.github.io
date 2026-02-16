@@ -85,10 +85,7 @@
     --line: rgba(70,50,35,.24);
     --btn: rgba(255,255,255,.18);
 
-    /* ✅ vitesse glissement (plus grand = plus lent) */
     --slideDur: 4.8s;
-
-    /* ✅ marge “design” */
     --edge: clamp(10px, 3vw, 28px);
   }
 
@@ -104,12 +101,16 @@
     overflow:hidden;
   }
 
+  /* ✅ voile au-dessus du site : flou + blocage des clics */
   .veil{
     position:fixed; inset:0;
     background: var(--veil);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     z-index:10;
+
+    /* ✅ IMPORTANT : capte les clics, donc le fond n’est JAMAIS cliquable */
+    pointer-events:auto;
   }
 
   .panel{
@@ -117,7 +118,6 @@
     top: 50%;
     left: var(--edge);
 
-    /* ✅ caché à gauche */
     transform: translate(-130%, -50%);
 
     width: var(--panelW);
@@ -135,21 +135,15 @@
     outline: 1px solid rgba(0,0,0,.12);
   }
 
-  /* ✅ SEULE animation : gauche -> se colle à droite */
   .panel.open{
     animation: slideToRight var(--slideDur) cubic-bezier(.18,.92,.18,1) forwards;
   }
 
   @keyframes slideToRight{
-    0%{
-      transform: translate(-130%, -50%);
-    }
-    100%{
-      transform: translate(calc(100vw - var(--panelW) - var(--edge)), -50%);
-    }
+    0%{ transform: translate(-130%, -50%); }
+    100%{ transform: translate(calc(100vw - var(--panelW) - var(--edge)), -50%); }
   }
 
-  /* ✅ ORDI : plein haut-bas */
   @media (min-width: 1024px){
     :root{ --panelH: 100dvh; }
 
@@ -162,12 +156,8 @@
       animation: slideToRightDesk var(--slideDur) cubic-bezier(.18,.92,.18,1) forwards;
     }
     @keyframes slideToRightDesk{
-      0%{
-        transform: translate(-130%, 0);
-      }
-      100%{
-        transform: translate(calc(100vw - var(--panelW) - var(--edge)), 0);
-      }
+      0%{ transform: translate(-130%, 0); }
+      100%{ transform: translate(calc(100vw - var(--panelW) - var(--edge)), 0); }
     }
   }
 
@@ -189,11 +179,7 @@
     text-shadow: 0 1px 0 rgba(255,255,255,.5);
   }
 
-  .first{
-    color: var(--red);
-    font-weight: 700;
-    margin-right: 0;
-  }
+  .first{ color: var(--red); font-weight: 700; margin-right: 0; }
 
   .actions{ display:flex; gap:10px; align-items:center; }
   .btn{
@@ -259,11 +245,7 @@
     flex: 0 0 auto;
   }
   .chev svg{ width:18px; height:18px; opacity:.85; }
-
-  details[open] .chev svg{
-    transform: rotate(180deg);
-    transition: transform .22s ease;
-  }
+  details[open] .chev svg{ transform: rotate(180deg); transition: transform .22s ease; }
 
   .items{
     padding: 10px 12px 12px 12px;
@@ -283,11 +265,7 @@
   }
   a.item:hover{ background: rgba(255,255,255,.16); }
 
-  .sub{
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing:.2px;
-  }
+  .sub{ font-size: 18px; font-weight: 700; letter-spacing:.2px; }
 
   .lock{
     width: 20px; height: 20px; flex:0 0 auto;
@@ -301,19 +279,13 @@
     vertical-align:bottom;
     clip-path: inset(0 100% 0 0);
   }
-
-  .write.reveal{
-    animation: inkReveal var(--dur, 2600ms) linear forwards;
-  }
-  @keyframes inkReveal{
-    to{ clip-path: inset(0 0 0 0); }
-  }
+  .write.reveal{ animation: inkReveal var(--dur, 2600ms) linear forwards; }
+  @keyframes inkReveal{ to{ clip-path: inset(0 0 0 0); } }
 
   .sealDock{
     position: relative;
     display:flex;
     justify-content:center;
-
     margin: 34px 0 0 0;
     padding: 26px 2px calc(18px + env(safe-area-inset-bottom)) 2px;
     pointer-events:none;
@@ -325,18 +297,15 @@
     left: 12px; right: 12px;
     top: 14px;
     height: 190px;
-
     border-radius: 32px;
     filter: blur(14px);
     opacity: .85;
-
     background: radial-gradient(
       ellipse at center,
       rgba(230,216,186,.42) 0%,
       rgba(230,216,186,.22) 55%,
       rgba(230,216,186,0) 100%
     );
-
     mix-blend-mode: multiply;
     pointer-events:none;
   }
@@ -358,7 +327,6 @@
     border-radius: 999px;
     pointer-events:none;
     z-index: -1;
-
     background: radial-gradient(
       circle at 50% 55%,
       rgba(238,230,214,.95) 0%,
@@ -366,7 +334,6 @@
       rgba(238,230,214,.25) 62%,
       rgba(238,230,214,0) 78%
     );
-
     filter: blur(6px);
   }
 
@@ -390,7 +357,7 @@
     .label{ font-size: 19px; }
     .sub{ font-size: 17px; }
   }
-</style>
+  </style>
 </head>
 
 <body>
@@ -398,6 +365,7 @@
     O.S.D.9.T.D.J. — osd9tdj.org — Menu de navigation — Association loi 1901 — contenus originaux — empreinte site.
   </div>
 
+  <!-- ✅ le fond flou au-dessus du site (non cliquable derrière) -->
   <div class="veil" id="veil" aria-hidden="true"></div>
 
   <main class="panel" id="panel" role="dialog" aria-modal="true" aria-label="Menu de navigation">
@@ -613,7 +581,6 @@
       node.appendChild(s2);
     }
 
-    /* ✅ ÉCRITURES : INCHANGÉ */
     function applyWriting(){
       const els = document.querySelectorAll(".js-write, .title");
       els.forEach(el => {
@@ -660,7 +627,6 @@
       const unlock = () => { initAudioOnce(); document.removeEventListener("pointerdown", unlock); };
       document.addEventListener("pointerdown", unlock, { once:true });
 
-      /* ✅ écriture après la fin du glissement */
       const slideMs = cssVarToMs("--slideDur", 4800);
 
       setTimeout(() => {
@@ -678,7 +644,9 @@
     document.getElementById("btnBack2").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
     document.getElementById("btnClose").addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
 
+    /* ✅ clic sur le voile = retour (et ça empêche tout clic sur le fond) */
     veil.addEventListener("click", () => { initAudioOnce(); playSafe(aEpee); goBack(); });
+
     panel.addEventListener("click", (e) => e.stopPropagation());
 
     window.addEventListener("load", () => openMenu());
