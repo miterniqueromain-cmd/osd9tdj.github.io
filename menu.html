@@ -129,27 +129,35 @@
     animation: slideIn 2.6s cubic-bezier(.18,.92,.18,1) forwards;
   }
 
-  /* ✅ MODIF DEMANDÉE : arrive au centre, pause, puis va à gauche + arrondi vertical côté gauche */
+  /* ✅ Animation corrigée :
+     - part réellement de la droite (état initial: -120%)
+     - arrive au centre et “stabilise”
+     - finit tout à gauche (left: 0) sans envoyer le panneau hors écran
+     - devient arrondi verticalement côté gauche (haut + bas) */
   @keyframes slideIn{
     0%{
-      transform: translate(120%, -50%);
+      transform: translate(-120%, -50%);
+      left: clamp(10px, 3vw, 28px);
       border-radius: var(--radius);
     }
 
-    /* Arrive au centre et se stabilise */
+    /* centre + stabilisation */
     58%{
       transform: translate(0, -50%);
+      left: clamp(10px, 3vw, 28px);
       border-radius: var(--radius);
     }
     72%{
       transform: translate(0, -50%);
+      left: clamp(10px, 3vw, 28px);
       border-radius: var(--radius);
     }
 
-    /* Fin à gauche + forme arrondie côté gauche (tiers de rond sur la hauteur) */
+    /* gauche + “tiers de rond” vertical sur le bord gauche */
     100%{
-      transform: translate(-12px, -50%);
-      border-radius: 38vh var(--radius) var(--radius) 38vh;
+      transform: translate(0, -50%);
+      left: 0px;
+      border-radius: 45vh var(--radius) var(--radius) 45vh;
     }
   }
 
@@ -455,8 +463,6 @@
           <a class="item" href="adhesion.html"><span class="sub js-write">Adhésion</span></a>
           <a class="item" href="cotisations.html"><span class="sub js-write">Cotisations</span></a>
           <a class="item" href="notice-adhesion.html"><span class="sub js-write">Procédure d’adhésion</span></a>
-
-          <!-- ✅ AJOUT DEMANDÉ : Ouvrir une commanderie -->
           <a class="item" href="commanderie.html"><span class="sub js-write">Ouvrir une commanderie</span></a>
         </div>
       </details>
