@@ -128,8 +128,29 @@
   .panel.open{
     animation: slideIn 2.6s cubic-bezier(.18,.92,.18,1) forwards;
   }
+
+  /* ✅ MODIF DEMANDÉE : arrive au centre, pause, puis va à gauche + arrondi vertical côté gauche */
   @keyframes slideIn{
-    to{ transform: translate(0, -50%); }
+    0%{
+      transform: translate(120%, -50%);
+      border-radius: var(--radius);
+    }
+
+    /* Arrive au centre et se stabilise */
+    58%{
+      transform: translate(0, -50%);
+      border-radius: var(--radius);
+    }
+    72%{
+      transform: translate(0, -50%);
+      border-radius: var(--radius);
+    }
+
+    /* Fin à gauche + forme arrondie côté gauche (tiers de rond sur la hauteur) */
+    100%{
+      transform: translate(-12px, -50%);
+      border-radius: 38vh var(--radius) var(--radius) 38vh;
+    }
   }
 
   .header{
@@ -314,24 +335,24 @@
   .seal.show{
     opacity:1;
   }
-.seal::before{
-  content:"";
-  position:absolute;
-  inset: -28px;
-  border-radius: 999px;
-  pointer-events:none;
-  z-index: -1;
+  .seal::before{
+    content:"";
+    position:absolute;
+    inset: -28px;
+    border-radius: 999px;
+    pointer-events:none;
+    z-index: -1;
 
-  background: radial-gradient(
-    circle at 50% 55%,
-    rgba(238,230,214,.95) 0%,
-    rgba(238,230,214,.70) 38%,
-    rgba(238,230,214,.25) 62%,
-    rgba(238,230,214,0) 78%
-  );
+    background: radial-gradient(
+      circle at 50% 55%,
+      rgba(238,230,214,.95) 0%,
+      rgba(238,230,214,.70) 38%,
+      rgba(238,230,214,.25) 62%,
+      rgba(238,230,214,0) 78%
+    );
 
-  filter: blur(6px);
-}
+    filter: blur(6px);
+  }
   .wm{
     position:absolute;
     left:-9999px;
@@ -434,6 +455,9 @@
           <a class="item" href="adhesion.html"><span class="sub js-write">Adhésion</span></a>
           <a class="item" href="cotisations.html"><span class="sub js-write">Cotisations</span></a>
           <a class="item" href="notice-adhesion.html"><span class="sub js-write">Procédure d’adhésion</span></a>
+
+          <!-- ✅ AJOUT DEMANDÉ : Ouvrir une commanderie -->
+          <a class="item" href="commanderie.html"><span class="sub js-write">Ouvrir une commanderie</span></a>
         </div>
       </details>
 
