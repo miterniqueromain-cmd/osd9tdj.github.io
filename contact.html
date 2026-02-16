@@ -172,14 +172,15 @@
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
             margin-bottom: 20px;
 
-            /* ✅ CORRECTION DEMANDÉE : aligner ce cadre sur les autres (form) */
+            /* ✅ Cadre du haut aligné avec les autres blocs (formulaire) */
             width: 100%;
             max-width: 820px;
         }
 
         .epee-img {
-            max-width: 90vw;
+            /* ✅ Image toujours dans le cadre sur mobile */
             width: 420px;
+            max-width: 100%;
             height: auto;
             display: block;
             margin: 0 auto;
@@ -409,7 +410,6 @@
 
 <!-- ✅ Menu 3 points (doré) -->
 <div class="top-menu" aria-label="Menu du site">
-  <!-- ✅ MODIF DEMANDÉE : les 3 points vont sur menu.html -->
   <a class="menu-dots" href="menu.html" title="Menu">⋯</a>
 </div>
 
@@ -484,8 +484,12 @@
                       <label for="origine">
                           Depuis quelle page ou quel contact nous écrivez-vous ? (facultatif)
                       </label>
+
+                      <!-- ✅ SEULE MODIF DEMANDÉE ICI : ajout des pages manquantes -->
                       <select id="origine" name="Origine">
                           <option value="" selected>– Choisir si vous le souhaitez –</option>
+
+                          <!-- (tes options existantes conservées) -->
                           <option value="Page Qui nous sommes">Page « Qui nous sommes »</option>
                           <option value="Formulaire d’adhésion">Formulaire d’adhésion</option>
                           <option value="Page Évènements">Page « Évènements »</option>
@@ -493,6 +497,29 @@
                           <option value="Recommandation d’un membre">Recommandation d’un membre</option>
                           <option value="Réseaux sociaux / internet">Réseaux sociaux / internet</option>
                           <option value="Autre source">Autre source</option>
+
+                          <!-- (ajouts : pages manquantes / autres pages du site) -->
+                          <option value="Page Accueil">Page « Accueil »</option>
+                          <option value="Page Notre mission">Page « Notre mission »</option>
+                          <option value="Page Notre histoire">Page « Notre histoire »</option>
+                          <option value="Page Ordres historiques">Page « Ordres historiques »</option>
+                          <option value="Page Histoire du Temple">Page « Histoire du Temple »</option>
+                          <option value="Page Dignitaires de l’Ordre">Page « Dignitaires de l’Ordre »</option>
+                          <option value="Page Bernard de Clairvaux">Page « Bernard de Clairvaux »</option>
+                          <option value="Page Activités & événements">Page « Activités & événements »</option>
+
+                          <option value="Page Cotisations">Page « Cotisations »</option>
+                          <option value="Page Procédure d’adhésion">Page « Procédure d’adhésion »</option>
+                          <option value="Page Ouvrir une commanderie">Page « Ouvrir une commanderie »</option>
+                          <option value="Page Assurance">Page « Assurance »</option>
+
+                          <option value="Page Statuts">Page « Statuts »</option>
+                          <option value="Page Mentions légales">Page « Mentions légales »</option>
+                          <option value="Page Cookies">Page « Cookies »</option>
+                          <option value="Page FAQ">Page « FAQ »</option>
+                          <option value="Page Menu">Page « Menu »</option>
+
+                          <option value="Email direct">E-mail direct (contact@osd9tdj.org)</option>
                       </select>
                   </div>
               </div>
@@ -547,7 +574,6 @@
               <select id="motif" name="Motif" required>
                   <option value="" selected disabled>– Sélectionner un motif –</option>
 
-                  <!-- Questions générales / vie de l’Ordre -->
                   <option value="Questions générales (Qui nous sommes, à quoi sert l’Ordre, nos actions)">
                       Questions générales (Qui nous sommes, à quoi sert l’Ordre, nos actions)
                   </option>
@@ -558,7 +584,6 @@
                       Savoir s’il existe une Commanderie ou représentation dans ma région
                   </option>
 
-                  <!-- Adhésion -->
                   <option value="Demande d’adhésion / devenir membre">
                       Demande d’adhésion / devenir membre
                   </option>
@@ -566,7 +591,6 @@
                       Suivi d’une demande d’adhésion déjà envoyée
                   </option>
 
-                  <!-- Évènements -->
                   <option value="Questions sur un évènement (inscription, lieu, participation)">
                       Questions sur un évènement (inscription, lieu, participation)
                   </option>
@@ -574,7 +598,6 @@
                       Organisation d’un évènement ou intervention de l’Ordre
                   </option>
 
-                  <!-- Boutique / commandes / paiements -->
                   <option value="Questions sur la boutique en ligne, les produits ou les modalités de paiement">
                       Questions sur la boutique en ligne, les produits ou les modalités de paiement
                   </option>
@@ -585,7 +608,6 @@
                       Question sur un paiement en ligne, une commande ou un don
                   </option>
 
-                  <!-- Cotisations / difficultés financières -->
                   <option value="Questions sur les cotisations, montants ou modes de règlement">
                       Questions sur les cotisations, montants ou modes de règlement
                   </option>
@@ -596,7 +618,6 @@
                       Demande de paiement en plusieurs fois ou difficultés financières
                   </option>
 
-                  <!-- Juridique / relations avec d’autres groupes -->
                   <option value="Questions juridiques / statutaires (association, nom, image, droits)">
                       Questions juridiques / statutaires (association, nom, image, droits)
                   </option>
@@ -604,12 +625,10 @@
                       Problème ou tension avec un autre groupe, ordre ou association (besoin d’éclairage ou de conseil)
                   </option>
 
-                  <!-- Caritatif -->
                   <option value="Demande d’aide, d’orientation ou d’action caritative / sociale">
                       Demande d’aide, d’orientation ou d’action caritative / sociale
                   </option>
 
-                  <!-- Partenariats / recherches -->
                   <option value="Proposition de partenariat, collaboration ou mise en relation">
                       Proposition de partenariat, collaboration ou mise en relation
                   </option>
@@ -617,12 +636,10 @@
                       Demande de recherche ou d’étude (travaux historiques, symboliques, universitaires)
                   </option>
 
-                  <!-- Site / technique -->
                   <option value="Remarque, correction ou problème technique concernant le site internet">
                       Remarque, correction ou problème technique concernant le site internet
                   </option>
 
-                  <!-- Autre -->
                   <option value="Autre demande spécifique (préciser dans le message)">
                       Autre demande spécifique (préciser dans le message)
                   </option>
@@ -658,7 +675,6 @@
       <div class="tabs-center">
         <nav class="tabs" aria-label="Navigation bas de page">
           <a class="tab" href="index.html">Accueil</a>
-    
         </nav>
       </div>
 
