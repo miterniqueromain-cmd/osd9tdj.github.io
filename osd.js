@@ -2,7 +2,7 @@
    - Playlist ordonnée, boucle complète
    - À chaque page: piste suivante
    - Anti-superposition: singleton + lock global (onglets/fenêtres) + pause sur sortie
-   - Google Translate: nouvelle fenêtre => ancienne perd focus => pause
+   - Google Translate: nouvelle fenêtre => ancienne perd focus => pause (mais blur court dropdown ignoré)
    - Épée: uniquement sur click (pas scroll)
 */
 (() => {
@@ -32,6 +32,12 @@
   const LOCK_KEY = "osd_audio_lock";
   const CHANNEL_NAME = "osd_audio_channel";
   const instanceId = `${Date.now()}_${Math.random().toString(16).slice(2)}`;
+
+  // sécurité: si un lock reste coincé (crash/kill), au bout de X ms on le considère "stale"
+  const STALE_LOCK_MS = 15_000; // 15s, suffisant pour éviter des blocages anormaux
+
+  // blur anti-dropdown: délai avant pause
+  const BLUR_PAUSE_DELAY_MS = 300;
 
   // ===== UTILS =====
   function clampIndex(n) {
@@ -103,6 +109,8 @@
   }
 
   async function playCurrent({ mutedStart } = { mutedStart: false }) {
+    // garde volume à chaque play (au cas où une autre page l'aurait modifié via même ID)
+    try { bgm.volume = BGM_VOLUME; } catch {}
     bgm.muted = !!mutedStart;
     try {
       const p = bgm.play();
@@ -127,10 +135,22 @@
     try {
       const raw = localStorage.getItem(LOCK_KEY);
       if (!raw) return null;
-      return JSON.parse(raw);
+      const obj = JSON.parse(raw);
+      if (!obj || typeof obj !== "object") return null;
+      if (!obj.owner || typeof obj.owner !== "string") return null;
+      if (!obj.t || typeof obj.t !== "number") return null;
+
+      // stale lock ?
+      if (Date.now() - obj.t > STALE_LOCK_MS) return null;
+      return obj;
     } catch {
       return null;
     }
+  }
+
+  function lockIsMine() {
+    const lock = readLock();
+    return lock && lock.owner === instanceId;
   }
 
   function claimLock() {
@@ -169,6 +189,8 @@
     loadTrack(currentTrackIndex);
 
     const unlocked = isUnlocked();
+
+    // si pas unlocked, on tente un "mutedStart" (pas de son) pour amorcer, puis unmute après geste
     await playCurrent({ mutedStart: !unlocked });
 
     // à chaque page, on prépare la suivante
@@ -194,14 +216,60 @@
   async function unlockAudio() {
     markUnlocked();
     bgm.muted = false;
+
+    // on réclame le lock, puis on ne relance que si lock à nous + visible
     claimLock();
+
+    if (document.hidden) return;
+    if (!lockIsMine()) return;
+
     if (bgm.paused) await playCurrent({ mutedStart: false });
   }
 
   // ===== STOP MUSIC ON EXIT/LOSS OF FOCUS =====
-  // (Google Translate ouvre une autre fenêtre => blur/hidden/pagehide)
-  window.addEventListener("blur", pauseBgm, true);
+  // Objectif: éviter que les <select>/menus natifs déclenchent un blur qui coupe la musique,
+  // tout en gardant le "vrai" anti-superposition (Google Translate / changement d'onglet/fenêtre).
 
+  let blurTimer = null;
+  let wasPlayingBeforeBlur = false;
+
+  function schedulePauseOnBlur() {
+    // on note l'état avant blur (pour éventuellement reprendre)
+    wasPlayingBeforeBlur = !bgm.paused;
+
+    if (blurTimer) clearTimeout(blurTimer);
+
+    // délai court: si blur = UI native (dropdown), le focus revient vite => on annule
+    blurTimer = setTimeout(() => {
+      blurTimer = null;
+
+      // Si on a encore perdu le focus, ou si la page est cachée => on pause
+      const stillNoFocus = (typeof document.hasFocus === "function") ? !document.hasFocus() : true;
+      if (document.hidden || stillNoFocus) pauseBgm();
+    }, BLUR_PAUSE_DELAY_MS);
+  }
+
+  // blur: pause potentielle (différée)
+  window.addEventListener("blur", schedulePauseOnBlur, true);
+
+  // focus: si c'était un blur "court" (dropdown), on annule et on reprend si nécessaire
+  window.addEventListener("focus", () => {
+    if (blurTimer) {
+      clearTimeout(blurTimer);
+      blurTimer = null;
+    }
+
+    // Reprise uniquement si:
+    // - audio déjà unlock
+    // - page visible
+    // - ça jouait avant le blur
+    // - le lock est toujours à nous (sinon un autre onglet/page joue)
+    if (!document.hidden && isUnlocked() && wasPlayingBeforeBlur && lockIsMine() && bgm.paused) {
+      try { bgm.play().catch(() => {}); } catch {}
+    }
+  }, true);
+
+  // Changement d'onglet => hidden est fiable, on pause direct
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) pauseBgm();
   }, true);
@@ -211,10 +279,13 @@
 
   // si page restaurée via BFCache
   window.addEventListener("pageshow", (e) => {
-    // si on revient, on ne relance que si déjà unlock
     if (document.hidden) return;
     if (!isUnlocked()) return;
+
+    // on reprend seulement si lock à nous (sinon on risquerait un doublon)
     claimLock();
+    if (!lockIsMine()) return;
+
     try { if (bgm.paused) bgm.play().catch(() => {}); } catch {}
   }, true);
 
