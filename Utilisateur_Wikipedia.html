@@ -4,13 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Utilisateur Wikipédia — Chevalerie Etudes (Projet)</title>
-  <meta name="description" content="Reproduction HTML (projet) de la page utilisateur Wikipédia : déclaration de conflit d’intérêt et engagements éditoriaux.">
+  <meta name="description" content="Reproduction HTML (projet) de la page utilisateur Wikipédia : déclaration de conflit d’intérêt, méthode de travail et engagements éditoriaux (sources, neutralité, transparence).">
 
-  <meta name="keywords" content="Ordre Sacré des Neuf Templiers de Jérusalem, OSD9TDJ, O.S.D.9.T.D.J., néo-templiers, néo-templierisme, ordre templier contemporain, ordre chevaleresque contemporain, association loi 1901, symbolique, initiatique, culture médiévale, chevalerie, templiers">
+  <meta name="keywords" content="OSD9TDJ, O.S.D.9.T.D.J., Chevalerie Etudes, conflit d’intérêt Wikipédia, neutralité, sources secondaires, vérifiabilité, brouillon Wikipédia">
   <meta name="language" content="fr">
   <meta name="rating" content="general">
-
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+
+  <link rel="canonical" href="https://osd9tdj.org/Utilisateur_Wikipedia.html">
+
   <style>
 :root{
   --bg:#ffffff; --text:#202122; --subtext:#54595d; --border:#a2a9b1; --light:#eaecf0;
@@ -18,6 +20,10 @@
   --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --sans: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,"Noto Sans","Liberation Sans",sans-serif;
   --serif: Georgia, "Times New Roman", Times, serif;
+
+  --action-bg: rgba(255,255,255,.92);
+  --action-brd: rgba(162,169,177,.65);
+  --action-shadow: 0 8px 28px rgba(0,0,0,.10);
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.55}
@@ -33,43 +39,67 @@ a:visited{color:var(--link-visited)}
   display:grid;place-items:center;font-weight:700;font-family:var(--serif);color:var(--subtext);
 }
 .brand .name{font-size:1.1rem;font-weight:600}
+
 .notice{
   background:#fff3cd;border:1px solid #ffeeba;color:#856404;padding:10px 12px;border-radius:4px;margin:12px 0
 }
-.layout{display:grid;grid-template-columns:250px 1fr;gap:16px;margin-top:12px}
-@media (max-width: 900px){.layout{grid-template-columns:1fr}.sidebar{order:2}}
-.sidebar{
-  border:1px solid var(--light);background:#fbfbfb;padding:12px;border-radius:6px;
-  position:sticky;top:10px;height:fit-content
-}
-.sidebar h3{margin:0 0 8px 0;font-size:1rem}
-.sidebar ul{margin:0;padding-left:18px}
-.sidebar li{margin:4px 0}
-.content{min-width:0}
 .hatnote{background:var(--toc);border:1px solid var(--light);padding:8px 10px;border-radius:4px;margin:0 0 10px 0}
 h1{font-size:1.9rem;margin:.2rem 0 .6rem 0;border-bottom:1px solid var(--light);padding-bottom:6px}
 h2{font-size:1.35rem;margin:1.2rem 0 .4rem 0;border-bottom:1px solid var(--light);padding-bottom:4px}
 h3{font-size:1.1rem;margin:1rem 0 .35rem 0}
-.lead{font-size:1.02rem}
-.infobox{
-  float:right;width:290px;margin:0 0 12px 12px;border:1px solid var(--border);background:#f8f9fa;
-  padding:8px;border-radius:3px;font-size:.95rem
-}
-.infobox table{width:100%;border-collapse:collapse}
-.infobox caption{font-weight:700;margin-bottom:6px}
-.infobox th,.infobox td{padding:4px 6px;border-top:1px solid #d0d7de;vertical-align:top}
-.infobox th{width:38%;text-align:left;color:var(--subtext);font-weight:600}
-.toc{border:1px solid var(--border);background:var(--toc);padding:10px 12px;border-radius:3px;display:inline-block;margin:8px 0 14px 0}
-.toc .title{font-weight:700;margin-bottom:6px}
-.toc ol{margin:0;padding-left:20px}
-.toc li{margin:3px 0}
-.references{border-top:1px solid var(--light);margin-top:18px;padding-top:12px}
-.ref-list{padding-left:18px}
-.badges{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 0 0}
-.badge{display:inline-block;padding:2px 8px;font-size:.85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--subtext)}
 code, pre{font-family:var(--mono)}
 .footer{margin:24px 0 18px 0;padding-top:10px;border-top:1px solid var(--light);color:var(--subtext);font-size:.9rem}
-</style>
+
+.kv{
+  display:grid; grid-template-columns: 220px 1fr; gap:10px;
+  border:1px solid var(--light); background:#fbfbfb; padding:10px 12px; border-radius:6px;
+}
+@media (max-width: 720px){ .kv{ grid-template-columns: 1fr; } }
+
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 0 0}
+.badge{display:inline-block;padding:2px 8px;font-size:.85rem;border:1px solid var(--border);border-radius:999px;background:#fff;color:var(--subtext)}
+
+/* ====== 3 BOUTONS FIXES (MENU / RETOUR / ACCUEIL) ====== */
+.actions-fixed{
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 99999;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--action-bg);
+  border: 1px solid var(--action-brd);
+  border-radius: 10px;
+  box-shadow: var(--action-shadow);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.action-btn{
+  appearance:none;
+  border:1px solid rgba(162,169,177,.9);
+  background:#fff;
+  color:#202122;
+  font-weight:700;
+  padding:8px 10px;
+  border-radius:9px;
+  cursor:pointer;
+  text-decoration:none !important;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  line-height:1;
+}
+.action-btn:hover{ background:#f6f7f8; }
+.action-btn:active{ transform: translateY(1px); }
+.action-btn.small{ font-weight:700; font-size:.92rem; }
+
+@media (max-width: 520px){
+  .actions-fixed{ left: 10px; right: 10px; justify-content: space-between; }
+  .action-btn{ flex:1; justify-content:center; }
+}
+  </style>
+
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -77,7 +107,7 @@ code, pre{font-family:var(--mono)}
     {
       "@type": "WebPage",
       "name": "Utilisateur Wikipédia — Chevalerie Etudes (Projet)",
-      "dateModified": "2026-01-25",
+      "dateModified": "2026-02-17",
       "inLanguage": "fr",
       "isPartOf": {
         "@type": "WebSite",
@@ -92,24 +122,29 @@ code, pre{font-family:var(--mono)}
     {
       "@type": "Organization",
       "name": "Ordre Sacré des Neuf Templiers de Jérusalem",
-      "alternateName": [
-        "O.S.D.9.T.D.J.",
-        "OSD9TDJ",
-        "OSD 9 TDJ"
-      ],
+      "alternateName": ["O.S.D.9.T.D.J.","OSD9TDJ","OSD 9 TDJ"],
       "url": "https://osd9tdj.org/"
     }
   ]
 }
   </script>
 </head>
+
 <body>
+
+  <!-- ===== 3 BOUTONS FIXES ===== -->
+  <nav class="actions-fixed" aria-label="Actions rapides">
+    <a class="action-btn small" id="btnMenu" href="menu.html" title="Ouvrir le menu">⋯ Menu</a>
+    <button class="action-btn small" id="btnBack" type="button" title="Revenir à la page précédente">← Retour</button>
+    <a class="action-btn small" href="index.html" title="Aller à l'accueil">Accueil</a>
+  </nav>
+
   <header class="header">
     <div class="container brand">
       <div class="logo">W</div>
       <div>
         <div class="name">Page utilisateur — Projet « Wikipédia »</div>
-        <div class="small">Reproduction HTML autonome (sans affiliation avec Wikipédia)</div>
+        <div class="small">Reproduction HTML autonome (sans affiliation avec Wikipédia/Wikimedia)</div>
       </div>
     </div>
   </header>
@@ -117,37 +152,134 @@ code, pre{font-family:var(--mono)}
   <main class="container">
     <div class="notice">
       <strong>Important :</strong> cette page est une reproduction « style Wikipédia » de la <strong>page utilisateur</strong> destinée à accompagner un brouillon.
+      <div class="badges">
+        <span class="badge">Transparence</span>
+        <span class="badge">Neutralité</span>
+        <span class="badge">Sources secondaires</span>
+        <span class="badge">Brouillon uniquement</span>
+        <span class="badge">Mise à jour : 2026-02-17</span>
+      </div>
       <div class="small" style="margin-top:6px">
-        Retour : <a href="Wikipedia.html">Wikipedia.html</a> •
-        Brouillon Wikipédia : <a href="https://fr.wikipedia.org/wiki/Utilisateur:Chevalerie_Etudes/Brouillon" rel="nofollow">Utilisateur:Chevalerie Etudes/Brouillon</a>
+        Retour :
+        <a href="Wikipedia.html">Wikipedia.html</a> •
+        Brouillon Wikipédia :
+        <a href="https://fr.wikipedia.org/wiki/Utilisateur:Chevalerie_Etudes/Brouillon" rel="nofollow">Utilisateur:Chevalerie Etudes/Brouillon</a> •
+        Page utilisateur Wikipédia :
+        <a href="https://fr.wikipedia.org/wiki/Utilisateur:Chevalerie_Etudes" rel="nofollow">Utilisateur:Chevalerie Etudes</a>
       </div>
     </div>
 
     <article class="content">
+      <div class="hatnote small">
+        Objectif : documenter une démarche de rédaction sérieuse, conforme aux bonnes pratiques wikipédiennes (neutralité, vérifiabilité, sources secondaires), avec déclaration explicite de situation potentielle de conflit d’intérêt.
+      </div>
+
       <h1>Utilisateur : Chevalerie Etudes</h1>
 
-      <h2>Déclaration de conflit d’intérêt</h2>
+      <h2>Déclaration (conflit d’intérêt / transparence)</h2>
       <p>
-        Je déclare être membre de l’association « <strong>Ordre Sacré des Neuf Templiers de Jérusalem</strong> », organisation contemporaine faisant l’objet de certains de mes brouillons sur Wikipédia.
+        Je déclare être membre de l’association <strong>Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</strong>.
+        À ce titre, je peux être considéré comme en <em>situation potentielle de conflit d’intérêt</em> concernant les pages où cette association est mentionnée.
       </p>
       <p>
-        Conformément aux recommandations relatives aux conflits d’intérêts, je m’engage à travailler exclusivement en brouillon, à m’appuyer uniquement sur des sources secondaires indépendantes
-        et à solliciter l’avis de contributeurs tiers avant toute publication dans l’espace encyclopédique.
+        Conformément aux recommandations de la communauté, cette déclaration vise à garantir une transparence totale et à faciliter le travail collectif
+        (relecture, corrections et arbitrage de neutralité). Les principes et recommandations utiles incluent notamment :
+        <a href="https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Conflit_d%27int%C3%A9r%C3%AAts" rel="nofollow">Conflit d’intérêts</a>,
+        <a href="https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Neutralit%C3%A9_de_point_de_vue" rel="nofollow">Neutralité</a>,
+        <a href="https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Citez_vos_sources" rel="nofollow">Citez vos sources</a>,
+        et la distinction
+        <a href="https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Sources_primaires,_secondaires_et_tertiaires" rel="nofollow">sources primaires/secondaires/tertiaires</a>. :contentReference[oaicite:1]{index=1}
+      </p>
+
+      <h2>Engagements éditoriaux (méthode “fourmi”)</h2>
+      <div class="kv">
+        <div><strong>1) Travail en brouillon</strong></div>
+        <div>Je travaille exclusivement dans l’espace brouillon (ou sous-page utilisateur), afin de permettre les relectures et corrections avant toute proposition publique.</div>
+
+        <div><strong>2) Priorité aux sources secondaires</strong></div>
+        <div>Je privilégie des sources indépendantes (ouvrages, presse reconnue, publications académiques). Les sources primaires (sites officiels, communiqués) ne servent qu’à des faits simples et vérifiables, sans interprétation.</div>
+
+        <div><strong>3) Neutralité et ton descriptif</strong></div>
+        <div>Je m’impose un style neutre : faits attribués, formulations prudentes, absence de superlatifs, et place proportionnée aux points de vue attestés par les sources. :contentReference[oaicite:2]{index=2}</div>
+
+        <div><strong>4) Pas de promotion</strong></div>
+        <div>Je n’utilise pas Wikipédia pour promouvoir une organisation, une personne ou une activité. Toute proposition d’ajout est soumise à la communauté et doit être justifiée par des sources secondaires. :contentReference[oaicite:3]{index=3}</div>
+
+        <div><strong>5) Relecture par des tiers</strong></div>
+        <div>Je sollicite l’avis de contributeurs non liés au sujet (pages de discussion, projets, espaces de relecture) afin de réduire le biais et d’améliorer la qualité rédactionnelle.</div>
+      </div>
+
+      <h2>Procédure de travail (pas à pas)</h2>
+      <ol>
+        <li><strong>Collecte des sources</strong> : constitution d’un corpus (au moins 70% de sources secondaires indépendantes).</li>
+        <li><strong>Rédaction neutre en brouillon</strong> : phrases courtes, attribution, chronologie claire, zéro “ton marketing”.</li>
+        <li><strong>Vérification</strong> : chaque affirmation factuelle doit pouvoir être reliée à une source ; suppression des éléments non sourçables.</li>
+        <li><strong>Relecture externe</strong> : demande d’avis + corrections (neutralité, admissibilité, style, structure).</li>
+        <li><strong>Proposition</strong> : si pertinent, proposition de modifications à la communauté (et non passage en force).</li>
+      </ol>
+
+      <h2>Périmètre et intentions (clarification positive)</h2>
+      <p>
+        L’intention est de produire un texte <strong>clair, documenté et vérifiable</strong>, permettant au lecteur de comprendre le cadre associatif,
+        le contexte culturel et les repères historiques, sans confusion entre histoire médiévale et usages contemporains.
+        Cette démarche vise à <strong>protéger la qualité encyclopédique</strong> : précision, sobriété, transparence, et respect des règles communautaires.
       </p>
 
       <h2>Liens</h2>
       <ul>
-        <li><a href="Wikipedia.html">Page « Wikipédia.html » (sur ce site)</a></li>
+        <li><a href="Wikipedia.html">Page « Wikipedia.html » (dossier encyclopédique sur ce site)</a></li>
         <li><a href="https://fr.wikipedia.org/wiki/Utilisateur:Chevalerie_Etudes" rel="nofollow">Page utilisateur sur Wikipédia</a></li>
         <li><a href="https://fr.wikipedia.org/wiki/Utilisateur:Chevalerie_Etudes/Brouillon" rel="nofollow">Brouillon principal sur Wikipédia</a></li>
+        <li><a href="https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Conflit_d%27int%C3%A9r%C3%AAts" rel="nofollow">Recommandation : conflit d’intérêts</a> :contentReference[oaicite:4]{index=4}</li>
+        <li><a href="https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Neutralit%C3%A9_de_point_de_vue" rel="nofollow">Principe fondateur : neutralité de point de vue</a> :contentReference[oaicite:5]{index=5}</li>
+        <li><a href="https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Citez_vos_sources" rel="nofollow">Recommandation : citer ses sources</a> :contentReference[oaicite:6]{index=6}</li>
+        <li><a href="https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Sources_primaires,_secondaires_et_tertiaires" rel="nofollow">Guide : sources primaires/secondaires/tertiaires</a> :contentReference[oaicite:7]{index=7}</li>
+        <li><a href="https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Autobiographie" rel="nofollow">Recommandation : autobiographie</a> :contentReference[oaicite:8]{index=8}</li>
       </ul>
 
       <div class="footer">
-        <div class="small">Mise à jour : 2026-01-25 • Fichier : <code>Utilisateur_Wikipedia.html</code></div>
+        <div><strong>Mentions :</strong> reproduction HTML publiée sur le site OSD9TDJ, sous responsabilité éditoriale du site. Cette page n’est pas affiliée à Wikipédia / Wikimedia.</div>
+        <div class="small">Mise à jour : 2026-02-17 • Fichier : <code>Utilisateur_Wikipedia.html</code></div>
       </div>
     </article>
   </main>
-  <script defer src="/osd.js"></script>
 
+  <!-- ===== MEMO “page précédente” POUR menu.html (fond iframe) ===== -->
+  <script>
+  (function(){
+    // Toujours mémoriser la page courante (fiable tablette / multi-ouvertures)
+    try{ sessionStorage.setItem("osd_prev_page", location.href); }catch(e){}
+
+    // Si clic vers menu.html, forcer la mémoire juste avant la navigation
+    document.addEventListener("click", function(e){
+      const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+      if(!a) return;
+      const href = (a.getAttribute("href") || "").trim();
+      if(href.includes("menu.html")){
+        try{ sessionStorage.setItem("osd_prev_page", location.href); }catch(err){}
+      }
+    }, true);
+
+    // Bouton Retour
+    const back = document.getElementById("btnBack");
+    if(back){
+      back.addEventListener("click", function(){
+        if (document.referrer && document.referrer.includes(location.hostname)) location.href = document.referrer;
+        else if (history.length > 1) history.back();
+        else location.href = "index.html";
+      });
+    }
+
+    // Bouton Menu (sécurise la mémoire)
+    const m = document.getElementById("btnMenu");
+    if(m){
+      m.addEventListener("click", function(){
+        try{ sessionStorage.setItem("osd_prev_page", location.href); }catch(err){}
+      }, true);
+    }
+  })();
+  </script>
+
+  <script defer src="/osd.js"></script>
 </body>
 </html>
