@@ -554,7 +554,148 @@ a:hover{ color:#fff; }
   h2{ padding: 9px 11px; }
   .silver-box::before{ inset: 8px; }
 }
- 
+ /* =========================================================
+   CORRECTION : plus sobre / plus élégant
+   - supprime les pastilles jaunes "moches"
+   - nav jaune => doré discret (pas de gros aplat)
+   - texte + paragraphes respirent sans grossir
+   - améliore l'affichage des "•" (wrap + aération)
+   ========================================================= */
+
+/* 1) Typo globale : on évite l'effet "gros caractères" */
+p{
+  font-size: 1rem !important;
+  line-height: 1.85 !important;
+  margin: 12px auto !important;
+  color: rgba(245,240,230,0.92) !important;
+  text-align: justify !important;
+  letter-spacing: 0.01em;
+  text-wrap: pretty;
+}
+
+/* 2) Titres : dorés mais SANS cadres flashy */
+h1{
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 12px 0 14px !important;
+  color: rgba(245,240,230,0.96) !important;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.65);
+}
+
+h2{
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 22px auto 10px !important;
+  color: rgba(214,167,40,0.95) !important; /* doré texte */
+  text-shadow: 0 1px 0 rgba(0,0,0,0.7);
+}
+
+/* petit filet discret sous h2 (et surtout PAS de gros encart) */
+h2::after{
+  content:"";
+  display:block;
+  height: 1px;
+  margin: 10px auto 0;
+  width: min(520px, 80%);
+  background: linear-gradient(to right, transparent, rgba(214,167,40,0.38), transparent);
+}
+
+/* 3) Supprime totalement les badges jaunes sur les strong dans les paragraphes */
+.silver-box p > strong{
+  display: inline !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  color: rgba(214,167,40,0.95) !important; /* doré élégant */
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+}
+
+/* Note "(à lire...)" : sobre */
+.silver-box .note strong{
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  color: rgba(245,240,230,0.95) !important;
+  font-family: 'Cinzel', serif;
+}
+
+/* 4) La carte (silver-box) : reste chic mais sans surcouche "lourde" */
+.silver-box{
+  padding: 18px 18px !important;
+  border-radius: 14px !important;
+  border: 1px solid rgba(220,220,220,0.22) !important;
+  background: rgba(255,255,255,0.035) !important;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.65) !important;
+}
+
+/* supprime le double liseré intérieur si présent */
+.silver-box::before{
+  content: none !important;
+}
+
+/* 5) "•" : tu les as mis dans des <p> (pas dans <ul><li>)
+      -> On améliore le rendu et surtout on évite l'effet pâté
+      -> MAIS: CSS ne peut pas transformer automatiquement chaque "•" en vrai retour ligne
+         si le texte source n'a pas de <br> ou <li>.
+*/
+.silver-box p{
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.silver-box p:has(> strong) + p{
+  margin-top: 8px !important;
+}
+
+/* On rend les puces un peu plus visibles et espacées quand elles existent */
+.silver-box p{
+  font-variant-ligatures: common-ligatures;
+}
+.silver-box p{
+  /* espace visuel autour du caractère • quand il est collé */
+  /* (ça aide quand tu as : "... : • item ; • item ; ...") */
+  letter-spacing: 0.012em;
+}
+
+/* 6) Boutons NAV "jaune" : on enlève le gros aplat */
+.nav-strip.gold{
+  background: rgba(0,0,0,0.18) !important;              /* revient sobre */
+  border-color: rgba(214,167,40,0.45) !important;
+}
+
+.nav-btn.gold{
+  background: transparent !important;                   /* plus de jaune plein */
+  color: rgba(214,167,40,0.95) !important;              /* texte doré */
+  border-left: 1px solid rgba(214,167,40,0.22) !important;
+}
+
+.nav-btn.gold:hover{
+  background: rgba(214,167,40,0.10) !important;         /* léger doré */
+  transform: none !important;
+}
+
+/* Boutons NAV "noir" : harmonise */
+.nav-btn.dark{
+  background: rgba(0,0,0,0.36) !important;
+}
+.nav-btn.dark:hover{
+  background: rgba(255,255,255,0.06) !important;
+}
+
+/* Mobile : conserve l'air sans grossir */
+@media (max-width:600px){
+  p{ line-height: 1.78 !important; }
+  .silver-box{ padding: 14px 14px !important; }
+}
+
 </style>
 </head>
 
