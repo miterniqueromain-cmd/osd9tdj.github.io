@@ -12,16 +12,19 @@
         content="Ordre Sacré des Neuf Templiers de Jérusalem, OSD9TDJ, ordre templier, ordre templier français, Templiers, chevalerie moderne, ordre initiatique, ordre chevaleresque contemporain, association loi 1901, intérêt général, utilité publique, utilité sociale, économie sociale et solidaire, ESS principes, ONG au sens éthique et associatif, transmission des valeurs, accompagnement des jeunes, repères, fraternité, discipline intérieure, engagement, Hugues de Payns, neuf fondateurs, Per Crucem Veritas">
   <link rel="canonical" href="https://osd9tdj.org/">
 
+  <!-- Robots -->
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
   <meta name="bingbot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
 
+  <!-- Open Graph -->
   <meta property="og:title" content="Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J.">
   <meta property="og:description" content="Site officiel de l’Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J., association culturelle et chevaleresque à vocation internationale.">
   <meta property="og:image" content="https://osd9tdj.org/blason-osd9tdj.PNG">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://osd9tdj.org/">
 
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J.">
   <meta name="twitter:description" content="Site officiel de l’Ordre Sacré des Neuf Templiers de Jérusalem.">
@@ -30,6 +33,7 @@
   <!-- WATERMARK INVISIBLE -->
   <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-INDEX-OFFICIAL-HOMEPAGE">
 
+  <!-- Données structurées -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -45,15 +49,23 @@
   }
   </script>
 
+  <!-- Polices Google -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
   :root {
     --or: #ffd700;
     --clair: #fdf7e5;
-    --topBarH: 78px;
+
+    /* ✅ réserve verticale pour éviter chevauchement avec contenu */
+    --topBarH: 88px;
+
+    /* ✅ réserve horizontale pour les 3 points (fixes à droite) */
+    --dotsW: 56px;
+    --dotsGap: 10px;
   }
 
+  /* ✅ CADRE FIXE + SCROLL DEDANS */
   html, body{
     height:100%;
     margin:0;
@@ -65,6 +77,7 @@
     min-height:100vh;
   }
 
+  /* Fond drapeau */
   body::before {
     content: "";
     position: fixed;
@@ -74,6 +87,7 @@
     z-index: -2;
   }
 
+  /* ✅ Cadre fixe */
   .frame-fixed{
     position:fixed;
     inset:14px;
@@ -86,6 +100,7 @@
     z-index:40;
   }
 
+  /* ✅ Zone qui défile à l'intérieur du cadre */
   .viewport-scroll{
     position:fixed;
     inset:22px;
@@ -95,21 +110,23 @@
     z-index:1;
   }
 
-  /* ✅ BARRE LANGUE (SANS TEXTE / SANS ICONE) + ⋯ À DROITE DEDANS */
+  /* ✅ BARRE LANGUE (SANS "AUTRE LANGUE", SANS ICONE) */
   .translate-bar{
     position: fixed;
     top: 22px;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 22px;
+    right: 22px;
     z-index: 80;
-    width: calc(100% - 44px);
+
     max-width: 980px;
+    margin: 0 auto;
 
     display:flex;
     align-items:center;
     gap:10px;
 
     padding: 10px 10px;
+    padding-right: calc(var(--dotsW) + var(--dotsGap) + 10px); /* ✅ place réservée */
     border-radius: 16px;
     border: 1px solid rgba(255,215,0,0.35);
     background: rgba(0,0,0,0.28);
@@ -117,7 +134,6 @@
     box-sizing: border-box;
   }
 
-  /* bloc gauche (boutons + select + traduire) */
   .translate-bar .grow{
     flex: 1 1 auto;
     min-width: 0;
@@ -127,17 +143,17 @@
     flex-wrap:wrap;
   }
 
-  /* ✅ FIX drapeaux Windows/PC */
-  .flag{
-    font-family: "Segoe UI Emoji","Segoe UI Symbol","Apple Color Emoji","Noto Color Emoji", sans-serif;
-    font-size: 1.05em;
-    line-height: 1;
+  /* ✅ DRAPEAUX EN IMAGES (OK sur PC Windows) */
+  .flagimg{
+    width: 16px;
+    height: 16px;
+    display:inline-block;
+    vertical-align: -2px;
+    margin-right: 6px;
   }
 
   .translate-bar select,
-  .translate-bar button,
-  .translate-bar a.menu-dot,
-  .translate-bar .quick button{
+  .translate-bar button{
     font-family:'Cinzel',serif;
     font-weight:700;
     border-radius: 999px;
@@ -147,20 +163,11 @@
     padding: 8px 12px;
     cursor:pointer;
     outline:none;
-    text-decoration:none;
     user-select:none;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
     line-height:1;
   }
 
-  .translate-bar button:hover,
-  .translate-bar a.menu-dot:hover,
-  .translate-bar .quick button:hover{
-    background: rgba(255,215,0,0.16);
-    color:#fff;
-  }
+  .translate-bar button:hover{ background: rgba(255,215,0,0.16); color:#fff; }
 
   .translate-bar .quick{
     display:inline-flex;
@@ -171,26 +178,48 @@
   .translate-bar .quick button{
     padding: 8px 10px;
     font-size: 0.86rem;
-    gap:6px;
   }
 
   .translate-bar select{
     max-width: min(92vw, 420px);
   }
 
-  /* ✅ ⋯ intégré et isolé à droite (pas de chevauchement) */
-  .translate-bar a.menu-dot{
-    flex: 0 0 auto;
-    width:46px;
-    height:34px;
-    padding:0;
-    font-size:22px;
-    background: rgba(0,0,0,0.22);
-    box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-    backdrop-filter: blur(6px);
-    margin-left: auto;
+  /* ✅ bouton "ouvrir traduction" sans texte (juste ↗) */
+  #translateBtn{
+    padding: 8px 10px;
+    min-width: 44px;
   }
 
+  /* ✅ 3 PETITS POINTS : FIXES, TOUJOURS À DROITE, AU-DESSUS DE TOUT */
+  .menu-dot{
+    position: fixed;
+    top: 22px;
+    right: 22px;
+    z-index: 90;
+
+    width: 46px;
+    height: 34px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius: 999px;
+    border: 1px solid rgba(255,215,0,0.55);
+    background: rgba(0,0,0,0.22);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+
+    font-family:'Cinzel',serif;
+    color: var(--or);
+    font-size: 22px;
+    line-height: 1;
+
+    text-decoration:none;
+    user-select:none;
+  }
+  .menu-dot:hover{ background: rgba(255,215,0,0.12); color:#fff; }
+
+  /* Voile de lisibilité (inchangé) */
   .overlay {
     min-height: 100vh;
     padding: calc(var(--topBarH) + 10px) 15px 20px;
@@ -203,6 +232,7 @@
     align-items: center;
   }
 
+  /* Menu onglets (inchangé) */
   .tabs {
     margin-top: 15px;
     margin-bottom: 25px;
@@ -211,6 +241,7 @@
     overflow: hidden;
     border: 1px solid rgba(255, 215, 0, 0.6);
     backdrop-filter: blur(6px);
+
     max-width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -232,6 +263,7 @@
   .tab + .tab { border-left: 1px solid rgba(255, 215, 0, 0.4); }
   .tab:hover { background: rgba(255, 215, 0, 0.20); color: #ffffff; }
 
+  /* Blason central (inchangé) */
   .blason-box {
     display: inline-block;
     padding: 18px;
@@ -288,6 +320,32 @@
     white-space:nowrap;
   }
 
+  /* 🔒 Badge Documents internes */
+  .docs-internes-badge{ margin: 14px auto 6px; }
+  .docs-internes-badge a{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #ffd700, #e6c200);
+    color: #111;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    box-shadow:
+      0 0 0 1px rgba(255,215,0,0.75) inset,
+      0 6px 14px rgba(0,0,0,0.45);
+  }
+  .docs-internes-badge a:hover{
+    background: linear-gradient(135deg, #ffe066, #f0d000);
+    box-shadow:
+      0 0 0 1px rgba(255,215,0,0.95) inset,
+      0 8px 18px rgba(0,0,0,0.55);
+  }
+
+  /* ✅ Footer */
   .footer {
     margin-top: auto;
     padding-top: 15px;
@@ -333,33 +391,9 @@
     border-bottom: 1px dotted rgba(255,215,0,0.55);
   }
 
-  .docs-internes-badge{ margin: 14px auto 6px; }
-  .docs-internes-badge a{
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #ffd700, #e6c200);
-    color: #111;
-    text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-weight: 700;
-    font-size: 0.85rem;
-    box-shadow:
-      0 0 0 1px rgba(255,215,0,0.75) inset,
-      0 6px 14px rgba(0,0,0,0.45);
-  }
-  .docs-internes-badge a:hover{
-    background: linear-gradient(135deg, #ffe066, #f0d000);
-    box-shadow:
-      0 0 0 1px rgba(255,215,0,0.95) inset,
-      0 8px 18px rgba(0,0,0,0.55);
-  }
-
-  /* ✅ MOBILE : barre langue coulissante (1 ligne) */
+  /* ✅ MOBILE : barre coulissante + réserve plus grande */
   @media (max-width: 480px) {
-    :root{ --topBarH: 110px; }
+    :root{ --topBarH: 122px; }
 
     h1 { font-size: 1.6rem; }
     .subtitle { font-size: 0.95rem; }
@@ -372,8 +406,10 @@
 
     .translate-bar{
       top: 16px;
-      width: calc(100% - 40px);
+      left: 20px;
+      right: 20px;
       padding: 8px 8px;
+      padding-right: calc(var(--dotsW) + var(--dotsGap) + 8px);
 
       flex-wrap: nowrap;
       overflow-x: auto;
@@ -398,11 +434,11 @@
       padding: 7px 10px;
       font-size: 0.88rem;
     }
-    .translate-bar button#translateBtn{
-      padding: 7px 10px;
-      font-size: 0.88rem;
-    }
-    .translate-bar a.menu-dot{
+    #translateBtn{ padding: 7px 9px; }
+
+    .menu-dot{
+      top: 16px;
+      right: 20px;
       width:42px;
       height:32px;
       font-size:20px;
@@ -410,10 +446,7 @@
   }
 
   @media (min-width: 481px) and (max-width: 1024px){
-    :root{ --topBarH: 96px; }
-  }
-  @media (min-width: 1025px){
-    :root{ --topBarH: 78px; }
+    :root{ --topBarH: 98px; }
   }
   </style>
 
@@ -424,102 +457,117 @@
 
 <body>
 
+  <!-- ✅ Cadre fixe -->
   <div class="frame-fixed" aria-hidden="true"></div>
 
-  <!-- ✅ Barre traduction (sans texte ni icône) + ⋯ intégré -->
+  <!-- ✅ 3 petits points FIXES (ne chevauchent jamais) -->
+  <a class="menu-dot" href="menu.html" title="Menu" aria-label="Menu">⋯</a>
+
+  <!-- ✅ Barre traduction (sans texte “Autre langue”, sans icône) -->
   <div class="translate-bar" aria-label="Traduction du site">
     <div class="grow">
+
+      <!-- ✅ 4 raccourcis (drapeaux en images) -->
       <div class="quick" aria-label="Traduction rapide">
-        <button type="button" class="quickLang" data-lang="en"><span class="flag">🇬🇧</span>&nbsp;EN</button>
-        <button type="button" class="quickLang" data-lang="it"><span class="flag">🇮🇹</span>&nbsp;IT</button>
-        <button type="button" class="quickLang" data-lang="es"><span class="flag">🇪🇸</span>&nbsp;ES</button>
-        <button type="button" class="quickLang" data-lang="de"><span class="flag">🇩🇪</span>&nbsp;DE</button>
+        <button type="button" class="quickLang" data-lang="en" aria-label="English">
+          <img class="flagimg" alt="" src="https://twemoji.maxcdn.com/v/latest/svg/1f1ec-1f1e7.svg">EN
+        </button>
+        <button type="button" class="quickLang" data-lang="it" aria-label="Italiano">
+          <img class="flagimg" alt="" src="https://twemoji.maxcdn.com/v/latest/svg/1f1ee-1f1f9.svg">IT
+        </button>
+        <button type="button" class="quickLang" data-lang="es" aria-label="Español">
+          <img class="flagimg" alt="" src="https://twemoji.maxcdn.com/v/latest/svg/1f1ea-1f1f8.svg">ES
+        </button>
+        <button type="button" class="quickLang" data-lang="de" aria-label="Deutsch">
+          <img class="flagimg" alt="" src="https://twemoji.maxcdn.com/v/latest/svg/1f1e9-1f1ea.svg">DE
+        </button>
       </div>
 
+      <!-- ✅ select sans texte “Choisir une langue” -->
       <select id="langSelect" aria-label="Langue">
-        <!-- ✅ SANS TEXTE DU TOUT -->
         <option value="" selected disabled>&#8203;</option>
 
-        <option value="af">🇿🇦 Afrikaans</option>
-        <option value="sq">🇦🇱 Albanian (Shqip)</option>
-        <option value="am">🇪🇹 Amharic (አማርኛ)</option>
-        <option value="ar">🇸🇦 Arabic (العربية)</option>
-        <option value="hy">🇦🇲 Armenian (Հայերեն)</option>
-        <option value="az">🇦🇿 Azerbaijani (Azərbaycanca)</option>
-        <option value="eu">🇪🇸 Basque (Euskara)</option>
-        <option value="be">🇧🇾 Belarusian (Беларуская)</option>
-        <option value="bn">🇧🇩 Bengali (বাংলা)</option>
-        <option value="bs">🇧🇦 Bosnian (Bosanski)</option>
-        <option value="bg">🇧🇬 Bulgarian (Български)</option>
-        <option value="ca">🇪🇸 Catalan (Català)</option>
-        <option value="ceb">🇵🇭 Cebuano</option>
-        <option value="zh-CN">🇨🇳 Chinese (Simplified)</option>
-        <option value="zh-TW">🇹🇼 Chinese (Traditional)</option>
-        <option value="co">🇫🇷 Corsican</option>
-        <option value="hr">🇭🇷 Croatian (Hrvatski)</option>
-        <option value="cs">🇨🇿 Czech (Čeština)</option>
-        <option value="da">🇩🇰 Danish (Dansk)</option>
-        <option value="nl">🇳🇱 Dutch (Nederlands)</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="eo">🌐 Esperanto</option>
-        <option value="et">🇪🇪 Estonian (Eesti)</option>
-        <option value="fi">🇫🇮 Finnish (Suomi)</option>
-        <option value="fr">🇫🇷 French (Français)</option>
-        <option value="fy">🇳🇱 Frisian (Frysk)</option>
-        <option value="gl">🇪🇸 Galician (Galego)</option>
-        <option value="ka">🇬🇪 Georgian (ქართული)</option>
-        <option value="de">🇩🇪 German (Deutsch)</option>
-        <option value="el">🇬🇷 Greek (Ελληνικά)</option>
-        <option value="gu">🇮🇳 Gujarati (ગુજરાતી)</option>
-        <option value="ht">🇭🇹 Haitian Creole (Kreyòl)</option>
-        <option value="ha">🇳🇬 Hausa</option>
-        <option value="haw">🇺🇸 Hawaiian</option>
-        <option value="he">🇮🇱 Hebrew (עברית)</option>
-        <option value="hi">🇮🇳 Hindi (हिन्दी)</option>
-        <option value="hmn">🌐 Hmong</option>
-        <option value="hu">🇭🇺 Hungarian (Magyar)</option>
-        <option value="is">🇮🇸 Icelandic (Íslenska)</option>
-        <option value="ig">🇳🇬 Igbo</option>
-        <option value="id">🇮🇩 Indonesian (Bahasa)</option>
-        <option value="ga">🇮🇪 Irish (Gaeilge)</option>
-        <option value="it">🇮🇹 Italian (Italiano)</option>
-        <option value="ja">🇯🇵 Japanese (日本語)</option>
-        <option value="kn">🇮🇳 Kannada (ಕನ್ನಡ)</option>
-        <option value="ko">🇰🇷 Korean (한국어)</option>
-        <option value="la">🌐 Latin</option>
-        <option value="lv">🇱🇻 Latvian (Latviešu)</option>
-        <option value="lt">🇱🇹 Lithuanian (Lietuvių)</option>
-        <option value="ms">🇲🇾 Malay (Bahasa Melayu)</option>
-        <option value="no">🇳🇴 Norwegian (Norsk)</option>
-        <option value="fa">🇮🇷 Persian (فارسی)</option>
-        <option value="pl">🇵🇱 Polish (Polski)</option>
-        <option value="pt">🇵🇹 Portuguese (Português)</option>
-        <option value="ro">🇷🇴 Romanian (Română)</option>
-        <option value="ru">🇷🇺 Russian (Русский)</option>
-        <option value="sr">🇷🇸 Serbian (Српски)</option>
-        <option value="sk">🇸🇰 Slovak (Slovenčina)</option>
-        <option value="sl">🇸🇮 Slovenian (Slovenščina)</option>
-        <option value="es">🇪🇸 Spanish (Español)</option>
-        <option value="sv">🇸🇪 Swedish (Svenska)</option>
-        <option value="th">🇹🇭 Thai (ไทย)</option>
-        <option value="tr">🇹🇷 Turkish (Türkçe)</option>
-        <option value="uk">🇺🇦 Ukrainian (Українська)</option>
-        <option value="ur">🇵🇰 Urdu (اردو)</option>
-        <option value="vi">🇻🇳 Vietnamese (Tiếng Việt)</option>
-        <option value="cy">🏴 Welsh (Cymraeg)</option>
-        <option value="yo">🇳🇬 Yoruba</option>
-        <option value="zu">🇿🇦 Zulu</option>
+        <option value="af">Afrikaans</option>
+        <option value="sq">Albanian (Shqip)</option>
+        <option value="am">Amharic (አማርኛ)</option>
+        <option value="ar">Arabic (العربية)</option>
+        <option value="hy">Armenian (Հայերեն)</option>
+        <option value="az">Azerbaijani (Azərbaycanca)</option>
+        <option value="eu">Basque (Euskara)</option>
+        <option value="be">Belarusian (Беларуская)</option>
+        <option value="bn">Bengali (বাংলা)</option>
+        <option value="bs">Bosnian (Bosanski)</option>
+        <option value="bg">Bulgarian (Български)</option>
+        <option value="ca">Catalan (Català)</option>
+        <option value="ceb">Cebuano</option>
+        <option value="zh-CN">Chinese (Simplified)</option>
+        <option value="zh-TW">Chinese (Traditional)</option>
+        <option value="co">Corsican</option>
+        <option value="hr">Croatian (Hrvatski)</option>
+        <option value="cs">Czech (Čeština)</option>
+        <option value="da">Danish (Dansk)</option>
+        <option value="nl">Dutch (Nederlands)</option>
+        <option value="en">English</option>
+        <option value="eo">Esperanto</option>
+        <option value="et">Estonian (Eesti)</option>
+        <option value="fi">Finnish (Suomi)</option>
+        <option value="fr">French (Français)</option>
+        <option value="fy">Frisian (Frysk)</option>
+        <option value="gl">Galician (Galego)</option>
+        <option value="ka">Georgian (ქართული)</option>
+        <option value="de">German (Deutsch)</option>
+        <option value="el">Greek (Ελληνικά)</option>
+        <option value="gu">Gujarati (ગુજરાતી)</option>
+        <option value="ht">Haitian Creole (Kreyòl)</option>
+        <option value="ha">Hausa</option>
+        <option value="haw">Hawaiian</option>
+        <option value="he">Hebrew (עברית)</option>
+        <option value="hi">Hindi (हिन्दी)</option>
+        <option value="hmn">Hmong</option>
+        <option value="hu">Hungarian (Magyar)</option>
+        <option value="is">Icelandic (Íslenska)</option>
+        <option value="ig">Igbo</option>
+        <option value="id">Indonesian (Bahasa)</option>
+        <option value="ga">Irish (Gaeilge)</option>
+        <option value="it">Italian (Italiano)</option>
+        <option value="ja">Japanese (日本語)</option>
+        <option value="kn">Kannada (ಕನ್ನಡ)</option>
+        <option value="ko">Korean (한국어)</option>
+        <option value="la">Latin</option>
+        <option value="lv">Latvian (Latviešu)</option>
+        <option value="lt">Lithuanian (Lietuvių)</option>
+        <option value="ms">Malay (Bahasa Melayu)</option>
+        <option value="no">Norwegian (Norsk)</option>
+        <option value="fa">Persian (فارسی)</option>
+        <option value="pl">Polish (Polski)</option>
+        <option value="pt">Portuguese (Português)</option>
+        <option value="ro">Romanian (Română)</option>
+        <option value="ru">Russian (Русский)</option>
+        <option value="sr">Serbian (Српски)</option>
+        <option value="sk">Slovak (Slovenčina)</option>
+        <option value="sl">Slovenian (Slovenščina)</option>
+        <option value="es">Spanish (Español)</option>
+        <option value="sv">Swedish (Svenska)</option>
+        <option value="th">Thai (ไทย)</option>
+        <option value="tr">Turkish (Türkçe)</option>
+        <option value="uk">Ukrainian (Українська)</option>
+        <option value="ur">Urdu (اردو)</option>
+        <option value="vi">Vietnamese (Tiếng Việt)</option>
+        <option value="cy">Welsh (Cymraeg)</option>
+        <option value="yo">Yoruba</option>
+        <option value="zu">Zulu</option>
       </select>
 
-      <button id="translateBtn" type="button" title="Ouvrir la page traduite">Traduire</button>
+      <!-- ✅ bouton sans texte : ↗ -->
+      <button id="translateBtn" type="button" title="Ouvrir la page traduite" aria-label="Traduire">↗</button>
     </div>
-
-    <a class="menu-dot" href="menu.html" title="Menu">⋯</a>
   </div>
 
+  <!-- ✅ Tout défile dedans -->
   <div class="viewport-scroll">
     <div class="overlay">
 
+      <!-- MENU (ONGLETS) : inchangé -->
       <nav class="tabs">
         <a href="activites.html" class="tab">Nos évènements</a>
         <a href="quinoussommes.html" class="tab">Qui nous sommes</a>
@@ -529,6 +577,7 @@
         <a href="contact.html" class="tab">📞 Contact</a>
       </nav>
 
+      <!-- BLASON -->
       <div class="blason-box">
         <img src="blason-osd9tdj.PNG"
              alt="Blason de l’Ordre Sacré des Neuf Templiers de Jérusalem"
@@ -538,16 +587,19 @@
       <h1>Ordre Sacré des Neuf Templiers de Jérusalem</h1>
       <p class="subtitle">Site officiel de l’O.S.D.9.T.D.J.</p>
 
+      <!-- ✅ Signature nnDnn -->
       <div class="nndnn-banner" aria-label="Signature templière nnDnn">
         <img src="croix.epee.PNG" alt="Épée – symbole">
         <div class="nndnn-text">nnDnn</div>
         <img src="croix.epee.PNG" alt="Épée – symbole">
       </div>
 
+      <!-- 🔒 Accès Documents internes -->
       <div class="docs-internes-badge">
         <a href="documents-internes.html">🔒 Acces reserve aux membres</a>
       </div>
 
+      <!-- BAS DE PAGE -->
       <div class="footer">
         <div class="line">
           <span>© OSD9TDJ Association Loi 1901, Tous droits réservés</span>
