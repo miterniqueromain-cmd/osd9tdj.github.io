@@ -1,16 +1,16 @@
-/* osd.js — Playlist OSD9TDJ (5 musiques) + épée au clic
-   FIX: anti-superposition (Google Translate / double injection)
+/* osd.js — OSD9TDJ
+   Playlist 5 musiques (ordre) + changement à chaque page + boucle playlist
+   Anti-superposition (Google Translate / double injection)
+   Coupe la musique si la page perd le focus (Translate ouvre une nouvelle fenêtre)
+   Épée uniquement sur CLICK (pas scroll)
 */
 (() => {
   "use strict";
 
-  // ✅ Singleton global: empêche double exécution => pas de double musique
-  if (window.__OSD_AUDIO_SINGLETON__ && window.__OSD_AUDIO_SINGLETON__.alive) {
-    // Si le script est relancé (translate), on ne relance pas une 2e musique.
-    // On peut juste sortir.
-    return;
-  }
+  // ✅ Singleton global: évite double exécution => pas de double musique
+  if (window.__OSD_AUDIO_SINGLETON__ && window.__OSD_AUDIO_SINGLETON__.alive) return;
 
+  // ===== CONFIG =====
   const TRACKS = [
     "/charlvera-guardian-of-the-holy-land-epic-background-music-for-video-206639.mp3",
     "/charlvera-knight-of-the-sacred-order-epic-background-music-for-video-206650.mp3",
@@ -20,14 +20,17 @@
   ];
 
   const SWORD_SRC = "/sons/epee.mp3";
+
   const BGM_VOLUME = 0.40;
   const SWORD_VOLUME = 0.90;
 
-  const K_INDEX = "osd_playlist_index";
-  const K_UNLOCKED = "osd_audio_unlocked";
+  // sessionStorage keys (par onglet)
+  const K_INDEX = "osd_playlist_index";     // index piste courante
+  const K_UNLOCKED = "osd_audio_unlocked";  // audio autorisé (après geste)
 
+  // ===== UTILS =====
   function ensureAudioEl(id) {
-    // ✅ Nettoie d’éventuels doublons (cas rare)
+    // Nettoie d’éventuels doublons (cas injecté/dupliqué)
     const all = document.querySelectorAll(`#${CSS.escape(id)}`);
     if (all.length > 1) {
       all.forEach((n, idx) => {
@@ -49,22 +52,27 @@
     return el;
   }
 
+  function clampIndex(n) {
+    const L = TRACKS.length;
+    return ((n % L) + L) % L;
+  }
+
   function getIndex() {
     try {
       const raw = sessionStorage.getItem(K_INDEX);
       const n = raw == null ? 0 : parseInt(raw, 10);
-      return Number.isFinite(n) ? ((n % TRACKS.length) + TRACKS.length) % TRACKS.length : 0;
+      return Number.isFinite(n) ? clampIndex(n) : 0;
     } catch {
       return 0;
     }
   }
 
   function setIndex(n) {
-    try { sessionStorage.setItem(K_INDEX, String(n)); } catch {}
+    try { sessionStorage.setItem(K_INDEX, String(clampIndex(n))); } catch {}
   }
 
   function nextIndex(i) {
-    return (i + 1) % TRACKS.length;
+    return clampIndex(i + 1);
   }
 
   function markUnlocked() {
@@ -75,9 +83,10 @@
     try { return sessionStorage.getItem(K_UNLOCKED) === "1"; } catch { return false; }
   }
 
+  // ===== AUDIO ELEMENTS =====
   const bgm = ensureAudioEl("osd_bgm");
   bgm.volume = BGM_VOLUME;
-  bgm.loop = false;
+  bgm.loop = false; // boucle gérée par playlist
 
   const sword = ensureAudioEl("osd_sword");
   sword.src = SWORD_SRC;
@@ -86,12 +95,12 @@
   let currentTrackIndex = getIndex();
 
   function loadTrack(i) {
-    currentTrackIndex = ((i % TRACKS.length) + TRACKS.length) % TRACKS.length;
+    currentTrackIndex = clampIndex(i);
     const src = TRACKS[currentTrackIndex];
 
-    // ✅ Important: si déjà en lecture, on coupe avant de changer de source
+    // stop sûr avant changement de src
     try { bgm.pause(); } catch {}
-    bgm.currentTime = 0;
+    try { bgm.currentTime = 0; } catch {}
 
     bgm.src = src;
     bgm.setAttribute("data-track-index", String(currentTrackIndex));
@@ -108,18 +117,22 @@
     }
   }
 
+  // ===== START / PAGE CHANGE =====
   async function startOnThisPage() {
     loadTrack(currentTrackIndex);
 
+    // autoplay: si pas unlock -> muted pour démarrer sans geste (quand possible)
     const unlocked = isUnlocked();
     await playCurrent({ mutedStart: !unlocked });
 
-    // ✅ changement de musique au changement de page
+    // À CHAQUE PAGE: on prépare l’index de la musique suivante
     setIndex(nextIndex(currentTrackIndex));
 
+    // si unlocked, on s’assure que ce n’est pas muted
     if (unlocked) bgm.muted = false;
   }
 
+  // Fin de piste => piste suivante (playlist) => boucle
   bgm.addEventListener("ended", async () => {
     const i = nextIndex(currentTrackIndex);
     loadTrack(i);
@@ -133,12 +146,42 @@
     if (unlocked) bgm.muted = false;
   });
 
+  // ===== UNLOCK AUDIO (1er geste utilisateur) =====
   async function unlockAudio() {
     markUnlocked();
     bgm.muted = false;
-    if (bgm.paused) await playCurrent({ mutedStart: false });
+
+    // si autoplay avait été bloqué, on relance maintenant
+    if (bgm.paused) {
+      await playCurrent({ mutedStart: false });
+    }
   }
 
+  // ===== STOP MUSIC WHEN TRANSLATE OPENS NEW WINDOW / TAB =====
+  function pauseBgm() {
+    try { bgm.pause(); } catch {}
+  }
+  function resumeBgmIfAllowed() {
+    // on relance uniquement si déjà unlock (sinon ça sera bloqué)
+    if (!isUnlocked()) return;
+    try {
+      if (bgm.paused) bgm.play().catch(() => {});
+    } catch {}
+  }
+
+  // Translate ouvre une nouvelle fenêtre => l’ancienne perd le focus => on coupe
+  window.addEventListener("blur", pauseBgm, true);
+
+  // Onglet masqué => on coupe ; retour => on relance si autorisé
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) pauseBgm();
+    else resumeBgmIfAllowed();
+  }, true);
+
+  // iOS/Safari: page cachée/suspendue
+  window.addEventListener("pagehide", pauseBgm, true);
+
+  // ===== SWORD: ONLY ON CLICK (NOT SCROLL) =====
   function playSword() {
     try {
       sword.currentTime = 0;
@@ -147,20 +190,19 @@
     } catch {}
   }
 
-  // ✅ Épée sur "click" seulement (pas scroll)
   document.addEventListener("click", (e) => {
     if (!e.isTrusted) return;
 
-    // (optionnel) ignore translate UI si tu veux
+    // évite de jouer quand on clique sur l’UI translate
     const t = e.target;
     if (t && t.closest) {
-      if (t.closest("#google_translate_element, .goog-te-gadget, .skiptranslate")) return;
+      if (t.closest("#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame")) return;
     }
 
     playSword();
   }, true);
 
-  // ✅ Unlock audio au 1er geste utilisateur
+  // Premier geste utilisateur => unlock
   const firstGesture = async () => {
     await unlockAudio();
     document.removeEventListener("click", firstGesture, true);
@@ -169,18 +211,18 @@
   document.addEventListener("click", firstGesture, true);
   document.addEventListener("keydown", firstGesture, true);
 
+  // ===== BOOT =====
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", startOnThisPage, { once: true });
   } else {
     startOnThisPage();
   }
 
-  document.addEventListener("visibilitychange", async () => {
+  // Si on revient sur la page et que la musique est stoppée, on relance (si autorisé)
+  document.addEventListener("visibilitychange", () => {
     if (document.hidden) return;
     if (!bgm.paused) return;
-    const unlocked = isUnlocked();
-    await playCurrent({ mutedStart: !unlocked });
-    if (unlocked) bgm.muted = false;
+    resumeBgmIfAllowed();
   });
 
   // ✅ marque singleton vivant
