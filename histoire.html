@@ -789,6 +789,29 @@
   }, true);
 })();
 </script>
+  <script>
+(function(){
+
+  /* ✅ AJOUT ICI */
+  if (location.pathname.endsWith("menu.html")) return;
+
+  try{
+    sessionStorage.setItem("osd_prev_page", location.href);
+  }catch(e){}
+
+  document.addEventListener("click", function(e){
+    const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if(!a) return;
+    const href = a.getAttribute("href") || "";
+    if(href.includes("menu.html")){
+      try{
+        sessionStorage.setItem("osd_prev_page", location.href);
+      }catch(err){}
+    }
+  }, true);
+})();
+</script>
+
 <script defer src="/osd.js"></script>
 
 </body>
