@@ -136,6 +136,37 @@
       max-width:100%;
       overflow-x:hidden;
     }
+.menu-dot{
+  position: fixed;
+  right: 26px;
+  top: calc(26px + env(safe-area-inset-top));
+  z-index: 100;
+  pointer-events: auto;
+
+  width: 46px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+
+  border-radius: 999px;
+  border: 1px solid rgba(214,167,40,0.55);
+  background: rgba(0,0,0,0.22);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+
+  font-family:'Cinzel',serif;
+  color: #d6a728;
+  font-size: 22px;
+  line-height: 1;
+
+  text-decoration: none;
+  user-select: none;
+}
+
+.menu-dot:hover{
+  background: rgba(214,167,40,0.12);
+  color:#fff;
+}
 
     /* =========================
        MENU 3 POINTS
@@ -643,23 +674,8 @@
   <div class="frame-fixed" aria-hidden="true"></div>
 
   <!-- Menu 3 points -->
-  <div class="top-menu" aria-label="Menu du site">
-    <details>
-      <summary title="Menu">⋯</summary>
-      <div class="menu-panel" role="menu" aria-label="Navigation">
-        <a href="index.html"> Accueil</a>
-        <a href="quinoussommes.html"> Qui nous sommes</a>
-        <a href="notre-mission.html"> Notre mission</a>
-        <a href="histoire.html"> Notre histoire</a>
-        <a href="ordres-historiques.html"> Ordres historiques</a>
-        <a href="faq.html"> FAQ</a>
-        <a href="vocation.html"> Histoire du Temple</a>
-        <a href="commanderies.html"> Dignitaires de l’Ordre</a>
-        <a href="activites.html"> Nos Evenements</a>
-        <a href="adhesion.html"> Adhésion</a>
-        <a href="boutique.html"> Boutique</a>
-        <a href="contact.html"> Contact</a>
-      </div>
+<a class="menu-dot" href="menu.html" title="Menu" aria-label="Menu">⋯</a>
+
     </details>
   </div>
 
@@ -828,5 +844,24 @@ DU TEMPLE</p>
 </footer>
 </div>
 </div>
+  <script>
+(function(){
+  try{
+    sessionStorage.setItem("osd_prev_page", location.href);
+  }catch(e){}
+
+  document.addEventListener("click", function(e){
+    const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if(!a) return;
+    const href = a.getAttribute("href") || "";
+    if(href.includes("menu.html")){
+      try{
+        sessionStorage.setItem("osd_prev_page", location.href);
+      }catch(err){}
+    }
+  }, true);
+})();
+</script>
+
 </body>
 </html>
