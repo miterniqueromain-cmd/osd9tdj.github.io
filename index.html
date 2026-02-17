@@ -27,6 +27,7 @@
   <meta name="twitter:description" content="Site officiel de l’Ordre Sacré des Neuf Templiers de Jérusalem.">
   <meta name="twitter:image" content="https://osd9tdj.org/blason-osd9tdj.PNG">
 
+  <!-- WATERMARK INVISIBLE -->
   <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-INDEX-OFFICIAL-HOMEPAGE">
 
   <script type="application/ld+json">
@@ -57,6 +58,7 @@
   }
   </script>
 
+  <!-- Polices Google -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
@@ -64,8 +66,8 @@
     --or: #ffd700;
     --clair: #fdf7e5;
 
-    /* ✅ hauteur bar top (pour éviter chevauchement) */
-    --topBarH: 74px; /* valeur par défaut (mobile) */
+    /* ✅ hauteur bar top (anti chevauchement) */
+    --topBarH: 78px; /* PC par défaut */
   }
 
   html, body{
@@ -100,7 +102,6 @@
     z-index:40;
   }
 
-  /* ✅ Zone qui défile à l'intérieur du cadre */
   .viewport-scroll{
     position:fixed;
     inset:22px;
@@ -110,7 +111,7 @@
     z-index:1;
   }
 
-  /* ✅ BARRE TRADUCTION (AU-DESSUS DE TOUT) + ⋯ INTEGRE */
+  /* ✅ BARRE TRADUCTION (AU-DESSUS DE TOUT) */
   .translate-bar{
     position: fixed;
     top: 22px;
@@ -152,6 +153,13 @@
     flex-wrap:wrap;
   }
 
+  /* ✅ FIX drapeaux Windows/PC : police emoji forcée */
+  .flag{
+    font-family: "Segoe UI Emoji","Segoe UI Symbol","Apple Color Emoji","Noto Color Emoji", sans-serif;
+    font-size: 1.05em;
+    line-height: 1;
+  }
+
   .translate-bar select,
   .translate-bar button,
   .translate-bar a.menu-dot,
@@ -184,7 +192,6 @@
     color:#fff;
   }
 
-  /* ✅ Boutons rapides */
   .translate-bar .quick{
     display:inline-flex;
     gap:8px;
@@ -197,7 +204,6 @@
     gap:6px;
   }
 
-  /* ⋯ à droite DANS la barre */
   .translate-bar .right{
     margin-left:auto;
     display:flex;
@@ -215,10 +221,9 @@
     backdrop-filter: blur(6px);
   }
 
-  /* Voile de lisibilité (inchangé) */
   .overlay {
     min-height: 100vh;
-    padding: calc(var(--topBarH) + 10px) 15px 20px; /* ✅ pousse le contenu sous la barre */
+    padding: calc(var(--topBarH) + 10px) 15px 20px;
     box-sizing: border-box;
     background: radial-gradient(circle at top,
       rgba(0, 0, 0, 0.25),
@@ -228,7 +233,6 @@
     align-items: center;
   }
 
-  /* Menu onglets (inchangé) */
   .tabs {
     margin-top: 15px;
     margin-bottom: 25px;
@@ -256,13 +260,8 @@
     white-space: nowrap;
     flex: 0 0 auto;
   }
-
   .tab + .tab { border-left: 1px solid rgba(255, 215, 0, 0.4); }
-
-  .tab:hover {
-    background: rgba(255, 215, 0, 0.20);
-    color: #ffffff;
-  }
+  .tab:hover { background: rgba(255, 215, 0, 0.20); color: #ffffff; }
 
   .blason-box {
     display: inline-block;
@@ -290,11 +289,7 @@
     text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
   }
 
-  .subtitle {
-    font-size: 1rem;
-    margin: 0 0 15px;
-    opacity: 0.95;
-  }
+  .subtitle { font-size: 1rem; margin: 0 0 15px; opacity: 0.95; }
 
   .nndnn-banner{
     margin: 18px auto 10px;
@@ -354,10 +349,7 @@
     letter-spacing:0.02em;
     text-transform: lowercase;
   }
-  .footer a:hover{
-    color:#fff !important;
-    border-bottom-color: rgba(255,215,0,0.95);
-  }
+  .footer a:hover{ color:#fff !important; border-bottom-color: rgba(255,215,0,0.95); }
   .sep{ opacity:0.55; }
 
   .legal-line {
@@ -372,9 +364,7 @@
     border-bottom: 1px dotted rgba(255,215,0,0.55);
   }
 
-  .docs-internes-badge{
-    margin: 14px auto 6px;
-  }
+  .docs-internes-badge{ margin: 14px auto 6px; }
   .docs-internes-badge a{
     display: inline-flex;
     align-items: center;
@@ -398,9 +388,9 @@
       0 8px 18px rgba(0,0,0,0.55);
   }
 
-  /* ✅ Réglages tailles : mobile */
+  /* ✅ MOBILE : barre langue coulissante (1 ligne) + plus compacte */
   @media (max-width: 480px) {
-    :root{ --topBarH: 118px; } /* bar prend 2 lignes sur mobile */
+    :root{ --topBarH: 110px; }
 
     h1 { font-size: 1.6rem; }
     .subtitle { font-size: 0.95rem; }
@@ -412,21 +402,53 @@
     .nndnn-text{ font-size:1.55rem; }
 
     .translate-bar{
-      top: 18px;
+      top: 16px;
       width: calc(100% - 40px);
+      padding: 8px 8px;
+
+      /* ✅ devient une ligne scrollable */
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap:8px;
     }
+    .translate-bar::-webkit-scrollbar{ display:none; }
+
+    .translate-bar .tlabel{ font-size:0.86rem; }
+    .translate-bar .grow{
+      flex-wrap: nowrap;
+      min-width: 0;
+      gap:8px;
+    }
+    .translate-bar .quick{ flex-wrap: nowrap; gap:6px; }
+    .translate-bar .quick button{
+      padding: 7px 9px;
+      font-size: 0.82rem;
+    }
+
     .translate-bar select{
-      max-width: 92vw;
+      max-width: 260px;
+      padding: 7px 10px;
+      font-size: 0.88rem;
     }
-    .translate-bar .grow{ min-width: 200px; }
+    .translate-bar button#translateBtn{
+      padding: 7px 10px;
+      font-size: 0.88rem;
+    }
+    .translate-bar a.menu-dot{
+      width:42px;
+      height:32px;
+      font-size:20px;
+    }
   }
 
-  /* ✅ Réglages tablette : évite chevauchement propre */
+  /* ✅ TABLETTE */
   @media (min-width: 481px) and (max-width: 1024px){
-    :root{ --topBarH: 96px; } /* bar souvent sur 2 lignes tablette */
+    :root{ --topBarH: 96px; }
   }
 
-  /* ✅ PC : bar souvent sur 1 ligne */
+  /* ✅ PC */
   @media (min-width: 1025px){
     :root{ --topBarH: 78px; }
   }
@@ -439,23 +461,24 @@
 
 <body>
 
+  <!-- ✅ Cadre fixe -->
   <div class="frame-fixed" aria-hidden="true"></div>
 
   <!-- ✅ Barre traduction + boutons rapides + ⋯ intégré -->
   <div class="translate-bar" aria-label="Traduction du site">
-    <div class="tlabel">🌍 Autre langue</div>
+    <div class="tlabel"><span class="flag">🌍</span> Autre langue</div>
 
     <div class="grow">
-      <!-- ✅ Boutons rapides -->
       <div class="quick" aria-label="Traduction rapide">
-        <button type="button" class="quickLang" data-lang="en">🇬🇧 EN</button>
-        <button type="button" class="quickLang" data-lang="it">🇮🇹 IT</button>
-        <button type="button" class="quickLang" data-lang="es">🇪🇸 ES</button>
-        <button type="button" class="quickLang" data-lang="de">🇩🇪 DE</button>
+        <button type="button" class="quickLang" data-lang="en"><span class="flag">🇬🇧</span>&nbsp;EN</button>
+        <button type="button" class="quickLang" data-lang="it"><span class="flag">🇮🇹</span>&nbsp;IT</button>
+        <button type="button" class="quickLang" data-lang="es"><span class="flag">🇪🇸</span>&nbsp;ES</button>
+        <button type="button" class="quickLang" data-lang="de"><span class="flag">🇩🇪</span>&nbsp;DE</button>
       </div>
 
       <select id="langSelect" aria-label="Choisir une langue">
-        <option value="" selected disabled>— Choisir une langue —</option>
+        <!-- ✅ sans texte visible du tout (zero-width space) -->
+        <option value="" selected disabled>&#8203;</option>
 
         <option value="af">🇿🇦 Afrikaans</option>
         <option value="sq">🇦🇱 Albanian (Shqip)</option>
@@ -575,6 +598,7 @@
     </div>
   </div>
 
+  <!-- ✅ Tout défile dedans -->
   <div class="viewport-scroll">
     <div class="overlay">
 
@@ -668,3 +692,4 @@
 
 </body>
 </html>
+
