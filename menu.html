@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <!-- ✅ SEO -->
   <title>Menu de navigation | OSD9TDJ</title>
   <meta name="description" content="Menu de navigation du site O.S.D.9.T.D.J. : accès rapide aux pages principales, aux informations officielles et aux pages encyclopédiques en cours de création." />
   <meta name="keywords" content="OSD9TDJ, ordre templier, association loi 1901, templiers, histoire du Temple, adhésion, événements, boutique, membres, statuts, mentions légales, cookies, FAQ" />
@@ -13,7 +12,6 @@
   <meta name="author" content="O.S.D.9.T.D.J." />
   <link rel="canonical" href="https://osd9tdj.org/menu.html" />
 
-  <!-- ✅ OpenGraph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Menu de navigation | OSD9TDJ" />
   <meta property="og:description" content="Accès rapide à l’arborescence du site O.S.D.9.T.D.J." />
@@ -23,67 +21,48 @@
   <meta name="twitter:title" content="Menu de navigation | OSD9TDJ" />
   <meta name="twitter:description" content="Accès rapide à l’arborescence du site O.S.D.9.T.D.J." />
 
-  <!-- ✅ Watermark invisible / empreinte -->
   <meta name="generator" content="OSD9TDJ - Menu de navigation" />
   <meta name="application-name" content="OSD9TDJ" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-  <!-- ✅ Police médiévale -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
 
-  <!-- ✅ JSON-LD : WebSite + Organization + WebPage -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@graph":[
-      {
-        "@type":"Organization",
-        "@id":"https://osd9tdj.org/#org",
-        "name":"O.S.D.9.T.D.J.",
-        "url":"https://osd9tdj.org/",
-        "logo":"https://osd9tdj.org/sceaudeux.PNG",
-        "description":"Association loi 1901 – site officiel O.S.D.9.T.D.J."
-      },
-      {
-        "@type":"WebSite",
-        "@id":"https://osd9tdj.org/#website",
-        "url":"https://osd9tdj.org/",
-        "name":"OSD9TDJ",
-        "publisher":{"@id":"https://osd9tdj.org/#org"},
-        "inLanguage":"fr-FR"
-      },
-      {
-        "@type":"WebPage",
-        "@id":"https://osd9tdj.org/menu.html#webpage",
-        "url":"https://osd9tdj.org/menu.html",
-        "name":"Menu de navigation | OSD9TDJ",
-        "isPartOf":{"@id":"https://osd9tdj.org/#website"},
-        "about":{"@id":"https://osd9tdj.org/#org"},
-        "inLanguage":"fr-FR"
-      },
-      {
-        "@type":"SiteNavigationElement",
-        "@id":"https://osd9tdj.org/menu.html#nav",
-        "name":"Menu de navigation",
-        "url":"https://osd9tdj.org/menu.html",
-        "inLanguage":"fr-FR"
-      }
+      {"@type":"Organization","@id":"https://osd9tdj.org/#org","name":"O.S.D.9.T.D.J.","url":"https://osd9tdj.org/","logo":"https://osd9tdj.org/sceaudeux.PNG","description":"Association loi 1901 – site officiel O.S.D.9.T.D.J."},
+      {"@type":"WebSite","@id":"https://osd9tdj.org/#website","url":"https://osd9tdj.org/","name":"OSD9TDJ","publisher":{"@id":"https://osd9tdj.org/#org"},"inLanguage":"fr-FR"},
+      {"@type":"WebPage","@id":"https://osd9tdj.org/menu.html#webpage","url":"https://osd9tdj.org/menu.html","name":"Menu de navigation | OSD9TDJ","isPartOf":{"@id":"https://osd9tdj.org/#website"},"about":{"@id":"https://osd9tdj.org/#org"},"inLanguage":"fr-FR"},
+      {"@type":"SiteNavigationElement","@id":"https://osd9tdj.org/menu.html#nav","name":"Menu de navigation","url":"https://osd9tdj.org/menu.html","inLanguage":"fr-FR"}
     ]
   }
   </script>
 
   <style>
   :root{
-    --veil: rgba(0,0,0,.20); /* ✅ voile plus clair */
+    /* voile global (fond derrière menu) : noir MAIS léger */
+    --veil: rgba(0,0,0,.18);
+
     --panelW: min(560px, 92vw);
     --panelH: min(92vh, 920px);
     --radius: 18px;
-    --ink: #2b1b12;
+
+    /* texte */
+    --txt: rgba(255,255,255,.96);
+    --txt2: rgba(255,255,255,.88);
     --red: #a11212;
-    --line: rgba(70,50,35,.24);
-    --btn: rgba(255,255,255,.18);
+
+    --line: rgba(255,255,255,.18);
+
+    /* voiles sous textes (cartes) : noirs translucides, pas trop sombres */
+    --card: rgba(0,0,0,.28);
+    --card2: rgba(0,0,0,.34);
+
+    --btn: rgba(0,0,0,.28);
+    --btn2: rgba(0,0,0,.42);
 
     --slideDur: 4.8s;
     --edge: clamp(10px, 3vw, 28px);
@@ -92,17 +71,16 @@
   html,body{height:100%; margin:0;}
   body{
     font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif;
-    color: var(--ink);
+    color: var(--txt);
 
-    /* ✅ FOND PAGE -> menu.png */
     background:
-      linear-gradient(to bottom, rgba(0,0,0,.38), rgba(0,0,0,.10)),
+      linear-gradient(to bottom, rgba(0,0,0,.30), rgba(0,0,0,.08)),
       url("menu.png") center/cover no-repeat fixed;
 
     overflow:hidden;
   }
 
-  /* ✅ ancienne page visible derrière (iframe flou léger) */
+  /* ancienne page derrière */
   .bgFrame{
     position:fixed;
     inset:0;
@@ -110,18 +88,18 @@
     height:100%;
     border:0;
     z-index:0;
-    filter: blur(1.5px);            /* ✅ beaucoup moins flouté */
+    filter: blur(1.2px);
     transform: scale(1.01);
-    pointer-events:none;            /* ✅ fond jamais cliquable */
+    pointer-events:none;
     background:#000;
   }
 
-  /* ✅ voile au-dessus du site : flou léger + blocage des clics */
+  /* voile au-dessus du fond */
   .veil{
     position:fixed; inset:0;
     background: var(--veil);
-    backdrop-filter: blur(1.5px);   /* ✅ beaucoup moins flouté */
-    -webkit-backdrop-filter: blur(1.5px);
+    backdrop-filter: blur(1.4px);
+    -webkit-backdrop-filter: blur(1.4px);
     z-index:10;
     pointer-events:auto;
   }
@@ -139,12 +117,11 @@
     box-shadow: 0 26px 80px rgba(0,0,0,.55);
     overflow:hidden;
 
-    /* ✅ harmonisé aussi sur menu.png (si tu veux garder "parchemin", dis-moi) */
     background:
-      linear-gradient(to bottom, rgba(0,0,0,.26), rgba(0,0,0,.06)),
+      linear-gradient(to bottom, rgba(0,0,0,.18), rgba(0,0,0,.08)),
       url("menu.png") center/cover no-repeat;
 
-    outline: 1px solid rgba(0,0,0,.12);
+    outline: 1px solid rgba(255,255,255,.10);
   }
 
   .panel.open{
@@ -173,13 +150,28 @@
     }
   }
 
+  /* ======== IMPORTANT: contenu caché pendant la coulisse ======== */
+  .panel .header,
+  .panel .scroll{
+    opacity: 0;
+    transform: translateX(-18px);
+    transition: opacity .55s ease, transform .55s ease;
+  }
+  .panel.ready .header,
+  .panel.ready .scroll{
+    opacity: 1;
+    transform: translateX(0);
+  }
+
   .header{
     position:sticky; top:0;
     padding: 18px 18px 12px 18px;
     display:flex; align-items:flex-start; justify-content:space-between;
     gap: 12px;
-    background: linear-gradient(to bottom, rgba(255,255,255,.55), rgba(255,255,255,.18));
-    border-bottom: 1px solid var(--line);
+
+    /* header noir léger pour laisser voir l'image */
+    background: linear-gradient(to bottom, rgba(0,0,0,.42), rgba(0,0,0,.18));
+    border-bottom: 1px solid rgba(255,255,255,.14);
     z-index: 30;
   }
 
@@ -188,10 +180,16 @@
     line-height:1.05;
     letter-spacing:.4px;
     margin:0;
-    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    color: var(--txt);
+    text-shadow: 0 2px 10px rgba(0,0,0,.65);
   }
 
-  .first{ color: var(--red); font-weight: 700; margin-right: 0; }
+  .first{
+    color: var(--red);
+    font-weight: 700;
+    margin-right: 0;
+    text-shadow: 0 0 10px rgba(161,18,18,.55), 0 2px 10px rgba(0,0,0,.65);
+  }
 
   .actions{ display:flex; gap:10px; align-items:center; }
   .btn{
@@ -199,13 +197,15 @@
     padding: 10px 12px;
     border-radius: 12px;
     background: var(--btn);
-    outline: 1px solid rgba(0,0,0,.18);
-    color: #2a1a12;
+    outline: 1px solid rgba(255,255,255,.18);
+    color: var(--txt);
     font-weight: 700;
     cursor:pointer;
     user-select:none;
     font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif;
+    text-shadow: 0 2px 10px rgba(0,0,0,.6);
   }
+  .btn:hover{ background: var(--btn2); }
   .btn.close{
     width: 42px; height: 42px;
     display:grid; place-items:center;
@@ -218,15 +218,17 @@
     overflow:auto;
     padding: 14px 16px calc(190px + env(safe-area-inset-bottom)) 16px;
     scrollbar-width: thin;
-    scrollbar-color: rgba(60,45,35,.45) transparent;
+    scrollbar-color: rgba(255,255,255,.35) transparent;
   }
 
   details.group{
     border-radius: 16px;
-    background: rgba(255,255,255,.14);
-    outline: 1px solid rgba(0,0,0,.12);
+    background: var(--card);
+    outline: 1px solid rgba(255,255,255,.14);
     margin: 10px 0;
     overflow:hidden;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
   }
 
   summary{
@@ -236,8 +238,8 @@
     padding: 14px 14px;
     cursor:pointer;
     user-select:none;
-    background: rgba(255,255,255,.10);
-    border-bottom: 1px dashed rgba(70,50,35,.22);
+    background: rgba(0,0,0,.22);
+    border-bottom: 1px dashed rgba(255,255,255,.16);
   }
   summary::-webkit-details-marker{ display:none; }
 
@@ -245,18 +247,20 @@
     font-size: 20px;
     font-weight: 800;
     letter-spacing:.3px;
-    text-shadow: 0 1px 0 rgba(255,255,255,.45);
+    color: var(--txt);
+    text-shadow: 0 2px 10px rgba(0,0,0,.65);
   }
 
   .chev{
     width: 34px; height: 34px;
     border-radius: 12px;
-    background: rgba(0,0,0,.10);
-    outline: 1px solid rgba(0,0,0,.16);
+    background: rgba(0,0,0,.18);
+    outline: 1px solid rgba(255,255,255,.16);
     display:grid; place-items:center;
     flex: 0 0 auto;
+    color: var(--txt);
   }
-  .chev svg{ width:18px; height:18px; opacity:.85; }
+  .chev svg{ width:18px; height:18px; opacity:.90; }
   details[open] .chev svg{ transform: rotate(180deg); transition: transform .22s ease; }
 
   .items{
@@ -271,20 +275,23 @@
     padding: 12px 12px;
     border-radius: 14px;
     text-decoration:none;
-    color: var(--ink);
-    background: rgba(255,255,255,.10);
-    outline: 1px solid rgba(0,0,0,.10);
+    color: var(--txt2);
+    background: rgba(0,0,0,.20);
+    outline: 1px solid rgba(255,255,255,.12);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
   }
-  a.item:hover{ background: rgba(255,255,255,.16); }
+  a.item:hover{ background: rgba(0,0,0,.30); color: var(--txt); }
 
   .sub{ font-size: 18px; font-weight: 700; letter-spacing:.2px; }
 
   .lock{
     width: 20px; height: 20px; flex:0 0 auto;
     opacity:.9;
-    filter: drop-shadow(0 2px 2px rgba(0,0,0,.25));
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,.35));
   }
 
+  /* reveal texte (inchangé mais on déclenche après coulisse) */
   .write{
     display:inline-block;
     overflow:hidden;
@@ -311,14 +318,13 @@
     height: 190px;
     border-radius: 32px;
     filter: blur(14px);
-    opacity: .85;
+    opacity: .70;
     background: radial-gradient(
       ellipse at center,
-      rgba(230,216,186,.42) 0%,
-      rgba(230,216,186,.22) 55%,
-      rgba(230,216,186,0) 100%
+      rgba(0,0,0,.22) 0%,
+      rgba(0,0,0,.10) 55%,
+      rgba(0,0,0,0) 100%
     );
-    mix-blend-mode: multiply;
     pointer-events:none;
   }
 
@@ -328,26 +334,9 @@
     height:auto;
     opacity:0;
     transition: opacity .45s ease;
-    filter: drop-shadow(0 14px 26px rgba(0,0,0,.40));
+    filter: drop-shadow(0 14px 26px rgba(0,0,0,.45));
   }
   .seal.show{ opacity:1; }
-
-  .seal::before{
-    content:"";
-    position:absolute;
-    inset: -28px;
-    border-radius: 999px;
-    pointer-events:none;
-    z-index: -1;
-    background: radial-gradient(
-      circle at 50% 55%,
-      rgba(238,230,214,.95) 0%,
-      rgba(238,230,214,.70) 38%,
-      rgba(238,230,214,.25) 62%,
-      rgba(238,230,214,0) 78%
-    );
-    filter: blur(6px);
-  }
 
   .wm{
     position:absolute;
@@ -369,154 +358,6 @@
     .label{ font-size: 19px; }
     .sub{ font-size: 17px; }
   }
-    /* ===== BOOST CONTRASTE (menu.png reste visible, texte ressort) ===== */
-
-/* 1) Un voile un poil plus "fumé" (pas blanc), pour ne pas laver l'image */
-:root{
-  --veil: rgba(0,0,0,.28); /* au lieu de .20 */
-}
-
-/* 2) Donne du contraste global sans changer la typo */
-body{
-  color: rgba(20,12,8,.98);
-}
-
-/* 3) Header: moins blanc, plus “parchemin sombre” => titre lisible */
-.header{
-  background: linear-gradient(to bottom, rgba(255,255,255,.42), rgba(255,255,255,.10)) !important;
-}
-
-/* 4) Titres/labels: ombre plus marquée + contour doux */
-.title,
-.label,
-.sub{
-  text-shadow:
-    0 2px 0 rgba(255,255,255,.35),
-    0 6px 16px rgba(0,0,0,.45) !important;
-}
-
-/* 5) Cartes: un cran plus opaques pour que le texte flotte moins sur l'image */
-details.group{
-  background: rgba(255,255,255,.20) !important; /* était .14 */
-  outline: 1px solid rgba(0,0,0,.18) !important;
-}
-
-summary{
-  background: rgba(255,255,255,.18) !important; /* était .10 */
-}
-
-/* 6) Liens: fond un peu plus dense + ombre interne */
-a.item{
-  background: rgba(255,255,255,.18) !important; /* était .10 */
-  outline: 1px solid rgba(0,0,0,.16) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
-}
-
-/* 7) Option “pro”: une micro-plaque derrière le texte (très légère) */
-.label, .sub{
-  padding: 2px 6px;
-  border-radius: 10px;
-  background: rgba(255,255,255,.10);
-}
-
-/* 8) Le chevron ressort mieux */
-.chev{
-  background: rgba(0,0,0,.16) !important;
-  outline: 1px solid rgba(0,0,0,.22) !important;
-}
-body::before{
-  content:"";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background: radial-gradient(ellipse at center,
-    rgba(0,0,0,.18) 0%,
-    rgba(0,0,0,.35) 55%,
-    rgba(0,0,0,.55) 100%);
-}
-.bgFrame{ z-index:0; }
-.veil{ z-index:10; }
-.panel{ z-index:20; }
-    /* ============================
-   MODE CONTRASTE NOIR MENU
-   ============================ */
-
-/* 1) Texte global blanc */
-body{
-  color: #f5f5f5 !important;
-}
-
-/* 2) Header noir translucide */
-.header{
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,.85),
-    rgba(0,0,0,.65)
-  ) !important;
-  border-bottom: 1px solid rgba(255,255,255,.15) !important;
-}
-
-/* 3) Titres et sous-titres bien visibles */
-.title,
-.label,
-.sub{
-  color: #ffffff !important;
-  text-shadow:
-    0 2px 6px rgba(0,0,0,.8),
-    0 0 18px rgba(0,0,0,.6) !important;
-}
-
-/* 4) Groupes (cards) noirs translucides */
-details.group{
-  background: rgba(0,0,0,.65) !important;
-  outline: 1px solid rgba(255,255,255,.15) !important;
-}
-
-/* 5) Ligne summary noire */
-summary{
-  background: rgba(0,0,0,.75) !important;
-  border-bottom: 1px dashed rgba(255,255,255,.2) !important;
-}
-
-/* 6) Liens menu noirs */
-a.item{
-  background: rgba(0,0,0,.55) !important;
-  color: #ffffff !important;
-  outline: 1px solid rgba(255,255,255,.12) !important;
-}
-
-a.item:hover{
-  background: rgba(0,0,0,.75) !important;
-}
-
-/* 7) Chevron plus visible */
-.chev{
-  background: rgba(255,255,255,.1) !important;
-  outline: 1px solid rgba(255,255,255,.2) !important;
-  color: #fff !important;
-}
-
-/* 8) Boutons noirs */
-.btn{
-  background: rgba(0,0,0,.75) !important;
-  color: #ffffff !important;
-  outline: 1px solid rgba(255,255,255,.2) !important;
-}
-
-.btn:hover{
-  background: rgba(0,0,0,.9) !important;
-}
-
-/* 9) Première lettre rouge conservée */
-.first{
-  color: #a11212 !important;
-  text-shadow:
-    0 0 10px rgba(161,18,18,.6),
-    0 2px 4px rgba(0,0,0,.8);
-}
-
-
   </style>
 </head>
 
@@ -525,10 +366,7 @@ a.item:hover{
     O.S.D.9.T.D.J. — osd9tdj.org — Menu de navigation — Association loi 1901 — contenus originaux — empreinte site.
   </div>
 
-  <!-- ✅ ancienne page visible derrière (floutée léger) -->
   <iframe class="bgFrame" id="bgFrame" title="Page précédente (floutée)" aria-hidden="true"></iframe>
-
-  <!-- ✅ voile au-dessus du fond -->
   <div class="veil" id="veil" aria-hidden="true"></div>
 
   <main class="panel" id="panel" role="dialog" aria-modal="true" aria-label="Menu de navigation">
@@ -541,7 +379,7 @@ a.item:hover{
     </header>
 
     <section class="scroll" id="scroll">
-      <details class="group" >
+      <details class="group">
         <summary>
           <div class="label js-write">Général</div>
           <div class="chev" aria-hidden="true">
@@ -684,7 +522,7 @@ a.item:hover{
       </details>
 
       <div style="display:flex; justify-content:center; margin: 14px 0 8px 0;">
-        <button class="btn" id="btnBack2" type="button" style="background:rgba(0,0,0,.14); color:#23150f;">
+        <button class="btn" id="btnBack2" type="button">
           ← Revenir à la page précédente
         </button>
       </div>
@@ -695,11 +533,11 @@ a.item:hover{
     </section>
   </main>
 
-  <!-- ✅ Patch global audio (musique aléatoire + épée au clic) -->
+  <!-- Audio global -->
   <script defer src="/osd.js"></script>
 
   <script>
-    /* ✅ On conserve les autres sons (plume + tampon) — pas de doublon musique/épée ici */
+    /* sons locaux (plume + tampon) */
     const SOUND_PLUME  = "sons/plume.mp3";
     const SOUND_TAMPON = "sons/tampon.mp3";
 
@@ -711,9 +549,7 @@ a.item:hover{
       try{
         aPlume  = new Audio(SOUND_PLUME);
         aTampon = new Audio(SOUND_TAMPON);
-
         [aPlume, aTampon].forEach(a => { a.preload = "auto"; a.volume = 0.85; });
-
         audioReady = true;
       }catch(e){}
     }
@@ -729,15 +565,51 @@ a.item:hover{
         aPlume.currentTime = 0;
         aPlume.play().catch(()=>{});
         window.setTimeout(() => {
-          try{
-            aPlume.pause();
-            aPlume.currentTime = 0;
-          }catch(e){}
+          try{ aPlume.pause(); aPlume.currentTime = 0; }catch(e){}
         }, Math.max(0, ms) + 80);
       }catch(e){}
     }
 
+    const panel = document.getElementById("panel");
+    const veil  = document.getElementById("veil");
+    const seal  = document.getElementById("seal");
+    const bgFrame = document.getElementById("bgFrame");
+
+    /* fond derrière menu + mémoire tablette */
+    (function setBackgroundPage(){
+      try{
+        const last = (() => {
+          try { return sessionStorage.getItem("osd_prev_page") || ""; } catch(e) { return ""; }
+        })();
+
+        if(last && (last.startsWith(location.origin) || last.startsWith("http"))){
+          bgFrame.src = last;
+          return;
+        }
+
+        const ref = document.referrer || "";
+        if(ref && ref.startsWith(location.origin)){
+          bgFrame.src = ref;
+          return;
+        }
+
+        bgFrame.src = "index.html";
+      }catch(e){
+        bgFrame.src = "index.html";
+      }
+    })();
+
     function goBack(){
+      // priorité: sessionStorage.osd_prev_page (fiable tablette)
+      try{
+        const last = sessionStorage.getItem("osd_prev_page") || "";
+        if(last && (last.startsWith(location.origin) || last.startsWith("http"))){
+          window.location.href = last;
+          return;
+        }
+      }catch(e){}
+
+      // fallback
       if (document.referrer && document.referrer.includes(location.hostname)) {
         window.location.href = document.referrer;
       } else if (history.length > 1) {
@@ -789,40 +661,12 @@ a.item:hover{
         if(dur > maxDur) maxDur = dur;
       });
 
+      // reveal
       setTimeout(() => {
         document.querySelectorAll(".write").forEach(w => w.classList.add("reveal"));
         startPlumeFor(maxDur);
-      }, 1400);
+      }, 180);
     }
-
-    const panel = document.getElementById("panel");
-    const veil  = document.getElementById("veil");
-    const seal  = document.getElementById("seal");
-    const bgFrame = document.getElementById("bgFrame");
-
-    /* ✅ MODIF TABLETTE : fond = sessionStorage.osd_prev_page puis referrer puis index */
-    (function setBackgroundPage(){
-      try{
-        const last = (function(){
-          try { return sessionStorage.getItem("osd_prev_page") || ""; } catch(e) { return ""; }
-        })();
-
-        if(last && (last.startsWith(location.origin) || last.startsWith("http"))){
-          bgFrame.src = last;
-          return;
-        }
-
-        const ref = document.referrer || "";
-        if(ref && ref.startsWith(location.origin)){
-          bgFrame.src = ref;
-          return;
-        }
-
-        bgFrame.src = "index.html";
-      }catch(e){
-        bgFrame.src = "index.html";
-      }
-    })();
 
     function cssVarToMs(varName, fallbackMs){
       try{
@@ -842,7 +686,10 @@ a.item:hover{
 
       const slideMs = cssVarToMs("--slideDur", 4800);
 
+      // 1) panneau coulisse vide
+      // 2) après la coulisse: on affiche header/scroll + on lance l'écriture
       setTimeout(() => {
+        panel.classList.add("ready");
         applyWriting();
 
         setTimeout(() => {
@@ -853,19 +700,17 @@ a.item:hover{
       }, slideMs + 60);
     }
 
-    /* ✅ Important : on init audio plume/tampon au 1er clic si autoplay est bloqué */
-    document.addEventListener("pointerdown", () => {
-      initAudioOnce();
-    }, { capture:true });
+    // init plume/tampon au premier geste (si autoplay bloqué)
+    document.addEventListener("pointerdown", () => { initAudioOnce(); }, { capture:true });
 
-    document.getElementById("btnBack").addEventListener("click", () => { goBack(); });
-    document.getElementById("btnBack2").addEventListener("click", () => { goBack(); });
-    document.getElementById("btnClose").addEventListener("click", () => { goBack(); });
+    document.getElementById("btnBack").addEventListener("click", goBack);
+    document.getElementById("btnBack2").addEventListener("click", goBack);
+    document.getElementById("btnClose").addEventListener("click", goBack);
 
-    veil.addEventListener("click", () => { goBack(); });
+    veil.addEventListener("click", goBack);
     panel.addEventListener("click", (e) => e.stopPropagation());
 
-    window.addEventListener("load", () => openMenu());
+    window.addEventListener("load", openMenu);
   </script>
 </body>
 </html>
