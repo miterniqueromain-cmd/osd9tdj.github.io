@@ -375,24 +375,13 @@
   <link rel="apple-touch-icon" href="icon-192.png">
 </head>
 
+
 <body>
 
   <div class="frame-fixed" aria-hidden="true"></div>
 
-  <div class="top-menu" aria-label="Menu du site">
-    <details>
-      <summary title="Menu">⋯</summary>
-      <div class="menu-panel" role="menu" aria-label="Navigation">
-        <a href="index.html">Accueil</a>
-        <a href="quinoussommes.html">Qui nous sommes</a>
-        <a href="notre-mission.html">Notre mission</a>
-        <a href="histoire.html">Notre histoire</a>
-        <a href="faq.html">FAQ</a>
-        <a href="boutique.html">Boutique</a>
-        <a href="contact.html">Contact</a>
-      </div>
-    </details>
-  </div>
+ <a class="menu-dot" href="menu.html" title="Menu" aria-label="Menu">⋯</a>
+
 
   <div class="viewport-scroll">
 
@@ -492,5 +481,23 @@
     </div>
 
   </div>
+  <script>
+  (function(){
+    // mémorise la page courante (pour que menu.html puisse l'afficher en fond)
+    try{
+      sessionStorage.setItem("osd_prev_page", location.href);
+    }catch(e){}
+
+    // au clic sur un lien vers menu.html, mémorise juste avant de partir (encore plus fiable)
+    document.addEventListener("click", function(e){
+      const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+      if(!a) return;
+      const href = a.getAttribute("href") || "";
+      if(href.includes("menu.html")){
+        try{ sessionStorage.setItem("osd_prev_page", location.href); }catch(err){}
+      }
+    }, true);
+  })();
+</script>
 </body>
 </html>
