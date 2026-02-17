@@ -1,14 +1,16 @@
 /* osd.js — Playlist OSD9TDJ (5 musiques) + épée au clic
-   - Musiques: lecture dans l’ordre, passe à la suivante à la fin, boucle playlist
-   - Changement de page: passe à la musique suivante
-   - Démarrage robuste: tente autoplay (muted), son activé au 1er clic
-   - Épée: uniquement sur "click" (pas pendant scroll)
-   - N'affecte pas les autres sons présents sur tes pages
+   FIX: anti-superposition (Google Translate / double injection)
 */
 (() => {
   "use strict";
 
-  // ===== CONFIG =====
+  // ✅ Singleton global: empêche double exécution => pas de double musique
+  if (window.__OSD_AUDIO_SINGLETON__ && window.__OSD_AUDIO_SINGLETON__.alive) {
+    // Si le script est relancé (translate), on ne relance pas une 2e musique.
+    // On peut juste sortir.
+    return;
+  }
+
   const TRACKS = [
     "/charlvera-guardian-of-the-holy-land-epic-background-music-for-video-206639.mp3",
     "/charlvera-knight-of-the-sacred-order-epic-background-music-for-video-206650.mp3",
@@ -18,16 +20,23 @@
   ];
 
   const SWORD_SRC = "/sons/epee.mp3";
-
   const BGM_VOLUME = 0.40;
   const SWORD_VOLUME = 0.90;
 
-  // sessionStorage keys (par onglet)
-  const K_INDEX = "osd_playlist_index";     // index de la musique courante
-  const K_UNLOCKED = "osd_audio_unlocked";  // audio autorisé (après geste utilisateur)
+  const K_INDEX = "osd_playlist_index";
+  const K_UNLOCKED = "osd_audio_unlocked";
 
-  // ===== UTIL =====
   function ensureAudioEl(id) {
+    // ✅ Nettoie d’éventuels doublons (cas rare)
+    const all = document.querySelectorAll(`#${CSS.escape(id)}`);
+    if (all.length > 1) {
+      all.forEach((n, idx) => {
+        if (idx === 0) return;
+        try { n.pause(); } catch {}
+        try { n.remove(); } catch {}
+      });
+    }
+
     let el = document.getElementById(id);
     if (!el) {
       el = document.createElement("audio");
@@ -54,8 +63,8 @@
     try { sessionStorage.setItem(K_INDEX, String(n)); } catch {}
   }
 
-  function nextIndex(current) {
-    return (current + 1) % TRACKS.length;
+  function nextIndex(i) {
+    return (i + 1) % TRACKS.length;
   }
 
   function markUnlocked() {
@@ -66,28 +75,30 @@
     try { return sessionStorage.getItem(K_UNLOCKED) === "1"; } catch { return false; }
   }
 
-  // ===== AUDIO ELEMENTS =====
   const bgm = ensureAudioEl("osd_bgm");
   bgm.volume = BGM_VOLUME;
-  bgm.loop = false; // on gère la boucle playlist nous-mêmes
+  bgm.loop = false;
 
   const sword = ensureAudioEl("osd_sword");
   sword.src = SWORD_SRC;
   sword.volume = SWORD_VOLUME;
 
-  // ===== PLAYLIST LOGIC =====
   let currentTrackIndex = getIndex();
 
   function loadTrack(i) {
     currentTrackIndex = ((i % TRACKS.length) + TRACKS.length) % TRACKS.length;
     const src = TRACKS[currentTrackIndex];
+
+    // ✅ Important: si déjà en lecture, on coupe avant de changer de source
+    try { bgm.pause(); } catch {}
+    bgm.currentTime = 0;
+
     bgm.src = src;
     bgm.setAttribute("data-track-index", String(currentTrackIndex));
   }
 
   async function playCurrent({ mutedStart } = { mutedStart: false }) {
     bgm.muted = !!mutedStart;
-
     try {
       const p = bgm.play();
       if (p && typeof p.then === "function") await p;
@@ -98,50 +109,36 @@
   }
 
   async function startOnThisPage() {
-    // À CHAQUE PAGE: on joue la musique courante,
-    // et on prépare la suivante pour le prochain changement de page.
     loadTrack(currentTrackIndex);
 
     const unlocked = isUnlocked();
+    await playCurrent({ mutedStart: !unlocked });
 
-    // Démarrage robuste:
-    // - si unlocked -> tente en son
-    // - sinon -> tente muted (autoplay)
-    const ok = await playCurrent({ mutedStart: !unlocked });
-
-    // prépare la musique suivante pour la prochaine page
+    // ✅ changement de musique au changement de page
     setIndex(nextIndex(currentTrackIndex));
 
-    // si ok et unlocked, on s’assure que ce n’est pas muted
-    if (ok && unlocked) bgm.muted = false;
+    if (unlocked) bgm.muted = false;
   }
 
-  // Quand une musique finit: passe à la suivante (playlist) et continue.
   bgm.addEventListener("ended", async () => {
     const i = nextIndex(currentTrackIndex);
     loadTrack(i);
 
     const unlocked = isUnlocked();
-    const ok = await playCurrent({ mutedStart: !unlocked });
+    await playCurrent({ mutedStart: !unlocked });
 
-    // on maintient aussi l'index "page suivante" cohérent
+    // garde l’index page suivante cohérent
     setIndex(nextIndex(i));
 
-    if (ok && unlocked) bgm.muted = false;
+    if (unlocked) bgm.muted = false;
   });
 
-  // ===== UNLOCK (1er geste utilisateur) =====
   async function unlockAudio() {
     markUnlocked();
     bgm.muted = false;
-
-    // si la musique ne joue pas (autoplay bloqué), on relance
-    if (bgm.paused) {
-      await playCurrent({ mutedStart: false });
-    }
+    if (bgm.paused) await playCurrent({ mutedStart: false });
   }
 
-  // ===== ÉPÉE: UNIQUEMENT SUR CLICK (pas scroll) =====
   function playSword() {
     try {
       sword.currentTime = 0;
@@ -150,13 +147,20 @@
     } catch {}
   }
 
-  // Click = action réelle (sur mobile, scroll ne déclenche pas click)
+  // ✅ Épée sur "click" seulement (pas scroll)
   document.addEventListener("click", (e) => {
     if (!e.isTrusted) return;
+
+    // (optionnel) ignore translate UI si tu veux
+    const t = e.target;
+    if (t && t.closest) {
+      if (t.closest("#google_translate_element, .goog-te-gadget, .skiptranslate")) return;
+    }
+
     playSword();
   }, true);
 
-  // Premier geste utilisateur: unlock audio (click + keydown)
+  // ✅ Unlock audio au 1er geste utilisateur
   const firstGesture = async () => {
     await unlockAudio();
     document.removeEventListener("click", firstGesture, true);
@@ -165,14 +169,12 @@
   document.addEventListener("click", firstGesture, true);
   document.addEventListener("keydown", firstGesture, true);
 
-  // Relance au chargement
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", startOnThisPage, { once: true });
   } else {
     startOnThisPage();
   }
 
-  // Si on revient sur l’onglet et que ça s’est stoppé, on relance
   document.addEventListener("visibilitychange", async () => {
     if (document.hidden) return;
     if (!bgm.paused) return;
@@ -181,4 +183,6 @@
     if (unlocked) bgm.muted = false;
   });
 
+  // ✅ marque singleton vivant
+  window.__OSD_AUDIO_SINGLETON__ = { alive: true };
 })();
