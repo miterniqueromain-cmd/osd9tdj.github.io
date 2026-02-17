@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
 
-  <!-- ✅ JSON-LD (jslon) : WebSite + Organization + WebPage -->
+  <!-- ✅ JSON-LD : WebSite + Organization + WebPage -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -94,9 +94,10 @@
     font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif;
     color: var(--ink);
 
+    /* ✅ FOND PAGE -> menu.png */
     background:
       linear-gradient(to bottom, rgba(0,0,0,.38), rgba(0,0,0,.10)),
-      url("parchemin.jpg") center/cover no-repeat fixed;
+      url("menu.png") center/cover no-repeat fixed;
 
     overflow:hidden;
   }
@@ -138,9 +139,10 @@
     box-shadow: 0 26px 80px rgba(0,0,0,.55);
     overflow:hidden;
 
+    /* ✅ harmonisé aussi sur menu.png (si tu veux garder "parchemin", dis-moi) */
     background:
       linear-gradient(to bottom, rgba(0,0,0,.26), rgba(0,0,0,.06)),
-      url("parchemin.jpg") center/cover no-repeat;
+      url("menu.png") center/cover no-repeat;
 
     outline: 1px solid rgba(0,0,0,.12);
   }
@@ -545,28 +547,24 @@
     </section>
   </main>
 
+  <!-- ✅ Patch global audio (musique aléatoire + épée au clic) -->
+  <script defer src="/osd.js"></script>
+
   <script>
+    /* ✅ On conserve les autres sons (plume + tampon) — pas de doublon musique/épée ici */
     const SOUND_PLUME  = "sons/plume.mp3";
-    const SOUND_EPEE   = "sons/epee.mp3";
     const SOUND_TAMPON = "sons/tampon.mp3";
-    const SOUND_MUSIC  = "sons/music.mp3";
 
     let audioReady = false;
-    let aPlume, aEpee, aTampon, aMusic;
+    let aPlume, aTampon;
 
     function initAudioOnce(){
       if (audioReady) return;
       try{
         aPlume  = new Audio(SOUND_PLUME);
-        aEpee   = new Audio(SOUND_EPEE);
         aTampon = new Audio(SOUND_TAMPON);
-        aMusic  = new Audio(SOUND_MUSIC);
 
-        [aPlume,aEpee,aTampon].forEach(a => { a.preload = "auto"; a.volume = 0.85; });
-
-        aMusic.preload = "auto";
-        aMusic.loop = true;
-        aMusic.volume = 0.45;
+        [aPlume, aTampon].forEach(a => { a.preload = "auto"; a.volume = 0.85; });
 
         audioReady = true;
       }catch(e){}
@@ -654,14 +652,14 @@
     const seal  = document.getElementById("seal");
     const bgFrame = document.getElementById("bgFrame");
 
-    /* ✅ MODIF TABLETTE : fond = sessionStorage (fiable) puis referrer puis index */
+    /* ✅ MODIF TABLETTE : fond = sessionStorage.osd_prev_page puis referrer puis index */
     (function setBackgroundPage(){
       try{
         const last = (function(){
-          try { return sessionStorage.getItem("osd9tdj_lastPage") || ""; } catch(e) { return ""; }
+          try { return sessionStorage.getItem("osd_prev_page") || ""; } catch(e) { return ""; }
         })();
 
-        if(last && last.startsWith(location.origin)){
+        if(last && (last.startsWith(location.origin) || last.startsWith("http"))){
           bgFrame.src = last;
           return;
         }
@@ -694,10 +692,6 @@
       panel.classList.add("open");
       initAudioOnce();
 
-      if(aMusic){
-        aMusic.play().catch(()=>{});
-      }
-
       const slideMs = cssVarToMs("--slideDur", 4800);
 
       setTimeout(() => {
@@ -711,13 +705,9 @@
       }, slideMs + 60);
     }
 
+    /* ✅ Important : on init audio plume/tampon au 1er clic si autoplay est bloqué */
     document.addEventListener("pointerdown", () => {
       initAudioOnce();
-      playSafe(aEpee);
-
-      if(aMusic && aMusic.paused){
-        aMusic.play().catch(()=>{});
-      }
     }, { capture:true });
 
     document.getElementById("btnBack").addEventListener("click", () => { goBack(); });
@@ -726,12 +716,6 @@
 
     veil.addEventListener("click", () => { goBack(); });
     panel.addEventListener("click", (e) => e.stopPropagation());
-
-    window.addEventListener("beforeunload", () => {
-      if(aMusic){
-        try{ aMusic.pause(); aMusic.currentTime = 0; }catch(e){}
-      }
-    });
 
     window.addEventListener("load", () => openMenu());
   </script>
