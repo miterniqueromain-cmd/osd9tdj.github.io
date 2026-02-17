@@ -425,6 +425,28 @@ ul.bullets li::marker{
   body::after{ mix-blend-mode: normal; opacity:0.018; }
   .nav-strip{ backdrop-filter:none; -webkit-backdrop-filter:none; }
 }
+  /* Ruban unique */
+.nav-strip.single{
+  border-color: rgba(214,167,40,0.50);
+  background: rgba(0,0,0,0.20);
+}
+
+/* Boutons du ruban unique */
+.nav-btn.single{
+  background: rgba(0,0,0,0.34);
+  color: rgba(245,240,230,0.92) !important;
+}
+
+.nav-btn.single:hover{
+  background: rgba(214,167,40,0.10);
+  color: #fff !important;
+}
+
+/* séparation entre boutons, un peu plus fine */
+.nav-btn.single + .nav-btn.single{
+  border-left: 1px solid rgba(214,167,40,0.20);
+}
+
 </style>
 </head>
 
@@ -550,20 +572,16 @@ ul.bullets li::marker{
     </div>
 
     <div class="silver-sep"></div>
+    
+<!-- RUBAN UNIQUE COULISSANT (toutes les pages) -->
+<nav class="nav-strip single" aria-label="Navigation du site">
+  <a class="nav-btn single" href="index.html">Accueil</a>
+  <a class="nav-btn single" href="contact.html">Contact</a>
+  <a class="nav-btn single" href="adhesion.html">Adhésion</a>
+  <a class="nav-btn single" href="statut.html">Statuts</a>
+</nav>
 
-    <!-- BARRE NOIRE -->
-    <nav class="nav-strip dark" aria-label="Navigation principale">
-      <a class="nav-btn dark" href="index.html">Accueil</a>
-      <a class="nav-btn dark" href="contact.html">Contact</a>
-    </nav>
-
-    <!-- BARRE DORÉE SOBRE -->
-    <nav class="nav-strip gold" aria-label="Navigation adhésion">
-      <a class="nav-btn gold" href="adhesion.html">Adhésion</a>
-      <a class="nav-btn gold" href="statut.html">Statuts</a>
-    </nav>
-
-    <div style="height:22px;"></div>
+  
 
     <footer class="footer-min" aria-label="Pied de page">
       <div class="line">
