@@ -105,8 +105,9 @@
   --or:#d6a728;
   --clair:#f5f0e6;
   --or-line: rgba(214,167,40,0.55);
-  --silver-border: rgba(220,220,220,0.24);
-  --silver-bg: rgba(255,255,255,0.04);
+  --silver-border: rgba(220,220,220,0.22);
+  --silver-bg: rgba(255,255,255,0.035);
+  --shadow: rgba(0,0,0,0.65);
 }
 
 /* Base */
@@ -114,7 +115,7 @@ html, body{
   height:100%;
   margin:0;
   padding:0;
-  overflow:hidden; /* on scroll dans .viewport-scroll */
+  overflow:hidden; /* scroll dans .viewport-scroll */
   font-family:'Lato', Arial, sans-serif;
   color:var(--clair);
   text-align:center;
@@ -131,21 +132,21 @@ body::before{
   z-index:0;
   pointer-events:none;
   background:
-    linear-gradient(rgba(0,0,0,0.48), rgba(0,0,0,0.68)),
+    linear-gradient(rgba(0,0,0,0.50), rgba(0,0,0,0.72)),
     url("fond-coms.PNG");
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
 }
 
-/* Grain léger */
+/* Grain léger (très discret) */
 body::after{
   content:"";
   position:fixed;
   inset:0;
   z-index:1;
   pointer-events:none;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.028'/></svg>");
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.020'/></svg>");
   mix-blend-mode: overlay;
 }
 
@@ -169,7 +170,6 @@ body::after{
   z-index:5;
   padding:30px 15px 44px;
   box-sizing:border-box;
-
   isolation:isolate;
   transform:translateZ(0);
   -webkit-transform:translateZ(0);
@@ -180,7 +180,8 @@ body::after{
   flex-direction:column;
   align-items:center;
   box-sizing:border-box;
-  max-width:100%;
+  max-width:1060px;   /* plus propre */
+  margin:0 auto;
   overflow-x:hidden;
 }
 
@@ -198,39 +199,52 @@ body::after{
   place-items: center;
 
   border-radius: 999px;
-  border: 1px solid rgba(214,167,40,0.55);
+  border: 1px solid rgba(214,167,40,0.50);
   background: rgba(0,0,0,0.22);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   box-shadow: 0 6px 16px rgba(0,0,0,0.35);
 
   font-family:'Cinzel',serif;
-  color: #d6a728;
+  color: rgba(214,167,40,0.95);
   font-size: 22px;
   line-height: 1;
   text-decoration: none;
   user-select: none;
 }
-.menu-dot:hover{ background: rgba(214,167,40,0.12); color:#fff; }
+.menu-dot:hover{ background: rgba(255,255,255,0.05); color:#fff; }
 
 h1{
   font-family:'Cinzel',serif;
-  font-size:1.75rem;
-  margin:10px 0 12px;
+  font-size:1.70rem;
+  margin:12px 0 14px;
   text-transform:uppercase;
-  letter-spacing:0.06em;
+  letter-spacing:0.08em;
   max-width:980px;
+  color: rgba(245,240,230,0.96);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.70);
 }
+
 h2{
   font-family:'Cinzel',serif;
   font-size:1.12rem;
-  margin:18px 0 8px;
+  margin:26px auto 10px;
   text-transform:uppercase;
-  letter-spacing:0.04em;
-  color:var(--or);
+  letter-spacing:0.05em;
+  color: rgba(214,167,40,0.95);
   max-width:980px;
   width:100%;
   text-align:center;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.75);
+}
+
+h2::after{
+  content:"";
+  display:block;
+  height:1px;
+  width:min(540px, 80%);
+  margin:10px auto 0;
+  background:linear-gradient(to right, transparent, rgba(214,167,40,0.38), transparent);
 }
 
 /* Hero */
@@ -238,9 +252,9 @@ h2{
   margin-top: 6px;
   margin-bottom: 18px;
   border-radius: 24px;
-  background: radial-gradient(circle at top, rgba(255,255,255,0.06), rgba(0,0,0,0.96));
+  background: radial-gradient(circle at top, rgba(255,255,255,0.05), rgba(0,0,0,0.96));
   box-shadow: 0 0 35px rgba(0,0,0,0.85);
-  border: 2px solid rgba(214,167,40,0.90);
+  border: 2px solid rgba(214,167,40,0.75);
   overflow:hidden;
   width:100%;
   max-width: 920px;
@@ -248,48 +262,76 @@ h2{
 }
 .hero-box img{ display:block; width:100%; height:auto; }
 
+/* Texte : respire */
 p{
-  max-width:900px;
-  margin:8px auto;
+  max-width:960px;
+  margin:12px auto;
   font-size:1rem;
-  line-height:1.62;
+  line-height:1.86;
   text-align:justify;
+  color: rgba(245,240,230,0.92);
+  text-rendering: optimizeLegibility;
+  letter-spacing: 0.01em;
 }
-a{ color: var(--clair); }
+a{ color: rgba(245,240,230,0.92); }
+a:hover{ color:#fff; }
 
-/* Silver box */
+/* Encadré principal */
 .silver-box{
   width:100%;
-  max-width:950px;
-  margin:10px auto;
-  padding:14px 16px;
-  border-radius:12px;
+  max-width:980px;
+  margin:12px auto;
+  padding:20px 20px;
+  border-radius:14px;
   border:1px solid var(--silver-border);
   background: var(--silver-bg);
-  box-shadow:0 0 14px rgba(0,0,0,0.55);
+  box-shadow: 0 16px 38px rgba(0,0,0,0.60);
   text-align:left;
   box-sizing:border-box;
 }
+
+/* Séparateurs sobres */
 .silver-sep{
   height:1px;
-  width:60%;
-  margin:12px auto;
-  background:linear-gradient(to right, transparent, rgba(220,220,220,0.45), transparent);
+  width:min(680px, 78%);
+  margin:18px auto;
+  background:linear-gradient(to right, transparent, rgba(220,220,220,0.40), transparent);
 }
 
+/* Note */
+.note{
+  font-size:0.98rem;
+  opacity:0.95;
+  text-align:center;
+  margin-top: 4px;
+}
+
+/* Listes propres (pour remplacer les • dans les paragraphes) */
 ul{
-  max-width:900px;
-  margin:10px auto 6px;
+  max-width:960px;
+  margin: 10px auto 8px;
+  padding-left: 22px;
   text-align:left;
-  line-height:1.55;
-  padding-left:20px;
+  line-height:1.78;
 }
-li{ margin:6px 0; }
+li{
+  margin: 8px 0;
+}
+ul.bullets li::marker{
+  color: rgba(214,167,40,0.80);
+}
 
-.note{ font-size:0.96rem; opacity:0.92; }
+/* Étapes : titre en Cinzel, doré sobre */
+.step-title{
+  margin: 18px 0 6px;
+  font-family:'Cinzel',serif;
+  font-weight:700;
+  color: rgba(214,167,40,0.95);
+  letter-spacing: 0.02em;
+}
 
 /* =========================
-   DOUBLE BARRE COULISSANTE (noire + jaune)
+   DOUBLE BARRE (noire + dorée sobre)
    ========================= */
 .nav-strip{
   margin: 18px auto 0;
@@ -315,24 +357,30 @@ li{ margin:6px 0; }
   font-weight: 700;
   font-family: 'Cinzel', serif;
   white-space: nowrap;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.12s ease;
+  transition: background 0.18s ease, color 0.18s ease;
   -webkit-tap-highlight-color: transparent;
 }
 .nav-btn:visited{ text-decoration:none !important; }
-.nav-btn + .nav-btn{ border-left: 1px solid rgba(214,167,40,0.35); }
+.nav-btn + .nav-btn{ border-left: 1px solid rgba(214,167,40,0.22); }
 
 /* NOIR */
 .nav-strip.dark{ background: rgba(0,0,0,0.18); }
-.nav-btn.dark{ color: var(--clair) !important; background: rgba(0,0,0,0.42); }
-.nav-btn.dark:hover{ background: rgba(214,167,40,0.20); color:#fff !important; }
+.nav-btn.dark{ color: rgba(245,240,230,0.92) !important; background: rgba(0,0,0,0.40); }
+.nav-btn.dark:hover{ background: rgba(255,255,255,0.06); color:#fff !important; }
 
-/* JAUNE */
+/* DORÉ SOBER (plus de jaune plein) */
 .nav-strip.gold{
-  border-color: rgba(214,167,40,0.65);
-  background: rgba(214,167,40,0.12);
+  background: rgba(0,0,0,0.18);
+  border-color: rgba(214,167,40,0.45);
 }
-.nav-btn.gold{ color: #1a0f05 !important; background: rgba(214,167,40,0.82); }
-.nav-btn.gold:hover{ background: rgba(214,167,40,0.95); transform: translateY(-1px); }
+.nav-btn.gold{
+  background: transparent;
+  color: rgba(214,167,40,0.95) !important;
+}
+.nav-btn.gold:hover{
+  background: rgba(214,167,40,0.10);
+  color:#fff !important;
+}
 
 /* Footer */
 .footer-min{
@@ -355,9 +403,9 @@ li{ margin:6px 0; }
 
 /* Mobile */
 @media (max-width:600px){
-  h1{ font-size:1.45rem; }
+  h1{ font-size:1.40rem; }
   h2{ font-size:1.02rem; }
-  p{ font-size:0.96rem; }
+  p{ font-size:0.98rem; line-height:1.78; }
 
   .frame-fixed{ inset:12px; }
   .viewport-scroll{
@@ -367,335 +415,16 @@ li{ margin:6px 0; }
     padding-right: max(12px, env(safe-area-inset-right));
     padding-bottom: max(44px, env(safe-area-inset-bottom));
   }
-  .silver-box{ padding:12px 13px; }
-  .silver-sep{ width:70%; }
+  .silver-box{ padding:16px 14px; }
+  .silver-sep{ width:80%; }
   .nav-btn{ padding: 10px 14px; font-size: 0.90rem; }
 }
 
 /* iOS: réduit les bugs de calques liés au grain */
 @media (max-width:900px){
-  body::after{ mix-blend-mode: normal; opacity:0.02; }
+  body::after{ mix-blend-mode: normal; opacity:0.018; }
   .nav-strip{ backdrop-filter:none; -webkit-backdrop-filter:none; }
 }
- /* =========================================================
-   SURCOUCHE "AÉRÉE" (cadres or/argent + titres dorés)
-   -> CSS ONLY : aucun changement HTML/JS
-   -> à coller EN FIN de <style>
-   ========================================================= */
-
-:root{
-  --gold-strong: rgba(214,167,40,0.95);
-  --gold-soft: rgba(214,167,40,0.35);
-  --silver-strong: rgba(235,235,235,0.28);
-  --ink-soft: rgba(245,240,230,0.92);
-
-  --card-pad: 22px;
-  --card-radius: 18px;
-  --card-gap: 18px;
-}
-
-/* Lisibilité générale */
-.container{
-  max-width: 1040px;         /* garde le centrage mais évite l'effet "bloc énorme" */
-  margin: 0 auto;
-  padding: 0 6px;
-}
-
-p{
-  font-size: 1.02rem;
-  line-height: 1.78;
-  margin: 14px auto;
-  color: var(--ink-soft);
-  text-align: justify;
-  hyphens: auto;
-  text-rendering: optimizeLegibility;
-}
-
-/* Titre principal : doré + encadrement fin + respiration */
-h1{
-  margin: 16px 0 18px;
-  padding: 14px 16px;
-  max-width: 960px;
-  border-radius: 16px;
-  border: 1px solid rgba(214,167,40,0.55);
-  background: linear-gradient(180deg, rgba(214,167,40,0.10), rgba(0,0,0,0.20));
-  box-shadow:
-    0 10px 26px rgba(0,0,0,0.55),
-    0 0 0 1px rgba(255,255,255,0.06) inset;
-  letter-spacing: 0.08em;
-
-  /* effet doré (sans images) */
-  background-clip: padding-box;
-  text-shadow: 0 1px 0 rgba(0,0,0,0.65);
-}
-
-/* Sous-titres : dorés + filet + séparation claire */
-h2{
-  margin: 26px auto 12px;
-  padding: 10px 14px;
-  border-radius: 14px;
-  max-width: 960px;
-
-  color: var(--gold-strong);
-  background: linear-gradient(180deg, rgba(214,167,40,0.08), rgba(255,255,255,0.02));
-  border: 1px solid rgba(214,167,40,0.28);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.45);
-}
-
-h2::after{
-  content:"";
-  display:block;
-  height: 1px;
-  margin: 10px auto 0;
-  width: min(560px, 86%);
-  background: linear-gradient(to right, transparent, rgba(214,167,40,0.55), transparent);
-}
-
-/* Carte principale (silver-box) : plus "luxe", plus aérée */
-.silver-box{
-  position: relative;
-  width: 100%;
-  max-width: 980px;
-  margin: 14px auto 10px;
-  padding: var(--card-pad);
-  border-radius: var(--card-radius);
-
-  /* argent + profondeur */
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.10)),
-    radial-gradient(circle at top, rgba(255,255,255,0.05), rgba(0,0,0,0.42)),
-    var(--silver-bg);
-
-  border: 1px solid rgba(235,235,235,0.22);
-  box-shadow:
-    0 18px 42px rgba(0,0,0,0.68),
-    0 0 0 1px rgba(214,167,40,0.16) inset;
-}
-
-/* Double liseré (or fin) autour de la carte */
-.silver-box::before{
-  content:"";
-  position:absolute;
-  inset: 10px;
-  border-radius: calc(var(--card-radius) - 8px);
-  border: 1px solid rgba(214,167,40,0.22);
-  pointer-events:none;
-}
-
-/* Respiration interne (évite l'effet "cafuillon") */
-.silver-box p{
-  max-width: 960px;
-  margin: 14px auto;
-}
-
-.silver-sep{
-  height:1px;
-  width:min(680px, 78%);
-  margin: 18px auto;
-  background: linear-gradient(to right, transparent, rgba(220,220,220,0.42), transparent);
-  opacity: 0.95;
-}
-
-/* Badge pour les lignes "Étape X — ..." (sans changer le HTML) */
-.silver-box p > strong{
-  display: inline-block;
-  padding: 8px 12px;
-  margin: 2px 0 4px;
-  border-radius: 999px;
-  font-family: 'Cinzel', serif;
-  letter-spacing: 0.02em;
-
-  color: #1a0f05;
-  background: linear-gradient(180deg, rgba(214,167,40,0.95), rgba(214,167,40,0.68));
-  border: 1px solid rgba(255,255,255,0.20);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.45);
-}
-
-/* Exception : la note "(à lire avant...)" reste sobre et centrée */
-.silver-box .note{
-  text-align:center;
-  margin: 6px auto 10px;
-  opacity: 0.95;
-}
-.silver-box .note strong{
-  display:inline-block;
-  padding: 8px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(220,220,220,0.22);
-  background: rgba(255,255,255,0.04);
-  color: rgba(245,240,230,0.92);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.45);
-  font-family: 'Cinzel', serif;
-}
-
-/* Listes : plus propres + alignées */
-ul{
-  max-width: 960px;
-  margin: 14px auto 10px;
-  padding-left: 26px;
-  line-height: 1.7;
-}
-li{
-  margin: 8px 0;
-}
-
-/* Liens : plus “premium” sans changer la nav */
-a{
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
-a:hover{ color:#fff; }
-
-/* Mobile : conserve l’aération sans exploser l’espace */
-@media (max-width:600px){
-  :root{ --card-pad: 16px; }
-  p{ line-height: 1.72; font-size: 0.98rem; }
-  h1{ padding: 12px 12px; }
-  h2{ padding: 9px 11px; }
-  .silver-box::before{ inset: 8px; }
-}
- /* =========================================================
-   CORRECTION : plus sobre / plus élégant
-   - supprime les pastilles jaunes "moches"
-   - nav jaune => doré discret (pas de gros aplat)
-   - texte + paragraphes respirent sans grossir
-   - améliore l'affichage des "•" (wrap + aération)
-   ========================================================= */
-
-/* 1) Typo globale : on évite l'effet "gros caractères" */
-p{
-  font-size: 1rem !important;
-  line-height: 1.85 !important;
-  margin: 12px auto !important;
-  color: rgba(245,240,230,0.92) !important;
-  text-align: justify !important;
-  letter-spacing: 0.01em;
-  text-wrap: pretty;
-}
-
-/* 2) Titres : dorés mais SANS cadres flashy */
-h1{
-  border: none !important;
-  background: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  margin: 12px 0 14px !important;
-  color: rgba(245,240,230,0.96) !important;
-  text-shadow: 0 1px 0 rgba(0,0,0,0.65);
-}
-
-h2{
-  border: none !important;
-  background: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  margin: 22px auto 10px !important;
-  color: rgba(214,167,40,0.95) !important; /* doré texte */
-  text-shadow: 0 1px 0 rgba(0,0,0,0.7);
-}
-
-/* petit filet discret sous h2 (et surtout PAS de gros encart) */
-h2::after{
-  content:"";
-  display:block;
-  height: 1px;
-  margin: 10px auto 0;
-  width: min(520px, 80%);
-  background: linear-gradient(to right, transparent, rgba(214,167,40,0.38), transparent);
-}
-
-/* 3) Supprime totalement les badges jaunes sur les strong dans les paragraphes */
-.silver-box p > strong{
-  display: inline !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  border: none !important;
-  background: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  color: rgba(214,167,40,0.95) !important; /* doré élégant */
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-}
-
-/* Note "(à lire...)" : sobre */
-.silver-box .note strong{
-  border: none !important;
-  background: none !important;
-  box-shadow: none !important;
-  color: rgba(245,240,230,0.95) !important;
-  font-family: 'Cinzel', serif;
-}
-
-/* 4) La carte (silver-box) : reste chic mais sans surcouche "lourde" */
-.silver-box{
-  padding: 18px 18px !important;
-  border-radius: 14px !important;
-  border: 1px solid rgba(220,220,220,0.22) !important;
-  background: rgba(255,255,255,0.035) !important;
-  box-shadow: 0 14px 34px rgba(0,0,0,0.65) !important;
-}
-
-/* supprime le double liseré intérieur si présent */
-.silver-box::before{
-  content: none !important;
-}
-
-/* 5) "•" : tu les as mis dans des <p> (pas dans <ul><li>)
-      -> On améliore le rendu et surtout on évite l'effet pâté
-      -> MAIS: CSS ne peut pas transformer automatiquement chaque "•" en vrai retour ligne
-         si le texte source n'a pas de <br> ou <li>.
-*/
-.silver-box p{
-  word-break: normal;
-  overflow-wrap: anywhere;
-}
-
-.silver-box p:has(> strong) + p{
-  margin-top: 8px !important;
-}
-
-/* On rend les puces un peu plus visibles et espacées quand elles existent */
-.silver-box p{
-  font-variant-ligatures: common-ligatures;
-}
-.silver-box p{
-  /* espace visuel autour du caractère • quand il est collé */
-  /* (ça aide quand tu as : "... : • item ; • item ; ...") */
-  letter-spacing: 0.012em;
-}
-
-/* 6) Boutons NAV "jaune" : on enlève le gros aplat */
-.nav-strip.gold{
-  background: rgba(0,0,0,0.18) !important;              /* revient sobre */
-  border-color: rgba(214,167,40,0.45) !important;
-}
-
-.nav-btn.gold{
-  background: transparent !important;                   /* plus de jaune plein */
-  color: rgba(214,167,40,0.95) !important;              /* texte doré */
-  border-left: 1px solid rgba(214,167,40,0.22) !important;
-}
-
-.nav-btn.gold:hover{
-  background: rgba(214,167,40,0.10) !important;         /* léger doré */
-  transform: none !important;
-}
-
-/* Boutons NAV "noir" : harmonise */
-.nav-btn.dark{
-  background: rgba(0,0,0,0.36) !important;
-}
-.nav-btn.dark:hover{
-  background: rgba(255,255,255,0.06) !important;
-}
-
-/* Mobile : conserve l'air sans grossir */
-@media (max-width:600px){
-  p{ line-height: 1.78 !important; }
-  .silver-box{ padding: 14px 14px !important; }
-}
-
 </style>
 </head>
 
@@ -722,64 +451,101 @@ h2::after{
       <h2>1 — Cadre général</h2>
 
       <p>
-        L’Ordre Sacré des Neuf Templiers de Jérusalem est une association régie par la loi du 1er juillet 1901. Son activité principale est classée sous le code APE / NAF 94.99Z — « Autres organisations fonctionnant par adhésion volontaire » (classification INSEE). Ce classement constitue une catégorisation administrative/statistique de l’activité associative. Il rappelle que l’Ordre fonctionne sur la base d’une adhésion volontaire encadrée, impliquant un cadre interne structuré, des responsabilités, et une vigilance proportionnée à ses activités et à son image publique. En conséquence, la procédure d’adhésion est volontairement rigoureuse et progressive. Elle vise notamment à : • prévenir toute dérive et tout malentendu sur la nature de l’engagement ; • protéger l’Association, ses membres et le candidat ; • préserver la cohésion et le bon fonctionnement interne ; • sécuriser la gestion administrative et documentaire, conformément aux règles applicables.
+        L’Ordre Sacré des Neuf Templiers de Jérusalem est une association régie par la loi du 1er juillet 1901.
+        Son activité principale est classée sous le code APE / NAF 94.99Z — « Autres organisations fonctionnant par adhésion volontaire »
+        (classification INSEE). Ce classement constitue une catégorisation administrative/statistique de l’activité associative.
+        Il rappelle que l’Ordre fonctionne sur la base d’une adhésion volontaire encadrée, impliquant un cadre interne structuré,
+        des responsabilités, et une vigilance proportionnée à ses activités et à son image publique.
+        En conséquence, la procédure d’adhésion est volontairement rigoureuse et progressive. Elle vise notamment à :
       </p>
+
+      <ul class="bullets">
+        <li>prévenir toute dérive et tout malentendu sur la nature de l’engagement ;</li>
+        <li>protéger l’Association, ses membres et le candidat ;</li>
+        <li>préserver la cohésion et le bon fonctionnement interne ;</li>
+        <li>sécuriser la gestion administrative et documentaire, conformément aux règles applicables.</li>
+      </ul>
 
       <h2>2 — Procédure d’adhésion</h2>
 
-      <p><strong>Étape 1 — Demande en ligne (premier contact)</strong></p>
+      <p class="step-title">Étape 1 — Demande en ligne (premier contact)</p>
       <p>
-        Le candidat remplit un formulaire d’adhésion en ligne (version simplifiée) mis à disposition sur le site officiel. Sont également accessibles en ligne des statuts simplifiés, destinés à présenter au grand public le cadre général, l’objet et les principes de l’Ordre.
+        Le candidat remplit un formulaire d’adhésion en ligne (version simplifiée) mis à disposition sur le site officiel.
+        Sont également accessibles en ligne des statuts simplifiés, destinés à présenter au grand public le cadre général,
+        l’objet et les principes de l’Ordre.
       </p>
 
-      <p><strong>Étape 2 — Convocation et entretien préalable</strong></p>
+      <p class="step-title">Étape 2 — Convocation et entretien préalable</p>
       <p>
-        À l’issue de l’examen de ce premier contact, l’Ordre peut convoquer le candidat à un entretien préalable, permettant d’évaluer la compatibilité générale du candidat avec les valeurs, le cadre et le fonctionnement de l’Ordre.
+        À l’issue de l’examen de ce premier contact, l’Ordre peut convoquer le candidat à un entretien préalable,
+        permettant d’évaluer la compatibilité générale du candidat avec les valeurs, le cadre et le fonctionnement de l’Ordre.
       </p>
 
-      <p><strong>Étape 3 — Accès sécurisé et documents officiels</strong></p>
+      <p class="step-title">Étape 3 — Accès sécurisé et documents officiels</p>
       <p>
-        Si l’entretien préalable est jugé satisfaisant, un code d’accès personnel et confidentiel est remis au candidat afin d’accéder à une page sécurisée et d’y télécharger : • le dossier officiel d’adhésion ; • les statuts définitifs et documents applicables à l’adhésion.
+        Si l’entretien préalable est jugé satisfaisant, un code d’accès personnel et confidentiel est remis au candidat
+        afin d’accéder à une page sécurisée et d’y télécharger :
       </p>
+      <ul class="bullets">
+        <li>le dossier officiel d’adhésion ;</li>
+        <li>les statuts définitifs et documents applicables à l’adhésion.</li>
+      </ul>
       <p>
-        La lecture des statuts définitifs est obligatoire avant toute remise du dossier complet et avant toute validation d’adhésion. Le candidat reconnaît que son engagement suppose la compréhension et l’acceptation pleine et entière de ces textes.
-      </p>
-
-      <p><strong>Étape 4 — Second entretien et dépôt du dossier complet</strong></p>
-      <p>
-        Le candidat est convoqué à un second entretien au cours duquel il remet le dossier dûment complété ainsi que l’ensemble des pièces justificatives requises.
-      </p>
-
-      <p><strong>Étape 5 — Délibération interne et décision</strong></p>
-      <p>
-        Conformément aux règles statutaires, la décision est prise en interne par le Grand Maître, assisté d’au moins deux Commandeurs, à l’issue d’une délibération. L’admission n’est jamais automatique. En application du principe de liberté associative, l’Ordre n’est tenu à aucune obligation de motivation ou de justification de sa décision auprès du candidat.
+        La lecture des statuts définitifs est obligatoire avant toute remise du dossier complet et avant toute validation d’adhésion.
+        Le candidat reconnaît que son engagement suppose la compréhension et l’acceptation pleine et entière de ces textes.
       </p>
 
+      <p class="step-title">Étape 4 — Second entretien et dépôt du dossier complet</p>
       <p>
-        <strong>Clause de non-recours :</strong> le candidat reconnaît que l’admission au sein de l’Ordre relève d’un choix discrétionnaire. En conséquence, il s’interdit tout recours, contestation ou demande d’indemnisation, de quelque nature que ce soit, fondé sur une décision de refus, de non-suite, de suspension de procédure ou de non-admission.
+        Le candidat est convoqué à un second entretien au cours duquel il remet le dossier dûment complété ainsi que l’ensemble
+        des pièces justificatives requises.
       </p>
 
-      <p><strong>Étape 6 — Effets de la décision / cotisation</strong></p>
+      <p class="step-title">Étape 5 — Délibération interne et décision</p>
       <p>
-        • En cas d’acceptation : l’adhésion devient effective après acquittement de la cotisation annuelle, condition obligatoire de validation. • En cas de refus : si une cotisation a été versée dans le cadre de la procédure, elle est intégralement remboursée, sans retenue.
-      </p>
-
-      <p><strong>Étape 7 — Traitement administratif et conservation</strong></p>
-      <p>
-        • En cas d’acceptation : enregistrement du dossier selon les modalités internes, attribution d’un numéro de matricule / numéro d’adhérent, et mise à disposition du dossier numérisé dans un espace sécurisé à accès personnel.
+        Conformément aux règles statutaires, la décision est prise en interne par le Grand Maître, assisté d’au moins deux Commandeurs,
+        à l’issue d’une délibération. L’admission n’est jamais automatique. En application du principe de liberté associative,
+        l’Ordre n’est tenu à aucune obligation de motivation ou de justification de sa décision auprès du candidat.
       </p>
 
       <p>
-        • Restitution de l’original : à l’issue du traitement, l’intégralité du dossier papier original est restituée au candidat (puis au membre en cas d’admission). Cette restitution est obligatoire car le dossier contient plusieurs annexes essentielles, notamment des formulaires prévus pour une éventuelle désaffiliation, rétractation ou démarches administratives ultérieures. Certaines de ces annexes peuvent être pré-remplies par le membre et simplement retournées à l’Ordre en cas de besoin. L’Ordre ne conserve aucune archive papier ; seule une version numérisée est conservée dans un environnement sécurisé, accessible au candidat ou au membre via un espace personnel protégé.
+        <strong>Clause de non-recours :</strong> le candidat reconnaît que l’admission au sein de l’Ordre relève d’un choix discrétionnaire.
+        En conséquence, il s’interdit tout recours, contestation ou demande d’indemnisation, de quelque nature que ce soit, fondé sur
+        une décision de refus, de non-suite, de suspension de procédure ou de non-admission.
       </p>
 
+      <p class="step-title">Étape 6 — Effets de la décision / cotisation</p>
+      <ul class="bullets">
+        <li><strong>En cas d’acceptation :</strong> l’adhésion devient effective après acquittement de la cotisation annuelle, condition obligatoire de validation.</li>
+        <li><strong>En cas de refus :</strong> si une cotisation a été versée dans le cadre de la procédure, elle est intégralement remboursée, sans retenue.</li>
+      </ul>
+
+      <p class="step-title">Étape 7 — Traitement administratif et conservation</p>
+      <ul class="bullets">
+        <li>
+          <strong>En cas d’acceptation :</strong> enregistrement du dossier selon les modalités internes, attribution d’un numéro de matricule / numéro d’adhérent,
+          et mise à disposition du dossier numérisé dans un espace sécurisé à accès personnel.
+        </li>
+      </ul>
+
       <p>
-        • En cas de refus : traitement du dossier selon les règles de confidentialité, sans conservation inutile.
+        <strong>Restitution de l’original :</strong> à l’issue du traitement, l’intégralité du dossier papier original est restituée au candidat
+        (puis au membre en cas d’admission). Cette restitution est obligatoire car le dossier contient plusieurs annexes essentielles,
+        notamment des formulaires prévus pour une éventuelle désaffiliation, rétractation ou démarches administratives ultérieures.
+        Certaines de ces annexes peuvent être pré-remplies par le membre et simplement retournées à l’Ordre en cas de besoin.
+        L’Ordre ne conserve aucune archive papier ; seule une version numérisée est conservée dans un environnement sécurisé,
+        accessible au candidat ou au membre via un espace personnel protégé.
       </p>
+
+      <ul class="bullets">
+        <li><strong>En cas de refus :</strong> traitement du dossier selon les règles de confidentialité, sans conservation inutile.</li>
+      </ul>
 
       <h2>3 — Renouvellement annuel</h2>
       <p>
-        L’adhésion est souscrite pour une durée d’un an et est renouvelable annuellement selon les règles internes. Le dossier complet n’a pas vocation à être refait chaque année, sauf changement nécessitant une mise à jour (pièces, informations essentielles, etc.).
+        L’adhésion est souscrite pour une durée d’un an et est renouvelable annuellement selon les règles internes.
+        Le dossier complet n’a pas vocation à être refait chaque année, sauf changement nécessitant une mise à jour
+        (pièces, informations essentielles, etc.).
       </p>
     </div>
 
@@ -791,11 +557,10 @@ h2::after{
       <a class="nav-btn dark" href="contact.html">Contact</a>
     </nav>
 
-    <!-- BARRE JAUNE (comme demandé) -->
+    <!-- BARRE DORÉE SOBRE -->
     <nav class="nav-strip gold" aria-label="Navigation adhésion">
       <a class="nav-btn gold" href="adhesion.html">Adhésion</a>
       <a class="nav-btn gold" href="statut.html">Statuts</a>
-     
     </nav>
 
     <div style="height:22px;"></div>
