@@ -377,6 +377,184 @@ li{ margin:6px 0; }
   body::after{ mix-blend-mode: normal; opacity:0.02; }
   .nav-strip{ backdrop-filter:none; -webkit-backdrop-filter:none; }
 }
+ /* =========================================================
+   SURCOUCHE "AÉRÉE" (cadres or/argent + titres dorés)
+   -> CSS ONLY : aucun changement HTML/JS
+   -> à coller EN FIN de <style>
+   ========================================================= */
+
+:root{
+  --gold-strong: rgba(214,167,40,0.95);
+  --gold-soft: rgba(214,167,40,0.35);
+  --silver-strong: rgba(235,235,235,0.28);
+  --ink-soft: rgba(245,240,230,0.92);
+
+  --card-pad: 22px;
+  --card-radius: 18px;
+  --card-gap: 18px;
+}
+
+/* Lisibilité générale */
+.container{
+  max-width: 1040px;         /* garde le centrage mais évite l'effet "bloc énorme" */
+  margin: 0 auto;
+  padding: 0 6px;
+}
+
+p{
+  font-size: 1.02rem;
+  line-height: 1.78;
+  margin: 14px auto;
+  color: var(--ink-soft);
+  text-align: justify;
+  hyphens: auto;
+  text-rendering: optimizeLegibility;
+}
+
+/* Titre principal : doré + encadrement fin + respiration */
+h1{
+  margin: 16px 0 18px;
+  padding: 14px 16px;
+  max-width: 960px;
+  border-radius: 16px;
+  border: 1px solid rgba(214,167,40,0.55);
+  background: linear-gradient(180deg, rgba(214,167,40,0.10), rgba(0,0,0,0.20));
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(255,255,255,0.06) inset;
+  letter-spacing: 0.08em;
+
+  /* effet doré (sans images) */
+  background-clip: padding-box;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.65);
+}
+
+/* Sous-titres : dorés + filet + séparation claire */
+h2{
+  margin: 26px auto 12px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  max-width: 960px;
+
+  color: var(--gold-strong);
+  background: linear-gradient(180deg, rgba(214,167,40,0.08), rgba(255,255,255,0.02));
+  border: 1px solid rgba(214,167,40,0.28);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.45);
+}
+
+h2::after{
+  content:"";
+  display:block;
+  height: 1px;
+  margin: 10px auto 0;
+  width: min(560px, 86%);
+  background: linear-gradient(to right, transparent, rgba(214,167,40,0.55), transparent);
+}
+
+/* Carte principale (silver-box) : plus "luxe", plus aérée */
+.silver-box{
+  position: relative;
+  width: 100%;
+  max-width: 980px;
+  margin: 14px auto 10px;
+  padding: var(--card-pad);
+  border-radius: var(--card-radius);
+
+  /* argent + profondeur */
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.10)),
+    radial-gradient(circle at top, rgba(255,255,255,0.05), rgba(0,0,0,0.42)),
+    var(--silver-bg);
+
+  border: 1px solid rgba(235,235,235,0.22);
+  box-shadow:
+    0 18px 42px rgba(0,0,0,0.68),
+    0 0 0 1px rgba(214,167,40,0.16) inset;
+}
+
+/* Double liseré (or fin) autour de la carte */
+.silver-box::before{
+  content:"";
+  position:absolute;
+  inset: 10px;
+  border-radius: calc(var(--card-radius) - 8px);
+  border: 1px solid rgba(214,167,40,0.22);
+  pointer-events:none;
+}
+
+/* Respiration interne (évite l'effet "cafuillon") */
+.silver-box p{
+  max-width: 960px;
+  margin: 14px auto;
+}
+
+.silver-sep{
+  height:1px;
+  width:min(680px, 78%);
+  margin: 18px auto;
+  background: linear-gradient(to right, transparent, rgba(220,220,220,0.42), transparent);
+  opacity: 0.95;
+}
+
+/* Badge pour les lignes "Étape X — ..." (sans changer le HTML) */
+.silver-box p > strong{
+  display: inline-block;
+  padding: 8px 12px;
+  margin: 2px 0 4px;
+  border-radius: 999px;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.02em;
+
+  color: #1a0f05;
+  background: linear-gradient(180deg, rgba(214,167,40,0.95), rgba(214,167,40,0.68));
+  border: 1px solid rgba(255,255,255,0.20);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.45);
+}
+
+/* Exception : la note "(à lire avant...)" reste sobre et centrée */
+.silver-box .note{
+  text-align:center;
+  margin: 6px auto 10px;
+  opacity: 0.95;
+}
+.silver-box .note strong{
+  display:inline-block;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(220,220,220,0.22);
+  background: rgba(255,255,255,0.04);
+  color: rgba(245,240,230,0.92);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.45);
+  font-family: 'Cinzel', serif;
+}
+
+/* Listes : plus propres + alignées */
+ul{
+  max-width: 960px;
+  margin: 14px auto 10px;
+  padding-left: 26px;
+  line-height: 1.7;
+}
+li{
+  margin: 8px 0;
+}
+
+/* Liens : plus “premium” sans changer la nav */
+a{
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+a:hover{ color:#fff; }
+
+/* Mobile : conserve l’aération sans exploser l’espace */
+@media (max-width:600px){
+  :root{ --card-pad: 16px; }
+  p{ line-height: 1.72; font-size: 0.98rem; }
+  h1{ padding: 12px 12px; }
+  h2{ padding: 9px 11px; }
+  .silver-box::before{ inset: 8px; }
+}
+ 
 </style>
 </head>
 
