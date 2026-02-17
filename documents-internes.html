@@ -111,6 +111,37 @@
       -webkit-overflow-scrolling:touch;
       z-index:1;
     }
+.menu-dot{
+  position: fixed;
+  right: 26px;
+  top: calc(26px + env(safe-area-inset-top));
+  z-index: 100;
+  pointer-events: auto;
+
+  width: 46px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+
+  border-radius: 999px;
+  border: 1px solid rgba(214,167,40,0.55);
+  background: rgba(0,0,0,0.22);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+
+  font-family:'Cinzel',serif;
+  color: #d6a728;
+  font-size: 22px;
+  line-height: 1;
+
+  text-decoration: none;
+  user-select: none;
+}
+
+.menu-dot:hover{
+  background: rgba(214,167,40,0.12);
+  color:#fff;
+}
 
     /* ✅ Menu 3 points */
     .top-menu{
@@ -687,17 +718,8 @@
 
   <div class="frame-fixed" aria-hidden="true"></div>
 
-  <div class="top-menu" aria-label="Menu documents internes">
-    <details>
-      <summary title="Menu">⋯</summary>
-      <div class="menu-panel" role="menu" aria-label="Navigation interne">
-        <a href="#organisation"> Vie de l'association </a>
-        <a href="#etudes"> Études</a>
-        <a href="#contacts"> Contacts</a>
-        <a href="#archives"> Archives</a>
-        <a href="administration.html">🔒 Administration</a>
-        <a href="index.html">← Retour site public</a>
-      </div>
+  <a class="menu-dot" href="menu.html" title="Menu" aria-label="Menu">⋯</a>
+
     </details>
   </div>
 
@@ -1165,6 +1187,24 @@ if (list){
   }
 }
   </script>
+<script>
+(function(){
+  try{
+    sessionStorage.setItem("osd_prev_page", location.href);
+  }catch(e){}
+
+  document.addEventListener("click", function(e){
+    const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if(!a) return;
+    const href = a.getAttribute("href") || "";
+    if(href.includes("menu.html")){
+      try{
+        sessionStorage.setItem("osd_prev_page", location.href);
+      }catch(err){}
+    }
+  }, true);
+})();
+</script>
 
 </body>
 </html>
