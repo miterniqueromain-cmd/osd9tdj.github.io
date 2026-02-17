@@ -1,40 +1,32 @@
-/* osd.js — OSD9TDJ
-   - Musique de fond: aléatoire, boucle, nouvelle musique à chaque page
-   - Démarrage robuste: tente autoplay immédiat (muted) puis son au 1er geste
-   - Son d'épée: au clic/tap sur toutes les pages
-   - N'écrase/supprime aucun autre son déjà présent dans tes pages
+/* osd.js — Playlist OSD9TDJ (5 musiques) + épée au clic
+   - Musiques: lecture dans l’ordre, passe à la suivante à la fin, boucle playlist
+   - Changement de page: passe à la musique suivante
+   - Démarrage robuste: tente autoplay (muted), son activé au 1er clic
+   - Épée: uniquement sur "click" (pas pendant scroll)
+   - N'affecte pas les autres sons présents sur tes pages
 */
 (() => {
   "use strict";
 
-  // === CONFIG (racine du site) ===
+  // ===== CONFIG =====
   const TRACKS = [
     "/charlvera-guardian-of-the-holy-land-epic-background-music-for-video-206639.mp3",
     "/charlvera-knight-of-the-sacred-order-epic-background-music-for-video-206650.mp3",
     "/charlvera-legends-of-the-iron-cross_-a-symphony-of-war-and-glory-472348.mp3",
     "/deuslower-fantasy-medieval-epic-music-239599.mp3",
-    "/fideascende-crux-invicta-325224.mp3",
+    "/fideascende-crux-invicta-325224.mp3"
   ];
 
-  // Son épée (d'après ton menu.html)
   const SWORD_SRC = "/sons/epee.mp3";
 
-  // Volumes
-  const BGM_VOLUME = 0.40;   // volume musique de fond
-  const SWORD_VOLUME = 0.90; // volume épée
-
-  // Anti-répétition "très aléatoire"
-  const HISTORY_SIZE = 4; // évite de rejouer les 4 derniers titres
+  const BGM_VOLUME = 0.40;
+  const SWORD_VOLUME = 0.90;
 
   // sessionStorage keys (par onglet)
-  const K_LAST = "osd_bgm_last";
-  const K_HIST = "osd_bgm_hist";
-  const K_UNLOCKED = "osd_audio_unlocked";
+  const K_INDEX = "osd_playlist_index";     // index de la musique courante
+  const K_UNLOCKED = "osd_audio_unlocked";  // audio autorisé (après geste utilisateur)
 
-  function safeParse(json, fallback) {
-    try { return JSON.parse(json); } catch { return fallback; }
-  }
-
+  // ===== UTIL =====
   function ensureAudioEl(id) {
     let el = document.getElementById(id);
     if (!el) {
@@ -42,53 +34,58 @@
       el.id = id;
       el.preload = "auto";
       el.playsInline = true;
-      // Important: ne pas afficher
       el.style.display = "none";
       document.body.appendChild(el);
     }
     return el;
   }
 
-  function pickTrack() {
-    const last = sessionStorage.getItem(K_LAST) || "";
-    const hist = safeParse(sessionStorage.getItem(K_HIST) || "[]", []);
-    const banned = new Set([last, ...hist].filter(Boolean));
-
-    let candidates = TRACKS.filter(t => !banned.has(t));
-    if (candidates.length === 0) candidates = TRACKS.slice();
-
-    const chosen = candidates[Math.floor(Math.random() * candidates.length)] || TRACKS[0];
-
-    // update history
-    const newHist = [chosen, ...hist.filter(t => t !== chosen)].slice(0, HISTORY_SIZE);
-    sessionStorage.setItem(K_LAST, chosen);
-    sessionStorage.setItem(K_HIST, JSON.stringify(newHist));
-
-    return chosen;
+  function getIndex() {
+    try {
+      const raw = sessionStorage.getItem(K_INDEX);
+      const n = raw == null ? 0 : parseInt(raw, 10);
+      return Number.isFinite(n) ? ((n % TRACKS.length) + TRACKS.length) % TRACKS.length : 0;
+    } catch {
+      return 0;
+    }
   }
 
-  // ---- Elements audio ----
+  function setIndex(n) {
+    try { sessionStorage.setItem(K_INDEX, String(n)); } catch {}
+  }
+
+  function nextIndex(current) {
+    return (current + 1) % TRACKS.length;
+  }
+
+  function markUnlocked() {
+    try { sessionStorage.setItem(K_UNLOCKED, "1"); } catch {}
+  }
+
+  function isUnlocked() {
+    try { return sessionStorage.getItem(K_UNLOCKED) === "1"; } catch { return false; }
+  }
+
+  // ===== AUDIO ELEMENTS =====
   const bgm = ensureAudioEl("osd_bgm");
-  bgm.loop = true;
   bgm.volume = BGM_VOLUME;
+  bgm.loop = false; // on gère la boucle playlist nous-mêmes
 
   const sword = ensureAudioEl("osd_sword");
   sword.src = SWORD_SRC;
   sword.volume = SWORD_VOLUME;
 
-  function setBgmSrc(src) {
-    // src doit être absolu ("/xxx.mp3")
-    if (!src) return;
-    if (bgm.getAttribute("data-track") === src) return;
-    bgm.setAttribute("data-track", src);
+  // ===== PLAYLIST LOGIC =====
+  let currentTrackIndex = getIndex();
+
+  function loadTrack(i) {
+    currentTrackIndex = ((i % TRACKS.length) + TRACKS.length) % TRACKS.length;
+    const src = TRACKS[currentTrackIndex];
     bgm.src = src;
+    bgm.setAttribute("data-track-index", String(currentTrackIndex));
   }
 
-  async function tryPlayBgm({ mutedStart } = { mutedStart: false }) {
-    const chosen = pickTrack();
-    setBgmSrc(chosen);
-
-    // stratégie: démarrer muted si demandé (passe souvent sans geste utilisateur)
+  async function playCurrent({ mutedStart } = { mutedStart: false }) {
     bgm.muted = !!mutedStart;
 
     try {
@@ -100,50 +97,51 @@
     }
   }
 
-  function markUnlocked() {
-    sessionStorage.setItem(K_UNLOCKED, "1");
-    // Une fois “unlock”, on remet le son
-    bgm.muted = false;
-    bgm.volume = BGM_VOLUME;
+  async function startOnThisPage() {
+    // À CHAQUE PAGE: on joue la musique courante,
+    // et on prépare la suivante pour le prochain changement de page.
+    loadTrack(currentTrackIndex);
+
+    const unlocked = isUnlocked();
+
+    // Démarrage robuste:
+    // - si unlocked -> tente en son
+    // - sinon -> tente muted (autoplay)
+    const ok = await playCurrent({ mutedStart: !unlocked });
+
+    // prépare la musique suivante pour la prochaine page
+    setIndex(nextIndex(currentTrackIndex));
+
+    // si ok et unlocked, on s’assure que ce n’est pas muted
+    if (ok && unlocked) bgm.muted = false;
   }
 
-  // 1) Démarrage au chargement (tentative)
-  // - si déjà unlocked dans cette session, on tente direct en son
-  // - sinon on tente en muted (robuste)
-  async function startOnLoad() {
-    const unlocked = sessionStorage.getItem(K_UNLOCKED) === "1";
+  // Quand une musique finit: passe à la suivante (playlist) et continue.
+  bgm.addEventListener("ended", async () => {
+    const i = nextIndex(currentTrackIndex);
+    loadTrack(i);
 
-    if (unlocked) {
-      const ok = await tryPlayBgm({ mutedStart: false });
-      if (!ok) {
-        // fallback : muted (certains contextes)
-        await tryPlayBgm({ mutedStart: true });
-      }
-    } else {
-      // tentative “sans action” la plus fiable
-      const okMuted = await tryPlayBgm({ mutedStart: true });
-      // si par miracle le navigateur autorise l'audio en son sans geste, on peut tester
-      if (!okMuted) {
-        // rien, on attendra l’unlock par geste utilisateur
-      }
-    }
-  }
+    const unlocked = isUnlocked();
+    const ok = await playCurrent({ mutedStart: !unlocked });
 
-  // 2) Déverrouillage sur premier geste utilisateur (met le son + relance si besoin)
+    // on maintient aussi l'index "page suivante" cohérent
+    setIndex(nextIndex(i));
+
+    if (ok && unlocked) bgm.muted = false;
+  });
+
+  // ===== UNLOCK (1er geste utilisateur) =====
   async function unlockAudio() {
     markUnlocked();
+    bgm.muted = false;
 
-    // Si la musique tourne déjà (muted), on passe en son
-    if (!bgm.paused) {
-      bgm.muted = false;
-      return;
+    // si la musique ne joue pas (autoplay bloqué), on relance
+    if (bgm.paused) {
+      await playCurrent({ mutedStart: false });
     }
-
-    // Sinon on relance en son
-    await tryPlayBgm({ mutedStart: false });
   }
 
-  // 3) Son d'épée au clic/tap (sur toutes les pages)
+  // ===== ÉPÉE: UNIQUEMENT SUR CLICK (pas scroll) =====
   function playSword() {
     try {
       sword.currentTime = 0;
@@ -152,35 +150,34 @@
     } catch {}
   }
 
-  // ---- Hooks ----
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", startOnLoad, { once: true });
-  } else {
-    startOnLoad();
-  }
-
-  // Pointerdown + keydown: unlock + épée
-  const onFirstUserGesture = async () => {
-    await unlockAudio();
-    // on retire seulement l’unlock “one-shot”, mais on garde épée sur chaque clic via un autre listener
-    document.removeEventListener("pointerdown", onFirstUserGesture, true);
-    document.removeEventListener("keydown", onFirstUserGesture, true);
-  };
-  document.addEventListener("pointerdown", onFirstUserGesture, true);
-  document.addEventListener("keydown", onFirstUserGesture, true);
-
-  // Épée à chaque clic/tap (capture pour passer même si stopPropagation)
-  document.addEventListener("pointerdown", () => {
-    // si l'audio n'est pas encore unlock, ce clic servira aussi à unlock via listener ci-dessus
+  // Click = action réelle (sur mobile, scroll ne déclenche pas click)
+  document.addEventListener("click", (e) => {
+    if (!e.isTrusted) return;
     playSword();
   }, true);
 
-  // Si on revient sur l’onglet et que la musique est stoppée, on relance (muted si pas unlock)
+  // Premier geste utilisateur: unlock audio (click + keydown)
+  const firstGesture = async () => {
+    await unlockAudio();
+    document.removeEventListener("click", firstGesture, true);
+    document.removeEventListener("keydown", firstGesture, true);
+  };
+  document.addEventListener("click", firstGesture, true);
+  document.addEventListener("keydown", firstGesture, true);
+
+  // Relance au chargement
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startOnThisPage, { once: true });
+  } else {
+    startOnThisPage();
+  }
+
+  // Si on revient sur l’onglet et que ça s’est stoppé, on relance
   document.addEventListener("visibilitychange", async () => {
     if (document.hidden) return;
     if (!bgm.paused) return;
-    const unlocked = sessionStorage.getItem(K_UNLOCKED) === "1";
-    await tryPlayBgm({ mutedStart: !unlocked });
+    const unlocked = isUnlocked();
+    await playCurrent({ mutedStart: !unlocked });
     if (unlocked) bgm.muted = false;
   });
 
