@@ -41,33 +41,17 @@
     "areaServed": "Worldwide",
     "nonprofitStatus": "NonProfit",
     "description": "L’Ordre Sacré des Neuf Templiers de Jérusalem (OSD9TDJ) est une association indépendante, régie par la loi française du 1er juillet 1901, à but non lucratif et à vocation internationale.\n\nPorté depuis la France et ouvert au monde, l’OSD9TDJ s’inscrit dans la continuité spirituelle, culturelle et symbolique de la chevalerie templière, entendue non comme une survivance historique figée, mais comme une voie vivante de transmission, d’engagement et de service. Il rassemble aujourd’hui une communauté structurée, fraternelle et en constante croissance, réunissant des femmes et des hommes animés par la recherche de sens, l’élévation personnelle et l’action juste.\n\nPar sa vocation éducative, culturelle et caritative, l’Ordre agit dans un but d’intérêt général et inscrit son action au service du bien commun et de l’utilité publique. Il développe des actions de transmission, de solidarité et d’accompagnement, notamment auprès de personnes en difficulté et de jeunes en manque de repères, en leur proposant un cadre structurant fondé sur les valeurs de responsabilité, de fraternité, de discipline intérieure et d’engagement.\n\nL’OSD9TDJ se définit comme un ordre initiatique et chevaleresque contemporain. À travers un parcours progressif, symbolique et pédagogique, il invite chacun de ses membres à un travail sur soi, à la rectitude morale, à la connaissance, et à la mise en pratique concrète des valeurs transmises. Cette démarche initiatique vise à former des êtres responsables, conscients et engagés, capables de servir la société avec justesse et discernement.\n\nLes activités de l’Ordre s’inscrivent dans une démarche conforme aux principes de l’Économie Sociale et Solidaire, plaçant l’humain, la solidarité, la transmission, l’engagement citoyen et l’utilité sociale au cœur de son action. L’OSD9TDJ privilégie une gouvernance claire, une gestion désintéressée et une action durable, orientée vers le long terme et le bien commun.\n\nDans le langage courant, l’Ordre Sacré des Neuf Templiers de Jérusalem peut être qualifié d’organisation non gouvernementale au sens éthique et associatif du terme, en raison de son indépendance, de son engagement éducatif, culturel et caritatif, ainsi que de ses actions de coopération et de transmission à l’échelle internationale.\n\nÀ titre de précision, l’OSD9TDJ ne bénéficie pas d’une reconnaissance juridique spécifique d’utilité publique ou de statut officiel d’organisme de l’ESS au sens strict du droit français.",
-    "disambiguatingDescription": "ONG : qualificatif au sens éthique et associatif (langage courant), sans constituer un statut juridique. ESS : démarche conforme aux principes, sans statut officiel d’organisme de l’ESS. Utilité publique : au sens de l’action et de l’intérêt général, sans reconnaissance juridique spécifique.",
-    "about": [
-      { "@type": "Thing", "name": "Ordre templier contemporain" },
-      { "@type": "Thing", "name": "Ordre initiatique" },
-      { "@type": "Thing", "name": "Chevalerie moderne" },
-      { "@type": "Thing", "name": "Transmission de valeurs" },
-      { "@type": "Thing", "name": "Accompagnement des jeunes en manque de repères" },
-      { "@type": "Thing", "name": "Intérêt général" },
-      { "@type": "Thing", "name": "Utilité sociale" },
-      { "@type": "Thing", "name": "Économie Sociale et Solidaire (principes)" },
-      { "@type": "Thing", "name": "Organisation non gouvernementale (sens éthique et associatif)" },
-      { "@type": "Thing", "name": "Hugues de Payns (référence historique templière)" },
-      { "@type": "Thing", "name": "Les neuf premiers fondateurs (référence historique templière)" }
-    ]
+    "disambiguatingDescription": "ONG : qualificatif au sens éthique et associatif (langage courant), sans constituer un statut juridique. ESS : démarche conforme aux principes, sans statut officiel d’organisme de l’ESS. Utilité publique : au sens de l’action et de l’intérêt général, sans reconnaissance juridique spécifique."
   }
   </script>
 
-  <!-- Polices Google -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
   :root {
     --or: #ffd700;
     --clair: #fdf7e5;
-
-    /* ✅ hauteur bar top (anti chevauchement) */
-    --topBarH: 78px; /* PC par défaut */
+    --topBarH: 78px;
   }
 
   html, body{
@@ -111,7 +95,7 @@
     z-index:1;
   }
 
-  /* ✅ BARRE TRADUCTION (AU-DESSUS DE TOUT) */
+  /* ✅ BARRE LANGUE (SANS TEXTE / SANS ICONE) + ⋯ À DROITE DEDANS */
   .translate-bar{
     position: fixed;
     top: 22px;
@@ -122,10 +106,8 @@
     max-width: 980px;
 
     display:flex;
-    flex-wrap:wrap;
-    gap:10px;
     align-items:center;
-    justify-content:flex-start;
+    gap:10px;
 
     padding: 10px 10px;
     border-radius: 16px;
@@ -135,25 +117,17 @@
     box-sizing: border-box;
   }
 
-  .translate-bar .tlabel{
-    font-family:'Cinzel',serif;
-    font-weight:700;
-    color:rgba(253,247,229,0.92);
-    font-size:0.92rem;
-    white-space:nowrap;
-    margin-left: 2px;
-  }
-
+  /* bloc gauche (boutons + select + traduire) */
   .translate-bar .grow{
     flex: 1 1 auto;
-    min-width: 240px;
+    min-width: 0;
     display:flex;
-    gap:10px;
     align-items:center;
+    gap:10px;
     flex-wrap:wrap;
   }
 
-  /* ✅ FIX drapeaux Windows/PC : police emoji forcée */
+  /* ✅ FIX drapeaux Windows/PC */
   .flag{
     font-family: "Segoe UI Emoji","Segoe UI Symbol","Apple Color Emoji","Noto Color Emoji", sans-serif;
     font-size: 1.05em;
@@ -181,10 +155,6 @@
     line-height:1;
   }
 
-  .translate-bar select{
-    max-width: min(92vw, 420px);
-  }
-
   .translate-bar button:hover,
   .translate-bar a.menu-dot:hover,
   .translate-bar .quick button:hover{
@@ -204,14 +174,13 @@
     gap:6px;
   }
 
-  .translate-bar .right{
-    margin-left:auto;
-    display:flex;
-    align-items:center;
-    gap:8px;
+  .translate-bar select{
+    max-width: min(92vw, 420px);
   }
 
+  /* ✅ ⋯ intégré et isolé à droite (pas de chevauchement) */
   .translate-bar a.menu-dot{
+    flex: 0 0 auto;
     width:46px;
     height:34px;
     padding:0;
@@ -219,6 +188,7 @@
     background: rgba(0,0,0,0.22);
     box-shadow: 0 6px 16px rgba(0,0,0,0.35);
     backdrop-filter: blur(6px);
+    margin-left: auto;
   }
 
   .overlay {
@@ -241,7 +211,6 @@
     overflow: hidden;
     border: 1px solid rgba(255, 215, 0, 0.6);
     backdrop-filter: blur(6px);
-
     max-width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -388,7 +357,7 @@
       0 8px 18px rgba(0,0,0,0.55);
   }
 
-  /* ✅ MOBILE : barre langue coulissante (1 ligne) + plus compacte */
+  /* ✅ MOBILE : barre langue coulissante (1 ligne) */
   @media (max-width: 480px) {
     :root{ --topBarH: 110px; }
 
@@ -406,7 +375,6 @@
       width: calc(100% - 40px);
       padding: 8px 8px;
 
-      /* ✅ devient une ligne scrollable */
       flex-wrap: nowrap;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
@@ -415,10 +383,8 @@
     }
     .translate-bar::-webkit-scrollbar{ display:none; }
 
-    .translate-bar .tlabel{ font-size:0.86rem; }
     .translate-bar .grow{
       flex-wrap: nowrap;
-      min-width: 0;
       gap:8px;
     }
     .translate-bar .quick{ flex-wrap: nowrap; gap:6px; }
@@ -443,12 +409,9 @@
     }
   }
 
-  /* ✅ TABLETTE */
   @media (min-width: 481px) and (max-width: 1024px){
     :root{ --topBarH: 96px; }
   }
-
-  /* ✅ PC */
   @media (min-width: 1025px){
     :root{ --topBarH: 78px; }
   }
@@ -461,13 +424,10 @@
 
 <body>
 
-  <!-- ✅ Cadre fixe -->
   <div class="frame-fixed" aria-hidden="true"></div>
 
-  <!-- ✅ Barre traduction + boutons rapides + ⋯ intégré -->
+  <!-- ✅ Barre traduction (sans texte ni icône) + ⋯ intégré -->
   <div class="translate-bar" aria-label="Traduction du site">
-    <div class="tlabel"><span class="flag">🌍</span> Autre langue</div>
-
     <div class="grow">
       <div class="quick" aria-label="Traduction rapide">
         <button type="button" class="quickLang" data-lang="en"><span class="flag">🇬🇧</span>&nbsp;EN</button>
@@ -476,8 +436,8 @@
         <button type="button" class="quickLang" data-lang="de"><span class="flag">🇩🇪</span>&nbsp;DE</button>
       </div>
 
-      <select id="langSelect" aria-label="Choisir une langue">
-        <!-- ✅ sans texte visible du tout (zero-width space) -->
+      <select id="langSelect" aria-label="Langue">
+        <!-- ✅ SANS TEXTE DU TOUT -->
         <option value="" selected disabled>&#8203;</option>
 
         <option value="af">🇿🇦 Afrikaans</option>
@@ -524,68 +484,29 @@
         <option value="ga">🇮🇪 Irish (Gaeilge)</option>
         <option value="it">🇮🇹 Italian (Italiano)</option>
         <option value="ja">🇯🇵 Japanese (日本語)</option>
-        <option value="jv">🇮🇩 Javanese</option>
         <option value="kn">🇮🇳 Kannada (ಕನ್ನಡ)</option>
-        <option value="kk">🇰🇿 Kazakh (Қазақша)</option>
-        <option value="km">🇰🇭 Khmer (ខ្មែរ)</option>
-        <option value="rw">🇷🇼 Kinyarwanda</option>
         <option value="ko">🇰🇷 Korean (한국어)</option>
-        <option value="ku">🌐 Kurdish</option>
-        <option value="ky">🇰🇬 Kyrgyz (Кыргызча)</option>
-        <option value="lo">🇱🇦 Lao (ລາວ)</option>
         <option value="la">🌐 Latin</option>
         <option value="lv">🇱🇻 Latvian (Latviešu)</option>
         <option value="lt">🇱🇹 Lithuanian (Lietuvių)</option>
-        <option value="lb">🇱🇺 Luxembourgish (Lëtzebuergesch)</option>
-        <option value="mk">🇲🇰 Macedonian (Македонски)</option>
-        <option value="mg">🇲🇬 Malagasy</option>
         <option value="ms">🇲🇾 Malay (Bahasa Melayu)</option>
-        <option value="ml">🇮🇳 Malayalam (മലയാളം)</option>
-        <option value="mt">🇲🇹 Maltese (Malti)</option>
-        <option value="mi">🇳🇿 Maori</option>
-        <option value="mr">🇮🇳 Marathi (मराठी)</option>
-        <option value="mn">🇲🇳 Mongolian (Монгол)</option>
-        <option value="my">🇲🇲 Myanmar (မြန်မာ)</option>
-        <option value="ne">🇳🇵 Nepali (नेपाली)</option>
         <option value="no">🇳🇴 Norwegian (Norsk)</option>
-        <option value="or">🇮🇳 Odia (ଓଡ଼ିଆ)</option>
-        <option value="ps">🇦🇫 Pashto (پښتو)</option>
         <option value="fa">🇮🇷 Persian (فارسی)</option>
         <option value="pl">🇵🇱 Polish (Polski)</option>
         <option value="pt">🇵🇹 Portuguese (Português)</option>
-        <option value="pa">🇮🇳 Punjabi (ਪੰਜਾਬੀ)</option>
         <option value="ro">🇷🇴 Romanian (Română)</option>
         <option value="ru">🇷🇺 Russian (Русский)</option>
-        <option value="sm">🇼🇸 Samoan</option>
-        <option value="gd">🏴 Scots Gaelic</option>
         <option value="sr">🇷🇸 Serbian (Српски)</option>
-        <option value="st">🇱🇸 Sesotho</option>
-        <option value="sn">🇿🇼 Shona</option>
-        <option value="sd">🇵🇰 Sindhi (سنڌي)</option>
-        <option value="si">🇱🇰 Sinhala (සිංහල)</option>
         <option value="sk">🇸🇰 Slovak (Slovenčina)</option>
         <option value="sl">🇸🇮 Slovenian (Slovenščina)</option>
-        <option value="so">🇸🇴 Somali</option>
         <option value="es">🇪🇸 Spanish (Español)</option>
-        <option value="su">🇮🇩 Sundanese</option>
-        <option value="sw">🇰🇪 Swahili (Kiswahili)</option>
         <option value="sv">🇸🇪 Swedish (Svenska)</option>
-        <option value="tl">🇵🇭 Tagalog</option>
-        <option value="tg">🇹🇯 Tajik (Тоҷикӣ)</option>
-        <option value="ta">🇮🇳 Tamil (தமிழ்)</option>
-        <option value="tt">🇷🇺 Tatar</option>
-        <option value="te">🇮🇳 Telugu (తెలుగు)</option>
         <option value="th">🇹🇭 Thai (ไทย)</option>
         <option value="tr">🇹🇷 Turkish (Türkçe)</option>
-        <option value="tk">🇹🇲 Turkmen</option>
         <option value="uk">🇺🇦 Ukrainian (Українська)</option>
         <option value="ur">🇵🇰 Urdu (اردو)</option>
-        <option value="ug">🇨🇳 Uyghur</option>
-        <option value="uz">🇺🇿 Uzbek (O‘zbek)</option>
         <option value="vi">🇻🇳 Vietnamese (Tiếng Việt)</option>
         <option value="cy">🏴 Welsh (Cymraeg)</option>
-        <option value="xh">🇿🇦 Xhosa</option>
-        <option value="yi">🌐 Yiddish</option>
         <option value="yo">🇳🇬 Yoruba</option>
         <option value="zu">🇿🇦 Zulu</option>
       </select>
@@ -593,12 +514,9 @@
       <button id="translateBtn" type="button" title="Ouvrir la page traduite">Traduire</button>
     </div>
 
-    <div class="right">
-      <a class="menu-dot" href="menu.html" title="Menu">⋯</a>
-    </div>
+    <a class="menu-dot" href="menu.html" title="Menu">⋯</a>
   </div>
 
-  <!-- ✅ Tout défile dedans -->
   <div class="viewport-scroll">
     <div class="overlay">
 
