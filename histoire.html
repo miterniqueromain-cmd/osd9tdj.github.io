@@ -121,90 +121,38 @@
       -webkit-overflow-scrolling: touch;
       z-index: 1;
     }
-.menu-dot{
-  position: fixed;
-  right: 26px;
-  top: calc(26px + env(safe-area-inset-top));
-  z-index: 100;
-  pointer-events: auto;
 
-  width: 46px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-
-  border-radius: 999px;
-  border: 1px solid rgba(214,167,40,0.55);
-  background: rgba(0,0,0,0.22);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-
-  font-family:'Cinzel',serif;
-  color: #d6a728;
-  font-size: 22px;
-  line-height: 1;
-
-  text-decoration: none;
-  user-select: none;
-}
-
-.menu-dot:hover{
-  background: rgba(214,167,40,0.12);
-  color:#fff;
-}
-
-    /* ✅ Menu 3 points */
-    .top-menu{
+    /* ✅ BOUTON MENU (⋯) */
+    .menu-dot{
       position: fixed;
-      top: 26px;
       right: 26px;
-      z-index: 60;
+      top: calc(26px + env(safe-area-inset-top));
+      z-index: 100;
       pointer-events: auto;
-    }
-    .top-menu details{ position: relative; }
-    .top-menu summary{
-      list-style: none;
-      cursor: pointer;
-      user-select: none;
+
       width: 46px;
       height: 34px;
       display: grid;
       place-items: center;
+
       border-radius: 999px;
       border: 1px solid rgba(214,167,40,0.55);
       background: rgba(0,0,0,0.22);
       backdrop-filter: blur(6px);
       box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+
       font-family:'Cinzel',serif;
-      color: var(--or);
+      color: #d6a728;
       font-size: 22px;
       line-height: 1;
+
+      text-decoration: none;
+      user-select: none;
     }
-    .top-menu summary::-webkit-details-marker{ display:none; }
-    .menu-panel{
-      position: absolute;
-      right: 0;
-      margin-top: 10px;
-      width: 260px;
-      max-width: calc(100vw - 60px);
-      border-radius: 14px;
-      border: 1px solid rgba(214,167,40,0.45);
-      background: rgba(0,0,0,0.70);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.55);
-      overflow: hidden;
+    .menu-dot:hover{
+      background: rgba(214,167,40,0.12);
+      color:#fff;
     }
-    .menu-panel a{
-      display:block;
-      padding: 11px 12px;
-      text-decoration:none;
-      color: rgba(248,232,200,0.92);
-      font-family:'Cinzel',serif;
-      font-weight:700;
-      font-size: 0.92rem;
-      border-bottom: 1px solid rgba(214,167,40,0.18);
-    }
-    .menu-panel a:hover{ background: rgba(214,167,40,0.12); color: #fff; }
-    .menu-panel a:last-child{ border-bottom: none; }
 
     /* ================== TON CSS EXISTANT (inchangé) ================== */
 
@@ -214,8 +162,7 @@
       padding:26px 16px 60px;
     }
 
-    /* ✅ HERO (MODIF DEMANDÉE) :
-       - même logique que ta page où ça marche (hero-box)
+    /* ✅ HERO :
        - l'affiche (portrait) s'affiche ENTIÈRE
        - double cadre conservé
     */
@@ -250,8 +197,8 @@
       display:block;
       width:100%;
       max-width:100%;
-      height:auto;           /* ✅ affiche entière */
-      position:relative;     /* ✅ pas en absolute */
+      height:auto;
+      position:relative;
       z-index:1;
     }
 
@@ -317,6 +264,18 @@
       border-radius:18px;
       padding:18px 18px 6px;
       box-shadow:0 0 18px rgba(0,0,0,0.7);
+    }
+
+    /* ✅ Liens dans le contenu (plus de bleu/violet) */
+    .panel a,
+    .panel a:visited{
+      color: var(--clair);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .panel a:hover{
+      color:#fff;
+      opacity:0.95;
     }
 
     h2{
@@ -438,13 +397,15 @@
       h2{font-size:1.12rem;}
       h3{font-size:1.02rem;}
       .tab{padding:9px 14px; font-size:0.86rem;}
-      .top-menu{ top:22px; right:22px; }
-      .menu-panel{ width: 240px; }
       .frame-fixed{
         inset: calc(12px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left));
       }
       .viewport-scroll{
         inset: calc(20px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left));
+      }
+      .menu-dot{
+        right:22px;
+        top: calc(22px + env(safe-area-inset-top));
       }
     }
 
@@ -504,11 +465,8 @@
     <div class="lys br">⚜️</div>
   </div>
 
-  <!-- ✅ Menu 3 points (toutes les pages) -->
- <a class="menu-dot" href="menu.html" title="Menu" aria-label="Menu">⋯</a>
-
-    </details>
-  </div>
+  <!-- ✅ Bouton menu (toutes les pages) -->
+  <a class="menu-dot" href="menu.html" title="Menu" aria-label="Menu">⋯</a>
 
   <!-- ✅ Tout défile dedans -->
   <div class="viewport-scroll">
@@ -539,11 +497,13 @@
 
         <p>Cet Ordre est créé par un évêque, en présence de deux autres évêques témoins, issus de courants du christianisme primitif indépendant, en dehors des structures romaines classiques.</p>
 
-        <p>La fondation repose sur plusieurs revendications de continuité formulées par le fondateur dans ses déclarations et documents statutaires.
-Celui-ci affirme d’une part l’existence d’une lignée apostolique qu’il fait remonter aux apôtres, indépendamment de toute filiation templière.
-Il rattache d’autre part l’Ordre à une tradition néo-templière issue du courant développé au XIXᵉ siècle par Bernard-Raymond Fabré-Palaprat.
-Enfin, il évoque également une continuité monarchique symbolique qu’il relie, par adoption revendiquée, à la lignée de Guy de Lusignan.
-Ces différentes filiations constituent le cadre narratif et doctrinal initial présenté par le fondateur.</p>
+        <p>
+          La fondation repose sur plusieurs revendications de continuité formulées par le fondateur dans ses déclarations et documents statutaires.
+          Celui-ci affirme d’une part l’existence d’une lignée apostolique qu’il fait remonter aux apôtres, indépendamment de toute filiation templière.
+          Il rattache d’autre part l’Ordre à une tradition néo-templière issue du courant développé au XIXᵉ siècle par Bernard-Raymond Fabré-Palaprat.
+          Enfin, il évoque également une continuité monarchique symbolique qu’il relie, par adoption revendiquée, à la lignée de Guy de Lusignan.
+          Ces différentes filiations constituent le cadre narratif et doctrinal initial présenté par le fondateur.
+        </p>
 
         <p>L’Ordre est alors conçu comme :</p>
         <ul>
@@ -563,14 +523,12 @@ Ces différentes filiations constituent le cadre narratif et doctrinal initial p
 
         <h3>3. Reprise de l’Ordre en 2022</h3>
 
-<p>En 2022, d’anciens membres réunis en Chapitre en Italie ont procédé à la réactivation de l’Ordre. 
-Au cours de ce Chapitre, un nouveau Grand Maître a été élu.</p>
+        <p>En 2022, d’anciens membres réunis en Chapitre en Italie ont procédé à la réactivation de l’Ordre. 
+        Au cours de ce Chapitre, un nouveau Grand Maître a été élu.</p>
 
-<p>À la suite de cette élection, et après prise de contact avec l’un des évêques témoins ayant participé à la fondation, celui-ci a accepté de procéder à la transmission au nouveau Grand Maître de la continuité revendiquée des trois filiations présentées par l’institution : la lignée apostolique, la filiation néo-templière issue du courant palapratien et la continuité monarchique symboliquement rattachée à la lignée de Guy de Lusignan. 
-Pour plus d’informations, voir notre <a href="wikipedia.html">page encyclopédique</a>.</p>
+        <p>À la suite de cette élection, et après prise de contact avec l’un des évêques témoins ayant participé à la fondation, celui-ci a accepté de procéder à la transmission au nouveau Grand Maître de la continuité revendiquée des trois filiations présentées par l’institution : la lignée apostolique, la filiation néo-templière issue du courant palapratien et la continuité monarchique symboliquement rattachée à la lignée de Guy de Lusignan.
+        Pour plus d’informations, voir notre <a href="wikipedia.html">page encyclopédique</a>.</p>
 
-
-        
         <ul>
           <li>d’un ancrage marial plus affirmé ;</li>
           <li>d’un rapprochement avec une spiritualité catholique ;</li>
@@ -681,7 +639,7 @@ Pour plus d’informations, voir notre <a href="wikipedia.html">page encyclopéd
         <p>Cette décision se fait sans rupture humaine, dans un climat apaisé.<br>
         Des relations amicales et respectueuses subsistent entre membres.</p>
         <p><strong>
-        Les membres ayant choisi de poursuivre leur engagement au sein de l’O.S.D.9.T.D.J. le font désormais exclusivement dans ce cadre, chaque structure poursuivant son activité de manière autonome, indépendante et distincte.
+          Les membres ayant choisi de poursuivre leur engagement au sein de l’O.S.D.9.T.D.J. le font désormais exclusivement dans ce cadre, chaque structure poursuivant son activité de manière autonome, indépendante et distincte.
         </strong></p>
 
         <div class="sep"></div>
@@ -778,48 +736,32 @@ Pour plus d’informations, voir notre <a href="wikipedia.html">page encyclopéd
 
     </div>
   </div>
-<script>
-(function(){
-  try{
-    sessionStorage.setItem("osd_prev_page", location.href);
-  }catch(e){}
 
-  document.addEventListener("click", function(e){
-    const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
-    if(!a) return;
-    const href = a.getAttribute("href") || "";
-    if(href.includes("menu.html")){
-      try{
-        sessionStorage.setItem("osd_prev_page", location.href);
-      }catch(err){}
-    }
-  }, true);
-})();
-</script>
+  <!-- ✅ Script unique (au lieu du doublon) -->
   <script>
-(function(){
+  (function(){
+    // Ne rien enregistrer depuis la page menu.html elle-même
+    if (location.pathname.endsWith("menu.html")) return;
 
-  /* ✅ AJOUT ICI */
-  if (location.pathname.endsWith("menu.html")) return;
+    try{
+      sessionStorage.setItem("osd_prev_page", location.href);
+    }catch(e){}
 
-  try{
-    sessionStorage.setItem("osd_prev_page", location.href);
-  }catch(e){}
+    document.addEventListener("click", function(e){
+      const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+      if(!a) return;
 
-  document.addEventListener("click", function(e){
-    const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
-    if(!a) return;
-    const href = a.getAttribute("href") || "";
-    if(href.includes("menu.html")){
-      try{
-        sessionStorage.setItem("osd_prev_page", location.href);
-      }catch(err){}
-    }
-  }, true);
-})();
-</script>
+      const href = a.getAttribute("href") || "";
+      if (href.includes("menu.html")){
+        try{
+          sessionStorage.setItem("osd_prev_page", location.href);
+        }catch(err){}
+      }
+    }, true);
+  })();
+  </script>
 
-<script defer src="/osd.js"></script>
+  <script defer src="/osd.js"></script>
 
 </body>
 </html>
