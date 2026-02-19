@@ -1308,8 +1308,8 @@ fixedPins.forEach(p => addPin(p, layerFixed));
 
     // =========================================================
     // ✅ BONUS AUTO (Wikidata) : TEMPLIERS ONLY, quand on ZOOM
-    // - Si WDQS bloque : la carte continue (épingles fixes restent)
-    // - Anti hospitaliers : exclusion explicite
+    // - Inclut : commanderies, châteaux/forteresses, églises SI lien templier structuré
+    // - Exclut : Hospitaliers (filtre explicite)
     // =========================================================
 
     const loadedZones = new Set();
@@ -1374,7 +1374,10 @@ SELECT ?item ?label ?coord ?frwiki ?enwiki WHERE {
     bd:serviceParam wikibase:cornerEast "Point(${ne.lng} ${ne.lat})"^^geo:wktLiteral .
   }
 
-  # ✅ INCLUSION : Templiers (plusieurs axes, car Wikidata est incomplet)
+  # ==========================================
+  # ✅ LIEN TEMPLIER (STRUCTURÉ) — INCLUSION
+  # (Wikidata est incomplet, donc plusieurs axes)
+  # ==========================================
   FILTER(
     EXISTS { ?item wdt:P611/wdt:P279* wd:Q41300 . } ||   # ordre religieux
     EXISTS { ?item wdt:P127/wdt:P279* wd:Q41300 . } ||   # propriétaire
@@ -1383,11 +1386,22 @@ SELECT ?item ?label ?coord ?frwiki ?enwiki WHERE {
     EXISTS { ?item wdt:P31/wdt:P279* wd:Q3024331 . }     # commanderie templière
   )
 
-  # ❌ EXCLUSION : Hospitaliers (mêmes axes)
+  # ==========================================
+  # ❌ EXCLUSION HOSPITALIERS (mêmes axes)
+  # ==========================================
   FILTER NOT EXISTS { ?item wdt:P611/wdt:P279* wd:Q187549 . }
   FILTER NOT EXISTS { ?item wdt:P127/wdt:P279* wd:Q187549 . }
   FILTER NOT EXISTS { ?item wdt:P137/wdt:P279* wd:Q187549 . }
   FILTER NOT EXISTS { ?item wdt:P361/wdt:P279* wd:Q187549 . }
+
+  # ==========================================
+  # ✅ TYPES DE LIEUX (optionnel mais utile)
+  # - On ne filtre PAS au texte.
+  # - On laisse passer tout lieu templier,
+  #   mais ces types aident à capter églises/châteaux
+  #   quand Wikidata les structure bien.
+  # ==========================================
+  OPTIONAL { ?item wdt:P31 ?type . }
 
   ?item rdfs:label ?label .
   FILTER(LANG(?label) = "fr" || LANG(?label) = "en")
@@ -1465,7 +1479,7 @@ LIMIT ${LIMIT}
 
 <script>
 (function(){
-  // ✅ OSD / page précédente : version UNIQUE (tu l’avais en double)
+  // ✅ OSD / page précédente : version UNIQUE (pas doublée)
   if (location.pathname.endsWith("menu.html")) return;
 
   try{
@@ -1489,3 +1503,4 @@ LIMIT ${LIMIT}
 
 </body>
 </html>
+ 
