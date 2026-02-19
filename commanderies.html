@@ -1301,21 +1301,19 @@ fixedPins.forEach(p => addPin(p, layerFixed));
 
     // =========================
     // ✅ BONUS AUTO (Wikidata) : petites doses quand on ZOOM
-    // - Si WDQS bloque : la carte continue (épingles fixes restent)
-    // - ✅ Cache intelligent (ne “bloque” plus une zone vide)
-    // - ✅ Fallback (si 0 résultat strict) : recherche par mots-clés templiers
-    //   tout en excluant les Hospitaliers quand c’est possible
+    // - Strict Templiers (structuré) + exclusion Hospitaliers
+    // - ✅ Coverage++ : ajoute P463 (member of) + P1416 (affiliation)
+    // - ✅ Cache intelligent (ne bloque plus une zone vide)
+    // - ✅ Fallback (si 0 strict) : mots-clés templiers (anti-hospitaliers si possible)
     // =========================
 
     const loadedZones = new Set();
 
-    // réglages anti-limite WDQS
-    const MIN_ZOOM = 7;      // on n’attaque WDQS qu’à un zoom “proche”
-    const LIMIT    = 180;    // dose par zone (évite les gros paquets)
-    const DEBOUNCE = 650;    // évite spam requêtes
-    let timer = null;
+    const MIN_ZOOM = 7;
+    const LIMIT    = 180;
+    const DEBOUNCE = 650;
 
-    // AbortController pour annuler une requête WDQS si on bouge vite
+    let timer = null;
     let wdqsController = null;
 
     function parsePoint(wkt){
@@ -1385,7 +1383,6 @@ fixedPins.forEach(p => addPin(p, layerFixed));
       const sw = b.getSouthWest();
       const ne = b.getNorthEast();
 
-      // zone “arrondie” = cache (évite de recharger en boucle)
       const key = [
         map.getZoom(),
         sw.lat.toFixed(2), sw.lng.toFixed(2),
@@ -1396,15 +1393,11 @@ fixedPins.forEach(p => addPin(p, layerFixed));
 
       setStatus("⏳ Chargement d’épingles (Wikidata — Templiers)…");
 
-      // annule la requête précédente si on relance
       if(wdqsController){
         try{ wdqsController.abort(); }catch(e){}
       }
       wdqsController = new AbortController();
 
-      // =========================
-      // 1) MODE STRICT (structuré) : Templiers oui / Hospitaliers non
-      // =========================
       const sparqlStrict = `
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX wikibase: <http://wikiba.se/ontology#>
@@ -1425,7 +1418,9 @@ SELECT ?item ?label ?coord ?frwiki ?enwiki WHERE {
     EXISTS { ?item wdt:P127/wdt:P279* wd:Q41300 . } ||
     EXISTS { ?item wdt:P137/wdt:P279* wd:Q41300 . } ||
     EXISTS { ?item wdt:P361/wdt:P279* wd:Q41300 . } ||
-    EXISTS { ?item wdt:P31/wdt:P279* wd:Q3024331 . }
+    EXISTS { ?item wdt:P31/wdt:P279* wd:Q3024331 . } ||
+    EXISTS { ?item wdt:P463/wdt:P279* wd:Q41300 . } ||   # ✅ member of
+    EXISTS { ?item wdt:P1416/wdt:P279* wd:Q41300 . }      # ✅ affiliation
   )
 
   # ❌ EXCLUSION : Hospitaliers (mêmes axes)
@@ -1433,6 +1428,8 @@ SELECT ?item ?label ?coord ?frwiki ?enwiki WHERE {
   FILTER NOT EXISTS { ?item wdt:P127/wdt:P279* wd:Q187549 . }
   FILTER NOT EXISTS { ?item wdt:P137/wdt:P279* wd:Q187549 . }
   FILTER NOT EXISTS { ?item wdt:P361/wdt:P279* wd:Q187549 . }
+  FILTER NOT EXISTS { ?item wdt:P463/wdt:P279* wd:Q187549 . }
+  FILTER NOT EXISTS { ?item wdt:P1416/wdt:P279* wd:Q187549 . }
 
   ?item rdfs:label ?label .
   FILTER(LANG(?label) = "fr" || LANG(?label) = "en")
@@ -1447,15 +1444,11 @@ LIMIT ${LIMIT}
           const added = applyRows(json);
 
           if(added > 0){
-            loadedZones.add(key); // ✅ on cache seulement si utile
+            loadedZones.add(key); // ✅ cache seulement si utile
             setStatus("✅ Épingles fixes : OK. Bonus Wikidata (Templiers) : +" + added + " (zone actuelle).");
             return;
           }
 
-          // =========================
-          // 2) FALLBACK (si 0 strict) : mots-clés templiers
-          //    + exclusion hospitaliers quand c’est possible
-          // =========================
           setStatus("ℹ️ 0 résultat strict ici. Tentative fallback (mots-clés templiers)…");
 
           const sparqlFallback = `
@@ -1475,7 +1468,6 @@ SELECT ?item ?label ?coord ?frwiki ?enwiki WHERE {
   ?item rdfs:label ?label .
   FILTER(LANG(?label) = "fr" || LANG(?label) = "en")
 
-  # ✅ fallback texte : récupère les items mal renseignés
   FILTER(
     CONTAINS(LCASE(STR(?label)), "templier") ||
     CONTAINS(LCASE(STR(?label)), "templar") ||
@@ -1492,6 +1484,8 @@ SELECT ?item ?label ?coord ?frwiki ?enwiki WHERE {
   FILTER NOT EXISTS { ?item wdt:P127/wdt:P279* wd:Q187549 . }
   FILTER NOT EXISTS { ?item wdt:P137/wdt:P279* wd:Q187549 . }
   FILTER NOT EXISTS { ?item wdt:P361/wdt:P279* wd:Q187549 . }
+  FILTER NOT EXISTS { ?item wdt:P463/wdt:P279* wd:Q187549 . }
+  FILTER NOT EXISTS { ?item wdt:P1416/wdt:P279* wd:Q187549 . }
 
 ${buildWikiUrls()}
 }
@@ -1501,11 +1495,11 @@ LIMIT ${Math.min(LIMIT, 120)}
           return fetchWDQS(sparqlFallback, wdqsController.signal)
             .then(json2 => {
               const added2 = applyRows(json2);
+
               if(added2 > 0){
                 loadedZones.add(key); // ✅ cache si utile
                 setStatus("✅ Bonus Wikidata (fallback) : +" + added2 + " (zone actuelle).");
               } else {
-                // ✅ surtout ne pas cacher une zone vide : ça peut changer avec zoom/WDQS
                 setStatus("ℹ️ Rien trouvé dans cette zone (Wikidata). Zoome davantage ou décale un peu.");
               }
             });
@@ -1514,9 +1508,7 @@ LIMIT ${Math.min(LIMIT, 120)}
           if(String(err?.name || "").toLowerCase().includes("abort")) return;
 
           console.log("WDQS:", err);
-          // ✅ sur erreur, ne pas figer la zone
-          loadedZones.delete(key);
-
+          loadedZones.delete(key); // ✅ ne pas figer une zone sur erreur
           setStatus("⚠️ Chargement impossible (Wikidata). Réseau/limite WDQS. Les épingles fixes restent disponibles.");
         });
     }
@@ -1524,10 +1516,7 @@ LIMIT ${Math.min(LIMIT, 120)}
     map.on("moveend", schedule);
     map.on("zoomend", schedule);
 
-    // iOS/scroll: évite “carte vide”
     setTimeout(() => map.invalidateSize(), 200);
-
-    // 1er message
     setStatus("✅ Épingles fixes : OK. Zoome pour tenter le bonus Wikidata (Templiers).");
   }
 
@@ -1538,7 +1527,7 @@ LIMIT ${Math.min(LIMIT, 120)}
 
 <script>
 (function(){
-  // ✅ OSD / page précédente : version UNIQUE (pas doublée)
+  // ✅ OSD / page précédente : version UNIQUE
   if (location.pathname.endsWith("menu.html")) return;
 
   try{
@@ -1550,9 +1539,7 @@ LIMIT ${Math.min(LIMIT, 120)}
     if(!a) return;
     const href = a.getAttribute("href") || "";
     if(href.includes("menu.html")){
-      try{
-        sessionStorage.setItem("osd_prev_page", location.href);
-      }catch(err){}
+      try{ sessionStorage.setItem("osd_prev_page", location.href); }catch(err){}
     }
   }, true);
 })();
@@ -1562,5 +1549,4 @@ LIMIT ${Math.min(LIMIT, 120)}
 
 </body>
 </html>
-    
-   
+  
