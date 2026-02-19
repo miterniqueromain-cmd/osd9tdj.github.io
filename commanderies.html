@@ -941,7 +941,7 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
 // ✅ PACK ÉPINGLES TEMPLIÈRES (attestées + Wikipédia)
 // Tu peux fusionner avec fixedPins via: fixedPins.push(...moreTemplarPins)
 // =========================
-const moreTemplarPins = [
+const fixedPins = [
 
   // =========================
   // SUISSE (Templiers / biens templiers recensés)
@@ -1012,13 +1012,138 @@ const moreTemplarPins = [
   {name:"Arwad / Ruad (fin de l’épisode templier)", city:"Arwad", country:"Syrie", lat:34.856110, lon:35.858330,
     wiki:"https://en.wikipedia.org/wiki/Arwad"},
 ];
+     {name:"Commanderie de Libdeau", city:"Toul", country:"France", lat:48.713741, lon:5.919718,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Libdeau"},
 
-// Fusion simple
-fixedPins.push(...moreTemplarPins);
+  {name:"Commanderie de Bayle", city:"Saint-Antonin-sur-Bayon", country:"France", lat:43.508694, lon:5.599722,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Bayle"},
 
-// Et tu relances ton rendu
+  {name:"Commanderie de Coulours", city:"Coulours", country:"France", lat:48.167500, lon:3.583611,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Coulours"},
+
+  {name:"Commanderie de La Romagne", city:"Saint-Maurice-sur-Vingeanne", country:"France", lat:47.591389, lon:5.393056,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_La_Romagne"},
+
+  {name:"Maison du Temple de La Chassagne", city:"Isômes", country:"France", lat:47.656111, lon:5.323889,
+    wiki:"https://fr.wikipedia.org/wiki/Maison_du_Temple_de_La_Chassagne"},
+
+  {name:"Commanderie Sainte-Catherine (Montbellet)", city:"Montbellet", country:"France", lat:46.483889, lon:4.863889,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_Sainte-Catherine"},
+
+  {name:"Commanderie d’Épailly", city:"Courban (Épailly)", country:"France", lat:47.930600, lon:4.718400,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_d%27%C3%89pailly"},
+
+  {name:"Prieuré hospitalier de Voulaines-les-Templiers (ancien Temple)", city:"Voulaines-les-Templiers", country:"France", lat:47.820000, lon:4.779167,
+    wiki:"https://fr.wikipedia.org/wiki/Prieur%C3%A9_hospitalier_de_Voulaines-les-Templiers"},
+
+  {name:"Commanderie de Bonlieu", city:"Piney (secteur)", country:"France", lat:48.332596, lon:4.339439,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Bonlieu"},
+
+  {name:"Commanderie de La Cavalerie", city:"La Cavalerie", country:"France", lat:44.000000, lon:3.157500,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_La_Cavalerie"},
+
+  {name:"Commanderie de Jalès", city:"Berrias-et-Casteljau", country:"France", lat:44.370000, lon:4.221944,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Jal%C3%A8s"},
+
+  {name:"Commanderie de Montiracle", city:"Les Avenières", country:"France", lat:45.721389, lon:5.231667,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Montiracle"},
+
+  {name:"Commanderie du Chambon (Haute-Loire)", city:"Le Chambon", country:"France", lat:45.350000, lon:3.366667,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_du_Chambon_%28Haute-Loire%29"},
+
+  {name:"Commanderie du Ruou", city:"Villecroze (secteur)", country:"France", lat:43.552222, lon:6.321111,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_du_Ruou"},
+
+  {name:"Commanderie de Toulouse (ancienne)", city:"Toulouse", country:"France", lat:43.596944, lon:1.442222,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Toulouse"},
+
+  {name:"Commanderie de Bure", city:"Bure-les-Templiers", country:"France", lat:47.738056, lon:4.893889,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Bure"},
+
+  {name:"Commanderie de Laon", city:"Laon", country:"France", lat:49.563056, lon:3.627222,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Laon"},
+
+  {name:"Moisy-le-Temple (ancienne présence templière)", city:"Moisy-le-Temple", country:"France", lat:49.114722, lon:3.082500,
+    wiki:"https://fr.wikipedia.org/wiki/Moisy-le-Temple"},
+
+  {name:"Commanderie de Beauvais-sur-Matha", city:"Beauvais-sur-Matha", country:"France", lat:45.883056, lon:-0.185278,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Beauvais-sur-Matha"},
+
+  {name:"Commanderie d’Ozon (Châtellerault)", city:"Châtellerault", country:"France", lat:46.797214, lon:0.543147,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_d%27Ozon"},
+
+  {name:"Commanderie de L’Ormeteau", city:"Reuilly", country:"France", lat:47.070833, lon:1.973611,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_L%27Ormeteau"},
+
+  {name:"Commanderie du Fouilloux", city:"La Chapelle (Charente)", country:"France", lat:45.829444, lon:0.059444,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_du_Fouilloux"},
+
+  {name:"Commanderie de Malleyrand", city:"Yvrac-et-Malleyrand", country:"France", lat:45.730556, lon:0.464444,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Malleyrand"},
+
+  {name:"Commanderie du Breuil-de-Cellefrouin", city:"Cellefrouin", country:"France", lat:45.905000, lon:0.405556,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_du_Breuil-de-Cellefrouin"},
+
+  {name:"Maison du Temple de Boixe", city:"Saint-Amant-de-Boixe", country:"France", lat:45.841944, lon:0.176667,
+    wiki:"https://fr.wikipedia.org/wiki/Maison_du_Temple_de_Boixe"},
+
+  {name:"Maison du Temple de Villegats", city:"Villefagnan (secteur)", country:"France", lat:45.992222, lon:0.187778,
+    wiki:"https://fr.wikipedia.org/wiki/Maison_du_Temple_de_Villegats"},
+
+  {name:"Commanderie de Salins (Jura)", city:"Salins-les-Bains", country:"France", lat:46.942222, lon:5.879722,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Salins"},
+
+  {name:"Commanderie de Chanonat", city:"Chanonat", country:"France", lat:45.692222, lon:3.097222,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Chanonat"},
+
+  {name:"Chapelle des Templiers (Avignon)", city:"Avignon", country:"France", lat:43.948760, lon:4.804465,
+    wiki:"https://fr.wikipedia.org/wiki/Chapelle_des_Templiers_(Avignon)"},
+
+  // =========================
+  // ESPAGNE — sites liés aux Templiers
+  // =========================
+  {name:"Gardeny Castle (Lleida)", city:"Lleida", country:"Espagne", lat:41.616944, lon:0.616944,
+    wiki:"https://en.wikipedia.org/wiki/Gardeny_Castle"},
+
+  {name:"Castle of Torija", city:"Torija", country:"Espagne", lat:40.745278, lon:-2.960556,
+    wiki:"https://en.wikipedia.org/wiki/Castle_of_Torija"},
+
+  // =========================
+  // PORTUGAL — châteaux liés aux Templiers / à l’héritage templier
+  // =========================
+  {name:"Castle of Castro Marim", city:"Castro Marim", country:"Portugal", lat:37.220833, lon:-7.443056,
+    wiki:"https://en.wikipedia.org/wiki/Castle_of_Castro_Marim"},
+
+  {name:"Castle of Castelo Branco", city:"Castelo Branco", country:"Portugal", lat:39.824167, lon:-7.492500,
+    wiki:"https://en.wikipedia.org/wiki/Castle_of_Castelo_Branco"},
+
+  {name:"Castle of Penas Roias", city:"Penas Roias", country:"Portugal", lat:41.572222, lon:-6.371111,
+    wiki:"https://en.wikipedia.org/wiki/Castle_of_Penas_Roias"},
+
+  // =========================
+  // ANGLETERRE — préceptories / maisons templières
+  // =========================
+  {name:"Willoughton Preceptory", city:"Willoughton", country:"Angleterre", lat:53.426900, lon:-0.605300,
+    wiki:"https://en.wikipedia.org/wiki/Willoughton_Preceptory"},
+
+  {name:"Rothley Temple (Rothley Preceptory)", city:"Rothley", country:"Angleterre", lat:52.705600, lon:-1.147800,
+    wiki:"https://en.wikipedia.org/wiki/Rothley_Temple"},
+
+  {name:"Faxfleet Preceptory", city:"Faxfleet", country:"Angleterre", lat:53.711974, lon:-0.698179,
+    wiki:"https://en.wikipedia.org/wiki/Faxfleet_Preceptory"},
+
+  {name:"Temple Newsam (ancien domaine templier)", city:"Leeds", country:"Angleterre", lat:53.784200, lon:-1.459500,
+    wiki:"https://en.wikipedia.org/wiki/Temple_Newsam"},
+
+  // =========================
+  // ALLEMAGNE — Maison du Temple (attestée)
+  // =========================
+  {name:"Maison du Temple (Hildesheim)", city:"Hildesheim", country:"Allemagne", lat:52.152500, lon:9.951944,
+    wiki:"https://fr.wikipedia.org/wiki/Maison_du_Temple_%28Hildesheim%29"},
+];
+
 fixedPins.forEach(p => addPin(p, layerFixed));
-
+    
     // On cadre la carte sur les épingles fixes au départ (si dispo)
     try{
       if(layerFixed.getLayers().length){
