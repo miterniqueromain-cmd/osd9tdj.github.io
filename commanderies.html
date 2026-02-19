@@ -937,44 +937,87 @@ contrôler toutes les marchandises qui sont débarquées par les vaisseaux de me
       });
     }
 
-    // =========================
-    // ✅ ÉPINGLES FIXES (rapides, toujours visibles)
-    // Ajoute-en autant que tu veux ici (c’est LE filet de sécurité)
-    // =========================
-    const fixedPins = [
-      // FRANCE
-      {name:"Enclos du Temple", city:"Paris", country:"France", lat:48.8647, lon:2.3586, wiki:"https://fr.wikipedia.org/wiki/Enclos_du_Temple"},
-      {name:"Commanderie d’Arville", city:"Couëtron-au-Perche", country:"France", lat:48.2876, lon:0.9790, wiki:"https://fr.wikipedia.org/wiki/Commanderie_templi%C3%A8re_d%27Arville"},
-      {name:"Commanderie de La Couvertoirade", city:"La Couvertoirade", country:"France", lat:43.9136, lon:3.3197, wiki:"https://fr.wikipedia.org/wiki/La_Couvertoirade"},
-      {name:"Commanderie de Sainte-Eulalie-de-Cernon", city:"Sainte-Eulalie-de-Cernon", country:"France", lat:44.0187, lon:3.1483, wiki:"https://fr.wikipedia.org/wiki/Sainte-Eulalie-de-Cernon"},
-      {name:"Commanderie de Coulommiers", city:"Coulommiers", country:"France", lat:48.8147, lon:3.0840, wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Coulommiers"},
-      {name:"Provins (pôle templier)", city:"Provins", country:"France", lat:48.5602, lon:3.2996, wiki:"https://fr.wikipedia.org/wiki/Provins"},
-      {name:"Troyes (Champagne)", city:"Troyes", country:"France", lat:48.2973, lon:4.0744, wiki:"https://fr.wikipedia.org/wiki/Troyes"},
-      {name:"Laon (pôle)", city:"Laon", country:"France", lat:49.5635, lon:3.6243, wiki:"https://fr.wikipedia.org/wiki/Laon"},
+ // =========================
+// ✅ PACK ÉPINGLES TEMPLIÈRES (attestées + Wikipédia)
+// Tu peux fusionner avec fixedPins via: fixedPins.push(...moreTemplarPins)
+// =========================
+const moreTemplarPins = [
 
-      // ANGLETERRE
-      {name:"Temple Church", city:"Londres", country:"Angleterre", lat:51.5111, lon:-0.1103, wiki:"https://en.wikipedia.org/wiki/Temple_Church"},
+  // =========================
+  // SUISSE (Templiers / biens templiers recensés)
+  // =========================
+  // NB: tu confondais très probablement "Coligny" avec "Cologny" (GE)
+  {name:"Biens templiers (Genève – quartier de Rive)", city:"Genève", country:"Suisse", lat:46.2044, lon:6.1432,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Suisse"},
+  {name:"Dépendance templière (Cologny)", city:"Cologny", country:"Suisse", lat:46.215833, lon:6.181111,
+    wiki:"https://fr.wikipedia.org/wiki/Cologny"},
+  {name:"Commanderie de La Chaux (Vaud)", city:"La Chaux (VD)", country:"Suisse", lat:46.6060, lon:6.9970,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_La_Chaux"},
 
-      // PORTUGAL / ESPAGNE
-      {name:"Convento de Cristo", city:"Tomar", country:"Portugal", lat:39.6033, lon:-8.4187, wiki:"https://fr.wikipedia.org/wiki/Couvent_du_Christ"},
-      {name:"Castillo de Ponferrada (pôle templier)", city:"Ponferrada", country:"Espagne", lat:42.5463, lon:-6.5973, wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Ponferrada"},
-      {name:"Monzón (pôle templier)", city:"Monzón", country:"Espagne", lat:41.9109, lon:0.1941, wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Monz%C3%B3n"},
+  // =========================
+  // FRANCE (command. / chapelles / sites templiers)
+  // =========================
+  {name:"Commanderie d’Avalleur", city:"Bar-sur-Seine", country:"France", lat:48.098333, lon:4.350000,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_d%27Avalleur"},
+  {name:"Commanderie de Richerenches", city:"Richerenches", country:"France", lat:44.360106, lon:4.912528,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Richerenches"},
+  {name:"Commanderie de La Rochelle", city:"La Rochelle", country:"France", lat:46.159236, lon:-1.153052,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_La_Rochelle"},
+  {name:"Chapelle des Templiers (Metz)", city:"Metz", country:"France", lat:49.114669, lon:6.170261,
+    wiki:"https://fr.wikipedia.org/wiki/Chapelle_des_Templiers_(Metz)"},
 
-      // ITALIE
-      {name:"Bari (Pouilles, pôle)", city:"Bari", country:"Italie", lat:41.1171, lon:16.8719, wiki:"https://fr.wikipedia.org/wiki/Bari"},
+  // =========================
+  // ANGLETERRE (Templiers)
+  // =========================
+  {name:"Commanderie de Temple Bruer", city:"Temple Bruer", country:"Angleterre", lat:53.071111, lon:-0.496111,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Temple_Bruer"},
+  {name:"Templecombe (préceptorie templière)", city:"Templecombe", country:"Angleterre", lat:51.0000, lon:-2.4164,
+    wiki:"https://en.wikipedia.org/wiki/Templecombe"},
+  {name:"Temple Balsall (préceptorie templière)", city:"Temple Balsall", country:"Angleterre", lat:52.3820, lon:-1.6970,
+    wiki:"https://en.wikipedia.org/wiki/Temple_Balsall"},
 
-      // LEVANT
-      {name:"Saint-Jean-d’Acre", city:"Acre", country:"Israël/Palestine", lat:32.9236, lon:35.0710, wiki:"https://fr.wikipedia.org/wiki/Acre_(Isra%C3%ABl)"},
-      {name:"Jérusalem", city:"Jérusalem", country:"Israël/Palestine", lat:31.7780, lon:35.2350, wiki:"https://fr.wikipedia.org/wiki/J%C3%A9rusalem"},
-      {name:"Nicosie (pôle)", city:"Nicosie", country:"Chypre", lat:35.1856, lon:33.3823, wiki:"https://fr.wikipedia.org/wiki/Nicosie"},
-      {name:"Tripoli (pôle)", city:"Tripoli", country:"Liban", lat:34.4367, lon:35.8497, wiki:"https://fr.wikipedia.org/wiki/Tripoli_(Liban)"},
+  // =========================
+  // PORTUGAL (forteresses templières)
+  // =========================
+  {name:"Château d’Almourol", city:"Praia do Ribatejo", country:"Portugal", lat:39.461944, lon:-8.383889,
+    wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_d%27Almourol"},
+  {name:"Château de Soure", city:"Soure", country:"Portugal", lat:40.056944, lon:-8.626111,
+    wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Soure"},
+  {name:"Château de Pombal", city:"Pombal", country:"Portugal", lat:39.916110, lon:-8.628060,
+    wiki:"https://en.wikipedia.org/wiki/Castle_of_Pombal"},
 
-      // SUISSE (exemples de repères géo — tu peux en ajouter)
-      {name:"Genève (repère)", city:"Genève", country:"Suisse", lat:46.2044, lon:6.1432, wiki:"https://fr.wikipedia.org/wiki/Gen%C3%A8ve"},
-      {name:"Lausanne (repère)", city:"Lausanne", country:"Suisse", lat:46.5197, lon:6.6323, wiki:"https://fr.wikipedia.org/wiki/Lausanne"}
-    ];
+  // =========================
+  // ESPAGNE (forteresses templières / occupations templières)
+  // =========================
+  {name:"Château de Miravet (forteresse templière)", city:"Miravet", country:"Espagne", lat:41.035556, lon:0.593611,
+    wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Miravet"},
+  {name:"Castillo de San Servando (occupation templière)", city:"Tolède", country:"Espagne", lat:39.860400, lon:-4.015600,
+    wiki:"https://en.wikipedia.org/wiki/Castle_of_San_Servando"},
+  {name:"Castillo de Montalbán", city:"San Martín de Montalbán", country:"Espagne", lat:39.752947, lon:-4.422387,
+    wiki:"https://en.wikipedia.org/wiki/Castle_of_Montalb%C3%A1n"},
 
-    fixedPins.forEach(p => addPin(p, layerFixed));
+  // =========================
+  // LEVANT / TERRE SAINTE (Templiers)
+  // =========================
+  {name:"Chastelet du Gué de Jacob", city:"Nord de la Galilée", country:"Israël", lat:33.004448, lon:35.627836,
+    wiki:"https://fr.wikipedia.org/wiki/Chastelet"},
+  {name:"Château Pèlerin (Atlit)", city:"Atlit", country:"Israël", lat:32.705280, lon:34.933890,
+    wiki:"https://en.wikipedia.org/wiki/Ch%C3%A2teau_P%C3%A8lerin"},
+  {name:"Citadel of Safed (fort templier)", city:"Safed", country:"Israël", lat:32.967780, lon:35.495280,
+    wiki:"https://en.wikipedia.org/wiki/Citadel_of_Safed"},
+  {name:"Beaufort Castle (liens templiers)", city:"Arnoun", country:"Liban", lat:33.324400, lon:35.532000,
+    wiki:"https://en.wikipedia.org/wiki/Beaufort_Castle%2C_Lebanon"},
+  {name:"Bagras (fort croisé/Templiers)", city:"Hatay", country:"Turquie", lat:36.426940, lon:36.225000,
+    wiki:"https://en.wikipedia.org/wiki/Bagras"},
+  {name:"Arwad / Ruad (fin de l’épisode templier)", city:"Arwad", country:"Syrie", lat:34.856110, lon:35.858330,
+    wiki:"https://en.wikipedia.org/wiki/Arwad"},
+];
+
+// Fusion simple
+fixedPins.push(...moreTemplarPins);
+
+// Et tu relances ton rendu
+fixedPins.forEach(p => addPin(p, layerFixed));
 
     // On cadre la carte sur les épingles fixes au départ (si dispo)
     try{
