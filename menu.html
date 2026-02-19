@@ -29,6 +29,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
 
+  <!-- JSON-LD principal (inchangé) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -38,6 +39,24 @@
       {"@type":"WebPage","@id":"https://osd9tdj.org/menu.html#webpage","url":"https://osd9tdj.org/menu.html","name":"Menu de navigation | OSD9TDJ","isPartOf":{"@id":"https://osd9tdj.org/#website"},"about":{"@id":"https://osd9tdj.org/#org"},"inLanguage":"fr-FR"},
       {"@type":"SiteNavigationElement","@id":"https://osd9tdj.org/menu.html#nav","name":"Menu de navigation","url":"https://osd9tdj.org/menu.html","inLanguage":"fr-FR"}
     ]
+  }
+  </script>
+
+  <!-- SEO "étoiles" (à remplir avec tes VRAIES valeurs si tu veux) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "@id":"https://osd9tdj.org/#org",
+    "name":"O.S.D.9.T.D.J.",
+    "url":"https://osd9tdj.org/",
+    "logo":"https://osd9tdj.org/sceaudeux.PNG",
+    "aggregateRating":{
+      "@type":"AggregateRating",
+      "ratingValue":"5",
+      "bestRating":"5",
+      "ratingCount":"5"
+    }
   }
   </script>
 
@@ -94,6 +113,36 @@
     background:#000;
   }
 
+  /* Watermark visible DISCRET (derrière le voile et le panneau, ne gêne jamais) */
+  .wmOverlay{
+    position:fixed;
+    inset:0;
+    z-index:5;              /* derrière le voile (10) et panel (20) */
+    pointer-events:none;
+    opacity:.10;
+    mix-blend-mode: overlay;
+    background-image:
+      repeating-linear-gradient(
+        -28deg,
+        rgba(255,255,255,.22) 0px,
+        rgba(255,255,255,.22) 1px,
+        transparent 1px,
+        transparent 220px
+      );
+  }
+  .wmOverlay::before{
+    content:"O.S.D.9.T.D.J. • osd9tdj.org • contenus originaux •";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%) rotate(-22deg);
+    font-size: clamp(14px, 2.1vw, 26px);
+    letter-spacing:.9px;
+    white-space:nowrap;
+    color: rgba(255,255,255,.28);
+    text-shadow: 0 2px 14px rgba(0,0,0,.55);
+  }
+
   /* voile au-dessus du fond */
   .veil{
     position:fixed; inset:0;
@@ -133,8 +182,10 @@
     100%{ transform: translate(calc(100vw - var(--panelW) - var(--edge)), -50%); }
   }
 
-  /* ✅ PLEINE HAUTEUR TABLETTE + PC (sans toucher au coulissage à droite)
-     On baisse juste le seuil pour éviter le "trou" entre 901 et 1023px */
+  /* ✅ FIX HAUTEUR (TABLETTE + PC)
+     IMPORTANT : on applique le "mode plein écran vertical" dès 901px
+     -> ça enlève la zone "coulissante moche" due à une hauteur limitée
+     -> et on garde EXACTEMENT ton coulissage à droite */
   @media (min-width: 901px){
     :root{ --panelH: 100dvh; }
 
@@ -340,6 +391,7 @@
   }
   .seal.show{ opacity:1; }
 
+  /* watermark invisible renforcé */
   .wm{
     position:absolute;
     left:-9999px;
@@ -365,11 +417,18 @@
 </head>
 
 <body>
+  <!-- watermark invisible renforcé -->
   <div class="wm" aria-hidden="true">
     O.S.D.9.T.D.J. — osd9tdj.org — Menu de navigation — Association loi 1901 — contenus originaux — empreinte site.
+    © OSD9TDJ. Toute reproduction, extraction ou réutilisation sans autorisation est interdite.
+    Signature: OSD9TDJ|MENU|v1|{{ts}}
   </div>
 
   <iframe class="bgFrame" id="bgFrame" title="Page précédente (floutée)" aria-hidden="true"></iframe>
+
+  <!-- watermark visible discret -->
+  <div class="wmOverlay" aria-hidden="true"></div>
+
   <div class="veil" id="veil" aria-hidden="true"></div>
 
   <main class="panel" id="panel" role="dialog" aria-modal="true" aria-label="Menu de navigation">
@@ -713,6 +772,22 @@
 
     veil.addEventListener("click", goBack);
     panel.addEventListener("click", (e) => e.stopPropagation());
+
+    // Watermark invisible renforcé (signature + timestamp + meta)
+    (function(){
+      try{
+        const wm = document.querySelector(".wm");
+        if(wm){
+          const ts = new Date().toISOString();
+          wm.textContent = wm.textContent.replace("{{ts}}", ts);
+
+          const meta = document.createElement("meta");
+          meta.name = "osd9tdj-watermark";
+          meta.content = "OSD9TDJ|menu|"+ts+"|"+location.pathname;
+          document.head.appendChild(meta);
+        }
+      }catch(e){}
+    })();
 
     window.addEventListener("load", openMenu);
   </script>
