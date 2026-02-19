@@ -1292,7 +1292,6 @@ const fixedPins = [
 ];
 
 fixedPins.forEach(p => addPin(p, layerFixed));
-
     try{
       if(layerFixed.getLayers().length){
         map.fitBounds(layerFixed.getBounds().pad(0.25));
@@ -1300,11 +1299,13 @@ fixedPins.forEach(p => addPin(p, layerFixed));
     }catch(e){}
 
     // =========================
-    // ✅ BONUS AUTO (Wikidata) : petites doses quand on ZOOM
-    // - Strict Templiers (structuré) + exclusion Hospitaliers
-    // - ✅ Coverage++ : ajoute P463 (member of) + P1416 (affiliation)
-    // - ✅ Cache intelligent (ne bloque plus une zone vide)
-    // - ✅ Fallback (si 0 strict) : mots-clés templiers (anti-hospitaliers si possible)
+    // ✅ BONUS AUTO (Wikidata) : Templiers ONLY quand on ZOOM
+    // - Mode STRICT (structuré) : très propre, Templiers oui / Hospitaliers non
+    // - Coverage++ : inclut aussi P463 (member of) + P1416 (affiliation)
+    // - Cache intelligent : n’enferme plus une zone vide
+    // - Mode FALLBACK (si 0 strict) : DURCI (pas de “commanderie/commandery” génériques)
+    //   -> réduit fortement le bruit, garde “Templier/Templar/Ordre du Temple/Temple Church…”
+    // - Wikipédia FR/EN cliquable (comme avant)
     // =========================
 
     const loadedZones = new Set();
@@ -1383,6 +1384,7 @@ fixedPins.forEach(p => addPin(p, layerFixed));
       const sw = b.getSouthWest();
       const ne = b.getNorthEast();
 
+      // zone “arrondie” = cache (évite de recharger en boucle)
       const key = [
         map.getZoom(),
         sw.lat.toFixed(2), sw.lng.toFixed(2),
@@ -1393,11 +1395,15 @@ fixedPins.forEach(p => addPin(p, layerFixed));
 
       setStatus("⏳ Chargement d’épingles (Wikidata — Templiers)…");
 
+      // annule la requête précédente si on relance
       if(wdqsController){
         try{ wdqsController.abort(); }catch(e){}
       }
       wdqsController = new AbortController();
 
+      // =========================
+      // 1) MODE STRICT (structuré)
+      // =========================
       const sparqlStrict = `
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX wikibase: <http://wikiba.se/ontology#>
@@ -1412,15 +1418,15 @@ SELECT ?item ?label ?coord ?frwiki ?enwiki WHERE {
     bd:serviceParam wikibase:cornerEast "Point(${ne.lng} ${ne.lat})"^^geo:wktLiteral .
   }
 
-  # ✅ INCLUSION : Templiers (axes multiples)
+  # ✅ INCLUSION : Templiers (axes multiples = meilleure couverture)
   FILTER(
-    EXISTS { ?item wdt:P611/wdt:P279* wd:Q41300 . } ||
-    EXISTS { ?item wdt:P127/wdt:P279* wd:Q41300 . } ||
-    EXISTS { ?item wdt:P137/wdt:P279* wd:Q41300 . } ||
-    EXISTS { ?item wdt:P361/wdt:P279* wd:Q41300 . } ||
-    EXISTS { ?item wdt:P31/wdt:P279* wd:Q3024331 . } ||
-    EXISTS { ?item wdt:P463/wdt:P279* wd:Q41300 . } ||   # ✅ member of
-    EXISTS { ?item wdt:P1416/wdt:P279* wd:Q41300 . }      # ✅ affiliation
+    EXISTS { ?item wdt:P611/wdt:P279* wd:Q41300 . } ||    # ordre religieux
+    EXISTS { ?item wdt:P127/wdt:P279* wd:Q41300 . } ||    # propriétaire
+    EXISTS { ?item wdt:P137/wdt:P279* wd:Q41300 . } ||    # opérateur/gestionnaire
+    EXISTS { ?item wdt:P361/wdt:P279* wd:Q41300 . } ||    # partie de
+    EXISTS { ?item wdt:P31/wdt:P279* wd:Q3024331 . } ||   # commanderie templière
+    EXISTS { ?item wdt:P463/wdt:P279* wd:Q41300 . } ||    # member of
+    EXISTS { ?item wdt:P1416/wdt:P279* wd:Q41300 . }      # affiliation
   )
 
   # ❌ EXCLUSION : Hospitaliers (mêmes axes)
@@ -1449,7 +1455,11 @@ LIMIT ${LIMIT}
             return;
           }
 
-          setStatus("ℹ️ 0 résultat strict ici. Tentative fallback (mots-clés templiers)…");
+          // =========================
+          // 2) FALLBACK DURCI (si 0 strict)
+          // -> très peu de bruit : on exige des mots templiers explicites
+          // =========================
+          setStatus("ℹ️ 0 résultat strict ici. Tentative fallback (Templier/Templar/Ordre du Temple)…");
 
           const sparqlFallback = `
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
@@ -1468,15 +1478,14 @@ SELECT ?item ?label ?coord ?frwiki ?enwiki WHERE {
   ?item rdfs:label ?label .
   FILTER(LANG(?label) = "fr" || LANG(?label) = "en")
 
+  # ✅ fallback durci : mots “Templiers” explicites (évite le grand n’importe quoi)
   FILTER(
     CONTAINS(LCASE(STR(?label)), "templier") ||
     CONTAINS(LCASE(STR(?label)), "templar") ||
-    CONTAINS(LCASE(STR(?label)), "order of the temple") ||
     CONTAINS(LCASE(STR(?label)), "ordre du temple") ||
+    CONTAINS(LCASE(STR(?label)), "order of the temple") ||
     CONTAINS(LCASE(STR(?label)), "temple church") ||
-    CONTAINS(LCASE(STR(?label)), "chapelle du temple") ||
-    CONTAINS(LCASE(STR(?label)), "commanderie") ||
-    CONTAINS(LCASE(STR(?label)), "commandery")
+    CONTAINS(LCASE(STR(?label)), "chapelle du temple")
   )
 
   # ❌ si Wikidata sait que c’est hospitalier, on exclut
@@ -1498,9 +1507,10 @@ LIMIT ${Math.min(LIMIT, 120)}
 
               if(added2 > 0){
                 loadedZones.add(key); // ✅ cache si utile
-                setStatus("✅ Bonus Wikidata (fallback) : +" + added2 + " (zone actuelle).");
+                setStatus("✅ Bonus Wikidata (fallback templier) : +" + added2 + " (zone actuelle).");
               } else {
-                setStatus("ℹ️ Rien trouvé dans cette zone (Wikidata). Zoome davantage ou décale un peu.");
+                // ✅ ne pas cacher une zone vide : ça peut changer selon zoom/données
+                setStatus("ℹ️ Rien trouvé dans cette zone. Zoome davantage ou décale un peu.");
               }
             });
         })
@@ -1516,7 +1526,10 @@ LIMIT ${Math.min(LIMIT, 120)}
     map.on("moveend", schedule);
     map.on("zoomend", schedule);
 
+    // iOS/scroll: évite “carte vide”
     setTimeout(() => map.invalidateSize(), 200);
+
+    // 1er message
     setStatus("✅ Épingles fixes : OK. Zoome pour tenter le bonus Wikidata (Templiers).");
   }
 
@@ -1549,4 +1562,5 @@ LIMIT ${Math.min(LIMIT, 120)}
 
 </body>
 </html>
-  
+
+   
