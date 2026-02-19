@@ -133,7 +133,9 @@
     100%{ transform: translate(calc(100vw - var(--panelW) - var(--edge)), -50%); }
   }
 
-  @media (min-width: 1024px){
+  /* ✅ PLEINE HAUTEUR TABLETTE + PC (sans toucher au coulissage à droite)
+     On baisse juste le seuil pour éviter le "trou" entre 901 et 1023px */
+  @media (min-width: 901px){
     :root{ --panelH: 100dvh; }
 
     .panel{
@@ -349,8 +351,7 @@
     user-select:none;
   }
 
-  /* ✅ FIX HAUTEUR :
-     Landscape = uniquement mobile (sinon ça cassait la pleine hauteur sur tablette/PC) */
+  /* Landscape compact : UNIQUEMENT petits écrans (mobile) */
   @media (max-width: 900px) and (orientation: landscape){
     :root{
       --panelW: min(620px, 70vw);
@@ -362,7 +363,6 @@
   }
   </style>
 </head>
-
 
 <body>
   <div class="wm" aria-hidden="true">
