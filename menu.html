@@ -349,7 +349,9 @@
     user-select:none;
   }
 
-  @media (orientation: landscape){
+  /* ✅ FIX HAUTEUR :
+     Landscape = uniquement mobile (sinon ça cassait la pleine hauteur sur tablette/PC) */
+  @media (max-width: 900px) and (orientation: landscape){
     :root{
       --panelW: min(620px, 70vw);
       --panelH: min(88vh, 720px);
@@ -360,6 +362,7 @@
   }
   </style>
 </head>
+
 
 <body>
   <div class="wm" aria-hidden="true">
