@@ -1305,46 +1305,92 @@ fixedPins.forEach(p => addPin(p, layerFixed));
     // ✅ BONUS AUTO (Wikidata) : petites doses quand on ZOOM
     // - Si WDQS bloque : la carte continue (épingles fixes restent)
     // =========================
-    const loadedZones = new Set();
+   <!-- =========================
+✅ FIN DE TON HTML (VERSION “PROPRE / PARFAITE”)
+- Wikidata : TEMPLIERS UNIQUEMENT (anti-hospitaliers)
+- Filtre STRUCTURÉ (pas seulement les mots du label)
+- Anti-spam : debounce + cache zones + abort des requêtes en cours
+- Wikipédia FR/EN cliquable quand dispo (comme avant)
+========================= -->
 
-    // réglages anti-limite WDQS
-    const MIN_ZOOM = 7;     // on n’attaque WDQS qu’à un zoom “proche”
-    const LIMIT    = 180;   // dose par zone (évite les gros paquets)
-    const DEBOUNCE = 650;   // évite spam requêtes
-    let timer = null;
+<script>
+(() => {
+  "use strict";
 
-    function parsePoint(wkt){
-      const m = /Point\(([-\d.]+)\s+([-\d.]+)\)/.exec(wkt || "");
-      return m ? { lon:+m[1], lat:+m[2] } : null;
+  // =========================================================
+  // ✅ BONUS AUTO (Wikidata) : TEMPLIERS ONLY, quand on ZOOM
+  // - Si WDQS bloque : la carte continue (épingles fixes restent)
+  // - Anti hospitaliers : exclusion explicite
+  // =========================================================
+
+  const loadedZones = new Set();
+
+  // réglages anti-limite WDQS
+  const MIN_ZOOM = 7;      // on n’attaque WDQS qu’à un zoom “proche”
+  const LIMIT    = 180;    // dose par zone (évite les gros paquets)
+  const DEBOUNCE = 650;    // évite spam requêtes
+
+  let timer = null;
+  let wdqsController = null;   // AbortController pour annuler requête en cours
+  let wdqsInFlight   = false;
+
+  function parsePoint(wkt){
+    // supporte Point(...) ou POINT(...)
+    const m = /point\s*\(\s*([-\d.]+)\s+([-\d.]+)\s*\)/i.exec(wkt || "");
+    return m ? { lon:+m[1], lat:+m[2] } : null;
+  }
+
+  function schedule(){
+    clearTimeout(timer);
+    timer = setTimeout(loadAuto, DEBOUNCE);
+  }
+
+  function loadAuto(){
+    if(!window.map || !window.layerAuto){
+      // si ton init map n'est pas encore prêt
+      return;
     }
 
-    function schedule(){
-      clearTimeout(timer);
-      timer = setTimeout(loadAuto, DEBOUNCE);
+    if(map.getZoom() < MIN_ZOOM){
+      setStatus("✅ Épingles fixes : OK. Zoome davantage pour tenter le bonus Wikidata (Templiers uniquement).");
+      return;
     }
 
-    function loadAuto(){
-      if(map.getZoom() < MIN_ZOOM){
-        setStatus("✅ Épingles fixes : OK. Zoome davantage pour tenter le bonus Wikidata.");
-        return;
-      }
+    const b  = map.getBounds();
+    const sw = b.getSouthWest();
+    const ne = b.getNorthEast();
 
-      const b  = map.getBounds();
-      const sw = b.getSouthWest();
-      const ne = b.getNorthEast();
+    // zone “arrondie” = cache (évite de recharger en boucle)
+    const key = [
+      map.getZoom(),
+      sw.lat.toFixed(2), sw.lng.toFixed(2),
+      ne.lat.toFixed(2), ne.lng.toFixed(2)
+    ].join("|");
 
-      // zone “arrondie” = cache (évite de recharger en boucle)
-      const key = [
-        map.getZoom(),
-        sw.lat.toFixed(2), sw.lng.toFixed(2),
-        ne.lat.toFixed(2), ne.lng.toFixed(2)
-      ].join("|");
-      if(loadedZones.has(key)) return;
-      loadedZones.add(key);
+    if(loadedZones.has(key)) return;
+    loadedZones.add(key);
 
-      setStatus("⏳ Chargement d’épingles (Wikidata)…");
+    // si une requête est en cours, on l’annule (on préfère la zone la + récente)
+    if(wdqsController){
+      try{ wdqsController.abort(); }catch(e){}
+    }
+    wdqsController = new AbortController();
 
-      const sparql = `
+    setStatus("⏳ Chargement d’épingles (Wikidata — Templiers uniquement)…");
+
+    // =========================================================
+    // ✅ SPARQL : TEMPLIERS (Q41300) / ❌ PAS HOSPITALIERS (Q187549)
+    //
+    // On privilégie les liens STRUCTURÉS :
+    // - P611 (ordre religieux)
+    // - P127 (propriétaire) / P137 (opérateur/gestionnaire)
+    // - P361 (fait partie de) quand un site est rattaché à un ensemble templier
+    // - P31 = "Templar commandery" (Q3024331) (quand c’est typé)
+    //
+    // Exclusion hospitaliers sur les mêmes axes.
+    // =========================================================
+
+    const sparql = `
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX wikibase: <http://wikiba.se/ontology#>
 PREFIX bd: <http://www.bigdata.com/rdf#>
@@ -1358,16 +1404,30 @@ SELECT ?item ?label ?coord ?frwiki ?enwiki WHERE {
     bd:serviceParam wikibase:cornerEast "Point(${ne.lng} ${ne.lat})"^^geo:wktLiteral .
   }
 
+  # =========================
+  # ✅ INCLUSION : Templiers
+  # =========================
+  FILTER(
+    EXISTS { ?item wdt:P611/wdt:P279* wd:Q41300 . } ||         # ordre religieux : Templiers
+    EXISTS { ?item wdt:P127/wdt:P279* wd:Q41300 . } ||         # propriétaire : Templiers (ou sous-classe)
+    EXISTS { ?item wdt:P137/wdt:P279* wd:Q41300 . } ||         # opérateur/gestionnaire : Templiers
+    EXISTS { ?item wdt:P361/wdt:P279* wd:Q41300 . } ||         # partie de : entité templière
+    EXISTS { ?item wdt:P31/wdt:P279* wd:Q3024331 . }           # instance/sous-classe : commanderie templière
+  )
+
+  # =========================
+  # ❌ EXCLUSION : Hospitaliers
+  # =========================
+  FILTER NOT EXISTS { ?item wdt:P611/wdt:P279* wd:Q187549 . }
+  FILTER NOT EXISTS { ?item wdt:P127/wdt:P279* wd:Q187549 . }
+  FILTER NOT EXISTS { ?item wdt:P137/wdt:P279* wd:Q187549 . }
+  FILTER NOT EXISTS { ?item wdt:P361/wdt:P279* wd:Q187549 . }
+
+  # Labels FR/EN
   ?item rdfs:label ?label .
   FILTER(LANG(?label) = "fr" || LANG(?label) = "en")
 
-  FILTER(
-    CONTAINS(LCASE(STR(?label)), "commanderie") ||
-    CONTAINS(LCASE(STR(?label)), "commandery") ||
-    CONTAINS(LCASE(STR(?label)), "templar") ||
-    CONTAINS(LCASE(STR(?label)), "templier")
-  )
-
+  # Wikipédia FR/EN si dispo (comme avant)
   OPTIONAL {
     ?fr schema:about ?item ; schema:isPartOf <https://fr.wikipedia.org/> ; schema:name ?frTitle .
     BIND(CONCAT("https://fr.wikipedia.org/wiki/", ENCODE_FOR_URI(?frTitle)) AS ?frwiki)
@@ -1378,62 +1438,93 @@ SELECT ?item ?label ?coord ?frwiki ?enwiki WHERE {
   }
 }
 LIMIT ${LIMIT}
-      `.trim();
+    `.trim();
 
-      const url = "https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(sparql);
+    const url = "https://query.wikidata.org/sparql?format=json&query=" + encodeURIComponent(sparql);
 
-      fetch(url, { headers: { "Accept":"application/sparql-results+json" } })
-        .then(r => {
-          if(!r.ok) throw new Error("HTTP " + r.status);
-          return r.json();
-        })
-        .then(json => {
-          const rows = json?.results?.bindings || [];
-          let added = 0;
+    wdqsInFlight = true;
 
-          rows.forEach(row => {
-            const c = parsePoint(row.coord?.value);
-            if(!c) return;
+    fetch(url, {
+      signal: wdqsController.signal,
+      headers: { "Accept":"application/sparql-results+json" }
+    })
+    .then(r => {
+      if(!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    })
+    .then(json => {
+      const rows = json?.results?.bindings || [];
+      let added = 0;
 
-            const name = row.label?.value || "Lieu";
-            const wiki = row.frwiki?.value || row.enwiki?.value || "";
+      // set global anti-doublon
+      map.__seen = map.__seen || new Set();
 
-            // petit filtre anti-doublon basique : on évite d’empiler 2x la même coord
-            // (pas parfait, mais utile)
-            const k = c.lat.toFixed(5) + "|" + c.lon.toFixed(5);
-            if(map.__seen && map.__seen.has(k)) return;
-            map.__seen = map.__seen || new Set();
-            map.__seen.add(k);
+      rows.forEach(row => {
+        const c = parsePoint(row.coord?.value);
+        if(!c) return;
 
-            addPin({name, lat:c.lat, lon:c.lon, wiki}, layerAuto);
-            added++;
-          });
+        // wiki si dispo (FR prioritaire)
+        const wiki = row.frwiki?.value || row.enwiki?.value || "";
 
-          setStatus("✅ Épingles fixes : OK. Bonus Wikidata : +" + added + " (zone actuelle).");
-        })
-        .catch(err => {
-          console.log("WDQS:", err);
-          setStatus("⚠️ Chargement impossible (Wikidata). Réseau/limite WDQS. Les épingles fixes restent disponibles.");
-        });
-    }
+        const name = row.label?.value || "Lieu templier";
 
-    map.on("moveend", schedule);
-    map.on("zoomend", schedule);
+        // anti-doublon coord (utile avec WDQS)
+        const k = c.lat.toFixed(5) + "|" + c.lon.toFixed(5);
+        if(map.__seen.has(k)) return;
+        map.__seen.add(k);
 
-    // iOS/scroll: évite “carte vide”
-    setTimeout(() => map.invalidateSize(), 200);
+        addPin({name, lat:c.lat, lon:c.lon, wiki}, layerAuto);
+        added++;
+      });
 
-    // 1er message
-    setStatus("✅ Épingles fixes : OK. Zoome pour tenter le bonus Wikidata.");
+      setStatus("✅ Épingles fixes : OK. Bonus Wikidata (Templiers) : +" + added + " (zone actuelle).");
+    })
+    .catch(err => {
+      // Abort = normal quand on bouge vite
+      if(String(err?.name || "").toLowerCase().includes("abort")) return;
+
+      console.log("WDQS:", err);
+      setStatus("⚠️ Chargement impossible (Wikidata). Réseau/limite WDQS. Les épingles fixes restent disponibles.");
+    })
+    .finally(() => {
+      wdqsInFlight = false;
+    });
   }
 
-  if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
-  else init();
+  // événements (une seule fois)
+  if(window.map){
+    map.on("moveend", schedule);
+    map.on("zoomend", schedule);
+  } else {
+    // si map est init après : on tente d’accrocher dès que possible
+    const hook = setInterval(() => {
+      if(window.map){
+        clearInterval(hook);
+        map.on("moveend", schedule);
+        map.on("zoomend", schedule);
+      }
+    }, 100);
+  }
+
+  // iOS/scroll: évite “carte vide”
+  setTimeout(() => { try{ map && map.invalidateSize(); }catch(e){} }, 200);
+
+  // 1er message
+  try{
+    setStatus("✅ Épingles fixes : OK. Zoome pour tenter le bonus Wikidata (Templiers uniquement).");
+  }catch(e){}
 })();
 </script>
+
 <script>
+/* =========================================================
+   ✅ OSD / page précédente : version nettoyée (pas doublée)
+   - Ne s’applique pas sur menu.html
+   - Mémorise la page précédente pour ton osd.js
+========================================================= */
 (function(){
   try{
+    if (location.pathname.endsWith("menu.html")) return;
     sessionStorage.setItem("osd_prev_page", location.href);
   }catch(e){}
 
@@ -1442,31 +1533,7 @@ LIMIT ${LIMIT}
     if(!a) return;
     const href = a.getAttribute("href") || "";
     if(href.includes("menu.html")){
-      try{
-        sessionStorage.setItem("osd_prev_page", location.href);
-      }catch(err){}
-    }
-  }, true);
-})();
-</script>
-  <script>
-(function(){
-
-  /* ✅ AJOUT ICI */
-  if (location.pathname.endsWith("menu.html")) return;
-
-  try{
-    sessionStorage.setItem("osd_prev_page", location.href);
-  }catch(e){}
-
-  document.addEventListener("click", function(e){
-    const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
-    if(!a) return;
-    const href = a.getAttribute("href") || "";
-    if(href.includes("menu.html")){
-      try{
-        sessionStorage.setItem("osd_prev_page", location.href);
-      }catch(err){}
+      try{ sessionStorage.setItem("osd_prev_page", location.href); }catch(err){}
     }
   }, true);
 })();
@@ -1475,5 +1542,4 @@ LIMIT ${LIMIT}
 <script defer src="/osd.js"></script>
 
 </body>
-  
 </html>
