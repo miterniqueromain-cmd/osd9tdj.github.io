@@ -1012,7 +1012,7 @@ const fixedPins = [
     wiki:"https://en.wikipedia.org/wiki/Arwad"},
 
   // =========================
-  // ✅ TES AJOUTS (ils doivent être ici, avant le ]; )
+  // ✅ TES AJOUTS
   // =========================
   {name:"Commanderie de Libdeau", city:"Toul", country:"France", lat:48.713741, lon:5.919718,
     wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Libdeau"},
@@ -1058,321 +1058,203 @@ const fixedPins = [
     wiki:"https://en.wikipedia.org/wiki/Temple_Newsam"},
   {name:"Maison du Temple (Hildesheim)", city:"Hildesheim", country:"Allemagne", lat:52.152500, lon:9.951944,
     wiki:"https://fr.wikipedia.org/wiki/Maison_du_Temple_%28Hildesheim%29"},
+
   // =========================
-// ✅ AJOUTS FIXES — ITALIE + AUTRES PAYS (références Wikipédia templières)
-// ⚠️ À coller DANS le tableau fixedPins, juste avant le "];" final.
-// =========================
-
-// =========================
-// ITALIE — Listes régionales de commanderies templières (Wikipédia FR)
-// =========================
-{name:"Liste des commanderies templières (Latium)", city:"Rome", country:"Italie", lat:41.9028, lon:12.4964,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Latium"},
-
-{name:"Liste des commanderies templières (Ligurie)", city:"Gênes", country:"Italie", lat:44.4056, lon:8.9463,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Ligurie"},
-
-{name:"Liste des commanderies templières (Lombardie)", city:"Milan", country:"Italie", lat:45.4642, lon:9.1900,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Lombardie"},
-
-{name:"Liste des commanderies templières (Émilie-Romagne)", city:"Bologne", country:"Italie", lat:44.4949, lon:11.3426,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_%C3%89milie-Romagne"},
-
-{name:"Liste des commanderies templières (Vénétie)", city:"Venise", country:"Italie", lat:45.4408, lon:12.3155,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_V%C3%A9n%C3%A9tie"},
-
-{name:"Liste des commanderies templières (Campanie)", city:"Naples", country:"Italie", lat:40.8518, lon:14.2681,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Campanie"},
-
-{name:"Liste des commanderies templières (Calabre)", city:"Catanzaro", country:"Italie", lat:38.9098, lon:16.5877,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Calabre"},
-
-{name:"Liste des commanderies templières (Marches)", city:"Ancône", country:"Italie", lat:43.6158, lon:13.5189,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_les_Marches"},
-
-{name:"Liste des commanderies templières (Molise)", city:"Campobasso", country:"Italie", lat:41.5600, lon:14.6684,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Molise"},
-
-{name:"Liste des commanderies templières (Ombrie)", city:"Pérouse", country:"Italie", lat:43.1107, lon:12.3908,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Ombrie"},
-
-{name:"Liste des commanderies templières (Piémont)", city:"Turin", country:"Italie", lat:45.0703, lon:7.6869,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Pi%C3%A9mont"},
-
-{name:"Liste des commanderies templières (Pouilles)", city:"Bari", country:"Italie", lat:41.1171, lon:16.8719,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_les_Pouilles"},
-
-{name:"Liste des commanderies templières (Sardaigne)", city:"Cagliari", country:"Italie", lat:39.2238, lon:9.1217,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Sardaigne"},
-
-{name:"Liste des commanderies templières (Sicile)", city:"Palerme", country:"Italie", lat:38.1157, lon:13.3615,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Sicile"},
-
-{name:"Liste des commanderies templières (Vallée d’Aoste)", city:"Aoste", country:"Italie", lat:45.7370, lon:7.3201,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Vall%C3%A9e_d%27Aoste"},
-
-{name:"Liste des commanderies templières (Trentin-Haut-Adige)", city:"Trente", country:"Italie", lat:46.0748, lon:11.1217,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Trentin-Haut-Adige"},
-
-{name:"Templiers en Italie (repère)", city:"Rome", country:"Italie", lat:41.9028, lon:12.4964,
-  wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Italie"},
-
-{name:"Liste des commanderies templières (catégorie Italie)", city:"Rome", country:"Italie", lat:41.9028, lon:12.4964,
-  wiki:"https://fr.wikipedia.org/wiki/Cat%C3%A9gorie:Liste_de_commanderies_templi%C3%A8res_en_Italie"},
-
-// =========================
-// ALLEMAGNE — listes régionales (Wikipédia FR) + province
-// =========================
-{name:"Liste des commanderies templières (Basse-Saxe)", city:"Hanovre", country:"Allemagne", lat:52.3759, lon:9.7320,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_la_Basse-Saxe"},
-
-{name:"Liste des maîtres de la province d’Allemagne (Ordre du Temple)", city:"Berlin", country:"Allemagne", lat:52.5200, lon:13.4050,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_ma%C3%AEtres_de_la_province_d%27Allemagne_de_l%27ordre_du_Temple"},
-
-// =========================
-// IRLANDE — liste provinciale (Wikipédia FR)
-// =========================
-{name:"Liste des commanderies templières (Leinster)", city:"Dublin", country:"Irlande", lat:53.3498, lon:-6.2603,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Leinster"},
-
-// =========================
-// ÉCOSSE — présence templière (Wikipédia EN)
-// =========================
-{name:"Knights Templar in Scotland (repère)", city:"Édimbourg", country:"Écosse", lat:55.9533, lon:-3.1883,
-  wiki:"https://en.wikipedia.org/wiki/Knights_Templar_in_Scotland"},
-
-{name:"Temple (Midlothian) — siège de Balantrodoch", city:"Temple", country:"Écosse", lat:55.8360, lon:-3.1370,
-  wiki:"https://en.wikipedia.org/wiki/Temple,_Midlothian"},
-
-// =========================
-// TCHÉQUIE — Moravie (Wikipédia FR)
-// =========================
-{name:"Liste des commanderies templières (Moravie)", city:"Brno", country:"Tchéquie", lat:49.1951, lon:16.6068,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Moravie"}
+  // ITALIE — Listes régionales (repères)
   // =========================
-// ✅ AJOUTS FIXES — ALLEMAGNE (régions) + EUROPE CENTRALE
-// =========================
+  {name:"Liste des commanderies templières (Latium)", city:"Rome", country:"Italie", lat:41.9028, lon:12.4964,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Latium"},
+  {name:"Liste des commanderies templières (Ligurie)", city:"Gênes", country:"Italie", lat:44.4056, lon:8.9463,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Ligurie"},
+  {name:"Liste des commanderies templières (Lombardie)", city:"Milan", country:"Italie", lat:45.4642, lon:9.1900,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Lombardie"},
+  {name:"Liste des commanderies templières (Émilie-Romagne)", city:"Bologne", country:"Italie", lat:44.4949, lon:11.3426,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_%C3%89milie-Romagne"},
+  {name:"Liste des commanderies templières (Vénétie)", city:"Venise", country:"Italie", lat:45.4408, lon:12.3155,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_V%C3%A9n%C3%A9tie"},
+  {name:"Liste des commanderies templières (Campanie)", city:"Naples", country:"Italie", lat:40.8518, lon:14.2681,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Campanie"},
+  {name:"Liste des commanderies templières (Calabre)", city:"Catanzaro", country:"Italie", lat:38.9098, lon:16.5877,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Calabre"},
+  {name:"Liste des commanderies templières (Marches)", city:"Ancône", country:"Italie", lat:43.6158, lon:13.5189,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_les_Marches"},
+  {name:"Liste des commanderies templières (Molise)", city:"Campobasso", country:"Italie", lat:41.5600, lon:14.6684,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Molise"},
+  {name:"Liste des commanderies templières (Ombrie)", city:"Pérouse", country:"Italie", lat:43.1107, lon:12.3908,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Ombrie"},
+  {name:"Liste des commanderies templières (Piémont)", city:"Turin", country:"Italie", lat:45.0703, lon:7.6869,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Pi%C3%A9mont"},
+  {name:"Liste des commanderies templières (Pouilles)", city:"Bari", country:"Italie", lat:41.1171, lon:16.8719,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_les_Pouilles"},
+  {name:"Liste des commanderies templières (Sardaigne)", city:"Cagliari", country:"Italie", lat:39.2238, lon:9.1217,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Sardaigne"},
+  {name:"Liste des commanderies templières (Sicile)", city:"Palerme", country:"Italie", lat:38.1157, lon:13.3615,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Sicile"},
+  {name:"Liste des commanderies templières (Vallée d’Aoste)", city:"Aoste", country:"Italie", lat:45.7370, lon:7.3201,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Vall%C3%A9e_d%27Aoste"},
+  {name:"Liste des commanderies templières (Trentin-Haut-Adige)", city:"Trente", country:"Italie", lat:46.0748, lon:11.1217,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Trentin-Haut-Adige"},
+  {name:"Templiers en Italie (repère)", city:"Rome", country:"Italie", lat:41.9028, lon:12.4964,
+    wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Italie"},
+  {name:"Liste des commanderies templières (catégorie Italie)", city:"Rome", country:"Italie", lat:41.9028, lon:12.4964,
+    wiki:"https://fr.wikipedia.org/wiki/Cat%C3%A9gorie:Liste_de_commanderies_templi%C3%A8res_en_Italie"},
 
-// =========================
-// ALLEMAGNE — Listes régionales de commanderies templières
-// =========================
-{name:"Liste des commanderies templières (Rhénanie-Palatinat)", city:"Mayence", country:"Allemagne", lat:49.9929, lon:8.2473,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Rh%C3%A9nanie-Palatinat"},
-
-{name:"Liste des commanderies templières (Saxe-Anhalt)", city:"Magdebourg", country:"Allemagne", lat:52.1205, lon:11.6276,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Saxe-Anhalt"},
-
-{name:"Liste des commanderies templières (Thuringe)", city:"Erfurt", country:"Allemagne", lat:50.9848, lon:11.0299,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Thuringe"},
-
-{name:"Liste des commanderies templières (Brandebourg)", city:"Potsdam", country:"Allemagne", lat:52.3906, lon:13.0645,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Brandebourg"},
-
-{name:"Liste des commanderies templières (Hesse)", city:"Wiesbaden", country:"Allemagne", lat:50.0782, lon:8.2398,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Hesse"},
-
-{name:"Liste des commanderies templières (Bavière)", city:"Munich", country:"Allemagne", lat:48.1351, lon:11.5820,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Bavi%C3%A8re"},
-
-{name:"Liste des commanderies templières (Saxe)", city:"Dresde", country:"Allemagne", lat:51.0504, lon:13.7373,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Saxe"},
-
-{name:"Liste des commanderies templières (Bade-Wurtemberg)", city:"Stuttgart", country:"Allemagne", lat:48.7758, lon:9.1829,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Bade-Wurtemberg"},
-
-// =========================
-// AUTRICHE
-// =========================
-{name:"Liste des commanderies templières (Autriche)", city:"Vienne", country:"Autriche", lat:48.2082, lon:16.3738,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Autriche"},
-
-{name:"Templiers en Autriche (repère historique)", city:"Vienne", country:"Autriche", lat:48.2082, lon:16.3738,
-  wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Autriche"},
-
-// =========================
-// POLOGNE
-// =========================
-{name:"Liste des commanderies templières (Pologne)", city:"Poznań", country:"Pologne", lat:52.4064, lon:16.9252,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Pologne"},
-
-{name:"Templiers en Pologne (repère)", city:"Gdańsk", country:"Pologne", lat:54.3520, lon:18.6466,
-  wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Pologne"},
-
-// =========================
-// HONGRIE
-// =========================
-{name:"Templiers en Hongrie (repère historique)", city:"Budapest", country:"Hongrie", lat:47.4979, lon:19.0402,
-  wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Hongrie"},
-
-// =========================
-// SLOVAQUIE
-// =========================
-{name:"Présence templière en Slovaquie", city:"Bratislava", country:"Slovaquie", lat:48.1486, lon:17.1077,
-  wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Slovaquie"},
-
-// =========================
-// SLOVÉNIE
-// =========================
-{name:"Templiers en Slovénie", city:"Ljubljana", country:"Slovénie", lat:46.0569, lon:14.5058,
-  wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Slov%C3%A9nie"},
-
-// =========================
-// CROATIE
-// =========================
-{name:"Templiers en Croatie", city:"Zagreb", country:"Croatie", lat:45.8150, lon:15.9819,
-  wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Croatie"},
-
-// =========================
-// ROUMANIE
-// =========================
-{name:"Templiers en Roumanie", city:"Cluj-Napoca", country:"Roumanie", lat:46.7712, lon:23.6236,
-  wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Roumanie"},
-
-// =========================
-// BULGARIE
-// =========================
-{name:"Templiers en Bulgarie", city:"Sofia", country:"Bulgarie", lat:42.6977, lon:23.3219,
-  wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Bulgarie"},
-
-// =========================
-// SUISSE (complément)
-// =========================
-{name:"Liste des commanderies templières en Suisse", city:"Berne", country:"Suisse", lat:46.9480, lon:7.4474,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Suisse"},
-// =========================
-// 🇮🇹 ITALIE — Templiers (listes régionales + sites majeurs)
-// 👉 À coller À L’INTÉRIEUR de ton const fixedPins = [ ... ] (avant le ]; final)
-// =========================
-
-/* --- Listes régionales (repères) --- */
-{name:"Liste des commanderies templières (Latium)", city:"Rome", country:"Italie", lat:41.9028, lon:12.4964,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Latium"},
-
-{name:"Liste des commanderies templières (Campanie)", city:"Naples", country:"Italie", lat:40.8518, lon:14.2681,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Campanie"},
-
-{name:"Liste des commanderies templières (Calabre)", city:"Reggio de Calabre", country:"Italie", lat:38.1112, lon:15.6473,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Calabre"},
-
-{name:"Liste des commanderies templières (Pouilles)", city:"Bari", country:"Italie", lat:41.1171, lon:16.8719,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_les_Pouilles"},
-
-{name:"Liste des commanderies templières (Sicile)", city:"Palerme", country:"Italie", lat:38.1157, lon:13.3615,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Sicile"},
-
-{name:"Liste des commanderies templières (Sardaigne)", city:"Cagliari", country:"Italie", lat:39.2238, lon:9.1217,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Sardaigne"},
-
-{name:"Liste des commanderies templières (Piémont)", city:"Turin", country:"Italie", lat:45.0703, lon:7.6869,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Pi%C3%A9mont"},
-
-{name:"Liste des commanderies templières (Ligurie)", city:"Gênes", country:"Italie", lat:44.4056, lon:8.9463,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Ligurie"},
-
-{name:"Liste des commanderies templières (Lombardie)", city:"Milan", country:"Italie", lat:45.4642, lon:9.1900,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Lombardie"},
-
-{name:"Liste des commanderies templières (Vénétie)", city:"Venise", country:"Italie", lat:45.4408, lon:12.3155,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_V%C3%A9n%C3%A9tie"},
-
-{name:"Liste des commanderies templières (Toscane)", city:"Florence", country:"Italie", lat:43.7696, lon:11.2558,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Toscane"},
-
-{name:"Liste des commanderies templières (Émilie-Romagne)", city:"Bologne", country:"Italie", lat:44.4949, lon:11.3426,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_%C3%89milie-Romagne"},
-
-{name:"Liste des commanderies templières (Ombrie)", city:"Pérouse", country:"Italie", lat:43.1107, lon:12.3908,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Ombrie"},
-
-{name:"Liste des commanderies templières (Marches)", city:"Ancône", country:"Italie", lat:43.6158, lon:13.5189,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_les_Marches"},
-
-{name:"Liste des commanderies templières (Molise)", city:"Campobasso", country:"Italie", lat:41.5600, lon:14.6650,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Molise"},
-
-{name:"Liste des commanderies templières (Frioul-Vénétie Julienne)", city:"Trieste", country:"Italie", lat:45.6495, lon:13.7768,
-  wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Frioul-V%C3%A9n%C3%A9tie_Julienne"},
-
-/* --- Sites / commanderies avec page dédiée --- */
-{name:"Commanderie de Pérouse (San Bevignate)", city:"Pérouse", country:"Italie", lat:43.1107, lon:12.3908,
-  wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_P%C3%A9rouse"},
-
-{name:"Église du Saint-Sépulcre (Pise)", city:"Pise", country:"Italie", lat:43.7228, lon:10.4017,
-  wiki:"https://fr.wikipedia.org/wiki/%C3%89glise_du_Saint-S%C3%A9pulcre_de_Pise"},
-
-{name:"Château de la Magione (Poggibonsi)", city:"Poggibonsi", country:"Italie", lat:43.4736, lon:11.1483,
-  wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_la_Magione"},
-
-{name:"Palazzo della Commenda del Santo Sepolcro (dit « palazzo dei Templari »)", city:"Florence", country:"Italie", lat:43.7696, lon:11.2558,
-  wiki:"https://it.wikipedia.org/wiki/Palazzo_della_Commenda_del_Santo_Sepolcro"},
-// =========================
-// 🇫🇷 FRANCE — Commanderies supplémentaires
-// =========================
-
-{name:"Commanderie de La Villedieu", city:"Élancourt", country:"France", lat:48.7817, lon:1.9553,
-  wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_La_Villedieu"},
-
-{name:"Commanderie de Montsaunès", city:"Montsaunès", country:"France", lat:43.1075, lon:0.8672,
-  wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Montsaun%C3%A8s"},
-
-{name:"Commanderie de La Salvetat", city:"La Salvetat-sur-Agout", country:"France", lat:43.6097, lon:2.7264,
-  wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_La_Salvetat"},
-
-{name:"Commanderie de Fretay", city:"Épuisay", country:"France", lat:47.9139, lon:0.9242,
-  wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Fretay"},
-
-{name:"Commanderie de Sours", city:"Sours", country:"France", lat:48.4103, lon:1.5939,
-  wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Sours"},
-
-{name:"Commanderie de Thors", city:"Thors", country:"France", lat:45.9436, lon:-0.3086,
-  wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Thors"},
-
-{name:"Commanderie de Launay", city:"Launay (Charente)", country:"France", lat:45.8440, lon:0.0495,
-  wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Launay"},
-
-{name:"Commanderie de La Bessière", city:"La Bessière", country:"France", lat:43.7095, lon:2.0306,
-  wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_La_Bessi%C3%A8re"},
-
-{name:"Commanderie de Villemoison", city:"Villemoison", country:"France", lat:47.7811, lon:2.4550,
-  wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Villemoison"},
-
-{name:"Commanderie de Lantic", city:"Lantic", country:"France", lat:48.6003, lon:-2.8661,
-  wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Lantic"},
-// =========================
-// 🇪🇸 ESPAGNE — Sites templiers supplémentaires
-// =========================
-
-{name:"Château de Peñíscola (occupation templière)", city:"Peñíscola", country:"Espagne", lat:40.3578, lon:0.4069,
-  wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Pe%C3%B1%C3%ADscola"},
-
-{name:"Château d’Amposta (Templiers)", city:"Amposta", country:"Espagne", lat:40.7106, lon:0.5792,
-  wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_d%27Amposta"},
-
-{name:"Château de Corbins (forteresse templière)", city:"Corbins", country:"Espagne", lat:41.6886, lon:0.6967,
-  wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Corbins"},
-
-{name:"Château de Castellote", city:"Castellote", country:"Espagne", lat:40.7992, lon:-0.3180,
-  wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Castellote"},
-
-{name:"Château de Xivert", city:"Alcalà de Xivert", country:"Espagne", lat:40.3042, lon:0.2736,
-  wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Xivert"},
-
-{name:"Château de Monzón", city:"Monzón", country:"Espagne", lat:41.9109, lon:0.1941,
-  wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Monz%C3%B3n"},
-
-{name:"Château de Gardeny", city:"Lleida", country:"Espagne", lat:41.6169, lon:0.6169,
-  wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Gardeny"},
-
-{name:"Château de Jerez de los Caballeros", city:"Jerez de los Caballeros", country:"Espagne", lat:38.3208, lon:-6.7714,
-  wiki:"https://fr.wikipedia.org/wiki/Jerez_de_los_Caballeros"},
-
-{name:"Château de Montalbán", city:"San Martín de Montalbán", country:"Espagne", lat:39.7529, lon:-4.4223,
-  wiki:"https://en.wikipedia.org/wiki/Castle_of_Montalb%C3%A1n"},
-
-{name:"Château de Caravaca (présence templière)", city:"Caravaca de la Cruz", country:"Espagne", lat:38.1056, lon:-1.8660,
-  wiki:"https://fr.wikipedia.org/wiki/Caravaca_de_la_Cruz"},
   // =========================
-  // ANGLETERRE — compléments (sans doublon avec Temple Church / Bruer / etc.)
+  // ALLEMAGNE — listes régionales + province
+  // =========================
+  {name:"Liste des commanderies templières (Basse-Saxe)", city:"Hanovre", country:"Allemagne", lat:52.3759, lon:9.7320,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_la_Basse-Saxe"},
+  {name:"Liste des maîtres de la province d’Allemagne (Ordre du Temple)", city:"Berlin", country:"Allemagne", lat:52.5200, lon:13.4050,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_ma%C3%AEtres_de_la_province_d%27Allemagne_de_l%27ordre_du_Temple"},
+
+  // =========================
+  // IRLANDE — Leinster
+  // =========================
+  {name:"Liste des commanderies templières (Leinster)", city:"Dublin", country:"Irlande", lat:53.3498, lon:-6.2603,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Leinster"},
+
+  // =========================
+  // ÉCOSSE — repères
+  // =========================
+  {name:"Knights Templar in Scotland (repère)", city:"Édimbourg", country:"Écosse", lat:55.9533, lon:-3.1883,
+    wiki:"https://en.wikipedia.org/wiki/Knights_Templar_in_Scotland"},
+  {name:"Temple (Midlothian) — siège de Balantrodoch", city:"Temple", country:"Écosse", lat:55.8360, lon:-3.1370,
+    wiki:"https://en.wikipedia.org/wiki/Temple,_Midlothian"},
+
+  // =========================
+  // TCHÉQUIE — Moravie
+  // =========================
+  {name:"Liste des commanderies templières (Moravie)", city:"Brno", country:"Tchéquie", lat:49.1951, lon:16.6068,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Moravie"},
+
+  // =========================
+  // ✅ AJOUTS FIXES — ALLEMAGNE (régions) + EUROPE CENTRALE
+  // =========================
+  {name:"Liste des commanderies templières (Rhénanie-Palatinat)", city:"Mayence", country:"Allemagne", lat:49.9929, lon:8.2473,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Rh%C3%A9nanie-Palatinat"},
+  {name:"Liste des commanderies templières (Saxe-Anhalt)", city:"Magdebourg", country:"Allemagne", lat:52.1205, lon:11.6276,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Saxe-Anhalt"},
+  {name:"Liste des commanderies templières (Thuringe)", city:"Erfurt", country:"Allemagne", lat:50.9848, lon:11.0299,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Thuringe"},
+  {name:"Liste des commanderies templières (Brandebourg)", city:"Potsdam", country:"Allemagne", lat:52.3906, lon:13.0645,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_dans_le_Brandebourg"},
+  {name:"Liste des commanderies templières (Hesse)", city:"Wiesbaden", country:"Allemagne", lat:50.0782, lon:8.2398,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Hesse"},
+  {name:"Liste des commanderies templières (Bavière)", city:"Munich", country:"Allemagne", lat:48.1351, lon:11.5820,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Bavi%C3%A8re"},
+  {name:"Liste des commanderies templières (Saxe)", city:"Dresde", country:"Allemagne", lat:51.0504, lon:13.7373,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Saxe"},
+  {name:"Liste des commanderies templières (Bade-Wurtemberg)", city:"Stuttgart", country:"Allemagne", lat:48.7758, lon:9.1829,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Bade-Wurtemberg"},
+
+  // =========================
+  // AUTRICHE
+  // =========================
+  {name:"Liste des commanderies templières (Autriche)", city:"Vienne", country:"Autriche", lat:48.2082, lon:16.3738,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Autriche"},
+  {name:"Templiers en Autriche (repère historique)", city:"Vienne", country:"Autriche", lat:48.2082, lon:16.3738,
+    wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Autriche"},
+
+  // =========================
+  // POLOGNE
+  // =========================
+  {name:"Liste des commanderies templières (Pologne)", city:"Poznań", country:"Pologne", lat:52.4064, lon:16.9252,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Pologne"},
+  {name:"Templiers en Pologne (repère)", city:"Gdańsk", country:"Pologne", lat:54.3520, lon:18.6466,
+    wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Pologne"},
+
+  // =========================
+  // HONGRIE
+  // =========================
+  {name:"Templiers en Hongrie (repère historique)", city:"Budapest", country:"Hongrie", lat:47.4979, lon:19.0402,
+    wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Hongrie"},
+
+  // =========================
+  // SLOVAQUIE
+  // =========================
+  {name:"Présence templière en Slovaquie", city:"Bratislava", country:"Slovaquie", lat:48.1486, lon:17.1077,
+    wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Slovaquie"},
+
+  // =========================
+  // SLOVÉNIE
+  // =========================
+  {name:"Templiers en Slovénie", city:"Ljubljana", country:"Slovénie", lat:46.0569, lon:14.5058,
+    wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Slov%C3%A9nie"},
+
+  // =========================
+  // CROATIE
+  // =========================
+  {name:"Templiers en Croatie", city:"Zagreb", country:"Croatie", lat:45.8150, lon:15.9819,
+    wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Croatie"},
+
+  // =========================
+  // ROUMANIE
+  // =========================
+  {name:"Templiers en Roumanie", city:"Cluj-Napoca", country:"Roumanie", lat:46.7712, lon:23.6236,
+    wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Roumanie"},
+
+  // =========================
+  // BULGARIE
+  // =========================
+  {name:"Templiers en Bulgarie", city:"Sofia", country:"Bulgarie", lat:42.6977, lon:23.3219,
+    wiki:"https://fr.wikipedia.org/wiki/Templiers_en_Bulgarie"},
+
+  // =========================
+  // SUISSE (complément)
+  // =========================
+  {name:"Liste des commanderies templières en Suisse", city:"Berne", country:"Suisse", lat:46.9480, lon:7.4474,
+    wiki:"https://fr.wikipedia.org/wiki/Liste_des_commanderies_templi%C3%A8res_en_Suisse"},
+
+  // =========================
+  // FRANCE — Commanderies supplémentaires
+  // =========================
+  {name:"Commanderie de La Villedieu", city:"Élancourt", country:"France", lat:48.7817, lon:1.9553,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_La_Villedieu"},
+  {name:"Commanderie de Montsaunès", city:"Montsaunès", country:"France", lat:43.1075, lon:0.8672,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Montsaun%C3%A8s"},
+  {name:"Commanderie de La Salvetat", city:"La Salvetat-sur-Agout", country:"France", lat:43.6097, lon:2.7264,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_La_Salvetat"},
+  {name:"Commanderie de Fretay", city:"Épuisay", country:"France", lat:47.9139, lon:0.9242,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Fretay"},
+  {name:"Commanderie de Sours", city:"Sours", country:"France", lat:48.4103, lon:1.5939,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Sours"},
+  {name:"Commanderie de Thors", city:"Thors", country:"France", lat:45.9436, lon:-0.3086,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Thors"},
+  {name:"Commanderie de Launay", city:"Launay (Charente)", country:"France", lat:45.8440, lon:0.0495,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Launay"},
+  {name:"Commanderie de La Bessière", city:"La Bessière", country:"France", lat:43.7095, lon:2.0306,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_La_Bessi%C3%A8re"},
+  {name:"Commanderie de Villemoison", city:"Villemoison", country:"France", lat:47.7811, lon:2.4550,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Villemoison"},
+  {name:"Commanderie de Lantic", city:"Lantic", country:"France", lat:48.6003, lon:-2.8661,
+    wiki:"https://fr.wikipedia.org/wiki/Commanderie_de_Lantic"},
+
+  // =========================
+  // ESPAGNE — Sites templiers supplémentaires
+  // =========================
+  {name:"Château de Peñíscola (occupation templière)", city:"Peñíscola", country:"Espagne", lat:40.3578, lon:0.4069,
+    wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Pe%C3%B1%C3%ADscola"},
+  {name:"Château d’Amposta (Templiers)", city:"Amposta", country:"Espagne", lat:40.7106, lon:0.5792,
+    wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_d%27Amposta"},
+  {name:"Château de Corbins (forteresse templière)", city:"Corbins", country:"Espagne", lat:41.6886, lon:0.6967,
+    wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Corbins"},
+  {name:"Château de Castellote", city:"Castellote", country:"Espagne", lat:40.7992, lon:-0.3180,
+    wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Castellote"},
+  {name:"Château de Xivert", city:"Alcalà de Xivert", country:"Espagne", lat:40.3042, lon:0.2736,
+    wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Xivert"},
+  {name:"Château de Monzón", city:"Monzón", country:"Espagne", lat:41.9109, lon:0.1941,
+    wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Monz%C3%B3n"},
+  {name:"Château de Gardeny", city:"Lleida", country:"Espagne", lat:41.6169, lon:0.6169,
+    wiki:"https://fr.wikipedia.org/wiki/Ch%C3%A2teau_de_Gardeny"},
+  {name:"Château de Jerez de los Caballeros", city:"Jerez de los Caballeros", country:"Espagne", lat:38.3208, lon:-6.7714,
+    wiki:"https://fr.wikipedia.org/wiki/Jerez_de_los_Caballeros"},
+  {name:"Château de Montalbán", city:"San Martín de Montalbán", country:"Espagne", lat:39.7529, lon:-4.4223,
+    wiki:"https://en.wikipedia.org/wiki/Castle_of_Montalb%C3%A1n"},
+  {name:"Château de Caravaca (présence templière)", city:"Caravaca de la Cruz", country:"Espagne", lat:38.1056, lon:-1.8660,
+    wiki:"https://fr.wikipedia.org/wiki/Caravaca_de_la_Cruz"},
+
+  // =========================
+  // ANGLETERRE — compléments
   // =========================
   {name:"Witham Preceptory (Temple)", city:"Witham-on-the-Hill", country:"Angleterre", lat:53.020006, lon:-0.395364,
     wiki:"https://en.wikipedia.org/wiki/Witham_Preceptory"},
@@ -1394,20 +1276,18 @@ const fixedPins = [
     wiki:"https://en.wikipedia.org/wiki/Ribston_Preceptory"},
 
   // =========================
-  // PORTUGAL — complément (attention: même zone que ton pin Tomar/Convento)
+  // PORTUGAL — complément
   // =========================
   {name:"Castle of Tomar (Templars)", city:"Tomar", country:"Portugal", lat:39.604170, lon:-8.422780,
     wiki:"https://en.wikipedia.org/wiki/Castle_of_Tomar"},
 
   // =========================
-  // ALLEMAGNE — complément (origine liée aux Templiers à Berlin)
+  // ALLEMAGNE — Berlin (fondations liées)
   // =========================
   {name:"Tempelhof (fondation liée aux Templiers)", city:"Berlin", country:"Allemagne", lat:52.466670, lon:13.383330,
     wiki:"https://en.wikipedia.org/wiki/Tempelhof"},
   {name:"Mariendorf (fondation liée aux Templiers)", city:"Berlin", country:"Allemagne", lat:52.433330, lon:13.366670,
     wiki:"https://en.wikipedia.org/wiki/Mariendorf"},
-  
-
 
 ];
 
