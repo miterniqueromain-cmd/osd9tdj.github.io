@@ -5,27 +5,14 @@
   <title>DG ASSOCIA PRO – Conditions générales – O.S.D.9.T.D.J.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <meta name="description" content="Lecture intégrée des conditions générales Allianz Associa Pro (PDF) avec navigation et ambiance du site O.S.D.9.T.D.J.">
+  <meta name="description" content="Consultation intégrée des conditions générales DG ASSOCIA PRO (PDF) – O.S.D.9.T.D.J.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
   <meta name="theme-color" content="#0b0b0b">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
   <link rel="canonical" href="https://osd9tdj.org/dg-associa-pro.html">
-
-  <meta property="og:locale" content="fr_FR">
-  <meta property="og:site_name" content="OSD9TDJ">
-  <meta property="og:title" content="DG ASSOCIA PRO – Conditions générales – O.S.D.9.T.D.J.">
-  <meta property="og:description" content="Lecteur PDF intégré (mobile/tablette) pour consulter les conditions générales Allianz.">
-  <meta property="og:image" content="https://osd9tdj.org/assurance.jpg">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://osd9tdj.org/dg-associa-pro.html">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-
-  <!-- PDF.js LOCAL (même domaine = pas de blocage CSP/CDN) -->
-  <link rel="stylesheet" href="/pdfjs/pdf_viewer.min.css">
-  <script src="/pdfjs/pdf.min.js"></script>
 
   <style>
     :root{
@@ -33,6 +20,7 @@
       --clair:#f5f0e6;
       --or-line:rgba(214,167,40,0.55);
     }
+
     html,body{
       height:100%;
       margin:0;
@@ -43,15 +31,19 @@
       background: radial-gradient(circle at top, #1b1b1b, #020202 70%);
       position:relative;
     }
+
     .frame-fixed{
       position: fixed;
       inset: 14px;
       border-radius: 22px;
       border: 2px solid var(--or-line);
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.08) inset, 0 0 38px rgba(0,0,0,0.40);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.08) inset,
+        0 0 38px rgba(0,0,0,0.40);
       pointer-events: none;
       z-index: 40;
     }
+
     .menu-dot{
       position: fixed;
       right: 26px;
@@ -76,15 +68,15 @@
     }
     .menu-dot:hover{ background: rgba(214,167,40,0.12); color:#fff; }
 
-    .viewport-scroll{
+    .viewport{
       position: fixed;
       inset: 22px;
-      overflow-y: auto;
-      overflow-x: hidden;
-      -webkit-overflow-scrolling: touch;
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      padding: 18px 14px 16px;
+      box-sizing:border-box;
       z-index: 1;
-      padding: 18px 14px 18px;
-      box-sizing: border-box;
     }
 
     .header{
@@ -99,8 +91,8 @@
       background: rgba(0,0,0,0.45);
       backdrop-filter: blur(6px);
       box-shadow: 0 10px 22px rgba(0,0,0,0.35);
-      margin-bottom: 12px;
     }
+
     .title{
       font-family:'Cinzel',serif;
       font-weight:700;
@@ -113,16 +105,9 @@
       margin-top:6px;
       font-size:0.84rem;
       opacity:0.88;
-      max-width: 90ch;
+      max-width: 85ch;
       line-height:1.35;
     }
-    .status{
-      margin: 10px 0 0;
-      font-size:0.85rem;
-      opacity:0.92;
-      line-height:1.35;
-    }
-    .status strong{ color: var(--or); }
 
     .btns{
       display:flex;
@@ -150,56 +135,70 @@
     }
     .btn:hover{ background: rgba(214,167,40,0.14); color:#fff; }
 
-    .pdf-shell{
+    .pdf-wrap{
+      position: relative;
+      flex:1 1 auto;
       border-radius: 18px;
       overflow:hidden;
       border: 2px solid rgba(214, 167, 40, 0.55);
       box-shadow: 0 0 35px rgba(0,0,0,0.65);
-      background: rgba(0,0,0,0.35);
-      padding: 14px 10px 16px;
+      background:#000;
+      min-height: 300px;
     }
 
-    #pdfPages{
-      display:flex;
-      flex-direction:column;
-      gap: 14px;
-      align-items:center;
-      justify-content:flex-start;
-      transform-origin: center top;
-      touch-action: pan-y pinch-zoom;
-    }
-    .page{ width:100%; display:flex; justify-content:center; }
-    canvas{
-      border-radius: 10px;
-      background:#111;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.55);
-      max-width: 100%;
-      height: auto;
+    /* PDF intégré */
+    iframe{
+      width:100%;
+      height:100%;
+      border:0;
       display:block;
+      background:#000;
     }
 
+    /* Fallback simple (comme tu veux) */
     .fallback{
-      margin-top: 12px;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(214,167,40,0.35);
-      background: rgba(0,0,0,0.45);
+      position:absolute;
+      inset: 0;
       display:none;
+      padding: 16px;
+      box-sizing:border-box;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.78), rgba(0,0,0,0.88));
     }
-
-    .hint{
+    .fallback .box{
+      max-width: 720px;
+      margin: 0 auto;
+      border-radius: 16px;
+      border: 1px solid rgba(214,167,40,0.35);
+      background: rgba(0,0,0,0.55);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.45);
+      padding: 14px 14px 12px;
+    }
+    .fallback .box h2{
+      margin: 0 0 8px;
+      font-family:'Cinzel',serif;
+      font-size: 1rem;
+      text-transform:uppercase;
+      letter-spacing:0.06em;
+      color: var(--or);
+    }
+    .fallback .box p{
+      margin: 0 0 10px;
+      font-size:0.92rem;
+      line-height:1.45;
+      opacity:0.92;
+    }
+    .fallback .row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
       margin-top: 10px;
-      font-size:0.82rem;
-      opacity:0.85;
-      line-height:1.35;
     }
 
     @media (max-width:600px){
       .frame-fixed{ inset:12px; }
-      .viewport-scroll{ inset:20px; padding: 14px 12px 14px; }
+      .viewport{ inset:20px; padding: 14px 12px 14px; }
       .menu-dot{ right:22px; top: calc(22px + env(safe-area-inset-top)); }
       .title{ font-size:0.9rem; }
-      .pdf-shell{ padding: 12px 8px 14px; }
     }
   </style>
 </head>
@@ -208,204 +207,67 @@
   <div class="frame-fixed" aria-hidden="true"></div>
   <a class="menu-dot" href="menu.html" title="Menu" aria-label="Menu">⋯</a>
 
-  <div class="viewport-scroll">
+  <div class="viewport">
     <div class="header">
       <div>
         <div class="title">DG ASSOCIA PRO — Conditions générales</div>
         <div class="subtitle">
-          Lecture intégrée au site (mobile/tablette). Faites défiler pour voir toutes les pages.
-          Zoom possible (+/− ou pincement).
+          Lecture intégrée au site. Si votre navigateur ne l’affiche pas correctement, utilisez “PDF direct” ou “Retour au site”.
         </div>
-        <div class="status" id="statusText">Chargement du document…</div>
       </div>
 
       <div class="btns">
-        <button class="btn" type="button" id="btnBack">← Retour</button>
-        <button class="btn" type="button" id="zoomOut">−</button>
-        <button class="btn" type="button" id="zoomIn">+</button>
-        <a class="btn" href="/DG%20ASSOCIA%20PRO.pdf" target="_blank" rel="noopener" id="btnOpenNative">↗ PDF normal</a>
+        <a class="btn" href="assurance.html">← Retour</a>
+        <!-- IMPORTANT : pas de target blank => pas de nouvelle fenêtre -->
+        <a class="btn" href="/DG%20ASSOCIA%20PRO.pdf" rel="noopener">↗ PDF direct</a>
       </div>
     </div>
 
-    <div class="pdf-shell">
-      <div id="pdfPages"></div>
+    <div class="pdf-wrap" aria-label="PDF intégré">
+      <!-- On garde une tentative d’affichage intégrée (comme avant) -->
+      <iframe id="pdfFrame" src="/DG%20ASSOCIA%20PRO.pdf" title="DG ASSOCIA PRO (PDF)"></iframe>
 
-      <div class="fallback" id="fallbackBox">
-        <div class="title" style="font-size:0.9rem;">Affichage intégré indisponible</div>
-        <div class="subtitle" style="margin-top:8px;">
-          Si votre navigateur bloque l’affichage intégré, utilisez l’ouverture normale.
-          <br><br>
-          <span id="errDetail" style="opacity:.85;"></span>
+      <!-- Fallback simple : seulement si ça ne s’affiche pas / si ça bug -->
+      <div class="fallback" id="fallback">
+        <div class="box">
+          <h2>Affichage intégré indisponible</h2>
+          <p>
+            Votre navigateur ne permet pas l’affichage intégré du document, ou l’affichage est incomplet.
+            Vous pouvez consulter le PDF directement ou revenir au site.
+          </p>
+          <div class="row">
+            <a class="btn" href="/DG%20ASSOCIA%20PRO.pdf" rel="noopener">↗ Consulter le PDF directement</a>
+            <a class="btn" href="assurance.html">← Retour au site</a>
+          </div>
         </div>
-        <div class="btns" style="margin-top:10px; justify-content:flex-start;">
-          <a class="btn" href="/DG%20ASSOCIA%20PRO.pdf" target="_blank" rel="noopener">↗ Ouvrir le PDF normal</a>
-          <a class="btn" href="assurance.html">← Retour au site</a>
-        </div>
-      </div>
-
-      <div class="hint">
-        Astuce : sur mobile, le zoom “pincer” fonctionne. Sinon utilisez +/−.
       </div>
     </div>
   </div>
 
   <script>
   (function(){
-    const PDF_URL = "/DG%20ASSOCIA%20PRO.pdf";
-    const statusText = document.getElementById("statusText");
-    const pagesEl = document.getElementById("pdfPages");
-    const fallbackBox = document.getElementById("fallbackBox");
-    const errDetail = document.getElementById("errDetail");
+    // But : rester simple. On affiche le fallback si le PDF ne se charge pas “comme une page”.
+    // Sur certains mobiles, iframe PDF charge mais n’est pas scrollable : on laisse le choix au visiteur via PDF direct.
+    const frame = document.getElementById("pdfFrame");
+    const fallback = document.getElementById("fallback");
 
-    // Retour = toujours assurance.html (comme tu veux)
-    document.getElementById("btnBack").addEventListener("click", function(){
-      location.href = "assurance.html";
+    let loaded = false;
+
+    // Si l’iframe déclenche load => on considère que ça s’ouvre.
+    frame.addEventListener("load", function(){
+      loaded = true;
+      // On ne masque PAS forcément : on ne veut pas de “double panneau”.
+      // On laisse juste le PDF visible. (fallback reste caché)
     });
 
-    // PDF.js worker en LOCAL
-    if (!window.pdfjsLib) {
-      showFallback("PDF.js non chargé (script local introuvable). Vérifie /pdfjs/pdf.min.js");
-      return;
-    }
-    pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdfjs/pdf.worker.min.js";
-
-    let pdfDoc = null;
-    let baseScale = 1;
-    let userScale = 1;
-    let rendering = false;
-
-    function setStatus(html){ statusText.innerHTML = html; }
-
-    function showFallback(msg){
-      setStatus('Impossible d’afficher le document en mode intégré. <strong>Utilisez “PDF normal”.</strong>');
-      if (errDetail) errDetail.textContent = "Détail : " + msg;
-      fallbackBox.style.display = "block";
-    }
-
-    function clearPages(){
-      while(pagesEl.firstChild) pagesEl.removeChild(pagesEl.firstChild);
-    }
-
-    function computeFitScale(pageWidth){
-      const shell = document.querySelector(".pdf-shell");
-      const st = getComputedStyle(shell);
-      const available = Math.max(280, shell.clientWidth - parseFloat(st.paddingLeft||0) - parseFloat(st.paddingRight||0));
-      return available / pageWidth;
-    }
-
-    async function renderAll(){
-      if(!pdfDoc || rendering) return;
-      rendering = true;
-      try{
-        clearPages();
-        fallbackBox.style.display = "none";
-
-        const first = await pdfDoc.getPage(1);
-        const vp1 = first.getViewport({ scale: 1 });
-        baseScale = computeFitScale(vp1.width);
-
-        const finalScale = baseScale * userScale;
-        const total = pdfDoc.numPages;
-
-        setStatus('Document chargé : <strong>' + total + '</strong> page(s). Défilez pour tout lire.');
-
-        for(let i=1; i<=total; i++){
-          const page = await pdfDoc.getPage(i);
-          const viewport = page.getViewport({ scale: finalScale });
-
-          const wrap = document.createElement("div");
-          wrap.className = "page";
-
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d", { alpha:false });
-
-          const dpr = Math.min(2, window.devicePixelRatio || 1);
-          canvas.width = Math.floor(viewport.width * dpr);
-          canvas.height = Math.floor(viewport.height * dpr);
-          canvas.style.width = Math.floor(viewport.width) + "px";
-          canvas.style.height = Math.floor(viewport.height) + "px";
-          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-          wrap.appendChild(canvas);
-          pagesEl.appendChild(wrap);
-
-          await page.render({ canvasContext: ctx, viewport }).promise;
-        }
-      }catch(e){
-        showFallback(e && e.message ? e.message : String(e));
-      }finally{
-        rendering = false;
+    // Timeout : si pas de load au bout de X secondes => on propose fallback.
+    setTimeout(function(){
+      if(!loaded){
+        fallback.style.display = "block";
       }
-    }
+    }, 2500);
 
-    async function load(){
-      try{
-        setStatus("Chargement du document…");
-        pdfDoc = await pdfjsLib.getDocument({ url: PDF_URL }).promise;
-        await renderAll();
-      }catch(e){
-        showFallback(e && e.message ? e.message : String(e));
-      }
-    }
-
-    function clamp(n,min,max){ return Math.max(min, Math.min(max, n)); }
-
-    document.getElementById("zoomIn").addEventListener("click", async function(){
-      userScale = clamp(userScale * 1.15, 0.6, 3.0);
-      await renderAll();
-    });
-    document.getElementById("zoomOut").addEventListener("click", async function(){
-      userScale = clamp(userScale / 1.15, 0.6, 3.0);
-      await renderAll();
-    });
-
-    // pinch zoom : preview + rerender à la fin
-    let pinch = false, startDist = 0, startScale = 1;
-    function dist(t1,t2){
-      const dx=t1.clientX-t2.clientX, dy=t1.clientY-t2.clientY;
-      return Math.sqrt(dx*dx+dy*dy);
-    }
-
-    pagesEl.addEventListener("touchstart", function(e){
-      if(e.touches && e.touches.length===2){
-        pinch = true;
-        startDist = dist(e.touches[0], e.touches[1]);
-        startScale = userScale;
-      }
-    }, { passive:true });
-
-    pagesEl.addEventListener("touchmove", function(e){
-      if(!pinch || !e.touches || e.touches.length!==2) return;
-      const ratio = dist(e.touches[0], e.touches[1]) / startDist;
-      const preview = clamp(startScale * ratio, 0.6, 3.0);
-      pagesEl.style.transform = "scale(" + preview.toFixed(3) + ")";
-      pagesEl.style.transition = "none";
-    }, { passive:true });
-
-    async function endPinch(){
-      if(!pinch) return;
-      pinch = false;
-      const m = pagesEl.style.transform.match(/scale\(([^)]+)\)/);
-      const final = m ? parseFloat(m[1]) : userScale;
-      pagesEl.style.transform = "";
-      userScale = clamp(final, 0.6, 3.0);
-      await renderAll();
-    }
-
-    pagesEl.addEventListener("touchend", function(e){
-      if(!e.touches || e.touches.length<2) endPinch();
-    }, { passive:true });
-    pagesEl.addEventListener("touchcancel", endPinch, { passive:true });
-
-    // Re-render orientation/tablette
-    let t=null;
-    window.addEventListener("resize", function(){
-      if(!pdfDoc) return;
-      clearTimeout(t);
-      t=setTimeout(renderAll, 180);
-    });
-
-    load();
+    // Bouton “PDF direct” et “Retour” restent toujours visibles en haut => pas de piège.
   })();
   </script>
 
