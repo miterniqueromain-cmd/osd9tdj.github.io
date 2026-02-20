@@ -456,6 +456,82 @@
       .viewport-scroll{ inset:20px; }
       .menu-dot{ right:22px; top: calc(22px + env(safe-area-inset-top)); }
     }
+
+    /* ===================== */
+    /* ✅ AJOUTS DEMANDÉS UNIQUEMENT */
+    /* ===================== */
+
+    /* 1) Petites barres dorées entre paragraphes (dans .box uniquement) */
+    .box p + p{
+      position: relative;
+      padding-top: 18px;
+      margin-top: 18px;
+    }
+    .box p + p::before{
+      content:"";
+      position:absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 78px;               /* petite barre, ne va pas au bout */
+      height: 1px;               /* très fine */
+      background: rgba(214,167,40,0.55);
+      border-radius: 999px;
+      box-shadow: 0 0 10px rgba(214,167,40,0.12);
+      pointer-events:none;
+    }
+
+    /* 2) Un seul “bouton coulissant” pour Site/PDF (un seul composant) */
+    .pill-switch{
+      position: relative;
+      display: inline-flex;
+      align-items: stretch;
+      border-radius: 999px;
+      overflow: hidden;
+      border:1px solid rgba(214,167,40,0.60);
+      background: rgba(0,0,0,0.18);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+      user-select:none;
+      max-width: 100%;
+    }
+    .pill-switch .opt{
+      position: relative;
+      z-index: 2;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      text-decoration:none;
+      color: rgba(245,240,230,0.92);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size:0.88rem;
+      white-space: nowrap;
+      background: rgba(0,0,0,0.35);
+      transition: color 0.2s ease;
+    }
+    .pill-switch .opt + .opt{
+      border-left:1px solid rgba(214,167,40,0.35);
+    }
+    .pill-switch .glide{
+      position:absolute;
+      inset: 2px auto 2px 2px;
+      width: calc(50% - 2px);
+      border-radius: 999px;
+      background: rgba(214,167,40,0.14);
+      border: 1px solid rgba(214,167,40,0.25);
+      box-shadow: 0 0 18px rgba(0,0,0,0.35);
+      transform: translateX(0);
+      transition: transform 0.22s ease;
+      z-index: 1;
+      pointer-events:none;
+    }
+    .pill-switch[data-active="pdf"] .glide{
+      transform: translateX(100%);
+    }
+    .pill-switch .opt:hover{
+      color:#fff;
+    }
   </style>
 
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -573,11 +649,22 @@
 
         <!-- ✅ Conditions générales : ouverture intégrée au site + option PDF direct -->
         <div class="pill-row" aria-label="Documents d’assurance">
-          <a class="pill" href="dg-associa-pro.html" title="Ouvrir les conditions générales dans le lecteur du site">
-            📘 Conditions générales (sur le site de OSD9TDJ)  </a>
-          <a class="pill" href="/DG%20ASSOCIA%20PRO.pdf" target="_blank" rel="noopener" title="Ouvrir le PDF directement">
-            ↗ Ouvrir les Conditions générales en PDF directement
-          </a>
+
+          <!-- ✅ REMPLACEMENT DES 2 PILLS PAR 1 SEUL “BOUTON COULISSANT” -->
+          <div class="pill-switch" id="docSwitch" data-active="site" aria-label="Conditions générales">
+            <span class="glide" aria-hidden="true"></span>
+
+            <a class="opt" href="dg-associa-pro.html"
+               title="Ouvrir sur le site">
+              📘 CG sur site
+            </a>
+
+            <a class="opt" href="/DG%20ASSOCIA%20PRO.pdf" target="_blank" rel="noopener"
+               title="Ouvrir le PDF">
+              ↗ PDF direct
+            </a>
+          </div>
+
         </div>
       </div>
 
@@ -641,6 +728,28 @@
         }catch(err){}
       }
     }, true);
+  })();
+  </script>
+
+  <!-- ✅ mini JS : fait juste “glisser” l’overlay sur l’option cliquée (aucun autre effet) -->
+  <script>
+  (function(){
+    const sw = document.getElementById("docSwitch");
+    if(!sw) return;
+
+    const opts = sw.querySelectorAll(".opt");
+    opts.forEach((opt, idx) => {
+      opt.addEventListener("mouseenter", () => {
+        sw.setAttribute("data-active", idx === 0 ? "site" : "pdf");
+      });
+      opt.addEventListener("focus", () => {
+        sw.setAttribute("data-active", idx === 0 ? "site" : "pdf");
+      });
+    });
+
+    sw.addEventListener("mouseleave", () => {
+      sw.setAttribute("data-active", "site");
+    });
   })();
   </script>
 
