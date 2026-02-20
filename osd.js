@@ -13,12 +13,34 @@
 
   // ===== CONFIG =====
   const TRACKS = [
-    "/charlvera-guardian-of-the-holy-land-epic-background-music-for-video-206639.mp3",
-    "/charlvera-knight-of-the-sacred-order-epic-background-music-for-video-206650.mp3",
-    "/charlvera-legends-of-the-iron-cross_-a-symphony-of-war-and-glory-472348.mp3",
-    "/deuslower-fantasy-medieval-epic-music-239599.mp3",
-    "/fideascende-crux-invicta-325224.mp3"
-  ];
+
+  // ⚔️ AGRESSIF / GUERRE
+  "/charlvera-legends-of-the-iron-cross_-a-symphony-of-war-and-glory-472348.mp3",
+  "/paulyudin-epic-485934.mp3",
+  "/charlvera-guardian-of-the-holy-land-epic-background-music-for-video-206639.mp3",
+
+  // ⚔️ CHEVALERIE / ÉPIQUE
+  "/charlvera-knight-of-the-sacred-order-epic-background-music-for-video-206650.mp3",
+  "/deuslower-fantasy-medieval-epic-music-239599.mp3",
+
+  // ⚔️ ÉPIQUE CINÉ (⚠️ NOM TRONQUÉ SUR TA CAPTURE → remplacer par le nom EXACT du fichier)
+  "/sigmamusicart-epic-cinematic-background-REPLACE_WITH_FULL_FILENAME.mp3",
+
+  // ✝️ TRANSITION SACRÉE
+  "/fideascende-crux-bellum-vox-325218.mp3",
+  "/fideascende-sanguis-dei-325211.mp3",
+  "/fideascende-crux-invicta-325224.mp3",
+
+  // ✝️ GRÉGORIEN PROFOND
+  "/nickpanek-act-of-contrition-latin-gregorian-chant-340859.mp3",
+  "/nickpanek-gregorian-chant-regina-caeli-prayer-340861.mp3",
+  "/nickpanek-amo-te-gregorian-chant-in-latin-340860.mp3",
+
+  // ✝️ FIN MYSTIQUE
+  "/fideascende-pater-noster-324805.mp3",
+
+  
+];
 
   const SWORD_SRC = "/sons/epee.mp3";
   const BGM_VOLUME = 0.40;
