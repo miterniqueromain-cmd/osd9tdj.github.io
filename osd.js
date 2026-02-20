@@ -23,8 +23,6 @@
   "/charlvera-knight-of-the-sacred-order-epic-background-music-for-video-206650.mp3",
   "/deuslower-fantasy-medieval-epic-music-239599.mp3",
 
-  // ⚔️ ÉPIQUE CINÉ (⚠️ NOM TRONQUÉ SUR TA CAPTURE → remplacer par le nom EXACT du fichier)
-  "/sigmamusicart-epic-cinematic-background-REPLACE_WITH_FULL_FILENAME.mp3",
 
   // ✝️ TRANSITION SACRÉE
   "/fideascende-crux-bellum-vox-325218.mp3",
