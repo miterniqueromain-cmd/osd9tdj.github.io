@@ -1,18 +1,17 @@
-/* osd.js — OSD9TDJ (playlist + épée) — STABLE FIX
-   Fix principal: NE PLUS skipper sur events "stalled/suspend/emptied" (trop fréquents).
-   -> On skip uniquement sur: ended + error
-   -> Et on garde un watchdog qui skip seulement si vraiment bloqué > 10s
-
-   + Unlock mobile robuste (play dans le geste)
-   + Google Translate OK (pause blur/hidden)
-   + Lock global si storage dispo, sinon fallback (ne bloque jamais l’audio)
+/* osd.js — OSD9TDJ — STABLE SIMPLE
+   - 1 seul audio BGM + 1 son épée
+   - Start au 1er geste utilisateur (mobile/PC)
+   - Shuffle sans répétition (sessionStorage)
+   - Enchaînement propre: ended => next
+   - Erreur: error => next
+   - Google Translate OK: blur/hidden pause, focus reprise si on jouait
 */
 
 (() => {
   "use strict";
 
   // ===== SINGLETON =====
-  if (window.__OSD_AUDIO_SINGLETON__ && window.__OSD_AUDIO_SINGLETON__.alive) return;
+  if (window.__OSD_AUDIO__?.alive) return;
 
   // ===== CONFIG =====
   const TRACKS = [
@@ -44,54 +43,33 @@
   const BGM_VOLUME = 0.40;
   const SWORD_VOLUME = 0.90;
 
+  const BLUR_PAUSE_DELAY_MS = 250;
+
+  // session keys
   const K_UNLOCKED = "osd_audio_unlocked";
   const K_ORDER = "osd_playlist_order";
-  const K_POS   = "osd_playlist_pos";
-
-  const LOCK_KEY = "osd_audio_lock";
-  const CHANNEL_NAME = "osd_audio_channel";
-  const instanceId = `${Date.now()}_${Math.random().toString(16).slice(2)}`;
-  const STALE_LOCK_MS = 15_000;
-
-  const BLUR_PAUSE_DELAY_MS = 300;
-
-  // watchdog (bloqué si currentTime n'avance pas)
-  const WATCHDOG_TICK_MS = 2000;
-  const WATCHDOG_STUCK_MS = 10_000;
+  const K_POS = "osd_playlist_pos";
 
   // ===== UTILS =====
-  const log  = (...a) => { try { console.log("[OSD]", ...a); } catch {} };
-  const warn = (...a) => { try { console.warn("[OSD]", ...a); } catch {} };
+  const log = (...a) => { try { /* console.log("[OSD]", ...a); */ } catch {} };
 
   function toAbs(url) {
     return new URL(String(url || ""), document.baseURI).href;
   }
-  function playlistLen() { return Array.isArray(TRACKS) ? TRACKS.length : 0; }
 
-  function markUnlocked(){ try { sessionStorage.setItem(K_UNLOCKED, "1"); } catch {} }
-  function isUnlocked(){ try { return sessionStorage.getItem(K_UNLOCKED) === "1"; } catch { return false; } }
-
-  function safePause(a){ try { a.pause(); } catch {} }
-  function safeStop(a){ try { a.pause(); } catch {} try { a.currentTime = 0; } catch {} }
-
-  function storageOK() {
-    try {
-      const k = "__osd_test__";
-      localStorage.setItem(k, "1");
-      localStorage.removeItem(k);
-      return true;
-    } catch { return false; }
+  function isUnlocked() {
+    try { return sessionStorage.getItem(K_UNLOCKED) === "1"; } catch { return false; }
   }
-  const LOCK_ENABLED = storageOK();
-  if (!LOCK_ENABLED) warn("localStorage indisponible -> lock global OFF (audio OK).");
+  function markUnlocked() {
+    try { sessionStorage.setItem(K_UNLOCKED, "1"); } catch {}
+  }
 
-  // ===== AUDIO ELEMENTS =====
   function ensureAudioEl(id) {
-    // supprime doublons (sécurité)
+    // supprime doublons si jamais
     const all = document.querySelectorAll(`#${CSS.escape(id)}`);
     if (all.length > 1) {
-      all.forEach((n, idx) => {
-        if (idx === 0) return;
+      all.forEach((n, i) => {
+        if (i === 0) return;
         try { n.pause(); } catch {}
         try { n.remove(); } catch {}
       });
@@ -101,7 +79,7 @@
     if (!el) {
       el = document.createElement("audio");
       el.id = id;
-      el.preload = "metadata";     // ✅ important: évite réseau agressif au boot
+      el.preload = "metadata"; // stable, pas agressif
       el.playsInline = true;
       el.style.display = "none";
       (document.body || document.documentElement).appendChild(el);
@@ -109,6 +87,73 @@
     return el;
   }
 
+  function fisherYates(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function getOrder() {
+    try { return JSON.parse(sessionStorage.getItem(K_ORDER) || "[]"); } catch { return []; }
+  }
+  function setOrder(o) {
+    try { sessionStorage.setItem(K_ORDER, JSON.stringify(o)); } catch {}
+  }
+  function getPos() {
+    try { return parseInt(sessionStorage.getItem(K_POS) || "0", 10) || 0; } catch { return 0; }
+  }
+  function setPos(n) {
+    try { sessionStorage.setItem(K_POS, String(n)); } catch {}
+  }
+
+  function ensureOrder() {
+    const L = TRACKS.length;
+    if (!L) return;
+
+    let order = getOrder();
+    let pos = getPos();
+
+    const valid =
+      Array.isArray(order) &&
+      order.length === L &&
+      order.every(n => Number.isInteger(n) && n >= 0 && n < L) &&
+      Number.isInteger(pos) &&
+      pos >= 0 && pos < L;
+
+    if (!valid) {
+      order = fisherYates([...Array(L)].map((_, i) => i));
+      pos = 0;
+      setOrder(order);
+      setPos(pos);
+    }
+  }
+
+  function nextIndex() {
+    ensureOrder();
+    const order = getOrder();
+    let pos = getPos();
+
+    const idx = order[pos];
+    pos++;
+
+    if (pos >= order.length) {
+      // reshuffle, mais évite de recommencer par la dernière piste
+      const last = order[order.length - 1];
+      let newOrder = fisherYates([...Array(order.length)].map((_, i) => i));
+      if (newOrder.length > 1 && newOrder[0] === last) {
+        [newOrder[0], newOrder[1]] = [newOrder[1], newOrder[0]];
+      }
+      setOrder(newOrder);
+      pos = 0;
+    }
+
+    setPos(pos);
+    return idx;
+  }
+
+  // ===== AUDIO STATE =====
   const bgm = ensureAudioEl("osd_bgm");
   bgm.loop = false;
   bgm.volume = BGM_VOLUME;
@@ -117,141 +162,17 @@
   sword.src = toAbs(SWORD_SRC);
   sword.volume = SWORD_VOLUME;
 
-  // ===== SHUFFLE =====
-  function getOrder(){ try { return JSON.parse(sessionStorage.getItem(K_ORDER) || "[]"); } catch { return []; } }
-  function setOrder(arr){ try { sessionStorage.setItem(K_ORDER, JSON.stringify(arr)); } catch {} }
-  function getPos(){ try { return parseInt(sessionStorage.getItem(K_POS) || "0", 10) || 0; } catch { return 0; } }
-  function setPos(n){ try { sessionStorage.setItem(K_POS, String(n)); } catch {} }
+  let started = false;
+  let starting = false;
+  let wasPlayingBeforeBlur = false;
 
-  function fisherYates(arr){
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }
-
-  function ensureShuffleOrder(){
-    const L = playlistLen();
-    if (!L) return;
-    let order = getOrder();
-    let pos = getPos();
-
-    const valid =
-      Array.isArray(order) &&
-      order.length === L &&
-      order.every(n => Number.isInteger(n) && n >= 0 && n < L) &&
-      Number.isInteger(pos) && pos >= 0 && pos < L;
-
-    if (!valid){
-      order = fisherYates([...Array(L)].map((_, i) => i));
-      pos = 0;
-      setOrder(order);
-      setPos(pos);
-    }
-  }
-
-  function nextFromShuffle(lastIndexOrNull){
-    ensureShuffleOrder();
-    const order = getOrder();
-    let pos = getPos();
-
-    let idx = order[pos];
-    pos++;
-
-    if (pos >= order.length) {
-      const last = order[order.length - 1];
-      let newOrder = fisherYates([...Array(order.length)].map((_, i) => i));
-      if (newOrder.length > 1 && newOrder[0] === last) [newOrder[0], newOrder[1]] = [newOrder[1], newOrder[0]];
-      setOrder(newOrder);
-      pos = 0;
-    }
-
-    if (Number.isInteger(lastIndexOrNull) && order.length > 1 && idx === lastIndexOrNull) {
-      ensureShuffleOrder();
-      const o2 = getOrder();
-      let p2 = getPos();
-      idx = o2[p2];
-      p2++;
-      if (p2 >= o2.length) p2 = 0;
-      setPos(p2);
-      return idx;
-    }
-
-    setPos(pos);
-    return idx;
-  }
-
-  // ===== LOCK GLOBAL =====
-  let bc = null;
-  try { bc = ("BroadcastChannel" in window) ? new BroadcastChannel(CHANNEL_NAME) : null; } catch { bc = null; }
-
-  function writeLock(owner){
-    if (!LOCK_ENABLED) return;
-    try { localStorage.setItem(LOCK_KEY, JSON.stringify({ owner, t: Date.now() })); } catch {}
-  }
-
-  function readLock(){
-    if (!LOCK_ENABLED) return { owner: instanceId, t: Date.now() };
-    try {
-      const raw = localStorage.getItem(LOCK_KEY);
-      if (!raw) return null;
-      const obj = JSON.parse(raw);
-      if (!obj || typeof obj !== "object") return null;
-      if (!obj.owner || typeof obj.owner !== "string") return null;
-      if (!obj.t || typeof obj.t !== "number") return null;
-      if (Date.now() - obj.t > STALE_LOCK_MS) return null;
-      return obj;
-    } catch { return null; }
-  }
-
-  function lockIsMine(){
-    if (!LOCK_ENABLED) return true;
-    const lock = readLock();
-    return lock && lock.owner === instanceId;
-  }
-
-  function claimLock(){
-    writeLock(instanceId);
-    if (bc) {
-      try { bc.postMessage({ type: "CLAIM", owner: instanceId }); } catch {}
-    }
-  }
-
-  if (bc) {
-    bc.onmessage = (ev) => {
-      const msg = ev && ev.data;
-      if (msg && msg.type === "CLAIM") {
-        if (!LOCK_ENABLED) return;
-        if (msg.owner && msg.owner !== instanceId) safePause(bgm);
-      }
-    };
-  }
-
-  window.addEventListener("storage", (e) => {
-    if (!LOCK_ENABLED) return;
-    if (e.key !== LOCK_KEY) return;
-    const lock = readLock();
-    if (lock && lock.owner && lock.owner !== instanceId) safePause(bgm);
-  });
-
-  // ===== PLAY CORE =====
-  let currentTrackIndex = null;
-  let skipping = false;
-
-  function loadTrack(i){
-    if (!playlistLen()) return;
-    currentTrackIndex = i;
-    safeStop(bgm);
-    bgm.src = toAbs(TRACKS[currentTrackIndex]);
+  function loadTrackByIndex(i) {
+    const src = TRACKS[i];
+    bgm.src = toAbs(src);
     try { bgm.load(); } catch {}
   }
 
-  async function playBgm({ mutedStart }){
-    if (!playlistLen()) return false;
-    bgm.volume = BGM_VOLUME;
-    bgm.muted = !!mutedStart;
-
+  async function playBgm() {
     try {
       const p = bgm.play();
       if (p && typeof p.then === "function") await p;
@@ -261,138 +182,92 @@
     }
   }
 
-  async function skipToNext(reason){
-    if (skipping) return;
-    skipping = true;
+  async function startNow() {
+    if (starting) return;
+    starting = true;
+
     try {
-      if (!playlistLen()) return;
+      if (!TRACKS.length) return;
 
-      claimLock();
-      if (!lockIsMine()) return;
-      if (document.hidden) return;
+      // si pas de src encore, on charge une piste
+      if (!bgm.src) {
+        const i = nextIndex();
+        loadTrackByIndex(i);
+      }
 
-      const nextIdx = nextFromShuffle(currentTrackIndex);
-      loadTrack(nextIdx);
+      bgm.volume = BGM_VOLUME;
+      bgm.muted = false;
 
-      const unlocked = isUnlocked();
-      const ok = await playBgm({ mutedStart: !unlocked });
-      if (ok && unlocked) bgm.muted = false;
-
-      log("skipToNext", reason, "=>", nextIdx);
+      const ok = await playBgm();
+      if (ok) {
+        started = true;
+        markUnlocked();
+      }
     } finally {
-      skipping = false;
+      starting = false;
     }
   }
 
-  // ✅ IMPORTANT: on skip UNIQUEMENT sur ended + error (le reste est géré par watchdog)
-  bgm.addEventListener("ended", () => skipToNext("ended"));
-  bgm.addEventListener("error", () => skipToNext("error"));
+  async function nextTrack(reason) {
+    if (!TRACKS.length) return;
+    // stop propre
+    try { bgm.pause(); } catch {}
+    try { bgm.currentTime = 0; } catch {}
 
-  // watchdog anti-stall (skip seulement si vrai blocage long)
-  let lastT = 0;
-  let stuckMs = 0;
+    const i = nextIndex();
+    loadTrackByIndex(i);
+    log("next", reason, i);
 
-  setInterval(() => {
-    if (!bgm || !bgm.src) { lastT = 0; stuckMs = 0; return; }
-    if (bgm.paused) { lastT = bgm.currentTime || 0; stuckMs = 0; return; }
-    if (document.hidden) { stuckMs = 0; return; }
-
-    const t = bgm.currentTime || 0;
-    if (t <= lastT + 0.01) stuckMs += WATCHDOG_TICK_MS;
-    else stuckMs = 0;
-
-    lastT = t;
-
-    if (stuckMs >= WATCHDOG_STUCK_MS) {
-      stuckMs = 0;
-      skipToNext("watchdog_stuck");
+    // ne tente de rejouer que si l’audio est "unlocked"
+    if (isUnlocked() && !document.hidden) {
+      bgm.muted = false;
+      await playBgm();
     }
-  }, WATCHDOG_TICK_MS);
-
-  // ===== START / UNLOCK =====
-  async function startSoft(){
-    if (!playlistLen()) return;
-
-    claimLock();
-    if (!lockIsMine()) return;
-    if (document.hidden) return;
-
-    if (currentTrackIndex == null) {
-      const firstIdx = nextFromShuffle(null);
-      loadTrack(firstIdx);
-    }
-
-    // si déjà unlocked: play normal
-    if (isUnlocked()) {
-      const ok = await playBgm({ mutedStart: false });
-      if (ok) return;
-    }
-
-    // sinon: tentative muette (souvent autorisée)
-    await playBgm({ mutedStart: true });
   }
 
-  async function unlockHard(){
-    markUnlocked();
+  // ===== EVENTS =====
+  // Enchaînement normal
+  bgm.addEventListener("ended", () => { nextTrack("ended"); });
 
-    claimLock();
-    if (!lockIsMine()) return;
-    if (document.hidden) return;
+  // Erreur vraie => piste suivante (sans “zapping” sur les events réseau)
+  bgm.addEventListener("error", () => { nextTrack("error"); });
 
-    if (currentTrackIndex == null) {
-      const firstIdx = nextFromShuffle(null);
-      loadTrack(firstIdx);
-    }
-
-    // Dans le geste utilisateur => play non-muet garanti
-    bgm.muted = false;
-    if (bgm.paused) await playBgm({ mutedStart: false });
-    else bgm.muted = false;
-  }
-
-  // ===== FOCUS / VISIBILITY (Translate OK) =====
+  // ===== GOOGLE TRANSLATE / FOCUS =====
   let blurTimer = null;
-  let wasPlayingBeforeBlur = false;
 
-  function schedulePauseOnBlur(){
+  function schedulePause() {
     wasPlayingBeforeBlur = !bgm.paused;
+
     if (blurTimer) clearTimeout(blurTimer);
     blurTimer = setTimeout(() => {
       blurTimer = null;
       const noFocus = (typeof document.hasFocus === "function") ? !document.hasFocus() : true;
-      if (document.hidden || noFocus) safePause(bgm);
+      if (document.hidden || noFocus) {
+        try { bgm.pause(); } catch {}
+      }
     }, BLUR_PAUSE_DELAY_MS);
   }
 
-  window.addEventListener("blur", schedulePauseOnBlur, true);
+  window.addEventListener("blur", schedulePause, true);
 
   window.addEventListener("focus", () => {
     if (blurTimer) { clearTimeout(blurTimer); blurTimer = null; }
-
     if (!document.hidden && isUnlocked() && wasPlayingBeforeBlur) {
-      claimLock();
-      if (!lockIsMine()) return;
-      try { if (bgm.paused) bgm.play().catch(() => {}); } catch {}
+      // reprise douce
+      try { bgm.play().catch(() => {}); } catch {}
     }
   }, true);
 
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden) safePause(bgm);
+    if (document.hidden) {
+      try { bgm.pause(); } catch {}
+    }
   }, true);
 
-  window.addEventListener("pagehide", () => safePause(bgm), true);
-  window.addEventListener("beforeunload", () => safePause(bgm), true);
+  window.addEventListener("pagehide", () => { try { bgm.pause(); } catch {} }, true);
 
-  window.addEventListener("pageshow", () => {
-    if (document.hidden) return;
-    if (!isUnlocked()) return;
-    claimLock();
-    if (!lockIsMine()) return;
-    try { if (bgm.paused) bgm.play().catch(() => {}); } catch {}
-  }, true);
-
-  // ===== ÉPÉE (click only, ignore UI translate) =====
-  function playSword(){
+  // ===== ÉPÉE (click only) =====
+  function playSword() {
     try {
       sword.currentTime = 0;
       const p = sword.play();
@@ -402,28 +277,54 @@
 
   document.addEventListener("click", (e) => {
     if (!e.isTrusted) return;
+
     const t = e.target;
     if (t && t.closest) {
+      // ignore UI Google Translate
       if (t.closest("#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame")) return;
     }
     playSword();
   }, true);
 
-  // 1er geste = unlock HARD
-  const firstGesture = async () => {
-    await unlockHard();
-    document.removeEventListener("click", firstGesture, true);
-    document.removeEventListener("keydown", firstGesture, true);
-  };
-  document.addEventListener("click", firstGesture, true);
-  document.addEventListener("keydown", firstGesture, true);
+  // ===== 1ER GESTE UTILISATEUR = DÉMARRAGE GARANTI =====
+  const onFirstGesture = async (e) => {
+    // Toute interaction = musique
+    await startNow();
 
-  // boot
+    document.removeEventListener("pointerdown", onFirstGesture, true);
+    document.removeEventListener("keydown", onFirstGesture, true);
+    document.removeEventListener("click", onFirstGesture, true);
+  };
+
+  document.addEventListener("pointerdown", onFirstGesture, true);
+  document.addEventListener("keydown", onFirstGesture, true);
+  document.addEventListener("click", onFirstGesture, true);
+
+  // Si déjà unlocked dans cet onglet, on tente une reprise douce au chargement (sans forcer)
+  const softBoot = () => {
+    if (isUnlocked() && !document.hidden) {
+      // charge une piste si pas déjà chargé
+      if (!bgm.src) {
+        const i = nextIndex();
+        loadTrackByIndex(i);
+      }
+      bgm.muted = false;
+      bgm.volume = BGM_VOLUME;
+      bgm.play().catch(() => {});
+    } else {
+      // prépare une première piste (sans lecture)
+      if (!bgm.src && TRACKS.length) {
+        const i = nextIndex();
+        loadTrackByIndex(i);
+      }
+    }
+  };
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", startSoft, { once: true });
+    document.addEventListener("DOMContentLoaded", softBoot, { once: true });
   } else {
-    startSoft();
+    softBoot();
   }
 
-  window.__OSD_AUDIO_SINGLETON__ = { alive: true, id: instanceId };
+  window.__OSD_AUDIO__ = { alive: true };
 })();
