@@ -1,8 +1,11 @@
-/* osd.js — OSD9TDJ (playlist + épée) — PROD FIX
-   - Démarrage fiable mobile/PC (audio unlock dans le geste)
-   - Pas de track-check réseau (0 lenteur)
-   - Google Translate OK (pause blur/hidden + ignore UI translate pour l’épée)
-   - Anti-superposition: lock global SI storage dispo, sinon fallback "pas de lock" (mais ça joue)
+/* osd.js — OSD9TDJ (playlist + épée) — STABLE FIX
+   Fix principal: NE PLUS skipper sur events "stalled/suspend/emptied" (trop fréquents).
+   -> On skip uniquement sur: ended + error
+   -> Et on garde un watchdog qui skip seulement si vraiment bloqué > 10s
+
+   + Unlock mobile robuste (play dans le geste)
+   + Google Translate OK (pause blur/hidden)
+   + Lock global si storage dispo, sinon fallback (ne bloque jamais l’audio)
 */
 
 (() => {
@@ -41,61 +44,64 @@
   const BGM_VOLUME = 0.40;
   const SWORD_VOLUME = 0.90;
 
-  // storage keys
   const K_UNLOCKED = "osd_audio_unlocked";
   const K_ORDER = "osd_playlist_order";
   const K_POS   = "osd_playlist_pos";
 
-  // lock global
   const LOCK_KEY = "osd_audio_lock";
   const CHANNEL_NAME = "osd_audio_channel";
   const instanceId = `${Date.now()}_${Math.random().toString(16).slice(2)}`;
   const STALE_LOCK_MS = 15_000;
 
-  // focus/translate
   const BLUR_PAUSE_DELAY_MS = 300;
 
-  // watchdog
+  // watchdog (bloqué si currentTime n'avance pas)
   const WATCHDOG_TICK_MS = 2000;
   const WATCHDOG_STUCK_MS = 10_000;
 
-  // ===== HELPERS =====
-  const log = (...a) => { try { console.log("[OSD]", ...a); } catch {} };
+  // ===== UTILS =====
+  const log  = (...a) => { try { console.log("[OSD]", ...a); } catch {} };
   const warn = (...a) => { try { console.warn("[OSD]", ...a); } catch {} };
 
   function toAbs(url) {
     return new URL(String(url || ""), document.baseURI).href;
   }
-
   function playlistLen() { return Array.isArray(TRACKS) ? TRACKS.length : 0; }
 
-  function markUnlocked() { try { sessionStorage.setItem(K_UNLOCKED, "1"); } catch {} }
-  function isUnlocked() { try { return sessionStorage.getItem(K_UNLOCKED) === "1"; } catch { return false; } }
+  function markUnlocked(){ try { sessionStorage.setItem(K_UNLOCKED, "1"); } catch {} }
+  function isUnlocked(){ try { return sessionStorage.getItem(K_UNLOCKED) === "1"; } catch { return false; } }
 
   function safePause(a){ try { a.pause(); } catch {} }
   function safeStop(a){ try { a.pause(); } catch {} try { a.currentTime = 0; } catch {} }
 
-  // ===== STORAGE AVAILABILITY (CRITIQUE) =====
   function storageOK() {
     try {
       const k = "__osd_test__";
       localStorage.setItem(k, "1");
       localStorage.removeItem(k);
       return true;
-    } catch {
-      return false;
-    }
+    } catch { return false; }
   }
-  const LOCK_ENABLED = storageOK(); // si faux => on n’empêche jamais la lecture
-  if (!LOCK_ENABLED) warn("localStorage indisponible -> lock global désactivé (audio restera fonctionnel).");
+  const LOCK_ENABLED = storageOK();
+  if (!LOCK_ENABLED) warn("localStorage indisponible -> lock global OFF (audio OK).");
 
   // ===== AUDIO ELEMENTS =====
   function ensureAudioEl(id) {
+    // supprime doublons (sécurité)
+    const all = document.querySelectorAll(`#${CSS.escape(id)}`);
+    if (all.length > 1) {
+      all.forEach((n, idx) => {
+        if (idx === 0) return;
+        try { n.pause(); } catch {}
+        try { n.remove(); } catch {}
+      });
+    }
+
     let el = document.getElementById(id);
     if (!el) {
       el = document.createElement("audio");
       el.id = id;
-      el.preload = "auto";
+      el.preload = "metadata";     // ✅ important: évite réseau agressif au boot
       el.playsInline = true;
       el.style.display = "none";
       (document.body || document.documentElement).appendChild(el);
@@ -161,7 +167,6 @@
       pos = 0;
     }
 
-    // éviter répétition immédiate
     if (Number.isInteger(lastIndexOrNull) && order.length > 1 && idx === lastIndexOrNull) {
       ensureShuffleOrder();
       const o2 = getOrder();
@@ -177,7 +182,7 @@
     return idx;
   }
 
-  // ===== LOCK GLOBAL (robuste) =====
+  // ===== LOCK GLOBAL =====
   let bc = null;
   try { bc = ("BroadcastChannel" in window) ? new BroadcastChannel(CHANNEL_NAME) : null; } catch { bc = null; }
 
@@ -187,7 +192,7 @@
   }
 
   function readLock(){
-    if (!LOCK_ENABLED) return { owner: instanceId, t: Date.now() }; // fallback => toujours "moi"
+    if (!LOCK_ENABLED) return { owner: instanceId, t: Date.now() };
     try {
       const raw = localStorage.getItem(LOCK_KEY);
       if (!raw) return null;
@@ -197,9 +202,7 @@
       if (!obj.t || typeof obj.t !== "number") return null;
       if (Date.now() - obj.t > STALE_LOCK_MS) return null;
       return obj;
-    } catch {
-      return null;
-    }
+    } catch { return null; }
   }
 
   function lockIsMine(){
@@ -215,16 +218,13 @@
     }
   }
 
-  function handleClaim(owner){
-    if (!LOCK_ENABLED) return;
-    if (!owner || owner === instanceId) return;
-    safePause(bgm);
-  }
-
   if (bc) {
     bc.onmessage = (ev) => {
       const msg = ev && ev.data;
-      if (msg && msg.type === "CLAIM") handleClaim(msg.owner);
+      if (msg && msg.type === "CLAIM") {
+        if (!LOCK_ENABLED) return;
+        if (msg.owner && msg.owner !== instanceId) safePause(bgm);
+      }
     };
   }
 
@@ -251,11 +251,12 @@
     if (!playlistLen()) return false;
     bgm.volume = BGM_VOLUME;
     bgm.muted = !!mutedStart;
+
     try {
       const p = bgm.play();
       if (p && typeof p.then === "function") await p;
       return true;
-    } catch (e) {
+    } catch {
       return false;
     }
   }
@@ -283,14 +284,14 @@
     }
   }
 
+  // ✅ IMPORTANT: on skip UNIQUEMENT sur ended + error (le reste est géré par watchdog)
   bgm.addEventListener("ended", () => skipToNext("ended"));
-  ["error", "stalled", "abort", "emptied", "suspend"].forEach((ev) => {
-    bgm.addEventListener(ev, () => skipToNext(ev));
-  });
+  bgm.addEventListener("error", () => skipToNext("error"));
 
-  // watchdog anti-stall
+  // watchdog anti-stall (skip seulement si vrai blocage long)
   let lastT = 0;
   let stuckMs = 0;
+
   setInterval(() => {
     if (!bgm || !bgm.src) { lastT = 0; stuckMs = 0; return; }
     if (bgm.paused) { lastT = bgm.currentTime || 0; stuckMs = 0; return; }
@@ -299,6 +300,7 @@
     const t = bgm.currentTime || 0;
     if (t <= lastT + 0.01) stuckMs += WATCHDOG_TICK_MS;
     else stuckMs = 0;
+
     lastT = t;
 
     if (stuckMs >= WATCHDOG_STUCK_MS) {
@@ -320,18 +322,19 @@
       loadTrack(firstIdx);
     }
 
-    // 1) si déjà unlocked (même onglet), play direct
+    // si déjà unlocked: play normal
     if (isUnlocked()) {
       const ok = await playBgm({ mutedStart: false });
       if (ok) return;
     }
 
-    // 2) sinon tentative muette (souvent autorisée)
+    // sinon: tentative muette (souvent autorisée)
     await playBgm({ mutedStart: true });
   }
 
   async function unlockHard(){
     markUnlocked();
+
     claimLock();
     if (!lockIsMine()) return;
     if (document.hidden) return;
@@ -341,7 +344,7 @@
       loadTrack(firstIdx);
     }
 
-    // IMPORTANT: dans le geste utilisateur => play non-muet
+    // Dans le geste utilisateur => play non-muet garanti
     bgm.muted = false;
     if (bgm.paused) await playBgm({ mutedStart: false });
     else bgm.muted = false;
@@ -365,6 +368,7 @@
 
   window.addEventListener("focus", () => {
     if (blurTimer) { clearTimeout(blurTimer); blurTimer = null; }
+
     if (!document.hidden && isUnlocked() && wasPlayingBeforeBlur) {
       claimLock();
       if (!lockIsMine()) return;
@@ -398,7 +402,6 @@
 
   document.addEventListener("click", (e) => {
     if (!e.isTrusted) return;
-
     const t = e.target;
     if (t && t.closest) {
       if (t.closest("#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame")) return;
@@ -406,7 +409,7 @@
     playSword();
   }, true);
 
-  // 1er geste = unlock HARD (garantie son)
+  // 1er geste = unlock HARD
   const firstGesture = async () => {
     await unlockHard();
     document.removeEventListener("click", firstGesture, true);
