@@ -1,10 +1,10 @@
-/* osd.js — OSD9TDJ — STABLE SIMPLE
-   - 1 seul audio BGM + 1 son épée
-   - Start au 1er geste utilisateur (mobile/PC)
-   - Shuffle sans répétition (sessionStorage)
-   - Enchaînement propre: ended => next
-   - Erreur: error => next
-   - Google Translate OK: blur/hidden pause, focus reprise si on jouait
+/* osd.js — OSD9TDJ — STABLE SIMPLE + FIX GOOGLE TRANSLATE
+   - Musique démarre au 1er geste utilisateur
+   - Playlist aléatoire sans répétition (sessionStorage)
+   - Enchaînement: ended => next
+   - Erreur vraie: error => next
+   - Google Translate: si clic sur l'UI Translate => pause immédiate sur la page d'origine
+     => évite "2 musiques à la fois" quand Translate ouvre une autre page
 */
 
 (() => {
@@ -43,7 +43,7 @@
   const BGM_VOLUME = 0.40;
   const SWORD_VOLUME = 0.90;
 
-  const BLUR_PAUSE_DELAY_MS = 250;
+  const BLUR_PAUSE_DELAY_MS = 200;
 
   // session keys
   const K_UNLOCKED = "osd_audio_unlocked";
@@ -51,8 +51,6 @@
   const K_POS = "osd_playlist_pos";
 
   // ===== UTILS =====
-  const log = (...a) => { try { /* console.log("[OSD]", ...a); */ } catch {} };
-
   function toAbs(url) {
     return new URL(String(url || ""), document.baseURI).href;
   }
@@ -65,7 +63,6 @@
   }
 
   function ensureAudioEl(id) {
-    // supprime doublons si jamais
     const all = document.querySelectorAll(`#${CSS.escape(id)}`);
     if (all.length > 1) {
       all.forEach((n, i) => {
@@ -79,7 +76,7 @@
     if (!el) {
       el = document.createElement("audio");
       el.id = id;
-      el.preload = "metadata"; // stable, pas agressif
+      el.preload = "metadata";
       el.playsInline = true;
       el.style.display = "none";
       (document.body || document.documentElement).appendChild(el);
@@ -95,18 +92,10 @@
     return arr;
   }
 
-  function getOrder() {
-    try { return JSON.parse(sessionStorage.getItem(K_ORDER) || "[]"); } catch { return []; }
-  }
-  function setOrder(o) {
-    try { sessionStorage.setItem(K_ORDER, JSON.stringify(o)); } catch {}
-  }
-  function getPos() {
-    try { return parseInt(sessionStorage.getItem(K_POS) || "0", 10) || 0; } catch { return 0; }
-  }
-  function setPos(n) {
-    try { sessionStorage.setItem(K_POS, String(n)); } catch {}
-  }
+  function getOrder() { try { return JSON.parse(sessionStorage.getItem(K_ORDER) || "[]"); } catch { return []; } }
+  function setOrder(o) { try { sessionStorage.setItem(K_ORDER, JSON.stringify(o)); } catch {} }
+  function getPos() { try { return parseInt(sessionStorage.getItem(K_POS) || "0", 10) || 0; } catch { return 0; } }
+  function setPos(n) { try { sessionStorage.setItem(K_POS, String(n)); } catch {} }
 
   function ensureOrder() {
     const L = TRACKS.length;
@@ -139,7 +128,6 @@
     pos++;
 
     if (pos >= order.length) {
-      // reshuffle, mais évite de recommencer par la dernière piste
       const last = order[order.length - 1];
       let newOrder = fisherYates([...Array(order.length)].map((_, i) => i));
       if (newOrder.length > 1 && newOrder[0] === last) {
@@ -153,6 +141,11 @@
     return idx;
   }
 
+  function isTranslateUI(target) {
+    if (!target || !target.closest) return false;
+    return !!target.closest("#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame");
+  }
+
   // ===== AUDIO STATE =====
   const bgm = ensureAudioEl("osd_bgm");
   bgm.loop = false;
@@ -162,13 +155,11 @@
   sword.src = toAbs(SWORD_SRC);
   sword.volume = SWORD_VOLUME;
 
-  let started = false;
   let starting = false;
   let wasPlayingBeforeBlur = false;
 
   function loadTrackByIndex(i) {
-    const src = TRACKS[i];
-    bgm.src = toAbs(src);
+    bgm.src = toAbs(TRACKS[i]);
     try { bgm.load(); } catch {}
   }
 
@@ -185,24 +176,18 @@
   async function startNow() {
     if (starting) return;
     starting = true;
-
     try {
       if (!TRACKS.length) return;
 
-      // si pas de src encore, on charge une piste
       if (!bgm.src) {
-        const i = nextIndex();
-        loadTrackByIndex(i);
+        loadTrackByIndex(nextIndex());
       }
 
       bgm.volume = BGM_VOLUME;
       bgm.muted = false;
 
       const ok = await playBgm();
-      if (ok) {
-        started = true;
-        markUnlocked();
-      }
+      if (ok) markUnlocked();
     } finally {
       starting = false;
     }
@@ -210,15 +195,12 @@
 
   async function nextTrack(reason) {
     if (!TRACKS.length) return;
-    // stop propre
+
     try { bgm.pause(); } catch {}
     try { bgm.currentTime = 0; } catch {}
 
-    const i = nextIndex();
-    loadTrackByIndex(i);
-    log("next", reason, i);
+    loadTrackByIndex(nextIndex());
 
-    // ne tente de rejouer que si l’audio est "unlocked"
     if (isUnlocked() && !document.hidden) {
       bgm.muted = false;
       await playBgm();
@@ -226,13 +208,25 @@
   }
 
   // ===== EVENTS =====
-  // Enchaînement normal
-  bgm.addEventListener("ended", () => { nextTrack("ended"); });
+  bgm.addEventListener("ended", () => nextTrack("ended"));
+  bgm.addEventListener("error", () => nextTrack("error"));
 
-  // Erreur vraie => piste suivante (sans “zapping” sur les events réseau)
-  bgm.addEventListener("error", () => { nextTrack("error"); });
+  // ===== GOOGLE TRANSLATE FIX : pause immédiate sur clic UI translate =====
+  // IMPORTANT: c’est ça qui empêche les 2 musiques quand Translate ouvre une autre page.
+  function pauseForTranslateUI() {
+    wasPlayingBeforeBlur = false;
+    try { bgm.pause(); } catch {}
+  }
 
-  // ===== GOOGLE TRANSLATE / FOCUS =====
+  document.addEventListener("pointerdown", (e) => {
+    if (isTranslateUI(e.target)) pauseForTranslateUI();
+  }, true);
+
+  document.addEventListener("click", (e) => {
+    if (isTranslateUI(e.target)) pauseForTranslateUI();
+  }, true);
+
+  // ===== FOCUS / VISIBILITY (Translate OK) =====
   let blurTimer = null;
 
   function schedulePause() {
@@ -253,7 +247,6 @@
   window.addEventListener("focus", () => {
     if (blurTimer) { clearTimeout(blurTimer); blurTimer = null; }
     if (!document.hidden && isUnlocked() && wasPlayingBeforeBlur) {
-      // reprise douce
       try { bgm.play().catch(() => {}); } catch {}
     }
   }, true);
@@ -266,7 +259,7 @@
 
   window.addEventListener("pagehide", () => { try { bgm.pause(); } catch {} }, true);
 
-  // ===== ÉPÉE (click only) =====
+  // ===== ÉPÉE (click only, ignore UI translate) =====
   function playSword() {
     try {
       sword.currentTime = 0;
@@ -277,18 +270,15 @@
 
   document.addEventListener("click", (e) => {
     if (!e.isTrusted) return;
-
-    const t = e.target;
-    if (t && t.closest) {
-      // ignore UI Google Translate
-      if (t.closest("#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame")) return;
-    }
+    if (isTranslateUI(e.target)) return; // ignore UI translate
     playSword();
   }, true);
 
   // ===== 1ER GESTE UTILISATEUR = DÉMARRAGE GARANTI =====
   const onFirstGesture = async (e) => {
-    // Toute interaction = musique
+    // Si l’utilisateur clique Translate, on ne démarre pas ici (on vient justement de pauser)
+    if (isTranslateUI(e.target)) return;
+
     await startNow();
 
     document.removeEventListener("pointerdown", onFirstGesture, true);
@@ -300,23 +290,13 @@
   document.addEventListener("keydown", onFirstGesture, true);
   document.addEventListener("click", onFirstGesture, true);
 
-  // Si déjà unlocked dans cet onglet, on tente une reprise douce au chargement (sans forcer)
+  // Boot doux: prépare une piste / reprend si déjà unlocked
   const softBoot = () => {
+    if (!bgm.src && TRACKS.length) loadTrackByIndex(nextIndex());
     if (isUnlocked() && !document.hidden) {
-      // charge une piste si pas déjà chargé
-      if (!bgm.src) {
-        const i = nextIndex();
-        loadTrackByIndex(i);
-      }
       bgm.muted = false;
       bgm.volume = BGM_VOLUME;
       bgm.play().catch(() => {});
-    } else {
-      // prépare une première piste (sans lecture)
-      if (!bgm.src && TRACKS.length) {
-        const i = nextIndex();
-        loadTrackByIndex(i);
-      }
     }
   };
 
