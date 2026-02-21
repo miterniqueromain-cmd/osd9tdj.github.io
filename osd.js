@@ -27,10 +27,23 @@
     "/charlvera-knight-of-the-sacred-order-epic-background-music-for-video-206650.mp3",
     "/deuslower-fantasy-medieval-epic-music-239599.mp3",
 
+    // 🏰 MÉDIÉVAL / AMBIANCES (AJOUT racine)
+    "/tunetank-medieval-festive-music-412772.mp3",
+    "/tunetank-medieval-happy-music-412790.mp3",
+    "/kaazoom-the-knight-and-the-flame-medieval-minstrelx27s-ballad-363292.mp3",
+    "/medieval_horizons-medieval-horizons-quiet-repose-470879.mp3",
+
     // ✝️ TRANSITION SACRÉE (entrée liturgique)
     "/fideascende-crux-bellum-vox-325218.mp3",
     "/fideascende-crux-invicta-325224.mp3",
     "/fideascende-sanguis-dei-325211.mp3",
+
+    // ✝️ AJOUTS FIDEASCENDE (racine)
+    "/fideascende-regnum-dei-325214.mp3",
+    "/fideascende-vox-vindictae-325213.mp3",
+    "/fideascende-domine-miserere-325207.mp3",
+    "/fideascende-domine-miserere-325207 (1).mp3",
+    "/fideascende-in-tempore-sancti-bellatoris-325217.mp3",
 
     // ✝️ GRÉGORIEN PROFOND
     "/nickpanek-act-of-contrition-latin-gregorian-chant-340859.mp3",
@@ -38,10 +51,10 @@
     "/nickpanek-amo-te-gregorian-chant-in-latin-340860.mp3",
 
     // ✝️ FIN MYSTIQUE
-    "/fideascende-pater-noster-324805.mp3",
+    "/fideascende-pater-noster-324805.mp3"
 
-    // (doublon volontaire possible, mais INUTILE avec shuffle — gardé si tu veux)
-    "/nickpanek-amo-te-gregorian-chant-in-latin-340860.mp3"
+    // (doublon volontaire possible, mais INUTILE avec shuffle — à éviter)
+    // "/nickpanek-amo-te-gregorian-chant-in-latin-340860.mp3"
   ];
 
   const SWORD_SRC = "/sons/epee.mp3";
@@ -75,7 +88,9 @@
   const WATCHDOG_STUCK_MS = 10_000;
 
   // ===== UTILS =====
-  function playlistLen() { return Array.isArray(TRACKS) ? TRACKS.length : 0; }
+  function playlistLen() {
+    return Array.isArray(TRACKS) ? TRACKS.length : 0;
+  }
 
   // Normalise les URLs (corrige GitHub Pages /repo/ + évite racine foireuse)
   function toAbs(url) {
@@ -84,8 +99,18 @@
     return new URL(clean, document.baseURI).href;
   }
 
-  function markUnlocked() { try { sessionStorage.setItem(K_UNLOCKED, "1"); } catch {} }
-  function isUnlocked() { try { return sessionStorage.getItem(K_UNLOCKED) === "1"; } catch { return false; } }
+  function markUnlocked() {
+    try {
+      sessionStorage.setItem(K_UNLOCKED, "1");
+    } catch {}
+  }
+  function isUnlocked() {
+    try {
+      return sessionStorage.getItem(K_UNLOCKED) === "1";
+    } catch {
+      return false;
+    }
+  }
 
   function ensureAudioEl(id) {
     // supprime doublons éventuels
@@ -93,8 +118,12 @@
     if (all.length > 1) {
       all.forEach((n, idx) => {
         if (idx === 0) return;
-        try { n.pause(); } catch {}
-        try { n.remove(); } catch {}
+        try {
+          n.pause();
+        } catch {}
+        try {
+          n.remove();
+        } catch {}
       });
     }
     let el = document.getElementById(id);
@@ -124,8 +153,7 @@
     // 1) HEAD (peut échouer selon config serveur)
     try {
       const ok = await withTimeout(TRACK_CHECK_TIMEOUT_MS, (signal) =>
-        fetch(abs, { method: "HEAD", cache: "no-store", signal })
-          .then((r) => r && r.ok)
+        fetch(abs, { method: "HEAD", cache: "no-store", signal }).then((r) => r && r.ok)
       );
       if (ok) return true;
     } catch {}
@@ -160,7 +188,7 @@
     // logs diagnostic
     try {
       console.log("[OSD] Tracks before:", before.length, "after:", TRACKS.length);
-      const removed = before.filter(u => !okSet.has(u));
+      const removed = before.filter((u) => !okSet.has(u));
       if (removed.length) console.warn("[OSD] Removed (unreachable):", removed);
     } catch {}
 
@@ -173,16 +201,28 @@
 
   // ===== SHUFFLE SANS RÉPÉTITION (par onglet) =====
   function getOrder() {
-    try { return JSON.parse(sessionStorage.getItem(K_ORDER) || "[]"); } catch { return []; }
+    try {
+      return JSON.parse(sessionStorage.getItem(K_ORDER) || "[]");
+    } catch {
+      return [];
+    }
   }
   function setOrder(arr) {
-    try { sessionStorage.setItem(K_ORDER, JSON.stringify(arr)); } catch {}
+    try {
+      sessionStorage.setItem(K_ORDER, JSON.stringify(arr));
+    } catch {}
   }
   function getPos() {
-    try { return parseInt(sessionStorage.getItem(K_POS) || "0", 10) || 0; } catch { return 0; }
+    try {
+      return parseInt(sessionStorage.getItem(K_POS) || "0", 10) || 0;
+    } catch {
+      return 0;
+    }
   }
   function setPos(n) {
-    try { sessionStorage.setItem(K_POS, String(n)); } catch {}
+    try {
+      sessionStorage.setItem(K_POS, String(n));
+    } catch {}
   }
 
   function fisherYates(arr) {
@@ -206,7 +246,7 @@
       order.every((n) => Number.isInteger(n) && n >= 0 && n < L) &&
       Number.isInteger(pos) &&
       pos >= 0 &&
-      pos <= L;
+      pos < L; // <-- petit fix: évite pos == L (idx undefined)
 
     if (!valid) {
       order = fisherYates([...Array(L)].map((_, i) => i));
@@ -238,7 +278,6 @@
 
     // évite répétition immédiate si possible
     if (Number.isInteger(lastIndexOrNull) && order.length > 1 && idx === lastIndexOrNull) {
-      // on prend le suivant
       ensureShuffleOrder();
       const order2 = getOrder();
       let pos2 = getPos();
@@ -266,12 +305,18 @@
   let skipping = false;
 
   function pauseBgm() {
-    try { bgm.pause(); } catch {}
+    try {
+      bgm.pause();
+    } catch {}
   }
 
   function stopBgmHard() {
-    try { bgm.pause(); } catch {}
-    try { bgm.currentTime = 0; } catch {}
+    try {
+      bgm.pause();
+    } catch {}
+    try {
+      bgm.currentTime = 0;
+    } catch {}
   }
 
   function loadTrack(i) {
@@ -286,7 +331,9 @@
 
   async function playCurrent({ mutedStart } = { mutedStart: false }) {
     if (!playlistLen()) return false;
-    try { bgm.volume = BGM_VOLUME; } catch {}
+    try {
+      bgm.volume = BGM_VOLUME;
+    } catch {}
     bgm.muted = !!mutedStart;
     try {
       const p = bgm.play();
@@ -304,8 +351,8 @@
       if (!playlistLen()) return;
 
       claimLock();
-      if (!lockIsMine()) return;          // respecte anti-superposition
-      if (document.hidden) return;        // pas de lecture en arrière-plan
+      if (!lockIsMine()) return; // respecte anti-superposition
+      if (document.hidden) return; // pas de lecture en arrière-plan
 
       const nextIdx = nextFromShuffle(currentTrackIndex);
       loadTrack(nextIdx);
@@ -315,7 +362,9 @@
       if (unlocked) bgm.muted = false;
 
       // debug
-      try { console.log("[OSD] skipToNext:", reason, "=>", nextIdx); } catch {}
+      try {
+        console.log("[OSD] skipToNext:", reason, "=>", nextIdx);
+      } catch {}
     } finally {
       skipping = false;
     }
@@ -323,10 +372,16 @@
 
   // ===== GLOBAL LOCK (anti multi-fenêtre / translate / onglets) =====
   let bc = null;
-  try { bc = ("BroadcastChannel" in window) ? new BroadcastChannel(CHANNEL_NAME) : null; } catch { bc = null; }
+  try {
+    bc = "BroadcastChannel" in window ? new BroadcastChannel(CHANNEL_NAME) : null;
+  } catch {
+    bc = null;
+  }
 
   function writeLock(owner) {
-    try { localStorage.setItem(LOCK_KEY, JSON.stringify({ owner, t: Date.now() })); } catch {}
+    try {
+      localStorage.setItem(LOCK_KEY, JSON.stringify({ owner, t: Date.now() }));
+    } catch {}
   }
 
   function readLock() {
@@ -352,7 +407,9 @@
   function claimLock() {
     writeLock(instanceId);
     if (bc) {
-      try { bc.postMessage({ type: "CLAIM", owner: instanceId }); } catch {}
+      try {
+        bc.postMessage({ type: "CLAIM", owner: instanceId });
+      } catch {}
     }
   }
 
@@ -386,9 +443,20 @@
   let stuckMs = 0;
 
   setInterval(() => {
-    if (!bgm || !bgm.src) { lastT = 0; stuckMs = 0; return; }
-    if (bgm.paused) { lastT = bgm.currentTime || 0; stuckMs = 0; return; }
-    if (document.hidden) { stuckMs = 0; return; }
+    if (!bgm || !bgm.src) {
+      lastT = 0;
+      stuckMs = 0;
+      return;
+    }
+    if (bgm.paused) {
+      lastT = bgm.currentTime || 0;
+      stuckMs = 0;
+      return;
+    }
+    if (document.hidden) {
+      stuckMs = 0;
+      return;
+    }
 
     const t = bgm.currentTime || 0;
     if (t <= lastT + 0.01) stuckMs += WATCHDOG_TICK_MS;
@@ -447,42 +515,58 @@
 
     blurTimer = setTimeout(() => {
       blurTimer = null;
-      const stillNoFocus = (typeof document.hasFocus === "function") ? !document.hasFocus() : true;
+      const stillNoFocus = typeof document.hasFocus === "function" ? !document.hasFocus() : true;
       if (document.hidden || stillNoFocus) pauseBgm();
     }, BLUR_PAUSE_DELAY_MS);
   }
 
   window.addEventListener("blur", schedulePauseOnBlur, true);
 
-  window.addEventListener("focus", () => {
-    if (blurTimer) {
-      clearTimeout(blurTimer);
-      blurTimer = null;
-    }
+  window.addEventListener(
+    "focus",
+    () => {
+      if (blurTimer) {
+        clearTimeout(blurTimer);
+        blurTimer = null;
+      }
 
-    if (!document.hidden && isUnlocked() && wasPlayingBeforeBlur && lockIsMine() && bgm.paused) {
-      try { bgm.play().catch(() => {}); } catch {}
-    }
-  }, true);
+      if (!document.hidden && isUnlocked() && wasPlayingBeforeBlur && lockIsMine() && bgm.paused) {
+        try {
+          bgm.play().catch(() => {});
+        } catch {}
+      }
+    },
+    true
+  );
 
   // Changement d'onglet => hidden est fiable, on pause direct
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) pauseBgm();
-  }, true);
+  document.addEventListener(
+    "visibilitychange",
+    () => {
+      if (document.hidden) pauseBgm();
+    },
+    true
+  );
 
   window.addEventListener("pagehide", pauseBgm, true);
   window.addEventListener("beforeunload", pauseBgm, true);
 
   // si page restaurée via BFCache
-  window.addEventListener("pageshow", () => {
-    if (document.hidden) return;
-    if (!isUnlocked()) return;
+  window.addEventListener(
+    "pageshow",
+    () => {
+      if (document.hidden) return;
+      if (!isUnlocked()) return;
 
-    claimLock();
-    if (!lockIsMine()) return;
+      claimLock();
+      if (!lockIsMine()) return;
 
-    try { if (bgm.paused) bgm.play().catch(() => {}); } catch {}
-  }, true);
+      try {
+        if (bgm.paused) bgm.play().catch(() => {});
+      } catch {}
+    },
+    true
+  );
 
   // ===== ÉPÉE UNIQUEMENT SUR CLICK (pas scroll) =====
   function playSword() {
@@ -493,17 +577,21 @@
     } catch {}
   }
 
-  document.addEventListener("click", (e) => {
-    if (!e.isTrusted) return;
+  document.addEventListener(
+    "click",
+    (e) => {
+      if (!e.isTrusted) return;
 
-    // évite l’UI translate
-    const t = e.target;
-    if (t && t.closest) {
-      if (t.closest("#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame")) return;
-    }
+      // évite l’UI translate
+      const t = e.target;
+      if (t && t.closest) {
+        if (t.closest("#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame")) return;
+      }
 
-    playSword();
-  }, true);
+      playSword();
+    },
+    true
+  );
 
   const firstGesture = async () => {
     await unlockAudio();
