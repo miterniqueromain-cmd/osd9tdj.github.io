@@ -1,57 +1,58 @@
+/* osd.js — OSD9TDJ (playlist + épée) — VERSION “ÇA MARCHE PARTOUT”
+   Objectif: 0 lenteur + audio fiable (mobile/PC) + Google Translate OK
 
+   ✅ Changements clés (par rapport à ta version qui ne fait plus de son) :
+   1) On SUPPRIME totalement le “track check” réseau (fetch/HEAD/Range) => plus aucun blocage.
+   2) On rend l’UNLOCK ultra robuste :
+      - si déjà “unlocked” dans l’onglet, on tente play direct
+      - sinon on tente autoplay MUET (souvent autorisé), puis on dé-mute au 1er geste
+      - au 1er geste utilisateur, on force play() (dans le geste) => c’est le point critique.
+   3) On garde :
+      - lock global multi-onglets/fenêtres (anti superposition)
+      - pause sur blur/visibilitychange/pagehide (Google Translate inclus)
+      - épée UNIQUEMENT sur click (avec exclusion UI Translate)
 */
+
 (() => {
   "use strict";
 
   // ===== SINGLETON (évite double init sur même page) =====
   if (window.__OSD_AUDIO_SINGLETON__ && window.__OSD_AUDIO_SINGLETON__.alive) return;
 
-
-  let TRACKS = [
+  // ===== CONFIG =====
+  const TRACKS = [
     "/charlvera-legends-of-the-iron-cross_-a-symphony-of-war-and-glory-472348.mp3",
     "/paulyudin-epic-485934.mp3",
     "/charlvera-guardian-of-the-holy-land-epic-background-music-for-video-206639.mp3",
-
     "/sigmamusicart-epic-cinematic-background-music-484595.mp3",
     "/charlvera-knight-of-the-sacred-order-epic-background-music-for-video-206650.mp3",
     "/deuslower-fantasy-medieval-epic-music-239599.mp3",
-
     "/tunetank-medieval-festive-music-412772.mp3",
     "/tunetank-medieval-happy-music-412790.mp3",
     "/kaazoom-the-knight-and-the-flame-medieval-minstrelx27s-ballad-363292.mp3",
     "/medieval_horizons-medieval-horizons-quiet-repose-470879.mp3",
-
     "/fideascende-crux-bellum-vox-325218.mp3",
     "/fideascende-crux-invicta-325224.mp3",
     "/fideascende-sanguis-dei-325211.mp3",
-
     "/fideascende-regnum-dei-325214.mp3",
     "/fideascende-vox-vindictae-325213.mp3",
     "/fideascende-domine-miserere-325207.mp3",
     "/fideascende-domine-miserere-325207 (1).mp3",
     "/fideascende-in-tempore-sancti-bellatoris-325217.mp3",
-
     "/nickpanek-act-of-contrition-latin-gregorian-chant-340859.mp3",
     "/nickpanek-gregorian-chant-regina-caeli-prayer-340861.mp3",
     "/nickpanek-amo-te-gregorian-chant-in-latin-340860.mp3",
-
     "/fideascende-pater-noster-324805.mp3"
   ];
 
   const SWORD_SRC = "/sons/epee.mp3";
-
   const BGM_VOLUME = 0.40;
   const SWORD_VOLUME = 0.90;
 
-  // ✅ Check automatique (désactivé par défaut pour ne pas plomber le chargement)
-  const ENABLE_TRACK_CHECK = false; // <-- si tu veux réactiver, mets true
-  const TRACK_CHECK_TIMEOUT_MS = 2500; // garde bas (si activé)
-  const TRACK_CHECK_CONCURRENCY = 3;   // limite réseau (si activé)
-
-  // sessionStorage (par onglet)
+  // sessionStorage (par onglet) : autorisation audio
   const K_UNLOCKED = "osd_audio_unlocked";
 
-  // shuffle order (par onglet)
+  // shuffle (par onglet)
   const K_ORDER = "osd_playlist_order";
   const K_POS = "osd_playlist_pos";
 
@@ -59,11 +60,9 @@
   const LOCK_KEY = "osd_audio_lock";
   const CHANNEL_NAME = "osd_audio_channel";
   const instanceId = `${Date.now()}_${Math.random().toString(16).slice(2)}`;
-
-  // sécurité: si un lock reste coincé (crash/kill), au bout de X ms on le considère "stale"
   const STALE_LOCK_MS = 15_000;
 
-  // blur anti-dropdown: délai avant pause
+  // pause blur (Google Translate / changement focus)
   const BLUR_PAUSE_DELAY_MS = 300;
 
   // watchdog anti-stall
@@ -75,7 +74,7 @@
     return Array.isArray(TRACKS) ? TRACKS.length : 0;
   }
 
-  // ✅ Normalise en URL absolue SANS casser "/..." (racine)
+  // Respecte "/..." (racine) ET "..." (relatif)
   function toAbs(url) {
     return new URL(String(url || ""), document.baseURI).href;
   }
@@ -88,7 +87,6 @@
   }
 
   function ensureAudioEl(id) {
-    // supprime doublons éventuels
     const all = document.querySelectorAll(`#${CSS.escape(id)}`);
     if (all.length > 1) {
       all.forEach((n, idx) => {
@@ -110,77 +108,15 @@
     return el;
   }
 
-  function withTimeout(ms, fn) {
-    const ctrl = new AbortController();
-    const t = setTimeout(() => ctrl.abort(), ms);
-    return Promise.resolve()
-      .then(() => fn(ctrl.signal))
-      .finally(() => clearTimeout(t));
+  function safePause(a) {
+    try { a.pause(); } catch {}
+  }
+  function safeStop(a) {
+    try { a.pause(); } catch {}
+    try { a.currentTime = 0; } catch {}
   }
 
-  // ===== CHECK TRACKS (OPTIONNEL) — léger + concurrence limitée =====
-  async function checkOneTrack(url) {
-    const abs = toAbs(url);
-
-    // HEAD (peut échouer selon serveur)
-    try {
-      const ok = await withTimeout(TRACK_CHECK_TIMEOUT_MS, (signal) =>
-        fetch(abs, { method: "HEAD", cache: "no-store", signal }).then((r) => r && r.ok)
-      );
-      if (ok) return true;
-    } catch {}
-
-    // GET Range (accepte uniquement 206 si possible, sinon ok => on laisse passer)
-    try {
-      const r = await withTimeout(TRACK_CHECK_TIMEOUT_MS, (signal) =>
-        fetch(abs, { method: "GET", headers: { Range: "bytes=0-0" }, cache: "no-store", signal })
-      );
-      if (!r) return false;
-      if (r.status === 206) return true;  // idéal
-      if (r.ok) return true;              // fallback (on évite de supprimer à tort)
-      return false;
-    } catch {
-      return false;
-    }
-  }
-
-  async function validateTracksLimited() {
-    if (!ENABLE_TRACK_CHECK) return;
-    if (!Array.isArray(TRACKS) || TRACKS.length === 0) return;
-
-    const unique = Array.from(new Set(TRACKS));
-    const okSet = new Set();
-
-    let i = 0;
-    async function worker() {
-      while (i < unique.length) {
-        const idx = i++;
-        const u = unique[idx];
-        const ok = await checkOneTrack(u);
-        if (ok) okSet.add(u);
-      }
-    }
-
-    const workers = Array.from({ length: Math.max(1, TRACK_CHECK_CONCURRENCY) }, worker);
-    await Promise.all(workers);
-
-    const before = TRACKS.slice();
-    TRACKS = before.filter((u) => okSet.has(u));
-
-    // si l’ordre shuffle existait, il doit être recalculé (taille a changé)
-    try {
-      sessionStorage.removeItem(K_ORDER);
-      sessionStorage.removeItem(K_POS);
-    } catch {}
-
-    try {
-      console.log("[OSD] Track check:", before.length, "=>", TRACKS.length);
-      const removed = before.filter((u) => !okSet.has(u));
-      if (removed.length) console.warn("[OSD] Removed (unreachable):", removed);
-    } catch {}
-  }
-
-  // ===== SHUFFLE SANS RÉPÉTITION (par onglet) =====
+  // ===== SHUFFLE SANS RÉPÉTITION =====
   function getOrder() {
     try { return JSON.parse(sessionStorage.getItem(K_ORDER) || "[]"); } catch { return []; }
   }
@@ -236,7 +172,6 @@
     if (pos >= order.length) {
       const last = order[order.length - 1];
       let newOrder = fisherYates([...Array(order.length)].map((_, i) => i));
-
       if (newOrder.length > 1 && newOrder[0] === last) {
         [newOrder[0], newOrder[1]] = [newOrder[1], newOrder[0]];
       }
@@ -244,6 +179,7 @@
       pos = 0;
     }
 
+    // évite répétition immédiate si possible
     if (Number.isInteger(lastIndexOrNull) && order.length > 1 && idx === lastIndexOrNull) {
       ensureShuffleOrder();
       const order2 = getOrder();
@@ -259,7 +195,7 @@
     return idx;
   }
 
-  // ===== AUDIO =====
+  // ===== AUDIO ELEMENTS =====
   const bgm = ensureAudioEl("osd_bgm");
   bgm.volume = BGM_VOLUME;
   bgm.loop = false;
@@ -271,58 +207,26 @@
   let currentTrackIndex = null;
   let skipping = false;
 
-  function pauseBgm() {
-    try { bgm.pause(); } catch {}
-  }
-
-  function stopBgmHard() {
-    try { bgm.pause(); } catch {}
-    try { bgm.currentTime = 0; } catch {}
-  }
-
   function loadTrack(i) {
     if (!playlistLen()) return;
     currentTrackIndex = i;
-
-    const src = TRACKS[currentTrackIndex];
-    stopBgmHard();
-    bgm.src = toAbs(src);
+    safeStop(bgm);
+    bgm.src = toAbs(TRACKS[currentTrackIndex]);
     bgm.setAttribute("data-track-index", String(currentTrackIndex));
+    try { bgm.load(); } catch {}
   }
 
-  async function playCurrent({ mutedStart } = { mutedStart: false }) {
+  async function tryPlayBgm({ mutedStart } = { mutedStart: false }) {
     if (!playlistLen()) return false;
     try { bgm.volume = BGM_VOLUME; } catch {}
     bgm.muted = !!mutedStart;
+
     try {
       const p = bgm.play();
       if (p && typeof p.then === "function") await p;
       return true;
     } catch {
       return false;
-    }
-  }
-
-  async function skipToNext(reason) {
-    if (skipping) return;
-    skipping = true;
-    try {
-      if (!playlistLen()) return;
-
-      claimLock();
-      if (!lockIsMine()) return;
-      if (document.hidden) return;
-
-      const nextIdx = nextFromShuffle(currentTrackIndex);
-      loadTrack(nextIdx);
-
-      const unlocked = isUnlocked();
-      await playCurrent({ mutedStart: !unlocked });
-      if (unlocked) bgm.muted = false;
-
-      try { console.log("[OSD] skipToNext:", reason, "=>", nextIdx); } catch {}
-    } finally {
-      skipping = false;
     }
   }
 
@@ -361,6 +265,10 @@
     }
   }
 
+  function pauseBgm() {
+    safePause(bgm);
+  }
+
   function handleClaim(owner) {
     if (!owner || owner === instanceId) return;
     pauseBgm();
@@ -379,7 +287,32 @@
     if (lock && lock.owner && lock.owner !== instanceId) pauseBgm();
   });
 
-  // ===== EVENTS: fin/erreurs => piste suivante =====
+  // ===== SKIP NEXT (robuste) =====
+  async function skipToNext(reason) {
+    if (skipping) return;
+    skipping = true;
+    try {
+      if (!playlistLen()) return;
+
+      claimLock();
+      if (!lockIsMine()) return;
+      if (document.hidden) return;
+
+      const nextIdx = nextFromShuffle(currentTrackIndex);
+      loadTrack(nextIdx);
+
+      // si pas encore unlock: on peut jouer muet (autorisé), puis on dé-mute au 1er geste
+      const unlocked = isUnlocked();
+      const ok = await tryPlayBgm({ mutedStart: !unlocked });
+      if (ok && unlocked) bgm.muted = false;
+
+      try { console.log("[OSD] skipToNext:", reason, "=>", nextIdx); } catch {}
+    } finally {
+      skipping = false;
+    }
+  }
+
+  // fin/erreurs => next
   bgm.addEventListener("ended", () => skipToNext("ended"));
   ["error", "stalled", "abort", "emptied", "suspend"].forEach((ev) => {
     bgm.addEventListener(ev, () => skipToNext(ev));
@@ -417,38 +350,57 @@
     }
   }, WATCHDOG_TICK_MS);
 
-  // ===== START LOGIC =====
-  async function startOnThisPage() {
-    // ✅ IMPORTANT: on ne check plus la playlist au chargement (ça plombe la page menu)
-    // Si tu veux absolument checker, fais-le après 1er geste (voir firstGesture)
-
+  // ===== START (ultra robuste) =====
+  async function startBgmSoft() {
     if (!playlistLen()) return;
 
     claimLock();
+    if (!lockIsMine()) return;
+    if (document.hidden) return;
 
-    const firstIdx = nextFromShuffle(null);
-    loadTrack(firstIdx);
+    if (currentTrackIndex == null) {
+      const firstIdx = nextFromShuffle(null);
+      loadTrack(firstIdx);
+    }
 
     const unlocked = isUnlocked();
-    await playCurrent({ mutedStart: !unlocked });
 
-    if (unlocked) bgm.muted = false;
+    // 1) si déjà unlocked: tente play normal (souvent OK si l’utilisateur a déjà interagi dans l’onglet)
+    if (unlocked) {
+      const ok = await tryPlayBgm({ mutedStart: false });
+      if (ok) return;
+    }
+
+    // 2) fallback: autoplay muet (souvent autorisé)
+    await tryPlayBgm({ mutedStart: true });
   }
 
-  // unlock audio au 1er geste
-  async function unlockAudio() {
+  // ===== UNLOCK AU 1ER GESTE (le point CRITIQUE) =====
+  async function unlockAndForcePlay() {
     markUnlocked();
-    bgm.muted = false;
 
     claimLock();
-
-    if (document.hidden) return;
     if (!lockIsMine()) return;
+    if (document.hidden) return;
 
-    if (bgm.paused) await playCurrent({ mutedStart: false });
+    // si aucune piste chargée (rare), charge maintenant
+    if (currentTrackIndex == null) {
+      const firstIdx = nextFromShuffle(null);
+      loadTrack(firstIdx);
+    }
+
+    // IMPORTANT: dans le geste utilisateur, on force play() + on dé-mute
+    bgm.muted = false;
+
+    if (bgm.paused) {
+      await tryPlayBgm({ mutedStart: false });
+    } else {
+      // si déjà en lecture muette, on dé-mute suffit souvent
+      bgm.muted = false;
+    }
   }
 
-  // ===== STOP MUSIC ON EXIT/LOSS OF FOCUS =====
+  // ===== GOOGLE TRANSLATE / FOCUS / VISIBILITY =====
   let blurTimer = null;
   let wasPlayingBeforeBlur = false;
 
@@ -456,7 +408,6 @@
     wasPlayingBeforeBlur = !bgm.paused;
 
     if (blurTimer) clearTimeout(blurTimer);
-
     blurTimer = setTimeout(() => {
       blurTimer = null;
       const stillNoFocus = typeof document.hasFocus === "function" ? !document.hasFocus() : true;
@@ -466,49 +417,41 @@
 
   window.addEventListener("blur", schedulePauseOnBlur, true);
 
-  window.addEventListener(
-    "focus",
-    () => {
-      if (blurTimer) {
-        clearTimeout(blurTimer);
-        blurTimer = null;
-      }
+  window.addEventListener("focus", () => {
+    if (blurTimer) {
+      clearTimeout(blurTimer);
+      blurTimer = null;
+    }
 
-      if (!document.hidden && isUnlocked() && wasPlayingBeforeBlur && lockIsMine() && bgm.paused) {
+    // si on revient (ex: translate nouvelle fenêtre fermée), on reprend si on jouait
+    if (!document.hidden && isUnlocked() && wasPlayingBeforeBlur) {
+      claimLock();
+      if (!lockIsMine()) return;
+      if (bgm.paused) {
         try { bgm.play().catch(() => {}); } catch {}
       }
-    },
-    true
-  );
+    }
+  }, true);
 
-  document.addEventListener(
-    "visibilitychange",
-    () => {
-      if (document.hidden) pauseBgm();
-    },
-    true
-  );
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) pauseBgm();
+  }, true);
 
   window.addEventListener("pagehide", pauseBgm, true);
   window.addEventListener("beforeunload", pauseBgm, true);
 
-  window.addEventListener(
-    "pageshow",
-    () => {
-      if (document.hidden) return;
-      if (!isUnlocked()) return;
+  // BFCache restore
+  window.addEventListener("pageshow", () => {
+    if (document.hidden) return;
+    if (!isUnlocked()) return;
 
-      claimLock();
-      if (!lockIsMine()) return;
+    claimLock();
+    if (!lockIsMine()) return;
 
-      try {
-        if (bgm.paused) bgm.play().catch(() => {});
-      } catch {}
-    },
-    true
-  );
+    try { if (bgm.paused) bgm.play().catch(() => {}); } catch {}
+  }, true);
 
-  // ===== ÉPÉE UNIQUEMENT SUR CLICK =====
+  // ===== ÉPÉE UNIQUEMENT SUR CLICK (et pas sur UI Translate) =====
   function playSword() {
     try {
       sword.currentTime = 0;
@@ -517,37 +460,20 @@
     } catch {}
   }
 
-  document.addEventListener(
-    "click",
-    (e) => {
-      if (!e.isTrusted) return;
+  document.addEventListener("click", (e) => {
+    if (!e.isTrusted) return;
 
-      const t = e.target;
-      if (t && t.closest) {
-        if (t.closest("#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame")) return;
-      }
-
-      playSword();
-    },
-    true
-  );
-
-  // ===== FIRST GESTURE =====
-  // ✅ Option: si tu veux valider les pistes, fais-le ici (après interaction) et surtout pas au boot
-  let checkedOnce = false;
-
-  const firstGesture = async () => {
-    // check optionnel après 1er geste (désactivé par défaut)
-    if (!checkedOnce) {
-      checkedOnce = true;
-      try {
-        // ⚠️ N'await pas si tu veux zéro impact; ici on await uniquement si ENABLE_TRACK_CHECK=true
-        await validateTracksLimited();
-      } catch {}
+    const t = e.target;
+    if (t && t.closest) {
+      if (t.closest("#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame")) return;
     }
+    playSword();
+  }, true);
 
-    await unlockAudio();
-
+  // ===== FIRST GESTURE: unlock + force play =====
+  const firstGesture = async (e) => {
+    // si c’est un clic dans l’UI translate, on UNLOCK quand même (ça reste un geste)
+    await unlockAndForcePlay();
     document.removeEventListener("click", firstGesture, true);
     document.removeEventListener("keydown", firstGesture, true);
   };
@@ -556,10 +482,12 @@
   document.addEventListener("keydown", firstGesture, true);
 
   // ===== BOOT =====
+  // Au chargement: on prépare (et éventuellement on démarre muet si possible),
+  // mais on garantit le “vrai son” au 1er geste.
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", startOnThisPage, { once: true });
+    document.addEventListener("DOMContentLoaded", startBgmSoft, { once: true });
   } else {
-    startOnThisPage();
+    startBgmSoft();
   }
 
   window.__OSD_AUDIO_SINGLETON__ = { alive: true, id: instanceId };
