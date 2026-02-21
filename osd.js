@@ -1,11 +1,4 @@
-/* osd.js — OSD9TDJ (playlist + épée)
-   - Playlist: shuffle sans répétition (même page 1h => ça varie)
-   - Anti-superposition: singleton + lock global (onglets/fenêtres) + pause sur sortie
-   - Google Translate: nouvelle fenêtre => ancienne perd focus => pause (blur court dropdown ignoré)
-   - Épée: uniquement sur click (pas scroll)
-   - CHECK AUTO: supprime automatiquement les pistes MP3 introuvables (404/etc.)
-   - FIX chemins: normalisation via document.baseURI (corrige GitHub Pages /repo/)
-   - Robustesse: skip sur ended/error/stalled + watchdog anti-blocage
+
 */
 (() => {
   "use strict";
@@ -13,54 +6,47 @@
   // ===== SINGLETON (évite double init sur même page) =====
   if (window.__OSD_AUDIO_SINGLETON__ && window.__OSD_AUDIO_SINGLETON__.alive) return;
 
-  // ===== CONFIG =====
-  // Conseil: chemins RELATIFS (sans "/" au début). On normalise quand même.
-  // Ordre “thématique” conservé mais la lecture est shuffle (anti-répétition).
+
   let TRACKS = [
-    // ⚔️ AGRESSIF / GUERRE (début)
     "/charlvera-legends-of-the-iron-cross_-a-symphony-of-war-and-glory-472348.mp3",
     "/paulyudin-epic-485934.mp3",
     "/charlvera-guardian-of-the-holy-land-epic-background-music-for-video-206639.mp3",
 
-    // ⚔️ ÉPIQUE CINÉ / CHEVALERIE
     "/sigmamusicart-epic-cinematic-background-music-484595.mp3",
     "/charlvera-knight-of-the-sacred-order-epic-background-music-for-video-206650.mp3",
     "/deuslower-fantasy-medieval-epic-music-239599.mp3",
 
-    // 🏰 MÉDIÉVAL / AMBIANCES (AJOUT racine)
     "/tunetank-medieval-festive-music-412772.mp3",
     "/tunetank-medieval-happy-music-412790.mp3",
     "/kaazoom-the-knight-and-the-flame-medieval-minstrelx27s-ballad-363292.mp3",
     "/medieval_horizons-medieval-horizons-quiet-repose-470879.mp3",
 
-    // ✝️ TRANSITION SACRÉE (entrée liturgique)
     "/fideascende-crux-bellum-vox-325218.mp3",
     "/fideascende-crux-invicta-325224.mp3",
     "/fideascende-sanguis-dei-325211.mp3",
 
-    // ✝️ AJOUTS FIDEASCENDE (racine)
     "/fideascende-regnum-dei-325214.mp3",
     "/fideascende-vox-vindictae-325213.mp3",
     "/fideascende-domine-miserere-325207.mp3",
     "/fideascende-domine-miserere-325207 (1).mp3",
     "/fideascende-in-tempore-sancti-bellatoris-325217.mp3",
 
-    // ✝️ GRÉGORIEN PROFOND
     "/nickpanek-act-of-contrition-latin-gregorian-chant-340859.mp3",
     "/nickpanek-gregorian-chant-regina-caeli-prayer-340861.mp3",
     "/nickpanek-amo-te-gregorian-chant-in-latin-340860.mp3",
 
-    // ✝️ FIN MYSTIQUE
     "/fideascende-pater-noster-324805.mp3"
-
-    // (doublon volontaire possible, mais INUTILE avec shuffle — à éviter)
-    // "/nickpanek-amo-te-gregorian-chant-in-latin-340860.mp3"
   ];
 
   const SWORD_SRC = "/sons/epee.mp3";
 
   const BGM_VOLUME = 0.40;
   const SWORD_VOLUME = 0.90;
+
+  // ✅ Check automatique (désactivé par défaut pour ne pas plomber le chargement)
+  const ENABLE_TRACK_CHECK = false; // <-- si tu veux réactiver, mets true
+  const TRACK_CHECK_TIMEOUT_MS = 2500; // garde bas (si activé)
+  const TRACK_CHECK_CONCURRENCY = 3;   // limite réseau (si activé)
 
   // sessionStorage (par onglet)
   const K_UNLOCKED = "osd_audio_unlocked";
@@ -80,9 +66,6 @@
   // blur anti-dropdown: délai avant pause
   const BLUR_PAUSE_DELAY_MS = 300;
 
-  // CHECK AUTO: timeout d’un check de piste (ms)
-  const TRACK_CHECK_TIMEOUT_MS = 3500;
-
   // watchdog anti-stall
   const WATCHDOG_TICK_MS = 2000;
   const WATCHDOG_STUCK_MS = 10_000;
@@ -92,24 +75,16 @@
     return Array.isArray(TRACKS) ? TRACKS.length : 0;
   }
 
-  // Normalise les URLs (corrige GitHub Pages /repo/ + évite racine foireuse)
+  // ✅ Normalise en URL absolue SANS casser "/..." (racine)
   function toAbs(url) {
-    // accepte "/x.mp3" ou "x.mp3" => devient absolu via baseURI
-    const clean = String(url || "").replace(/^\//, "");
-    return new URL(clean, document.baseURI).href;
+    return new URL(String(url || ""), document.baseURI).href;
   }
 
   function markUnlocked() {
-    try {
-      sessionStorage.setItem(K_UNLOCKED, "1");
-    } catch {}
+    try { sessionStorage.setItem(K_UNLOCKED, "1"); } catch {}
   }
   function isUnlocked() {
-    try {
-      return sessionStorage.getItem(K_UNLOCKED) === "1";
-    } catch {
-      return false;
-    }
+    try { return sessionStorage.getItem(K_UNLOCKED) === "1"; } catch { return false; }
   }
 
   function ensureAudioEl(id) {
@@ -118,14 +93,11 @@
     if (all.length > 1) {
       all.forEach((n, idx) => {
         if (idx === 0) return;
-        try {
-          n.pause();
-        } catch {}
-        try {
-          n.remove();
-        } catch {}
+        try { n.pause(); } catch {}
+        try { n.remove(); } catch {}
       });
     }
+
     let el = document.getElementById(id);
     if (!el) {
       el = document.createElement("audio");
@@ -146,11 +118,11 @@
       .finally(() => clearTimeout(t));
   }
 
-  // ===== CHECK AUTO DES PISTES (supprime celles qui ne répondent pas) =====
+  // ===== CHECK TRACKS (OPTIONNEL) — léger + concurrence limitée =====
   async function checkOneTrack(url) {
     const abs = toAbs(url);
 
-    // 1) HEAD (peut échouer selon config serveur)
+    // HEAD (peut échouer selon serveur)
     try {
       const ok = await withTimeout(TRACK_CHECK_TIMEOUT_MS, (signal) =>
         fetch(abs, { method: "HEAD", cache: "no-store", signal }).then((r) => r && r.ok)
@@ -158,71 +130,68 @@
       if (ok) return true;
     } catch {}
 
-    // 2) fallback GET Range 0-0 (ultra léger)
+    // GET Range (accepte uniquement 206 si possible, sinon ok => on laisse passer)
     try {
-      const ok2 = await withTimeout(TRACK_CHECK_TIMEOUT_MS, (signal) =>
-        fetch(abs, {
-          method: "GET",
-          headers: { Range: "bytes=0-0" },
-          cache: "no-store",
-          signal
-        }).then((r) => r && (r.ok || r.status === 206))
+      const r = await withTimeout(TRACK_CHECK_TIMEOUT_MS, (signal) =>
+        fetch(abs, { method: "GET", headers: { Range: "bytes=0-0" }, cache: "no-store", signal })
       );
-      return !!ok2;
+      if (!r) return false;
+      if (r.status === 206) return true;  // idéal
+      if (r.ok) return true;              // fallback (on évite de supprimer à tort)
+      return false;
     } catch {
       return false;
     }
   }
 
-  async function validateTracks() {
+  async function validateTracksLimited() {
+    if (!ENABLE_TRACK_CHECK) return;
     if (!Array.isArray(TRACKS) || TRACKS.length === 0) return;
 
-    // On évite de checker 2x la même URL
     const unique = Array.from(new Set(TRACKS));
-    const results = await Promise.all(unique.map(async (u) => [u, await checkOneTrack(u)]));
-    const okSet = new Set(results.filter(([, ok]) => ok).map(([u]) => u));
+    const okSet = new Set();
+
+    let i = 0;
+    async function worker() {
+      while (i < unique.length) {
+        const idx = i++;
+        const u = unique[idx];
+        const ok = await checkOneTrack(u);
+        if (ok) okSet.add(u);
+      }
+    }
+
+    const workers = Array.from({ length: Math.max(1, TRACK_CHECK_CONCURRENCY) }, worker);
+    await Promise.all(workers);
 
     const before = TRACKS.slice();
     TRACKS = before.filter((u) => okSet.has(u));
-
-    // logs diagnostic
-    try {
-      console.log("[OSD] Tracks before:", before.length, "after:", TRACKS.length);
-      const removed = before.filter((u) => !okSet.has(u));
-      if (removed.length) console.warn("[OSD] Removed (unreachable):", removed);
-    } catch {}
 
     // si l’ordre shuffle existait, il doit être recalculé (taille a changé)
     try {
       sessionStorage.removeItem(K_ORDER);
       sessionStorage.removeItem(K_POS);
     } catch {}
+
+    try {
+      console.log("[OSD] Track check:", before.length, "=>", TRACKS.length);
+      const removed = before.filter((u) => !okSet.has(u));
+      if (removed.length) console.warn("[OSD] Removed (unreachable):", removed);
+    } catch {}
   }
 
   // ===== SHUFFLE SANS RÉPÉTITION (par onglet) =====
   function getOrder() {
-    try {
-      return JSON.parse(sessionStorage.getItem(K_ORDER) || "[]");
-    } catch {
-      return [];
-    }
+    try { return JSON.parse(sessionStorage.getItem(K_ORDER) || "[]"); } catch { return []; }
   }
   function setOrder(arr) {
-    try {
-      sessionStorage.setItem(K_ORDER, JSON.stringify(arr));
-    } catch {}
+    try { sessionStorage.setItem(K_ORDER, JSON.stringify(arr)); } catch {}
   }
   function getPos() {
-    try {
-      return parseInt(sessionStorage.getItem(K_POS) || "0", 10) || 0;
-    } catch {
-      return 0;
-    }
+    try { return parseInt(sessionStorage.getItem(K_POS) || "0", 10) || 0; } catch { return 0; }
   }
   function setPos(n) {
-    try {
-      sessionStorage.setItem(K_POS, String(n));
-    } catch {}
+    try { sessionStorage.setItem(K_POS, String(n)); } catch {}
   }
 
   function fisherYates(arr) {
@@ -246,7 +215,7 @@
       order.every((n) => Number.isInteger(n) && n >= 0 && n < L) &&
       Number.isInteger(pos) &&
       pos >= 0 &&
-      pos < L; // <-- petit fix: évite pos == L (idx undefined)
+      pos < L;
 
     if (!valid) {
       order = fisherYates([...Array(L)].map((_, i) => i));
@@ -268,7 +237,6 @@
       const last = order[order.length - 1];
       let newOrder = fisherYates([...Array(order.length)].map((_, i) => i));
 
-      // évite de recommencer par la même piste que la dernière
       if (newOrder.length > 1 && newOrder[0] === last) {
         [newOrder[0], newOrder[1]] = [newOrder[1], newOrder[0]];
       }
@@ -276,7 +244,6 @@
       pos = 0;
     }
 
-    // évite répétition immédiate si possible
     if (Number.isInteger(lastIndexOrNull) && order.length > 1 && idx === lastIndexOrNull) {
       ensureShuffleOrder();
       const order2 = getOrder();
@@ -301,22 +268,16 @@
   sword.src = toAbs(SWORD_SRC);
   sword.volume = SWORD_VOLUME;
 
-  let currentTrackIndex = null; // index numérique dans TRACKS
+  let currentTrackIndex = null;
   let skipping = false;
 
   function pauseBgm() {
-    try {
-      bgm.pause();
-    } catch {}
+    try { bgm.pause(); } catch {}
   }
 
   function stopBgmHard() {
-    try {
-      bgm.pause();
-    } catch {}
-    try {
-      bgm.currentTime = 0;
-    } catch {}
+    try { bgm.pause(); } catch {}
+    try { bgm.currentTime = 0; } catch {}
   }
 
   function loadTrack(i) {
@@ -331,9 +292,7 @@
 
   async function playCurrent({ mutedStart } = { mutedStart: false }) {
     if (!playlistLen()) return false;
-    try {
-      bgm.volume = BGM_VOLUME;
-    } catch {}
+    try { bgm.volume = BGM_VOLUME; } catch {}
     bgm.muted = !!mutedStart;
     try {
       const p = bgm.play();
@@ -351,8 +310,8 @@
       if (!playlistLen()) return;
 
       claimLock();
-      if (!lockIsMine()) return; // respecte anti-superposition
-      if (document.hidden) return; // pas de lecture en arrière-plan
+      if (!lockIsMine()) return;
+      if (document.hidden) return;
 
       const nextIdx = nextFromShuffle(currentTrackIndex);
       loadTrack(nextIdx);
@@ -361,27 +320,18 @@
       await playCurrent({ mutedStart: !unlocked });
       if (unlocked) bgm.muted = false;
 
-      // debug
-      try {
-        console.log("[OSD] skipToNext:", reason, "=>", nextIdx);
-      } catch {}
+      try { console.log("[OSD] skipToNext:", reason, "=>", nextIdx); } catch {}
     } finally {
       skipping = false;
     }
   }
 
-  // ===== GLOBAL LOCK (anti multi-fenêtre / translate / onglets) =====
+  // ===== GLOBAL LOCK (anti multi-fenêtre / onglets) =====
   let bc = null;
-  try {
-    bc = "BroadcastChannel" in window ? new BroadcastChannel(CHANNEL_NAME) : null;
-  } catch {
-    bc = null;
-  }
+  try { bc = "BroadcastChannel" in window ? new BroadcastChannel(CHANNEL_NAME) : null; } catch { bc = null; }
 
   function writeLock(owner) {
-    try {
-      localStorage.setItem(LOCK_KEY, JSON.stringify({ owner, t: Date.now() }));
-    } catch {}
+    try { localStorage.setItem(LOCK_KEY, JSON.stringify({ owner, t: Date.now() })); } catch {}
   }
 
   function readLock() {
@@ -392,7 +342,7 @@
       if (!obj || typeof obj !== "object") return null;
       if (!obj.owner || typeof obj.owner !== "string") return null;
       if (!obj.t || typeof obj.t !== "number") return null;
-      if (Date.now() - obj.t > STALE_LOCK_MS) return null; // stale lock
+      if (Date.now() - obj.t > STALE_LOCK_MS) return null;
       return obj;
     } catch {
       return null;
@@ -407,9 +357,7 @@
   function claimLock() {
     writeLock(instanceId);
     if (bc) {
-      try {
-        bc.postMessage({ type: "CLAIM", owner: instanceId });
-      } catch {}
+      try { bc.postMessage({ type: "CLAIM", owner: instanceId }); } catch {}
     }
   }
 
@@ -433,12 +381,11 @@
 
   // ===== EVENTS: fin/erreurs => piste suivante =====
   bgm.addEventListener("ended", () => skipToNext("ended"));
-
   ["error", "stalled", "abort", "emptied", "suspend"].forEach((ev) => {
     bgm.addEventListener(ev, () => skipToNext(ev));
   });
 
-  // ===== WATCHDOG anti-stall (si currentTime n'avance pas) =====
+  // ===== WATCHDOG anti-stall =====
   let lastT = 0;
   let stuckMs = 0;
 
@@ -472,16 +419,13 @@
 
   // ===== START LOGIC =====
   async function startOnThisPage() {
-    // 1) check automatique (une seule fois au boot de la page)
-    await validateTracks();
+    // ✅ IMPORTANT: on ne check plus la playlist au chargement (ça plombe la page menu)
+    // Si tu veux absolument checker, fais-le après 1er geste (voir firstGesture)
 
-    // 2) si plus rien -> on ne tente pas d’audio
     if (!playlistLen()) return;
 
-    // 3) revendique lock et démarre
     claimLock();
 
-    // 4) charge une première piste via shuffle
     const firstIdx = nextFromShuffle(null);
     loadTrack(firstIdx);
 
@@ -531,15 +475,12 @@
       }
 
       if (!document.hidden && isUnlocked() && wasPlayingBeforeBlur && lockIsMine() && bgm.paused) {
-        try {
-          bgm.play().catch(() => {});
-        } catch {}
+        try { bgm.play().catch(() => {}); } catch {}
       }
     },
     true
   );
 
-  // Changement d'onglet => hidden est fiable, on pause direct
   document.addEventListener(
     "visibilitychange",
     () => {
@@ -551,7 +492,6 @@
   window.addEventListener("pagehide", pauseBgm, true);
   window.addEventListener("beforeunload", pauseBgm, true);
 
-  // si page restaurée via BFCache
   window.addEventListener(
     "pageshow",
     () => {
@@ -568,7 +508,7 @@
     true
   );
 
-  // ===== ÉPÉE UNIQUEMENT SUR CLICK (pas scroll) =====
+  // ===== ÉPÉE UNIQUEMENT SUR CLICK =====
   function playSword() {
     try {
       sword.currentTime = 0;
@@ -582,7 +522,6 @@
     (e) => {
       if (!e.isTrusted) return;
 
-      // évite l’UI translate
       const t = e.target;
       if (t && t.closest) {
         if (t.closest("#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame")) return;
@@ -593,11 +532,26 @@
     true
   );
 
+  // ===== FIRST GESTURE =====
+  // ✅ Option: si tu veux valider les pistes, fais-le ici (après interaction) et surtout pas au boot
+  let checkedOnce = false;
+
   const firstGesture = async () => {
+    // check optionnel après 1er geste (désactivé par défaut)
+    if (!checkedOnce) {
+      checkedOnce = true;
+      try {
+        // ⚠️ N'await pas si tu veux zéro impact; ici on await uniquement si ENABLE_TRACK_CHECK=true
+        await validateTracksLimited();
+      } catch {}
+    }
+
     await unlockAudio();
+
     document.removeEventListener("click", firstGesture, true);
     document.removeEventListener("keydown", firstGesture, true);
   };
+
   document.addEventListener("click", firstGesture, true);
   document.addEventListener("keydown", firstGesture, true);
 
