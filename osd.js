@@ -1,22 +1,14 @@
-/* osd.js — OSD9TDJ (playlist + épée) — VERSION “ÇA MARCHE PARTOUT”
-   Objectif: 0 lenteur + audio fiable (mobile/PC) + Google Translate OK
-
-   ✅ Changements clés (par rapport à ta version qui ne fait plus de son) :
-   1) On SUPPRIME totalement le “track check” réseau (fetch/HEAD/Range) => plus aucun blocage.
-   2) On rend l’UNLOCK ultra robuste :
-      - si déjà “unlocked” dans l’onglet, on tente play direct
-      - sinon on tente autoplay MUET (souvent autorisé), puis on dé-mute au 1er geste
-      - au 1er geste utilisateur, on force play() (dans le geste) => c’est le point critique.
-   3) On garde :
-      - lock global multi-onglets/fenêtres (anti superposition)
-      - pause sur blur/visibilitychange/pagehide (Google Translate inclus)
-      - épée UNIQUEMENT sur click (avec exclusion UI Translate)
+/* osd.js — OSD9TDJ (playlist + épée) — PROD FIX
+   - Démarrage fiable mobile/PC (audio unlock dans le geste)
+   - Pas de track-check réseau (0 lenteur)
+   - Google Translate OK (pause blur/hidden + ignore UI translate pour l’épée)
+   - Anti-superposition: lock global SI storage dispo, sinon fallback "pas de lock" (mais ça joue)
 */
 
 (() => {
   "use strict";
 
-  // ===== SINGLETON (évite double init sur même page) =====
+  // ===== SINGLETON =====
   if (window.__OSD_AUDIO_SINGLETON__ && window.__OSD_AUDIO_SINGLETON__.alive) return;
 
   // ===== CONFIG =====
@@ -49,53 +41,56 @@
   const BGM_VOLUME = 0.40;
   const SWORD_VOLUME = 0.90;
 
-  // sessionStorage (par onglet) : autorisation audio
+  // storage keys
   const K_UNLOCKED = "osd_audio_unlocked";
-
-  // shuffle (par onglet)
   const K_ORDER = "osd_playlist_order";
-  const K_POS = "osd_playlist_pos";
+  const K_POS   = "osd_playlist_pos";
 
-  // lock global (entre fenêtres/onglets)
+  // lock global
   const LOCK_KEY = "osd_audio_lock";
   const CHANNEL_NAME = "osd_audio_channel";
   const instanceId = `${Date.now()}_${Math.random().toString(16).slice(2)}`;
   const STALE_LOCK_MS = 15_000;
 
-  // pause blur (Google Translate / changement focus)
+  // focus/translate
   const BLUR_PAUSE_DELAY_MS = 300;
 
-  // watchdog anti-stall
+  // watchdog
   const WATCHDOG_TICK_MS = 2000;
   const WATCHDOG_STUCK_MS = 10_000;
 
-  // ===== UTILS =====
-  function playlistLen() {
-    return Array.isArray(TRACKS) ? TRACKS.length : 0;
-  }
+  // ===== HELPERS =====
+  const log = (...a) => { try { console.log("[OSD]", ...a); } catch {} };
+  const warn = (...a) => { try { console.warn("[OSD]", ...a); } catch {} };
 
-  // Respecte "/..." (racine) ET "..." (relatif)
   function toAbs(url) {
     return new URL(String(url || ""), document.baseURI).href;
   }
 
-  function markUnlocked() {
-    try { sessionStorage.setItem(K_UNLOCKED, "1"); } catch {}
-  }
-  function isUnlocked() {
-    try { return sessionStorage.getItem(K_UNLOCKED) === "1"; } catch { return false; }
-  }
+  function playlistLen() { return Array.isArray(TRACKS) ? TRACKS.length : 0; }
 
-  function ensureAudioEl(id) {
-    const all = document.querySelectorAll(`#${CSS.escape(id)}`);
-    if (all.length > 1) {
-      all.forEach((n, idx) => {
-        if (idx === 0) return;
-        try { n.pause(); } catch {}
-        try { n.remove(); } catch {}
-      });
+  function markUnlocked() { try { sessionStorage.setItem(K_UNLOCKED, "1"); } catch {} }
+  function isUnlocked() { try { return sessionStorage.getItem(K_UNLOCKED) === "1"; } catch { return false; } }
+
+  function safePause(a){ try { a.pause(); } catch {} }
+  function safeStop(a){ try { a.pause(); } catch {} try { a.currentTime = 0; } catch {} }
+
+  // ===== STORAGE AVAILABILITY (CRITIQUE) =====
+  function storageOK() {
+    try {
+      const k = "__osd_test__";
+      localStorage.setItem(k, "1");
+      localStorage.removeItem(k);
+      return true;
+    } catch {
+      return false;
     }
+  }
+  const LOCK_ENABLED = storageOK(); // si faux => on n’empêche jamais la lecture
+  if (!LOCK_ENABLED) warn("localStorage indisponible -> lock global désactivé (audio restera fonctionnel).");
 
+  // ===== AUDIO ELEMENTS =====
+  function ensureAudioEl(id) {
     let el = document.getElementById(id);
     if (!el) {
       el = document.createElement("audio");
@@ -108,29 +103,21 @@
     return el;
   }
 
-  function safePause(a) {
-    try { a.pause(); } catch {}
-  }
-  function safeStop(a) {
-    try { a.pause(); } catch {}
-    try { a.currentTime = 0; } catch {}
-  }
+  const bgm = ensureAudioEl("osd_bgm");
+  bgm.loop = false;
+  bgm.volume = BGM_VOLUME;
 
-  // ===== SHUFFLE SANS RÉPÉTITION =====
-  function getOrder() {
-    try { return JSON.parse(sessionStorage.getItem(K_ORDER) || "[]"); } catch { return []; }
-  }
-  function setOrder(arr) {
-    try { sessionStorage.setItem(K_ORDER, JSON.stringify(arr)); } catch {}
-  }
-  function getPos() {
-    try { return parseInt(sessionStorage.getItem(K_POS) || "0", 10) || 0; } catch { return 0; }
-  }
-  function setPos(n) {
-    try { sessionStorage.setItem(K_POS, String(n)); } catch {}
-  }
+  const sword = ensureAudioEl("osd_sword");
+  sword.src = toAbs(SWORD_SRC);
+  sword.volume = SWORD_VOLUME;
 
-  function fisherYates(arr) {
+  // ===== SHUFFLE =====
+  function getOrder(){ try { return JSON.parse(sessionStorage.getItem(K_ORDER) || "[]"); } catch { return []; } }
+  function setOrder(arr){ try { sessionStorage.setItem(K_ORDER, JSON.stringify(arr)); } catch {} }
+  function getPos(){ try { return parseInt(sessionStorage.getItem(K_POS) || "0", 10) || 0; } catch { return 0; } }
+  function setPos(n){ try { sessionStorage.setItem(K_POS, String(n)); } catch {} }
+
+  function fisherYates(arr){
     for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -138,22 +125,19 @@
     return arr;
   }
 
-  function ensureShuffleOrder() {
+  function ensureShuffleOrder(){
     const L = playlistLen();
     if (!L) return;
-
     let order = getOrder();
     let pos = getPos();
 
     const valid =
       Array.isArray(order) &&
       order.length === L &&
-      order.every((n) => Number.isInteger(n) && n >= 0 && n < L) &&
-      Number.isInteger(pos) &&
-      pos >= 0 &&
-      pos < L;
+      order.every(n => Number.isInteger(n) && n >= 0 && n < L) &&
+      Number.isInteger(pos) && pos >= 0 && pos < L;
 
-    if (!valid) {
+    if (!valid){
       order = fisherYates([...Array(L)].map((_, i) => i));
       pos = 0;
       setOrder(order);
@@ -161,7 +145,7 @@
     }
   }
 
-  function nextFromShuffle(lastIndexOrNull) {
+  function nextFromShuffle(lastIndexOrNull){
     ensureShuffleOrder();
     const order = getOrder();
     let pos = getPos();
@@ -172,22 +156,20 @@
     if (pos >= order.length) {
       const last = order[order.length - 1];
       let newOrder = fisherYates([...Array(order.length)].map((_, i) => i));
-      if (newOrder.length > 1 && newOrder[0] === last) {
-        [newOrder[0], newOrder[1]] = [newOrder[1], newOrder[0]];
-      }
+      if (newOrder.length > 1 && newOrder[0] === last) [newOrder[0], newOrder[1]] = [newOrder[1], newOrder[0]];
       setOrder(newOrder);
       pos = 0;
     }
 
-    // évite répétition immédiate si possible
+    // éviter répétition immédiate
     if (Number.isInteger(lastIndexOrNull) && order.length > 1 && idx === lastIndexOrNull) {
       ensureShuffleOrder();
-      const order2 = getOrder();
-      let pos2 = getPos();
-      idx = order2[pos2];
-      pos2++;
-      if (pos2 >= order2.length) pos2 = 0;
-      setPos(pos2);
+      const o2 = getOrder();
+      let p2 = getPos();
+      idx = o2[p2];
+      p2++;
+      if (p2 >= o2.length) p2 = 0;
+      setPos(p2);
       return idx;
     }
 
@@ -195,50 +177,17 @@
     return idx;
   }
 
-  // ===== AUDIO ELEMENTS =====
-  const bgm = ensureAudioEl("osd_bgm");
-  bgm.volume = BGM_VOLUME;
-  bgm.loop = false;
-
-  const sword = ensureAudioEl("osd_sword");
-  sword.src = toAbs(SWORD_SRC);
-  sword.volume = SWORD_VOLUME;
-
-  let currentTrackIndex = null;
-  let skipping = false;
-
-  function loadTrack(i) {
-    if (!playlistLen()) return;
-    currentTrackIndex = i;
-    safeStop(bgm);
-    bgm.src = toAbs(TRACKS[currentTrackIndex]);
-    bgm.setAttribute("data-track-index", String(currentTrackIndex));
-    try { bgm.load(); } catch {}
-  }
-
-  async function tryPlayBgm({ mutedStart } = { mutedStart: false }) {
-    if (!playlistLen()) return false;
-    try { bgm.volume = BGM_VOLUME; } catch {}
-    bgm.muted = !!mutedStart;
-
-    try {
-      const p = bgm.play();
-      if (p && typeof p.then === "function") await p;
-      return true;
-    } catch {
-      return false;
-    }
-  }
-
-  // ===== GLOBAL LOCK (anti multi-fenêtre / onglets) =====
+  // ===== LOCK GLOBAL (robuste) =====
   let bc = null;
-  try { bc = "BroadcastChannel" in window ? new BroadcastChannel(CHANNEL_NAME) : null; } catch { bc = null; }
+  try { bc = ("BroadcastChannel" in window) ? new BroadcastChannel(CHANNEL_NAME) : null; } catch { bc = null; }
 
-  function writeLock(owner) {
+  function writeLock(owner){
+    if (!LOCK_ENABLED) return;
     try { localStorage.setItem(LOCK_KEY, JSON.stringify({ owner, t: Date.now() })); } catch {}
   }
 
-  function readLock() {
+  function readLock(){
+    if (!LOCK_ENABLED) return { owner: instanceId, t: Date.now() }; // fallback => toujours "moi"
     try {
       const raw = localStorage.getItem(LOCK_KEY);
       if (!raw) return null;
@@ -253,25 +202,23 @@
     }
   }
 
-  function lockIsMine() {
+  function lockIsMine(){
+    if (!LOCK_ENABLED) return true;
     const lock = readLock();
     return lock && lock.owner === instanceId;
   }
 
-  function claimLock() {
+  function claimLock(){
     writeLock(instanceId);
     if (bc) {
       try { bc.postMessage({ type: "CLAIM", owner: instanceId }); } catch {}
     }
   }
 
-  function pauseBgm() {
-    safePause(bgm);
-  }
-
-  function handleClaim(owner) {
+  function handleClaim(owner){
+    if (!LOCK_ENABLED) return;
     if (!owner || owner === instanceId) return;
-    pauseBgm();
+    safePause(bgm);
   }
 
   if (bc) {
@@ -282,13 +229,38 @@
   }
 
   window.addEventListener("storage", (e) => {
+    if (!LOCK_ENABLED) return;
     if (e.key !== LOCK_KEY) return;
     const lock = readLock();
-    if (lock && lock.owner && lock.owner !== instanceId) pauseBgm();
+    if (lock && lock.owner && lock.owner !== instanceId) safePause(bgm);
   });
 
-  // ===== SKIP NEXT (robuste) =====
-  async function skipToNext(reason) {
+  // ===== PLAY CORE =====
+  let currentTrackIndex = null;
+  let skipping = false;
+
+  function loadTrack(i){
+    if (!playlistLen()) return;
+    currentTrackIndex = i;
+    safeStop(bgm);
+    bgm.src = toAbs(TRACKS[currentTrackIndex]);
+    try { bgm.load(); } catch {}
+  }
+
+  async function playBgm({ mutedStart }){
+    if (!playlistLen()) return false;
+    bgm.volume = BGM_VOLUME;
+    bgm.muted = !!mutedStart;
+    try {
+      const p = bgm.play();
+      if (p && typeof p.then === "function") await p;
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  async function skipToNext(reason){
     if (skipping) return;
     skipping = true;
     try {
@@ -301,47 +273,32 @@
       const nextIdx = nextFromShuffle(currentTrackIndex);
       loadTrack(nextIdx);
 
-      // si pas encore unlock: on peut jouer muet (autorisé), puis on dé-mute au 1er geste
       const unlocked = isUnlocked();
-      const ok = await tryPlayBgm({ mutedStart: !unlocked });
+      const ok = await playBgm({ mutedStart: !unlocked });
       if (ok && unlocked) bgm.muted = false;
 
-      try { console.log("[OSD] skipToNext:", reason, "=>", nextIdx); } catch {}
+      log("skipToNext", reason, "=>", nextIdx);
     } finally {
       skipping = false;
     }
   }
 
-  // fin/erreurs => next
   bgm.addEventListener("ended", () => skipToNext("ended"));
   ["error", "stalled", "abort", "emptied", "suspend"].forEach((ev) => {
     bgm.addEventListener(ev, () => skipToNext(ev));
   });
 
-  // ===== WATCHDOG anti-stall =====
+  // watchdog anti-stall
   let lastT = 0;
   let stuckMs = 0;
-
   setInterval(() => {
-    if (!bgm || !bgm.src) {
-      lastT = 0;
-      stuckMs = 0;
-      return;
-    }
-    if (bgm.paused) {
-      lastT = bgm.currentTime || 0;
-      stuckMs = 0;
-      return;
-    }
-    if (document.hidden) {
-      stuckMs = 0;
-      return;
-    }
+    if (!bgm || !bgm.src) { lastT = 0; stuckMs = 0; return; }
+    if (bgm.paused) { lastT = bgm.currentTime || 0; stuckMs = 0; return; }
+    if (document.hidden) { stuckMs = 0; return; }
 
     const t = bgm.currentTime || 0;
     if (t <= lastT + 0.01) stuckMs += WATCHDOG_TICK_MS;
     else stuckMs = 0;
-
     lastT = t;
 
     if (stuckMs >= WATCHDOG_STUCK_MS) {
@@ -350,8 +307,8 @@
     }
   }, WATCHDOG_TICK_MS);
 
-  // ===== START (ultra robuste) =====
-  async function startBgmSoft() {
+  // ===== START / UNLOCK =====
+  async function startSoft(){
     if (!playlistLen()) return;
 
     claimLock();
@@ -363,96 +320,75 @@
       loadTrack(firstIdx);
     }
 
-    const unlocked = isUnlocked();
-
-    // 1) si déjà unlocked: tente play normal (souvent OK si l’utilisateur a déjà interagi dans l’onglet)
-    if (unlocked) {
-      const ok = await tryPlayBgm({ mutedStart: false });
+    // 1) si déjà unlocked (même onglet), play direct
+    if (isUnlocked()) {
+      const ok = await playBgm({ mutedStart: false });
       if (ok) return;
     }
 
-    // 2) fallback: autoplay muet (souvent autorisé)
-    await tryPlayBgm({ mutedStart: true });
+    // 2) sinon tentative muette (souvent autorisée)
+    await playBgm({ mutedStart: true });
   }
 
-  // ===== UNLOCK AU 1ER GESTE (le point CRITIQUE) =====
-  async function unlockAndForcePlay() {
+  async function unlockHard(){
     markUnlocked();
-
     claimLock();
     if (!lockIsMine()) return;
     if (document.hidden) return;
 
-    // si aucune piste chargée (rare), charge maintenant
     if (currentTrackIndex == null) {
       const firstIdx = nextFromShuffle(null);
       loadTrack(firstIdx);
     }
 
-    // IMPORTANT: dans le geste utilisateur, on force play() + on dé-mute
+    // IMPORTANT: dans le geste utilisateur => play non-muet
     bgm.muted = false;
-
-    if (bgm.paused) {
-      await tryPlayBgm({ mutedStart: false });
-    } else {
-      // si déjà en lecture muette, on dé-mute suffit souvent
-      bgm.muted = false;
-    }
+    if (bgm.paused) await playBgm({ mutedStart: false });
+    else bgm.muted = false;
   }
 
-  // ===== GOOGLE TRANSLATE / FOCUS / VISIBILITY =====
+  // ===== FOCUS / VISIBILITY (Translate OK) =====
   let blurTimer = null;
   let wasPlayingBeforeBlur = false;
 
-  function schedulePauseOnBlur() {
+  function schedulePauseOnBlur(){
     wasPlayingBeforeBlur = !bgm.paused;
-
     if (blurTimer) clearTimeout(blurTimer);
     blurTimer = setTimeout(() => {
       blurTimer = null;
-      const stillNoFocus = typeof document.hasFocus === "function" ? !document.hasFocus() : true;
-      if (document.hidden || stillNoFocus) pauseBgm();
+      const noFocus = (typeof document.hasFocus === "function") ? !document.hasFocus() : true;
+      if (document.hidden || noFocus) safePause(bgm);
     }, BLUR_PAUSE_DELAY_MS);
   }
 
   window.addEventListener("blur", schedulePauseOnBlur, true);
 
   window.addEventListener("focus", () => {
-    if (blurTimer) {
-      clearTimeout(blurTimer);
-      blurTimer = null;
-    }
-
-    // si on revient (ex: translate nouvelle fenêtre fermée), on reprend si on jouait
+    if (blurTimer) { clearTimeout(blurTimer); blurTimer = null; }
     if (!document.hidden && isUnlocked() && wasPlayingBeforeBlur) {
       claimLock();
       if (!lockIsMine()) return;
-      if (bgm.paused) {
-        try { bgm.play().catch(() => {}); } catch {}
-      }
+      try { if (bgm.paused) bgm.play().catch(() => {}); } catch {}
     }
   }, true);
 
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden) pauseBgm();
+    if (document.hidden) safePause(bgm);
   }, true);
 
-  window.addEventListener("pagehide", pauseBgm, true);
-  window.addEventListener("beforeunload", pauseBgm, true);
+  window.addEventListener("pagehide", () => safePause(bgm), true);
+  window.addEventListener("beforeunload", () => safePause(bgm), true);
 
-  // BFCache restore
   window.addEventListener("pageshow", () => {
     if (document.hidden) return;
     if (!isUnlocked()) return;
-
     claimLock();
     if (!lockIsMine()) return;
-
     try { if (bgm.paused) bgm.play().catch(() => {}); } catch {}
   }, true);
 
-  // ===== ÉPÉE UNIQUEMENT SUR CLICK (et pas sur UI Translate) =====
-  function playSword() {
+  // ===== ÉPÉE (click only, ignore UI translate) =====
+  function playSword(){
     try {
       sword.currentTime = 0;
       const p = sword.play();
@@ -470,24 +406,20 @@
     playSword();
   }, true);
 
-  // ===== FIRST GESTURE: unlock + force play =====
-  const firstGesture = async (e) => {
-    // si c’est un clic dans l’UI translate, on UNLOCK quand même (ça reste un geste)
-    await unlockAndForcePlay();
+  // 1er geste = unlock HARD (garantie son)
+  const firstGesture = async () => {
+    await unlockHard();
     document.removeEventListener("click", firstGesture, true);
     document.removeEventListener("keydown", firstGesture, true);
   };
-
   document.addEventListener("click", firstGesture, true);
   document.addEventListener("keydown", firstGesture, true);
 
-  // ===== BOOT =====
-  // Au chargement: on prépare (et éventuellement on démarre muet si possible),
-  // mais on garantit le “vrai son” au 1er geste.
+  // boot
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", startBgmSoft, { once: true });
+    document.addEventListener("DOMContentLoaded", startSoft, { once: true });
   } else {
-    startBgmSoft();
+    startSoft();
   }
 
   window.__OSD_AUDIO_SINGLETON__ = { alive: true, id: instanceId };
