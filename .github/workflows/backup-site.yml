@@ -19,22 +19,46 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 1) Créer l’archive ZIP
-      - name: Create ZIP backup
+      # 1) Créer 2 archives ZIP :
+      #    - site (tous les jours) SANS mp3
+      #    - mp3 (uniquement le 1er du mois UTC) avec seulement les mp3 à la racine
+      - name: Create ZIP backups (site daily + mp3 monthly)
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p backups
           DATE=$(date -u +"%Y-%m-%d_%H-%M")
-          ZIP="backups/backup_site_${DATE}.zip"
 
-          zip -r "$ZIP" . \
+          ZIP_SITE="backups/backup_site_${DATE}.zip"
+          ZIP_MP3="backups/backup_mp3_${DATE}.zip"
+
+          # Backup du site SANS mp3 (mp3 à la racine)
+          zip -r -9 "$ZIP_SITE" . \
             -x ".git/*" \
             -x ".github/*" \
-            -x "backups/*"
+            -x "backups/*" \
+            -x "*.mp3"
 
-          echo "ZIP_FILE=$ZIP" >> "$GITHUB_ENV"
-          ls -lah "$ZIP"
+          echo "ZIP_SITE=$ZIP_SITE" >> "$GITHUB_ENV"
+
+          # Backup MP3 uniquement le 1er du mois (UTC)
+          DAY=$(date -u +"%d")
+          if [ "$DAY" = "01" ]; then
+            if ls ./*.mp3 >/dev/null 2>&1; then
+              zip -9 "$ZIP_MP3" ./*.mp3
+              echo "ZIP_MP3=$ZIP_MP3" >> "$GITHUB_ENV"
+              echo "MP3 backup created (monthly): $ZIP_MP3"
+            else
+              echo "No MP3 found at repo root (monthly mp3 backup skipped)."
+              echo "ZIP_MP3=" >> "$GITHUB_ENV"
+            fi
+          else
+            echo "Not the 1st of the month (UTC) -> skipping MP3 backup."
+            echo "ZIP_MP3=" >> "$GITHUB_ENV"
+          fi
+
+          echo "Archives created:"
+          ls -lah backups
 
       # 2) Récupérer un access_token Zoho via refresh_token
       - name: Get Zoho access token (refresh_token)
@@ -68,13 +92,13 @@ jobs:
           echo "::add-mask::$ACCESS_TOKEN"
           echo "ACCESS_TOKEN=$ACCESS_TOKEN" >> "$GITHUB_ENV"
 
-      # 3) Upload du ZIP vers TON dossier Zoho WorkDrive
-      - name: Upload ZIP to Zoho WorkDrive
+      # 3) Upload du ZIP SITE (tous les jours)
+      - name: Upload SITE ZIP to Zoho WorkDrive
         shell: bash
         env:
           ACCESS_TOKEN: ${{ env.ACCESS_TOKEN }}
           FOLDER_ID: ${{ secrets.ZOHO_TARGET_FOLDER_ID }}
-          ZIP_FILE: ${{ env.ZIP_FILE }}
+          ZIP_FILE: ${{ env.ZIP_SITE }}
         run: |
           set -euo pipefail
 
@@ -97,12 +121,46 @@ jobs:
             -F "parent_id=$FOLDER_ID" \
             -F "content=@$ZIP_FILE")"
 
-          echo "===== WORKDRIVE UPLOAD RESPONSE ====="
+          echo "===== WORKDRIVE UPLOAD RESPONSE (SITE) ====="
           echo "$UPLOAD_RESPONSE"
           echo "===== END RESPONSE ====="
 
-      # 4) Nettoyage WorkDrive: garder seulement les 20 derniers ZIP (FIX ICI)
-      - name: Cleanup WorkDrive (keep last 20)
+      # 3bis) Upload du ZIP MP3 (uniquement le 1er du mois, si créé)
+      - name: Upload MP3 ZIP to Zoho WorkDrive (monthly)
+        shell: bash
+        env:
+          ACCESS_TOKEN: ${{ env.ACCESS_TOKEN }}
+          FOLDER_ID: ${{ secrets.ZOHO_TARGET_FOLDER_ID }}
+          ZIP_FILE: ${{ env.ZIP_MP3 }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${ZIP_FILE:-}" ]; then
+            echo "No MP3 zip to upload (skipping)."
+            exit 0
+          fi
+
+          if [ ! -f "$ZIP_FILE" ]; then
+            echo "MP3 ZIP not found (skipping): $ZIP_FILE"
+            exit 0
+          fi
+
+          echo "Uploading: $ZIP_FILE"
+          echo "To folder_id: $FOLDER_ID"
+
+          UPLOAD_RESPONSE="$(curl -sS --fail-with-body -X POST "https://www.zohoapis.eu/workdrive/api/v1/upload" \
+            -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
+            -F "parent_id=$FOLDER_ID" \
+            -F "content=@$ZIP_FILE")"
+
+          echo "===== WORKDRIVE UPLOAD RESPONSE (MP3) ====="
+          echo "$UPLOAD_RESPONSE"
+          echo "===== END RESPONSE ====="
+
+      # 4) Nettoyage WorkDrive : garder seulement les 20 derniers ZIP de chaque type (site + mp3)
+      #    Fix important : pour lister le contenu d’un dossier, c’est /files/<folder_id>/files
+      #    + pagination pour ne pas rater des fichiers si tu en as beaucoup.
+      - name: Cleanup WorkDrive (keep last 20 of each)
         shell: bash
         env:
           ACCESS_TOKEN: ${{ env.ACCESS_TOKEN }}
@@ -111,53 +169,79 @@ jobs:
         run: |
           set -euo pipefail
 
-          echo "Listing files in folder_id=$FOLDER_ID (keeping last $KEEP)…"
-
-          LIST_URL="https://www.zohoapis.eu/workdrive/api/v1/files/$FOLDER_ID"
-
-          LIST_RESPONSE="$(curl -sS -X GET "$LIST_URL" \
-            -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
-            -H "Accept: application/json")"
-
-          echo "===== WORKDRIVE LIST RESPONSE (debug) ====="
-          echo "$LIST_RESPONSE"
-          echo "===== END RESPONSE ====="
-
-          # Si Zoho ne renvoie pas du JSON → stop propre
-          if ! echo "$LIST_RESPONSE" | jq . >/dev/null 2>&1; then
-            echo "ERROR: Zoho did not return JSON (bad folder id / scope / region)"
+          if [ -z "$FOLDER_ID" ]; then
+            echo "ERROR: ZOHO_TARGET_FOLDER_ID is empty"
             exit 1
           fi
 
-          TO_DELETE_IDS="$(
-            echo "$LIST_RESPONSE" | jq -r '
-              .data[]
-              | select(.attributes.name | test("^backup_site_[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{2}-[0-9]{2}\\.zip$"))
-              | "\(.attributes.name)\t\(.id)"
-            ' | sort -r | tail -n +$((KEEP+1)) | cut -f2
-          )"
+          BASE_URL="https://www.zohoapis.eu/workdrive/api/v1/files/$FOLDER_ID/files"
+          LIMIT=50
+          OFFSET=0
 
-          if [ -z "${TO_DELETE_IDS:-}" ]; then
-            echo "Nothing to delete."
-            exit 0
-          fi
+          echo "Listing all files in folder_id=$FOLDER_ID (keeping last $KEEP of each)…"
 
-          echo "Deleting these file ids:"
-          echo "$TO_DELETE_IDS"
+          ALL_DATA="[]"
 
-          while read -r FILE_ID; do
-            [ -z "$FILE_ID" ] && continue
-            echo "Deleting $FILE_ID …"
-            curl -sS -X DELETE \
-              "https://www.zohoapis.eu/workdrive/api/v1/files/$FILE_ID" \
+          while true; do
+            URL="${BASE_URL}?page[limit]=${LIMIT}&page[offset]=${OFFSET}"
+            RESP="$(curl -sS -X GET "$URL" \
               -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
-              >/dev/null
-          done <<< "$TO_DELETE_IDS"
+              -H "Accept: application/json")"
+
+            if ! echo "$RESP" | jq . >/dev/null 2>&1; then
+              echo "ERROR: Zoho did not return JSON"
+              echo "$RESP"
+              exit 1
+            fi
+
+            COUNT="$(echo "$RESP" | jq '.data | length')"
+            if [ "$COUNT" -eq 0 ]; then
+              break
+            fi
+
+            ALL_DATA="$(jq -s '.[0] + .[1]' <(echo "$ALL_DATA") <(echo "$RESP" | jq '.data'))"
+            OFFSET=$((OFFSET + LIMIT))
+          done
+
+          echo "Total files fetched: $(echo "$ALL_DATA" | jq 'length')"
+
+          delete_by_prefix () {
+            local PREFIX="$1"
+
+            TO_DELETE_IDS="$(
+              echo "$ALL_DATA" | jq -r --arg p "$PREFIX" '
+                .[]
+                | select(.attributes.name | test("^" + $p + "_[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{2}-[0-9]{2}\\.zip$"))
+                | "\(.attributes.name)\t\(.id)"
+              ' | sort -r | tail -n +$((KEEP+1)) | cut -f2
+            )"
+
+            if [ -z "${TO_DELETE_IDS:-}" ]; then
+              echo "Nothing to delete for $PREFIX."
+              return 0
+            fi
+
+            echo "Deleting old files for $PREFIX:"
+            echo "$TO_DELETE_IDS"
+
+            while read -r FILE_ID; do
+              [ -z "$FILE_ID" ] && continue
+              echo "Deleting $FILE_ID …"
+              curl -sS -X DELETE \
+                "https://www.zohoapis.eu/workdrive/api/v1/files/$FILE_ID" \
+                -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
+                >/dev/null
+            done <<< "$TO_DELETE_IDS"
+          }
+
+          delete_by_prefix "backup_site"
+          delete_by_prefix "backup_mp3"
 
           echo "Cleanup done."
-      # 5) (Optionnel) Artifact GitHub en secours
+
+      # 5) (Optionnel) Artifact GitHub en secours (les 2 types)
       - name: Upload backup artifact (GitHub)
         uses: actions/upload-artifact@v4
         with:
           name: site-backup
-          path: backups/backup_site_*.zip
+          path: backups/backup_*.zip
