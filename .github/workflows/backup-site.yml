@@ -183,8 +183,9 @@ jobs:
           ALL_DATA="[]"
 
           while true; do
-            URL="${BASE_URL}?page[limit]=${LIMIT}&page[offset]=${OFFSET}"
-            RESP="$(curl -sS -X GET "$URL" \
+            # Crochets encodés + curl globbing désactivé (robuste)
+            URL="${BASE_URL}?page%5Blimit%5D=${LIMIT}&page%5Boffset%5D=${OFFSET}"
+            RESP="$(curl -g -sS --fail-with-body -X GET "$URL" \
               -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
               -H "Accept: application/json")"
 
@@ -227,7 +228,7 @@ jobs:
             while read -r FILE_ID; do
               [ -z "$FILE_ID" ] && continue
               echo "Deleting $FILE_ID …"
-              curl -sS -X DELETE \
+              curl -sS --fail-with-body -X DELETE \
                 "https://www.zohoapis.eu/workdrive/api/v1/files/$FILE_ID" \
                 -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
                 >/dev/null
