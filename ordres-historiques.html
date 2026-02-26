@@ -1193,63 +1193,1236 @@
 </div>
 </div>
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<title>Ordres historiques — Terre sainte, Byzance, Reconquista &amp; ordres de cour | OSD9TDJ</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+<!-- SEO -->
+<meta content="Panorama grand public (non exhaustif) des grands ordres et institutions historiques : Terre sainte, ordres religieux-militaires, hospitalité, Reconquista ibérique, Lieux saints de Jérusalem, Byzance/Constantinople, et ordres de cour. Repères, définitions, évolutions et héritages." name="description"/>
+<meta content="ordres historiques, Terre sainte, Jérusalem, croisades, ordres religieux-militaires, Templiers, Ordre du Temple, Hospitaliers, Saint-Jean, Malte, Teutoniques, Saint-Lazare, Saint-Sépulcre, Reconquista, Santiago, Calatrava, Alcántara, Avis, Byzance, Constantinople, ordres de cour, Toison d'or, Jarretière, commanderie" name="keywords"/>
+<meta content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" name="robots"/>
+<meta content="Ordre Sacré des Neuf Templiers de Jérusalem (OSD9TDJ)" name="author"/>
+<link href="https://osd9tdj.org/ordres-historiques.html" rel="canonical"/>
+
+<!-- OpenGraph -->
+<meta content="Ordres historiques — Terre sainte, Byzance, Reconquista &amp; ordres de cour" property="og:title"/>
+<meta content="Panorama non exhaustif des ordres et institutions historiques (Terre sainte, hospitalité, Reconquista, Byzance, ordres de cour) : repères, définitions, évolutions, héritages." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://osd9tdj.org/ordres-historiques.html" property="og:url"/>
+<meta content="icon-512.png" property="og:image"/>
+<meta content="fr_FR" property="og:locale"/>
+
+<!-- Twitter / X -->
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Ordres historiques — Terre sainte, Byzance, Reconquista &amp; ordres de cour" name="twitter:title"/>
+<meta content="Panorama non exhaustif des ordres et institutions historiques : repères, définitions, évolutions, héritages." name="twitter:description"/>
+<meta content="icon-512.png" name="twitter:image"/>
+
+<!-- Polices -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&amp;family=Lato:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
+
+<link href="icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
+<link href="icon-512.png" rel="icon" sizes="512x512" type="image/png"/>
+<link href="icon-192.png" rel="apple-touch-icon"/>
+
+<!-- JSON-LD (SEO) -->
+<script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebPage",
+    "name":"Ordres historiques — Terre sainte, Byzance, Reconquista & ordres de cour",
+    "url":"https://osd9tdj.org/ordres-historiques.html",
+    "inLanguage":"fr-FR",
+    "description":"Panorama grand public (non exhaustif) des grands ordres et institutions historiques : Terre sainte, ordres religieux-militaires, hospitalité, Reconquista ibérique, Lieux saints de Jérusalem, Byzance/Constantinople, et ordres de cour. Repères, définitions, évolutions et héritages.",
+    "isPartOf":{
+      "@type":"WebSite",
+      "name":"OSD9TDJ",
+      "url":"https://osd9tdj.org/"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Ordre Sacré des Neuf Templiers de Jérusalem (OSD9TDJ)",
+      "url":"https://osd9tdj.org/"
+    }
+  }
+</script>
+<script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Accueil","item":"https://osd9tdj.org/index.html"},
+      {"@type":"ListItem","position":2,"name":"Ordres historiques","item":"https://osd9tdj.org/ordres-historiques.html"}
+    ]
+  }
+</script>
+
+<style>
+  :root{
+    --or:#d6a728;
+    --clair:#f8e8c8;
+    --fond:#070708;
+    --or-line:rgba(214,167,40,0.40);
+    --or-line2:rgba(214,167,40,0.24);
+    --or-glow:rgba(214,167,40,0.10);
+    --card:rgba(10,10,12,0.86);
+    --card2:rgba(0,0,0,0.10);
+    --txt:rgba(248,232,200,0.92);
+    --muted:rgba(248,232,200,0.78);
+  }
+
+  html,body{
+    height:100%;
+    margin:0;
+    padding:0;
+    font-family:'Lato',Arial,sans-serif;
+    color:var(--clair);
+    text-align:center;
+
+    /* ✅ image de fond demandée */
+    background: url("fond-oh.PNG") center / cover no-repeat fixed;
+  }
+
+  /* ✅ voile noir (pour lisibilité sur fond blanc) + texture conservée */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+      background:
+  linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)),
+  linear-gradient(135deg, rgba(255,255,255,0.06), rgba(0,0,0,0.0) 35%, rgba(255,255,255,0.04) 60%, rgba(0,0,0,0.0)),
+  repeating-linear-gradient(25deg,
+    rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.02) 18px,
+    rgba(0,0,0,0.00) 36px, rgba(255,255,255,0.03) 54px
+  );
+    opacity:1;
+    z-index:0;
+  }
+
+  /* ✅ lisibilité titres/texte d’intro sur fond clair */
+  header.hero h1,
+  header.hero h2,
+  header.hero .lead{
+    text-shadow:0 2px 14px rgba(0,0,0,0.78);
+  }
+
+  .wm{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:50;
+    opacity:0.10;
+    mix-blend-mode:overlay;
+    background-image:
+      repeating-linear-gradient(-28deg,
+        rgba(214,167,40,0.50) 0px,
+        rgba(214,167,40,0.50) 1px,
+        rgba(0,0,0,0.0) 1px,
+        rgba(0,0,0,0.0) 140px
+      );
+  }
+  .wm::after{
+    content:attr(data-wm);
+    position:absolute;
+    inset:-40px;
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    letter-spacing:0.28em;
+    color:rgba(214,167,40,0.85);
+    transform:rotate(-18deg);
+    display:grid;
+    place-items:center;
+    text-transform:uppercase;
+    filter:blur(0.15px);
+    opacity:0.85;
+    background:
+      repeating-linear-gradient(0deg,
+        transparent 0px,
+        transparent 64px,
+        rgba(214,167,40,0.06) 64px,
+        rgba(214,167,40,0.06) 66px
+      );
+    white-space:pre;
+    line-height:2.2;
+  }
+
+  .frame-fixed{
+    position:fixed;
+    inset:14px;
+    border-radius:22px;
+    border:2px solid rgba(214,167,40,0.55);
+    box-shadow:0 0 0 1px rgba(248,232,200,0.16) inset, 0 0 38px rgba(0,0,0,0.35);
+    pointer-events:none;
+    z-index:40;
+  }
+
+  .viewport-scroll{
+    position:fixed;
+    inset:22px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    -webkit-overflow-scrolling:touch;
+    z-index:1;
+    padding:30px 15px 44px;
+    box-sizing:border-box;
+  }
+
+  .skip{
+    position:absolute;
+    left:-9999px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+  }
+  .skip:focus{
+    left:24px;
+    top:24px;
+    width:auto;
+    height:auto;
+    padding:10px 12px;
+    border-radius:999px;
+    background:rgba(0,0,0,0.80);
+    border:1px solid rgba(214,167,40,0.55);
+    color:var(--clair);
+    z-index:1000;
+  }
+.menu-dot{
+  position: fixed;
+  right: 26px;
+  top: calc(26px + env(safe-area-inset-top));
+  z-index: 100;
+  pointer-events: auto;
+
+  width: 46px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+
+  border-radius: 999px;
+  border: 1px solid rgba(214,167,40,0.55);
+  background: rgba(0,0,0,0.22);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+
+  font-family:'Cinzel',serif;
+  color: #d6a728;
+  font-size: 22px;
+  line-height: 1;
+
+  text-decoration: none;
+  user-select: none;
+}
+
+.menu-dot:hover{
+  background: rgba(214,167,40,0.12);
+  color:#fff;
+}
+
+  .top-menu{
+    position:fixed;
+    top:26px;
+    right:26px;
+    z-index:80;
+    pointer-events:auto;
+  }
+  .top-menu details{position:relative;}
+  .top-menu summary{
+    list-style:none;
+    cursor:pointer;
+    user-select:none;
+    width:46px;
+    height:34px;
+    display:grid;
+    place-items:center;
+    border-radius:999px;
+    border:1px solid rgba(214,167,40,0.55);
+    background:rgba(0,0,0,0.22);
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 16px rgba(0,0,0,0.35);
+    font-family:'Cinzel',serif;
+    color:var(--or);
+    font-size:22px;
+    line-height:1;
+  }
+  .top-menu summary::-webkit-details-marker{display:none;}
+  .menu-panel{
+    position:absolute;
+    right:0;
+    margin-top:10px;
+    width:260px;
+    max-width:calc(100vw - 60px);
+    border-radius:14px;
+    border:1px solid rgba(214,167,40,0.45);
+    background:rgba(0,0,0,0.70);
+    box-shadow:0 18px 40px rgba(0,0,0,0.55);
+    overflow:hidden;
+  }
+  .menu-panel a{
+    display:block;
+    padding:11px 12px;
+    text-decoration:none;
+    color:rgba(248,232,200,0.92);
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:0.92rem;
+    border-bottom:1px solid rgba(214,167,40,0.18);
+    text-align:left;
+  }
+  .menu-panel a:hover{background:rgba(214,167,40,0.12); color:#fff;}
+  .menu-panel a:last-child{border-bottom:none;}
+
+  .container{
+    min-height:auto;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    max-width:1120px;
+    margin:0 auto;
+  }
+
+  header.hero{max-width:980px; margin:0 auto 12px;}
+  h1{
+    font-family:'Cinzel',serif;
+    font-size:2.10rem;
+    margin:12px 0 6px;
+    letter-spacing:0.02em;
+  }
+  h2{
+    font-family:'Cinzel',serif;
+    font-size:1.16rem;
+    margin:0 0 10px;
+    font-weight:normal;
+    opacity:0.92;
+  }
+  .lead{
+    margin:8px auto 0;
+    max-width:920px;
+    color:var(--muted);
+    line-height:1.7;
+    font-size:0.98rem;
+    text-align:center;
+  }
+
+  h3{
+    font-family:'Cinzel',serif;
+    letter-spacing:0.03em;
+    margin:0 0 12px;
+    text-align:center;
+  }
+
+  .section-card{
+    width:100%;
+    max-width:920px;
+    margin:22px auto;
+    padding:22px 22px;
+    text-align:justify;
+    background:linear-gradient(180deg,var(--card),var(--card2));
+    border-radius:20px;
+    border:1px solid var(--or-line);
+    box-shadow:0 8px 22px rgba(0,0,0,0.45), 0 0 0 1px rgba(0,0,0,0.14) inset;
+    position:relative;
+    overflow:hidden;
+  }
+  .section-card::before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    background:
+      radial-gradient(circle at 18% 0%, var(--or-glow), transparent 62%),
+      radial-gradient(circle at 86% 115%, rgba(248,232,200,0.05), transparent 58%);
+    pointer-events:none;
+    opacity:0.95;
+  }
+  .section-card.alt{
+    background:linear-gradient(180deg, rgba(0,0,0,0.20), rgba(0,0,0,0.12));
+    border-color:var(--or-line2);
+  }
+
+  .section-card p{
+    position:relative;
+    max-width:880px;
+    margin:16px auto;
+    font-size:1.10rem;
+    line-height:1.94;
+    letter-spacing:0.01em;
+    color:var(--txt);
+  }
+  .section-card p strong{color:#fff;}
+  .section-card p em{color:rgba(248,232,200,0.94);}
+
+  .note{
+    position:relative;
+    max-width:880px;
+    margin:14px auto 4px;
+    padding:12px 14px;
+    border-radius:14px;
+    border:1px solid rgba(214,167,40,0.28);
+    background:rgba(0,0,0,0.20);
+    color:rgba(248,232,200,0.86);
+    line-height:1.8;
+    font-size:1.02rem;
+  }
+
+  .section-card ul{
+    position:relative;
+    max-width:880px;
+    margin:12px auto 18px;
+    padding-left:18px;
+    color:rgba(248,232,200,0.90);
+  }
+  .section-card li{margin:8px 0; line-height:1.75;}
+
+  .soft-sep{
+    position:relative;
+    height:16px;
+    max-width:820px;
+    margin:10px auto 8px;
+  }
+  .soft-sep::after{
+    content:"";
+    position:absolute;
+    left:12%;
+    right:12%;
+    top:50%;
+    height:1px;
+    background:linear-gradient(to right, transparent, rgba(214,167,40,0.30), transparent);
+    opacity:0.95;
+    transform:translateY(-50%);
+  }
+
+  figure.inner-img{
+    margin:10px auto 14px;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 0 28px rgba(0,0,0,0.85);
+    border:2px solid rgba(214,167,40,0.82);
+    background:rgba(0,0,0,0.12);
+    width:100%;
+    max-width:820px;
+    box-sizing:border-box;
+  }
+  figure.inner-img img{
+    display:block;
+    width:100%;
+    height:auto;
+    max-width:100%;
+  }
+
+  .grid-2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:26px;
+    margin-top:14px;
+    position:relative;
+  }
+  @media (max-width:820px){
+    .grid-2{grid-template-columns:1fr; justify-items:center;}
+    .card{width:100%; max-width:760px; margin-left:auto; margin-right:auto;}
+  }
+
+  .card{
+    position:relative;
+    border:1px solid rgba(214,167,40,0.22);
+    border-radius:16px;
+    padding:16px 16px;
+    background:rgba(0,0,0,0.18);
+    box-shadow:0 0 0 1px rgba(0,0,0,0.10) inset;
+    box-sizing:border-box;
+    overflow:hidden;
+  }
+  .card h4{
+    font-family:'Cinzel',serif;
+    color:rgba(214,167,40,0.98);
+    letter-spacing:0.03em;
+    margin:4px 0 10px;
+    text-transform:uppercase;
+    text-align:center;
+  }
+  .card p{
+    margin:0 0 12px;
+    line-height:1.85;
+    font-size:1.03rem;
+    color:rgba(248,232,200,0.90);
+    text-align:justify;
+  }
+
+  .toc a{
+    display:inline-block;
+    margin:4px 0;
+    color:rgba(214,167,40,0.95);
+    text-decoration:none;
+    border-bottom:1px dashed rgba(214,167,40,0.35);
+  }
+
+  .section-card a{
+    color:rgba(248,232,200,0.92);
+    text-decoration:none;
+    border-bottom:1px dotted rgba(214,167,40,0.45);
+    padding-bottom:1px;
+  }
+  .section-card a:hover{color:#fff; border-bottom-color:rgba(214,167,40,0.85);}
+
+  .tabs{
+    margin:18px auto 0;
+    display:inline-flex;
+    max-width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    border-radius:999px;
+    overflow-y:hidden;
+    border:1px solid rgba(214,167,40,0.55);
+    background:rgba(0,0,0,0.18);
+    backdrop-filter:blur(6px);
+  }
+  .tabs::-webkit-scrollbar{display:none;}
+  .tab{
+    flex:0 0 auto;
+    padding:10px 18px;
+    text-decoration:none;
+    color:var(--clair);
+    font-size:0.93rem;
+    font-weight:700;
+    font-family:'Cinzel',serif;
+    background:rgba(0,0,0,0.42);
+    transition:background 0.2s ease, color 0.2s ease;
+    white-space:nowrap;
+  }
+  .tab + .tab{border-left:1px solid rgba(214,167,40,0.35);}
+  .tab:hover{background:rgba(214,167,40,0.20); color:#fff;}
+
+  .cta-ordres{
+    margin: 16px auto 6px;
+    text-align:center;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    position:relative;
+  }
+  .cta-ordres .cta-slider{
+    display:inline-flex;
+    align-items:center;
+    gap:18px;
+    max-width:100%;
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding:12px 18px;
+    border-radius:999px;
+    background: linear-gradient(180deg, rgba(214,167,40,0.98), rgba(214,167,40,0.78));
+    border:1px solid rgba(255,231,168,0.75);
+    box-shadow:
+      0 10px 24px rgba(0,0,0,0.45),
+      0 0 0 1px rgba(0,0,0,0.22) inset,
+      0 0 18px rgba(214,167,40,0.18);
+  }
+  .cta-ordres .cta-slider::-webkit-scrollbar{ display:none; }
+  .cta-ordres .cta-slider a{
+    flex:0 0 auto;
+    color:#140b02;
+    font-family:'Cinzel',serif;
+    font-weight:800;
+    letter-spacing:0.03em;
+    text-decoration:none;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+  .cta-ordres .cta-slider a:hover{ text-decoration:underline; }
+  .cta-ordres .divider{
+    width:1px;
+    height:20px;
+    background: rgba(20,11,2,0.25);
+    flex: 0 0 auto;
+  }
+
+  .footer-min{
+    margin-top:26px;
+    padding-top:14px;
+    width:100%;
+    max-width:980px;
+    border-top:1px solid rgba(214,167,40,0.22);
+    opacity:0.92;
+    position:relative;
+  }
+  .footer-min .line{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    align-items:center;
+    justify-content:center;
+    font-size:0.78rem;
+    color:rgba(248,232,200,0.85);
+  }
+  .footer-min a{
+    font-size:0.72rem;
+    text-transform:lowercase;
+    letter-spacing:0.02em;
+    color:rgba(248,232,200,0.78);
+    text-decoration:none;
+    border-bottom:1px dotted rgba(214,167,40,0.55);
+    padding-bottom:1px;
+  }
+  .footer-min a:hover{color:#fff; border-bottom-color:rgba(214,167,40,0.95);}
+  .sep{opacity:0.55;}
+
+  @media (max-width:600px){
+    .grid-2{justify-items:center;}
+    .card{max-width:520px;}
+    h1{font-size:1.72rem;}
+    h2{font-size:1.02rem;}
+    .section-card{padding:18px 14px; border-radius:18px; margin:18px auto;}
+    .section-card p{font-size:1.03rem; line-height:1.90; margin:15px auto;}
+    .top-menu{top:22px; right:22px;}
+    .menu-panel{width:240px;}
+    .frame-fixed{inset:12px;}
+    .viewport-scroll{inset:20px;}
+    .soft-sep::after{left:8%; right:8%;}
+  }
+
+  *, *::before, *::after { box-sizing:border-box; }
+  img { max-width:100%; height:auto; }
+  .section-card, .card, .grid-2, .container, .viewport-scroll { min-width:0; }
+  .section-card p, .card p, .section-card li, .toc, .toc a{
+    overflow-wrap:anywhere;
+    word-break:break-word;
+    hyphens:auto;
+  }
+
+  /* ✅ CADRE ICONES : image telle quelle (fond noir + croix blanche).
+     + FIX important : on évite le recadrage/zoom -> object-fit:contain + carré */
+  .icon-frame{
+    max-width:260px;
+    width:60vw;
+    margin:10px auto 6px;
+    border-radius:14px;
+    border:1px solid rgba(214,167,40,0.30);
+    box-sizing:border-box;
+    padding:18px;
+    background:#000;
+    aspect-ratio:1/1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .icon-frame img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+  }
+
+  /* ================= FIX TABLETTE / MOBILE – CHEVAUCHEMENT TITRES ================= */
+  header.hero{
+    position: relative;
+    z-index: 2;
+    margin-bottom: 28px;
+  }
+  header.hero h1{ margin-top: 0; }
+  header.hero h2{ margin-top: 6px; }
+  header.hero .lead{ margin-top: 12px; }
+
+  header.hero + figure.inner-img{
+    margin-top: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 900px){
+    header.hero{ padding-top: 10px; }
+  }
+
+  @media (max-width: 600px){
+    header.hero h1{ font-size: 1.6rem; }
+    header.hero h2{ font-size: 1rem; }
+    header.hero .lead{ font-size: 0.95rem; }
+  }
+</style>
+</head>
+
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<div aria-hidden="true" class="wm" data-wm="OSD9TDJ • ORDRES HISTORIQUES • TERRE SAINTE • BYZANCE • RECONQUISTA •"></div>
+<div aria-hidden="true" class="frame-fixed"></div>
+
+<div aria-label="Menu du site" class="top-menu">
+  <details>
+    <summary title="Menu">⋯</summary>
+   <a class="menu-dot" href="menu.html" title="Menu" aria-label="Menu">⋯</a>
+
+  </details>
+</div>
+
+<div class="viewport-scroll" id="contenu">
+<div class="container">
+
+<header class="hero">
+  <h1>ORDRES HISTORIQUES</h1>
+  <h2>Terre sainte · Lieux saints · Reconquista · Constantinople · Ordres de cour</h2>
+  <p class="lead">
+    Cette page rassemble des <strong>repères historiques</strong> et des <strong>définitions claires</strong> pour distinguer :
+    l’engagement de croisade, la vie monastique, l’hospitalité médiévale, les ordres religieux-militaires, les ordres ibériques
+    de la Reconquista, les institutions liées aux Lieux saints, et enfin les ordres de cour. L’objectif est pédagogique :
+    <em>décrire des familles</em>, comprendre leurs fonctions, et suivre leurs transformations sans confusion.
+  </p>
+</header>
+
+<!-- (1/9) Ambiance Terre sainte / Jérusalem -->
+<figure class="inner-img">
+  <img alt="Terre sainte : Jérusalem et présence hospitalière" loading="lazy" src="hospitaliers-terre-sainte-scene-jerusalem.jpg"/>
+</figure>
+
+<div class="section-card">
+  <h3>Préambule : de quoi parle-t-on exactement ?</h3>
+  <p>
+    Quand on dit « ordre » au Moyen Âge, on mélange souvent plusieurs réalités. Certaines sont religieuses (règle, vie communautaire,
+    obéissance), d’autres sont pratiques (accueil, soin, logistique), d’autres encore relèvent d’une mission armée (protection de routes,
+    défense de places) ou d’un cadre politique (ordres de cour, prestige dynastique). Un même nom peut changer de sens selon les siècles,
+    les territoires et les autorités qui l’encadrent.
+  </p>
+  <p>
+    Ici, nous proposons un <strong>panorama non exhaustif</strong> : il ne s’agit pas d’établir une liste « définitive »,
+    mais de donner des <strong>catégories solides</strong> et des <strong>repères chronologiques</strong>. Les débats modernes de
+    reconnaissance, d’appellations contemporaines ou de continuités juridiques ne sont pas l’objet de cette page : on décrit d’abord
+    des <em>réalités historiques</em>, leurs fonctions, et leurs héritages.
+  </p>
+  <div class="note">
+    <strong>Principe de lecture :</strong> un emblème (croix, couleur, blason) est un repère utile, mais il ne suffit pas à définir la
+    nature d’un ordre. Pour comprendre, il faut toujours croiser : <strong>fonction</strong> (soin/défense/cour),
+    <strong>règle</strong>, <strong>statut</strong>, <strong>implantation</strong> et <strong>évolutions</strong>.
+  </div>
+  <div class="note">
+    <strong>Respect des héritages :</strong> l’O.S.D.9.T.D.J. exprime un <strong>respect absolu</strong> envers les ordres historiques
+    cités, et tout particulièrement envers les ordres <strong>reconnus</strong> (notamment par les autorités religieuses compétentes,
+    dont le Vatican, ainsi que par les cadres nobiliaires et dynastiques en place) : ils sont, à ce titre, <strong>les bienvenus</strong>
+    chez nous, dans un esprit de considération, de courtoisie et d’honneur.
+  </div>
+</div>
+
+<!-- Sommaire -->
+<div class="section-card alt" id="sommaire">
+  <h3>Sommaire</h3>
+  <p class="toc">
+    <a href="#contexte">1. Contexte : Terre sainte et monde méditerranéen</a><br/>
+    <a href="#croises">2. Les croisés : un engagement, pas un ordre</a><br/>
+    <a href="#monachisme">3. Moines, règles et ordres monastiques</a><br/>
+    <a href="#hospitalite">4. L’hospitalité : hôpitaux, routes, pèlerins</a><br/>
+    <a href="#ordres-militaires">5. Ordres religieux-militaires (Terre sainte)</a><br/>
+    <a href="#ordres-secondaires">6. Ordres secondaires, locaux et spécialisés</a><br/>
+    <a href="#iberiques">7. Grands ordres ibériques (Reconquista)</a><br/>
+    <a href="#lieux-saints">8. Lieux saints et institutions liées à Jérusalem</a><br/>
+    <a href="#constantinople">9. Constantinople / Byzance : un autre modèle</a><br/>
+    <a href="#aristocratiques">10. Ordres aristocratiques et dynastiques</a><br/>
+    <a href="#savoyard">11. Saint-Maurice &amp; Saint-Lazare : recompositions</a><br/>
+    <a href="#survivances">12. Transformations, diffusion et mémoire</a><br/>
+    <a href="#reperes">13. Repères visuels : transcriptions modernes</a><br/>
+    <a href="#glossaire">14. Glossaire rapide</a>
+  </p>
+</div>
+
+<!-- 1 -->
+<div class="section-card" id="contexte">
+  <h3>1) Contexte : Terre sainte et monde méditerranéen</h3>
+  <p>
+    La Terre sainte médiévale est un <strong>carrefour</strong> : routes terrestres, ports, relais, sanctuaires, marchés, alliances
+    et conflits. Après 1099, la présence latine en Orient s’inscrit dans des équilibres mouvants, au contact de puissances régionales
+    et d’autorités locales. Les enjeux sont concrets : sécuriser les itinéraires, tenir des places fortes, administrer des territoires,
+    maintenir une vie religieuse organisée, tout en assurant la circulation des pèlerins.
+  </p>
+  <p>
+    Ce contexte explique l’apparition d’institutions durables : certaines naissent d’un besoin <strong>d’accueil et de soin</strong>,
+    d’autres d’une nécessité <strong>de protection</strong>, d’autres encore de la volonté de structurer une présence religieuse.
+    Avec le temps, des structures initialement modestes peuvent se doter d’une discipline, de ressources et de réseaux
+    (maisons, commanderies, propriétés) qui les rendent comparables, par leur efficacité, à de véritables administrations.
+  </p>
+</div>
+
+<!-- (2/9) Contexte général (chevaliers / époque) -->
+<figure class="inner-img">
+  <img alt="Enluminure médiévale : chevaliers et contexte d’époque" loading="lazy" src="bataille-medievale-enluminure-chevaliers.JPG"/>
+</figure>
+
+<!-- 2 -->
+<div class="section-card alt" id="croises">
+  <h3>2) Les croisés : un engagement, pas un ordre</h3>
+  <p>
+    Le mot « croisé » renvoie d’abord à une <strong>condition</strong> : celle d’un fidèle qui « prend la croix » pour une expédition
+    déterminée, avec un cadre spirituel (vœu, intention, pénitence) et un cadre social (mobilisation, financement, logistique).
+    Cet engagement est <strong>temporaire</strong> : il commence, il se déroule, puis il s’achève. On peut être croisé sans être moine,
+    sans être membre d’une institution permanente, et sans être « chevalier d’ordre ».
+  </p>
+  <p>
+    Certaines personnes prolongent ensuite leur engagement en rejoignant des structures stables (par exemple des institutions hospitalières
+    ou des ordres religieux-militaires). Mais ce passage n’est pas automatique : la croisade ne fabrique pas, à elle seule, un ordre.
+    C’est précisément là que naissent beaucoup de confusions modernes : on confond l’expédition (moment) avec l’institution (durée).
+  </p>
+  <div class="note">
+    <strong>À retenir :</strong> la croisade est une <em>dynamique</em> et un <em>cadre d’engagement</em> ; un ordre est une
+    <em>organisation</em> structurée (règle, hiérarchie, ressources, implantation, mission).
+  </div>
+</div>
+
+<!-- (3/9) Croisade (siège / assaut) -->
+<figure class="inner-img">
+  <img alt="Croisades : siège et assaut d’une forteresse (peinture)" loading="lazy" src="croisades-siege-assaut-forteresse-peinture.jpg"/>
+</figure>
+
+<!-- 3 -->
+<div class="section-card" id="monachisme">
+  <h3>3) Moines, règles et ordres monastiques</h3>
+  <p>
+    La culture institutionnelle médiévale s’enracine dans la <strong>vie religieuse</strong> : prière, offices, obéissance,
+    stabilité communautaire, hiérarchie interne et discipline. Les règles (au premier rang desquelles la <strong>Règle de saint Benoît</strong>)
+    structurent l’Occident latin en proposant un modèle : vivre ensemble, travailler, prier, accueillir, et organiser le temps.
+    Les réformes successives (par exemple celles qui insistent davantage sur l’austérité, la simplicité ou la rigueur) expriment
+    une quête continue de cohérence spirituelle.
+  </p>
+  <p>
+    Les ordres religieux-militaires ne surgissent pas en rupture totale : ils reprennent la logique de la règle et de la vie communautaire,
+    mais l’articulent à une mission spécifique, liée à la protection des itinéraires, à l’escorte, à la défense de places ou à la sécurité
+    d’un espace. C’est un point capital : la singularité n’est pas dans l’existence d’une « armée »,
+    mais dans le <strong>mariage institutionnel</strong> entre <em>règle</em>, <em>discipline</em> et <em>mission</em>.
+  </p>
+  <p>
+    Dans le langage courant, on parle souvent de « moines-soldats ». Historiquement, il vaut mieux parler de
+    <strong>religieux sous vœux</strong> assumant une mission de protection armée, dans un contexte précis. La nuance est importante :
+    elle évite de caricaturer des institutions qui furent aussi des réseaux d’accueil, de logistique, de soins, d’administration,
+    et parfois de diplomatie.
+  </p>
+</div>
+
+<!-- (4/9) Règle monastique -->
+<figure class="inner-img">
+  <img alt="Saint Benoît : remise de la règle (enluminure)" loading="lazy" src="saint-benoit-remise-regle-enluminure.JPG"/>
+</figure>
+
+<!-- 4 -->
+<div class="section-card alt" id="hospitalite">
+  <h3>4) L’hospitalité : hôpitaux, routes, pèlerins</h3>
+  <p>
+    L’hospitalité médiévale n’est pas un simple geste privé : c’est une <strong>infrastructure</strong>. Sur des routes longues, coûteuses
+    et parfois dangereuses, il faut des lieux pour accueillir, nourrir, héberger, soigner, protéger les plus faibles, et organiser les flux.
+    On parle d’hospices, d’hôpitaux, de maisons d’accueil, parfois rattachés à des sanctuaires ou à des réseaux urbains.
+  </p>
+  <p>
+    Dans certains contextes, ces institutions se structurent : elles recrutent, administrent des biens, coordonnent des maisons,
+    et mettent en place des règles internes. Elles deviennent des acteurs majeurs de la « logistique du pèlerinage ».
+    Quand les routes deviennent trop incertaines, l’hospitalité peut s’accompagner, selon les lieux et les périodes,
+    d’une <strong>protection</strong> (escortes, gardes, fortifications), sans que la mission de soin et d’accueil disparaisse.
+  </p>
+  <div class="note">
+    <strong>Point-clé :</strong> le soin et l’accueil sont une finalité à part entière. L’armement éventuel n’est pas le cœur
+    de l’hospitalité, mais une réponse pragmatique à l’insécurité.
+  </div>
+</div>
+
+<!-- (5/9) Hospitalité / soin -->
+<figure class="inner-img">
+  <img alt="Hospitaliers : secours à un blessé (illustration)" loading="lazy" src="hospitaliers-secours-templier-blesse.jpg"/>
+</figure>
+
+<!-- 5 -->
+<div class="section-card" id="ordres-militaires">
+  <h3>5) Ordres religieux-militaires (Terre sainte)</h3>
+  <p>
+    Les ordres religieux-militaires regroupent des hommes liés par des <strong>vœux religieux</strong> (pauvreté, chasteté, obéissance),
+    vivant selon une discipline communautaire et soumis à une hiérarchie. Leur mission est de contribuer, par des moyens organisés,
+    à la <strong>protection</strong> (routes, pèlerins, lieux, places) et, selon les cas, à la défense des États latins d’Orient.
+    Leur efficacité tient à leur capacité à combiner des ressources : maisons, commanderies, réseaux, intendance, et parfois fortifications.
+  </p>
+  <p>
+    Pour éviter les confusions, il faut distinguer : <strong>l’origine</strong> (hospitalière, défensive, mixte),
+    <strong>le mode d’implantation</strong> (Orient/Occident), <strong>la fonction dominante</strong> (soin/escorte/territoire),
+    et <strong>les transformations</strong> au fil du temps. Certaines institutions survivent en changeant d’espace,
+    en modifiant leur mission, ou en réorientant leurs œuvres.
+  </p>
+
+  <figure class="inner-img">
+    <img alt="Ordre du Temple : chevalier templier (illustration moderne)" src="chevalier-templier-illustration-moderne.JPG"/>
+  </figure>
+
+  <div class="soft-sep"></div>
+  <h3 style="margin-top:0;">Repères majeurs</h3>
+
+  <div class="grid-2">
+
+    <div class="card">
+      <h4>Ordre du Temple</h4>
+      <figure class="inner-img">
+        <img alt="Croix de l’Ordre du Temple" loading="lazy" src="croix-templiers.PNG" style="max-width:260px;width:60vw;height:auto;display:block;margin:10px auto 6px;"/>
+      </figure>
+      <p>
+        L’Ordre du Temple apparaît dans la logique de la protection des itinéraires et de la sécurité des implantations.
+        Sa puissance tient à sa discipline, à son réseau de maisons et de commanderies, et à sa capacité de projection.
+        Sa dissolution au début du XIVe siècle constitue une rupture institutionnelle majeure, dont la mémoire a fortement marqué
+        l’imaginaire européen.
+        <br/><strong>Dates clés :</strong><br/>
+        1118 : Neufs chevaliers croisés, dirigés par Hugues de Payns, fondent l’Ordre des Pauvres Chevaliers du Christ ; vœu de défendre les pèlerins et de protéger les chemins menant en Terre Sainte.
+        1119 : L’ordre prend le nom de « Milice du Temple » ; Baudouin II, roi de Jérusalem, lui assigne une demeure sur l’emplacement du Temple de Salomon, à Jérusalem (près d’un couvent de chanoines réguliers).
+        1312 : L’ordre est liquidé par le pape Clément V, dans un contexte troublé où le roi de France Philippe le Bel joue un rôle majeur.
+      </p>
+    </div>
+
+    <div class="card">
+      <h4>Ordre de l’Hôpital (Saint-Jean)</h4>
+      <!-- ✅ IMAGE EXACTE : noir + croix blanche, sans masque -->
+      <figure class="inner-img icon-frame" aria-label="Croix de l’Ordre de l’Hôpital (Saint-Jean)">
+        <img src="croix-malte.PNG" alt="Croix de l’Ordre de l’Hôpital (Saint-Jean)" loading="lazy"/>
+      </figure>
+      <p>
+        L’Ordre de l’Hôpital se caractérise par une origine centrée sur l’accueil et le soin. Dans un environnement instable,
+        la protection devient un complément de mission, puis une dimension structurante. Son histoire traverse des déplacements
+        et des reconfigurations, avec un héritage durable lié aux œuvres, à l’organisation et à l’identité hospitalière.
+        <strong>Devenu l’Ordre de Malte</strong>, il explique la présence durable de la croix dite « de Malte » dans les repères modernes.
+        <br/><strong>Dates clés :</strong><br/>
+        1048 : Construction de l’église Sainte-Marie-Latine à Jérusalem, berceau de l’ordre.
+        1113 : Le pape Pascal II reconnaît l’Ordre de Saint-Jean-Baptiste, fondé par le bienheureux Gérard Tenque ; les Hospitaliers sont alors distincts des religieux.
+        Après la mort de frère Gérard, Raymond du Puy, son successeur, est le premier qualifié de « maître » : il convertit l’institution en ordre religieux de chevalerie (reconnaissance confirmée ensuite par le pape Calixte II).
+        1140 : Adoption d’une vocation militaire tout en conservant la mission hospitalière.
+        Organisation en 8 « langues » : Provence, Auvergne, France, Italie, Aragón-Navarre, Castille-León-Portugal, Angleterre et Allemagne (Marseille : haut-lieu de l’ordre).
+      </p>
+    </div>
+
+    <div class="card">
+      <h4>Ordre Teutonique</h4>
+      <figure class="inner-img">
+        <img alt="Croix de l’Ordre Teutonique" loading="lazy" src="croix-teutonique.PNG" style="max-width:260px;width:60vw;height:auto;display:block;margin:10px auto 6px;"/>
+      </figure>
+      <p>
+        Né dans la dynamique des croisades, l’Ordre Teutonique développe une trajectoire singulière, marquée par l’Europe du Nord-Est.
+        Selon les périodes, sa mission se recompose, et l’institution se réoriente progressivement vers des formes davantage religieuses
+        et caritatives, tout en conservant une forte mémoire historique.
+        <br/><strong>Dates clés :</strong><br/>
+        1198 : Création en Terre Sainte lors des Croisades.
+        L’ordre existe toujours : il n’est plus un ordre de chevalerie mais un ordre religieux (« Frères de l’Ordre Allemand de Sainte-Marie-de-Jérusalem »), dirigé par un abbé mitré relevant du pape ; environ un millier de membres (prêtres, religieuses et laïcs) poursuivent l’œuvre hospitalière et éducative.
+      </p>
+    </div>
+
+    <div class="card">
+      <h4>Ordre de Saint-Lazare</h4>
+      <!-- ✅ MASQUE SUPPRIMÉ : image normale -->
+      <figure class="inner-img icon-frame" aria-label="Croix de l’Ordre de Saint-Lazare">
+        <img src="croix-slazarre.PNG" alt="Croix de l’Ordre de Saint-Lazare" loading="lazy"/>
+      </figure>
+      <p>
+        Associé à l’assistance (notamment dans la prise en charge de la lèpre), il illustre la dimension hospitalière et la charité organisée.
+        Au fil des siècles, des recompositions et des fusions modifient ses cadres, ce qui explique la diversité des présentations
+        et des repères visuels dans les sources modernes.
+        <br/><strong>Dates clés :</strong><br/>
+        1200 : Formation à partir des Hospitaliers ; les premiers Lazaristes sont des frères hospitaliers dédiés aux lépreux (premier grand maître : le bienheureux Gérard Tenque).
+        1244 : Le roi Louis IX contribue au développement de l’Ordre en France.
+        1980 : La dénomination d’« ordre » est abandonnée ; l’association adopte de nouveaux statuts et prend le titre d’« Hospitaliers de Saint Lazare ».
+      </p>
+    </div>
+
+  </div>
+
+  <div class="soft-sep"></div>
+  <p>
+    Les emblèmes (croix, couleurs, boucliers) sont des marqueurs forts. Toutefois, pour comprendre un ordre, il faut regarder
+    la <strong>fonction réelle</strong> (soin, escorte, défense, administration), la <strong>règle</strong>, le <strong>statut</strong>
+    et le <strong>cheminement historique</strong>.
+  </p>
+</div>
+
+<!-- (6/9) Blasons / croix (repères iconographiques) -->
+<figure class="inner-img">
+  <img alt="Tableau : blasons et croix d’ordres médiévaux" loading="lazy" src="tableau-ordres-militaires-blasons-croises.jpg"/>
+</figure>
+
+<!-- 6 -->
+<div class="section-card alt" id="ordres-secondaires">
+  <h3>6) Ordres secondaires, locaux et spécialisés</h3>
+  <p>
+    À côté des grands ordres, on rencontre une constellation d’initiatives : institutions locales, fondations liées à une ville,
+    structures spécialisées, ou ordres à trajectoire brève. Certaines naissent d’une situation précise (un port, une route, une crise),
+    puis disparaissent, fusionnent, ou sont absorbées par des organisations plus puissantes. Cette « galaxie » explique pourquoi des tableaux
+    modernes présentent parfois des listes longues : l’histoire médiévale est riche en fondations et en recompositions.
+  </p>
+  <p>
+    Il est utile de distinguer : ce qui relève d’une institution stable et durable, de ce qui est un projet ponctuel,
+    de ce qui est une maison hospitalière, et de ce qui correspond à un ordre structuré. Le langage contemporain a tendance à
+    « aplatir » ces différences ; l’objectif ici est au contraire de les rendre lisibles.
+  </p>
+
+  <div class="soft-sep"></div>
+  <div class="grid-2">
+    <div class="card"><h4>Ordre de Montjoie</h4><p>1175 : Fondation en Terre Sainte par le comte Rodrigo Alvarez de Sarriá ; siège au château de Montjoie, sur une colline dominant Jérusalem.1221 : L’Ordre est incorporé dans l’Ordre de Calatrava.</p></div>
+    <div class="card"><h4>Ordre de Saint-Georges d’Alfama</h4><p>1201 : Fondation par le roi Pedro II d’Aragón pour protéger les côtes catalanes des pirates musulmans.1373 : Reconnaissance pontificale.Participation à la libération de Valence.1400 : Fusion avec l’Ordre de Montesa.</p></div>
+    <div class="card"><h4>Ordre des Chevaliers Porte-Glaive</h4><p>1202 : Albert de Buxhövden, évêque de Livonie et fondateur de Riga, fonde l’Ordre des Chevaliers Porte-Glaive (Frères de la Milice du Christ).XVIe siècle : sécularisation de l’Ordre.</p></div>
+    <div class="card"><h4>Ordre de Dobrin</h4><p>1216 : Ordre polonais du XIIIe siècle.</p></div>
+    <div class="card"><h4>Ordre de Sainte-Marie d’Espagne</h4><p>1272 : Ordre espagnol du XIIIe siècle ayant pour mission d’opérer sur mer.</p></div>
+  </div>
+</div>
+
+<!-- 7 -->
+<div class="section-card" id="iberiques">
+  <h3>7) Grands ordres ibériques (Reconquista)</h3>
+  <p>
+    La Reconquista correspond à une guerre longue, territoriale et politique, principalement en péninsule Ibérique.
+    Les ordres ibériques adoptent parfois une forme comparable aux ordres d’Orient (discipline, règle, hiérarchie),
+    mais leur terrain, leurs objectifs et leurs équilibres sont d’abord <strong>péninsulaires</strong> : frontière mouvante, contrôle de forteresses,
+    administration de terres, soutien aux couronnes, sécurisation de routes et de zones de colonisation.
+  </p>
+  <p>
+    Leur puissance ne se mesure pas seulement à la dimension militaire : elle se lit aussi dans l’organisation foncière,
+    la gestion de territoires, et la place institutionnelle que les royaumes leur attribuent.
+  </p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h4>Santiago / Alcántara (repères)</h4>
+      <p>
+        Dans les ordres ibériques, les croix et couleurs servent de repères visuels. La compréhension historique se fait surtout
+        par l’implantation, les fonctions et le lien avec les pouvoirs locaux.
+        <br/><strong>Dates clés :</strong><br/>
+        1170 : Ordre de Saint-Jacques-de-l’épée : naissance en Espagne (province de León). Des chanoines réguliers de Saint Augustin construisent des hôpitaux sur le chemin de Saint-Jacques-de-Compostelle (Galice) afin de secourir les pèlerins attaqués par les Maures.
+        1493 : La branche espagnole est administrée par un grand maître jusqu’en 1493 ; depuis, les rois d’Espagne conservent les titre et dignité de grand maître et administrateur de l’ordre.
+        1789 : Au Portugal, la reine Maria sécularise l’Ordre ; il subsiste comme ordre de mérite (sciences, littérature, arts).<br/><br/><br/><br/>
+      </p>
+    </div>
+
+    <div class="card">
+      <h4>Calatrava</h4>
+      <p>
+        Calatrava incarne la logique des places fortes et du contrôle stratégique : forteresses, ressources, administration
+        d’un espace de frontière.
+        <br/><strong>Dates clés :</strong><br/>
+        1158 : Fondation (plus ancien ordre ibérique) par Raimundo Serrat, abbé cistercien de Fitero (Espagne) ; mission de défendre la forteresse de Calatrava, sur la frontière avec la zone musulmane au sud de la Castille.
+        1164 : Le pape Alexandre III confirme la création.
+        L’Ordre existe toujours (deux couvents : Madrid et Burgos).
+      </p>
+    </div>
+  </div>
+
+  <div class="soft-sep"></div>
+  <div class="grid-2">
+    <div class="card"><h4>Ordre de Saint-Benoît d’Aviz (Avis)</h4><p>1147 : Le roi Alfonso Henriques Ier de Portugal prend Évora aux Maures ; création d’une troupe de chevaliers (« Confrères de Sainte-Marie d’Évora ») pour la défense de la ville.1187 : Création de l’Ordre (dans la filiation de Calatrava), régi par les règles de Saint Benoît et de Cîteaux.1963 : Devenu honorifique, l’Ordre récompense les services militaires.</p></div>
+    <div class="card"><h4>Ordre de Montesa</h4><p>1312 : Après la dissolution de l’Ordre du Temple par le pape Clément V, le roi d’Aragón Jaime II refuse la fusion avec les Hospitaliers dans ses États.1317 : Compromis : fusion en Aragón et Catalogne ; dans le royaume de Valence, création d’un nouvel ordre (« Nuestra Señora de Montesa ») à partir de Templiers reconnus innocents lors du procès.L’Ordre est devenu honorifique.</p></div>
+    <div class="card"><h4>Ordre du Christ (Portugal)</h4><p>1319 : Après la dissolution du Temple, le roi Dinis Ier obtient du pape Jean XXII l’autorisation de créer la « Milice du Christ » ; continuité sous un nouveau nom, avec accueil de nombreux Templiers.Aujourd’hui : ordre dédié à récompenser d’éminents services civils et de hautes personnalités étrangères.</p></div>
+  </div>
+</div>
+
+<!-- (7/9) Repère ibérique (croix verte) -->
+<figure class="inner-img">
+  <img alt="Reconquista : cavalerie et croix verte (reconstitution)" loading="lazy" src="cavalerie-croix-verte-reconstitution.jpg"/>
+</figure>
+
+<!-- 8 -->
+<div class="section-card alt" id="lieux-saints">
+  <h3>8) Lieux saints et institutions liées à Jérusalem</h3>
+  <p>
+    Les Lieux saints structurent une spiritualité, une liturgie, une théologie et une organisation du pèlerinage.
+    Autour des sanctuaires, on trouve des présences religieuses, des œuvres d’accueil, des communautés et des institutions
+    liées à l’encadrement des visiteurs.
+  </p>
+  <p>
+    La compréhension historique demande de distinguer le lieu, les communautés et les cadres institutionnels successifs.
+  </p>
+
+  <div class="soft-sep"></div>
+  <h3>Repères : ordres et institutions liés aux Lieux saints (dates)</h3>
+  <div class="grid-2">
+    <div class="card">
+      <h4>Ordre du Saint-Sépulcre de Jérusalem</h4>
+      <figure class="inner-img">
+        <img alt="Croix de l’Ordre du Saint-Sépulcre de Jérusalem" loading="lazy" src="croix-sepultre.PNG" style="max-width:260px;width:60vw;height:auto;display:block;margin:10px auto 6px;background:rgba(248,232,200,0.16);padding:18px;border-radius:14px;border:1px solid rgba(214,167,40,0.30);box-sizing:border-box;"/>
+      </figure>
+      <p>1099 : Fondation ; Godefroy de Bouillon fonde un ordre de chanoines réguliers. Mission : veiller sur le Saint-Sépulcre et y célébrer les offices.1112 : Les religieux sont placés sous la règle de Saint Augustin par le patriarche de Jérusalem.1122 : Une bulle du pape Calixte II confirme l’organisation.Ce n’est que plus tard que l’institution devient un ordre de chevalerie.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 9 -->
+<div class="section-card" id="constantinople">
+  <h3>9) Constantinople / Byzance : un autre modèle</h3>
+  <p>
+    Constantinople (Byzance) ne se comprend pas toujours avec les catégories occidentales. Là où l’Occident latin voit se développer
+    des ordres relativement autonomes, l’Empire byzantin s’appuie sur un appareil impérial sacralisé : dignités, titres, hiérarchies
+    de cour, clergé structuré, cérémonial, et une articulation forte entre pouvoir, symbolique et institutions.
+  </p>
+  <p>
+    Byzance n’est pas l’absence d’ordre : c’est un autre type d’organisation, où la cour et l’État jouent un rôle différent.
+  </p>
+  <div class="note">
+    <strong>À retenir :</strong> la logique byzantine est davantage <em>impériale et cérémonielle</em> ; la logique occidentale
+    des ordres est davantage <em>corporative et institutionnelle</em>.
+  </div>
+
+  <div class="soft-sep"></div>
+  <h3>Repères : fondations et continuités (dates)</h3>
+  <div class="grid-2">
+    <div class="card">
+      <h4>Ordre Constantinien de Saint-Georges</h4>
+      <figure class="inner-img">
+        <img alt="Croix de l’Ordre Constantinien de Saint-Georges" loading="lazy" src="croix-saintgconstantinople.JPG" style="max-width:260px;width:60vw;height:auto;display:block;margin:10px auto 6px;"/>
+      </figure>
+      <p>28 octobre 312 : Référence fondatrice : après la victoire de Constantin sur Maxence, création d’une légion chargée d’accompagner le « labarum » orné de la croix.1190 : La milice devient un ordre de chevalerie sous l’autorité de l’empereur de Constantinople, Ange Comnène.L’Ordre existe toujours : sous l’autorité de la Maison royale des Deux-Siciles ; glorifie la Croix, aide à la propagation de la Foi, à la défense de l’Église, à l’assistance hospitalière et à la bienfaisance.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 10 -->
+<div class="section-card alt" id="aristocratiques">
+  <h3>10) Ordres aristocratiques et dynastiques</h3>
+  <p>
+    À la fin du Moyen Âge et à l’époque moderne, se développent des ordres de cour fondés par des princes, rois ou maisons souveraines.
+    Leur fonction est d’abord politique, symbolique et sociale : prestige, fidélité au souverain, cérémonial, et structuration d’une élite.
+  </p>
+  <p>
+    Ces ordres ne reposent généralement ni sur l’hospitalité, ni sur des vœux monastiques. Leur logique est celle de la souveraineté :
+    créer une communauté d’honneur autour du prince.
+  </p>
+
+  <div class="soft-sep"></div>
+  <h3>Repères : principaux ordres de cour (dates)</h3>
+  <div class="grid-2">
+    <div class="card"><h4>Ordre Très Noble de la Jarretière</h4><p>1348 : Créé par le roi Édouard III ; principal ordre de chevalerie britannique, parmi les plus prestigieux au monde.Grand maître : le roi ou la reine ; composition : chevaliers royaux, dames, 24 chevaliers, et « extra knights » (dont plusieurs souverains européens).</p></div>
+    <div class="card"><h4>Ordre des Chevaliers de la Noble Maison de Saint-Ouen (Chevaliers de l’Étoile)</h4><p>1351 : Créé par le roi de France Jean II, le Bon ; ordre de courte durée, probablement inspiré par l’Ordre de la Jarretière.</p></div>
+    <div class="card"><h4>Très Honorable Ordre du Bain</h4><p>1399 : Origine liée au couronnement d’Henri IV d’Angleterre (rite du « bain » avant l’adoubement).Ordre toujours actif ; récompense de nombreux services.</p></div>
+    <div class="card"><h4>Ordre du Dragon</h4><p>1408–1437 : Ordre de courte durée dans le Saint-Empire romain germanique.</p></div>
+    <div class="card"><h4>Noble Ordre de la Toison d’Or</h4><p>1430 : Créé à Bruges lors du mariage de Philippe III le Bon (duc de Bourgogne) avec l’infante Isabelle de Portugal ; but : gloire de Dieu et défense de la religion chrétienne.Aujourd’hui : deux branches de la Toison d’Or se disputent la légitimité ; la France reconnaît la branche espagnole (grand maître : le roi d’Espagne).</p></div>
+    <div class="card"><h4>Ordre de l’Eléphant</h4><p>1462 : Ordre danois, mixte, toujours existant ; symbole traditionnel associé à la chasteté et à la pureté.</p></div>
+    <div class="card"><h4>Ordre de Saint-Michel</h4><p>1469 : Créé par Louis XI (France) en réponse à la Toison d’Or ; premier siège : abbaye du Mont Saint-Michel.L’Ordre n’est pas totalement inactif : certains prétendants « légitimistes » de la Maison de Bourbon-Anjou s’en réclament.</p></div>
+    <div class="card"><h4>Ordre de San Stefano</h4><p>1561 : Créé par Cosimo de Médicis (duc de Toscane) ; rapidement approuvé par le pape.Mission initiale : lutte contre les pirates d’Afrique du Nord (territoires maritimes toscans et mer Tyrrhénienne).Ordre toujours actif ; assistance auprès de la marine italienne.</p></div>
+    <div class="card"><h4>Ordre du Saint-Esprit</h4><p>1578 : Créé par Henri III (France) pour s’attacher les principaux chefs du « parti catholique » durant les guerres de religion.</p></div>
+    <div class="card"><h4>Ordre Très Ancien et Très Noble du Chardon</h4><p>1687 : Ordre écossais (modèle : Jarretière, Toison d’Or, Saint-Michel) ; devise : « Nemo Me Impune Lacessit ».</p></div>
+    <div class="card"><h4>Ordre Royal et Militaire de Saint-Louis</h4><p>1693 : Créé par Louis XIV ; récompense les meilleurs serviteurs de la Monarchie.</p></div>
+  </div>
+</div>
+
+<!-- 11 -->
+<div class="section-card" id="savoyard">
+  <h3>11) Saint-Maurice &amp; Saint-Lazare : recompositions</h3>
+  <p>
+    Certains héritages s’expliquent par des fusions et des reconfigurations : une tradition hospitalière ou médiévale peut être reprise,
+    réorganisée et intégrée dans un cadre dynastique. Ces recompositions sont fréquentes : les institutions s’adaptent aux pouvoirs,
+    aux territoires et aux besoins d’une époque.
+  </p>
+
+  <div class="soft-sep"></div>
+  <h3>Repères : Savoie et recompositions (dates)</h3>
+  <div class="grid-2">
+    <div class="card"><h4>Ordre des Saints-Maurice-et-Lazare (Savoie)</h4><p>1434 : Amédée VIII, duc de Savoie, crée une Milice de Saint-Maurice.1572 : Le duc Emmanuel Philibert de Savoie crée l’Ordre Militaire et Religieux de Saint-Maurice.Aujourd’hui : apanage de la Maison de Savoie.</p></div>
+  </div>
+</div>
+
+<!-- 12 -->
+<div class="section-card alt" id="survivances">
+  <h3>12) Transformations, diffusion et mémoire</h3>
+  <p>
+    Après la période des croisades, les institutions suivent des trajectoires diverses : certaines disparaissent juridiquement,
+    d’autres se déplacent, d’autres changent de mission, et certaines se recomposent sous de nouveaux cadres.
+  </p>
+  <p>
+    La plupart des héritages se lisent dans des transitions : réorientation vers l’assistance, intégration politique,
+    ou transformation en traditions honorifiques et patrimoniales.
+  </p>
+
+  <div class="soft-sep"></div>
+  <h3>Repères : dérivations et continuités (dates)</h3>
+  <div class="grid-2">
+    <div class="card"><h4>Bailliage d’Utrecht de l’Ordre Teutonique</h4><p>1580 : « L’Ordre Teutonique des Pays-Bas » dérive de l’Ordre Teutonique traditionnel.1975 : Le Bailliage d’Utrecht et le « Johanniter Orde in Nederland » se réunissent pour coordonner leurs activités hospitalières.</p></div>
+  </div>
+</div>
+
+<!-- IMAGE TABLEAU ORDRES (ENTRE BLOC 12 ET 13) -->
+<figure class="inner-img">
+  <img src="tableau-ordre.jpg" alt="Tableau comparatif des ordres historiques"/>
+</figure>
+
+<div class="section-card" id="reperes">
+  <h3>13) Repères visuels : transcriptions modernes</h3>
+  <p>
+    Les planches et transcriptions modernes (croix, blasons, appellations) aident à comparer des symboles, mais elles simplifient
+    parfois des réalités complexes : variantes d’emblèmes, appellations tardives, classifications différentes.
+  </p>
+</div>
+
+<!-- 14 -->
+<div class="section-card alt" id="glossaire">
+  <h3>14) Glossaire rapide</h3>
+  <ul>
+    <li><strong>Ordre religieux</strong> : communauté sous règle, tournée vers la prière, la vie spirituelle et l’organisation communautaire.</li>
+    <li><strong>Ordre religieux-militaire</strong> : institution sous vœux, avec une mission de protection armée dans un contexte historique précis.</li>
+    <li><strong>Institution hospitalière</strong> : structure d’accueil et de soin, parfois dotée de moyens de protection selon les lieux et périodes.</li>
+    <li><strong>Ordre de cour</strong> : ordre dynastique/aristocratique, lié au souverain, à l’honneur, au prestige et au cérémonial.</li>
+    <li><strong>Commanderie</strong> : établissement local pivot des réseaux d’ordres ou d’institutions.</li>
+  </ul>
+</div>
+
+<!-- ✅ BOUTON NOIR EN BAS : uniquement Sommaire / Accueil / Contact -->
+<div aria-label="Navigation de page" class="tabs">
+  <a class="tab" href="#sommaire">Sommaire</a>
+  <a class="tab" href="index.html">Accueil</a>
+  <a class="tab" href="contact.html">Contact</a>
+</div>
+
+<!-- ✅ BOUTON JAUNE UNIQUE (coulissant interne) : Histoire du Temple + Dignitaires -->
+<div class="cta-ordres" aria-label="Accès rapide">
+  <div class="cta-slider" role="navigation" aria-label="Accès rapides">
+    <a href="vocation.html">Histoire du Temple</a>
+    <span class="divider" aria-hidden="true"></span>
+    <a href="commanderies.html">Commanderies et dignitaires de l’Ordre du Temple</a>
+  </div>
+</div>
+
+<div class="footer-min">
+  <div class="line">
+    <span>© <span id="y"></span> OSD9TDJ</span>
+    <span class="sep">•</span>
+    <a href="mentions.html">mentions</a>
+    <span class="sep">•</span>
+    <a href="cookies.html">cookies</a>
+  </div>
+</div>
+
+</div>
+</div>
+
 <script>
+  // année footer
   (function(){
     var y = new Date().getFullYear();
     var el = document.getElementById('y');
-    if(el) el.textContent = y;
+    if (el) el.textContent = y;
   })();
 
+  // watermark
   (function(){
     var wm = document.querySelector('.wm');
-    if(!wm) return;
+    if (!wm) return;
     var y = new Date().getFullYear();
     var base = "OSD9TDJ • ORDRES HISTORIQUES • TERRE SAINTE • BYZANCE • RECONQUISTA • " + y + " •";
     wm.setAttribute('data-wm', base + "\n" + base + "\n" + base);
   })();
-</script>
-<script>
-(function(){
-  try{
-    sessionStorage.setItem("osd_prev_page", location.href);
-  }catch(e){}
 
-  document.addEventListener("click", function(e){
-    const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
-    if(!a) return;
-    const href = a.getAttribute("href") || "";
-    if(href.includes("menu.html")){
-      try{
-        sessionStorage.setItem("osd_prev_page", location.href);
-      }catch(err){}
-    }
-  }, true);
-})();
-  <script>
-(function(){
+  // mémoire "page précédente" pour menu.html
+  (function(){
+    try{
+      sessionStorage.setItem("osd_prev_page", location.href);
+    }catch(e){}
 
-  /* ✅ AJOUT ICI */
-  if (location.pathname.endsWith("menu.html")) return;
-
-  try{
-    sessionStorage.setItem("osd_prev_page", location.href);
-  }catch(e){}
-
-  document.addEventListener("click", function(e){
-    const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
-    if(!a) return;
-    const href = a.getAttribute("href") || "";
-    if(href.includes("menu.html")){
-      try{
-        sessionStorage.setItem("osd_prev_page", location.href);
-      }catch(err){}
-    }
-  }, true);
-})();
+    document.addEventListener("click", function(e){
+      var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+      if (!a) return;
+      var href = a.getAttribute("href") || "";
+      if (href.indexOf("menu.html") !== -1){
+        try{ sessionStorage.setItem("osd_prev_page", location.href); }catch(err){}
+      }
+    }, true);
+  })();
 </script>
 
-<<script defer src="/osd.js"></script>
-/script>
+<script defer src="/osd.js"></script>
 
 </body>
 </html>
