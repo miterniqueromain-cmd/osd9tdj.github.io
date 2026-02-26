@@ -9,6 +9,8 @@
 
 (() => {
   "use strict";
+     // Empêche toute musique si la page est dans un iframe (ex: bgFrame du menu)
+  if (window.self !== window.top) return;
 
   // ===== SINGLETON =====
   if (window.__OSD_AUDIO__?.alive) return;
