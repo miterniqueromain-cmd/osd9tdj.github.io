@@ -2,72 +2,98 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
   <title>Menu de navigation | OSD9TDJ</title>
-  <meta name="description" content="Menu de navigation du site O.S.D.9.T.D.J. : accès rapide aux pages principales, aux informations officielles et aux pages encyclopédiques en cours de création." />
-  <meta name="keywords" content="OSD9TDJ, ordre templier, association loi 1901, templiers, histoire du Temple, adhésion, événements, boutique, membres, statuts, mentions légales, cookies, FAQ" />
+
+  <!-- SEO base -->
+  <meta name="description" content="Menu de navigation du site officiel O.S.D.9.T.D.J. : accès rapide aux pages principales, informations officielles, adhésion, événements, boutique et ressources." />
+  <meta name="keywords" content="OSD9TDJ, ordre templier, association loi 1901, templiers, chevalerie, adhésion, événements, boutique, membres, statuts, mentions légales, cookies, FAQ" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="O.S.D.9.T.D.J." />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="color-scheme" content="dark" />
   <link rel="canonical" href="https://osd9tdj.org/menu.html" />
 
+  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Menu de navigation | OSD9TDJ" />
   <meta property="og:description" content="Accès rapide à l’arborescence du site O.S.D.9.T.D.J." />
   <meta property="og:url" content="https://osd9tdj.org/menu.html" />
   <meta property="og:site_name" content="OSD9TDJ" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:image" content="https://osd9tdj.org/sceaudeux.PNG" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Menu de navigation | OSD9TDJ" />
   <meta name="twitter:description" content="Accès rapide à l’arborescence du site O.S.D.9.T.D.J." />
+  <meta name="twitter:image" content="https://osd9tdj.org/sceaudeux.PNG" />
 
-  <meta name="generator" content="OSD9TDJ - Menu de navigation" />
-  <meta name="application-name" content="OSD9TDJ" />
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
-
+  <!-- Perf -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
-
-  <!-- (Optionnel perf) Google Translate -->
   <link rel="dns-prefetch" href="//translate.google.com">
   <link rel="preconnect" href="https://translate.google.com" crossorigin>
 
-  <!-- JSON-LD principal (inchangé) -->
+  <!-- JSON-LD (SEO renforcé + graphe cohérent) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@graph":[
-      {"@type":"Organization","@id":"https://osd9tdj.org/#org","name":"O.S.D.9.T.D.J.","url":"https://osd9tdj.org/","logo":"https://osd9tdj.org/sceaudeux.PNG","description":"Association loi 1901 – site officiel O.S.D.9.T.D.J."},
-      {"@type":"WebSite","@id":"https://osd9tdj.org/#website","url":"https://osd9tdj.org/","name":"OSD9TDJ","publisher":{"@id":"https://osd9tdj.org/#org"},"inLanguage":"fr-FR"},
-      {"@type":"WebPage","@id":"https://osd9tdj.org/menu.html#webpage","url":"https://osd9tdj.org/menu.html","name":"Menu de navigation | OSD9TDJ","isPartOf":{"@id":"https://osd9tdj.org/#website"},"about":{"@id":"https://osd9tdj.org/#org"},"inLanguage":"fr-FR"},
-      {"@type":"SiteNavigationElement","@id":"https://osd9tdj.org/menu.html#nav","name":"Menu de navigation","url":"https://osd9tdj.org/menu.html","inLanguage":"fr-FR"}
+      {
+        "@type":"Organization",
+        "@id":"https://osd9tdj.org/#org",
+        "name":"Ordre Sacré des Neuf Templiers de Jérusalem",
+        "alternateName":"O.S.D.9.T.D.J.",
+        "url":"https://osd9tdj.org/",
+        "logo":{"@type":"ImageObject","url":"https://osd9tdj.org/sceaudeux.PNG"},
+        "description":"Association loi 1901 à vocation internationale. Site officiel O.S.D.9.T.D.J.",
+        "foundingLocation":{"@type":"Country","name":"France"},
+        "areaServed":"Worldwide"
+      },
+      {
+        "@type":"WebSite",
+        "@id":"https://osd9tdj.org/#website",
+        "url":"https://osd9tdj.org/",
+        "name":"OSD9TDJ",
+        "publisher":{"@id":"https://osd9tdj.org/#org"},
+        "inLanguage":"fr-FR"
+      },
+      {
+        "@type":"WebPage",
+        "@id":"https://osd9tdj.org/menu.html#webpage",
+        "url":"https://osd9tdj.org/menu.html",
+        "name":"Menu de navigation | OSD9TDJ",
+        "isPartOf":{"@id":"https://osd9tdj.org/#website"},
+        "about":{"@id":"https://osd9tdj.org/#org"},
+        "inLanguage":"fr-FR",
+        "primaryImageOfPage":{"@type":"ImageObject","url":"https://osd9tdj.org/menu.png"},
+        "breadcrumb":{"@id":"https://osd9tdj.org/menu.html#breadcrumb"}
+      },
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://osd9tdj.org/menu.html#breadcrumb",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Accueil","item":"https://osd9tdj.org/"},
+          {"@type":"ListItem","position":2,"name":"Menu","item":"https://osd9tdj.org/menu.html"}
+        ]
+      },
+      {
+        "@type":"SiteNavigationElement",
+        "@id":"https://osd9tdj.org/menu.html#sitenav",
+        "name":"Menu de navigation",
+        "url":"https://osd9tdj.org/menu.html",
+        "inLanguage":"fr-FR"
+      }
     ]
-  }
-  </script>
-
-  <!-- SEO "étoiles" (à remplir avec tes VRAIES valeurs si tu veux) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "@id":"https://osd9tdj.org/#org",
-    "name":"O.S.D.9.T.D.J.",
-    "url":"https://osd9tdj.org/",
-    "logo":"https://osd9tdj.org/sceaudeux.PNG",
-    "aggregateRating":{
-      "@type":"AggregateRating",
-      "ratingValue":"5",
-      "bestRating":"5",
-      "ratingCount":"5"
-    }
   }
   </script>
 
   <style>
   :root{
     --veil: rgba(0,0,0,.18);
-
     --panelW: min(560px, 92vw);
     --panelH: min(92vh, 920px);
     --radius: 18px;
@@ -76,11 +102,7 @@
     --txt2: rgba(255,255,255,.88);
     --red: #a11212;
 
-    --line: rgba(255,255,255,.18);
-
     --card: rgba(0,0,0,.28);
-    --card2: rgba(0,0,0,.34);
-
     --btn: rgba(0,0,0,.28);
     --btn2: rgba(0,0,0,.42);
 
@@ -99,10 +121,8 @@
   }
 
   .bgFrame{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
+    position:fixed; inset:0;
+    width:100%; height:100%;
     border:0;
     z-index:0;
     filter: blur(1.2px);
@@ -112,8 +132,7 @@
   }
 
   .wmOverlay{
-    position:fixed;
-    inset:0;
+    position:fixed; inset:0;
     z-index:5;
     pointer-events:none;
     opacity:.10;
@@ -181,14 +200,8 @@
   @media (min-width: 901px){
     :root{ --panelH: 100dvh; }
 
-    .panel{
-      top: 0;
-      transform: translate(-130%, 0);
-      height: var(--panelH);
-    }
-    .panel.open{
-      animation: slideToRightDesk var(--slideDur) cubic-bezier(.18,.92,.18,1) forwards;
-    }
+    .panel{ top:0; transform: translate(-130%, 0); height: var(--panelH); }
+    .panel.open{ animation: slideToRightDesk var(--slideDur) cubic-bezier(.18,.92,.18,1) forwards; }
     @keyframes slideToRightDesk{
       0%{ transform: translate(-130%, 0); }
       100%{ transform: translate(calc(100vw - var(--panelW) - var(--edge)), 0); }
@@ -400,10 +413,7 @@
     .sub{ font-size: 17px; }
   }
 
-  /* ==========================================================
-     ✅ Google Translate : suppression bannière + reset offsets
-     (CSS fallback ; /osd.js fait aussi le clean)
-     ========================================================== */
+  /* Google Translate : suppression bannière + reset offsets (fallback CSS) */
   iframe.goog-te-banner-frame,
   .goog-te-banner-frame,
   .goog-te-banner-frame.skiptranslate,
@@ -422,14 +432,11 @@
   <div class="wm" aria-hidden="true">
     O.S.D.9.T.D.J. — osd9tdj.org — Menu de navigation — Association loi 1901 — contenus originaux — empreinte site.
     © OSD9TDJ. Toute reproduction, extraction ou réutilisation sans autorisation est interdite.
-    Signature: OSD9TDJ|MENU|v1|{{ts}}
+    Signature: OSD9TDJ|MENU|v2|{{ts}}
   </div>
 
   <iframe class="bgFrame" id="bgFrame" title="Page précédente (floutée)" aria-hidden="true"></iframe>
-
-  <!-- watermark visible discret -->
   <div class="wmOverlay" aria-hidden="true"></div>
-
   <div class="veil" id="veil" aria-hidden="true"></div>
 
   <main class="panel" id="panel" role="dialog" aria-modal="true" aria-label="Menu de navigation">
@@ -586,9 +593,7 @@
       </details>
 
       <div style="display:flex; justify-content:center; margin: 14px 0 8px 0;">
-        <button class="btn" id="btnBack2" type="button">
-          ← Revenir à la page précédente
-        </button>
+        <button class="btn" id="btnBack2" type="button">← Revenir à la page précédente</button>
       </div>
 
       <div class="sealDock" aria-hidden="true">
@@ -597,17 +602,20 @@
     </section>
   </main>
 
-  <!-- ✅ Google Translate (widget invisible) -->
+  <!-- Google Translate (widget invisible) -->
   <div id="google_translate_element" style="display:none;"></div>
 
-  <!-- ✅ Script principal (audio + translate + mémoire + anti-bannière) -->
+  <!-- Script commun site (audio + translate + mémoire + anti-bannière) -->
   <script defer src="/osd.js"></script>
 
-  <!-- ✅ Google Translate (callback défini dans /osd.js) -->
+  <!-- Google Translate (callback défini dans /osd.js) -->
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
 
-  <!-- ✅ Script menu (animation plume/tampon/retour) -->
+  <!-- Script MENU (fix retour traduction + plume/tampon + back fiable) -->
   <script>
+  (function(){
+    "use strict";
+
     /* sons locaux (plume + tampon) */
     const SOUND_PLUME  = "sons/plume.mp3";
     const SOUND_TAMPON = "sons/tampon.mp3";
@@ -624,12 +632,10 @@
         audioReady = true;
       }catch(e){}
     }
-
     function playSafe(a){
       if(!audioReady || !a) return;
       try{ a.currentTime = 0; a.play().catch(()=>{}); }catch(e){}
     }
-
     function startPlumeFor(ms){
       if(!audioReady || !aPlume) return;
       try{
@@ -641,11 +647,32 @@
       }catch(e){}
     }
 
-    const panel = document.getElementById("panel");
-    const veil  = document.getElementById("veil");
-    const seal  = document.getElementById("seal");
+    const panel   = document.getElementById("panel");
+    const veil    = document.getElementById("veil");
+    const seal    = document.getElementById("seal");
     const bgFrame = document.getElementById("bgFrame");
 
+    /* ✅ FIX TRAD: stocke la langue courante dans sessionStorage avant de quitter menu */
+    function rememberLangForNextPage(){
+      try{
+        const m = document.cookie.match(/(?:^|;\s*)googtrans=([^;]+)/);
+        const gt = m ? decodeURIComponent(m[1]) : "";
+        const parts = gt.split("/");
+        const lang = (parts.length >= 3) ? (parts[2] || "") : "";
+        if(lang) sessionStorage.setItem("osd_last_lang", lang);
+      }catch(e){}
+    }
+
+    /* ✅ FIX TRAD: ré-écrit le cookie googtrans juste avant navigation */
+    function ensureGoogtransCookie(lang){
+      try{
+        if(!lang) return;
+        const v = (lang === "fr") ? "/fr/fr" : ("/fr/" + lang);
+        document.cookie = "googtrans=" + encodeURIComponent(v) + ";path=/;SameSite=Lax";
+      }catch(e){}
+    }
+
+    /* fond derrière menu + mémoire tablette */
     (function setBackgroundPage(){
       try{
         const last = (() => {
@@ -656,13 +683,11 @@
           bgFrame.src = last;
           return;
         }
-
         const ref = document.referrer || "";
         if(ref && ref.startsWith(location.origin)){
           bgFrame.src = ref;
           return;
         }
-
         bgFrame.src = "index.html";
       }catch(e){
         bgFrame.src = "index.html";
@@ -670,6 +695,14 @@
     })();
 
     function goBack(){
+      // ✅ avant de quitter: mémorise et force cookie
+      rememberLangForNextPage();
+      try{
+        const lang = sessionStorage.getItem("osd_last_lang") || "";
+        ensureGoogtransCookie(lang);
+      }catch(e){}
+
+      // priorité: sessionStorage.osd_prev_page
       try{
         const last = sessionStorage.getItem("osd_prev_page") || "";
         if(last && (last.startsWith(location.origin) || last.startsWith("http"))){
@@ -678,6 +711,7 @@
         }
       }catch(e){}
 
+      // fallback
       if (document.referrer && document.referrer.includes(location.hostname)) {
         window.location.href = document.referrer;
       } else if (history.length > 1) {
@@ -765,15 +799,22 @@
       }, slideMs + 60);
     }
 
+    // init audio au premier geste
     document.addEventListener("pointerdown", () => { initAudioOnce(); }, { capture:true });
 
+    // Buttons + overlay
     document.getElementById("btnBack").addEventListener("click", goBack);
     document.getElementById("btnBack2").addEventListener("click", goBack);
     document.getElementById("btnClose").addEventListener("click", goBack);
-
     veil.addEventListener("click", goBack);
     panel.addEventListener("click", (e) => e.stopPropagation());
 
+    // ESC ferme
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") goBack();
+    });
+
+    // Watermark invisible renforcé (signature + timestamp + meta)
     (function(){
       try{
         const wm = document.querySelector(".wm");
@@ -790,6 +831,7 @@
     })();
 
     window.addEventListener("load", openMenu);
+  })();
   </script>
 </body>
 </html>
