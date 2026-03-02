@@ -15,10 +15,10 @@
   <meta name="color-scheme" content="dark">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
-  <!-- ✅ Canonical (mets ton URL PROPRE, pas un safelink) -->
+  <!-- ✅ Canonical -->
   <link rel="canonical" href="https://osd9tdj.org/">
 
-  <!-- ✅ Hreflang (site FR source + x-default) -->
+  <!-- ✅ Hreflang -->
   <link rel="alternate" href="https://osd9tdj.org/" hreflang="fr">
   <link rel="alternate" href="https://osd9tdj.org/" hreflang="x-default">
 
@@ -487,7 +487,8 @@
   }
 
   /* ==========================================================
-     ✅ Google Translate - suppression bannière (robuste)
+     ✅ Google Translate - suppression bannière (CSS fallback)
+     (Le vrai "anti-bar" est géré par /osd.js)
      ========================================================== */
   iframe.goog-te-banner-frame,
   .goog-te-banner-frame,
@@ -496,19 +497,13 @@
     display: none !important;
     visibility: hidden !important;
   }
-
-  /* Google pousse parfois la page vers le bas */
   html, body {
     top: 0 !important;
     position: static !important;
   }
-
-  /* Supprime les tooltips Google Translate */
   #goog-gt-tt, .goog-te-balloon-frame {
     display: none !important;
   }
-
-  /* On cache le gadget standard Google Translate (tu utilises tes boutons à toi) */
   .goog-te-gadget { display:none !important; }
   </style>
 </head>
@@ -680,160 +675,6 @@
   <!-- ✅ Widget Google Translate (invisible) -->
   <div id="google_translate_element" style="display:none;"></div>
 
-  <!-- ==========================================================
-       ✅ Google Translate + Mémoire + Anti-bannière (JS renforcé)
-       ========================================================== -->
-  <script>
-  (function(){
-    "use strict";
-
-    // --- Cookies ---
-    function setCookie(name, value, days){
-      const d = new Date();
-      d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-      // SameSite=Lax OK pour navigation interne
-      document.cookie = name + "=" + encodeURIComponent(value) +
-        ";expires=" + d.toUTCString() +
-        ";path=/;SameSite=Lax";
-    }
-
-    function getCookie(name){
-      const m = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-      return m ? decodeURIComponent(m[2]) : "";
-    }
-
-    // --- Anti-bannière / nettoyage DOM ---
-    function killGTBanner(){
-      try {
-        // supprime les iframes bannière
-        document.querySelectorAll("iframe.goog-te-banner-frame").forEach(el => el.remove());
-
-        // reset offsets (Google pousse parfois le body/html)
-        document.documentElement.style.top = "0px";
-        document.body.style.top = "0px";
-        document.body.style.position = "static";
-
-        // supprime aussi des nodes potentiels (safe)
-        const balloon = document.getElementById("goog-gt-tt");
-        if (balloon) balloon.remove();
-        document.querySelectorAll(".goog-te-balloon-frame").forEach(el => el.remove());
-      } catch(e) {}
-    }
-
-    // Observe toute réinjection
-    function observeForBanner(){
-      try{
-        const obs = new MutationObserver(function(){
-          killGTBanner();
-        });
-        obs.observe(document.documentElement, { childList:true, subtree:true });
-      }catch(e){}
-    }
-
-    // --- Mémoire de langue (googtrans) ---
-    function rememberLanguage(lang){
-      // langue source: fr
-      if(!lang || lang === "fr"){
-        setCookie("googtrans", "/fr/fr", 365);
-        return;
-      }
-      setCookie("googtrans", "/fr/" + lang, 365);
-    }
-
-    // Applique une langue via le combo interne de Google (créé par element.js)
-    function applyLanguageToGoogleCombo(lang){
-      const start = Date.now();
-      const timer = setInterval(function(){
-        const combo = document.querySelector(".goog-te-combo");
-        if(combo){
-          combo.value = lang;
-          combo.dispatchEvent(new Event("change", { bubbles: true }));
-          clearInterval(timer);
-          // re-nettoyage après changement (Google retente parfois)
-          setTimeout(killGTBanner, 250);
-          setTimeout(killGTBanner, 800);
-          setTimeout(killGTBanner, 1500);
-        } else if(Date.now() - start > 10000){
-          clearInterval(timer);
-        }
-      }, 200);
-    }
-
-    function setLanguage(lang){
-      if(!lang) return;
-      rememberLanguage(lang);
-
-      // si la page n'est pas encore initialisée, on attend le combo
-      applyLanguageToGoogleCombo(lang);
-    }
-
-    function getRememberedLang(){
-      const gt = getCookie("googtrans") || "";
-      // format: /fr/en
-      const parts = gt.split("/");
-      const lang = (parts.length >= 3) ? parts[2] : "";
-      return lang || "";
-    }
-
-    function applyRememberedLanguage(){
-      const lang = getRememberedLang();
-      if(lang && lang !== "fr"){
-        applyLanguageToGoogleCombo(lang);
-      }
-    }
-
-    // Callback Google Translate
-    window.googleTranslateElementInit = function(){
-      try{
-        new window.google.translate.TranslateElement(
-          { pageLanguage: "fr", autoDisplay: false },
-          "google_translate_element"
-        );
-      }catch(e){}
-
-      // nettoyage + application langue mémorisée
-      killGTBanner();
-      applyRememberedLanguage();
-      observeForBanner();
-    };
-
-    // --- Events UI ---
-    document.addEventListener("DOMContentLoaded", function(){
-      // anti-bannière (au plus tôt)
-      killGTBanner();
-
-      const btn = document.getElementById("translateBtn");
-      const langSelect = document.getElementById("langSelect");
-
-      if(btn && langSelect){
-        btn.addEventListener("click", function(){
-          setLanguage(langSelect.value);
-        });
-      }
-
-      document.querySelectorAll(".quickLang").forEach(function(b){
-        b.addEventListener("click", function(){
-          setLanguage(this.getAttribute("data-lang"));
-        });
-      });
-
-      // si cookie déjà présent, on tente d'appliquer
-      applyRememberedLanguage();
-
-      // re-nettoyage delayed
-      setTimeout(killGTBanner, 400);
-      setTimeout(killGTBanner, 1200);
-      setTimeout(killGTBanner, 2500);
-    });
-
-    // Expose si besoin ailleurs
-    window.OSD_setLanguage = setLanguage;
-  })();
-  </script>
-
-  <!-- ✅ Script Google Translate -->
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
-
   <!-- ✅ Ton script menu (inchangé) -->
   <script>
   (function(){
@@ -856,7 +697,11 @@
   })();
   </script>
 
+  <!-- ✅ Script principal (audio + translate + mémoire + anti-bannière) -->
   <script defer src="/osd.js"></script>
+
+  <!-- ✅ Script Google Translate (callback: googleTranslateElementInit défini dans /osd.js) -->
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
 
 </body>
 </html>
