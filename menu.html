@@ -66,21 +66,18 @@
 
   <style>
   :root{
-    /* voile global (fond derrière menu) : noir MAIS léger */
     --veil: rgba(0,0,0,.18);
 
     --panelW: min(560px, 92vw);
     --panelH: min(92vh, 920px);
     --radius: 18px;
 
-    /* texte */
     --txt: rgba(255,255,255,.96);
     --txt2: rgba(255,255,255,.88);
     --red: #a11212;
 
     --line: rgba(255,255,255,.18);
 
-    /* voiles sous textes (cartes) : noirs translucides, pas trop sombres */
     --card: rgba(0,0,0,.28);
     --card2: rgba(0,0,0,.34);
 
@@ -95,15 +92,12 @@
   body{
     font-family: "Uncial Antiqua", ui-serif, Georgia, "Times New Roman", serif;
     color: var(--txt);
-
     background:
       linear-gradient(to bottom, rgba(0,0,0,.30), rgba(0,0,0,.08)),
       url("menu.png") center/cover no-repeat fixed;
-
     overflow:hidden;
   }
 
-  /* ancienne page derrière */
   .bgFrame{
     position:fixed;
     inset:0;
@@ -117,11 +111,10 @@
     background:#000;
   }
 
-  /* Watermark visible DISCRET (derrière le voile et le panneau, ne gêne jamais) */
   .wmOverlay{
     position:fixed;
     inset:0;
-    z-index:5;              /* derrière le voile (10) et panel (20) */
+    z-index:5;
     pointer-events:none;
     opacity:.10;
     mix-blend-mode: overlay;
@@ -147,7 +140,6 @@
     text-shadow: 0 2px 14px rgba(0,0,0,.55);
   }
 
-  /* voile au-dessus du fond */
   .veil{
     position:fixed; inset:0;
     background: var(--veil);
@@ -220,7 +212,6 @@
     padding: 18px 18px 12px 18px;
     display:flex; align-items:flex-start; justify-content:space-between;
     gap: 12px;
-
     background: linear-gradient(to bottom, rgba(0,0,0,.42), rgba(0,0,0,.18));
     border-bottom: 1px solid rgba(255,255,255,.14);
     z-index: 30;
@@ -411,6 +402,7 @@
 
   /* ==========================================================
      ✅ Google Translate : suppression bannière + reset offsets
+     (CSS fallback ; /osd.js fait aussi le clean)
      ========================================================== */
   iframe.goog-te-banner-frame,
   .goog-te-banner-frame,
@@ -420,11 +412,7 @@
     visibility:hidden !important;
   }
   #goog-gt-tt, .goog-te-balloon-frame { display:none !important; }
-
-  html, body {
-    top: 0 !important;
-    position: static !important;
-  }
+  html, body { top: 0 !important; position: static !important; }
   .goog-te-gadget { display:none !important; }
   </style>
 </head>
@@ -585,7 +573,7 @@
 
       <details class="group">
         <summary>
-          <div class="label js-write">Encyclopédique </div>
+          <div class="label js-write">Encyclopédique</div>
           <div class="chev" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -609,128 +597,16 @@
     </section>
   </main>
 
-  <!-- Audio global -->
-  <script defer src="/osd.js"></script>
-
-  <!-- ==========================================================
-       ✅ Google Translate (invisible) + mémoire + anti-bannière
-       IMPORTANT : le callback DOIT exister AVANT element.js
-       ========================================================== -->
+  <!-- ✅ Google Translate (widget invisible) -->
   <div id="google_translate_element" style="display:none;"></div>
 
-  <script>
-  (function(){
-    "use strict";
+  <!-- ✅ Script principal (audio + translate + mémoire + anti-bannière) -->
+  <script defer src="/osd.js"></script>
 
-    // Cookies
-    function setCookie(name, value, days){
-      const d = new Date();
-      d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-      document.cookie = name + "=" + encodeURIComponent(value) +
-        ";expires=" + d.toUTCString() + ";path=/;SameSite=Lax";
-    }
-    function getCookie(name){
-      const m = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-      return m ? decodeURIComponent(m[2]) : "";
-    }
-
-    // Anti-bannière / nettoyage
-    function killGTBanner(){
-      try{
-        document.querySelectorAll("iframe.goog-te-banner-frame").forEach(el => el.remove());
-        document.querySelectorAll(".goog-te-banner-frame").forEach(el => el.remove());
-
-        const balloon = document.getElementById("goog-gt-tt");
-        if(balloon) balloon.remove();
-        document.querySelectorAll(".goog-te-balloon-frame").forEach(el => el.remove());
-
-        // reset offsets parfois appliqués par Google
-        document.documentElement.style.top = "0px";
-        document.body.style.top = "0px";
-        document.body.style.position = "static";
-      }catch(e){}
-    }
-
-    function observeForBanner(){
-      try{
-        const obs = new MutationObserver(function(){ killGTBanner(); });
-        obs.observe(document.documentElement, { childList:true, subtree:true });
-      }catch(e){}
-    }
-
-    // Mémoire de langue (googtrans)
-    function rememberLanguage(lang){
-      if(!lang || lang === "fr"){
-        setCookie("googtrans", "/fr/fr", 365);
-        return;
-      }
-      setCookie("googtrans", "/fr/" + lang, 365);
-    }
-
-    function getRememberedLang(){
-      const gt = getCookie("googtrans") || "";
-      const parts = gt.split("/");
-      return (parts.length >= 3) ? (parts[2] || "") : "";
-    }
-
-    function applyLanguageToGoogleCombo(lang){
-      const start = Date.now();
-      const timer = setInterval(function(){
-        const combo = document.querySelector(".goog-te-combo");
-        if(combo){
-          combo.value = lang;
-          combo.dispatchEvent(new Event("change", { bubbles:true }));
-          clearInterval(timer);
-
-          setTimeout(killGTBanner, 250);
-          setTimeout(killGTBanner, 900);
-          setTimeout(killGTBanner, 1600);
-        } else if(Date.now() - start > 10000){
-          clearInterval(timer);
-        }
-      }, 200);
-    }
-
-    function applyRememberedLanguage(){
-      const lang = getRememberedLang();
-      if(lang && lang !== "fr"){
-        applyLanguageToGoogleCombo(lang);
-      }
-    }
-
-    // Callback appelé par element.js
-    window.googleTranslateElementInit = function(){
-      try{
-        new window.google.translate.TranslateElement(
-          { pageLanguage: "fr", autoDisplay: false },
-          "google_translate_element"
-        );
-      }catch(e){}
-
-      killGTBanner();
-      applyRememberedLanguage();
-      observeForBanner();
-    };
-
-    // Expose si tu veux déclencher une langue depuis ailleurs
-    window.OSD_setLanguage = function(lang){
-      rememberLanguage(lang);
-      applyLanguageToGoogleCombo(lang);
-    };
-
-    document.addEventListener("DOMContentLoaded", function(){
-      // nettoyage early
-      killGTBanner();
-      // tentative avant init (si widget déjà présent sur certains navigateurs)
-      applyRememberedLanguage();
-      setTimeout(killGTBanner, 600);
-      setTimeout(killGTBanner, 1400);
-    });
-  })();
-  </script>
-
+  <!-- ✅ Google Translate (callback défini dans /osd.js) -->
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
 
+  <!-- ✅ Script menu (animation plume/tampon/retour) -->
   <script>
     /* sons locaux (plume + tampon) */
     const SOUND_PLUME  = "sons/plume.mp3";
@@ -770,7 +646,6 @@
     const seal  = document.getElementById("seal");
     const bgFrame = document.getElementById("bgFrame");
 
-    /* fond derrière menu + mémoire tablette */
     (function setBackgroundPage(){
       try{
         const last = (() => {
