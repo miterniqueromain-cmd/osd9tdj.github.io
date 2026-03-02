@@ -3,13 +3,17 @@
    - Playlist aléatoire sans répétition (sessionStorage)
    - Enchaînement: ended => next
    - Erreur vraie: error => next
-   - Google Translate: si clic sur l'UI Translate => pause immédiate sur la page d'origine
-     => évite "2 musiques à la fois" quand Translate ouvre une autre page
+   - Google Translate:
+       * Fix audio: si clic UI Translate => pause immédiate
+       * Mode "TOP": persistance langue via cookie googtrans
+       * Ré-application automatique sur chaque page
+       * API globale: window.OSD_setLanguage(lang)
 */
 
 (() => {
   "use strict";
-     // Empêche toute musique si la page est dans un iframe (ex: bgFrame du menu)
+
+  // Empêche toute musique si la page est dans un iframe (ex: bgFrame du menu)
   if (window.self !== window.top) return;
 
   // ===== SINGLETON =====
@@ -145,7 +149,9 @@
 
   function isTranslateUI(target) {
     if (!target || !target.closest) return false;
-    return !!target.closest("#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame");
+    return !!target.closest(
+      "#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame, .goog-te-combo"
+    );
   }
 
   // ===== AUDIO STATE =====
@@ -214,7 +220,6 @@
   bgm.addEventListener("error", () => nextTrack("error"));
 
   // ===== GOOGLE TRANSLATE FIX : pause immédiate sur clic UI translate =====
-  // IMPORTANT: c’est ça qui empêche les 2 musiques quand Translate ouvre une autre page.
   function pauseForTranslateUI() {
     wasPlayingBeforeBlur = false;
     try { bgm.pause(); } catch {}
@@ -278,9 +283,7 @@
 
   // ===== 1ER GESTE UTILISATEUR = DÉMARRAGE GARANTI =====
   const onFirstGesture = async (e) => {
-    // Si l’utilisateur clique Translate, on ne démarre pas ici (on vient justement de pauser)
     if (isTranslateUI(e.target)) return;
-
     await startNow();
 
     document.removeEventListener("pointerdown", onFirstGesture, true);
@@ -308,5 +311,100 @@
     softBoot();
   }
 
+  // =====================================================================
+  // ✅ GOOGLE TRANSLATE — MODE "TOP DU TOP" (PERSISTANCE + AUTO-APPLY)
+  // =====================================================================
+
+  function setCookie(name, value, days) {
+    const d = new Date();
+    d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = name + "=" + value + ";expires=" + d.toUTCString() + ";path=/;SameSite=Lax";
+  }
+
+  function getCookie(name) {
+    const m = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+    return m ? m[2] : "";
+  }
+
+  // Google persiste la langue via cookie "googtrans" : "/fr/de"
+  function rememberLanguage(lang) {
+    if (!lang || lang === "fr") {
+      setCookie("googtrans", "/fr/fr", 365);
+      setCookie("googtrans", "/fr/fr", 365);
+      return;
+    }
+    setCookie("googtrans", "/fr/" + lang, 365);
+    setCookie("googtrans", "/fr/" + lang, 365);
+  }
+
+  function setLanguage(lang) {
+    if (!lang) return;
+
+    // évite des clics bots / scripts
+    rememberLanguage(lang);
+
+    // Si l’utilisateur change la langue, on coupe la musique instantanément (propre)
+    pauseForTranslateUI();
+
+    const start = Date.now();
+    const timer = setInterval(() => {
+      const combo = document.querySelector(".goog-te-combo");
+      if (combo) {
+        combo.value = lang;
+        combo.dispatchEvent(new Event("change"));
+        clearInterval(timer);
+      } else if (Date.now() - start > 8000) {
+        clearInterval(timer);
+      }
+    }, 250);
+  }
+
+  function applyRememberedLanguage() {
+    const gt = decodeURIComponent(getCookie("googtrans") || "");
+    const parts = gt.split("/");
+    const lang = (parts.length >= 3) ? parts[2] : "";
+    if (lang && lang !== "fr") {
+      // Ne pas relancer si déjà sélectionné
+      const combo = document.querySelector(".goog-te-combo");
+      if (combo && combo.value === lang) return;
+      setLanguage(lang);
+    }
+  }
+
+  // Callback attendu par:
+  // <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  window.googleTranslateElementInit = function () {
+    try {
+      if (window.google && window.google.translate && window.google.translate.TranslateElement) {
+        new window.google.translate.TranslateElement(
+          { pageLanguage: "fr", autoDisplay: false },
+          "google_translate_element"
+        );
+      }
+    } catch {}
+    applyRememberedLanguage();
+  };
+
+  // API globale (utile si tes boutons sur index appellent ça)
+  window.OSD_setLanguage = setLanguage;
+
+  // Si le widget arrive après, on tente quand même d’appliquer la langue mémorisée
+  document.addEventListener("DOMContentLoaded", () => {
+    applyRememberedLanguage();
+
+    // Si tu as sur l’index: #translateBtn et #langSelect, on les branche ici aussi
+    const btn = document.getElementById("translateBtn");
+    const langSelect = document.getElementById("langSelect");
+    if (btn && langSelect) {
+      btn.addEventListener("click", () => setLanguage(langSelect.value));
+    }
+    document.querySelectorAll(".quickLang").forEach(b => {
+      b.addEventListener("click", function () {
+        setLanguage(this.getAttribute("data-lang"));
+      });
+    });
+  });
+
+  // ===== FIN =====
   window.__OSD_AUDIO__ = { alive: true };
 })();
