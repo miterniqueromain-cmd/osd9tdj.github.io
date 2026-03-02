@@ -29,6 +29,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
 
+  <!-- (Optionnel perf) Google Translate -->
+  <link rel="dns-prefetch" href="//translate.google.com">
+  <link rel="preconnect" href="https://translate.google.com" crossorigin>
+
   <!-- JSON-LD principal (inchangé) -->
   <script type="application/ld+json">
   {
@@ -182,10 +186,6 @@
     100%{ transform: translate(calc(100vw - var(--panelW) - var(--edge)), -50%); }
   }
 
-  /* ✅ FIX HAUTEUR (TABLETTE + PC)
-     IMPORTANT : on applique le "mode plein écran vertical" dès 901px
-     -> ça enlève la zone "coulissante moche" due à une hauteur limitée
-     -> et on garde EXACTEMENT ton coulissage à droite */
   @media (min-width: 901px){
     :root{ --panelH: 100dvh; }
 
@@ -203,7 +203,6 @@
     }
   }
 
-  /* ======== IMPORTANT: contenu caché pendant la coulisse ======== */
   .panel .header,
   .panel .scroll{
     opacity: 0;
@@ -222,7 +221,6 @@
     display:flex; align-items:flex-start; justify-content:space-between;
     gap: 12px;
 
-    /* header noir léger pour laisser voir l'image */
     background: linear-gradient(to bottom, rgba(0,0,0,.42), rgba(0,0,0,.18));
     border-bottom: 1px solid rgba(255,255,255,.14);
     z-index: 30;
@@ -344,7 +342,6 @@
     filter: drop-shadow(0 2px 2px rgba(0,0,0,.35));
   }
 
-  /* reveal texte (inchangé mais on déclenche après coulisse) */
   .write{
     display:inline-block;
     overflow:hidden;
@@ -391,7 +388,6 @@
   }
   .seal.show{ opacity:1; }
 
-  /* watermark invisible renforcé */
   .wm{
     position:absolute;
     left:-9999px;
@@ -403,7 +399,6 @@
     user-select:none;
   }
 
-  /* Landscape compact : UNIQUEMENT petits écrans (mobile) */
   @media (max-width: 900px) and (orientation: landscape){
     :root{
       --panelW: min(620px, 70vw);
@@ -413,6 +408,24 @@
     .label{ font-size: 19px; }
     .sub{ font-size: 17px; }
   }
+
+  /* ==========================================================
+     ✅ Google Translate : suppression bannière + reset offsets
+     ========================================================== */
+  iframe.goog-te-banner-frame,
+  .goog-te-banner-frame,
+  .goog-te-banner-frame.skiptranslate,
+  .goog-te-banner {
+    display:none !important;
+    visibility:hidden !important;
+  }
+  #goog-gt-tt, .goog-te-balloon-frame { display:none !important; }
+
+  html, body {
+    top: 0 !important;
+    position: static !important;
+  }
+  .goog-te-gadget { display:none !important; }
   </style>
 </head>
 
@@ -599,9 +612,124 @@
   <!-- Audio global -->
   <script defer src="/osd.js"></script>
 
-  <!-- Google Translate (widget invisible) -->
-<div id="google_translate_element" style="display:none;"></div>
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <!-- ==========================================================
+       ✅ Google Translate (invisible) + mémoire + anti-bannière
+       IMPORTANT : le callback DOIT exister AVANT element.js
+       ========================================================== -->
+  <div id="google_translate_element" style="display:none;"></div>
+
+  <script>
+  (function(){
+    "use strict";
+
+    // Cookies
+    function setCookie(name, value, days){
+      const d = new Date();
+      d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+      document.cookie = name + "=" + encodeURIComponent(value) +
+        ";expires=" + d.toUTCString() + ";path=/;SameSite=Lax";
+    }
+    function getCookie(name){
+      const m = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+      return m ? decodeURIComponent(m[2]) : "";
+    }
+
+    // Anti-bannière / nettoyage
+    function killGTBanner(){
+      try{
+        document.querySelectorAll("iframe.goog-te-banner-frame").forEach(el => el.remove());
+        document.querySelectorAll(".goog-te-banner-frame").forEach(el => el.remove());
+
+        const balloon = document.getElementById("goog-gt-tt");
+        if(balloon) balloon.remove();
+        document.querySelectorAll(".goog-te-balloon-frame").forEach(el => el.remove());
+
+        // reset offsets parfois appliqués par Google
+        document.documentElement.style.top = "0px";
+        document.body.style.top = "0px";
+        document.body.style.position = "static";
+      }catch(e){}
+    }
+
+    function observeForBanner(){
+      try{
+        const obs = new MutationObserver(function(){ killGTBanner(); });
+        obs.observe(document.documentElement, { childList:true, subtree:true });
+      }catch(e){}
+    }
+
+    // Mémoire de langue (googtrans)
+    function rememberLanguage(lang){
+      if(!lang || lang === "fr"){
+        setCookie("googtrans", "/fr/fr", 365);
+        return;
+      }
+      setCookie("googtrans", "/fr/" + lang, 365);
+    }
+
+    function getRememberedLang(){
+      const gt = getCookie("googtrans") || "";
+      const parts = gt.split("/");
+      return (parts.length >= 3) ? (parts[2] || "") : "";
+    }
+
+    function applyLanguageToGoogleCombo(lang){
+      const start = Date.now();
+      const timer = setInterval(function(){
+        const combo = document.querySelector(".goog-te-combo");
+        if(combo){
+          combo.value = lang;
+          combo.dispatchEvent(new Event("change", { bubbles:true }));
+          clearInterval(timer);
+
+          setTimeout(killGTBanner, 250);
+          setTimeout(killGTBanner, 900);
+          setTimeout(killGTBanner, 1600);
+        } else if(Date.now() - start > 10000){
+          clearInterval(timer);
+        }
+      }, 200);
+    }
+
+    function applyRememberedLanguage(){
+      const lang = getRememberedLang();
+      if(lang && lang !== "fr"){
+        applyLanguageToGoogleCombo(lang);
+      }
+    }
+
+    // Callback appelé par element.js
+    window.googleTranslateElementInit = function(){
+      try{
+        new window.google.translate.TranslateElement(
+          { pageLanguage: "fr", autoDisplay: false },
+          "google_translate_element"
+        );
+      }catch(e){}
+
+      killGTBanner();
+      applyRememberedLanguage();
+      observeForBanner();
+    };
+
+    // Expose si tu veux déclencher une langue depuis ailleurs
+    window.OSD_setLanguage = function(lang){
+      rememberLanguage(lang);
+      applyLanguageToGoogleCombo(lang);
+    };
+
+    document.addEventListener("DOMContentLoaded", function(){
+      // nettoyage early
+      killGTBanner();
+      // tentative avant init (si widget déjà présent sur certains navigateurs)
+      applyRememberedLanguage();
+      setTimeout(killGTBanner, 600);
+      setTimeout(killGTBanner, 1400);
+    });
+  })();
+  </script>
+
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
 
   <script>
     /* sons locaux (plume + tampon) */
@@ -667,7 +795,6 @@
     })();
 
     function goBack(){
-      // priorité: sessionStorage.osd_prev_page (fiable tablette)
       try{
         const last = sessionStorage.getItem("osd_prev_page") || "";
         if(last && (last.startsWith(location.origin) || last.startsWith("http"))){
@@ -676,7 +803,6 @@
         }
       }catch(e){}
 
-      // fallback
       if (document.referrer && document.referrer.includes(location.hostname)) {
         window.location.href = document.referrer;
       } else if (history.length > 1) {
@@ -728,7 +854,6 @@
         if(dur > maxDur) maxDur = dur;
       });
 
-      // reveal
       setTimeout(() => {
         document.querySelectorAll(".write").forEach(w => w.classList.add("reveal"));
         startPlumeFor(maxDur);
@@ -753,8 +878,6 @@
 
       const slideMs = cssVarToMs("--slideDur", 4800);
 
-      // 1) panneau coulisse vide
-      // 2) après la coulisse: on affiche header/scroll + on lance l'écriture
       setTimeout(() => {
         panel.classList.add("ready");
         applyWriting();
@@ -767,7 +890,6 @@
       }, slideMs + 60);
     }
 
-    // init plume/tampon au premier geste (si autoplay bloqué)
     document.addEventListener("pointerdown", () => { initAudioOnce(); }, { capture:true });
 
     document.getElementById("btnBack").addEventListener("click", goBack);
@@ -777,7 +899,6 @@
     veil.addEventListener("click", goBack);
     panel.addEventListener("click", (e) => e.stopPropagation());
 
-    // Watermark invisible renforcé (signature + timestamp + meta)
     (function(){
       try{
         const wm = document.querySelector(".wm");
