@@ -7,6 +7,7 @@
        * Fix audio: si clic UI Translate => pause immédiate
        * Mode "TOP": persistance langue via cookie googtrans
        * Ré-application automatique sur chaque page
+       * Anti-bannière: CSS + DOM cleanup + MutationObserver + reset offsets
        * API globale: window.OSD_setLanguage(lang)
 */
 
@@ -18,6 +19,59 @@
 
   // ===== SINGLETON =====
   if (window.__OSD_AUDIO__?.alive) return;
+
+  // =====================================================================
+  // ✅ GOOGLE TRANSLATE — HIDE TOP BANNER (CSS injecté)
+  // =====================================================================
+  function injectGTStylesOnce() {
+    if (document.getElementById("osd-gt-css")) return;
+    const css = `
+      iframe.goog-te-banner-frame,
+      .goog-te-banner-frame,
+      .goog-te-banner-frame.skiptranslate,
+      .goog-te-banner{
+        display:none !important;
+        visibility:hidden !important;
+      }
+      #goog-gt-tt, .goog-te-balloon-frame{
+        display:none !important;
+      }
+      html, body{
+        top:0 !important;
+        position:static !important;
+      }
+      /* On garde ton UI à toi, on cache le gadget standard */
+      .goog-te-gadget{ display:none !important; }
+    `;
+    const style = document.createElement("style");
+    style.id = "osd-gt-css";
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  function killGTBanner() {
+    try {
+      document.querySelectorAll("iframe.goog-te-banner-frame").forEach(el => el.remove());
+      document.querySelectorAll(".goog-te-banner-frame").forEach(el => el.remove());
+
+      const tt = document.getElementById("goog-gt-tt");
+      if (tt) tt.remove();
+      document.querySelectorAll(".goog-te-balloon-frame").forEach(el => el.remove());
+
+      document.documentElement.style.top = "0px";
+      document.body.style.top = "0px";
+      document.body.style.position = "static";
+    } catch {}
+  }
+
+  function observeGTBanner() {
+    if (window.__OSD_GT_OBS__) return;
+    try {
+      const obs = new MutationObserver(() => killGTBanner());
+      obs.observe(document.documentElement, { childList: true, subtree: true });
+      window.__OSD_GT_OBS__ = obs;
+    } catch {}
+  }
 
   // ===== CONFIG =====
   const TRACKS = [
@@ -150,7 +204,7 @@
   function isTranslateUI(target) {
     if (!target || !target.closest) return false;
     return !!target.closest(
-      "#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame, .goog-te-combo"
+      "#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame, .goog-te-combo, iframe.goog-te-menu-frame"
     );
   }
 
@@ -201,7 +255,7 @@
     }
   }
 
-  async function nextTrack(reason) {
+  async function nextTrack() {
     if (!TRACKS.length) return;
 
     try { bgm.pause(); } catch {}
@@ -216,8 +270,8 @@
   }
 
   // ===== EVENTS =====
-  bgm.addEventListener("ended", () => nextTrack("ended"));
-  bgm.addEventListener("error", () => nextTrack("error"));
+  bgm.addEventListener("ended", () => nextTrack());
+  bgm.addEventListener("error", () => nextTrack());
 
   // ===== GOOGLE TRANSLATE FIX : pause immédiate sur clic UI translate =====
   function pauseForTranslateUI() {
@@ -233,7 +287,7 @@
     if (isTranslateUI(e.target)) pauseForTranslateUI();
   }, true);
 
-  // ===== FOCUS / VISIBILITY (Translate OK) =====
+  // ===== FOCUS / VISIBILITY =====
   let blurTimer = null;
 
   function schedulePause() {
@@ -277,11 +331,11 @@
 
   document.addEventListener("click", (e) => {
     if (!e.isTrusted) return;
-    if (isTranslateUI(e.target)) return; // ignore UI translate
+    if (isTranslateUI(e.target)) return;
     playSword();
   }, true);
 
-  // ===== 1ER GESTE UTILISATEUR = DÉMARRAGE GARANTI =====
+  // ===== 1ER GESTE UTILISATEUR = DÉMARRAGE =====
   const onFirstGesture = async (e) => {
     if (isTranslateUI(e.target)) return;
     await startNow();
@@ -312,68 +366,78 @@
   }
 
   // =====================================================================
-  // ✅ GOOGLE TRANSLATE — MODE "TOP DU TOP" (PERSISTANCE + AUTO-APPLY)
+  // ✅ GOOGLE TRANSLATE — MODE "TOP" (PERSISTANCE + AUTO-APPLY + ANTI-BAR)
   // =====================================================================
 
   function setCookie(name, value, days) {
     const d = new Date();
     d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-    document.cookie = name + "=" + value + ";expires=" + d.toUTCString() + ";path=/;SameSite=Lax";
+    document.cookie = name + "=" + encodeURIComponent(value) +
+      ";expires=" + d.toUTCString() + ";path=/;SameSite=Lax";
   }
 
   function getCookie(name) {
     const m = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
-    return m ? m[2] : "";
+    return m ? decodeURIComponent(m[2]) : "";
   }
 
   // Google persiste la langue via cookie "googtrans" : "/fr/de"
   function rememberLanguage(lang) {
     if (!lang || lang === "fr") {
       setCookie("googtrans", "/fr/fr", 365);
-      setCookie("googtrans", "/fr/fr", 365);
       return;
     }
     setCookie("googtrans", "/fr/" + lang, 365);
-    setCookie("googtrans", "/fr/" + lang, 365);
+  }
+
+  function applyLanguageToCombo(lang) {
+    const start = Date.now();
+    const timer = setInterval(() => {
+      const combo = document.querySelector(".goog-te-combo");
+      if (combo) {
+        // évite re-trigger inutile
+        if (combo.value !== lang) {
+          combo.value = lang;
+          combo.dispatchEvent(new Event("change", { bubbles: true }));
+        }
+        clearInterval(timer);
+
+        // Google réinjecte parfois -> re-clean
+        killGTBanner();
+        setTimeout(killGTBanner, 300);
+        setTimeout(killGTBanner, 1200);
+      } else if (Date.now() - start > 10000) {
+        clearInterval(timer);
+      }
+    }, 200);
   }
 
   function setLanguage(lang) {
     if (!lang) return;
 
-    // évite des clics bots / scripts
     rememberLanguage(lang);
+    pauseForTranslateUI(); // propre
 
-    // Si l’utilisateur change la langue, on coupe la musique instantanément (propre)
-    pauseForTranslateUI();
-
-    const start = Date.now();
-    const timer = setInterval(() => {
-      const combo = document.querySelector(".goog-te-combo");
-      if (combo) {
-        combo.value = lang;
-        combo.dispatchEvent(new Event("change"));
-        clearInterval(timer);
-      } else if (Date.now() - start > 8000) {
-        clearInterval(timer);
-      }
-    }, 250);
+    applyLanguageToCombo(lang);
   }
 
   function applyRememberedLanguage() {
-    const gt = decodeURIComponent(getCookie("googtrans") || "");
+    const gt = getCookie("googtrans") || "";
     const parts = gt.split("/");
-    const lang = (parts.length >= 3) ? parts[2] : "";
+    const lang = (parts.length >= 3) ? (parts[2] || "") : "";
+
     if (lang && lang !== "fr") {
-      // Ne pas relancer si déjà sélectionné
       const combo = document.querySelector(".goog-te-combo");
       if (combo && combo.value === lang) return;
-      setLanguage(lang);
+      applyLanguageToCombo(lang);
     }
   }
 
-  // Callback attendu par:
-  // <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  // Callback attendu par element.js?cb=googleTranslateElementInit
   window.googleTranslateElementInit = function () {
+    injectGTStylesOnce();
+    killGTBanner();
+
     try {
       if (window.google && window.google.translate && window.google.translate.TranslateElement) {
         new window.google.translate.TranslateElement(
@@ -382,17 +446,28 @@
         );
       }
     } catch {}
+
     applyRememberedLanguage();
+
+    killGTBanner();
+    setTimeout(killGTBanner, 300);
+    setTimeout(killGTBanner, 1200);
+
+    observeGTBanner();
   };
 
-  // API globale (utile si tes boutons sur index appellent ça)
+  // API globale
   window.OSD_setLanguage = setLanguage;
 
-  // Si le widget arrive après, on tente quand même d’appliquer la langue mémorisée
+  // Init DOM
   document.addEventListener("DOMContentLoaded", () => {
+    injectGTStylesOnce();
+    killGTBanner();
+    observeGTBanner();
+
     applyRememberedLanguage();
 
-    // Si tu as sur l’index: #translateBtn et #langSelect, on les branche ici aussi
+    // Si page avec UI custom (index)
     const btn = document.getElementById("translateBtn");
     const langSelect = document.getElementById("langSelect");
     if (btn && langSelect) {
@@ -403,6 +478,9 @@
         setLanguage(this.getAttribute("data-lang"));
       });
     });
+
+    setTimeout(killGTBanner, 600);
+    setTimeout(killGTBanner, 1800);
   });
 
   // ===== FIN =====
