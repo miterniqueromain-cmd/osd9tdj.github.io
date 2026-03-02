@@ -1,16 +1,19 @@
-/* osd.js — SAFE MODE (anti-crash) — OSD9TDJ
+/* osd.js — SAFE MODE (corrigé) — OSD9TDJ
    - Audio stable + playlist session
    - Google Translate persistance googtrans + auto-apply
+   - Priorité: sessionStorage.osd_last_lang (fix menu retour)
    - Anti-bannière Google Translate (CSS + cleanup + observer)
 */
 
 (() => {
   "use strict";
 
-  // ===== SUPER GARDE-FOUS : si quoi que ce soit échoue, on ne casse pas le site
-  const SAFE = (fn) => { try { fn(); } catch (e) { /* silence */ } };
+  // ✅ SAFE qui RETOURNE une valeur (sinon getCookie() = "" tout le temps)
+  const SAFE = (fn, fallback) => {
+    try { return fn(); } catch { return fallback; }
+  };
 
-  // Si iframe (ex: bgFrame menu), pas de musique (comme chez toi)
+  // Si iframe (ex: bgFrame menu), pas de musique / pas de scripts invasifs
   if (window.self !== window.top) return;
 
   // Singleton
@@ -64,23 +67,41 @@
     SAFE(() => {
       const d = new Date();
       d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-      document.cookie = name + "=" + encodeURIComponent(value) +
-        ";expires=" + d.toUTCString() + ";path=/;SameSite=Lax";
+      document.cookie =
+        name + "=" + encodeURIComponent(value) +
+        ";expires=" + d.toUTCString() +
+        ";path=/;SameSite=Lax";
     });
   }
+
   function getCookie(name) {
     return SAFE(() => {
       const m = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
       return m ? decodeURIComponent(m[2]) : "";
-    }) || "";
+    }, "");
   }
 
+  // Google persiste via cookie "googtrans": /fr/en
   function rememberLanguage(lang) {
     if (!lang || lang === "fr") {
       setCookie("googtrans", "/fr/fr", 365);
+      SAFE(() => sessionStorage.setItem("osd_last_lang", "fr"));
       return;
     }
     setCookie("googtrans", "/fr/" + lang, 365);
+    SAFE(() => sessionStorage.setItem("osd_last_lang", lang));
+  }
+
+  function getPreferredLang() {
+    // ✅ priorité menu: sessionStorage osd_last_lang
+    const sLang = SAFE(() => sessionStorage.getItem("osd_last_lang") || "", "");
+    if (sLang) return sLang;
+
+    // fallback cookie googtrans
+    const gt = getCookie("googtrans");
+    const parts = (gt || "").split("/");
+    const cLang = (parts.length >= 3) ? (parts[2] || "") : "";
+    return cLang || "";
   }
 
   function applyLanguageToCombo(lang) {
@@ -103,9 +124,7 @@
   }
 
   function applyRememberedLanguage() {
-    const gt = getCookie("googtrans");
-    const parts = (gt || "").split("/");
-    const lang = (parts.length >= 3) ? (parts[2] || "") : "";
+    const lang = getPreferredLang();
     if (lang && lang !== "fr") applyLanguageToCombo(lang);
   }
 
@@ -132,6 +151,7 @@
 
   // API globale
   window.OSD_setLanguage = function (lang) {
+    if (!lang) return;
     rememberLanguage(lang);
     applyLanguageToCombo(lang);
   };
@@ -167,7 +187,6 @@
   const SWORD_SRC = "/sons/epee.mp3";
   const BGM_VOLUME = 0.40;
   const SWORD_VOLUME = 0.90;
-
   const BLUR_PAUSE_DELAY_MS = 200;
 
   const K_UNLOCKED = "osd_audio_unlocked";
@@ -176,20 +195,22 @@
 
   function toAbs(url) { return new URL(String(url || ""), document.baseURI).href; }
 
-  function isUnlocked() { try { return sessionStorage.getItem(K_UNLOCKED) === "1"; } catch { return false; } }
-  function markUnlocked() { try { sessionStorage.setItem(K_UNLOCKED, "1"); } catch {} }
+  function isUnlocked() { return SAFE(() => sessionStorage.getItem(K_UNLOCKED) === "1", false); }
+  function markUnlocked() { SAFE(() => sessionStorage.setItem(K_UNLOCKED, "1")); }
 
   function ensureAudioEl(id) {
-    let el = document.getElementById(id);
-    if (!el) {
-      el = document.createElement("audio");
-      el.id = id;
-      el.preload = "metadata";
-      el.playsInline = true;
-      el.style.display = "none";
-      (document.body || document.documentElement).appendChild(el);
-    }
-    return el;
+    return SAFE(() => {
+      let el = document.getElementById(id);
+      if (!el) {
+        el = document.createElement("audio");
+        el.id = id;
+        el.preload = "metadata";
+        el.playsInline = true;
+        el.style.display = "none";
+        (document.body || document.documentElement).appendChild(el);
+      }
+      return el;
+    }, null);
   }
 
   function fisherYates(arr) {
@@ -200,10 +221,10 @@
     return arr;
   }
 
-  function getOrder() { try { return JSON.parse(sessionStorage.getItem(K_ORDER) || "[]"); } catch { return []; } }
-  function setOrder(o) { try { sessionStorage.setItem(K_ORDER, JSON.stringify(o)); } catch {} }
-  function getPos() { try { return parseInt(sessionStorage.getItem(K_POS) || "0", 10) || 0; } catch { return 0; } }
-  function setPos(n) { try { sessionStorage.setItem(K_POS, String(n)); } catch {} }
+  function getOrder() { return SAFE(() => JSON.parse(sessionStorage.getItem(K_ORDER) || "[]"), []); }
+  function setOrder(o) { SAFE(() => sessionStorage.setItem(K_ORDER, JSON.stringify(o))); }
+  function getPos() { return SAFE(() => (parseInt(sessionStorage.getItem(K_POS) || "0", 10) || 0), 0); }
+  function setPos(n) { SAFE(() => sessionStorage.setItem(K_POS, String(n))); }
 
   function ensureOrder() {
     const L = TRACKS.length;
@@ -251,14 +272,22 @@
 
   function isTranslateUI(target) {
     if (!target || !target.closest) return false;
-    return !!target.closest("#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame, .goog-te-combo, iframe.goog-te-menu-frame");
+    return !!target.closest(
+      "#google_translate_element, .goog-te-gadget, .skiptranslate, .goog-te-menu-frame, .goog-te-combo, iframe.goog-te-menu-frame"
+    );
   }
 
   const bgm = ensureAudioEl("osd_bgm");
+  const sword = ensureAudioEl("osd_sword");
+  if (!bgm || !sword) {
+    // on ne casse pas le site si un navigateur bloque l'audio
+    window.__OSD_AUDIO__ = { alive: true };
+    return;
+  }
+
   bgm.loop = false;
   bgm.volume = BGM_VOLUME;
 
-  const sword = ensureAudioEl("osd_sword");
   sword.src = toAbs(SWORD_SRC);
   sword.volume = SWORD_VOLUME;
 
@@ -309,7 +338,7 @@
   bgm.addEventListener("ended", () => nextTrack());
   bgm.addEventListener("error", () => nextTrack());
 
-  // Optionnel : pause sur UI translate (garde UX propre)
+  // Optionnel : pause si clic UI translate (tu peux enlever si tu veux)
   function pauseForTranslateUI() {
     wasPlayingBeforeBlur = false;
     SAFE(() => bgm.pause());
@@ -396,6 +425,7 @@
     killGTBanner();
     observeGTBanner();
 
+    // ✅ applique langue (sessionStorage prioritaire)
     applyRememberedLanguage();
 
     // Branche ton UI custom si présente
