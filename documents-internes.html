@@ -393,6 +393,52 @@
       line-height:1.35;
     }
 
+    /* ✅ AJOUT : planning des études */
+    .planning-form{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:stretch;
+      margin-top:10px;
+    }
+    .planning-select{
+      width:100%;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid rgba(255,215,0,0.45);
+      background:rgba(0,0,0,0.35);
+      color:rgba(253,247,229,0.95);
+      font-weight:700;
+      outline:none;
+      appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--or) 50%),
+        linear-gradient(135deg, var(--or) 50%, transparent 50%);
+      background-position:
+        calc(100% - 22px) calc(50% - 3px),
+        calc(100% - 15px) calc(50% - 3px);
+      background-size:7px 7px, 7px 7px;
+      background-repeat:no-repeat;
+      padding-right:44px;
+    }
+    .planning-select option{
+      color:#111;
+      background:#fff;
+    }
+    .planning-btn{
+      margin:0;
+      width:100%;
+      justify-content:center;
+    }
+    .planning-hint{
+      font-size:0.82rem;
+      opacity:0.86;
+      margin-top:8px;
+      line-height:1.35;
+    }
+
     /* Footer */
     .footer {
       margin-top: 18px;
@@ -838,6 +884,25 @@
 
             <div class="card"><h2>Bibliothèque d’étude</h2><p>Ouvrages et documents de référence.</p>
               <a href="https://workdrive.zohopublic.eu/external/d2507beffb3de66ad23e98d257dcf48544d2c25fa9ce0293dc27f66343b98b81">Accéder</a></div>
+
+            <!-- ✅ AJOUT : Planning des études -->
+            <div class="card">
+              <h2>Planning des études</h2>
+              <p>Choisissez la zone souhaitée pour consulter le planning des réunions, rencontres et études.</p>
+
+              <form class="planning-form" id="planningForm" autocomplete="off">
+                <select class="planning-select" id="planningSelect" aria-label="Choisir un planning" required>
+                  <option value="">Sélectionner un planning</option>
+                  <option value="planning-etudes-haute-savoie.html">Haute-Savoie</option>
+                </select>
+
+                <button class="btn-or planning-btn" type="submit">Ouvrir le planning</button>
+              </form>
+
+              <div class="planning-hint">
+                D’autres zones pourront être ajoutées ensuite : Nord, Bordeaux, partout, etc.
+              </div>
+            </div>
           </div>
         </div>
       </details>
@@ -1011,6 +1076,24 @@
           return;
         }
         openZohoUrl(url, "Dossier – " + key);
+      });
+    }
+
+    // ✅ AJOUT : formulaire planning des études
+    const planningForm = document.getElementById("planningForm");
+    const planningSelect = document.getElementById("planningSelect");
+
+    if (planningForm && planningSelect){
+      planningForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const target = planningSelect.value;
+
+        if (!target){
+          alert("⚠️ Merci de sélectionner un planning.");
+          return;
+        }
+
+        window.location.href = target;
       });
     }
 
@@ -1235,8 +1318,6 @@ if (list){
 
 <!-- Google Translate (callback défini dans /osd.js) -->
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
-
-
 
 </body>
 </html>
