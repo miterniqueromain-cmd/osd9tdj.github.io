@@ -76,32 +76,39 @@
       color:var(--clair);
       text-align:center;
       min-height:100vh;
-      background:#000;
     }
 
+    /* ✅ FOND FIXE comme tes autres pages */
     body::before{
       content:"";
       position:fixed;
       inset:0;
-      background:
-        linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.88)),
-        url("fondpla.jpg") no-repeat center center;
+      background:url("fondpla.jpg") no-repeat center center;
       background-size:cover;
       background-attachment:fixed;
       z-index:-3;
     }
 
+    /* ✅ voile noir + léger halo doré */
     body::after{
       content:"";
       position:fixed;
       inset:0;
       background:
-        radial-gradient(circle at top, rgba(0,0,0,0.18), rgba(0,0,0,0.70)),
-        radial-gradient(circle at center, rgba(214,167,40,0.06), rgba(0,0,0,0));
+        radial-gradient(circle at top,
+          rgba(0,0,0,0.28),
+          rgba(0,0,0,0.55) 45%,
+          rgba(0,0,0,0.82) 100%),
+        linear-gradient(to bottom,
+          rgba(0,0,0,0.18),
+          rgba(0,0,0,0.55),
+          rgba(0,0,0,0.82)),
+        radial-gradient(circle at center, rgba(214,167,40,0.05), rgba(0,0,0,0));
       z-index:-2;
       pointer-events:none;
     }
 
+    /* ✅ Tablette / mobile : fond stable */
     @media (max-width:1024px){
       body::before{
         background-attachment:scroll;
@@ -121,6 +128,7 @@
       z-index:40;
     }
 
+    /* ✅ scroll interne comme tes autres pages */
     .viewport-scroll{
       position:fixed;
       inset:22px;
@@ -157,10 +165,14 @@
       color:#fff;
     }
 
+    /* ✅ overlay interne sur la zone scroll */
     .overlay{
       min-height:100vh;
       padding:26px 15px 28px;
-      background:radial-gradient(circle at top, rgba(0,0,0,0.18), rgba(0,0,0,0.34));
+      box-sizing:border-box;
+      background: radial-gradient(circle at top,
+        rgba(0,0,0,0.22),
+        rgba(0,0,0,0.34));
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -1025,15 +1037,12 @@
 
     /* =========================================================
        CONFIGURATION FORMSPREE
-       Reprend l'idée de ta page adhésion.
-       Si tu utilises le même endpoint, laisse tel quel.
-       Sinon remplace les deux URL ci-dessous.
        ========================================================= */
     const FORM_PRESENCE_ENDPOINT = "https://formspree.io/f/xwpgwkld";
     const FORM_MODIFICATION_ENDPOINT = "https://formspree.io/f/xwpgwkld";
 
     /* =========================================================
-       DONNÉES DU CALENDRIER (selon le PDF 2026 Haute-Savoie)
+       DONNÉES DU CALENDRIER
        ========================================================= */
     const REUNIONS = [
       { no: 1,  date: "2026-03-05", start: "19:00", end: "22:00", label: "Réunion n°1 – Jeudi 05/03/2026 – 19h00 à 22h00" },
@@ -1046,7 +1055,7 @@
       { no: 9,  date: "2026-09-03", start: "19:00", end: "22:00", label: "Réunion n°9 – Jeudi 03/09/2026 – 19h00 à 22h00" },
       { no: 10, date: "2026-09-17", start: "19:00", end: "22:00", label: "Réunion n°10 – Jeudi 17/09/2026 – 19h00 à 22h00" },
       { no: 11, date: "2026-10-01", start: "19:00", end: "22:00", label: "Réunion n°11 – Jeudi 01/10/2026 – 19h00 à 22h00" },
-      { no: 12, date: "2026-10-15", start: "19:00", end: "22h00", label: "Réunion n°12 – Jeudi 15/10/2026 – 19h00 à 22h00" },
+      { no: 12, date: "2026-10-15", start: "19:00", end: "22:00", label: "Réunion n°12 – Jeudi 15/10/2026 – 19h00 à 22h00" },
       { no: 13, date: "2026-11-12", start: "19:00", end: "22:00", label: "Réunion n°13 – Jeudi 12/11/2026 – 19h00 à 22h00" },
       { no: 14, date: "2026-11-26", start: "19:00", end: "22:00", label: "Réunion n°14 – Jeudi 26/11/2026 – 19h00 à 22h00" },
       { no: 15, date: "2026-12-10", start: "19:00", end: "22:00", label: "Réunion n°15 – Jeudi 10/12/2026 – 19h00 à 22h00" }
@@ -1066,12 +1075,11 @@
     }
 
     function meetingStartDate(meeting){
-      return new Date(`${meeting.date}T${meeting.start === "22h00" ? "19:00" : meeting.start}:00`);
+      return new Date(`${meeting.date}T${meeting.start}:00`);
     }
 
     function meetingEndDate(meeting){
-      const end = meeting.end === "22h00" ? "22:00" : meeting.end;
-      return new Date(`${meeting.date}T${end}:00`);
+      return new Date(`${meeting.date}T${meeting.end}:00`);
     }
 
     function initialDeadline(meeting){
@@ -1131,6 +1139,7 @@
         const locked = isInitialLocked(meeting);
         const started = isMeetingStarted(meeting);
         const stateLabel = locked ? "Clôturée pour validation initiale" : "Ouverte";
+
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td>${meeting.no}</td>
