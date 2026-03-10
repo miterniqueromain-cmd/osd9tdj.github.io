@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Planning des études – Haute-Savoie | O.S.D.9.T.D.J.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO (page interne) -->
+  <meta name="description" content="Planning des réunions de cours et travaux 2026 – Haute-Savoie. Espace sécurisé réservé aux membres de l’O.S.D.9.T.D.J. Confirmation de présence et modification de situation." />
+  <link rel="canonical" href="https://osd9tdj.org/planning-etudes-haute-savoie.html" />
+
+  <!-- Anti-indexation / anti-cache -->
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
+  <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
+  <meta name="bingbot" content="noindex,nofollow,noarchive,nosnippet,max-snippet:-1,max-image-preview:none,max-video-preview:-1">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Planning des études – Haute-Savoie – O.S.D.9.T.D.J." />
+  <meta property="og:description" content="Page interne sécurisée de confirmation de présence aux réunions d’étude." />
+  <meta property="og:image" content="https://osd9tdj.org/hautpla.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://osd9tdj.org/planning-etudes-haute-savoie.html" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Planning des études – Haute-Savoie – O.S.D.9.T.D.J.">
+  <meta name="twitter:description" content="Confirmation de présence aux réunions d’étude – espace réservé aux membres.">
+  <meta name="twitter:image" content="https://osd9tdj.org/hautpla.jpg">
+
+  <!-- WATERMARKS -->
+  <meta name="osd9tdj-signature" content="WTRMK-PLANNING-ETUDES-HS-2026-OSD9TDJ-SECURE-MEMBRES" />
+  <meta name="osd9tdj-origin" content="osd9tdj.org / planning-etudes-haute-savoie.html" />
+  <!-- OSD9TDJ_WTRMK:[PLA-HS-2026-CONVOCATIONS-SECURISED-IX] -->
+
+  <!-- Hardening -->
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    base-uri 'self';
+    form-action 'self' https://formspree.io;
+    frame-ancestors 'none';
+    object-src 'none';
+    connect-src 'self' https://formspree.io;
+    img-src 'self' https: data:;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    font-src https://fonts.gstatic.com;
+    script-src 'self' 'unsafe-inline';
+    frame-src https://workdrive.zohopublic.eu https://*.zohopublic.eu https://*.zoho.com https://*.zoho.eu;
+    upgrade-insecure-requests;
+  ">
+
+  <!-- Polices -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --or:#d6a728;
+      --or2:#ffd700;
+      --clair:#f5f2ea;
+      --line:rgba(214,167,40,0.45);
+      --soft:rgba(214,167,40,0.20);
+      --bgCard:rgba(0,0,0,0.62);
+      --bgGlass:rgba(0,0,0,0.28);
+      --danger:#d98a8a;
+      --ok:#a8d8a8;
+    }
+
+    *{ box-sizing:border-box; }
+
+    html, body{
+      height:100%;
+      margin:0;
+      padding:0;
+      overflow:hidden;
+      font-family:'Lato', Arial, sans-serif;
+      color:var(--clair);
+      text-align:center;
+      min-height:100vh;
+      background:#000;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.18), rgba(0,0,0,0.88)),
+        url("fondpla.jpg") no-repeat center center;
+      background-size:cover;
+      background-attachment:fixed;
+      z-index:-3;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(circle at top, rgba(0,0,0,0.18), rgba(0,0,0,0.70)),
+        radial-gradient(circle at center, rgba(214,167,40,0.06), rgba(0,0,0,0));
+      z-index:-2;
+      pointer-events:none;
+    }
+
+    @media (max-width:1024px){
+      body::before{
+        background-attachment:scroll;
+        background-position:center top;
+      }
+    }
+
+    .frame-fixed{
+      position:fixed;
+      inset:14px;
+      border-radius:22px;
+      border:2px solid rgba(214,167,40,0.55);
+      box-shadow:
+        0 0 0 1px rgba(245,242,234,0.12) inset,
+        0 0 38px rgba(0,0,0,0.35);
+      pointer-events:none;
+      z-index:40;
+    }
+
+    .viewport-scroll{
+      position:fixed;
+      inset:22px;
+      overflow-y:auto;
+      overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      z-index:1;
+    }
+
+    .menu-dot{
+      position:fixed;
+      right:26px;
+      top:calc(26px + env(safe-area-inset-top));
+      z-index:100;
+      pointer-events:auto;
+      width:46px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:999px;
+      border:1px solid rgba(214,167,40,0.55);
+      background:rgba(0,0,0,0.22);
+      backdrop-filter:blur(6px);
+      box-shadow:0 6px 16px rgba(0,0,0,0.35);
+      font-family:'Cinzel',serif;
+      color:var(--or);
+      font-size:22px;
+      line-height:1;
+      text-decoration:none;
+      user-select:none;
+    }
+    .menu-dot:hover{
+      background:rgba(214,167,40,0.12);
+      color:#fff;
+    }
+
+    .overlay{
+      min-height:100vh;
+      padding:26px 15px 28px;
+      background:radial-gradient(circle at top, rgba(0,0,0,0.18), rgba(0,0,0,0.34));
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .hero{
+      width:100%;
+      max-width:980px;
+      margin:8px auto 18px;
+      padding:8px;
+      border-radius:18px;
+      border:2px solid rgba(214,167,40,0.55);
+      background:rgba(0,0,0,0.42);
+      box-shadow:0 14px 34px rgba(0,0,0,0.45);
+      overflow:hidden;
+    }
+
+    .hero img{
+      width:100%;
+      display:block;
+      border-radius:12px;
+      object-fit:cover;
+      max-height:260px;
+    }
+
+    .lock-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 20px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(0,0,0,0.55);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      color:var(--or2);
+      margin:4px auto 18px;
+      box-shadow:0 0 18px rgba(0,0,0,0.6);
+    }
+
+    h1{
+      font-family:'Cinzel',serif;
+      font-size:1.95rem;
+      margin:4px 0 8px;
+      text-shadow:0 0 8px rgba(0,0,0,0.7);
+      letter-spacing:0.03em;
+    }
+
+    .subtitle{
+      font-size:0.98rem;
+      opacity:0.96;
+      margin:0 0 16px;
+      max-width:980px;
+      line-height:1.45;
+    }
+
+    .btn-or{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 18px;
+      border-radius:999px;
+      background:linear-gradient(135deg, #ffd700, #e0ba22);
+      color:#111;
+      text-decoration:none;
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size:0.92rem;
+      box-shadow:
+        0 0 0 1px rgba(255,215,0,0.75) inset,
+        0 6px 14px rgba(0,0,0,0.45);
+      margin:10px 6px 16px;
+      border:0;
+      cursor:pointer;
+    }
+    .btn-or:hover{ transform:translateY(-1px); }
+
+    .btn-ghost{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 18px;
+      border-radius:999px;
+      background:rgba(0,0,0,0.60);
+      color:var(--clair);
+      text-decoration:none;
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      font-size:0.9rem;
+      border:1px solid rgba(214,167,40,0.50);
+      box-shadow:0 8px 18px rgba(0,0,0,0.35);
+      margin:10px 6px 16px;
+      cursor:pointer;
+    }
+    .btn-ghost:hover{
+      background:rgba(214,167,40,0.14);
+      color:#fff;
+    }
+
+    .actions-top{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      margin-bottom:6px;
+    }
+
+    .section,
+    .accordion{
+      width:100%;
+      max-width:980px;
+      margin:12px auto 0;
+      background:rgba(0,0,0,0.60);
+      border:1px solid rgba(214,167,40,0.35);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 0 22px rgba(0,0,0,0.60);
+      text-align:left;
+    }
+
+    .section-head,
+    .accordion summary{
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      font-family:'Cinzel',serif;
+      color:var(--or2);
+      font-weight:700;
+      letter-spacing:0.04em;
+      background:rgba(0,0,0,0.42);
+      border-bottom:1px solid rgba(214,167,40,0.18);
+    }
+
+    .accordion summary{
+      cursor:pointer;
+      list-style:none;
+      user-select:none;
+    }
+    .accordion summary::-webkit-details-marker{ display:none; }
+
+    .section-body,
+    .acc-body{
+      padding:16px;
+    }
+
+    .notice{
+      font-size:0.95rem;
+      line-height:1.55;
+      opacity:0.95;
+      margin:0 0 12px;
+    }
+
+    .notice strong{
+      color:var(--or2);
+      font-family:'Cinzel',serif;
+    }
+
+    .mini-note{
+      padding:12px 14px;
+      border-left:3px solid var(--or);
+      border-radius:10px;
+      background:rgba(255,255,255,0.03);
+      font-size:0.92rem;
+      line-height:1.5;
+      margin:12px 0;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(1, minmax(0,1fr));
+      gap:18px;
+      width:100%;
+      max-width:980px;
+      margin:0 auto 12px;
+    }
+    @media (min-width:720px){
+      .cards{ grid-template-columns:repeat(2, minmax(0,1fr)); }
+    }
+
+    .card{
+      background:var(--bgCard);
+      border:1px solid rgba(214,167,40,0.42);
+      border-radius:18px;
+      padding:18px 16px;
+      box-shadow:0 0 22px rgba(0,0,0,0.6);
+    }
+
+    .card h2,
+    .card h3{
+      font-family:'Cinzel',serif;
+      font-size:1.05rem;
+      color:var(--or2);
+      margin:0 0 8px;
+    }
+
+    .card p{
+      font-size:0.92rem;
+      opacity:0.94;
+      margin:0 0 12px;
+      line-height:1.45;
+    }
+
+    .rules-list{
+      margin:0;
+      padding-left:18px;
+      line-height:1.55;
+      font-size:0.94rem;
+    }
+
+    .rules-list li{ margin:6px 0; }
+
+    .calendar-table-wrap{
+      width:100%;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      border-radius:14px;
+      border:1px solid rgba(214,167,40,0.20);
+      background:rgba(255,255,255,0.03);
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:700px;
+    }
+
+    th, td{
+      padding:10px 12px;
+      border-bottom:1px solid rgba(214,167,40,0.15);
+      font-size:0.93rem;
+      text-align:left;
+      vertical-align:top;
+    }
+
+    th{
+      font-family:'Cinzel',serif;
+      color:var(--or2);
+      background:rgba(214,167,40,0.08);
+      white-space:nowrap;
+    }
+
+    tr:last-child td{ border-bottom:none; }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:5px 10px;
+      border-radius:999px;
+      border:1px solid rgba(214,167,40,0.35);
+      background:rgba(214,167,40,0.12);
+      font-size:0.78rem;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .tag.locked{
+      border-color:rgba(217,138,138,0.45);
+      background:rgba(217,138,138,0.10);
+      color:#ffd7d7;
+    }
+
+    .tag.open{
+      border-color:rgba(168,216,168,0.45);
+      background:rgba(168,216,168,0.10);
+      color:#dfffe0;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+
+    .field label{
+      display:block;
+      margin:0 0 6px;
+      font-size:0.92rem;
+      font-weight:700;
+      color:var(--clair);
+    }
+
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid rgba(214,167,40,0.45);
+      background:rgba(0,0,0,0.35);
+      color:rgba(245,242,234,0.96);
+      font-size:0.95rem;
+      outline:none;
+    }
+
+    .field select{
+      appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--or2) 50%),
+        linear-gradient(135deg, var(--or2) 50%, transparent 50%);
+      background-position:
+        calc(100% - 22px) calc(50% - 3px),
+        calc(100% - 15px) calc(50% - 3px);
+      background-size:7px 7px, 7px 7px;
+      background-repeat:no-repeat;
+      padding-right:44px;
+    }
+
+    .field textarea{
+      min-height:92px;
+      resize:vertical;
+    }
+
+    .field small{
+      display:block;
+      margin-top:6px;
+      opacity:0.82;
+      line-height:1.35;
+    }
+
+    .status-box{
+      margin-top:12px;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid rgba(214,167,40,0.22);
+      background:rgba(255,255,255,0.03);
+      font-size:0.9rem;
+      line-height:1.45;
+    }
+
+    .status-box strong{
+      color:var(--or2);
+      font-family:'Cinzel',serif;
+    }
+
+    .info-grid{
+      display:grid;
+      grid-template-columns:repeat(1, minmax(0,1fr));
+      gap:12px;
+    }
+    @media (min-width:840px){
+      .info-grid{
+        grid-template-columns:repeat(3, minmax(0,1fr));
+      }
+    }
+
+    .info-pill{
+      border-radius:16px;
+      border:1px solid rgba(214,167,40,0.35);
+      background:rgba(0,0,0,0.42);
+      padding:14px;
+      text-align:center;
+    }
+
+    .info-pill .top{
+      display:block;
+      font-family:'Cinzel',serif;
+      color:var(--or2);
+      font-size:0.88rem;
+      margin-bottom:6px;
+    }
+
+    .info-pill .val{
+      font-size:0.95rem;
+      font-weight:700;
+      line-height:1.35;
+    }
+
+    .tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:10px 0 0;
+    }
+
+    .tab-btn{
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid rgba(214,167,40,0.45);
+      background:rgba(0,0,0,0.38);
+      color:var(--clair);
+      font-family:'Cinzel',serif;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .tab-btn[aria-selected="true"]{
+      background:rgba(214,167,40,0.20);
+      color:#fff;
+      border-color:rgba(214,167,40,0.70);
+    }
+
+    .tab-panel{ display:none; }
+    .tab-panel.active{ display:block; }
+
+    .footer{
+      margin-top:18px;
+      padding-top:15px;
+      font-size:0.8rem;
+      opacity:0.92;
+      line-height:1.35rem;
+      width:100%;
+      max-width:980px;
+      border-top:1px solid rgba(214,167,40,0.22);
+      text-align:center;
+    }
+
+    .footer .line{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      justify-content:center;
+      font-size:0.78rem;
+      color:rgba(245,242,234,0.88);
+    }
+
+    .footer a{
+      color:rgba(245,242,234,0.88) !important;
+      text-decoration:none !important;
+      border-bottom:1px dotted rgba(214,167,40,0.55);
+      padding-bottom:1px;
+      font-size:0.72rem;
+      text-transform:lowercase;
+    }
+
+    .wmk{
+      position:fixed;
+      left:-9999px;
+      top:-9999px;
+      opacity:0;
+      pointer-events:none;
+      user-select:none;
+    }
+
+    /* Overlay validation */
+    .validate-overlay{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:rgba(0,0,0,0.86);
+      z-index:9999;
+      overflow:hidden;
+    }
+
+    .validate-overlay.open{ display:flex; }
+
+    .validate-overlay::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at center, rgba(214,167,40,0.22), rgba(0,0,0,0.12) 36%, rgba(0,0,0,0.88) 100%);
+      opacity:0.9;
+    }
+
+    .validate-card{
+      position:relative;
+      z-index:1;
+      width:min(520px, 92vw);
+      padding:22px 20px 18px;
+      border-radius:24px;
+      border:1px solid rgba(214,167,40,0.48);
+      background:rgba(0,0,0,0.72);
+      box-shadow:0 24px 60px rgba(0,0,0,0.65);
+      text-align:center;
+      animation:fadeInUp .35s ease-out both;
+    }
+
+    .validate-art{
+      width:min(240px, 58vw);
+      max-width:240px;
+      margin:0 auto 14px;
+      display:block;
+      filter:drop-shadow(0 14px 28px rgba(0,0,0,0.45));
+      animation:validationPulse 1.35s ease-in-out forwards;
+      transform-origin:center center;
+    }
+
+    .validate-title{
+      font-family:'Cinzel',serif;
+      color:var(--or2);
+      font-size:1.18rem;
+      margin:4px 0 8px;
+      letter-spacing:0.03em;
+    }
+
+    .validate-text{
+      font-size:0.94rem;
+      line-height:1.45;
+      opacity:0.96;
+      margin:0;
+    }
+
+    .loading-dots::after{
+      content:"";
+      animation:dots 1.2s steps(4, end) infinite;
+    }
+
+    @keyframes dots{
+      0%{ content:""; }
+      25%{ content:"."; }
+      50%{ content:".."; }
+      75%{ content:"..."; }
+      100%{ content:""; }
+    }
+
+    @keyframes validationPulse{
+      0%{ transform:scale(0.76); opacity:0; }
+      35%{ transform:scale(1.04); opacity:1; }
+      65%{ transform:scale(1.12); opacity:1; }
+      100%{ transform:scale(1.18); opacity:1; }
+    }
+
+    @keyframes fadeInUp{
+      from{ opacity:0; transform:translateY(18px); }
+      to{ opacity:1; transform:translateY(0); }
+    }
+
+    .hidden{ display:none !important; }
+
+    @media (max-width:600px){
+      .frame-fixed{ inset:12px; }
+      .viewport-scroll{ inset:20px; }
+      .menu-dot{ top:22px; right:22px; }
+      h1{ font-size:1.62rem; }
+      .btn-or, .btn-ghost{
+        width:100%;
+        max-width:340px;
+        margin-left:auto;
+        margin-right:auto;
+      }
+      .actions-top{
+        flex-direction:column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script>window.ACCESS_GROUP="MEMBRES_DOCS"</script>
+  <script src="js/membres-lock.js"></script>
+
+  <span class="wmk">OSD9TDJ::PLANNING-ETUDES::HAUTE-SAVOIE::2026::WTRMK</span>
+
+  <div class="frame-fixed" aria-hidden="true"></div>
+  <a class="menu-dot" href="menu.html" title="Menu" aria-label="Menu">⋯</a>
+
+  <div class="viewport-scroll">
+    <div class="overlay">
+
+      <div class="hero">
+        <img src="hautpla.jpg" alt="Planning des études Haute-Savoie – O.S.D.9.T.D.J.">
+      </div>
+
+      <div class="lock-badge">🔒 Espace sécurisé – planning des études</div>
+
+      <h1>Planning des études – Haute-Savoie</h1>
+      <p class="subtitle">
+        Réunions de cours, travaux, organisation et suivi des actions de l’association.
+        Validation de présence réservée aux membres convoqués.
+      </p>
+
+      <div class="actions-top">
+        <a class="btn-or" href="documents-internes.html">← Retour aux documents internes</a>
+        <a class="btn-ghost" href="pla.pdf" target="_blank" rel="noopener noreferrer">📄 Consulter la convocation officielle (PDF)</a>
+      </div>
+
+      <section class="section">
+        <div class="section-head">
+          <span>Règles générales</span>
+          <span>✦</span>
+        </div>
+        <div class="section-body">
+          <div class="info-grid">
+            <div class="info-pill">
+              <span class="top">Période</span>
+              <span class="val">Du 05 février 2026 au 31 décembre 2026</span>
+            </div>
+            <div class="info-pill">
+              <span class="top">Cadence</span>
+              <span class="val">Jeudi tous les 15 jours<br>hors vacances scolaires Zone A</span>
+            </div>
+            <div class="info-pill">
+              <span class="top">Horaires</span>
+              <span class="val">19h00 – 22h00<br>durée prévisionnelle : environ 3 heures</span>
+            </div>
+          </div>
+
+          <div class="mini-note">
+            <strong>Confirmation obligatoire :</strong> chaque membre doit confirmer sa situation pour chaque réunion.
+            Le délai normal de confirmation est fixé au plus tard <strong>72 heures (3 jours)</strong> avant le début de la réunion.
+            Sans réponse dans le délai, le membre peut être réputé <strong>non confirmé</strong> et comptabilisé comme absent pour l’organisation.
+          </div>
+
+          <ul class="rules-list">
+            <li>Les réunions sont des réunions de travail, d’étude, d’organisation et de suivi des actions de l’association.</li>
+            <li>Un rappel officiel est adressé par e-mail au minimum 7 jours avant chaque réunion.</li>
+            <li>Le présent espace permet une validation sécurisée par numéro d’adhérent.</li>
+            <li>Une fois la déclaration initiale envoyée, elle est verrouillée sur l’appareil utilisé. Un changement ultérieur doit passer par l’onglet <strong>Changement de situation</strong>.</li>
+            <li>Participation collation : 15 € par réunion, à acquitter en ligne à l’avance ou au plus tard avant l’heure de début.</li>
+          </ul>
+        </div>
+      </section>
+
+      <details class="accordion" id="calendrier" open>
+        <summary><span>Calendrier 2026 – Réunions Haute-Savoie</span><span>▾</span></summary>
+        <div class="acc-body">
+          <div class="calendar-table-wrap">
+            <table aria-label="Calendrier des réunions 2026 Haute-Savoie">
+              <thead>
+                <tr>
+                  <th>N°</th>
+                  <th>Date</th>
+                  <th>Jour</th>
+                  <th>Horaire</th>
+                  <th>Zone</th>
+                  <th>État de confirmation</th>
+                </tr>
+              </thead>
+              <tbody id="calendarTableBody">
+                <!-- Rempli par JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mini-note" style="margin-top:14px;">
+            <strong>N.B. :</strong> ce planning peut être ajusté en cas d’événement exceptionnel.
+            Toute modification fait l’objet d’une communication officielle.
+          </div>
+        </div>
+      </details>
+
+      <section class="section" id="declarations">
+        <div class="section-head">
+          <span>Déclarations de présence</span>
+          <span>✦</span>
+        </div>
+        <div class="section-body">
+          <div class="tabs" role="tablist" aria-label="Onglets planning">
+            <button class="tab-btn" type="button" role="tab" aria-selected="true" aria-controls="panel-presence" id="tab-presence">Validation initiale</button>
+            <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="panel-modification" id="tab-modification">Changement de situation</button>
+          </div>
+
+          <div class="tab-panel active" id="panel-presence" role="tabpanel" aria-labelledby="tab-presence">
+            <div class="cards" style="margin-top:16px;">
+              <div class="card">
+                <h2>Valider ma situation</h2>
+                <p>
+                  Cette déclaration initiale sert à préparer les études et l’organisation.
+                  Elle est disponible jusqu’à <strong>72 heures avant</strong> chaque réunion.
+                </p>
+
+                <form id="presenceForm" novalidate>
+                  <input type="hidden" name="form_type" value="presence_initiale">
+                  <input type="hidden" name="_subject" value="Planning études HS – Confirmation de présence">
+                  <input type="hidden" name="Commanderie" value="Haute-Savoie">
+                  <input type="hidden" name="Origine_page" value="planning-etudes-haute-savoie.html">
+
+                  <div class="form-grid">
+                    <div class="field">
+                      <label for="presenceMember">Numéro d’adhérent</label>
+                      <select id="presenceMember" name="Numero_adherent" required>
+                        <option value="">Sélectionner votre numéro</option>
+                        <option value="OSD9TDJ-HT-0001">OSD9TDJ-HT-0001</option>
+                        <option value="OSD9TDJ-HT-0002">OSD9TDJ-HT-0002</option>
+                        <option value="OSD9TDJ-HT-0003">OSD9TDJ-HT-0003</option>
+                        <option value="OSD9TDJ-HT-0004">OSD9TDJ-HT-0004</option>
+                        <option value="OSD9TDJ-HT-0005">OSD9TDJ-HT-0005</option>
+                        <option value="OSD9TDJ-HT-0006">OSD9TDJ-HT-0006</option>
+                        <option value="OSD9TDJ-HT-0007">OSD9TDJ-HT-0007</option>
+                        <option value="OSD9TDJ-HT-0008">OSD9TDJ-HT-0008</option>
+                        <option value="OSD9TDJ-HT-0009">OSD9TDJ-HT-0009</option>
+                        <option value="OSD9TDJ-HT-0010">OSD9TDJ-HT-0010</option>
+                        <option value="OSD9TDJ-HT-0011">OSD9TDJ-HT-0011</option>
+                        <option value="OSD9TDJ-HT-0012">OSD9TDJ-HT-0012</option>
+                      </select>
+                      <small>Identification sans nom, uniquement par numéro d’adhérent.</small>
+                    </div>
+
+                    <div class="field">
+                      <label for="presenceMeeting">Réunion concernée</label>
+                      <select id="presenceMeeting" name="Reunion" required></select>
+                      <small>Les réunions clôturées à moins de 72 h ne sont plus validables ici.</small>
+                    </div>
+
+                    <div class="field">
+                      <label for="presenceStatus">Ma situation</label>
+                      <select id="presenceStatus" name="Situation" required>
+                        <option value="">Choisir votre situation</option>
+                        <option value="Je serai présent(e)">Je serai présent(e)</option>
+                        <option value="Je serai absent(e)">Je serai absent(e)</option>
+                        <option value="Je serai indisponible">Je serai indisponible</option>
+                        <option value="Retenu(e)">Retenu(e)</option>
+                        <option value="Désolé, j’ai été retenu">Désolé, j’ai été retenu</option>
+                      </select>
+                      <small>Aucune justification n’est demandée.</small>
+                    </div>
+
+                    <div class="field hidden">
+                      <label for="presenceMessage">Message interne</label>
+                      <textarea id="presenceMessage" name="Message_interne">Confirmation initiale envoyée depuis la page planning des études – Haute-Savoie.</textarea>
+                    </div>
+
+                    <div class="field">
+                      <button class="btn-or" type="submit" style="margin:4px 0 0;">Valider définitivement</button>
+                    </div>
+                  </div>
+                </form>
+
+                <div class="status-box" id="presenceInfoBox">
+                  <strong>Rappel :</strong> après validation initiale, la même combinaison
+                  <em>numéro d’adhérent + réunion</em> est verrouillée sur cet appareil.
+                  Pour signaler un changement, utilisez l’onglet <strong>Changement de situation</strong>.
+                </div>
+              </div>
+
+              <div class="card">
+                <h3>Fonctionnement</h3>
+                <p>Cette première déclaration est celle qui sert à l’organisation en amont.</p>
+                <ul class="rules-list">
+                  <li>Choix du numéro d’adhérent.</li>
+                  <li>Sélection de la réunion convoquée.</li>
+                  <li>Sélection de la situation sans justification.</li>
+                  <li>Envoi d’un e-mail via la plateforme de formulaire.</li>
+                  <li>Animation de validation, puis retour automatique à la page précédente.</li>
+                </ul>
+                <div class="mini-note">
+                  Si une réunion n’apparaît plus ici, c’est qu’elle est clôturée pour la validation initiale.
+                  Dans ce cas, un changement tardif passe uniquement par l’onglet ci-contre, tant que la réunion n’a pas commencé.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="panel-modification" role="tabpanel" aria-labelledby="tab-modification">
+            <div class="cards" style="margin-top:16px;">
+              <div class="card">
+                <h2>Changement de situation</h2>
+                <p>
+                  Cet onglet permet d’avertir d’une modification après votre première déclaration :
+                  par exemple un empêchement, une absence, ou un changement de dernière minute.
+                </p>
+
+                <form id="modificationForm" novalidate>
+                  <input type="hidden" name="form_type" value="changement_de_situation">
+                  <input type="hidden" name="_subject" value="Planning études HS – Changement de situation">
+                  <input type="hidden" name="Commanderie" value="Haute-Savoie">
+                  <input type="hidden" name="Origine_page" value="planning-etudes-haute-savoie.html">
+
+                  <div class="form-grid">
+                    <div class="field">
+                      <label for="modificationMember">Numéro d’adhérent</label>
+                      <select id="modificationMember" name="Numero_adherent" required>
+                        <option value="">Sélectionner votre numéro</option>
+                        <option value="OSD9TDJ-HT-0001">OSD9TDJ-HT-0001</option>
+                        <option value="OSD9TDJ-HT-0002">OSD9TDJ-HT-0002</option>
+                        <option value="OSD9TDJ-HT-0003">OSD9TDJ-HT-0003</option>
+                        <option value="OSD9TDJ-HT-0004">OSD9TDJ-HT-0004</option>
+                        <option value="OSD9TDJ-HT-0005">OSD9TDJ-HT-0005</option>
+                        <option value="OSD9TDJ-HT-0006">OSD9TDJ-HT-0006</option>
+                        <option value="OSD9TDJ-HT-0007">OSD9TDJ-HT-0007</option>
+                        <option value="OSD9TDJ-HT-0008">OSD9TDJ-HT-0008</option>
+                        <option value="OSD9TDJ-HT-0009">OSD9TDJ-HT-0009</option>
+                        <option value="OSD9TDJ-HT-0010">OSD9TDJ-HT-0010</option>
+                        <option value="OSD9TDJ-HT-0011">OSD9TDJ-HT-0011</option>
+                        <option value="OSD9TDJ-HT-0012">OSD9TDJ-HT-0012</option>
+                      </select>
+                    </div>
+
+                    <div class="field">
+                      <label for="modificationMeeting">Réunion concernée</label>
+                      <select id="modificationMeeting" name="Reunion" required></select>
+                      <small>Modification possible tant que la réunion n’a pas commencé.</small>
+                    </div>
+
+                    <div class="field">
+                      <label for="modificationStatus">Nouvelle situation</label>
+                      <select id="modificationStatus" name="Nouvelle_situation" required>
+                        <option value="">Choisir la nouvelle situation</option>
+                        <option value="Je serai présent(e)">Je serai présent(e)</option>
+                        <option value="Je serai absent(e)">Je serai absent(e)</option>
+                        <option value="Je serai indisponible">Je serai indisponible</option>
+                        <option value="Retenu(e)">Retenu(e)</option>
+                        <option value="Désolé, j’ai été retenu">Désolé, j’ai été retenu</option>
+                      </select>
+                    </div>
+
+                    <div class="field hidden">
+                      <label for="modificationMessage">Message interne</label>
+                      <textarea id="modificationMessage" name="Message_interne">Modification de situation envoyée depuis la page planning des études – Haute-Savoie.</textarea>
+                    </div>
+
+                    <div class="field">
+                      <button class="btn-or" type="submit" style="margin:4px 0 0;">Envoyer la modification</button>
+                    </div>
+                  </div>
+                </form>
+
+                <div class="status-box">
+                  <strong>Usage :</strong> cet onglet sert précisément à prévenir d’un changement après la validation initiale.
+                  Un e-mail séparé est envoyé pour avertir le secrétariat / l’organisation.
+                </div>
+              </div>
+
+              <div class="card">
+                <h3>Informations utiles</h3>
+                <ul class="rules-list">
+                  <li>Aucun nom n’est demandé sur la page.</li>
+                  <li>Le changement de situation n’exige pas de justification.</li>
+                  <li>Chaque envoi produit une notification distincte.</li>
+                  <li>Après l’heure de début de la réunion, la modification n’est plus proposée.</li>
+                </ul>
+                <div class="mini-note">
+                  Cette page reste réservée aux membres dans l’espace sécurisé. Elle reprend le principe du formulaire déjà utilisé sur votre site pour les envois par e-mail via la plateforme de formulaire.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <a class="btn-or" href="documents-internes.html">← Retour aux documents internes</a>
+
+      <div class="footer">
+        <div class="line">
+          <span>© O.S.D.9.T.D.J. Association Loi 1901 – Tous droits réservés</span>
+          <span>·</span>
+          <a href="cookies.html">cookies</a>
+          <span>·</span>
+          <a href="mentions.html">mentions légales</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Overlay validation -->
+  <div class="validate-overlay" id="validateOverlay" aria-hidden="true">
+    <div class="validate-card" role="dialog" aria-modal="true" aria-label="Validation enregistrée">
+      <img class="validate-art" src="valipla.jpg" alt="Validation enregistrée">
+      <div class="validate-title">Validation enregistrée</div>
+      <p class="validate-text">
+        Votre déclaration a bien été prise en compte.<br>
+        Retour à la page précédente<span class="loading-dots"></span>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const _osd9pla = "OSD9TDJ-PLANNING-ETUDES-HS-2026";
+
+    /* =========================================================
+       CONFIGURATION FORMSPREE
+       Reprend l'idée de ta page adhésion.
+       Si tu utilises le même endpoint, laisse tel quel.
+       Sinon remplace les deux URL ci-dessous.
+       ========================================================= */
+    const FORM_PRESENCE_ENDPOINT = "https://formspree.io/f/xwpgwkld";
+    const FORM_MODIFICATION_ENDPOINT = "https://formspree.io/f/xwpgwkld";
+
+    /* =========================================================
+       DONNÉES DU CALENDRIER (selon le PDF 2026 Haute-Savoie)
+       ========================================================= */
+    const REUNIONS = [
+      { no: 1,  date: "2026-03-05", start: "19:00", end: "22:00", label: "Réunion n°1 – Jeudi 05/03/2026 – 19h00 à 22h00" },
+      { no: 2,  date: "2026-03-19", start: "19:00", end: "22:00", label: "Réunion n°2 – Jeudi 19/03/2026 – 19h00 à 22h00" },
+      { no: 3,  date: "2026-04-02", start: "19:00", end: "22:00", label: "Réunion n°3 – Jeudi 02/04/2026 – 19h00 à 22h00" },
+      { no: 4,  date: "2026-04-30", start: "19:00", end: "22:00", label: "Réunion n°4 – Jeudi 30/04/2026 – 19h00 à 22h00" },
+      { no: 6,  date: "2026-05-28", start: "19:00", end: "22:00", label: "Réunion n°6 – Jeudi 28/05/2026 – 19h00 à 22h00" },
+      { no: 7,  date: "2026-06-11", start: "19:00", end: "22:00", label: "Réunion n°7 – Jeudi 11/06/2026 – 19h00 à 22h00" },
+      { no: 8,  date: "2026-06-25", start: "19:00", end: "22:00", label: "Réunion n°8 – Jeudi 25/06/2026 – 19h00 à 22h00" },
+      { no: 9,  date: "2026-09-03", start: "19:00", end: "22:00", label: "Réunion n°9 – Jeudi 03/09/2026 – 19h00 à 22h00" },
+      { no: 10, date: "2026-09-17", start: "19:00", end: "22:00", label: "Réunion n°10 – Jeudi 17/09/2026 – 19h00 à 22h00" },
+      { no: 11, date: "2026-10-01", start: "19:00", end: "22:00", label: "Réunion n°11 – Jeudi 01/10/2026 – 19h00 à 22h00" },
+      { no: 12, date: "2026-10-15", start: "19:00", end: "22h00", label: "Réunion n°12 – Jeudi 15/10/2026 – 19h00 à 22h00" },
+      { no: 13, date: "2026-11-12", start: "19:00", end: "22:00", label: "Réunion n°13 – Jeudi 12/11/2026 – 19h00 à 22h00" },
+      { no: 14, date: "2026-11-26", start: "19:00", end: "22:00", label: "Réunion n°14 – Jeudi 26/11/2026 – 19h00 à 22h00" },
+      { no: 15, date: "2026-12-10", start: "19:00", end: "22:00", label: "Réunion n°15 – Jeudi 10/12/2026 – 19h00 à 22h00" }
+    ];
+
+    const MEMBER_PREFIX = "OSD9TDJ-PLA-HS-LOCK";
+    const PRESENCE_CUTOFF_HOURS = 72;
+
+    function formatDateFr(isoDate){
+      const [y,m,d] = isoDate.split("-");
+      return `${d}/${m}/${y}`;
+    }
+
+    function weekdayFr(isoDate){
+      const d = new Date(`${isoDate}T12:00:00`);
+      return d.toLocaleDateString("fr-FR", { weekday:"long" });
+    }
+
+    function meetingStartDate(meeting){
+      return new Date(`${meeting.date}T${meeting.start === "22h00" ? "19:00" : meeting.start}:00`);
+    }
+
+    function meetingEndDate(meeting){
+      const end = meeting.end === "22h00" ? "22:00" : meeting.end;
+      return new Date(`${meeting.date}T${end}:00`);
+    }
+
+    function initialDeadline(meeting){
+      return new Date(meetingStartDate(meeting).getTime() - PRESENCE_CUTOFF_HOURS * 60 * 60 * 1000);
+    }
+
+    function isInitialLocked(meeting){
+      return new Date() > initialDeadline(meeting);
+    }
+
+    function isMeetingStarted(meeting){
+      return new Date() >= meetingStartDate(meeting);
+    }
+
+    function storageKey(member, meetingNo){
+      return `${MEMBER_PREFIX}::${member}::${meetingNo}`;
+    }
+
+    function saveInitialValidation(member, meetingNo, status){
+      const payload = {
+        type: "initiale",
+        member,
+        meetingNo,
+        status,
+        ts: new Date().toISOString()
+      };
+      localStorage.setItem(storageKey(member, meetingNo), JSON.stringify(payload));
+    }
+
+    function getInitialValidation(member, meetingNo){
+      try{
+        const raw = localStorage.getItem(storageKey(member, meetingNo));
+        return raw ? JSON.parse(raw) : null;
+      }catch(e){
+        return null;
+      }
+    }
+
+    function upsertOption(select, value, text, disabled=false){
+      const opt = document.createElement("option");
+      opt.value = value;
+      opt.textContent = text;
+      opt.disabled = disabled;
+      select.appendChild(opt);
+    }
+
+    function populateForms(){
+      const presenceMeeting = document.getElementById("presenceMeeting");
+      const modificationMeeting = document.getElementById("modificationMeeting");
+      const tableBody = document.getElementById("calendarTableBody");
+
+      presenceMeeting.innerHTML = `<option value="">Choisir la réunion</option>`;
+      modificationMeeting.innerHTML = `<option value="">Choisir la réunion</option>`;
+      tableBody.innerHTML = "";
+
+      REUNIONS.forEach(meeting => {
+        const locked = isInitialLocked(meeting);
+        const started = isMeetingStarted(meeting);
+        const stateLabel = locked ? "Clôturée pour validation initiale" : "Ouverte";
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${meeting.no}</td>
+          <td>${formatDateFr(meeting.date)}</td>
+          <td>${weekdayFr(meeting.date)}</td>
+          <td>19h00 – 22h00</td>
+          <td>Haute-Savoie</td>
+          <td><span class="tag ${locked ? "locked" : "open"}">${stateLabel}</span></td>
+        `;
+        tableBody.appendChild(tr);
+
+        const presenceText = `${meeting.label}${locked ? " — clôturée" : ""}`;
+        upsertOption(presenceMeeting, String(meeting.no), presenceText, locked);
+
+        const modificationText = `${meeting.label}${started ? " — commencée / clôturée" : ""}`;
+        upsertOption(modificationMeeting, String(meeting.no), modificationText, started);
+      });
+    }
+
+    function updatePresenceLockInfo(){
+      const member = document.getElementById("presenceMember").value;
+      const meetingNo = document.getElementById("presenceMeeting").value;
+      const box = document.getElementById("presenceInfoBox");
+
+      if (!member || !meetingNo){
+        box.innerHTML = `<strong>Rappel :</strong> après validation initiale, la même combinaison <em>numéro d’adhérent + réunion</em> est verrouillée sur cet appareil. Pour signaler un changement, utilisez l’onglet <strong>Changement de situation</strong>.`;
+        return;
+      }
+
+      const existing = getInitialValidation(member, meetingNo);
+      if (existing){
+        box.innerHTML = `<strong>Déjà enregistré :</strong> une validation initiale a déjà été faite sur cet appareil pour ce numéro d’adhérent et cette réunion.<br>Utilisez l’onglet <strong>Changement de situation</strong> pour prévenir d’une modification.`;
+      } else {
+        box.innerHTML = `<strong>Validation initiale possible :</strong> aucun envoi enregistré sur cet appareil pour cette combinaison.`;
+      }
+    }
+
+    function formToPayload(form){
+      const fd = new FormData(form);
+      return Object.fromEntries(fd.entries());
+    }
+
+    async function postToFormspree(endpoint, data){
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok){
+        throw new Error("Échec de l’envoi.");
+      }
+
+      return response.json().catch(() => ({}));
+    }
+
+    function openSuccessOverlay(){
+      const overlay = document.getElementById("validateOverlay");
+      overlay.classList.add("open");
+      overlay.setAttribute("aria-hidden", "false");
+    }
+
+    function goBackOrFallback(){
+      try{
+        const prev = sessionStorage.getItem("osd_prev_page");
+        if (prev && prev !== location.href){
+          location.href = prev;
+          return;
+        }
+      }catch(e){}
+      location.href = "documents-internes.html";
+    }
+
+    async function handlePresenceSubmit(e){
+      e.preventDefault();
+
+      const form = e.currentTarget;
+      const member = document.getElementById("presenceMember").value;
+      const meetingNo = document.getElementById("presenceMeeting").value;
+      const status = document.getElementById("presenceStatus").value;
+
+      if (!member || !meetingNo || !status){
+        alert("⚠️ Merci de sélectionner votre numéro d’adhérent, la réunion et votre situation.");
+        return;
+      }
+
+      const meeting = REUNIONS.find(r => String(r.no) === String(meetingNo));
+      if (!meeting){
+        alert("⚠️ Réunion introuvable.");
+        return;
+      }
+
+      if (isInitialLocked(meeting)){
+        alert("⚠️ Cette réunion est clôturée pour la validation initiale (moins de 72 heures avant).");
+        return;
+      }
+
+      const existing = getInitialValidation(member, meetingNo);
+      if (existing){
+        alert("⚠️ Une validation initiale a déjà été enregistrée sur cet appareil pour cette réunion. Utilisez l’onglet “Changement de situation”.");
+        return;
+      }
+
+      const payload = formToPayload(form);
+      payload.Reunion_libelle = meeting.label;
+      payload.Date_reunion = formatDateFr(meeting.date);
+      payload.Heure = "19h00 – 22h00";
+      payload.Delai_reglementaire = "Validation initiale autorisée jusqu'à 72 heures avant la réunion";
+      payload.Timestamp_envoi = new Date().toLocaleString("fr-FR");
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const oldText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Envoi en cours…";
+
+      try{
+        await postToFormspree(FORM_PRESENCE_ENDPOINT, payload);
+        saveInitialValidation(member, meetingNo, status);
+        openSuccessOverlay();
+        setTimeout(goBackOrFallback, 1900);
+      }catch(err){
+        alert("⚠️ L’envoi a échoué. Merci de réessayer.");
+      }finally{
+        submitBtn.disabled = false;
+        submitBtn.textContent = oldText;
+        updatePresenceLockInfo();
+      }
+    }
+
+    async function handleModificationSubmit(e){
+      e.preventDefault();
+
+      const form = e.currentTarget;
+      const member = document.getElementById("modificationMember").value;
+      const meetingNo = document.getElementById("modificationMeeting").value;
+      const status = document.getElementById("modificationStatus").value;
+
+      if (!member || !meetingNo || !status){
+        alert("⚠️ Merci de sélectionner votre numéro d’adhérent, la réunion et la nouvelle situation.");
+        return;
+      }
+
+      const meeting = REUNIONS.find(r => String(r.no) === String(meetingNo));
+      if (!meeting){
+        alert("⚠️ Réunion introuvable.");
+        return;
+      }
+
+      if (isMeetingStarted(meeting)){
+        alert("⚠️ Cette réunion a déjà commencé. La modification n’est plus disponible depuis cette page.");
+        return;
+      }
+
+      const previous = getInitialValidation(member, meetingNo);
+      const payload = formToPayload(form);
+      payload.Reunion_libelle = meeting.label;
+      payload.Date_reunion = formatDateFr(meeting.date);
+      payload.Heure = "19h00 – 22h00";
+      payload.Situation_precedente_locale = previous ? previous.status : "Aucune donnée locale enregistrée";
+      payload.Timestamp_envoi = new Date().toLocaleString("fr-FR");
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const oldText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Envoi en cours…";
+
+      try{
+        await postToFormspree(FORM_MODIFICATION_ENDPOINT, payload);
+
+        if (previous){
+          saveInitialValidation(member, meetingNo, status);
+        }
+
+        openSuccessOverlay();
+        setTimeout(goBackOrFallback, 1900);
+      }catch(err){
+        alert("⚠️ L’envoi de la modification a échoué. Merci de réessayer.");
+      }finally{
+        submitBtn.disabled = false;
+        submitBtn.textContent = oldText;
+        updatePresenceLockInfo();
+      }
+    }
+
+    function setupTabs(){
+      const btnPresence = document.getElementById("tab-presence");
+      const btnModification = document.getElementById("tab-modification");
+      const panelPresence = document.getElementById("panel-presence");
+      const panelModification = document.getElementById("panel-modification");
+
+      function activate(which){
+        const isPresence = which === "presence";
+        btnPresence.setAttribute("aria-selected", isPresence ? "true" : "false");
+        btnModification.setAttribute("aria-selected", isPresence ? "false" : "true");
+        panelPresence.classList.toggle("active", isPresence);
+        panelModification.classList.toggle("active", !isPresence);
+      }
+
+      btnPresence.addEventListener("click", () => activate("presence"));
+      btnModification.addEventListener("click", () => activate("modification"));
+    }
+
+    (function(){
+      try{
+        sessionStorage.setItem("osd_prev_page", location.href);
+      }catch(e){}
+
+      document.addEventListener("click", function(e){
+        const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+        if(!a) return;
+        const href = a.getAttribute("href") || "";
+        if(href.includes("menu.html")){
+          try{
+            sessionStorage.setItem("osd_prev_page", location.href);
+          }catch(err){}
+        }
+      }, true);
+    })();
+
+    (function(){
+      if (location.pathname.endsWith("menu.html")) return;
+
+      try{
+        sessionStorage.setItem("osd_prev_page", location.href);
+      }catch(e){}
+
+      document.addEventListener("click", function(e){
+        const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+        if(!a) return;
+        const href = a.getAttribute("href") || "";
+        if(href.includes("menu.html")){
+          try{
+            sessionStorage.setItem("osd_prev_page", location.href);
+          }catch(err){}
+        }
+      }, true);
+    })();
+
+    document.addEventListener("DOMContentLoaded", () => {
+      populateForms();
+      setupTabs();
+      updatePresenceLockInfo();
+
+      document.getElementById("presenceMember").addEventListener("change", updatePresenceLockInfo);
+      document.getElementById("presenceMeeting").addEventListener("change", updatePresenceLockInfo);
+
+      document.getElementById("presenceForm").addEventListener("submit", handlePresenceSubmit);
+      document.getElementById("modificationForm").addEventListener("submit", handleModificationSubmit);
+    });
+  </script>
+
+  <!-- Google Translate (widget invisible) -->
+  <div id="google_translate_element" style="display:none;"></div>
+
+  <!-- Script commun site (audio + translate + mémoire + anti-bannière) -->
+  <script defer src="/osd.js"></script>
+
+  <!-- Google Translate -->
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
+</body>
+</html>
