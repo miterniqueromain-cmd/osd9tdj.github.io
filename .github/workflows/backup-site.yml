@@ -183,7 +183,6 @@ jobs:
           ALL_DATA="[]"
 
           while true; do
-            # JSON:API => Accept MUST be application/vnd.api+json
             URL="${BASE_URL}?page%5Blimit%5D=${LIMIT}&page%5Boffset%5D=${OFFSET}&filter%5Btype%5D=all"
             RESP="$(curl -g -sS --fail-with-body -X GET "$URL" \
               -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
@@ -227,12 +226,28 @@ jobs:
 
             while read -r FILE_ID; do
               [ -z "$FILE_ID" ] && continue
-              echo "Deleting $FILE_ID …"
-              curl -sS --fail-with-body -X DELETE \
-                "https://www.zohoapis.eu/workdrive/api/v1/files/$FILE_ID" \
-                -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
-                -H "Accept: application/vnd.api+json" \
-                >/dev/null
+              echo "Trashing $FILE_ID …"
+
+              HTTP_CODE="$(
+                curl -sS -o /tmp/zoho_trash_response.json -w "%{http_code}" \
+                  -X PATCH "https://www.zohoapis.eu/workdrive/api/v1/files/$FILE_ID" \
+                  -H "Authorization: Zoho-oauthtoken $ACCESS_TOKEN" \
+                  -H "Accept: application/vnd.api+json" \
+                  -H "Content-Type: application/vnd.api+json" \
+                  --data "$(jq -nc --arg id "$FILE_ID" '{
+                    data: {
+                      attributes: { status: "51" },
+                      type: "files",
+                      id: $id
+                    }
+                  }')"
+              )"
+
+              if [ "$HTTP_CODE" -ge 400 ]; then
+                echo "ERROR: failed to trash file $FILE_ID (HTTP $HTTP_CODE)"
+                cat /tmp/zoho_trash_response.json || true
+                exit 1
+              fi
             done <<< "$TO_DELETE_IDS"
           }
 
