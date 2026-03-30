@@ -78,7 +78,6 @@
       min-height:100vh;
     }
 
-    /* ✅ FOND FIXE comme tes autres pages */
     body::before{
       content:"";
       position:fixed;
@@ -89,7 +88,6 @@
       z-index:-3;
     }
 
-    /* ✅ voile noir + léger halo doré */
     body::after{
       content:"";
       position:fixed;
@@ -108,7 +106,6 @@
       pointer-events:none;
     }
 
-    /* ✅ Tablette / mobile : fond stable */
     @media (max-width:1024px){
       body::before{
         background-attachment:scroll;
@@ -128,7 +125,6 @@
       z-index:40;
     }
 
-    /* ✅ scroll interne comme tes autres pages */
     .viewport-scroll{
       position:fixed;
       inset:22px;
@@ -165,7 +161,6 @@
       color:#fff;
     }
 
-    /* ✅ overlay interne sur la zone scroll */
     .overlay{
       min-height:100vh;
       padding:26px 15px 28px;
@@ -615,7 +610,6 @@
       user-select:none;
     }
 
-    /* Overlay validation */
     .validate-overlay{
       position:fixed;
       inset:0;
@@ -725,6 +719,7 @@
 <body>
   <script>window.ACCESS_GROUP="MEMBRES_DOCS"</script>
   <script src="js/membres-lock.js"></script>
+  <script src="js/membres-auth.js"></script>
 
   <span class="wmk">OSD9TDJ::PLANNING-ETUDES::HAUTE-SAVOIE::2026::WTRMK</span>
 
@@ -864,6 +859,12 @@
                     </div>
 
                     <div class="field">
+                      <label for="presenceCode">Code personnel</label>
+                      <input type="password" id="presenceCode" autocomplete="off" placeholder="Votre code personnel" required>
+                      <small>Ce code doit correspondre exactement au matricule sélectionné.</small>
+                    </div>
+
+                    <div class="field">
                       <label for="presenceMeeting">Réunion concernée</label>
                       <select id="presenceMeeting" name="Reunion" required></select>
                       <small>Les réunions clôturées à moins de 72 h ne sont plus validables ici.</small>
@@ -905,6 +906,7 @@
                 <p>Cette première déclaration est celle qui sert à l’organisation en amont.</p>
                 <ul class="rules-list">
                   <li>Choix du numéro d’adhérent.</li>
+                  <li>Saisie du code personnel associé à ce numéro.</li>
                   <li>Sélection de la réunion convoquée.</li>
                   <li>Sélection de la situation sans justification.</li>
                   <li>Envoi d’un e-mail via la plateforme de formulaire.</li>
@@ -954,6 +956,12 @@
                     </div>
 
                     <div class="field">
+                      <label for="modificationCode">Code personnel</label>
+                      <input type="password" id="modificationCode" autocomplete="off" placeholder="Votre code personnel" required>
+                      <small>Le code doit correspondre au matricule choisi.</small>
+                    </div>
+
+                    <div class="field">
                       <label for="modificationMeeting">Réunion concernée</label>
                       <select id="modificationMeeting" name="Reunion" required></select>
                       <small>Modification possible tant que la réunion n’a pas commencé.</small>
@@ -992,6 +1000,7 @@
                 <h3>Informations utiles</h3>
                 <ul class="rules-list">
                   <li>Aucun nom n’est demandé sur la page.</li>
+                  <li>Chaque déclaration est liée à un matricule et à son code personnel.</li>
                   <li>Le changement de situation n’exige pas de justification.</li>
                   <li>Chaque envoi produit une notification distincte.</li>
                   <li>Après l’heure de début de la réunion, la modification n’est plus proposée.</li>
@@ -1020,7 +1029,6 @@
     </div>
   </div>
 
-  <!-- Overlay validation -->
   <div class="validate-overlay" id="validateOverlay" aria-hidden="true">
     <div class="validate-card" role="dialog" aria-modal="true" aria-label="Validation enregistrée">
       <img class="validate-art" src="valipla.jpg" alt="Validation enregistrée">
@@ -1035,15 +1043,9 @@
   <script>
     const _osd9pla = "OSD9TDJ-PLANNING-ETUDES-HS-2026";
 
-    /* =========================================================
-       CONFIGURATION FORMSPREE
-       ========================================================= */
     const FORM_PRESENCE_ENDPOINT = "https://formspree.io/f/xwpgwkld";
     const FORM_MODIFICATION_ENDPOINT = "https://formspree.io/f/xwpgwkld";
 
-    /* =========================================================
-       DONNÉES DU CALENDRIER
-       ========================================================= */
     const REUNIONS = [
       { no: 1,  date: "2026-03-05", start: "19:00", end: "22:00", label: "Réunion n°1 – Jeudi 05/03/2026 – 19h00 à 22h00" },
       { no: 2,  date: "2026-03-19", start: "19:00", end: "22:00", label: "Réunion n°2 – Jeudi 19/03/2026 – 19h00 à 22h00" },
@@ -1057,7 +1059,7 @@
       { no: 11, date: "2026-10-01", start: "19:00", end: "22:00", label: "Réunion n°11 – Jeudi 01/10/2026 – 19h00 à 22h00" },
       { no: 12, date: "2026-10-15", start: "19:00", end: "22:00", label: "Réunion n°12 – Jeudi 15/10/2026 – 19h00 à 22h00" },
       { no: 13, date: "2026-11-12", start: "19:00", end: "22:00", label: "Réunion n°13 – Jeudi 12/11/2026 – 19h00 à 22h00" },
-      { no: 14, date: "2026-11-26", start: "19:00", end: "22:00", label: "Réunion n°14 – Jeudi 26/11/2026 – 19h00 à 22h00" },
+      { no: 14, date: "2026-11-26", start: "19:00", end: "22h00", label: "Réunion n°14 – Jeudi 26/11/2026 – 19h00 à 22h00" },
       { no: 15, date: "2026-12-10", start: "19:00", end: "22:00", label: "Réunion n°15 – Jeudi 10/12/2026 – 19h00 à 22h00" }
     ];
 
@@ -1221,11 +1223,17 @@
 
       const form = e.currentTarget;
       const member = document.getElementById("presenceMember").value;
+      const code = document.getElementById("presenceCode").value;
       const meetingNo = document.getElementById("presenceMeeting").value;
       const status = document.getElementById("presenceStatus").value;
 
-      if (!member || !meetingNo || !status){
-        alert("⚠️ Merci de sélectionner votre numéro d’adhérent, la réunion et votre situation.");
+      if (!member || !code || !meetingNo || !status){
+        alert("⚠️ Merci de compléter tous les champs.");
+        return;
+      }
+
+      if (!window.OSD_AUTH || !window.OSD_AUTH.verify(member, code)){
+        alert("⛔ Code personnel incorrect pour ce matricule.");
         return;
       }
 
@@ -1252,6 +1260,9 @@
       payload.Heure = "19h00 – 22h00";
       payload.Delai_reglementaire = "Validation initiale autorisée jusqu'à 72 heures avant la réunion";
       payload.Timestamp_envoi = new Date().toLocaleString("fr-FR");
+      payload.Code_verifie = "oui";
+
+      delete payload.presenceCode;
 
       const submitBtn = form.querySelector('button[type="submit"]');
       const oldText = submitBtn.textContent;
@@ -1277,11 +1288,17 @@
 
       const form = e.currentTarget;
       const member = document.getElementById("modificationMember").value;
+      const code = document.getElementById("modificationCode").value;
       const meetingNo = document.getElementById("modificationMeeting").value;
       const status = document.getElementById("modificationStatus").value;
 
-      if (!member || !meetingNo || !status){
-        alert("⚠️ Merci de sélectionner votre numéro d’adhérent, la réunion et la nouvelle situation.");
+      if (!member || !code || !meetingNo || !status){
+        alert("⚠️ Merci de compléter tous les champs.");
+        return;
+      }
+
+      if (!window.OSD_AUTH || !window.OSD_AUTH.verify(member, code)){
+        alert("⛔ Code personnel incorrect pour ce matricule.");
         return;
       }
 
@@ -1303,6 +1320,9 @@
       payload.Heure = "19h00 – 22h00";
       payload.Situation_precedente_locale = previous ? previous.status : "Aucune donnée locale enregistrée";
       payload.Timestamp_envoi = new Date().toLocaleString("fr-FR");
+      payload.Code_verifie = "oui";
+
+      delete payload.modificationCode;
 
       const submitBtn = form.querySelector('button[type="submit"]');
       const oldText = submitBtn.textContent;
@@ -1394,13 +1414,8 @@
     });
   </script>
 
-  <!-- Google Translate (widget invisible) -->
   <div id="google_translate_element" style="display:none;"></div>
-
-  <!-- Script commun site (audio + translate + mémoire + anti-bannière) -->
   <script defer src="/osd.js"></script>
-
-  <!-- Google Translate -->
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
 </body>
 </html>
