@@ -71,7 +71,6 @@
       min-height:100vh;
     }
 
-    /* ✅ FOND = fond-membre.PNG (adapté mobile/tablette) */
     body::before{
       content:"";
       position:fixed;
@@ -81,7 +80,6 @@
       background-attachment:fixed;
       z-index:-2;
     }
-    /* iOS/Android : fixed peut “bugger” => scroll + cadrage stable */
     @media (max-width: 1024px){
       body::before{
         background-attachment:scroll;
@@ -89,7 +87,6 @@
       }
     }
 
-    /* ✅ Cadre fixe */
     .frame-fixed{
       position:fixed;
       inset:14px;
@@ -102,7 +99,6 @@
       z-index:40;
     }
 
-    /* ✅ Zone scroll interne */
     .viewport-scroll{
       position:fixed;
       inset:22px;
@@ -111,96 +107,34 @@
       -webkit-overflow-scrolling:touch;
       z-index:1;
     }
-.menu-dot{
-  position: fixed;
-  right: 26px;
-  top: calc(26px + env(safe-area-inset-top));
-  z-index: 100;
-  pointer-events: auto;
 
-  width: 46px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-
-  border-radius: 999px;
-  border: 1px solid rgba(214,167,40,0.55);
-  background: rgba(0,0,0,0.22);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-
-  font-family:'Cinzel',serif;
-  color: #d6a728;
-  font-size: 22px;
-  line-height: 1;
-
-  text-decoration: none;
-  user-select: none;
-}
-
-.menu-dot:hover{
-  background: rgba(214,167,40,0.12);
-  color:#fff;
-}
-
-    /* ✅ Menu 3 points */
-    .top-menu{
-      position:fixed;
-      top:26px;
-      right:26px;
-      z-index:60;
-      pointer-events:auto;
-    }
-    .top-menu details{ position:relative; }
-    .top-menu summary{
-      list-style:none;
-      cursor:pointer;
-      user-select:none;
-      width:46px;
-      height:34px;
-      display:grid;
-      place-items:center;
-      border-radius:999px;
-      border:1px solid rgba(255,215,0,0.55);
-      background:rgba(0,0,0,0.22);
+    .menu-dot{
+      position: fixed;
+      right: 26px;
+      top: calc(26px + env(safe-area-inset-top));
+      z-index: 100;
+      pointer-events: auto;
+      width: 46px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      border: 1px solid rgba(214,167,40,0.55);
+      background: rgba(0,0,0,0.22);
       backdrop-filter: blur(6px);
-      box-shadow:0 6px 16px rgba(0,0,0,0.35);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
       font-family:'Cinzel',serif;
-      color:var(--or);
-      font-size:22px;
-      line-height:1;
+      color: #d6a728;
+      font-size: 22px;
+      line-height: 1;
+      text-decoration: none;
+      user-select: none;
     }
-    .top-menu summary::-webkit-details-marker{ display:none; }
-
-    .menu-panel{
-      position:absolute;
-      right:0;
-      margin-top:10px;
-      width:260px;
-      max-width:calc(100vw - 60px);
-      border-radius:14px;
-      border:1px solid rgba(255,215,0,0.45);
-      background:rgba(0,0,0,0.75);
-      box-shadow:0 18px 40px rgba(0,0,0,0.55);
-      overflow:hidden;
-    }
-    .menu-panel a{
-      display:block;
-      padding:11px 12px;
-      text-decoration:none;
-      color:rgba(253,247,229,0.92);
-      font-family:'Cinzel',serif;
-      font-weight:700;
-      font-size:0.92rem;
-      border-bottom:1px solid rgba(255,215,0,0.18);
-    }
-    .menu-panel a:hover{
-      background:rgba(255,215,0,0.12);
+    .menu-dot:hover{
+      background: rgba(214,167,40,0.12);
       color:#fff;
     }
-    .menu-panel a:last-child{ border-bottom:none; }
 
-    /* ✅ Voile noir */
     .overlay{
       min-height:100vh;
       padding:30px 15px 28px;
@@ -213,7 +147,6 @@
       align-items:center;
     }
 
-    /* ✅ BADGE : plus de fond jaune (fond noir + bord doré) */
     .lock-badge{
       display:inline-flex;
       align-items:center;
@@ -243,7 +176,6 @@
       max-width:980px;
     }
 
-    /* Bouton */
     .btn-or{
       display:inline-flex;
       align-items:center;
@@ -264,19 +196,6 @@
       cursor:pointer;
     }
 
-    .section-title{
-      width:100%;
-      max-width:980px;
-      margin:18px auto 10px;
-      font-family:'Cinzel',serif;
-      color:var(--or);
-      font-size:1.05rem;
-      letter-spacing:0.06em;
-      opacity:0.95;
-      text-align:left;
-    }
-
-    /* Accordéons */
     .accordion{
       width:100%;
       max-width:980px;
@@ -357,43 +276,7 @@
     }
     .card a:hover{ background:rgba(255,215,0,0.35); }
 
-    /* ✅ AJOUT : champ matricule (loupe) */
-    .matricule-form{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      align-items:stretch;
-      margin-top:10px;
-    }
-    .matricule-input{
-      width:100%;
-      padding:12px 14px;
-      border-radius:12px;
-      border:1px solid rgba(255,215,0,0.45);
-      background:rgba(0,0,0,0.35);
-      color:rgba(253,247,229,0.95);
-      font-weight:700;
-      letter-spacing:0.06em;
-      outline:none;
-    }
-    .matricule-input::placeholder{
-      color:rgba(253,247,229,0.65);
-      font-weight:600;
-      letter-spacing:0.04em;
-    }
-    .matricule-btn{
-      margin:0;
-      width:100%;
-      justify-content:center;
-    }
-    .matricule-hint{
-      font-size:0.82rem;
-      opacity:0.86;
-      margin-top:8px;
-      line-height:1.35;
-    }
-
-    /* ✅ AJOUT : planning des études */
+    .matricule-form,
     .planning-form{
       display:flex;
       flex-direction:column;
@@ -401,6 +284,8 @@
       align-items:stretch;
       margin-top:10px;
     }
+
+    .matricule-input,
     .planning-select{
       width:100%;
       padding:12px 14px;
@@ -410,6 +295,20 @@
       color:rgba(253,247,229,0.95);
       font-weight:700;
       outline:none;
+      box-sizing:border-box;
+    }
+
+    .matricule-input{
+      letter-spacing:0.06em;
+    }
+
+    .matricule-input::placeholder{
+      color:rgba(253,247,229,0.65);
+      font-weight:600;
+      letter-spacing:0.04em;
+    }
+
+    .planning-select{
       appearance:none;
       -webkit-appearance:none;
       -moz-appearance:none;
@@ -423,15 +322,20 @@
       background-repeat:no-repeat;
       padding-right:44px;
     }
+
     .planning-select option{
       color:#111;
       background:#fff;
     }
+
+    .matricule-btn,
     .planning-btn{
       margin:0;
       width:100%;
       justify-content:center;
     }
+
+    .matricule-hint,
     .planning-hint{
       font-size:0.82rem;
       opacity:0.86;
@@ -439,7 +343,15 @@
       line-height:1.35;
     }
 
-    /* Footer */
+    .matricule-preview{
+      min-height:1.3em;
+      font-size:0.82rem;
+      color:rgba(255,215,0,0.92);
+      font-weight:700;
+      margin-top:6px;
+      text-align:left;
+    }
+
     .footer {
       margin-top: 18px;
       padding-top: 15px;
@@ -469,89 +381,6 @@
       text-transform: lowercase;
     }
 
-    /* Modal Zoho */
-    .modal{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.78);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:9999;
-      padding:18px;
-    }
-    .modal.open{ display:flex; }
-    .modal-card{
-      width:min(1100px, 96vw);
-      height:min(760px, 88vh);
-      background:rgba(0,0,0,0.92);
-      border:1px solid rgba(255,215,0,0.55);
-      border-radius:18px;
-      box-shadow:0 20px 60px rgba(0,0,0,0.75);
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-    }
-    .modal-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding:10px 12px;
-      border-bottom:1px solid rgba(255,215,0,0.18);
-      background:rgba(0,0,0,0.65);
-    }
-    .modal-title{
-      font-family:'Cinzel',serif;
-      color:var(--or);
-      font-weight:700;
-      font-size:0.95rem;
-      letter-spacing:0.04em;
-      text-align:left;
-    }
-    .modal-actions{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:flex-end;
-    }
-    .btn-mini{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(255,215,0,0.16);
-      color:#fff;
-      text-decoration:none;
-      font-weight:700;
-      border:1px solid rgba(255,215,0,0.45);
-      font-family:'Cinzel',serif;
-      font-size:0.78rem;
-      cursor:pointer;
-      white-space:nowrap;
-    }
-    .btn-mini:hover{ background:rgba(255,215,0,0.28); }
-
-    .modal-body{ flex:1 1 auto; }
-    .zoho-frame{
-      width:100%;
-      height:100%;
-      border:0;
-      display:block;
-      background:#000;
-    }
-    .modal-hint{
-      padding:10px 12px;
-      border-top:1px solid rgba(255,215,0,0.18);
-      font-size:0.82rem;
-      opacity:0.88;
-      line-height:1.35;
-      text-align:left;
-    }
-
-    /* Watermark invisible */
     .wmk{
       position:fixed;
       left:-9999px;
@@ -562,193 +391,61 @@
     }
 
     @media (max-width: 480px){
-      .top-menu{ top:22px; right:22px; }
-      .menu-panel{ width:240px; }
       .frame-fixed{ inset:12px; }
       .viewport-scroll{ inset:20px; }
       h1{ font-size:1.6rem; }
       .btn-or{ font-size:0.85rem; }
     }
-    /* ✅ PATCH MOBILE : boutons centrés */
-@media (max-width: 600px){
-  .btn-or{
-    display:flex;
-    justify-content:center;
-    width:100%;
-    max-width:320px;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
-  }
 
-  .card a{
-    display:flex;
-    justify-content:center;
-    width:100%;
-    max-width:220px;
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
-  }
-}
-    /* =====================================================
-   PATCH RESPONSIVE – CENTRAGE DES BOUTONS (ALL DEVICES)
-   Mobile + Tablette + Accordéons
-   ===================================================== */
+    @media (max-width: 600px){
+      .btn-or{
+        display:flex;
+        justify-content:center;
+        width:100%;
+        max-width:320px;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+      }
 
-/* Boutons principaux */
-.btn-or{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin-left:auto;
-  margin-right:auto;
-  text-align:center;
-}
+      .card a{
+        display:flex;
+        justify-content:center;
+        width:100%;
+        max-width:220px;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+      }
+    }
 
-/* Boutons dans les cartes (ACCÉDER) */
-.card a{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  margin-left:auto;
-  margin-right:auto;
-  text-align:center;
-}
+    .btn-or{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      margin-left:auto;
+      margin-right:auto;
+      text-align:center;
+    }
 
-/* Ajustements largeur par device */
-@media (max-width: 600px){
-  .btn-or{ max-width:320px; width:100%; }
-  .card a{ max-width:220px; width:100%; }
-}
+    .card a{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      margin-left:auto;
+      margin-right:auto;
+      text-align:center;
+    }
 
-@media (min-width: 601px) and (max-width: 1024px){
-  /* TABLETTE */
-  .btn-or{ max-width:340px; }
-  .card a{ max-width:240px; }
-}
+    @media (min-width: 601px) and (max-width: 1024px){
+      .btn-or{ max-width:340px; }
+      .card a{ max-width:240px; }
+    }
 
-/* Accordéons (administration) */
-.accordion .card a,
-.subacc .card a{
-  margin-left:auto;
-  margin-right:auto;
-}
- /* ===== MENU ⋯ DANS LA MODALE ZOHO ===== */
-.modal-left{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  min-width:0;
-}
-
-.zoho-nav{ position:relative; }
-.zoho-nav summary{
-  list-style:none;
-  cursor:pointer;
-  user-select:none;
-  width:46px;
-  height:34px;
-  display:grid;
-  place-items:center;
-  border-radius:999px;
-  border:1px solid rgba(255,215,0,0.55);
-  background:rgba(0,0,0,0.22);
-  backdrop-filter: blur(6px);
-  box-shadow:0 6px 16px rgba(0,0,0,0.35);
-  font-family:'Cinzel',serif;
-  color:var(--or);
-  font-size:22px;
-  line-height:1;
-}
-.zoho-nav summary::-webkit-details-marker{ display:none; }
-
-.zoho-nav-panel{
-  position:absolute;
-  left:0;
-  margin-top:10px;
-  width:280px;
-  max-width:calc(100vw - 60px);
-  border-radius:14px;
-  border:1px solid rgba(255,215,0,0.45);
-  background:rgba(0,0,0,0.90);
-  box-shadow:0 18px 40px rgba(0,0,0,0.55);
-  overflow:auto;
-  max-height:min(60vh, 520px);
-  z-index:20;
-}
-
-.zoho-nav-panel .group-title{
-  padding:10px 12px;
-  font-family:'Cinzel',serif;
-  font-weight:800;
-  color:var(--or);
-  border-bottom:1px solid rgba(255,215,0,0.18);
-  background:rgba(255,215,0,0.06);
-  text-align:left;
-}
-
-.zoho-nav-link{
-  width:100%;
-  display:block;
-  padding:10px 12px;
-  border:0;
-  background:transparent;
-  text-align:left;
-  cursor:pointer;
-  color:rgba(253,247,229,0.92);
-  font-family:'Lato', Arial, sans-serif;
-  font-weight:800;
-  font-size:0.92rem;
-  border-bottom:1px solid rgba(255,215,0,0.12);
-}
-.zoho-nav-link:hover{
-  background:rgba(255,215,0,0.12);
-  color:#fff;
-}
-
-/* ===== ONGLETs (multi pages) DANS LA MODALE ===== */
-.zoho-tabs{
-  display:none;
-  gap:8px;
-  flex-wrap:wrap;
-  padding:10px 12px;
-  border-bottom:1px solid rgba(255,215,0,0.18);
-  background:rgba(0,0,0,0.55);
-}
-.zoho-tabs.open{ display:flex; }
-
-.zoho-tab{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:7px 10px;
-  border-radius:999px;
-  border:1px solid rgba(255,215,0,0.35);
-  background:rgba(255,215,0,0.10);
-  color:rgba(253,247,229,0.95);
-  font-weight:800;
-  font-family:'Cinzel',serif;
-  font-size:0.75rem;
-  cursor:pointer;
-  max-width:100%;
-}
-.zoho-tab[aria-selected="true"]{
-  background:rgba(255,215,0,0.22);
-  border-color:rgba(255,215,0,0.55);
-  color:#fff;
-}
-.zoho-tab .x{
-  display:inline-grid;
-  place-items:center;
-  width:20px;
-  height:20px;
-  border-radius:999px;
-  border:1px solid rgba(255,215,0,0.35);
-  background:rgba(0,0,0,0.35);
-  font-size:0.9rem;
-  line-height:1;
-}
+    .accordion .card a{
+      margin-left:auto;
+      margin-right:auto;
+    }
   </style>
 
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -765,9 +462,6 @@
   <div class="frame-fixed" aria-hidden="true"></div>
 
   <a class="menu-dot" href="menu.html" title="Menu" aria-label="Menu">⋯</a>
-
-    </details>
-  </div>
 
   <div class="viewport-scroll">
     <div class="overlay">
@@ -800,13 +494,12 @@
             <div class="card">
               <h2>Dossier d’adhésion</h2>
               <p>Formulaire d’adhésion prêt à imprimer, pièces à fournir, documents officiels.</p>
-              <a href="https://workdrive.zohopublic.eu/external/4b8d0a925d053400c1191b0d4280e7e9c069ca1223e19f1630a28a9b7f5dcdd8">Télécharger</a>
+              <a href="https://workdrive.zohopublic.eu/external/4b8d0a925d053400c1191b0d4280e7e9c069ca1223e19f1630a28a9b7f5dcdd8" target="_blank" rel="noopener noreferrer">Télécharger</a>
             </div>
 
-            <!-- ✅ LA “LOUPE” : on garde la page ouverte, on ouvre en MODALE -->
             <div class="card">
               <h2>Accès à votre dossier (matricule)</h2>
-              <p>Entrez votre matricule. Vous serez redirigé vers votre dossier Zoho (code demandé par Zoho).</p>
+              <p>Entrez votre matricule. Votre dossier Zoho s’ouvrira directement dans un nouvel onglet.</p>
 
               <form class="matricule-form" id="matriculeForm" autocomplete="off">
                 <input
@@ -818,77 +511,32 @@
                   spellcheck="false"
                   placeholder="Ex : OSD9TDJ-HT-0001"
                   aria-label="Matricule"
+                  list="matriculeHints"
                   required
                 >
+                <datalist id="matriculeHints">
+                  <option value="OSD9TDJ-HT-0001"></option>
+                  <option value="OSD9TDJ-NP-0001"></option>
+                  <option value="OSD9TDJ-EXT-0001"></option>
+                  <option value="HT-0001"></option>
+                  <option value="NP-0001"></option>
+                  <option value="EXT-0001"></option>
+                </datalist>
+
                 <button class="btn-or matricule-btn" type="submit">Ouvrir mon dossier</button>
               </form>
 
+              <div class="matricule-preview" id="matriculePreview"></div>
+
               <div class="matricule-hint">
-                Astuce : majuscules/minuscules, espaces ou tirets → c’est normalisé automatiquement.
+                Vous pouvez taper par exemple : <strong>HT-0001</strong>, <strong>np 3</strong>, <strong>ext0004</strong> ou le matricule complet.
+                Les majuscules, espaces et tirets sont corrigés automatiquement.
               </div>
             </div>
-          </div>
-        </div>
-      </details>
 
-      <!-- ORGANISATION -->
-      <details class="accordion" id="organisation" >
-        <summary><span> Vie de l'association </span><span class="acc-right">▾</span></summary>
-        <div class="acc-body">
-          <div class="cards">
-            <div class="card"><h2>Statuts & règlements</h2><p>Statuts, règlement intérieur, chartes, documents officiels.</p>
-              <a href="https://workdrive.zohopublic.eu/external/c3c592f4b6f7f82bf1c717236760403d67693e93efb69a6a82f5465b46c39f85">Accéder</a></div>
-
-            <div class="card"><h2>Procès-verbaux & comptes annuels</h2><p>PV, comptes annuels, bilans et documents financiers.</p>
-              <a href="https://workdrive.zohopublic.eu/external/adeca9bab72881c197c1d06254063da267041c5fc2b9d1a1531aed18e4ade6b8">Accéder</a></div>
-
-            <div class="card"><h2>Documents Préfecture</h2><p>Déclarations, récépissés, courriers et pièces administratives.</p>
-              <a href="https://workdrive.zohopublic.eu/external/52a5579789f6993023b3da01a4af2d39ed984856a014a99af6faa2d06f0cfe5b">Accéder</a></div>
-
-            <div class="card"><h2>Convocations</h2><p>Convocations officielles pour chaque réunion.</p>
-              <a href="https://workdrive.zohopublic.eu/external/89b3551423d215f877da0eba39773a44e0abb27cedb20c0a2adae15a58c58eb0">Accéder</a></div>
-
-            <div class="card"><h2>Organisation des événements</h2><p>Dossiers, check-lists, logistique, informations internes.</p>
-              <a href="https://workdrive.zohopublic.eu/external/c82147c01eeb546c90e4bc8431dba06bbbe2b1bab0ccc9699dc94cf697a03fc0">Accéder</a></div>
-
-            <div class="card"><h2>Planning annuel</h2><p>Planning des rencontres, thèmes, dates et informations.</p>
-              <a href="https://workdrive.zohopublic.eu/external/68ff80cf77de19dd1592441813d05884c36a1220a8ab72cb08baaafb1cf406c4">Accéder</a></div>
-          </div>
-        </div>
-      </details>
-
-      <!-- ÉTUDES -->
-      <details class="accordion" id="etudes">
-        <summary><span>Études</span><span class="acc-right">▾</span></summary>
-        <div class="acc-body">
-          <div class="cards">
-
-            <!-- NOVICIAT (NOUVEAU BOUTON) -->
-            <div class="card">
-              <h2>Noviciat – Documents</h2>
-              <p>Documents d’étude réservés aux novices (programme, supports, lectures).</p>
-              <a href="https://workdrive.zohopublic.eu/external/836073359a880a7daedb88bb3869a2358c2e4eecdc48817dbd55d15f2598d046">Accéder</a>
-            </div>
-
-            <div class="card"><h2>Documents d’étude</h2><p>Documents de travail, lectures, supports et synthèses.</p>
-              <a href="https://workdrive.zohopublic.eu/external/fb340d2f58ef3025ca9e5cdbfcfb950acdda4b6c1678abb9e1087966c7b0af90">Accéder</a></div>
-
-            <div class="card"><h2>Planches d’étude</h2><p>Planches, travaux d’étude et approfondissements.</p>
-              <a href="https://workdrive.zohopublic.eu/external/c8df8ac1a7e8b7fee105482d62cd18a2793c4564de39a84803388b97c72e4d5d">Accéder</a></div>
-
-            <div class="card"><h2>Procès-verbaux</h2><p>Comptes rendus, PV scannés, documents associés.</p>
-              <a href="https://workdrive.zohopublic.eu/external/8397a360ab984ac0bfba758f466f756e28fa078f8ea3a4ec4757da754ebf10eb">Accéder</a></div>
-
-            <div class="card"><h2>Travaux & documents</h2><p>Travaux, documents internes, éléments de suivi.</p>
-              <a href="https://workdrive.zohopublic.eu/external/a2d0b3a4aeab6c6cff9bbfd46216f1adc08071aea20cd7780e0246bc175a30e">Accéder</a></div>
-
-            <div class="card"><h2>Bibliothèque d’étude</h2><p>Ouvrages et documents de référence.</p>
-              <a href="https://workdrive.zohopublic.eu/external/d2507beffb3de66ad23e98d257dcf48544d2c25fa9ce0293dc27f66343b98b81">Accéder</a></div>
-
-            <!-- ✅ AJOUT : Planning des études -->
             <div class="card">
               <h2>Planning des études</h2>
-              <p>Choisissez la zone souhaitée pour consulter le planning des réunions, rencontres et études.</p>
+              <p>Choisissez la zone souhaitée pour consulter directement le planning des réunions, rencontres et études.</p>
 
               <form class="planning-form" id="planningForm" autocomplete="off">
                 <select class="planning-select" id="planningSelect" aria-label="Choisir un planning" required>
@@ -900,9 +548,65 @@
               </form>
 
               <div class="planning-hint">
-            
+                Le planning s’ouvre directement sur la page correspondante.
               </div>
             </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- ORGANISATION -->
+      <details class="accordion" id="organisation">
+        <summary><span>Vie de l'association</span><span class="acc-right">▾</span></summary>
+        <div class="acc-body">
+          <div class="cards">
+            <div class="card"><h2>Statuts & règlements</h2><p>Statuts, règlement intérieur, chartes, documents officiels.</p>
+              <a href="https://workdrive.zohopublic.eu/external/c3c592f4b6f7f82bf1c717236760403d67693e93efb69a6a82f5465b46c39f85" target="_blank" rel="noopener noreferrer">Accéder</a></div>
+
+            <div class="card"><h2>Procès-verbaux & comptes annuels</h2><p>PV, comptes annuels, bilans et documents financiers.</p>
+              <a href="https://workdrive.zohopublic.eu/external/adeca9bab72881c197c1d06254063da267041c5fc2b9d1a1531aed18e4ade6b8" target="_blank" rel="noopener noreferrer">Accéder</a></div>
+
+            <div class="card"><h2>Documents Préfecture</h2><p>Déclarations, récépissés, courriers et pièces administratives.</p>
+              <a href="https://workdrive.zohopublic.eu/external/52a5579789f6993023b3da01a4af2d39ed984856a014a99af6faa2d06f0cfe5b" target="_blank" rel="noopener noreferrer">Accéder</a></div>
+
+            <div class="card"><h2>Convocations</h2><p>Convocations officielles pour chaque réunion.</p>
+              <a href="https://workdrive.zohopublic.eu/external/89b3551423d215f877da0eba39773a44e0abb27cedb20c0a2adae15a58c58eb0" target="_blank" rel="noopener noreferrer">Accéder</a></div>
+
+            <div class="card"><h2>Organisation des événements</h2><p>Dossiers, check-lists, logistique, informations internes.</p>
+              <a href="https://workdrive.zohopublic.eu/external/c82147c01eeb546c90e4bc8431dba06bbbe2b1bab0ccc9699dc94cf697a03fc0" target="_blank" rel="noopener noreferrer">Accéder</a></div>
+
+            <div class="card"><h2>Planning annuel</h2><p>Planning des rencontres, thèmes, dates et informations.</p>
+              <a href="https://workdrive.zohopublic.eu/external/68ff80cf77de19dd1592441813d05884c36a1220a8ab72cb08baaafb1cf406c4" target="_blank" rel="noopener noreferrer">Accéder</a></div>
+          </div>
+        </div>
+      </details>
+
+      <!-- ÉTUDES -->
+      <details class="accordion" id="etudes">
+        <summary><span>Études</span><span class="acc-right">▾</span></summary>
+        <div class="acc-body">
+          <div class="cards">
+
+            <div class="card">
+              <h2>Noviciat – Documents</h2>
+              <p>Documents d’étude réservés aux novices (programme, supports, lectures).</p>
+              <a href="https://workdrive.zohopublic.eu/external/836073359a880a7daedb88bb3869a2358c2e4eecdc48817dbd55d15f2598d046" target="_blank" rel="noopener noreferrer">Accéder</a>
+            </div>
+
+            <div class="card"><h2>Documents d’étude</h2><p>Documents de travail, lectures, supports et synthèses.</p>
+              <a href="https://workdrive.zohopublic.eu/external/fb340d2f58ef3025ca9e5cdbfcfb950acdda4b6c1678abb9e1087966c7b0af90" target="_blank" rel="noopener noreferrer">Accéder</a></div>
+
+            <div class="card"><h2>Planches d’étude</h2><p>Planches, travaux d’étude et approfondissements.</p>
+              <a href="https://workdrive.zohopublic.eu/external/c8df8ac1a7e8b7fee105482d62cd18a2793c4564de39a84803388b97c72e4d5d" target="_blank" rel="noopener noreferrer">Accéder</a></div>
+
+            <div class="card"><h2>Procès-verbaux</h2><p>Comptes rendus, PV scannés, documents associés.</p>
+              <a href="https://workdrive.zohopublic.eu/external/8397a360ab984ac0bfba758f466f756e28fa078f8ea3a4ec4757da754ebf10eb" target="_blank" rel="noopener noreferrer">Accéder</a></div>
+
+            <div class="card"><h2>Travaux & documents</h2><p>Travaux, documents internes, éléments de suivi.</p>
+              <a href="https://workdrive.zohopublic.eu/external/a2d0b3a4aeab6c6cff9bbfd46216f1adc08071aea20cd7780e0246bc175a30e" target="_blank" rel="noopener noreferrer">Accéder</a></div>
+
+            <div class="card"><h2>Bibliothèque d’étude</h2><p>Ouvrages et documents de référence.</p>
+              <a href="https://workdrive.zohopublic.eu/external/d2507beffb3de66ad23e98d257dcf48544d2c25fa9ce0293dc27f66343b98b81" target="_blank" rel="noopener noreferrer">Accéder</a></div>
           </div>
         </div>
       </details>
@@ -928,7 +632,7 @@
         <div class="acc-body">
           <div class="cards">
             <div class="card"><h2>Archives – Doctrine interne</h2><p>Archives internes protégées.</p>
-              <a href="https://workdrive.zohopublic.eu/external/22e9a3445369cbd1aba6c25d170e0858f649cde4a726a4cde3f40d6458b1475">Accéder</a></div>
+              <a href="https://workdrive.zohopublic.eu/external/22e9a3445369cbd1aba6c25d170e0858f649cde4a726a4cde3f40d6458b1475" target="_blank" rel="noopener noreferrer">Accéder</a></div>
           </div>
         </div>
       </details>
@@ -948,75 +652,9 @@
     </div>
   </div>
 
-  <!-- MODALE ZOHO -->
-  <div class="modal" id="zohoModal" aria-hidden="true">
-    <div class="modal-card" role="dialog" aria-modal="true" aria-label="Documents Zoho">
-      <div class="modal-head">
-  <div class="modal-left">
-    <details class="zoho-nav" id="zohoNav">
-      <summary title="Menu">⋯</summary>
-      <div class="zoho-nav-panel" id="zohoNavPanel" role="menu" aria-label="Navigation Zoho">
-        <div class="group-title">Aller à une section</div>
-        <button type="button" class="zoho-nav-link" data-jump="#adhesion">Préparer entretien</button>
-        <button type="button" class="zoho-nav-link" data-jump="#organisation">Vie de l'association</button>
-        <button type="button" class="zoho-nav-link" data-jump="#etudes">Études</button>
-        <button type="button" class="zoho-nav-link" data-jump="#contacts">Contacts</button>
-        <button type="button" class="zoho-nav-link" data-jump="#archives">Archives</button>
-
-        <div class="group-title">Ouvrir un dossier Zoho</div>
-        <!-- Cette liste sera auto-remplie par le JS avec tous les liens workdrive du HTML -->
-        <div id="zohoLinksList"></div>
-      </div>
-    </details>
-
-    <div class="modal-title" id="zohoModalTitle">Documents</div>
-  </div>
-
-  <div class="modal-actions">
-    <a class="btn-mini" id="zohoOpenExternal" href="#" target="_blank" rel="noopener noreferrer">Ouvrir dans Zoho</a>
-    <button class="btn-mini" type="button" id="zohoClose">Fermer</button>
-  </div>
-</div>
-
-<div class="zoho-tabs" id="zohoTabs" aria-label="Onglets Zoho"></div>
-      <div class="modal-body">
-        <iframe class="zoho-frame" id="zohoFrame" title="Zoho" src="about:blank"></iframe>
-      </div>
-      <div class="modal-hint">
-        Si Zoho refuse l’intégration (sécurité), l’iframe peut rester vide : utilisez “Ouvrir dans Zoho”.
-      </div>
-    </div>
-  </div>
-
   <script>
-    const modal = document.getElementById("zohoModal");
-    const frame = document.getElementById("zohoFrame");
-    const closeBtn = document.getElementById("zohoClose");
-    const openExternal = document.getElementById("zohoOpenExternal");
-    const modalTitle = document.getElementById("zohoModalTitle");
-
-    function openZohoUrl(url, title){
-      if (!url) return;
-      modalTitle.textContent = title || "Documents";
-      frame.src = url;
-      openExternal.href = url;
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden","false");
-    }
-
-    function closeZoho(){
-      modal.classList.remove("open");
-      modal.setAttribute("aria-hidden","true");
-      frame.src = "about:blank";
-    }
-    
-    closeBtn.addEventListener("click", closeZoho);
-    modal.addEventListener("click", (e) => { if (e.target === modal) closeZoho(); });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeZoho(); });
-
-    // ✅ Matricules -> liens Zoho (30 dossiers : HT + NP + EXT)
+    // ✅ Matricules -> liens Zoho (conservés à l’identique)
     const DOSSIERS = {
-      // HT (Haute-Savoie) 0001-0012
       "OSD9TDJ-HT-0001": "https://workdrive.zohopublic.eu/external/635517088a4ce6fce0f1e2c1b0e6998ae6c38257a1da3958372aef71e28f7665",
       "OSD9TDJ-HT-0002": "https://workdrive.zohopublic.eu/external/572d578c580ea50faee8745771494a2e9fdc38aa708e33b451c3610b338fe6d1",
       "OSD9TDJ-HT-0003": "https://workdrive.zohopublic.eu/external/a80781fa14442afb91e066659ed0b24bb687355e7d3b12dfa3777a198204550e",
@@ -1030,7 +668,6 @@
       "OSD9TDJ-HT-0011": "https://workdrive.zohopublic.eu/external/16897b2b62219bc3bc1ee3b3eb09dad32d3d98ce5329b85c30fea77bb32b3cf2",
       "OSD9TDJ-HT-0012": "https://workdrive.zohopublic.eu/external/acc09fce25701919437189a55ca2b3465c2526815ccd7e83019a991aa2e67c34",
 
-      // NP (Nord) 0001-0010
       "OSD9TDJ-NP-0001": "https://workdrive.zohopublic.eu/external/3be65e26921837bcc00f2ba68495f8a0f91c7fb852f20311e85440af4a30c539",
       "OSD9TDJ-NP-0002": "https://workdrive.zohopublic.eu/external/b26930a87ac8b66aba8d2461df2cfed675af527dbea2dabc15bfbcf84df307cd",
       "OSD9TDJ-NP-0003": "https://workdrive.zohopublic.eu/external/2205294dbaa634e644477e8daacdda7d6f1c7e963957fd8fd46a8d4ca3c70d8b",
@@ -1042,7 +679,6 @@
       "OSD9TDJ-NP-0009": "https://workdrive.zohopublic.eu/external/4d0eb1ed4efe97278484215d61430604b3c11bdde9b6b27086311f8519e24761",
       "OSD9TDJ-NP-0010": "https://workdrive.zohopublic.eu/external/35fd14fa8812fe39d0c816d193eac966c7fa11850733b643e9b6f697b21e8849",
 
-      // EXT (Externes) 0001-0008
       "OSD9TDJ-EXT-0001": "https://workdrive.zohopublic.eu/external/1982757f2e9664af7544c5b9899c06834d1decc3bec0f9789003c7b78cece2a4",
       "OSD9TDJ-EXT-0002": "https://workdrive.zohopublic.eu/external/5816ffe7e962f88daa3b5205d741099ce02c4e86cd3cb9ea6b280e7b4381b107",
       "OSD9TDJ-EXT-0003": "https://workdrive.zohopublic.eu/external/2d38135c2e096c66afc69ff675fe3ee19f1716c78240557727704bd700243ca9",
@@ -1054,37 +690,88 @@
     };
 
     function normalizeMatricule(raw){
-      if (!raw) return "";
-      return raw
+      return String(raw || "")
         .trim()
         .toUpperCase()
-        .replace(/[‐-‒–—−]/g, "-")
-        .replace(/\s+/g, "");
+        .replace(/[‐-‒–—−_]/g, "-")
+        .replace(/\s+/g, "")
+        .replace(/[^A-Z0-9-]/g, "");
+    }
+
+    function buildMatricule(raw){
+      const value = normalizeMatricule(raw);
+      if (!value) return "";
+
+      if (DOSSIERS[value]) return value;
+
+      let v = value.replace(/^OSD9TDJ-?/, "");
+
+      let m = v.match(/^(HT|NP|EXT)-?(\d{1,4})$/);
+      if (m) return `OSD9TDJ-${m[1]}-${m[2].padStart(4, "0")}`;
+
+      m = v.match(/^(HT|NP|EXT)(\d{1,4})$/);
+      if (m) return `OSD9TDJ-${m[1]}-${m[2].padStart(4, "0")}`;
+
+      m = value.match(/^(\d{1,4})$/);
+      if (m) return `OSD9TDJ-HT-${m[1].padStart(4, "0")}`;
+
+      return value;
     }
 
     const form = document.getElementById("matriculeForm");
     const input = document.getElementById("matriculeInput");
+    const preview = document.getElementById("matriculePreview");
 
-    if (form && input){
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const key = normalizeMatricule(input.value);
-        const url = DOSSIERS[key];
+    function refreshPreview(){
+      if (!input || !preview) return;
+      const built = buildMatricule(input.value);
 
-        if (!url){
-          alert("⚠️ Matricule introuvable. Vérifie le format (ex : OSD9TDJ-HT-0001).");
-          return;
+      if (!input.value.trim()){
+        preview.textContent = "";
+        return;
+      }
+
+      if (DOSSIERS[built]){
+        preview.textContent = "Matricule reconnu : " + built;
+      } else {
+        preview.textContent = "Format interprété : " + built;
+      }
+    }
+
+    if (input){
+      input.addEventListener("input", refreshPreview);
+      input.addEventListener("blur", function(){
+        const built = buildMatricule(input.value);
+        if (built && DOSSIERS[built]) {
+          input.value = built;
+          refreshPreview();
         }
-        openZohoUrl(url, "Dossier – " + key);
       });
     }
 
-    // ✅ AJOUT : formulaire planning des études
+    if (form && input){
+      form.addEventListener("submit", function(e){
+        e.preventDefault();
+
+        const key = buildMatricule(input.value);
+        const url = DOSSIERS[key];
+
+        if (!url){
+          alert("⚠️ Matricule introuvable. Exemple accepté : OSD9TDJ-HT-0001, HT-0001, NP 3, EXT0004.");
+          return;
+        }
+
+        input.value = key;
+        refreshPreview();
+        window.open(url, "_blank", "noopener,noreferrer");
+      });
+    }
+
     const planningForm = document.getElementById("planningForm");
     const planningSelect = document.getElementById("planningSelect");
 
     if (planningForm && planningSelect){
-      planningForm.addEventListener("submit", (e) => {
+      planningForm.addEventListener("submit", function(e){
         e.preventDefault();
         const target = planningSelect.value;
 
@@ -1096,228 +783,51 @@
         window.location.href = target;
       });
     }
-
-    // Tous les liens Zoho => modale (la page reste ouverte)
-    document.querySelectorAll('a[href*="workdrive.zohopublic.eu"]').forEach(a => {
-      a.addEventListener("click", (e) => {
-        const url = a.getAttribute("href");
-        if (!url) return;
-
-        if (url.startsWith("mailto:") || url.startsWith("https://wa.me/")) return;
-
-        e.preventDefault();
-        const title =
-          a.closest(".card")?.querySelector("h2")?.textContent?.trim()
-          || "Documents";
-
-        openZohoUrl(url, title);
-      });
-    });
-    // ====== Onglets Zoho (multi-pages) ======
-const tabsBar = document.getElementById("zohoTabs");
-let ZOHO_TABS = []; // {id, title, url}
-let ACTIVE_ID = null;
-
-function renderTabs(){
-  if (!tabsBar) return;
-  tabsBar.innerHTML = "";
-  if (ZOHO_TABS.length === 0){
-    tabsBar.classList.remove("open");
-    return;
-  }
-  tabsBar.classList.add("open");
-
-  ZOHO_TABS.forEach(t => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "zoho-tab";
-    b.setAttribute("aria-selected", t.id === ACTIVE_ID ? "true" : "false");
-
-    const label = document.createElement("span");
-    label.textContent = t.title;
-
-    const x = document.createElement("span");
-    x.className = "x";
-    x.textContent = "×";
-
-    b.appendChild(label);
-    b.appendChild(x);
-
-    b.addEventListener("click", (e) => {
-      // clic sur X -> fermer l'onglet
-      if (e.target === x){
-        e.stopPropagation();
-        ZOHO_TABS = ZOHO_TABS.filter(tt => tt.id !== t.id);
-        if (ACTIVE_ID === t.id){
-          ACTIVE_ID = ZOHO_TABS.length ? ZOHO_TABS[ZOHO_TABS.length - 1].id : null;
-          const next = ZOHO_TABS.find(tt => tt.id === ACTIVE_ID);
-          if (next){
-            frame.src = next.url;
-            openExternal.href = next.url;
-            modalTitle.textContent = next.title;
-          } else {
-            frame.src = "about:blank";
-          }
-        }
-        renderTabs();
-        return;
-      }
-
-      // sinon -> activer l'onglet
-      ACTIVE_ID = t.id;
-      frame.src = t.url;
-      openExternal.href = t.url;
-      modalTitle.textContent = t.title;
-      renderTabs();
-    });
-
-    tabsBar.appendChild(b);
-  });
-}
-
-// ✅ Remplace ton openZohoUrl par une version qui ouvre en onglet
-const _openZohoUrl_old = openZohoUrl;
-openZohoUrl = function(url, title){
-  if (!url) return;
-  const tTitle = title || "Documents";
-  const existing = ZOHO_TABS.find(t => t.url === url);
-
-  if (existing){
-    ACTIVE_ID = existing.id;
-    frame.src = existing.url;
-    openExternal.href = existing.url;
-    modalTitle.textContent = existing.title;
-  } else {
-    const id = "t_" + Date.now() + "_" + Math.random().toString(16).slice(2);
-    const tab = { id, title: tTitle, url };
-    ZOHO_TABS.push(tab);
-    ACTIVE_ID = id;
-
-    frame.src = url;
-    openExternal.href = url;
-    modalTitle.textContent = tTitle;
-  }
-
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden","false");
-  renderTabs();
-};
-
-// À la fermeture: on garde les onglets (pour réouvrir la modale) ?
-// -> si tu veux tout vider à chaque fermeture, décommente les 2 lignes.
-const _closeZoho_old = closeZoho;
-closeZoho = function(){
-  modal.classList.remove("open");
-  modal.setAttribute("aria-hidden","true");
-  frame.src = "about:blank";
-  // ZOHO_TABS = []; ACTIVE_ID = null; renderTabs();
-};
-
-// ====== Menu ⋯ dans la modale : "Aller à une section" ======
-document.querySelectorAll(".zoho-nav-link[data-jump]").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const target = btn.getAttribute("data-jump");
-    const scroller = document.querySelector(".viewport-scroll");
-    const el = document.querySelector(target);
-    if (scroller && el){
-      scroller.scrollTo({ top: el.offsetTop - 20, behavior: "smooth" });
-    }
-    // fermer le menu
-    const nav = document.getElementById("zohoNav");
-    if (nav) nav.open = false;
-  });
-});
-
-// ====== Auto-lister tous les liens Zoho du HTML dans le menu de la modale ======
-const list = document.getElementById("zohoLinksList");
-if (list){
-  const seen = new Set();
-  const links = Array.from(document.querySelectorAll('a[href*="workdrive.zohopublic.eu"]'));
-
-  links.forEach(a => {
-    const url = a.getAttribute("href");
-    if (!url || seen.has(url)) return;
-    seen.add(url);
-
-    const title =
-      a.closest(".card")?.querySelector("h2")?.textContent?.trim()
-      || a.closest(".card")?.querySelector("h3")?.textContent?.trim()
-      || a.textContent.trim()
-      || "Documents";
-
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "zoho-nav-link";
-    b.textContent = title;
-
-    b.addEventListener("click", () => {
-      openZohoUrl(url, title);
-      const nav = document.getElementById("zohoNav");
-      if (nav) nav.open = false;
-    });
-
-    list.appendChild(b);
-  });
-
-  // Si aucun lien
-  if (seen.size === 0){
-    const p = document.createElement("div");
-    p.style.padding = "10px 12px";
-    p.style.opacity = "0.85";
-    p.style.textAlign = "left";
-    p.textContent = "Aucun lien Zoho détecté sur cette page.";
-    list.appendChild(p);
-  }
-}
   </script>
-<script>
-(function(){
-  try{
-    sessionStorage.setItem("osd_prev_page", location.href);
-  }catch(e){}
 
-  document.addEventListener("click", function(e){
-    const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
-    if(!a) return;
-    const href = a.getAttribute("href") || "";
-    if(href.includes("menu.html")){
-      try{
-        sessionStorage.setItem("osd_prev_page", location.href);
-      }catch(err){}
-    }
-  }, true);
-})();
-</script>
   <script>
-(function(){
+  (function(){
+    try{
+      sessionStorage.setItem("osd_prev_page", location.href);
+    }catch(e){}
 
-  /* ✅ AJOUT ICI */
-  if (location.pathname.endsWith("menu.html")) return;
+    document.addEventListener("click", function(e){
+      const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+      if(!a) return;
+      const href = a.getAttribute("href") || "";
+      if(href.includes("menu.html")){
+        try{
+          sessionStorage.setItem("osd_prev_page", location.href);
+        }catch(err){}
+      }
+    }, true);
+  })();
+  </script>
 
-  try{
-    sessionStorage.setItem("osd_prev_page", location.href);
-  }catch(e){}
+  <script>
+  (function(){
+    if (location.pathname.endsWith("menu.html")) return;
 
-  document.addEventListener("click", function(e){
-    const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
-    if(!a) return;
-    const href = a.getAttribute("href") || "";
-    if(href.includes("menu.html")){
-      try{
-        sessionStorage.setItem("osd_prev_page", location.href);
-      }catch(err){}
-    }
-  }, true);
-})();
-</script>
- <!-- Google Translate (widget invisible) -->
-<div id="google_translate_element" style="display:none;"></div>
+    try{
+      sessionStorage.setItem("osd_prev_page", location.href);
+    }catch(e){}
 
-<!-- Script commun site (audio + translate + mémoire + anti-bannière) -->
-<script defer src="/osd.js"></script>
+    document.addEventListener("click", function(e){
+      const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+      if(!a) return;
+      const href = a.getAttribute("href") || "";
+      if(href.includes("menu.html")){
+        try{
+          sessionStorage.setItem("osd_prev_page", location.href);
+        }catch(err){}
+      }
+    }, true);
+  })();
+  </script>
 
-<!-- Google Translate (callback défini dans /osd.js) -->
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
+  <div id="google_translate_element" style="display:none;"></div>
+  <script defer src="/osd.js"></script>
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
 
 </body>
 </html>
