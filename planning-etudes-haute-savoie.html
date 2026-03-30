@@ -318,18 +318,6 @@
       padding:16px;
     }
 
-    .notice{
-      font-size:0.95rem;
-      line-height:1.55;
-      opacity:0.95;
-      margin:0 0 12px;
-    }
-
-    .notice strong{
-      color:var(--or2);
-      font-family:'Cinzel',serif;
-    }
-
     .mini-note{
       padding:12px 14px;
       border-left:3px solid var(--or);
@@ -798,9 +786,7 @@
                   <th>État de confirmation</th>
                 </tr>
               </thead>
-              <tbody id="calendarTableBody">
-                <!-- Rempli par JS -->
-              </tbody>
+              <tbody id="calendarTableBody"></tbody>
             </table>
           </div>
 
@@ -861,7 +847,7 @@
                     <div class="field">
                       <label for="presenceCode">Code personnel</label>
                       <input type="password" id="presenceCode" autocomplete="off" placeholder="Votre code personnel" required>
-                      <small>Ce code doit correspondre exactement au matricule sélectionné.</small>
+                      <small>Les majuscules et minuscules sont ignorées. Les espaces au début et à la fin sont ignorés.</small>
                     </div>
 
                     <div class="field">
@@ -958,7 +944,7 @@
                     <div class="field">
                       <label for="modificationCode">Code personnel</label>
                       <input type="password" id="modificationCode" autocomplete="off" placeholder="Votre code personnel" required>
-                      <small>Le code doit correspondre au matricule choisi.</small>
+                      <small>Les majuscules et minuscules sont ignorées. Les espaces au début et à la fin sont ignorés.</small>
                     </div>
 
                     <div class="field">
@@ -1059,7 +1045,7 @@
       { no: 11, date: "2026-10-01", start: "19:00", end: "22:00", label: "Réunion n°11 – Jeudi 01/10/2026 – 19h00 à 22h00" },
       { no: 12, date: "2026-10-15", start: "19:00", end: "22:00", label: "Réunion n°12 – Jeudi 15/10/2026 – 19h00 à 22h00" },
       { no: 13, date: "2026-11-12", start: "19:00", end: "22:00", label: "Réunion n°13 – Jeudi 12/11/2026 – 19h00 à 22h00" },
-      { no: 14, date: "2026-11-26", start: "19:00", end: "22h00", label: "Réunion n°14 – Jeudi 26/11/2026 – 19h00 à 22h00" },
+      { no: 14, date: "2026-11-26", start: "19:00", end: "22:00", label: "Réunion n°14 – Jeudi 26/11/2026 – 19h00 à 22h00" },
       { no: 15, date: "2026-12-10", start: "19:00", end: "22:00", label: "Réunion n°15 – Jeudi 10/12/2026 – 19h00 à 22h00" }
     ];
 
@@ -1078,10 +1064,6 @@
 
     function meetingStartDate(meeting){
       return new Date(`${meeting.date}T${meeting.start}:00`);
-    }
-
-    function meetingEndDate(meeting){
-      return new Date(`${meeting.date}T${meeting.end}:00`);
     }
 
     function initialDeadline(meeting){
@@ -1232,8 +1214,14 @@
         return;
       }
 
-      if (!window.OSD_AUTH || !window.OSD_AUTH.verify(member, code)){
-        alert("⛔ Code personnel incorrect pour ce matricule.");
+      if (!window.OSD_AUTH) {
+        alert("⚠️ Module d’authentification introuvable.");
+        return;
+      }
+
+      const authResult = window.OSD_AUTH.verify(member, code);
+      if (!authResult.ok){
+        alert(authResult.message);
         return;
       }
 
@@ -1261,8 +1249,6 @@
       payload.Delai_reglementaire = "Validation initiale autorisée jusqu'à 72 heures avant la réunion";
       payload.Timestamp_envoi = new Date().toLocaleString("fr-FR");
       payload.Code_verifie = "oui";
-
-      delete payload.presenceCode;
 
       const submitBtn = form.querySelector('button[type="submit"]');
       const oldText = submitBtn.textContent;
@@ -1297,8 +1283,14 @@
         return;
       }
 
-      if (!window.OSD_AUTH || !window.OSD_AUTH.verify(member, code)){
-        alert("⛔ Code personnel incorrect pour ce matricule.");
+      if (!window.OSD_AUTH) {
+        alert("⚠️ Module d’authentification introuvable.");
+        return;
+      }
+
+      const authResult = window.OSD_AUTH.verify(member, code);
+      if (!authResult.ok){
+        alert(authResult.message);
         return;
       }
 
@@ -1321,8 +1313,6 @@
       payload.Situation_precedente_locale = previous ? previous.status : "Aucune donnée locale enregistrée";
       payload.Timestamp_envoi = new Date().toLocaleString("fr-FR");
       payload.Code_verifie = "oui";
-
-      delete payload.modificationCode;
 
       const submitBtn = form.querySelector('button[type="submit"]');
       const oldText = submitBtn.textContent;
