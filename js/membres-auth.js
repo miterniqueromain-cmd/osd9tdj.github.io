@@ -1,13 +1,9 @@
 (function () {
   "use strict";
 
-  /*
-    Matricule => code personnel
-    Remplace les codes ci-dessous par les tiens.
-  */
   const USERS = {
-    "OSD9TDJ-HT-0001": "alpha23",
-    "OSD9TDJ-HT-0002": "delta91",
+    "OSD9TDJ-HT-0001": "alpha59",
+    "OSD9TDJ-HT-0002": "delta59",
     "OSD9TDJ-HT-0003": "kappa88",
     "OSD9TDJ-HT-0004": "sigma44",
     "OSD9TDJ-HT-0005": "omega77",
@@ -22,26 +18,20 @@
 
   const STORAGE_KEY = "osd_auth_attempts_v1";
   const MAX_ATTEMPTS = 5;
-  const LOCK_DURATION_MS = 15 * 60 * 1000; // 15 min
+  const LOCK_DURATION_MS = 15 * 60 * 1000;
 
   function normalizeText(value) {
-    return String(value || "")
-      .trim()
-      .toLowerCase();
+    return String(value || "").trim().toLowerCase();
   }
 
   function normalizeMember(member) {
-    return String(member || "")
-      .trim()
-      .toUpperCase();
+    return String(member || "").trim().toUpperCase();
   }
 
   function readState() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) {
-        return { failures: 0, lockedUntil: 0 };
-      }
+      if (!raw) return { failures: 0, lockedUntil: 0 };
       const parsed = JSON.parse(raw);
       return {
         failures: Number(parsed.failures || 0),
@@ -103,10 +93,7 @@
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
 
-    if (minutes <= 0) {
-      return `${seconds}s`;
-    }
-
+    if (minutes <= 0) return `${seconds}s`;
     return `${minutes} min ${seconds}s`;
   }
 
@@ -118,10 +105,7 @@
       return {
         ok: false,
         code: "locked",
-        message:
-          "⛔ Trop de tentatives. Réessaie dans " +
-          formatRemaining(getRemainingLockMs()) +
-          "."
+        message: "⛔ Trop de tentatives. Réessaie dans " + formatRemaining(getRemainingLockMs()) + "."
       };
     }
 
@@ -147,10 +131,7 @@
         return {
           ok: false,
           code: "locked",
-          message:
-            "⛔ Trop de tentatives. Réessaie dans " +
-            formatRemaining(result.remainingMs) +
-            "."
+          message: "⛔ Trop de tentatives. Réessaie dans " + formatRemaining(result.remainingMs) + "."
         };
       }
 
@@ -170,19 +151,14 @@
         return {
           ok: false,
           code: "locked",
-          message:
-            "⛔ Trop de tentatives. Réessaie dans " +
-            formatRemaining(result.remainingMs) +
-            "."
+          message: "⛔ Trop de tentatives. Réessaie dans " + formatRemaining(result.remainingMs) + "."
         };
       }
 
       return {
         ok: false,
         code: "bad_code",
-        message:
-          "⛔ Code personnel incorrect pour ce matricule. " +
-          "Les majuscules et minuscules sont ignorées."
+        message: "⛔ Code personnel incorrect pour ce matricule. Les majuscules et minuscules sont ignorées."
       };
     }
 
