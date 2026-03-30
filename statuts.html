@@ -5,6 +5,7 @@
   <title>Statuts – Ordre Sacré des Neuf Templiers de Jérusalem</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
 
   <!-- SEO principal -->
   <meta name="description" content="Statuts publics officiels de l’Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J. Association loi 1901 à vocation culturelle, historique, éducative, caritative et initiatique. Héritage templier, patrimoine médiéval, rites, études symboliques, fraternité, actions solidaires et cadre associatif laïque.">
@@ -187,7 +188,9 @@
   <style>
     :root {
       --or: #d6a728;
+      --or2: rgba(214,167,40,0.82);
       --clair: #f5f2ea;
+      --encoche: 14px;
     }
 
     * { box-sizing: border-box; }
@@ -203,6 +206,7 @@
       text-align: center;
       position: relative;
       overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body::before {
@@ -317,6 +321,8 @@
       margin-top: 28px;
       margin-bottom: 10px;
       text-transform: uppercase;
+      overflow-wrap: anywhere;
+      word-break: normal;
     }
 
     h3 {
@@ -326,10 +332,78 @@
       margin-top: 20px;
     }
 
+    /* ✅ Cartouche discret pour les articles */
+    .article-title {
+      text-align: center;
+      margin-top: 34px;
+      margin-bottom: 14px;
+    }
+
+    .article-badge {
+      position: relative;
+      display: inline-block;
+      width: min(100%, 100%);
+      max-width: 100%;
+      padding: 11px 18px;
+      border-radius: 14px;
+      background: linear-gradient(to bottom, rgba(214,167,40,0.08), rgba(214,167,40,0.03));
+      box-shadow:
+        0 0 0 1px rgba(214,167,40,0.30) inset,
+        0 8px 20px rgba(0,0,0,0.18);
+      overflow-wrap: anywhere;
+      white-space: normal;
+      line-height: 1.35;
+    }
+
+    .article-badge::before,
+    .article-badge::after,
+    .article-badge .corner-tl,
+    .article-badge .corner-br {
+      content: "";
+      position: absolute;
+      width: var(--encoche);
+      height: var(--encoche);
+      pointer-events: none;
+    }
+
+    .article-badge::before {
+      top: 8px;
+      left: 8px;
+      border-top: 2px solid rgba(214,167,40,0.82);
+      border-left: 2px solid rgba(214,167,40,0.82);
+      border-top-left-radius: 5px;
+    }
+
+    .article-badge::after {
+      top: 8px;
+      right: 8px;
+      border-top: 2px solid rgba(214,167,40,0.82);
+      border-right: 2px solid rgba(214,167,40,0.82);
+      border-top-right-radius: 5px;
+    }
+
+    .article-badge .corner-tl {
+      bottom: 8px;
+      left: 8px;
+      border-bottom: 2px solid rgba(214,167,40,0.82);
+      border-left: 2px solid rgba(214,167,40,0.82);
+      border-bottom-left-radius: 5px;
+    }
+
+    .article-badge .corner-br {
+      bottom: 8px;
+      right: 8px;
+      border-bottom: 2px solid rgba(214,167,40,0.82);
+      border-right: 2px solid rgba(214,167,40,0.82);
+      border-bottom-right-radius: 5px;
+    }
+
     p, ul {
       text-align: justify;
       font-size: 1rem;
       line-height: 1.55;
+      overflow-wrap: break-word;
+      word-break: normal;
     }
 
     ul {
@@ -407,6 +481,19 @@
       opacity: 0.85;
     }
 
+    /* ✅ Anti lien bleu / auto-détection téléphone */
+    a,
+    a:visited,
+    a:hover,
+    a:active,
+    a[x-apple-data-detectors],
+    a[href^="tel"],
+    a[href^="sms"],
+    a[href^="mailto"] {
+      color: var(--clair);
+      -webkit-text-fill-color: var(--clair);
+    }
+
     .footer a,
     .footer a:visited,
     .footer a:hover,
@@ -414,10 +501,20 @@
     .legal-line a,
     .legal-line a:visited,
     .legal-line a:hover,
-    .legal-line a:active {
+    .legal-line a:active,
+    a[x-apple-data-detectors],
+    a[href^="tel"],
+    a[href^="sms"] {
       color: var(--clair) !important;
+      -webkit-text-fill-color: var(--clair) !important;
       text-decoration: underline;
+      text-decoration-color: rgba(245,242,234,0.75);
+      text-decoration-thickness: 1px;
       opacity: 0.92;
+      font-weight: inherit !important;
+      border-bottom: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
     }
 
     .footer a:hover,
@@ -430,13 +527,26 @@
     }
 
     @media (max-width: 600px) {
+      :root { --encoche: 12px; }
+
       h1 { font-size: 1.6rem; }
-      h2 { font-size: 1.05rem; }
+      h2 { font-size: 1.02rem; }
       p { font-size: 0.95rem; }
       .top-menu { top: 22px; right: 22px; }
       .frame-fixed { inset: 12px; }
       .viewport-scroll { inset: 20px; }
       .tab { padding: 9px 14px; font-size: 0.86rem; }
+
+      .article-title {
+        margin-top: 28px;
+        margin-bottom: 12px;
+      }
+
+      .article-badge {
+        width: 100%;
+        padding: 10px 14px;
+        font-size: 0.98rem;
+      }
     }
 
     iframe.goog-te-banner-frame,
@@ -522,7 +632,7 @@
         respecté.
       </p>
 
-      <h2>Article 1 – Dénomination</h2>
+      <h2 class="article-title"><span class="article-badge">Article 1 – Dénomination<i class="corner-tl"></i><i class="corner-br"></i></span></h2>
       <p>
         Il est fondé entre les adhérents aux présents statuts une association régie par
         la loi du 1<sup>er</sup> juillet 1901, ayant pour titre&nbsp;:<br>
@@ -531,7 +641,7 @@
         Sigle statutaire&nbsp;: <strong>O.S.D.9.T.D.J.</strong>
       </p>
 
-      <h2>Article 2 – Objet</h2>
+      <h2 class="article-title"><span class="article-badge">Article 2 – Objet<i class="corner-tl"></i><i class="corner-br"></i></span></h2>
 
       <p class="note">
         Note : ces références historiques et symboliques n’ont aucune valeur juridique ou canonique et sont
@@ -642,7 +752,7 @@
         intérieur.
       </p>
 
-      <h2>Article 3 – Siège social</h2>
+      <h2 class="article-title"><span class="article-badge">Article 3 – Siège social<i class="corner-tl"></i><i class="corner-br"></i></span></h2>
       <p>
         Le siège social est fixé en Haute-Savoie (74), France.
         L’adresse exacte est déterminée par le Conseil directeur, consignée au procès-verbal
@@ -650,12 +760,12 @@
         dans les conditions prévues par les statuts.
       </p>
 
-      <h2>Article 4 – Durée</h2>
+      <h2 class="article-title"><span class="article-badge">Article 4 – Durée<i class="corner-tl"></i><i class="corner-br"></i></span></h2>
       <p>
         La durée de l’association est illimitée.
       </p>
 
-      <h2>Article 5 – Membres</h2>
+      <h2 class="article-title"><span class="article-badge">Article 5 – Membres<i class="corner-tl"></i><i class="corner-br"></i></span></h2>
       <p>
         L’association se compose de membres actifs, de membres d’honneur, de membres externe et de
         membres bienfaiteurs. Les qualités, droits et devoirs de chaque catégorie
@@ -669,7 +779,7 @@
         l’autorisation de leurs représentants légaux et d’un encadrement adapté.
       </p>
 
-      <h2>Article 6 – Admission</h2>
+      <h2 class="article-title"><span class="article-badge">Article 6 – Admission<i class="corner-tl"></i><i class="corner-br"></i></span></h2>
       <p>
         L’admission est prononcée par le Grand Maître (Président), après avis
         conforme d’au moins deux Commandeurs (Responsables régionaux), ou selon la
@@ -693,7 +803,7 @@
         l’O.S.D.9.T.D.J. et des règles propres à chaque structure.
       </p>
 
-      <h2>Article 7 – Radiation</h2>
+      <h2 class="article-title"><span class="article-badge">Article 7 – Radiation<i class="corner-tl"></i><i class="corner-br"></i></span></h2>
       <p>
         La qualité de membre se perd par démission, décès, perte des conditions
         d’adhésion ou décision de radiation prise par le Conseil directeur, après
@@ -701,7 +811,7 @@
         l’association.
       </p>
 
-      <h2>Article 8 – Ressources</h2>
+      <h2 class="article-title"><span class="article-badge">Article 8 – Ressources<i class="corner-tl"></i><i class="corner-br"></i></span></h2>
       <p>
         Les ressources de l’association comprennent notamment&nbsp;:
       </p>
@@ -729,7 +839,7 @@
         de l’économie sociale et solidaire, sans statut ESS formel.
       </p>
 
-      <h2>Article 9 – Grand Maître (Président) et Collège des Neuf Sages</h2>
+      <h2 class="article-title"><span class="article-badge">Article 9 – Grand Maître (Président) et Collège des Neuf Sages<i class="corner-tl"></i><i class="corner-br"></i></span></h2>
       <p>
         Le Grand Maître est le Président de l’association. Il est le
         <strong>représentant légal</strong> de l’O.S.D.9.T.D.J. et assume, à ce titre, la
@@ -757,7 +867,7 @@
         de l’Assemblée générale, qui demeure le corps ultime de décision.
       </p>
 
-      <h2>Article 12 – Neutralité</h2>
+      <h2 class="article-title"><span class="article-badge">Article 12 – Neutralité<i class="corner-tl"></i><i class="corner-br"></i></span></h2>
       <p>
         L’association est neutre sur le plan politique et religieux.
         Elle respecte toutes les traditions, sans en revendiquer la filiation ni le
@@ -766,7 +876,7 @@
         canonique ni dogmatique.
       </p>
 
-      <h2>Article 12 bis – Clause de non-confusion, d’indépendance et d’interdiction de sigles</h2>
+      <h2 class="article-title"><span class="article-badge">Article 12 bis – Clause de non-confusion, d’indépendance et d’interdiction de sigles<i class="corner-tl"></i><i class="corner-br"></i></span></h2>
       <p>
         L’Ordre Sacré des Neuf Templiers de Jérusalem, association régie par la loi
         du 1<sup>er</sup> juillet 1901, affirme expressément son indépendance pleine et entière
@@ -790,7 +900,7 @@
         disciplinaires pouvant aller jusqu’à l’exclusion.
       </p>
 
-      <h2>Article 13 – Dimension internationale et coopérations</h2>
+      <h2 class="article-title"><span class="article-badge">Article 13 – Dimension internationale et coopérations<i class="corner-tl"></i><i class="corner-br"></i></span></h2>
       <p>
         L’association a vocation à développer ses activités dans différents pays et
         peut créer des représentations à l’étranger, rattachées à l’association
@@ -807,7 +917,7 @@
         ses actes.
       </p>
 
-      <h2>Articles 15 et suivants – Gestion financière et transparence</h2>
+      <h2 class="article-title"><span class="article-badge">Articles 15 et suivants – Gestion financière et transparence<i class="corner-tl"></i><i class="corner-br"></i></span></h2>
       <p>
         Les statuts prévoient un ensemble de garanties en matière de gestion
         financière&nbsp;: double signature bancaire sur les comptes centraux,
@@ -824,7 +934,7 @@
         en vigueur.
       </p>
 
-      <h2>Article 34 – Données personnelles et droit à l’image (RGPD)</h2>
+      <h2 class="article-title"><span class="article-badge">Article 34 – Données personnelles et droit à l’image (RGPD)<i class="corner-tl"></i><i class="corner-br"></i></span></h2>
       <p>
         Conformément à l’Article 34 des statuts, l’association applique strictement
         le Règlement général sur la protection des données (RGPD). Les données
