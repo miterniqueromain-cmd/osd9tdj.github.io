@@ -13,7 +13,7 @@
   <meta name="description"
         content="Découvrez les activités, rencontres d’étude, évènements culturels, fraternels, philosophiques et chevaleresques de l’Ordre Sacré des Neuf Templiers de Jérusalem. L’association organise des travaux réguliers, des rencontres, des temps d’étude approfondie et accueille les personnes souhaitant découvrir sa démarche.">
   <meta name="keywords"
-        content="OSD9TDJ, O.S.D.9.T.D.J., Ordre Sacré des Neuf Templiers de Jérusalem, activités association, évènements, rencontres templières, études philosophiques, études initiatiques, chevalerie moderne, fraternité, culture templière, association loi 1901, rencontres régulières, réunion découverte, ordre templier, activité associative, travaux d’étude, rencontres culturelles, évènements fraternels, association active">
+        content="OSD9TDJ, O.S.D.9.T.D.J., Ordre Sacré des Neuf Templiers de Jérusalem, activités association, évènements, rencontres templières, études philosophiques, études initiatiques, chevalerie moderne, fraternité, culture templière, association loi 1901, rencontres régulières, réunion découverte, ordre templier, activité associative, travaux d’étude, rencontres culturelles, évènements fraternels, association active, Cordes-sur-Ciel, Église Hélios, ordre secret du temple, saint ordre christique, rite de Mithra, Rose+Croix, alchimie">
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
   <meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
   <meta name="bingbot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
@@ -96,7 +96,7 @@
         "@id":"https://osd9tdj.org/activites.html#webpage",
         "url":"https://osd9tdj.org/activites.html",
         "name":"Activités et évènements – O.S.D.9.T.D.J.",
-        "description":"Page consacrée aux activités, rencontres d’étude, évènements passés et perspectives de découverte de l’Ordre Sacré des Neuf Templiers de Jérusalem.",
+        "description":"Page consacrée aux activités, rencontres d’étude, évènements passés et à venir, et modalités de découverte de l’Ordre Sacré des Neuf Templiers de Jérusalem.",
         "isPartOf":{"@id":"https://osd9tdj.org/#website"},
         "about":{"@id":"https://osd9tdj.org/#organization"},
         "inLanguage":"fr-FR"
@@ -105,7 +105,7 @@
         "@type":"Article",
         "@id":"https://osd9tdj.org/activites.html#article",
         "headline":"Activités et évènements de l’Ordre Sacré des Neuf Templiers de Jérusalem",
-        "description":"Présentation des activités régulières, des rencontres bimensuelles d’étude, des évènements publics et des modalités de prise de contact pour découvrir l’association.",
+        "description":"Présentation des activités régulières, des rencontres bimensuelles d’étude, des évènements publics, d’une participation à un convent extérieur en mai 2026 et des modalités de prise de contact pour découvrir l’association.",
         "mainEntityOfPage":{"@id":"https://osd9tdj.org/activites.html#webpage"},
         "publisher":{"@id":"https://osd9tdj.org/#organization"},
         "image":"https://osd9tdj.org/logo-ix.PNG",
@@ -119,7 +119,10 @@
           "travaux initiatiques",
           "chevalerie moderne",
           "évènements culturels",
-          "réunion découverte"
+          "réunion découverte",
+          "Cordes-sur-Ciel",
+          "Rite de Mithra",
+          "Rose+Croix"
         ]
       },
       {
@@ -148,6 +151,14 @@
             "acceptedAnswer":{
               "@type":"Answer",
               "text":"L’association propose des temps d’étude, de réflexion philosophique, de travail culturel et symbolique, ainsi que des évènements ponctuels, rencontres fraternelles et activités publiques selon les périodes."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Un déplacement est-il prévu en mai 2026 ?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Oui. Des membres de l’association participeront librement à un déplacement à Cordes-sur-Ciel du 15 au 17 mai 2026, dans le cadre d’un convent organisé par une structure extérieure."
             }
           }
         ]
@@ -361,7 +372,48 @@
       color: var(--clair);
       text-decoration: underline;
     }
+.organizer-symbol-box{
+  margin: 10px auto 18px;
+  padding: 14px 14px 10px;
+  max-width: 320px;
+  border: 1px solid rgba(214,167,40,0.30);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.02);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.22);
+  text-align: center;
+}
 
+.organizer-symbol{
+  display: block;
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  margin: 0 auto 10px;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.35));
+}
+
+.organizer-symbol-caption{
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: rgba(253,247,229,0.88);
+  text-align: center;
+}
+
+@media (max-width: 600px){
+  .organizer-symbol-box{
+    max-width: 100%;
+    padding: 12px 12px 9px;
+  }
+
+  .organizer-symbol{
+    max-width: 120px;
+  }
+
+  .organizer-symbol-caption{
+    font-size: 0.84rem;
+  }
+}
     .poster-wrap{
       margin:14px 0 16px;
       display:flex;
@@ -575,13 +627,12 @@
       <div class="intro-block" aria-label="Présentation des activités">
         <div class="events-title">Vie de l’association</div>
         <p>
-          L’Ordre Sacré des Neuf Templiers de Jérusalem ne se limite pas à des prises de position statutaires
-          ou à une seule présence institutionnelle ponctuelle. L’association mène une activité réelle,
-          suivie et régulière, dans un cadre discret, sérieux et conforme à sa vocation culturelle,
-          fraternelle, philosophique et initiatique.
+          L’Ordre Sacré des Neuf Templiers de Jérusalem ne se limite pas à une existence statutaire
+          ou institutionnelle. L’association mène une activité réelle, suivie et régulière, dans un
+          cadre discret, sérieux et conforme à sa vocation culturelle, fraternelle, philosophique et initiatique.
         </p>
         <p>
-          En dehors de nos évènements publics ou occasionnels, l’association se réunit de manière régulière
+          En dehors de ses évènements publics ou ponctuels, l’association se réunit de manière régulière
           pour conduire des temps d’étude, de réflexion, de transmission et de travail approfondi.
           Ces rencontres constituent une part essentielle de la vie de l’O.S.D.9.T.D.J. et témoignent
           du caractère concret, vivant et non fictif de son activité.
@@ -624,14 +675,47 @@
 
       <div class="events-section">
         <div class="events-title">Évènements à venir</div>
-        <p>
-          Aucun évènement public n’est programmé pour le moment.
-        </p>
-        <p>
-          Nous vous invitons à revenir consulter cette page régulièrement : nos évènements culturels,
-          fraternels, associatifs et chevaleresques y seront annoncés lorsqu’ils seront ouverts
-          à la communication publique.
-        </p>
+
+      <div class="event-card">
+  <h2 class="event-name">Participation à un Convent à Cordes-sur-Ciel</h2>
+  <p class="event-date">15 au 17 mai 2026</p>
+
+  <div class="organizer-symbol-box" aria-label="Symbole de l’organisateur">
+    <img src="croix-helios.PNG"
+         alt="Croix de l’Église Hélios, structure organisatrice du Convent de mai 2026"
+         class="organizer-symbol"
+         loading="lazy"
+         decoding="async">
+    <p class="organizer-symbol-caption">
+      Symbole de l’Église Hélios, structure organisatrice du Convent de mai 2026.
+    </p>
+  </div>
+
+  <p class="event-desc">
+            Dans le cadre de ses activités culturelles, philosophiques et initiatiques, des membres de
+            l’Ordre Sacré des Neuf Templiers de Jérusalem participeront à un déplacement à Cordes-sur-Ciel,
+            du 15 au 17 mai 2026, à l’occasion d’un Convent organisé par l’Église Hélios.
+            <br><br>
+            Ce déplacement s’effectue dans un cadre libre, volontaire et personnel. L’association n’est pas
+            organisatrice de l’évènement cultuel lui-même et intervient uniquement pour son organisation
+            logistique collective, conformément au cadre défini pour ce déplacement.
+            <br><br>
+            Cette rencontre annoncée par l’organisateur comprendra notamment des conférences consacrées à
+            l’alchimie, aux momies égyptiennes, à la Rose+Croix ainsi qu’un Rite de Mithra. Elle permettra
+            également des échanges avec diverses sensibilités et présences issues d’horizons templiers,
+            rosicruciens et traditionnels, entre autres le Saint Ordre Christique, l’Ordre Secret du Temple
+            et d’autres structures présentes à cette occasion.
+            <br><br>
+            Les documents d’information communiqués par l’organisateur présentent l’Église Hélios comme
+            disposant en 2026 de plus de 170 lieux de culte ouverts dans 55 pays, comme l’une des Églises
+            principales de la C.E.S.O.N.C.O. (Conférence des Églises Syriaques Orthodoxes Non-Chalcédoniennes
+            Occidentales), laquelle comprend 18 Églises orthodoxes autocéphales, et comme ayant signé en 2021
+            des accords d’intercommunion avec la W.A.C. (Europe), Worldwide Anglican Church.
+            <br><br>
+            Pour l’O.S.D.9.T.D.J., ce déplacement s’inscrit dans la continuité de ses travaux d’étude et de
+            recherche, dans un esprit de discernement, de culture, d’ouverture et de fraternité.
+          </p>
+        </div>
       </div>
 
       <div class="events-section" aria-label="Évènement passé">
