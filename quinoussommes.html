@@ -267,34 +267,49 @@
 
     .container{
       min-height:auto;
+      box-sizing:border-box;
       display:flex;
       flex-direction:column;
-      align-items:stretch;
+      align-items:center;
       width:100%;
       max-width:100%;
+      margin:0 auto;
       overflow-x:hidden;
     }
 
-    .image-box, h1, h2, .nndnn-banner, .big-history-wrap, nav.tabs, footer.footer-min{
-      align-self:center;
+    .page-header{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      margin:0 auto 6px;
+      text-align:center;
     }
 
     .image-box{
       margin-top:10px;
       margin-bottom:24px;
-      margin-left:auto;
-      margin-right:auto;
-      border-radius:18px;
+      padding:18px;
+      border-radius:24px;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.06), rgba(0,0,0,0.96));
       overflow:hidden;
       box-shadow:0 0 35px rgba(0,0,0,0.9);
       border:2px solid rgba(214,167,40,0.85);
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      width:auto;
+      max-width:100%;
     }
 
     .image-box img{
       display:block;
-      max-width:84vw;
-      width:395px;
+      max-width:80vw;
+      width:360px;
       height:auto;
+      margin:0 auto;
+      background:#000;
     }
 
     h1{
@@ -303,16 +318,24 @@
       margin:10px 0 6px;
       line-height:1.25;
       text-wrap:balance;
+      width:100%;
+      max-width:980px;
+      margin-left:auto;
+      margin-right:auto;
     }
 
     h2{
       font-family:'Cinzel',serif;
       font-size:1.22rem;
-      margin-bottom:18px;
+      margin:0 0 18px;
       font-weight:normal;
       opacity:0.9;
       line-height:1.35;
       text-wrap:balance;
+      width:100%;
+      max-width:980px;
+      margin-left:auto;
+      margin-right:auto;
     }
 
     h3{
@@ -330,7 +353,7 @@
 
     .section-card{
       width:100%;
-      max-width:min(920px, 100%);
+      max-width:920px;
       margin:22px auto;
       padding:22px 22px;
       text-align:justify;
@@ -342,7 +365,6 @@
         0 0 0 1px rgba(0,0,0,0.14) inset;
       position:relative;
       overflow:hidden;
-      align-self:center;
       scroll-margin-top:30px;
     }
 
@@ -558,6 +580,7 @@
       gap:16px;
       flex-wrap:nowrap;
       text-align:center;
+      width:100%;
     }
 
     .nndnn-banner img{
@@ -640,7 +663,7 @@
         margin:16px auto;
       }
       .tab{ padding:9px 16px; font-size:0.86rem; }
-      .image-box img{ width:360px; max-width:88vw; }
+      .image-box img{ width:320px; max-width:80vw; }
       .soft-sep::after{ left:6%; right:6%; }
 
       details.section-card > summary{
@@ -839,7 +862,7 @@
   <div class="viewport-scroll">
     <main class="container" id="contenu-principal">
 
-      <header>
+      <header class="page-header">
         <div class="image-box">
           <img
             src="blason-osd9tdj.PNG"
