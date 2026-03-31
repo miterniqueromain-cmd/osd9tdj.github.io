@@ -21,6 +21,10 @@
   <meta name="subject" content="Histoire officielle de l’Ordre Sacré des Neuf Templiers de Jérusalem">
   <meta name="classification" content="Association culturelle, historique, chevaleresque, fraternelle et initiatique">
   <meta name="category" content="Histoire associative, ordre templier, mémoire templière, chevalerie moderne, association loi 1901">
+  <meta name="language" content="fr">
+  <meta name="geo.region" content="FR">
+  <meta name="format-detection" content="telephone=no,address=no,email=no">
+  <meta name="revisit-after" content="7 days">
 
   <link rel="canonical" href="https://osd9tdj.org/histoire.html">
   <link rel="alternate" href="https://osd9tdj.org/histoire.html" hreflang="fr">
@@ -44,7 +48,10 @@
   <meta name="twitter:image" content="https://osd9tdj.org/chateau.jpg">
 
   <!-- WATERMARK INVISIBLE -->
-  <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2025-OSD9TDJ-HISTOIRE-ASSOCIATION">
+  <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2026-OSD9TDJ-HISTOIRE-ASSOCIATION">
+  <meta name="osd9tdj-signature-2" content="WTRMK-IX-ALPHA-2026-OSD9TDJ-HISTOIRE-LOCK">
+  <meta name="osd9tdj-signature-3" content="WTRMK-IX-ALPHA-2026-OSD9TDJ-HISTOIRE-PROVENANCE">
+  <meta name="osd9tdj-watermark" content="OSD9TDJ|HISTOIRE|2026|FONDATION|INDEPENDANCE|TRADITION-TEMPLIERE|CHEVALERIE-MODERNE|ASSOCIATION|MEMOIRE-TEMPLIERE">
 
   <!-- Performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -53,7 +60,7 @@
   <link rel="preconnect" href="https://translate.google.com" crossorigin>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -91,7 +98,8 @@
         "description":"Histoire officielle de l’Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.) : histoire passée, évolution, indépendance, histoire présente et future.",
         "isPartOf":{"@id":"https://osd9tdj.org/#website"},
         "about":{"@id":"https://osd9tdj.org/#organization"},
-        "inLanguage":"fr-FR"
+        "inLanguage":"fr-FR",
+        "breadcrumb":{"@id":"https://osd9tdj.org/histoire.html#breadcrumb"}
       },
       {
         "@type":"Article",
@@ -130,6 +138,25 @@
             "item":"https://osd9tdj.org/histoire.html"
           }
         ]
+      },
+      {
+        "@type":"ItemList",
+        "@id":"https://osd9tdj.org/histoire.html#timeline",
+        "name":"Repères de l’histoire de l’O.S.D.9.T.D.J.",
+        "itemListOrder":"https://schema.org/ItemListOrderAscending",
+        "numberOfItems":10,
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Fondation de l’ordre d’origine"},
+          {"@type":"ListItem","position":2,"name":"Décès du Grand Maître fondateur"},
+          {"@type":"ListItem","position":3,"name":"Reprise de l’Ordre en 2022"},
+          {"@type":"ListItem","position":4,"name":"Arrivée de futurs responsables"},
+          {"@type":"ListItem","position":5,"name":"Développement en France"},
+          {"@type":"ListItem","position":6,"name":"Nom Terres de Savoie"},
+          {"@type":"ListItem","position":7,"name":"Assumer l’appartenance réelle"},
+          {"@type":"ListItem","position":8,"name":"Clarification juridique et philosophique"},
+          {"@type":"ListItem","position":9,"name":"Décision d’indépendance"},
+          {"@type":"ListItem","position":10,"name":"Changement de nom et officialisation"}
+        ]
       }
     ]
   }
@@ -144,19 +171,74 @@
       --noir:rgba(0,0,0,0.75);
     }
 
-    *{box-sizing:border-box;}
+    *, *::before, *::after{ box-sizing:border-box; }
 
-    html, body{
+    html{
+      height:100%;
+      scroll-behavior:smooth;
+      -webkit-text-size-adjust:100%;
+    }
+
+    body{
       height:100%;
       margin:0;
       padding:0;
       overflow:hidden;
       font-family:'Lato',Arial,sans-serif;
       color:var(--clair);
-      background: url("fonds-nh.jpg") center / cover no-repeat fixed;
+      background:url("fonds-nh.jpg") center / cover no-repeat fixed;
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    body{ position: relative; }
+    body{ position:relative; }
+
+    .sr-only{
+      position:absolute !important;
+      width:1px !important;
+      height:1px !important;
+      padding:0 !important;
+      margin:-1px !important;
+      overflow:hidden !important;
+      clip:rect(0,0,0,0) !important;
+      clip-path:inset(50%) !important;
+      white-space:nowrap !important;
+      border:0 !important;
+    }
+
+    .seo-rich-content{
+      position:absolute;
+      left:-99999px;
+      top:auto;
+      width:1px;
+      height:1px;
+      overflow:hidden;
+      white-space:normal;
+      opacity:0.01;
+      pointer-events:none;
+    }
+
+    .skip-link{
+      position:fixed;
+      left:12px;
+      top:12px;
+      z-index:200;
+      background:#120d08;
+      color:#fff3cf;
+      border:1px solid rgba(214,167,40,0.6);
+      padding:10px 14px;
+      border-radius:12px;
+      transform:translateY(-150%);
+      transition:transform .2s ease;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    .skip-link:focus{
+      transform:translateY(0);
+      outline:none;
+    }
 
     body::before{
       content:"";
@@ -167,32 +249,33 @@
         linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.75)),
         radial-gradient(circle at 10% 0%, rgba(214,167,40,0.08), transparent 35%),
         radial-gradient(circle at 90% 0%, rgba(214,167,40,0.06), transparent 40%);
-      transform: translateX(-100%);
-      animation: veilSlide 900ms ease forwards;
-      z-index: 0;
+      transform:translateX(-100%);
+      animation:veilSlide 900ms ease forwards;
+      z-index:0;
     }
-    @keyframes veilSlide{ to{ transform: translateX(0); } }
+
+    @keyframes veilSlide{ to{ transform:translateX(0); } }
 
     .frame-fixed{
-      position: fixed;
+      position:fixed;
       inset: calc(14px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) calc(14px + env(safe-area-inset-left));
-      border-radius: 22px;
-      border: 2px solid rgba(214,167,40,0.55);
+      border-radius:22px;
+      border:2px solid rgba(214,167,40,0.55);
       box-shadow:
         0 0 0 1px rgba(248,232,200,0.16) inset,
         0 0 38px rgba(0,0,0,0.35);
-      pointer-events: none;
-      z-index: 40;
+      pointer-events:none;
+      z-index:40;
     }
 
     .lys{
       position:absolute;
       font-family:'Cinzel',serif;
       font-weight:700;
-      font-size: 18px;
-      color: var(--or);
-      opacity: 0.55;
-      text-shadow: 0 0 12px rgba(0,0,0,0.65);
+      font-size:18px;
+      color:var(--or);
+      opacity:0.55;
+      text-shadow:0 0 12px rgba(0,0,0,0.65);
     }
     .lys.tl{ top:10px; left:12px; }
     .lys.tr{ top:10px; right:12px; }
@@ -200,40 +283,59 @@
     .lys.br{ bottom:10px; right:12px; }
 
     .viewport-scroll{
-      position: fixed;
+      position:fixed;
       inset: calc(22px + env(safe-area-inset-top)) calc(22px + env(safe-area-inset-right)) calc(22px + env(safe-area-inset-bottom)) calc(22px + env(safe-area-inset-left));
-      overflow-y: auto;
-      overflow-x: hidden;
-      -webkit-overflow-scrolling: touch;
-      z-index: 1;
-      scroll-behavior: smooth;
+      overflow-y:auto;
+      overflow-x:hidden;
+      -webkit-overflow-scrolling:touch;
+      z-index:1;
+      scroll-behavior:smooth;
+      scrollbar-width:thin;
+      scrollbar-color: rgba(214,167,40,0.5) rgba(0,0,0,0.18);
+      overscroll-behavior:contain;
+      touch-action:pan-y;
     }
 
-    .menu-dot{
-      position: fixed;
-      right: 26px;
-      top: calc(26px + env(safe-area-inset-top));
-      z-index: 100;
-      pointer-events: auto;
-      width: 46px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      border-radius: 999px;
-      border: 1px solid rgba(214,167,40,0.55);
-      background: rgba(0,0,0,0.22);
-      backdrop-filter: blur(6px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-      font-family:'Cinzel',serif;
-      color: #d6a728;
-      font-size: 22px;
-      line-height: 1;
-      text-decoration: none;
-      user-select: none;
+    .viewport-scroll::-webkit-scrollbar{ width:10px; }
+    .viewport-scroll::-webkit-scrollbar-thumb{
+      background:rgba(214,167,40,0.38);
+      border-radius:999px;
+      border:2px solid transparent;
+      background-clip:padding-box;
     }
-    .menu-dot:hover{
-      background: rgba(214,167,40,0.12);
+    .viewport-scroll::-webkit-scrollbar-track{ background:transparent; }
+
+    .menu-dot{
+      position:fixed;
+      right:26px;
+      top:calc(26px + env(safe-area-inset-top));
+      z-index:100;
+      pointer-events:auto;
+      width:46px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:999px;
+      border:1px solid rgba(214,167,40,0.55);
+      background:rgba(0,0,0,0.22);
+      backdrop-filter:blur(6px);
+      box-shadow:0 6px 16px rgba(0,0,0,0.35);
+      font-family:'Cinzel',serif;
+      color:#d6a728;
+      font-size:22px;
+      line-height:1;
+      text-decoration:none;
+      user-select:none;
+      transition: transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+    }
+
+    .menu-dot:hover,
+    .menu-dot:focus-visible{
+      background:rgba(214,167,40,0.12);
       color:#fff;
+      transform:translateY(-1px);
+      box-shadow:0 8px 22px rgba(0,0,0,0.42);
+      outline:none;
     }
 
     .wrap{
@@ -243,17 +345,16 @@
     }
 
     .hero{
-      position: relative;
+      position:relative;
       margin:10px auto 22px;
       width:100%;
-      max-width: min(1000px, 100%);
+      max-width:min(1000px, 100%);
       padding:10px;
       border-radius:20px;
       border:2px solid rgba(214,167,40,0.90);
       box-shadow:0 0 40px rgba(0,0,0,0.92);
-      background: rgba(0,0,0,0.45);
+      background:rgba(0,0,0,0.45);
       overflow:hidden;
-      box-sizing:border-box;
     }
 
     .hero::before{
@@ -282,6 +383,8 @@
       letter-spacing:0.06em;
       text-transform:uppercase;
       font-size:2rem;
+      line-height:1.25;
+      text-wrap:balance;
     }
 
     .subtitle{
@@ -290,6 +393,7 @@
       font-family:'Cinzel',serif;
       opacity:0.92;
       font-size:1.05rem;
+      text-wrap:balance;
     }
 
     .motto{
@@ -298,10 +402,10 @@
       font-style:italic;
       opacity:0.92;
     }
-    .motto strong{color:var(--or);}
+    .motto strong{ color:var(--or); }
 
     .tabs{
-      margin:10px auto 26px;
+      margin:10px auto 14px;
       display:flex;
       justify-content:center;
       width:fit-content;
@@ -312,10 +416,12 @@
       border-radius:999px;
       overflow-y:hidden;
       border:1px solid rgba(214,167,40,0.55);
-      backdrop-filter: blur(6px);
+      backdrop-filter:blur(6px);
       background:rgba(0,0,0,0.18);
     }
-    .tabs::-webkit-scrollbar{display:none;}
+
+    .tabs::-webkit-scrollbar{ display:none; }
+
     .tab{
       flex:0 0 auto;
       padding:10px 16px;
@@ -328,8 +434,59 @@
       transition:background 0.2s ease, color 0.2s ease;
       white-space:nowrap;
     }
+
     .tab + .tab{ border-left:1px solid rgba(214,167,40,0.35); }
-    .tab:hover{ background:rgba(214,167,40,0.20); color:#fff; }
+    .tab:hover,
+    .tab:focus-visible{
+      background:rgba(214,167,40,0.20);
+      color:#fff;
+      outline:none;
+    }
+
+    .quick-nav{
+      width:100%;
+      max-width:980px;
+      margin:0 auto 26px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(214,167,40,0.26);
+      background:rgba(255,255,255,0.03);
+      box-shadow:0 0 12px rgba(0,0,0,0.45);
+      text-align:left;
+    }
+
+    .quick-nav-title{
+      font-family:'Cinzel',serif;
+      font-size:0.98rem;
+      color:var(--or);
+      margin:0 0 8px;
+      letter-spacing:0.03em;
+      text-transform:uppercase;
+    }
+
+    .quick-nav-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .quick-nav-links a{
+      text-decoration:none;
+      border:1px solid rgba(214,167,40,0.28);
+      background:rgba(0,0,0,0.18);
+      padding:7px 10px;
+      border-radius:999px;
+      color:var(--clair);
+      font-size:0.88rem;
+      line-height:1.2;
+    }
+
+    .quick-nav-links a:hover,
+    .quick-nav-links a:focus-visible{
+      background:rgba(214,167,40,0.14);
+      color:#fff;
+      outline:none;
+    }
 
     .panel{
       background:linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.35));
@@ -341,10 +498,11 @@
 
     .panel a,
     .panel a:visited{
-      color: var(--clair);
-      text-decoration: underline;
-      text-underline-offset: 2px;
+      color:var(--clair);
+      text-decoration:underline;
+      text-underline-offset:2px;
     }
+
     .panel a:hover{
       color:#fff;
       opacity:0.95;
@@ -357,6 +515,7 @@
       letter-spacing:0.04em;
       text-transform:uppercase;
       font-size:1.25rem;
+      scroll-margin-top:24px;
     }
 
     h3{
@@ -365,6 +524,7 @@
       color:#ffe7a8;
       letter-spacing:0.02em;
       font-size:1.08rem;
+      scroll-margin-top:24px;
     }
 
     p{
@@ -405,6 +565,7 @@
       max-width:700px;
       background:rgba(0,0,0,0.35);
     }
+
     .image-inline img{ width:100%; display:block; height:auto; }
 
     .tiny-link{
@@ -420,8 +581,9 @@
       text-align:center;
       font-size:0.82rem;
       opacity:0.85;
+      line-height:1.55;
     }
-    .footer a{color:var(--clair);}
+    .footer a{ color:var(--clair); }
 
     .nndnn-banner{
       margin:26px auto 6px;
@@ -432,13 +594,15 @@
       flex-wrap:nowrap;
       text-align:center;
     }
+
     .nndnn-banner img{
       height:74px;
       width:auto;
       display:block;
-      filter: drop-shadow(0 0 10px rgba(0,0,0,0.85));
+      filter:drop-shadow(0 0 10px rgba(0,0,0,0.85));
       opacity:0.96;
     }
+
     .nndnn-text{
       font-family:'Cinzel',serif;
       color:var(--or);
@@ -460,55 +624,59 @@
       background:rgba(214,167,40,0.08);
       box-shadow:0 0 14px rgba(0,0,0,0.55);
     }
+
     .helios-goldbox p{ margin:0; }
 
-    @media (max-width: 600px){
-      .title{font-size:1.55rem;}
-      .subtitle{font-size:1rem;}
-      p{font-size:0.95rem;}
-      h2{font-size:1.12rem;}
-      h3{font-size:1.02rem;}
-      .tab{padding:9px 14px; font-size:0.86rem;}
-      .frame-fixed{
-        inset: calc(12px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left));
-      }
-      .viewport-scroll{
-        inset: calc(20px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left));
-      }
-      .menu-dot{
-        right:22px;
-        top: calc(22px + env(safe-area-inset-top));
-      }
+    iframe.goog-te-banner-frame,
+    .goog-te-banner-frame,
+    .goog-te-banner-frame.skiptranslate,
+    .goog-te-banner{
+      display:none !important;
+      visibility:hidden !important;
     }
 
-    .cta-ordres{
-      margin: 18px auto 6px;
-      text-align:center;
-      width: 100%;
-      display: flex;
-      justify-content: center;
+    html, body{
+      top:0 !important;
+      position:static !important;
     }
+
+    #goog-gt-tt, .goog-te-balloon-frame{
+      display:none !important;
+    }
+
+    .goog-te-gadget{ display:none !important; }
+
+    .cta-ordres{
+      margin:18px auto 6px;
+      text-align:center;
+      width:100%;
+      display:flex;
+      justify-content:center;
+    }
+
     .cta-ordres .cta-slider{
-      display: inline-flex;
-      align-items: center;
-      gap: 18px;
-      max-width: 100%;
-      overflow-x: auto;
-      overflow-y: hidden;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      padding: 12px 18px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(214,167,40,0.98), rgba(214,167,40,0.78));
+      display:inline-flex;
+      align-items:center;
+      gap:18px;
+      max-width:100%;
+      overflow-x:auto;
+      overflow-y:hidden;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      padding:12px 18px;
+      border-radius:999px;
+      background:linear-gradient(180deg, rgba(214,167,40,0.98), rgba(214,167,40,0.78));
       border:1px solid rgba(255,231,168,0.75);
       box-shadow:
         0 10px 24px rgba(0,0,0,0.45),
         0 0 0 1px rgba(0,0,0,0.22) inset,
         0 0 18px rgba(214,167,40,0.18);
     }
+
     .cta-ordres .cta-slider::-webkit-scrollbar{ display:none; }
+
     .cta-ordres .cta-slider a{
-      flex: 0 0 auto;
+      flex:0 0 auto;
       color:#140b02;
       font-family:'Cinzel',serif;
       font-weight:800;
@@ -517,33 +685,53 @@
       text-transform:uppercase;
       white-space:nowrap;
     }
-    .cta-ordres .cta-slider a:hover{ text-decoration: underline; }
+
+    .cta-ordres .cta-slider a:hover,
+    .cta-ordres .cta-slider a:focus-visible{
+      text-decoration:underline;
+      outline:none;
+    }
+
     .cta-ordres .divider{
       width:1px;
       height:20px;
-      background: rgba(20,11,2,0.25);
-      flex: 0 0 auto;
+      background:rgba(20,11,2,0.25);
+      flex:0 0 auto;
     }
 
-    iframe.goog-te-banner-frame,
-    .goog-te-banner-frame,
-    .goog-te-banner-frame.skiptranslate,
-    .goog-te-banner {
-      display:none !important;
-      visibility:hidden !important;
+    @media (max-width: 600px){
+      .title{ font-size:1.55rem; }
+      .subtitle{ font-size:1rem; }
+      p{ font-size:0.95rem; }
+      h2{ font-size:1.12rem; }
+      h3{ font-size:1.02rem; }
+      .tab{ padding:9px 14px; font-size:0.86rem; }
+      .frame-fixed{
+        inset: calc(12px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left));
+      }
+      .viewport-scroll{
+        inset: calc(20px + env(safe-area-inset-top)) calc(20px + env(safe-area-inset-right)) calc(20px + env(safe-area-inset-bottom)) calc(20px + env(safe-area-inset-left));
+      }
+      .menu-dot{
+        right:22px;
+        top:calc(22px + env(safe-area-inset-top));
+      }
+      .nndnn-banner img{ height:48px; }
+      .nndnn-text{ font-size:1.55rem; }
     }
-    html, body {
-      top:0 !important;
-      position:static !important;
+
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior:auto; }
+      *, *::before, *::after{
+        animation:none !important;
+        transition:none !important;
+      }
     }
-    #goog-gt-tt, .goog-te-balloon-frame {
-      display:none !important;
-    }
-    .goog-te-gadget { display:none !important; }
   </style>
 </head>
 
 <body>
+  <a class="skip-link" href="#contenu-principal">Aller au contenu principal</a>
 
   <div class="frame-fixed" aria-hidden="true">
     <div class="lys tl">⚜️</div>
@@ -552,24 +740,54 @@
     <div class="lys br">⚜️</div>
   </div>
 
-  <a class="menu-dot" href="menu.html" title="Menu" aria-label="Menu">⋯</a>
+  <a class="menu-dot" href="menu.html" title="Menu" aria-label="Ouvrir le menu du site">⋯</a>
 
   <div class="viewport-scroll">
-    <div class="wrap">
+    <main class="wrap" id="contenu-principal">
 
-      <div class="hero">
-        <img src="sophia.PNG" alt="Illustration – Histoire de l’Association" loading="eager" decoding="async">
-      </div>
+      <header>
+        <div class="hero">
+          <img
+            src="sophia.PNG"
+            alt="Illustration – Histoire de l’Association"
+            fetchpriority="high"
+            decoding="async"
+            onerror="this.onerror=null; this.src='sophia.png';"
+          >
+        </div>
 
-      <div class="title">Histoire de l’Association</div>
-      <div class="subtitle">Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</div>
-      <div class="motto">« <strong>Per Crucem, Veritas</strong> »</div>
+        <div class="title">Histoire de l’Association</div>
+        <div class="subtitle">Ordre Sacré des Neuf Templiers de Jérusalem (O.S.D.9.T.D.J.)</div>
+        <div class="motto">« <strong>Per Crucem, Veritas</strong> »</div>
 
-      <div class="panel">
+        <nav class="tabs" aria-label="Navigation bas de tête">
+          <a class="tab" href="#histoire-passee">Histoire passée</a>
+          <a class="tab" href="#histoire-presente">Histoire présente et future</a>
+        </nav>
 
-        <h2>I. Histoire passée</h2>
+        <nav class="quick-nav" aria-label="Navigation interne historique">
+          <div class="quick-nav-title">Repères rapides</div>
+          <div class="quick-nav-links">
+            <a href="#fondation">Fondation</a>
+            <a href="#deces">Décès du fondateur</a>
+            <a href="#reprise-2022">Reprise 2022</a>
+            <a href="#arrivee-2022">Arrivée des futurs responsables</a>
+            <a href="#developpement-france">Développement en France</a>
+            <a href="#terres-savoie">Terres de Savoie</a>
+            <a href="#appartenance-reelle">Appartenance réelle</a>
+            <a href="#clarification">Clarification</a>
+            <a href="#independance-2025">Indépendance 2025</a>
+            <a href="#officialisation">Officialisation</a>
+            <a href="#histoire-presente">Présent &amp; futur</a>
+          </div>
+        </nav>
+      </header>
 
-        <h3>1. Fondation de l’Ordre d’origine</h3>
+      <section class="panel" aria-label="Contenu historique principal">
+
+        <h2 id="histoire-passee">I. Histoire passée</h2>
+
+        <h3 id="fondation">1. Fondation de l’Ordre d’origine</h3>
 
         <p>Il y a plus de dix ans, à Bâle, en Suisse, est fondé un ordre chevaleresque sous le nom de :</p>
 
@@ -596,14 +814,14 @@
 
         <div class="sep"></div>
 
-        <h3>2. Décès du Grand Maître fondateur</h3>
+        <h3 id="deces">2. Décès du Grand Maître fondateur</h3>
 
         <p>Le Grand Maître fondateur décède prématurément à Cuba.<br>
         Ce décès entraîne une mise en sommeil de facto de l’Ordre, sans dissolution formelle, mais avec un arrêt de son activité structurée.</p>
 
         <div class="sep"></div>
 
-        <h3>3. Reprise de l’Ordre en 2022</h3>
+        <h3 id="reprise-2022">3. Reprise de l’Ordre en 2022</h3>
 
         <p>En 2022, d’anciens membres réunis en Chapitre en Italie ont procédé à la réactivation de l’Ordre.
         Au cours de ce Chapitre, un nouveau Grand Maître a été élu.</p>
@@ -621,7 +839,7 @@
 
         <div class="sep"></div>
 
-        <h3>4. Arrivée de futurs responsables (2022)</h3>
+        <h3 id="arrivee-2022">4. Arrivée de futurs responsables (2022)</h3>
 
         <p>Au cours de l’année 2022, plusieurs personnes — dont certains qui occuperont par la suite des responsabilités importantes dans notre structure actuelle — rejoignent en Suisse le Souverain et Auguste Ordre Chevaleresque de Notre-Dame de Sion.</p>
 
@@ -636,7 +854,7 @@
 
         <div class="sep"></div>
 
-        <h3>5. Développement en France et création d’une structure juridique (novembre 2024)</h3>
+        <h3 id="developpement-france">5. Développement en France et création d’une structure juridique (novembre 2024)</h3>
 
         <p>En novembre 2024, dans le cadre du développement de l’Ordre vers la France, les membres français décident de créer une structure juridique associative afin de disposer d’un cadre légal sur le territoire français.</p>
 
@@ -657,7 +875,7 @@
 
         <div class="sep"></div>
 
-        <h3>6. Pourquoi le nom « Terres de Savoie »</h3>
+        <h3 id="terres-savoie">6. Pourquoi le nom « Terres de Savoie »</h3>
 
         <p>Le choix de cette dénomination répond à une intention prudente :</p>
         <ul>
@@ -668,7 +886,7 @@
 
         <div class="sep"></div>
 
-        <h3>7. Assumer l’appartenance réelle</h3>
+        <h3 id="appartenance-reelle">7. Assumer l’appartenance réelle</h3>
 
         <p>Au fil des mois, une réflexion collective s’engage parmi les membres français.<br>
         Plusieurs constats émergent :</p>
@@ -693,7 +911,7 @@
 
         <div class="sep"></div>
 
-        <h3>8. Clarification juridique et philosophique</h3>
+        <h3 id="clarification">8. Clarification juridique et philosophique</h3>
 
         <p>Une évidence s’impose progressivement :</p>
 
@@ -714,7 +932,7 @@
 
         <div class="sep"></div>
 
-        <h3>9. Décision d’indépendance (octobre 2025)</h3>
+        <h3 id="independance-2025">9. Décision d’indépendance (octobre 2025)</h3>
 
         <p>Début octobre 2025, l’ensemble du groupe français, rejoint par quelques membres suisses, prend une décision collective :</p>
         <ul>
@@ -731,7 +949,7 @@
 
         <div class="sep"></div>
 
-        <h3>10. Changement de nom et officialisation</h3>
+        <h3 id="officialisation">10. Changement de nom et officialisation</h3>
 
         <p>L’association adopte alors le nom :</p>
 
@@ -748,14 +966,16 @@
           <li>accompagné de statuts affirmant clairement la nature laïque et associative de la structure.</li>
         </ul>
 
-        <h2>II. Histoire présente et future : continuité, ouverture et discernement</h2>
+        <h2 id="histoire-presente">II. Histoire présente et future : continuité, ouverture et discernement</h2>
 
         <div class="image-inline">
-          <img src="templier.jpg"
-               alt="Templier – continuité et avenir"
-               loading="lazy"
-               decoding="async"
-               onerror="this.onerror=null; this.src='templier.jpeg';">
+          <img
+            src="templier.jpg"
+            alt="Templier – continuité et avenir"
+            loading="lazy"
+            decoding="async"
+            onerror="this.onerror=null; this.src='templier.jpeg';"
+          >
         </div>
 
         <p>
@@ -768,16 +988,18 @@
         </p>
 
         <p>
-          Dans cette perspective, l’Ordre reconnaît l’existence de structures religieuses distinctes, relevant d’un autre cadre juridique (notamment la loi de 1905), qui portent un héritage spirituel templier dans leur propre tradition.
+          Dans cette perspective, l’Ordre reconnaît l’existence de structures religieuses distinctes, relevant d’un autre cadre juridique, qui portent un héritage spirituel templier dans leur propre tradition.
         </p>
 
         <p>
           Cette ouverture s’inscrit sans confusion : l’O.S.D.9.T.D.J. demeure indépendant et strictement associatif.
         </p>
 
-        <div class="helios-goldbox"><p><strong>
-          À ce titre, Hélios est mentionnée comme Église de christianisme primitif, de fondation anté-chalcédonienne, et conservatrice de l’Église apostolique templière dans sa véritable filiation, depuis le pape Benoît XIII, Pedro de Luna.
-        </strong></p></div>
+        <div class="helios-goldbox">
+          <p><strong>
+            À ce titre, Hélios est mentionnée comme Église de christianisme primitif, de fondation anté-chalcédonienne, et conservatrice de l’Église apostolique templière dans sa véritable filiation, depuis le pape Benoît XIII, Pedro de Luna.
+          </strong></p>
+        </div>
 
         <p>Cette mention :</p>
         <ul>
@@ -790,12 +1012,12 @@
           L’Ordre Sacré des Neuf Templiers de Jérusalem demeure un espace ouvert, où chaque membre reste libre de son chemin personnel, dans le respect du cadre associatif, de l’indépendance de l’Ordre et de la fraternité.
         </p>
 
-      </div>
+      </section>
 
       <div class="nndnn-banner" aria-label="Signature templière nnDnn">
-        <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;" loading="lazy" decoding="async">
+        <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='croix.epee.png';">
         <div class="nndnn-text">nnDnn</div>
-        <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;" loading="lazy" decoding="async">
+        <img src="croix.epee.PNG" alt="Épée – symbole" style="height:48px; width:auto;" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='croix.epee.png';">
       </div>
 
       <nav class="tabs" aria-label="Navigation bas de page" style="margin-top:22px;">
@@ -821,64 +1043,449 @@
         <a href="cookies.html">Cookies</a>
       </div>
 
-    </div>
+      <section class="seo-rich-content" aria-hidden="true">
+        <h2>Histoire officielle de l’O.S.D.9.T.D.J.</h2>
+        <p>
+          Cette page présente l’histoire de l’Ordre Sacré des Neuf Templiers de Jérusalem, son origine,
+          son évolution, son développement en France, la clarification de son cadre, sa décision d’indépendance,
+          son changement de nom et son affirmation comme association laïque, culturelle, historique, fraternelle,
+          initiatique et chevaleresque régie par la loi de 1901.
+        </p>
+        <p>
+          Elle traite notamment de la mémoire templière, de la chevalerie moderne, de l’histoire associative,
+          des étapes de fondation, de la reprise de 2022, des liens initiaux avec Notre-Dame de Sion,
+          de la structure OCNDS, de l’OCNSS, de l’indépendance institutionnelle, de la clarification juridique
+          et philosophique, ainsi que de l’ouverture présente et future de l’O.S.D.9.T.D.J.
+        </p>
+      </section>
+
+    </main>
   </div>
 
+  <div id="google_translate_element" style="display:none;"></div>
+
   <script>
-  (function(){
-    if (location.pathname.endsWith("menu.html")) return;
+  (function () {
+    "use strict";
 
-    try{
-      sessionStorage.setItem("osd_prev_page", location.href);
-      localStorage.setItem("osd_last_page_title", document.title);
-      localStorage.setItem("osd_last_page_path", location.pathname);
-    }catch(e){}
+    var doc = document;
+    var win = window;
+    var body = doc.body;
 
-    const viewport = document.querySelector('.viewport-scroll');
-    if (viewport) {
-      try{
-        const saved = sessionStorage.getItem("osd_histoire_scroll");
-        if (saved) viewport.scrollTop = parseInt(saved, 10) || 0;
-      }catch(e){}
+    var pageKey = "osd9tdj:histoire";
+    var prevPageKey = "osd_prev_page";
+    var scrollKey = pageKey + ":scroll";
+    var visitKey = pageKey + ":visits";
+    var readProgressKey = pageKey + ":read-progress";
+    var contentIndexKey = pageKey + ":content-index";
+    var headingsKey = pageKey + ":headings";
+    var seoSnapshotKey = pageKey + ":seo-snapshot";
+    var statsKey = pageKey + ":stats";
+    var translateKey = "googtrans";
+    var firstSeenKey = pageKey + ":first-seen";
+    var lastSeenKey = pageKey + ":last-seen";
 
-      let timer = null;
-      viewport.addEventListener("scroll", function(){
-        clearTimeout(timer);
-        timer = setTimeout(function(){
-          try{
-            sessionStorage.setItem("osd_histoire_scroll", String(viewport.scrollTop));
-          }catch(e){}
-        }, 80);
-      }, { passive:true });
+    function safeSet(storage, key, value) {
+      try { storage.setItem(key, value); } catch (e) {}
     }
 
-    document.addEventListener("click", function(e){
-      const a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
-      if(!a) return;
-      const href = a.getAttribute("href") || "";
-      if (href.includes("menu.html")){
-        try{
-          sessionStorage.setItem("osd_prev_page", location.href);
-        }catch(err){}
-      }
-    }, true);
+    function safeGet(storage, key) {
+      try { return storage.getItem(key); } catch (e) { return null; }
+    }
 
-    window.addEventListener("beforeunload", function(){
-      try{
-        if (viewport) sessionStorage.setItem("osd_histoire_scroll", String(viewport.scrollTop));
-      }catch(e){}
-    });
+    function toArray(list) {
+      return Array.prototype.slice.call(list || []);
+    }
+
+    function clamp(n, min, max) {
+      return Math.max(min, Math.min(max, n));
+    }
+
+    function throttle(fn, delay) {
+      var last = 0;
+      var timer = null;
+      return function () {
+        var now = Date.now();
+        var context = this;
+        var args = arguments;
+        if (now - last >= delay) {
+          last = now;
+          fn.apply(context, args);
+        } else {
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            last = Date.now();
+            fn.apply(context, args);
+          }, delay - (now - last));
+        }
+      };
+    }
+
+    function debounce(fn, delay) {
+      var timer = null;
+      return function () {
+        var context = this;
+        var args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          fn.apply(context, args);
+        }, delay);
+      };
+    }
+
+    function normalizeText(str) {
+      return (str || "").replace(/\s+/g, " ").trim();
+    }
+
+    function persistPreviousPage() {
+      if (location.pathname.endsWith("menu.html")) return;
+      safeSet(sessionStorage, prevPageKey, location.href);
+      safeSet(localStorage, "osd_last_page_title", document.title);
+      safeSet(localStorage, "osd_last_page_path", location.pathname);
+    }
+
+    function initPreviousPageTracking() {
+      persistPreviousPage();
+      doc.addEventListener("click", function (e) {
+        var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+        if (!a) return;
+        var href = a.getAttribute("href") || "";
+        if (href.indexOf("menu.html") !== -1) {
+          persistPreviousPage();
+        }
+      }, true);
+    }
+
+    function getScroller() {
+      return doc.querySelector(".viewport-scroll");
+    }
+
+    function initScrollMemory() {
+      var scroller = getScroller();
+      if (!scroller) return;
+
+      var saved = parseInt(safeGet(sessionStorage, scrollKey) || safeGet(sessionStorage, "osd_histoire_scroll") || "0", 10);
+      if (!isNaN(saved) && !location.hash) {
+        scroller.scrollTop = saved;
+      }
+
+      scroller.addEventListener("scroll", throttle(function () {
+        safeSet(sessionStorage, scrollKey, String(scroller.scrollTop || 0));
+        safeSet(sessionStorage, "osd_histoire_scroll", String(scroller.scrollTop || 0));
+      }, 120), { passive: true });
+
+      win.addEventListener("beforeunload", function () {
+        safeSet(sessionStorage, scrollKey, String(scroller.scrollTop || 0));
+        safeSet(sessionStorage, "osd_histoire_scroll", String(scroller.scrollTop || 0));
+      });
+    }
+
+    function initImages() {
+      toArray(doc.querySelectorAll("img")).forEach(function (img, index) {
+        if (!img.hasAttribute("decoding")) img.setAttribute("decoding", "async");
+        if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
+        if (!img.getAttribute("alt")) {
+          img.setAttribute("alt", "Illustration O.S.D.9.T.D.J. " + (index + 1));
+        }
+      });
+    }
+
+    function initImageFallbacks() {
+      toArray(doc.querySelectorAll("img")).forEach(function (img) {
+        if (img.dataset.errorBound === "1") return;
+        img.dataset.errorBound = "1";
+        img.addEventListener("error", function handleError() {
+          var current = img.getAttribute("src") || "";
+          if (current.indexOf("sophia.PNG") !== -1) {
+            img.removeEventListener("error", handleError);
+            img.setAttribute("src", "sophia.png");
+          } else if (current.indexOf("croix.epee.PNG") !== -1) {
+            img.removeEventListener("error", handleError);
+            img.setAttribute("src", "croix.epee.png");
+          } else if (current.indexOf("templier.jpg") !== -1) {
+            img.removeEventListener("error", handleError);
+            img.setAttribute("src", "templier.jpeg");
+          }
+        });
+      });
+    }
+
+    function initExternalLinks() {
+      toArray(doc.querySelectorAll('a[href]')).forEach(function (a) {
+        var href = a.getAttribute("href") || "";
+        if (/^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0) {
+          a.setAttribute("rel", "noopener noreferrer external");
+        }
+      });
+    }
+
+    function initHashNavigation() {
+      var scroller = getScroller();
+      if (!scroller) return;
+
+      function scrollToHash(hash) {
+        if (!hash) return;
+        var id = hash.replace(/^#/, "");
+        if (!id) return;
+        var target = doc.getElementById(id);
+        if (!target) return;
+
+        win.requestAnimationFrame(function () {
+          var scrollerRect = scroller.getBoundingClientRect();
+          var targetRect = target.getBoundingClientRect();
+          var offset = targetRect.top - scrollerRect.top + scroller.scrollTop - 12;
+          scroller.scrollTo({
+            top: Math.max(0, offset),
+            behavior: win.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+          });
+        });
+      }
+
+      if (location.hash) {
+        setTimeout(function () {
+          scrollToHash(location.hash);
+        }, 80);
+      }
+
+      win.addEventListener("hashchange", function () {
+        scrollToHash(location.hash);
+      });
+    }
+
+    function initVisits() {
+      var visits = parseInt(safeGet(localStorage, visitKey) || "0", 10);
+      if (isNaN(visits)) visits = 0;
+      visits += 1;
+      safeSet(localStorage, visitKey, String(visits));
+      body.setAttribute("data-visits", String(visits));
+
+      var now = String(Date.now());
+      if (!safeGet(localStorage, firstSeenKey)) {
+        safeSet(localStorage, firstSeenKey, now);
+      }
+      safeSet(localStorage, lastSeenKey, now);
+    }
+
+    function initReadingProgress() {
+      var scroller = getScroller();
+      if (!scroller) return;
+
+      var progressWrap = doc.createElement("div");
+      progressWrap.setAttribute("aria-hidden", "true");
+      progressWrap.style.position = "fixed";
+      progressWrap.style.left = "24px";
+      progressWrap.style.right = "24px";
+      progressWrap.style.top = "14px";
+      progressWrap.style.height = "3px";
+      progressWrap.style.zIndex = "99";
+      progressWrap.style.pointerEvents = "none";
+      progressWrap.style.borderRadius = "999px";
+      progressWrap.style.background = "rgba(255,255,255,0.05)";
+      progressWrap.style.overflow = "hidden";
+
+      var bar = doc.createElement("div");
+      bar.style.height = "100%";
+      bar.style.width = "0%";
+      bar.style.borderRadius = "999px";
+      bar.style.background = "linear-gradient(90deg, rgba(214,167,40,0.35), rgba(214,167,40,0.95), rgba(248,232,200,0.75))";
+      bar.style.boxShadow = "0 0 18px rgba(214,167,40,0.25)";
+      progressWrap.appendChild(bar);
+      body.appendChild(progressWrap);
+
+      function update() {
+        var max = Math.max(1, scroller.scrollHeight - scroller.clientHeight);
+        var pct = clamp((scroller.scrollTop / max) * 100, 0, 100);
+        bar.style.width = pct + "%";
+        safeSet(sessionStorage, readProgressKey, pct.toFixed(2));
+        body.setAttribute("data-read-progress", pct.toFixed(2));
+      }
+
+      update();
+      scroller.addEventListener("scroll", throttle(update, 25), { passive: true });
+      win.addEventListener("resize", debounce(update, 80), { passive: true });
+    }
+
+    function initTranslateMemoryFlag() {
+      var raw = safeGet(localStorage, translateKey) || safeGet(sessionStorage, translateKey) || "";
+      if (raw) {
+        body.setAttribute("data-translate-memory", "1");
+      }
+    }
+
+    function buildContentIndex() {
+      var sections = toArray(doc.querySelectorAll("h2[id], h3[id]"));
+      var index = sections.map(function (node) {
+        return {
+          id: node.id,
+          title: normalizeText(node.textContent)
+        };
+      }).filter(function (item) {
+        return item.id && item.title;
+      });
+
+      safeSet(sessionStorage, contentIndexKey, JSON.stringify(index));
+      body.setAttribute("data-section-count", String(index.length));
+    }
+
+    function auditHeadings() {
+      var headings = toArray(doc.querySelectorAll("h1,h2,h3")).map(function (node) {
+        return node.tagName + ":" + normalizeText(node.textContent);
+      });
+      safeSet(sessionStorage, headingsKey, JSON.stringify(headings));
+      body.setAttribute("data-heading-count", String(headings.length));
+    }
+
+    function auditSeoState() {
+      var description = doc.querySelector('meta[name="description"]');
+      var canonical = doc.querySelector('link[rel="canonical"]');
+      var h1 = doc.querySelector(".title");
+      var internalLinks = toArray(doc.querySelectorAll('a[href]')).filter(function (a) {
+        var href = a.getAttribute("href") || "";
+        return href && !/^https?:\/\//i.test(href) && href.indexOf("#") !== 0 && href.indexOf("mailto:") !== 0;
+      });
+
+      var snapshot = {
+        title: doc.title,
+        descriptionLength: description ? (description.content || "").length : 0,
+        canonical: canonical ? canonical.href : "",
+        h1: h1 ? normalizeText(h1.textContent) : "",
+        internalLinkCount: internalLinks.length,
+        imageCount: doc.images.length,
+        sectionCount: doc.querySelectorAll("h2[id], h3[id]").length
+      };
+
+      safeSet(sessionStorage, seoSnapshotKey, JSON.stringify(snapshot));
+      body.setAttribute("data-description-length", String(snapshot.descriptionLength));
+      body.setAttribute("data-internal-links", String(snapshot.internalLinkCount));
+      body.setAttribute("data-images", String(snapshot.imageCount));
+    }
+
+    function computeStats() {
+      var textBlocks = toArray(doc.querySelectorAll("main p, main li, .title, .subtitle, main h2, main h3"));
+      var text = textBlocks.map(function (n) { return normalizeText(n.textContent); }).join(" ");
+      var words = text ? text.split(/\s+/).filter(Boolean) : [];
+      var stats = {
+        words: words.length,
+        characters: text.length,
+        paragraphs: doc.querySelectorAll("main p").length,
+        listItems: doc.querySelectorAll("main li").length,
+        sections: doc.querySelectorAll("h2[id], h3[id]").length,
+        navLinks: doc.querySelectorAll(".quick-nav a, .tabs a, .cta-slider a").length
+      };
+      safeSet(sessionStorage, statsKey, JSON.stringify(stats));
+      body.setAttribute("data-word-count", String(stats.words));
+    }
+
+    function initSectionAutoJumpFromQuery() {
+      var params = new URLSearchParams(location.search);
+      var section = params.get("section");
+      if (!section) return;
+      var target = doc.getElementById(section);
+      if (!target) return;
+      setTimeout(function () {
+        location.hash = "#" + section;
+      }, 60);
+    }
+
+    function initMutationGuard() {
+      var observer = new MutationObserver(function () {
+        initImageFallbacks();
+      });
+      observer.observe(body, { childList: true, subtree: true });
+    }
+
+    function initPrintHooks() {
+      win.addEventListener("beforeprint", function () {
+        body.setAttribute("data-printing", "1");
+      });
+      win.addEventListener("afterprint", function () {
+        body.removeAttribute("data-printing");
+      });
+    }
+
+    function initMicroSignals() {
+      body.setAttribute("data-page", "histoire");
+      body.setAttribute("data-entity", "osd9tdj");
+      body.setAttribute("data-template", "seo-rich-history");
+      body.setAttribute("data-language", "fr");
+      body.setAttribute("data-theme", "templar-history-dark");
+      body.setAttribute(
+        "data-keywords",
+        [
+          "histoire de l’association",
+          "ordre templier moderne",
+          "mémoire templière",
+          "indépendance associative",
+          "chevalerie moderne",
+          "osd9tdj"
+        ].join("|")
+      );
+    }
+
+    function initLinkTrackingHints() {
+      toArray(doc.querySelectorAll("a[href]")).forEach(function (a) {
+        if (!a.dataset.linkRole) {
+          var href = a.getAttribute("href") || "";
+          if (href.indexOf("contact") !== -1) a.dataset.linkRole = "contact";
+          else if (href.indexOf("mentions") !== -1) a.dataset.linkRole = "legal";
+          else if (href.indexOf("cookies") !== -1) a.dataset.linkRole = "cookies";
+          else if (href.indexOf("Wikipedia") !== -1) a.dataset.linkRole = "encyclopedic";
+          else if (href.indexOf("ordres-historiques") !== -1) a.dataset.linkRole = "historical-orders";
+          else if (href.indexOf("notre-mission") !== -1) a.dataset.linkRole = "mission";
+          else if (href.indexOf("quinoussommes") !== -1) a.dataset.linkRole = "identity";
+          else a.dataset.linkRole = "internal";
+        }
+      });
+    }
+
+    function initStructuredDomHints() {
+      var main = doc.getElementById("contenu-principal");
+      if (main) {
+        main.setAttribute("itemscope", "");
+        main.setAttribute("itemtype", "https://schema.org/Article");
+      }
+    }
+
+    function initTimeMetrics() {
+      var start = Date.now();
+      win.addEventListener("pagehide", function () {
+        var spent = Date.now() - start;
+        safeSet(sessionStorage, pageKey + ":last-duration", String(spent));
+      });
+    }
+
+    function init() {
+      initPreviousPageTracking();
+      initScrollMemory();
+      initImages();
+      initImageFallbacks();
+      initExternalLinks();
+      initHashNavigation();
+      initVisits();
+      initReadingProgress();
+      initTranslateMemoryFlag();
+      buildContentIndex();
+      auditHeadings();
+      auditSeoState();
+      computeStats();
+      initSectionAutoJumpFromQuery();
+      initMutationGuard();
+      initPrintHooks();
+      initMicroSignals();
+      initLinkTrackingHints();
+      initStructuredDomHints();
+      initTimeMetrics();
+    }
+
+    if (doc.readyState === "loading") {
+      doc.addEventListener("DOMContentLoaded", init, { once:true });
+    } else {
+      init();
+    }
   })();
   </script>
 
-  <!-- Google Translate (widget invisible) -->
-  <div id="google_translate_element" style="display:none;"></div>
-
-  <!-- Script commun site (audio + translate + mémoire + anti-bannière) -->
   <script defer src="/osd.js"></script>
-
-  <!-- Google Translate -->
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
-
 </body>
 </html>
