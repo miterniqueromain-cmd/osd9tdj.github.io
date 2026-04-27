@@ -38,6 +38,9 @@
   <link rel="alternate" href="https://osd9tdj.org/mentions.html" hreflang="fr">
   <link rel="alternate" href="https://osd9tdj.org/mentions.html" hreflang="x-default">
 
+  <!-- Lien SEO caché – Chronique du Grand Maître -->
+  <link rel="me" href="https://romainmiterniquetemplier.wordpress.com/">
+
   <!-- Open Graph -->
   <meta property="og:title" content="Informations officielles – O.S.D.9.T.D.J.">
   <meta property="og:description" content="Mentions officielles, statut, indépendance, RGPD, cookies techniques, responsabilité et protection renforcée des logos, écrits, sceaux, blasons et signes distinctifs de l’O.S.D.9.T.D.J.">
@@ -98,7 +101,8 @@
       "url":"https://osd9tdj.org/contact.html"
     },
     "sameAs":[
-      "https://osd9tdj.org/"
+      "https://osd9tdj.org/",
+      "https://romainmiterniquetemplier.wordpress.com/"
     ]
   }
   </script>
@@ -144,7 +148,8 @@
       {"@type":"Thing","name":"Protection des logos"},
       {"@type":"Thing","name":"Protection des écrits"},
       {"@type":"Thing","name":"Association loi 1901"},
-      {"@type":"Thing","name":"Ordres templiers et histoire"}
+      {"@type":"Thing","name":"Ordres templiers et histoire"},
+      {"@type":"Thing","name":"Chronique du Grand Maître"}
     ],
     "primaryImageOfPage":{
       "@type":"ImageObject",
@@ -431,51 +436,6 @@
       margin-right:auto;
     }
 
-    .quick-nav{
-      width:100%;
-      max-width:950px;
-      margin:0 auto 16px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(214,167,40,0.26);
-      background:var(--panel);
-      box-shadow:0 0 12px rgba(0,0,0,0.45);
-      text-align:left;
-    }
-
-    .quick-nav-title{
-      font-family:'Cinzel',serif;
-      font-size:0.98rem;
-      color:var(--or);
-      margin:0 0 8px;
-      letter-spacing:0.03em;
-      text-transform:uppercase;
-    }
-
-    .quick-nav-links{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-    }
-
-    .quick-nav-links a{
-      text-decoration:none;
-      border:1px solid rgba(214,167,40,0.28);
-      background:rgba(0,0,0,0.18);
-      padding:7px 10px;
-      border-radius:999px;
-      color:var(--clair);
-      font-size:0.88rem;
-      line-height:1.2;
-    }
-
-    .quick-nav-links a:hover,
-    .quick-nav-links a:focus-visible{
-      background:rgba(214,167,40,0.14);
-      color:#fff;
-      outline:none;
-    }
-
     h2{
       font-family:'Cinzel', serif;
       font-size:1.15rem;
@@ -693,22 +653,6 @@
         </div>
 
         <h1>Informations officielles</h1>
-
-        <nav class="quick-nav" aria-label="Navigation interne des informations officielles">
-          <div class="quick-nav-title">Accès rapide</div>
-          <div class="quick-nav-links">
-            <a href="#identite">Identité</a>
-            <a href="#objet">Nature &amp; ouverture</a>
-            <a href="#independance">Indépendance</a>
-            <a href="#hebergement">Hébergement</a>
-            <a href="#propriete">Propriété intellectuelle</a>
-            <a href="#rgpd">RGPD</a>
-            <a href="#cookies">Cookies</a>
-            <a href="#responsabilite">Responsabilité</a>
-            <a href="#usurpation">Usurpation</a>
-            <a href="#droit-applicable">Droit applicable</a>
-          </div>
-        </nav>
       </header>
 
       <div class="ip-alert" role="alert" aria-label="Avertissement de protection">
@@ -1164,6 +1108,11 @@
           des éléments d’identité protégés. Leur reproduction, imitation, diffusion, exploitation ou adaptation,
           même partielle, sans autorisation écrite préalable, est interdite.
         </p>
+        <p>
+          La Chronique du Grand Maître, associée à l’identité publique et culturelle de l’Ordre Sacré des Neuf
+          Templiers de Jérusalem, peut être consultée à l’adresse suivante :
+          <a href="https://romainmiterniquetemplier.wordpress.com/" rel="me noopener noreferrer">Chronique du Grand Maître – Romain Miternique Templier</a>.
+        </p>
       </section>
 
     </main>
@@ -1520,7 +1469,9 @@
           "blason",
           "sceau",
           "usurpation de qualité",
-          "osd9tdj"
+          "osd9tdj",
+          "chronique du grand maitre",
+          "romain miternique templier"
         ].join("|")
       );
     }
@@ -1533,6 +1484,7 @@
           else if (href.indexOf("assurance") !== -1) a.dataset.linkRole = "assurance";
           else if (href.indexOf("cookies") !== -1) a.dataset.linkRole = "cookies";
           else if (href.indexOf("mentions") !== -1) a.dataset.linkRole = "legal";
+          else if (href.indexOf("romainmiterniquetemplier.wordpress.com") !== -1) a.dataset.linkRole = "chronique-grand-maitre";
           else a.dataset.linkRole = "internal";
         }
       });
