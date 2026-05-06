@@ -9,23 +9,7 @@
     <priority>1.00</priority>
   </url>
 
-  <!-- Index -->
-  <url>
-    <loc>https://osd9tdj.org/index.html</loc>
-    <lastmod>2026-05-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-
-  <!-- Hub/Menu -->
-  <url>
-    <loc>https://osd9tdj.org/menu.html</loc>
-    <lastmod>2026-05-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.98</priority>
-  </url>
-
-  <!-- Pages institutionnelles -->
+  <!-- Pages institutionnelles majeures -->
   <url>
     <loc>https://osd9tdj.org/notre-mission.html</loc>
     <lastmod>2026-05-06</lastmod>
@@ -75,7 +59,7 @@
     <priority>0.88</priority>
   </url>
 
-  <!-- Activités -->
+  <!-- Activités et commanderies -->
   <url>
     <loc>https://osd9tdj.org/activites.html</loc>
     <lastmod>2026-05-06</lastmod>
@@ -97,7 +81,12 @@
     <priority>0.86</priority>
   </url>
 
-
+  <url>
+    <loc>https://osd9tdj.org/planning-etudes-haute-savoie.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.84</priority>
+  </url>
 
   <!-- Adhésion -->
   <url>
@@ -141,6 +130,13 @@
     <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.74</priority>
+  </url>
+
+  <url>
+    <loc>https://osd9tdj.org/menu.html</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
   </url>
 
   <!-- Administratif -->
