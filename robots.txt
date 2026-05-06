@@ -1,29 +1,28 @@
 # =====================================================================
 # robots.txt — osd9tdj.org
-# O.S.D.9.T.D.J. — Site public (indexation + IA autorisées)
-# Objectif : visibilité maximale (Search + IA) + blocage crawlers SEO commerciaux
-# Date : 2026-01-25
+# O.S.D.9.T.D.J. — Site public officiel
+# Objectif : indexation maximale Google/Bing + visibilité IA
+# Stratégie : tout autoriser aux moteurs utiles, bloquer crawlers SEO/scraping
+# Date : 2026-05-06
 # =====================================================================
 
-# -------------------------
-# SITEMAPS (découverte)
-# -------------------------
-Sitemap: https://osd9tdj.org/sitemap-pages.xml
+# ---------------------------------------------------------------------
+# SITEMAP INDEX OFFICIEL
+# ---------------------------------------------------------------------
 Sitemap: https://osd9tdj.org/sitemap.xml
 
 
 # =====================================================================
-# RÈGLE GÉNÉRALE (SITE PUBLIC)
+# ACCÈS GLOBAL — SITE PUBLIC
 # =====================================================================
 User-agent: *
 Allow: /
 
 
 # =====================================================================
-# MOTEURS DE RECHERCHE — AUTORISÉS
+# MOTEURS DE RECHERCHE MAJEURS — AUTORISÉS
 # =====================================================================
 
-# Google
 User-agent: Googlebot
 Allow: /
 
@@ -36,44 +35,68 @@ Allow: /
 User-agent: Googlebot-Video
 Allow: /
 
-# Microsoft / Bing
+User-agent: Storebot-Google
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: Mediapartners-Google
+Allow: /
+
 User-agent: Bingbot
 Allow: /
 
-# DuckDuckGo
+User-agent: msnbot
+Allow: /
+
+User-agent: MSNBot-Media
+Allow: /
+
 User-agent: DuckDuckBot
 Allow: /
 
-# Apple
 User-agent: Applebot
 Allow: /
 
-# Qwant/Exalead (selon infra)
+User-agent: AppleNewsBot
+Allow: /
+
+User-agent: Qwantify
+Allow: /
+
 User-agent: Exabot
 Allow: /
 
-# Yandex
 User-agent: YandexBot
 Allow: /
 
-# Baidu
+User-agent: YandexImages
+Allow: /
+
 User-agent: Baiduspider
 Allow: /
 
-# Naver
+User-agent: Baiduspider-image
+Allow: /
+
 User-agent: Yeti
 Allow: /
 
-# Seznam (CZ)
 User-agent: SeznamBot
+Allow: /
+
+User-agent: Sogou web spider
+Allow: /
+
+User-agent: Slurp
 Allow: /
 
 
 # =====================================================================
-# IA / AGENTS — AUTORISÉS (maximum de compat)
+# IA / LLM / AGENTS DE RÉPONSE — AUTORISÉS
 # =====================================================================
 
-# OpenAI bots : GPTBot + OAI-SearchBot + ChatGPT-User
 User-agent: GPTBot
 Allow: /
 
@@ -83,7 +106,12 @@ Allow: /
 User-agent: ChatGPT-User
 Allow: /
 
-# Anthropic bots
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 User-agent: anthropic-ai
 Allow: /
 
@@ -96,38 +124,84 @@ Allow: /
 User-agent: Claude-User
 Allow: /
 
-# Meta
 User-agent: Meta-ExternalAgent
 Allow: /
 
-# Amazon
+User-agent: Meta-ExternalFetcher
+Allow: /
+
 User-agent: Amazonbot
 Allow: /
 
-# Common Crawl (utilisé par de nombreuses IA)
 User-agent: CCBot
 Allow: /
 
-# Perplexity
 User-agent: PerplexityBot
 Allow: /
 
 User-agent: Perplexity-User
 Allow: /
 
-# You.com
 User-agent: YouBot
 Allow: /
 
-# Divers bots IA / agents (tolérance max)
 User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: CohereBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: ImagesiftBot
+Allow: /
+
+User-agent: Kangaroo Bot
+Allow: /
+
+User-agent: omgili
+Allow: /
+
+User-agent: omgilibot
 Allow: /
 
 
 # =====================================================================
-# CRAWL-DELAY (BONUS)
-# NOTE : Google/Bing ignorent Crawl-delay ; Common Crawl le respecte.
+# RESSOURCES TECHNIQUES — EXPLICITEMENT ACCESSIBLES
+# Important pour le rendu Google, les images et les extraits enrichis.
 # =====================================================================
+
+User-agent: *
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.mjs$
+Allow: /*.json$
+Allow: /*.xml$
+Allow: /*.txt$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.webp$
+Allow: /*.avif$
+Allow: /*.svg$
+Allow: /*.gif$
+Allow: /*.ico$
+Allow: /*.pdf$
+Allow: /*.woff$
+Allow: /*.woff2$
+Allow: /*.ttf$
+Allow: /*.otf$
+
+
+# =====================================================================
+# CRAWL-DELAY — BOTS QUI LE RESPECTENT
+# Google/Bing ignorent généralement cette directive.
+# =====================================================================
+
 User-agent: CCBot
 Crawl-delay: 2
 
@@ -137,87 +211,235 @@ Crawl-delay: 2
 User-agent: YandexBot
 Crawl-delay: 2
 
+User-agent: YandexImages
+Crawl-delay: 2
+
 User-agent: SeznamBot
+Crawl-delay: 2
+
+User-agent: Baiduspider
+Crawl-delay: 3
+
+User-agent: Baiduspider-image
+Crawl-delay: 3
+
+User-agent: Sogou web spider
+Crawl-delay: 3
+
+User-agent: Bytespider
+Crawl-delay: 3
+
+User-agent: CriteoBot
+Crawl-delay: 5
+
+User-agent: Amazonbot
 Crawl-delay: 2
 
 
 # =====================================================================
-# CRAWLERS SEO COMMERCIAUX / AGRESSIFS — BLOQUÉS
-# (évite le scraping, l’audit concurrentiel, la consommation de crawl)
+# CRAWLERS SEO COMMERCIAUX / AUDIT / SCRAPING — BLOQUÉS
+# Objectif : limiter scraping, analyse concurrentielle et crawl parasite.
 # =====================================================================
 
-# Ahrefs
 User-agent: AhrefsBot
 Disallow: /
+
 User-agent: AhrefsSiteAudit
 Disallow: /
 
-# Semrush
 User-agent: SemrushBot
 Disallow: /
+
 User-agent: SemrushBot-SA
 Disallow: /
 
-# Majestic
+User-agent: SemrushBot-BA
+Disallow: /
+
+User-agent: SemrushBot-SI
+Disallow: /
+
+User-agent: SemrushBot-SWA
+Disallow: /
+
+User-agent: SemrushBot-CT
+Disallow: /
+
 User-agent: MJ12bot
 Disallow: /
 
-# Moz / Dotbot / Roger
 User-agent: DotBot
 Disallow: /
+
 User-agent: rogerbot
 Disallow: /
 
-# SISTRIX
 User-agent: SISTRIX
 Disallow: /
 
-# DataForSEO
 User-agent: DataForSeoBot
 Disallow: /
 
-# BLEX (scraper)
 User-agent: BLEXBot
 Disallow: /
 
-# Serpstat / SE Ranking / Ubersuggest
 User-agent: SerpstatBot
 Disallow: /
+
 User-agent: SeRankBot
 Disallow: /
+
 User-agent: Ubersuggest
 Disallow: /
 
-# Site audit tools
 User-agent: Screaming Frog SEO Spider
 Disallow: /
+
 User-agent: Sitebulb
 Disallow: /
 
-# Autres bots SEO / “analyse”
 User-agent: AspiegelBot
 Disallow: /
+
 User-agent: MojeekBot
 Disallow: /
+
 User-agent: NetcraftSurveyAgent
 Disallow: /
+
 User-agent: LinkdexBot
 Disallow: /
+
 User-agent: MegaIndex.ru
 Disallow: /
+
+User-agent: MegaIndex
+Disallow: /
+
 User-agent: XoviBot
 Disallow: /
+
 User-agent: SEOdiver
 Disallow: /
+
 User-agent: SEOkicks
 Disallow: /
+
 User-agent: zoominfo
 Disallow: /
+
 User-agent: TurnitinBot
 Disallow: /
 
-# Petal (souvent très crawler)
 User-agent: PetalBot
+Disallow: /
+
+User-agent: Barkrowler
+Disallow: /
+
+User-agent: SeekportBot
+Disallow: /
+
+User-agent: Spbot
+Disallow: /
+
+User-agent: Linguee
+Disallow: /
+
+User-agent: ltx71
+Disallow: /
+
+User-agent: trendictionbot
+Disallow: /
+
+User-agent: Cliqzbot
+Disallow: /
+
+User-agent: Cocolyzebot
+Disallow: /
+
+User-agent: DomainStatsBot
+Disallow: /
+
+User-agent: archive.org_bot
+Disallow: /
+
+User-agent: ia_archiver
+Disallow: /
+
+User-agent: Nutch
+Disallow: /
+
+User-agent: MauiBot
+Disallow: /
+
+User-agent: BUbiNG
+Disallow: /
+
+User-agent: MegaIndex.ru/2.0
+Disallow: /
+
+User-agent: ZoomBot
+Disallow: /
+
+User-agent: BacklinkCrawler
+Disallow: /
+
+User-agent: LinkpadBot
+Disallow: /
+
+User-agent: spbot
+Disallow: /
+
+User-agent: OpenLinkProfiler
+Disallow: /
+
+User-agent: SEOstats
+Disallow: /
+
+User-agent: RankActiveLinkBot
+Disallow: /
+
+User-agent: Lipperhey
+Disallow: /
+
+User-agent: sistrix
+Disallow: /
+
+User-agent: WebMeUp
+Disallow: /
+
+User-agent: SEOkicks-Robot
+Disallow: /
+
+User-agent: SiteExplorer
+Disallow: /
+
+User-agent: SimilarWeb
+Disallow: /
+
+User-agent: SentiBot
+Disallow: /
+
+User-agent: GrapeshotCrawler
+Disallow: /
+
+User-agent: magpie-crawler
+Disallow: /
+
+User-agent: proximic
+Disallow: /
+
+User-agent: CensysInspect
+Disallow: /
+
+User-agent: zgrab
+Disallow: /
+
+User-agent: masscan
+Disallow: /
+
+User-agent: Shodan
 Disallow: /
 
 
