@@ -229,12 +229,13 @@ body{
 body::before{
   content:"";
   position:fixed;
-  inset:-6%;
-  background-image:url("./gmfond.png");
+  inset:0;
+  background-image:url("gmfond.png");
   background-position:center center;
   background-size:cover;
   background-repeat:no-repeat;
-  z-index:-10;
+  z-index:0;
+  pointer-events:none;
   animation:fondVoile 16s ease-in-out infinite alternate;
   transform-origin:center center;
   will-change:transform, filter;
@@ -244,7 +245,8 @@ body::after{
   content:"";
   position:fixed;
   inset:0;
-  z-index:-9;
+  z-index:1;
+  pointer-events:none;
   background:
     radial-gradient(circle at 50% 34%, rgba(255,215,0,.20), transparent 34%),
     radial-gradient(circle at 50% 88%, rgba(90,0,0,.20), transparent 42%),
@@ -277,7 +279,7 @@ body::after{
 .light-rays{
   position:fixed;
   inset:-30%;
-  z-index:-8;
+  z-index:2;
   pointer-events:none;
   background:
     conic-gradient(
@@ -348,6 +350,7 @@ body::after{
 .viewport{
   position:fixed;
   inset:22px;
+  z-index:10;
   display:flex;
   flex-direction:column;
   isolation:isolate;
@@ -640,7 +643,7 @@ iframe{
 @media(max-width:640px){
   body::before{
     background-attachment:scroll;
-    inset:-8%;
+    inset:0;
   }
 
   .frame{
