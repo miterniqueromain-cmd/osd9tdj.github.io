@@ -55,6 +55,12 @@
     <priority>0.80</priority>
   </url>
   <url>
+    <loc>https://osd9tdj.org/chronique.html</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://osd9tdj.org/commanderie.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>monthly</changefreq>
