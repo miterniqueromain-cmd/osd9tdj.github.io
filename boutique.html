@@ -222,18 +222,23 @@ body::before{
   content:"";
   position:fixed;
   inset:0;
-  background:url("drapeau-osd9tdj.PNG") center center / cover no-repeat fixed;
-  z-index:-4;
+  background-image:url("drapeau-osd9tdj.PNG");
+  background-position:center center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  z-index:0;
+  pointer-events:none;
 }
 
 body::after{
   content:"";
   position:fixed;
   inset:0;
+  z-index:1;
+  pointer-events:none;
   background:
     radial-gradient(circle at top, rgba(255,215,0,.12), transparent 32%),
     linear-gradient(135deg, rgba(0,0,0,.34) 0%, rgba(24,5,5,.26) 42%, rgba(0,0,0,.78) 100%);
-  z-index:-3;
 }
 
 .frame-fixed{
@@ -275,6 +280,7 @@ body::after{
 .viewport{
   position:fixed;
   inset:22px;
+  z-index:10;
   display:flex;
   flex-direction:column;
   isolation:isolate;
@@ -592,6 +598,7 @@ iframe{
 
   body::before{
     background-attachment:scroll;
+    inset:0;
   }
 
   .frame-fixed{
@@ -745,7 +752,7 @@ iframe{
       </p>
 
       <div class="spinner" id="spinner" aria-hidden="true"></div>
-      <div id="countdown" role="status" aria-live="polite">Ouverture sécurisée… 5</div>
+      <div id="countdown" role="status" aria-live="polite">Ouverture sécurisée… 10</div>
 
       <div class="action-row">
         <a href="#" id="returnBtn" class="action-btn" style="display:none">
@@ -813,7 +820,7 @@ iframe{
   const STORAGE_OPENED = "osd_bank_opened_once";
   const STORAGE_DATE = "osd_bank_last_open_date";
 
-  let seconds = 5;
+  let seconds = 10;
   let timer = null;
   let lastFocused = null;
   let frameLoaded = false;
