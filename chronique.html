@@ -5,20 +5,17 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-<meta name="googlebot" content="index, follow">
-<meta name="bingbot" content="index, follow">
 
 <title>Chroniques du Grand Maître – O.S.D.9.T.D.J.</title>
 
-<meta name="description" content="Accès aux Chroniques du Grand Maître de l’Ordre Sacré des Neuf Templiers de Jérusalem. Blog personnel, réflexions, textes, chroniques, transmission initiatique, culture templière et pensée symbolique.">
-<meta name="keywords" content="Chroniques du Grand Maître, Grand Maître, OSD9TDJ, Ordre Sacré des Neuf Templiers de Jérusalem, blog templier, chroniques templières, pensée initiatique, ésotérisme, spiritualité, tradition templière, chevalerie spirituelle, textes initiatiques, transmission, philosophie templière, patrimoine templier, ordre templier contemporain">
+<meta name="description" content="Accès au blog personnel des Chroniques du Grand Maître de l’Ordre Sacré des Neuf Templiers de Jérusalem. Textes, réflexions, chroniques, transmission initiatique, culture templière et pensée symbolique.">
+<meta name="keywords" content="Chroniques du Grand Maître, Grand Maître, OSD9TDJ, Ordre Sacré des Neuf Templiers de Jérusalem, blog templier, chroniques templières, pensée initiatique, ésotérisme, spiritualité, tradition templière, chevalerie spirituelle, textes initiatiques, transmission, philosophie templière, patrimoine templier">
 <meta name="author" content="Ordre Sacré des Neuf Templiers de Jérusalem – O.S.D.9.T.D.J.">
 <meta name="publisher" content="O.S.D.9.T.D.J. Association Loi 1901">
 <meta name="language" content="fr-FR">
 <meta name="theme-color" content="#000000">
-<meta name="format-detection" content="telephone=no">
-<link rel="canonical" href="https://osd9tdj.org/chroniques.html">
 
+<link rel="canonical" href="https://osd9tdj.org/chroniques.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://romainmiterniquetemplier.wordpress.com" crossorigin>
@@ -28,9 +25,8 @@
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="O.S.D.9.T.D.J.">
 <meta property="og:title" content="Chroniques du Grand Maître – O.S.D.9.T.D.J.">
-<meta property="og:description" content="Entrer dans le blog personnel des Chroniques du Grand Maître : textes, réflexions, transmission initiatique et culture templière.">
+<meta property="og:description" content="Entrer dans le blog personnel des Chroniques du Grand Maître.">
 <meta property="og:image" content="https://osd9tdj.org/gmfond.png">
-<meta property="og:image:alt" content="Ouvrir la Table des Chroniques">
 <meta property="og:url" content="https://osd9tdj.org/chroniques.html">
 <meta property="og:type" content="website">
 
@@ -38,9 +34,6 @@
 <meta name="twitter:title" content="Chroniques du Grand Maître – O.S.D.9.T.D.J.">
 <meta name="twitter:description" content="Accès au blog personnel des Chroniques du Grand Maître.">
 <meta name="twitter:image" content="https://osd9tdj.org/gmfond.png">
-
-<meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2026-OSD9TDJ-CHRONIQUES-GRAND-MAITRE">
-<meta name="osd9tdj-page-role" content="passerelle-blog-chroniques-grand-maitre-iframe">
 
 <script type="application/ld+json">
 {
@@ -79,29 +72,11 @@
 }
 </script>
 
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"Blog",
-  "name":"Les Chroniques du Grand Maître",
-  "url":"https://romainmiterniquetemplier.wordpress.com/",
-  "inLanguage":"fr-FR",
-  "description":"Blog personnel consacré aux chroniques, textes, réflexions et transmissions du Grand Maître.",
-  "isAccessibleForFree":true,
-  "publisher":{
-    "@type":"Organization",
-    "name":"Ordre Sacré des Neuf Templiers de Jérusalem",
-    "alternateName":"O.S.D.9.T.D.J."
-  }
-}
-</script>
-
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --or:#ffd700;
-  --or-soft:#d6a728;
   --clair:#fdf7e5;
   --or-line:rgba(255,215,0,.58);
   --or-line-soft:rgba(255,215,0,.22);
@@ -115,7 +90,6 @@ html,body{
   margin:0;
   width:100%;
   height:100%;
-  min-height:100%;
   overflow:hidden;
   font-family:'Lato',Arial,sans-serif;
   color:#fff;
@@ -125,10 +99,10 @@ html,body{
 body::before{
   content:"";
   position:fixed;
-  inset:-3%;
-  background:url("gmfond.png") center center / cover no-repeat fixed;
+  inset:-4%;
+  background:url("gmfond.png") center center / cover no-repeat;
   z-index:-5;
-  animation:veilWind 13s ease-in-out infinite alternate;
+  animation:fondVoile 12s ease-in-out infinite alternate;
   transform-origin:center;
 }
 
@@ -137,17 +111,28 @@ body::after{
   position:fixed;
   inset:0;
   background:
-    radial-gradient(circle at 50% 30%, rgba(255,215,0,.18), transparent 34%),
-    radial-gradient(circle at 50% 86%, rgba(90,0,0,.20), transparent 42%),
-    linear-gradient(135deg, rgba(0,0,0,.35), rgba(0,0,0,.72));
+    radial-gradient(circle at 50% 32%, rgba(255,215,0,.18), transparent 36%),
+    linear-gradient(135deg, rgba(0,0,0,.34), rgba(0,0,0,.78));
   z-index:-4;
 }
 
-@keyframes veilWind{
-  0%{transform:scale(1.03) translate3d(-8px,-3px,0)}
-  35%{transform:scale(1.045) translate3d(7px,4px,0)}
-  70%{transform:scale(1.035) translate3d(-4px,7px,0)}
-  100%{transform:scale(1.05) translate3d(9px,-5px,0)}
+@keyframes fondVoile{
+  0%{
+    transform:scale(1.04) translate3d(-10px,-4px,0) skewX(-.6deg);
+    filter:brightness(.95) contrast(1.04);
+  }
+  35%{
+    transform:scale(1.055) translate3d(8px,5px,0) skewX(.5deg);
+    filter:brightness(1.03) contrast(1.08);
+  }
+  70%{
+    transform:scale(1.045) translate3d(-5px,8px,0) skewX(-.35deg);
+    filter:brightness(.98) contrast(1.06);
+  }
+  100%{
+    transform:scale(1.06) translate3d(10px,-5px,0) skewX(.45deg);
+    filter:brightness(1.05) contrast(1.08);
+  }
 }
 
 .light-rays{
@@ -158,21 +143,21 @@ body::after{
   background:
     conic-gradient(from 0deg at 50% 50%,
       transparent 0deg,
-      rgba(255,215,0,.10) 18deg,
-      transparent 36deg,
-      transparent 72deg,
-      rgba(255,215,0,.08) 92deg,
-      transparent 112deg,
-      transparent 160deg,
-      rgba(255,215,0,.07) 178deg,
-      transparent 198deg,
-      transparent 250deg,
-      rgba(255,215,0,.09) 270deg,
-      transparent 292deg,
+      rgba(255,215,0,.09) 18deg,
+      transparent 38deg,
+      transparent 80deg,
+      rgba(255,215,0,.07) 100deg,
+      transparent 120deg,
+      transparent 180deg,
+      rgba(255,215,0,.08) 205deg,
+      transparent 230deg,
+      transparent 285deg,
+      rgba(255,215,0,.08) 305deg,
+      transparent 330deg,
       transparent 360deg);
-  animation:slowSun 34s linear infinite;
-  opacity:.68;
-  filter:blur(10px);
+  animation:slowSun 38s linear infinite;
+  opacity:.55;
+  filter:blur(12px);
 }
 
 @keyframes slowSun{
@@ -191,27 +176,6 @@ body::after{
     inset 0 0 0 1px rgba(255,255,255,.06),
     0 0 38px rgba(0,0,0,.45);
 }
-
-.corner-cross{
-  position:fixed;
-  z-index:42;
-  width:42px;
-  height:42px;
-  display:grid;
-  place-items:center;
-  pointer-events:none;
-  color:rgba(255,215,0,.78);
-  font-family:'Cinzel',serif;
-  font-size:30px;
-  line-height:1;
-  text-shadow:0 0 12px rgba(255,215,0,.45),0 2px 12px rgba(0,0,0,.75);
-}
-
-.corner-cross::before{content:"✠"}
-.corner-cross.top-left{top:20px;left:20px}
-.corner-cross.top-right{top:20px;right:20px}
-.corner-cross.bottom-left{bottom:20px;left:20px}
-.corner-cross.bottom-right{bottom:20px;right:20px}
 
 .viewport{
   position:fixed;
@@ -251,7 +215,6 @@ body::after{
 .main{
   flex:1;
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
   text-align:center;
@@ -266,7 +229,7 @@ body::after{
   border:1px solid rgba(255,215,0,.40);
   border-radius:30px;
   background:
-    linear-gradient(180deg, rgba(0,0,0,.46), rgba(0,0,0,.72)),
+    linear-gradient(180deg, rgba(0,0,0,.42), rgba(0,0,0,.72)),
     radial-gradient(circle at 50% 0%, rgba(255,215,0,.16), transparent 48%);
   box-shadow:
     0 28px 80px rgba(0,0,0,.68),
@@ -274,19 +237,6 @@ body::after{
     inset 0 0 58px rgba(255,215,0,.06);
   backdrop-filter:blur(8px) saturate(115%);
   overflow:hidden;
-}
-
-.chronique-card::before{
-  content:"✠";
-  position:absolute;
-  left:50%;
-  top:14px;
-  transform:translateX(-50%);
-  font-family:'Cinzel',serif;
-  font-size:34px;
-  color:rgba(255,215,0,.34);
-  text-shadow:0 0 28px rgba(255,215,0,.22);
-  pointer-events:none;
 }
 
 .chronique-card::after{
@@ -305,60 +255,31 @@ body::after{
   align-items:center;
   justify-content:center;
   gap:14px;
-  margin:0 auto 18px;
-  color:var(--or);
-  font-family:'Cinzel',serif;
-  opacity:.95;
+  margin:0 auto 20px;
 }
 
 .decor-line::before,
 .decor-line::after{
   content:"";
-  width:min(210px,24vw);
+  width:min(230px,28vw);
   height:1px;
   background:linear-gradient(90deg, transparent, rgba(255,215,0,.82), transparent);
 }
 
 .decor-line span{
   display:inline-block;
-  transform:rotate(45deg);
   width:13px;
   height:13px;
+  transform:rotate(45deg);
   border:1px solid rgba(255,215,0,.85);
   background:linear-gradient(135deg, rgba(255,215,0,.92), rgba(126,74,0,.62));
   box-shadow:0 0 16px rgba(255,215,0,.28);
 }
 
-.fleurons{
-  position:relative;
-  z-index:1;
-  display:flex;
-  justify-content:center;
-  gap:clamp(20px,6vw,70px);
-  margin:4px auto 16px;
-  color:rgba(255,215,0,.86);
-  font-family:'Cinzel',serif;
-  font-size:clamp(1.8rem,5vw,3.2rem);
-  text-shadow:0 0 18px rgba(255,215,0,.28),0 3px 14px rgba(0,0,0,.8);
-}
-
-.fleurons span{
-  animation:fleuronFloat 5.8s ease-in-out infinite alternate;
-}
-
-.fleurons span:nth-child(2){
-  animation-delay:1.3s;
-}
-
-@keyframes fleuronFloat{
-  from{transform:translateY(0) rotate(-1deg)}
-  to{transform:translateY(-5px) rotate(1deg)}
-}
-
 h1{
   position:relative;
   z-index:1;
-  margin:6px auto 10px;
+  margin:8px auto 12px;
   font-family:'Cinzel',serif;
   color:var(--clair);
   font-size:clamp(1.45rem,4.2vw,2.85rem);
@@ -572,8 +493,6 @@ iframe{
 }
 
 @media (max-width:640px){
-  html,body{overflow:hidden}
-
   body::before{
     background-attachment:scroll;
   }
@@ -583,18 +502,9 @@ iframe{
     border-radius:16px;
   }
 
-  .corner-cross{
-    font-size:24px;
-    width:34px;
-    height:34px;
+  .viewport{
+    inset:14px;
   }
-
-  .corner-cross.top-left{top:12px;left:12px}
-  .corner-cross.top-right{top:12px;right:12px}
-  .corner-cross.bottom-left{bottom:12px;left:12px}
-  .corner-cross.bottom-right{bottom:12px;right:12px}
-
-  .viewport{inset:14px}
 
   .menu-dot{
     top:calc(18px + var(--safe-top));
@@ -614,7 +524,9 @@ iframe{
     overflow:auto;
   }
 
-  h1{font-size:1.32rem}
+  h1{
+    font-size:1.32rem;
+  }
 
   .lead{
     font-size:.92rem;
@@ -679,10 +591,6 @@ iframe{
   .note{
     display:none;
   }
-
-  .fleurons{
-    font-size:1.7rem;
-  }
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -698,10 +606,6 @@ iframe{
 <body>
 <div class="light-rays" aria-hidden="true"></div>
 <div class="frame-fixed" aria-hidden="true"></div>
-<div class="corner-cross top-left" aria-hidden="true"></div>
-<div class="corner-cross top-right" aria-hidden="true"></div>
-<div class="corner-cross bottom-left" aria-hidden="true"></div>
-<div class="corner-cross bottom-right" aria-hidden="true"></div>
 
 <a class="menu-dot" href="menu.html" title="Menu" aria-label="Menu" data-store-return="true">⋯</a>
 
@@ -711,15 +615,10 @@ iframe{
 
       <div class="decor-line" aria-hidden="true"><span></span></div>
 
-      <div class="fleurons" aria-hidden="true">
-        <span>⚜</span>
-        <span>⚜</span>
-      </div>
-
-      <h1 id="pageTitle">Ouvrir la Table des Chroniques</h1>
+      <h1 id="pageTitle">Ouvrir la Table du Grand Maître</h1>
 
       <p class="lead" id="infoText">
-        Vous allez entrer dans le blog personnel des Chroniques du Grand Maître.
+        Vous allez entrer dans les Chroniques du Grand Maître.
       </p>
 
       <p class="note" id="securityNote">
@@ -727,7 +626,7 @@ iframe{
       </p>
 
       <div class="spinner" id="spinner" aria-hidden="true"></div>
-      <div id="countdown" role="status" aria-live="polite">Ouverture des chroniques… 5</div>
+      <div id="countdown" role="status" aria-live="polite">Ouverture des chroniques… 10</div>
 
       <div class="action-row">
         <a href="#" id="returnBtn" class="action-btn" style="display:none">
@@ -796,7 +695,7 @@ iframe{
   const STORAGE_OPENED = "osd_chroniques_opened_once";
   const STORAGE_DATE = "osd_chroniques_last_open_date";
 
-  let seconds = 5;
+  let seconds = 10;
   let timer = null;
   let lastFocused = null;
   let frameLoaded = false;
