@@ -235,6 +235,7 @@
 
 html,body{
   margin:0;
+  width:100%;
   min-height:100%;
   height:100%;
   overflow:hidden;
@@ -247,11 +248,7 @@ body::before{
   content:"";
   position:fixed;
   inset:0;
-  background-image:url("drapeau-osd9tdj.PNG");
-  background-position:center center;
-  background-size:cover;
-  background-repeat:no-repeat;
-  background-attachment:fixed;
+  background:url("drapeau-osd9tdj.PNG") center center / cover no-repeat fixed;
   z-index:-4;
 }
 
@@ -260,29 +257,12 @@ body::after{
   position:fixed;
   inset:0;
   background:
-    linear-gradient(135deg, rgba(0,0,0,.54) 0%, rgba(30,8,8,.30) 38%, rgba(0,0,0,.72) 100%),
-    radial-gradient(circle at 50% 8%, rgba(255,215,0,.18), transparent 34%),
-    radial-gradient(circle at 50% 92%, rgba(120,0,0,.22), transparent 38%);
+    radial-gradient(circle at top, rgba(255,215,0,.12), transparent 32%),
+    linear-gradient(135deg, rgba(0,0,0,.34) 0%, rgba(24,5,5,.26) 42%, rgba(0,0,0,.78) 100%);
   z-index:-3;
 }
 
 ::selection{background:rgba(255,215,0,.24)}
-
-.skip-link{
-  position:fixed;
-  left:14px;
-  top:14px;
-  transform:translateY(-120%);
-  z-index:5000;
-  background:#000;
-  color:var(--clair);
-  border:1px solid var(--or-line);
-  padding:10px 14px;
-  border-radius:999px;
-  text-decoration:none;
-}
-
-.skip-link:focus{transform:translateY(0)}
 
 .frame-fixed{
   position:fixed;
@@ -297,18 +277,31 @@ body::after{
     0 0 38px rgba(0,0,0,.45);
 }
 
-.frame-fixed::before,
-.frame-fixed::after{
-  content:"✠";
-  position:absolute;
-  color:rgba(255,215,0,.72);
+.corner-cross{
+  position:fixed;
+  z-index:42;
+  width:42px;
+  height:42px;
+  display:grid;
+  place-items:center;
+  pointer-events:none;
+  color:rgba(255,215,0,.78);
   font-family:'Cinzel',serif;
-  font-size:26px;
-  text-shadow:0 0 18px rgba(255,215,0,.28);
+  font-size:30px;
+  line-height:1;
+  text-shadow:
+    0 0 12px rgba(255,215,0,.45),
+    0 2px 12px rgba(0,0,0,.75);
 }
 
-.frame-fixed::before{left:18px;top:12px}
-.frame-fixed::after{right:18px;bottom:12px}
+.corner-cross::before{
+  content:"✠";
+}
+
+.corner-cross.top-left{top:20px;left:20px}
+.corner-cross.top-right{top:20px;right:20px}
+.corner-cross.bottom-left{bottom:20px;left:20px}
+.corner-cross.bottom-right{bottom:20px;right:20px}
 
 .viewport{
   position:fixed;
@@ -433,13 +426,13 @@ body::after{
   border:1px solid rgba(255,215,0,.36);
   border-radius:28px;
   background:
-    linear-gradient(180deg, rgba(10,6,3,.56), rgba(0,0,0,.70)),
+    linear-gradient(180deg, rgba(10,6,3,.50), rgba(0,0,0,.66)),
     radial-gradient(circle at 50% 0%, rgba(255,215,0,.14), transparent 42%);
   box-shadow:
     0 26px 70px rgba(0,0,0,.62),
     inset 0 0 0 1px rgba(255,255,255,.05),
     inset 0 0 52px rgba(255,215,0,.05);
-  backdrop-filter:blur(8px) saturate(115%);
+  backdrop-filter:blur(6px) saturate(115%);
   overflow:hidden;
 }
 
@@ -690,6 +683,11 @@ iframe{
 
 @media (max-width:640px){
   .frame-fixed{inset:8px;border-radius:16px}
+  .corner-cross{font-size:24px;width:34px;height:34px}
+  .corner-cross.top-left{top:12px;left:12px}
+  .corner-cross.top-right{top:12px;right:12px}
+  .corner-cross.bottom-left{bottom:12px;left:12px}
+  .corner-cross.bottom-right{bottom:12px;right:12px}
   .viewport{inset:14px}
   .site-menu{top:calc(18px + var(--safe-top));right:18px}
   .main{padding-top:62px}
@@ -712,8 +710,11 @@ iframe{
 </head>
 
 <body>
-<a href="#contenu" class="skip-link">Aller au contenu principal</a>
 <div class="frame-fixed" aria-hidden="true"></div>
+<div class="corner-cross top-left" aria-hidden="true"></div>
+<div class="corner-cross top-right" aria-hidden="true"></div>
+<div class="corner-cross bottom-left" aria-hidden="true"></div>
+<div class="corner-cross bottom-right" aria-hidden="true"></div>
 
 <details class="site-menu" id="pageMenu">
   <summary title="Menu" aria-label="Ouvrir le menu">⋯</summary>
