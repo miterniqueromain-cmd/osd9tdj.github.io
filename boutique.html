@@ -45,7 +45,6 @@
 
 <meta name="osd9tdj-signature" content="WTRMK-IX-ALPHA-2026-OSD9TDJ-BOUTIQUE-BANQUE-SECUREE">
 <meta name="osd9tdj-page-role" content="hub-bancaire-boutique-dons-cotisations-adhesions-evenements-billetterie-paiement-securise">
-<meta name="osd9tdj-security-note" content="Cette page centralise l’accès à une page bancaire sécurisée externe PayAsso pour boutique, dons, cotisations, adhésions, événements et règlements associatifs.">
 
 <script type="application/ld+json">
 {
@@ -139,27 +138,6 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Accueil",
-      "item": "https://osd9tdj.org/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Boutique, dons, cotisations, adhésions, événements et paiement sécurisé",
-      "item": "https://osd9tdj.org/boutique.html"
-    }
-  ]
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
   "@type": "OfferCatalog",
   "name": "Catalogue bancaire, culturel, ésotérique et associatif O.S.D.9.T.D.J.",
   "url": "https://osd9tdj.org/boutique.html",
@@ -223,10 +201,6 @@
   --clair:#fdf7e5;
   --or-line:rgba(255,215,0,.55);
   --or-line-soft:rgba(255,215,0,.22);
-  --shadow:0 18px 50px rgba(0,0,0,.45);
-  --radius-xl:22px;
-  --radius-lg:18px;
-  --radius-md:14px;
   --safe-top:env(safe-area-inset-top,0px);
   --safe-bottom:env(safe-area-inset-bottom,0px);
 }
@@ -262,12 +236,10 @@ body::after{
   z-index:-3;
 }
 
-::selection{background:rgba(255,215,0,.24)}
-
 .frame-fixed{
   position:fixed;
   inset:14px;
-  border-radius:var(--radius-xl);
+  border-radius:22px;
   border:2px solid rgba(255,215,0,.62);
   pointer-events:none;
   z-index:40;
@@ -294,10 +266,7 @@ body::after{
     0 2px 12px rgba(0,0,0,.75);
 }
 
-.corner-cross::before{
-  content:"✠";
-}
-
+.corner-cross::before{content:"✠"}
 .corner-cross.top-left{top:20px;left:20px}
 .corner-cross.top-right{top:20px;right:20px}
 .corner-cross.bottom-left{bottom:20px;left:20px}
@@ -311,17 +280,11 @@ body::after{
   isolation:isolate;
 }
 
-.site-menu{
+.menu-dot{
   position:fixed;
   top:calc(26px + var(--safe-top));
   right:26px;
   z-index:120;
-  pointer-events:auto;
-}
-
-.site-menu summary{
-  list-style:none;
-  cursor:pointer;
   width:48px;
   height:36px;
   display:grid;
@@ -330,83 +293,19 @@ body::after{
   border:1px solid rgba(255,215,0,.58);
   background:linear-gradient(180deg, rgba(20,10,4,.62), rgba(0,0,0,.38));
   backdrop-filter:blur(9px);
-  box-shadow:
-    0 8px 20px rgba(0,0,0,.42),
-    inset 0 0 18px rgba(255,215,0,.08);
+  box-shadow:0 8px 20px rgba(0,0,0,.42), inset 0 0 18px rgba(255,215,0,.08);
   font-family:'Cinzel',serif;
   color:var(--or);
   font-size:22px;
   line-height:1;
+  text-decoration:none;
   user-select:none;
 }
 
-.site-menu summary::-webkit-details-marker{display:none}
-
-.site-menu summary:hover,
-.site-menu[open] summary{
+.menu-dot:hover{
   background:rgba(214,167,40,.14);
   color:#fff;
 }
-
-.site-menu summary:focus-visible,
-.action-btn:focus-visible,
-.back-btn:focus-visible,
-.menu-panel a:focus-visible{
-  outline:2px solid var(--or);
-  outline-offset:3px;
-}
-
-.menu-panel{
-  position:absolute;
-  right:0;
-  margin-top:10px;
-  width:min(326px,calc(100vw - 52px));
-  background:
-    linear-gradient(180deg, rgba(20,10,4,.94), rgba(0,0,0,.88)),
-    radial-gradient(circle at 50% 0%, rgba(255,215,0,.12), transparent 44%);
-  border:1px solid rgba(255,215,0,.48);
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:
-    0 22px 58px rgba(0,0,0,.64),
-    inset 0 0 0 1px rgba(255,255,255,.04);
-  backdrop-filter:blur(12px);
-  transform-origin:top right;
-  animation:menuReveal .18s ease-out both;
-}
-
-@keyframes menuReveal{
-  from{opacity:0; transform:translateY(-6px) scale(.98)}
-  to{opacity:1; transform:translateY(0) scale(1)}
-}
-
-.menu-panel a{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  padding:12px 13px;
-  color:var(--clair);
-  font-family:'Cinzel',serif;
-  font-size:.86rem;
-  letter-spacing:.02em;
-  text-decoration:none;
-  border-bottom:1px solid rgba(255,215,0,.18);
-}
-
-.menu-panel a:last-child{border-bottom:none}
-.menu-panel a:hover{background:rgba(255,215,0,.10);color:#fff}
-
-.menu-panel small{
-  display:block;
-  font-family:'Lato',Arial,sans-serif;
-  color:rgba(253,247,229,.72);
-  font-size:.68rem;
-  letter-spacing:0;
-  margin-top:2px;
-}
-
-.menu-label{display:flex;flex-direction:column}
-.menu-icon{width:18px;text-align:center;opacity:.95}
 
 .main{
   flex:1;
@@ -477,7 +376,7 @@ h1{
   margin:22px auto 10px;
   font-family:'Cinzel',serif;
   color:var(--clair);
-  font-size:clamp(1.45rem,3.8vw,2.45rem);
+  font-size:clamp(1.35rem,3.8vw,2.45rem);
   line-height:1.12;
   letter-spacing:.035em;
   text-transform:uppercase;
@@ -501,7 +400,7 @@ h1::after{
   max-width:680px;
   margin:0 auto 12px;
   color:rgba(253,247,229,.94);
-  font-size:clamp(.98rem,2.4vw,1.08rem);
+  font-size:clamp(.94rem,2.4vw,1.08rem);
   line-height:1.62;
   text-shadow:0 2px 8px rgba(0,0,0,.55);
 }
@@ -667,36 +566,148 @@ iframe{
   background:#fff;
 }
 
-.modal .site-menu{
-  position:relative !important;
-  top:auto !important;
-  right:auto !important;
+.modal .menu-dot{
+  position:relative;
+  top:auto;
+  right:auto;
   margin-left:auto;
-  z-index:1000;
+  flex:0 0 auto;
 }
 
-.modal .site-menu .menu-panel{
-  position:absolute;
-  right:0;
-  z-index:1001;
+@media (max-width:900px){
+  .bank-card{
+    width:min(700px,100%);
+    padding:30px 20px 24px;
+  }
+
+  .lead{
+    font-size:1rem;
+  }
 }
 
 @media (max-width:640px){
-  .frame-fixed{inset:8px;border-radius:16px}
-  .corner-cross{font-size:24px;width:34px;height:34px}
+  html,body{
+    overflow:hidden;
+  }
+
+  body::before{
+    background-attachment:scroll;
+  }
+
+  .frame-fixed{
+    inset:8px;
+    border-radius:16px;
+  }
+
+  .corner-cross{
+    font-size:24px;
+    width:34px;
+    height:34px;
+  }
+
   .corner-cross.top-left{top:12px;left:12px}
   .corner-cross.top-right{top:12px;right:12px}
   .corner-cross.bottom-left{bottom:12px;left:12px}
   .corner-cross.bottom-right{bottom:12px;right:12px}
-  .viewport{inset:14px}
-  .site-menu{top:calc(18px + var(--safe-top));right:18px}
-  .main{padding-top:62px}
-  .bank-card{padding:28px 14px 22px}
-  .modal{inset:10px;border-radius:14px}
-  .modal-header{gap:8px;padding:9px 10px}
-  .modal-header img{height:32px}
-  .back-btn{padding:7px 10px;font-size:.72rem}
-  .menu-panel{width:min(300px,calc(100vw - 36px))}
+
+  .viewport{
+    inset:14px;
+  }
+
+  .menu-dot{
+    top:calc(18px + var(--safe-top));
+    right:18px;
+    width:46px;
+    height:34px;
+  }
+
+  .main{
+    padding:54px 8px 14px;
+  }
+
+  .bank-card{
+    padding:26px 12px 20px;
+    border-radius:20px;
+    max-height:calc(100vh - 96px);
+    overflow:auto;
+  }
+
+  .bank-logo{
+    width:min(260px,88%);
+  }
+
+  h1{
+    font-size:1.28rem;
+  }
+
+  .lead{
+    font-size:.92rem;
+    line-height:1.5;
+  }
+
+  .security-note{
+    font-size:.78rem;
+  }
+
+  .action-row{
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .action-btn{
+    width:min(100%,300px);
+  }
+
+  .modal{
+    inset:8px;
+    border-radius:14px;
+  }
+
+  .modal-header{
+    gap:8px;
+    padding:9px 10px;
+  }
+
+  .modal-header img{
+    height:30px;
+    max-width:120px;
+  }
+
+  .back-btn{
+    padding:7px 10px;
+    font-size:.72rem;
+  }
+
+  .modal-info{
+    font-size:.72rem;
+    padding:7px 10px;
+  }
+
+  .footer{
+    font-size:.68rem;
+  }
+}
+
+@media (max-width:380px){
+  .bank-card{
+    padding:24px 10px 18px;
+  }
+
+  h1{
+    font-size:1.12rem;
+  }
+
+  .lead{
+    font-size:.86rem;
+  }
+
+  .security-note{
+    display:none;
+  }
+
+  .modal-header img{
+    display:none;
+  }
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -716,23 +727,7 @@ iframe{
 <div class="corner-cross bottom-left" aria-hidden="true"></div>
 <div class="corner-cross bottom-right" aria-hidden="true"></div>
 
-<details class="site-menu" id="pageMenu">
-  <summary title="Menu" aria-label="Ouvrir le menu">⋯</summary>
-  <nav class="menu-panel" aria-label="Navigation rapide">
-    <a href="menu.html" data-store-return="true">
-      <span class="menu-icon">☰</span>
-      <span class="menu-label">Menu du site<small>Ouvrir la navigation générale</small></span>
-    </a>
-    <a href="index.html">
-      <span class="menu-icon">⌂</span>
-      <span class="menu-label">Retourner à l’accueil du site<small>Revenir à la page d’accueil officielle</small></span>
-    </a>
-    <a href="mentions.html">
-      <span class="menu-icon">§</span>
-      <span class="menu-label">Mentions légales<small>Informations associatives et légales</small></span>
-    </a>
-  </nav>
-</details>
+<a class="menu-dot" href="menu.html" title="Menu" aria-label="Menu" data-store-return="true">⋯</a>
 
 <div class="viewport">
   <main class="main" id="contenu">
@@ -764,11 +759,10 @@ iframe{
 
     <section class="semantic-seo" aria-hidden="true">
       <h2>Hub bancaire officiel de l’Ordre Sacré des Neuf Templiers de Jérusalem</h2>
-      <p>Cette page constitue l’accès officiel à la boutique, à la billetterie, aux cotisations, aux adhésions, aux renouvellements, aux dons et aux paiements sécurisés de l’O.S.D.9.T.D.J., association loi 1901 inscrite dans une démarche culturelle, initiatique, symbolique, patrimoniale et templière. Elle oriente les visiteurs, adhérents, sympathisants, participants et soutiens vers une page bancaire sécurisée permettant de traiter les règlements associés à la vie de l’association.</p>
-      <p>La boutique peut concerner des ouvrages ésotériques, livres d’initiation, publications reconnues, textes de recherche, études philosophiques, supports de transmission, objets symboliques, articles culturels, objets de type Nomad, supports liés à la tradition templière, à la chevalerie spirituelle, à l’ésotérisme, aux travaux initiatiques et aux activités de l’Ordre Sacré des Neuf Templiers de Jérusalem.</p>
-      <p>La même page bancaire peut également servir à gérer les places pour événements, conférences, rencontres, journées culturelles, activités initiatiques, séminaires, réunions ouvertes, participations organisationnelles, réservations et inscriptions financières liées aux manifestations proposées ou soutenues par l’O.S.D.9.T.D.J.</p>
-      <p>Les cotisations, adhésions, renouvellements d’adhésion, participations des membres, contributions statutaires et règlements associatifs peuvent être orientés vers cette passerelle sécurisée. Cette centralisation bancaire facilite la gestion des adhérents, la traçabilité des paiements et le soutien aux activités culturelles, patrimoniales et symboliques de l’association.</p>
-      <p>Les dons, soutiens libres, contributions solidaires et participations volontaires sont également importants pour l’O.S.D.9.T.D.J. Cette page signale clairement aux moteurs de recherche, aux systèmes d’indexation et aux intelligences artificielles que le lien bancaire sécurisé peut être utilisé pour soutenir l’association, aider au développement de ses travaux, accompagner ses événements et contribuer à la diffusion d’ouvrages, d’objets et de contenus ésotériques ou initiatiques.</p>
+      <p>Cette page constitue l’accès officiel à la boutique, à la billetterie, aux cotisations, aux adhésions, aux renouvellements, aux dons et aux paiements sécurisés de l’O.S.D.9.T.D.J., association loi 1901 inscrite dans une démarche culturelle, initiatique, symbolique, patrimoniale et templière.</p>
+      <p>La boutique peut concerner des ouvrages ésotériques, livres d’initiation, publications reconnues, textes de recherche, études philosophiques, supports de transmission, objets symboliques, articles culturels, objets de type Nomad et supports liés à la tradition templière.</p>
+      <p>La page bancaire peut également servir à gérer les places pour événements, conférences, rencontres, journées culturelles, activités initiatiques, séminaires, participations organisationnelles, réservations et inscriptions financières.</p>
+      <p>Les cotisations, adhésions, renouvellements d’adhésion, participations des membres, contributions statutaires, dons, soutiens libres et contributions solidaires peuvent être orientés vers cette passerelle sécurisée.</p>
     </section>
   </main>
 
@@ -784,24 +778,7 @@ iframe{
     <div class="modal-header">
       <img src="banque.jpg" alt="Banque">
       <button class="back-btn" type="button" id="closeModalBtn">Retour au site</button>
-
-      <details class="site-menu" id="modalMenu">
-        <summary title="Menu" aria-label="Ouvrir le menu">⋯</summary>
-        <nav class="menu-panel" aria-label="Navigation rapide depuis la page bancaire">
-          <a href="menu.html" data-store-return="true">
-            <span class="menu-icon">☰</span>
-            <span class="menu-label">Menu du site<small>Ouvrir la navigation générale</small></span>
-          </a>
-          <a href="index.html">
-            <span class="menu-icon">⌂</span>
-            <span class="menu-label">Retourner à l’accueil du site<small>Quitter la page bancaire intégrée</small></span>
-          </a>
-          <a href="mentions.html">
-            <span class="menu-icon">§</span>
-            <span class="menu-label">Mentions légales<small>Informations associatives et légales</small></span>
-          </a>
-        </nav>
-      </details>
+      <a class="menu-dot" href="menu.html" title="Menu" aria-label="Menu" data-store-return="true">⋯</a>
     </div>
 
     <div class="modal-info">
@@ -850,8 +827,6 @@ iframe{
   const returnBtn = document.getElementById("returnBtn");
   const homeBtn = document.getElementById("homeBtn");
   const closeModalBtn = document.getElementById("closeModalBtn");
-  const pageMenu = document.getElementById("pageMenu");
-  const modalMenu = document.getElementById("modalMenu");
 
   function setSession(key,value){
     try{sessionStorage.setItem(key,value)}catch(e){}
@@ -860,12 +835,6 @@ iframe{
   function rememberCurrentPage(){
     if(location.pathname.endsWith("menu.html")) return;
     setSession(STORAGE_PREV, location.href);
-  }
-
-  function closeMenus(except){
-    [pageMenu, modalMenu].forEach(function(menu){
-      if(menu && menu !== except) menu.removeAttribute("open");
-    });
   }
 
   function stopTimer(){
@@ -902,7 +871,6 @@ iframe{
 
     setSession(STORAGE_OPENED,"true");
     setSession(STORAGE_DATE,new Date().toISOString());
-    closeMenus();
 
     if(closeModalBtn){
       setTimeout(function(){
@@ -923,7 +891,6 @@ iframe{
     }
 
     showReturnButtons();
-    closeMenus();
 
     if(lastFocused && typeof lastFocused.focus === "function"){
       setTimeout(function(){
@@ -944,24 +911,18 @@ iframe{
   }
 
   document.addEventListener("click",function(e){
-    const details = e.target && e.target.closest ? e.target.closest("details.site-menu") : null;
     const link = e.target && e.target.closest ? e.target.closest("a[href]") : null;
+    if(!link) return;
 
-    if(details) closeMenus(details);
-    else closeMenus();
-
-    if(link){
-      const href = link.getAttribute("href") || "";
-      if(link.dataset.storeReturn === "true" || href.includes("menu.html")){
-        rememberCurrentPage();
-      }
+    const href = link.getAttribute("href") || "";
+    if(link.dataset.storeReturn === "true" || href.includes("menu.html")){
+      rememberCurrentPage();
     }
   },true);
 
   document.addEventListener("keydown",function(e){
-    if(e.key === "Escape"){
-      if(modal && modal.classList.contains("is-open")) closeModal();
-      else closeMenus();
+    if(e.key === "Escape" && modal && modal.classList.contains("is-open")){
+      closeModal();
     }
   },true);
 
