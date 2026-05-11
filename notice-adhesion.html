@@ -1182,7 +1182,6 @@
         safeSet(sessionStorage, pageKey + ":last-duration", String(spent));
       });
     }
-
     function initMicroSignals() {
       body.setAttribute("data-page", "notice-adhesion");
       body.setAttribute("data-entity", "osd9tdj");
@@ -1204,7 +1203,29 @@
       );
     }
 
-    <!-- Google Translate (widget invisible) -->
+    function init() {
+      initScrollMemory();
+      initVisits();
+      initReadingProgress();
+      buildContentIndex();
+      auditHeadings();
+      auditSeoState();
+      computeStats();
+      initHashNavigation();
+      initStructuredDomHints();
+      initTimeMetrics();
+      initMicroSignals();
+    }
+
+    if (doc.readyState === "loading") {
+      doc.addEventListener("DOMContentLoaded", init, { once:true });
+    } else {
+      init();
+    }
+  })();
+  </script>
+
+  <!-- Google Translate (widget invisible) -->
   <div id="google_translate_element" style="display:none;"></div>
 
   <!-- Script commun site (audio + translate + mémoire + anti-bannière) -->
@@ -1215,3 +1236,4 @@
 
 </body>
 </html>
+   
