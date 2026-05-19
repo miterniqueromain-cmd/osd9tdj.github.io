@@ -69,124 +69,186 @@
   <link rel="apple-touch-icon" href="icon-192.png">
 
   <!-- JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@graph":[
-      {
-        "@type":"Organization",
-        "@id":"https://osd9tdj.org/#organization",
-        "name":"Ordre Sacré des Neuf Templiers de Jérusalem",
-        "alternateName":["O.S.D.9.T.D.J.","OSD9TDJ"],
-        "url":"https://osd9tdj.org",
-        "logo":"https://osd9tdj.org/logo-ix.PNG",
-        "description":"Association loi 1901 à vocation culturelle, fraternelle, philosophique et initiatique, organisant des rencontres régulières, des activités d’étude, des évènements culturels et des temps de découverte.",
-        "sameAs":["https://osd9tdj.org"]
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+
+    {
+      "@type":"Organization",
+      "@id":"https://osd9tdj.org/#organization",
+      "name":"Ordre Sacré des Neuf Templiers de Jérusalem",
+      "alternateName":[
+        "O.S.D.9.T.D.J.",
+        "OSD9TDJ"
+      ],
+      "url":"https://osd9tdj.org",
+      "logo":"https://osd9tdj.org/logo-ix.PNG",
+      "description":"Association loi 1901 à vocation culturelle, fraternelle, philosophique, symbolique et initiatique, organisant des rencontres régulières, des travaux d’étude, des activités culturelles, des temps de transmission et des évènements liés à la chevalerie contemporaine et aux traditions initiatiques.",
+      "sameAs":[
+        "https://osd9tdj.org"
+      ]
+    },
+
+    {
+      "@type":"WebSite",
+      "@id":"https://osd9tdj.org/#website",
+      "url":"https://osd9tdj.org",
+      "name":"O.S.D.9.T.D.J.",
+      "publisher":{
+        "@id":"https://osd9tdj.org/#organization"
       },
-      {
-        "@type":"WebSite",
-        "@id":"https://osd9tdj.org/#website",
-        "url":"https://osd9tdj.org",
-        "name":"O.S.D.9.T.D.J.",
-        "publisher":{"@id":"https://osd9tdj.org/#organization"},
-        "inLanguage":"fr-FR"
+      "inLanguage":"fr-FR"
+    },
+
+    {
+      "@type":"WebPage",
+      "@id":"https://osd9tdj.org/activites.html#webpage",
+      "url":"https://osd9tdj.org/activites.html",
+      "name":"Activités et évènements – O.S.D.9.T.D.J.",
+      "description":"Page consacrée aux activités, rencontres d’étude, évènements culturels, rencontres fraternelles, travaux initiatiques et déplacements liés à l’Ordre Sacré des Neuf Templiers de Jérusalem.",
+      "isPartOf":{
+        "@id":"https://osd9tdj.org/#website"
       },
-      {
-        "@type":"WebPage",
-        "@id":"https://osd9tdj.org/activites.html#webpage",
-        "url":"https://osd9tdj.org/activites.html",
-        "name":"Activités et évènements – O.S.D.9.T.D.J.",
-        "description":"Page consacrée aux activités, rencontres d’étude, évènements passés et à venir, et modalités de découverte de l’Ordre Sacré des Neuf Templiers de Jérusalem.",
-        "isPartOf":{"@id":"https://osd9tdj.org/#website"},
-        "about":{"@id":"https://osd9tdj.org/#organization"},
-        "inLanguage":"fr-FR"
+      "about":{
+        "@id":"https://osd9tdj.org/#organization"
       },
-      {
-        "@type":"Article",
-        "@id":"https://osd9tdj.org/activites.html#article",
-        "headline":"Activités et évènements de l’Ordre Sacré des Neuf Templiers de Jérusalem",
-        "description":"Présentation des activités régulières, des rencontres bimensuelles d’étude, des évènements publics, d’une participation à un convent extérieur en mai 2026 et des modalités de prise de contact pour découvrir l’association.",
-        "mainEntityOfPage":{"@id":"https://osd9tdj.org/activites.html#webpage"},
-        "publisher":{"@id":"https://osd9tdj.org/#organization"},
-        "image":"https://osd9tdj.org/logo-ix.PNG",
-        "inLanguage":"fr-FR",
-        "about":[
-          "activité associative",
-          "rencontres d’étude",
-          "association active",
-          "ordre templier moderne",
-          "rencontres philosophiques",
-          "travaux initiatiques",
-          "chevalerie moderne",
-          "évènements culturels",
-          "réunion découverte",
-          "Cordes-sur-Ciel",
-          "Rite de Mithra",
-          "Rose+Croix"
-        ]
+      "inLanguage":"fr-FR"
+    },
+
+    {
+      "@type":"Article",
+      "@id":"https://osd9tdj.org/activites.html#article",
+      "headline":"Activités et évènements de l’Ordre Sacré des Neuf Templiers de Jérusalem",
+      "description":"Présentation des activités régulières, rencontres d’étude, évènements publics, travaux symboliques, rencontres culturelles et participation à un convent extérieur organisé à Cordes-sur-Ciel en mai 2026.",
+      "mainEntityOfPage":{
+        "@id":"https://osd9tdj.org/activites.html#webpage"
       },
-      {
-        "@type":"FAQPage",
-        "@id":"https://osd9tdj.org/activites.html#faq",
-        "mainEntity":[
-          {
-            "@type":"Question",
-            "name":"L’association a-t-elle des activités régulières ?",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"Oui. L’association mène des activités régulières, notamment des rencontres d’étude approfondie organisées tous les quinze jours, hors périodes scolaires, ainsi que des temps de travail culturel, philosophique et fraternel."
-            }
-          },
-          {
-            "@type":"Question",
-            "name":"Peut-on découvrir l’association ?",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"Oui. Les personnes souhaitant découvrir la démarche de l’association ou rencontrer ses membres peuvent prendre contact via la page contact afin d’être orientées vers une réunion de découverte."
-            }
-          },
-          {
-            "@type":"Question",
-            "name":"Quels types d’activités sont proposés ?",
-            "acceptedAnswer":{
-              "@type":"Answer",
-              "text":"L’association propose des temps d’étude, de réflexion philosophique, de travail culturel et symbolique, ainsi que des évènements ponctuels, rencontres fraternelles et activités publiques selon les périodes."
-            }
-          },
-          {
-            {
-  "@type":"Question",
-  "name":"Quels éléments importants ont marqué ce déplacement à Cordes-sur-Ciel ?",
-  "acceptedAnswer":{
-    "@type":"Answer",
-    "text":"Ce déplacement a notamment été marqué par des conférences culturelles et initiatiques, des échanges fraternels avec différentes sensibilités traditionnelles ainsi que par plusieurs temps symboliques et chevaleresques importants. À cette occasion, le grand maître de l’O.S.D.9.T.D.J. a reçu des onctions mineures ainsi qu’une transmission et reconnaissance chevaleresque s’inscrivant dans la continuité de son parcours initiatique. Ces reconnaissances, reçues dans le cadre du courant néo-templier et de traditions initiatiques associées, sont reconnues par plusieurs groupes et sensibilités chevaleresques et initiatiques contemporains. Elles renforcent les liens fraternels, symboliques et initiatiques entretenus par l’ordre dans le respect de son identité propre et de son cadre associatif loi 1901."
-  }
+      "publisher":{
+        "@id":"https://osd9tdj.org/#organization"
+      },
+      "image":"https://osd9tdj.org/logo-ix.PNG",
+      "inLanguage":"fr-FR",
+
+      "about":[
+        "activité associative",
+        "rencontres d’étude",
+        "association active",
+        "ordre templier moderne",
+        "chevalerie contemporaine",
+        "rencontres philosophiques",
+        "travaux initiatiques",
+        "traditions symboliques",
+        "fraternité templière",
+        "évènements culturels",
+        "Cordes-sur-Ciel",
+        "Église Hélios",
+        "Rose+Croix",
+        "Rite de Mithra",
+        "commanderies templières",
+        "traditions chevaleresques",
+        "association loi 1901",
+        "travaux symboliques",
+        "transmission initiatique",
+        "ordre initiatique"
+      ]
+    },
+
+    {
+      "@type":"FAQPage",
+      "@id":"https://osd9tdj.org/activites.html#faq",
+
+      "mainEntity":[
+
+        {
+          "@type":"Question",
+          "name":"L’association a-t-elle des activités régulières ?",
+
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Oui. L’association mène des activités régulières, notamment des rencontres d’étude approfondie organisées tous les quinze jours durant les périodes scolaires, ainsi que des temps de travail culturel, philosophique, symbolique et fraternel."
+          }
+        },
+
+        {
+          "@type":"Question",
+          "name":"Peut-on découvrir l’association ?",
+
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Oui. Les personnes souhaitant découvrir la démarche de l’association ou rencontrer ses membres peuvent prendre contact via la page contact afin d’être orientées vers une réunion de découverte ou un temps d’échange."
+          }
+        },
+
+        {
+          "@type":"Question",
+          "name":"Quels types d’activités sont proposés ?",
+
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"L’association propose des temps d’étude, de réflexion philosophique, des travaux culturels et symboliques, des rencontres fraternelles, des échanges autour des traditions initiatiques et chevaleresques ainsi que différents évènements publics ou privés selon les périodes."
+          }
+        },
+
+        {
+          "@type":"Question",
+          "name":"Quels éléments importants ont marqué le déplacement à Cordes-sur-Ciel en mai 2026 ?",
+
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Le déplacement à Cordes-sur-Ciel organisé à l’occasion d’un convent de l’Église Hélios a été marqué par plusieurs conférences culturelles et initiatiques, des rencontres fraternelles entre différentes structures traditionnelles, ainsi que des échanges avec diverses Églises, commanderies templières et groupes initiatiques venus de plusieurs régions de France et d’autres horizons internationaux. À cette occasion, le grand maître de l’O.S.D.9.T.D.J. a reçu des onctions mineures de clerc ainsi qu’un réarmement chevaleresque transmis par Paul Sanda, dans le cadre du courant initiatique néo-templier auquel se rattachent certains travaux internes de l’ordre. Ces reconnaissances s’inscrivent dans la continuité du parcours initiatique et chevaleresque du grand maître et participent au maintien des liens symboliques, fraternels et traditionnels entretenus par l’O.S.D.9.T.D.J. avec différents courants et sensibilités initiatiques contemporaines, dans le respect du cadre associatif loi 1901 de l’association."
+          }
+        },
+
+        {
+          "@type":"Question",
+          "name":"L’O.S.D.9.T.D.J. est-il une association loi 1901 ?",
+
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Oui. L’O.S.D.9.T.D.J. est une association régie par la loi du 1er juillet 1901. Ses activités s’inscrivent dans un cadre culturel, philosophique, symbolique, fraternel et initiatique librement vécu par ses membres."
+          }
+        },
+
+        {
+          "@type":"Question",
+          "name":"Les activités de l’association sont-elles publiques ?",
+
+          "acceptedAnswer":{
+            "@type":"Answer",
+            "text":"Certaines activités et rencontres peuvent être rendues publiques ou ouvertes à la découverte, tandis que d’autres travaux d’étude et temps de transmission demeurent organisés dans un cadre plus discret réservé aux membres ou aux personnes invitées."
+          }
+        }
+
+      ]
+    },
+
+    {
+      "@type":"BreadcrumbList",
+      "@id":"https://osd9tdj.org/activites.html#breadcrumb",
+
+      "itemListElement":[
+
+        {
+          "@type":"ListItem",
+          "position":1,
+          "name":"Accueil",
+          "item":"https://osd9tdj.org/index.html"
+        },
+
+        {
+          "@type":"ListItem",
+          "position":2,
+          "name":"Activités",
+          "item":"https://osd9tdj.org/activites.html"
+        }
+
+      ]
+    }
+
+  ]
 }
-            }
-          }
-        ]
-      },
-      {
-        "@type":"BreadcrumbList",
-        "@id":"https://osd9tdj.org/activites.html#breadcrumb",
-        "itemListElement":[
-          {
-            "@type":"ListItem",
-            "position":1,
-            "name":"Accueil",
-            "item":"https://osd9tdj.org/index.html"
-          },
-          {
-            "@type":"ListItem",
-            "position":2,
-            "name":"Activités",
-            "item":"https://osd9tdj.org/activites.html"
-          }
-        ]
-      }
-    ]
-  }
-  </script>
+</script>
 
   <style>
     :root{
