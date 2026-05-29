@@ -67,148 +67,161 @@
   <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
   <link rel="apple-touch-icon" href="icon-192.png">
 
-  <!-- JSON-LD ENRICHI -->
-  <script type="application/ld+json">
+ <!-- JSON-LD ENRICHI VALIDE -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
- "@type":"Question",
- "name":"Quelle différence entre succession chevaleresque et succession religieuse ?",
- "acceptedAnswer":{
- "@type":"Answer",
- "text":"La succession chevaleresque concerne la transmission de l’honneur, de l’adoubement et de certaines fonctions symboliques. Elle est distincte des successions apostoliques ou religieuses."
- }
-}
+      "@type": "Organization",
+      "@id": "https://osd9tdj.org/#organization",
+      "name": "Ordre Sacré des Neuf Templiers de Jérusalem",
+      "alternateName": ["O.S.D.9.T.D.J.", "OSD9TDJ", "Ordre Sacré des Neuf Templiers"],
+      "url": "https://osd9tdj.org",
+      "logo": "https://osd9tdj.org/sceau-osd9tdj.PNG",
+      "description": "Association loi 1901 à vocation culturelle, historique, chevaleresque, fraternelle et initiatique.",
+      "sameAs": [
+        "https://osd9tdj.org",
+        "https://romainmiterniquetemplier.wordpress.com/"
+      ]
+    },
     {
- "@type":"Question",
- "name":"Pourquoi Hugues Capet apparaît-il dans cette succession ?",
- "acceptedAnswer":{
- "@type":"Answer",
- "text":"La succession présentée par l’O.S.D.9.T.D.J. se réfère à une mémoire capétienne associée à la Fontaine d’Honneur et à la continuité chevaleresque."
- }
-}
+      "@type": "Person",
+      "@id": "https://osd9tdj.org/#romainmiternique",
+      "name": "Romain Miternique",
+      "jobTitle": "Grand Maître",
+      "memberOf": {
+        "@id": "https://osd9tdj.org/#organization"
+      },
+      "url": "https://osd9tdj.org/succession.html"
+    },
     {
- "@type":"Person",
- "@id":"https://osd9tdj.org/#paulsanda",
- "name":"Paul Sanda",
- "alternateName":"Tau Sendivogius",
- "description":"Figure mentionnée dans la transmission chevaleresque et initiatique présentée par l’O.S.D.9.T.D.J."
-}
+      "@type": "Person",
+      "@id": "https://osd9tdj.org/#paulsanda",
+      "name": "Paul Sanda",
+      "alternateName": "Tau Sendivogius",
+      "description": "Figure mentionnée dans la transmission chevaleresque et initiatique présentée par l’O.S.D.9.T.D.J."
+    },
     {
- "@type":"Person",
- "@id":"https://osd9tdj.org/#romainmiternique",
- "name":"Romain Miternique",
- "jobTitle":"Grand Maître",
- "memberOf":{
-   "@id":"https://osd9tdj.org/#organization"
- },
- "url":"https://osd9tdj.org/succession.html"
-}
-  {
-    "@context":"https://schema.org",
-    "@graph":[
-      {
-        "@type":"Organization",
-        "@id":"https://osd9tdj.org/#organization",
-        "name":"Ordre Sacré des Neuf Templiers de Jérusalem",
-        "alternateName":["O.S.D.9.T.D.J.","OSD9TDJ","Ordre Sacré des Neuf Templiers"],
-        "url":"https://osd9tdj.org",
-        "logo":"https://osd9tdj.org/sceau-osd9tdj.PNG",
-        "description":"Association loi 1901 à vocation culturelle, historique, chevaleresque, fraternelle et initiatique.",
-        "sameAs":["https://osd9tdj.org","https://romainmiterniquetemplier.wordpress.com/"]
+      "@type": "WebSite",
+      "@id": "https://osd9tdj.org/#website",
+      "url": "https://osd9tdj.org",
+      "name": "O.S.D.9.T.D.J.",
+      "publisher": {
+        "@id": "https://osd9tdj.org/#organization"
       },
-      {
-        "@type":"WebSite",
-        "@id":"https://osd9tdj.org/#website",
-        "url":"https://osd9tdj.org",
-        "name":"O.S.D.9.T.D.J.",
-        "publisher":{"@id":"https://osd9tdj.org/#organization"},
-        "inLanguage":"fr-FR"
+      "inLanguage": "fr-FR"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://osd9tdj.org/succession.html#webpage",
+      "url": "https://osd9tdj.org/succession.html",
+      "name": "Succession chevaleresque – O.S.D.9.T.D.J.",
+      "description": "Page institutionnelle consacrée à la succession chevaleresque et initiatique reconnue par l’Ordre Sacré des Neuf Templiers de Jérusalem.",
+      "isPartOf": {
+        "@id": "https://osd9tdj.org/#website"
       },
-      {
-        "@type":"WebPage",
-        "@id":"https://osd9tdj.org/succession.html#webpage",
-        "url":"https://osd9tdj.org/succession.html",
-        "name":"Succession chevaleresque – O.S.D.9.T.D.J.",
-        "description":"Page institutionnelle consacrée à la succession chevaleresque et initiatique reconnue par l’Ordre Sacré des Neuf Templiers de Jérusalem.",
-        "isPartOf":{"@id":"https://osd9tdj.org/#website"},
-        "about":{"@id":"https://osd9tdj.org/#organization"},
-        "inLanguage":"fr-FR",
-        "breadcrumb":{"@id":"https://osd9tdj.org/succession.html#breadcrumb"}
+      "about": {
+        "@id": "https://osd9tdj.org/#organization"
       },
-      {
-        "@type":"Article",
-        "@id":"https://osd9tdj.org/succession.html#article",
-        "headline":"Succession chevaleresque et initiatique de l’O.S.D.9.T.D.J.",
-        "description":"Présentation détaillée de la succession chevaleresque, de la Fontaine d’Honneur, de la chrétienté primitive, de la chevalerie primitive, de la lignée capétienne et de la transmission reçue par le Grand Maître de l’O.S.D.9.T.D.J.",
-        "mainEntityOfPage":{"@id":"https://osd9tdj.org/succession.html#webpage"},
-        "publisher":{"@id":"https://osd9tdj.org/#organization"},
-        "image":"https://osd9tdj.org/Romain.jpg",
-        "inLanguage":"fr-FR",
-        "about":[
-          "succession chevaleresque",
-          "transmission initiatique",
-          "Fontaine d’Honneur",
-          "Hugues Capet",
-          "lignée capétienne",
-          "chrétienté primitive",
-          "chevalerie primitive",
-          "adoubement chevaleresque",
-          "ordre templier moderne",
-          "mémoire templière",
-          "voie chevaleresque",
-          "association loi 1901"
-        ],
-        "mentions":[
-          "Hugues Capet",
-          "Fontaine d’Honneur",
-          "Paul Sanda",
-          "Tau Sendivogius",
-          "Ordre Secret du Temple",
-          "HELIOS",
-          "Romain Miternique",
-          "Notre-Dame de Sion",
-          "OCNSS"
-        ]
-      },
-      {
-        "@type":"BreadcrumbList",
-        "@id":"https://osd9tdj.org/succession.html#breadcrumb",
-        "itemListElement":[
-          {"@type":"ListItem","position":1,"name":"Accueil","item":"https://osd9tdj.org/index.html"},
-          {"@type":"ListItem","position":2,"name":"Succession chevaleresque","item":"https://osd9tdj.org/succession.html"}
-        ]
-      },
-      {
-        "@type":"ItemList",
-        "@id":"https://osd9tdj.org/succession.html#lineage",
-        "name":"Lignée chevaleresque présentée par l’O.S.D.9.T.D.J.",
-        "itemListOrder":"https://schema.org/ItemListOrderAscending",
-        "numberOfItems":20,
-        "itemListElement":[
-          {"@type":"ListItem","position":1,"name":"Hugues Capet"},
-          {"@type":"ListItem","position":2,"name":"Philippe II Auguste"},
-          {"@type":"ListItem","position":3,"name":"Louis IX Saint Louis"},
-          {"@type":"ListItem","position":4,"name":"Robert de Clermont"},
-          {"@type":"ListItem","position":5,"name":"Henri IV"},
-          {"@type":"ListItem","position":6,"name":"Louis XIII le Juste"},
-          {"@type":"ListItem","position":7,"name":"Louis XIV le Grand"},
-          {"@type":"ListItem","position":8,"name":"Philippe V de Bourbon"},
-          {"@type":"ListItem","position":9,"name":"Charles III de Bourbon"},
-          {"@type":"ListItem","position":10,"name":"Charles IV de Bourbon"},
-          {"@type":"ListItem","position":11,"name":"Infant Henri de Bourbon"},
-          {"@type":"ListItem","position":12,"name":"Prince François II de Paule"},
-          {"@type":"ListItem","position":13,"name":"Prince François III de Paule"},
-          {"@type":"ListItem","position":14,"name":"Marquis Portafax de Oria"},
-          {"@type":"ListItem","position":15,"name":"Pierre Paul Jean Neveux"},
-          {"@type":"ListItem","position":16,"name":"Michel Swysen"},
-          {"@type":"ListItem","position":17,"name":"Armand Toussaint"},
-          {"@type":"ListItem","position":18,"name":"Tau Phaidros"},
-          {"@type":"ListItem","position":19,"name":"Tau Sendivogius"},
-          {"@type":"ListItem","position":20,"name":"Romain Miternique"}
-        ]
+      "inLanguage": "fr-FR",
+      "breadcrumb": {
+        "@id": "https://osd9tdj.org/succession.html#breadcrumb"
       }
-    ]
-  }
-  </script>
+    },
+    {
+      "@type": "Article",
+      "@id": "https://osd9tdj.org/succession.html#article",
+      "headline": "Succession chevaleresque et initiatique de l’O.S.D.9.T.D.J.",
+      "description": "Présentation détaillée de la succession chevaleresque, de la Fontaine d’Honneur, de la chrétienté primitive, de la chevalerie primitive, de la lignée capétienne et de la transmission reçue par le Grand Maître de l’O.S.D.9.T.D.J.",
+      "mainEntityOfPage": {
+        "@id": "https://osd9tdj.org/succession.html#webpage"
+      },
+      "publisher": {
+        "@id": "https://osd9tdj.org/#organization"
+      },
+      "author": {
+        "@id": "https://osd9tdj.org/#organization"
+      },
+      "image": "https://osd9tdj.org/Romain.jpg",
+      "inLanguage": "fr-FR",
+      "about": [
+        "succession chevaleresque",
+        "transmission initiatique",
+        "Fontaine d’Honneur",
+        "Hugues Capet",
+        "lignée capétienne",
+        "chrétienté primitive",
+        "chevalerie primitive",
+        "adoubement chevaleresque",
+        "ordre templier moderne",
+        "mémoire templière",
+        "voie chevaleresque",
+        "association loi 1901"
+      ],
+      "mentions": [
+        { "@id": "https://osd9tdj.org/#romainmiternique" },
+        { "@id": "https://osd9tdj.org/#paulsanda" },
+        "Hugues Capet",
+        "Fontaine d’Honneur",
+        "Tau Sendivogius",
+        "Tau Phaidros",
+        "Ordre Secret du Temple",
+        "HELIOS",
+        "Notre-Dame de Sion",
+        "OCNSS"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://osd9tdj.org/succession.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://osd9tdj.org/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Succession chevaleresque",
+          "item": "https://osd9tdj.org/succession.html"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://osd9tdj.org/succession.html#lineage",
+      "name": "Lignée chevaleresque présentée par l’O.S.D.9.T.D.J.",
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "numberOfItems": 20,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Hugues Capet" },
+        { "@type": "ListItem", "position": 2, "name": "Philippe II Auguste" },
+        { "@type": "ListItem", "position": 3, "name": "Louis IX Saint Louis" },
+        { "@type": "ListItem", "position": 4, "name": "Robert de Clermont" },
+        { "@type": "ListItem", "position": 5, "name": "Henri IV" },
+        { "@type": "ListItem", "position": 6, "name": "Louis XIII le Juste" },
+        { "@type": "ListItem", "position": 7, "name": "Louis XIV le Grand" },
+        { "@type": "ListItem", "position": 8, "name": "Philippe V de Bourbon" },
+        { "@type": "ListItem", "position": 9, "name": "Charles III de Bourbon" },
+        { "@type": "ListItem", "position": 10, "name": "Charles IV de Bourbon" },
+        { "@type": "ListItem", "position": 11, "name": "Infant Henri de Bourbon" },
+        { "@type": "ListItem", "position": 12, "name": "Prince François II de Paule" },
+        { "@type": "ListItem", "position": 13, "name": "Prince François III de Paule" },
+        { "@type": "ListItem", "position": 14, "name": "Marquis Portafax de Oria" },
+        { "@type": "ListItem", "position": 15, "name": "Pierre Paul Jean Neveux" },
+        { "@type": "ListItem", "position": 16, "name": "Michel Swysen" },
+        { "@type": "ListItem", "position": 17, "name": "Armand Toussaint" },
+        { "@type": "ListItem", "position": 18, "name": "Tau Phaidros" },
+        { "@type": "ListItem", "position": 19, "name": "Tau Sendivogius" },
+        { "@type": "ListItem", "position": 20, "name": "Romain Miternique" }
+      ]
+    }
+  ]
+}
+</script>
 
   <style>
     :root{
