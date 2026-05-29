@@ -4,7 +4,7 @@
   <!-- Accueil principal -->
   <url>
     <loc>https://osd9tdj.org/</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.00</priority>
   </url>
@@ -12,49 +12,56 @@
   <!-- Pages institutionnelles majeures -->
   <url>
     <loc>https://osd9tdj.org/notre-mission.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
+    <priority>0.96</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/quinoussommes.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.95</priority>
+    <priority>0.96</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/histoire.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
   </url>
 
   <url>
+    <loc>https://osd9tdj.org/succession.html</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.94</priority>
+  </url>
+
+  <url>
     <loc>https://osd9tdj.org/vocation.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.93</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/ordres-historiques.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.92</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/embleme-et-logo.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/bernard.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
@@ -62,45 +69,43 @@
   <!-- Activités et commanderies -->
   <url>
     <loc>https://osd9tdj.org/activites.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.90</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/commanderies.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.88</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/commanderie.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.86</priority>
   </url>
 
-
-
   <!-- Adhésion -->
   <url>
     <loc>https://osd9tdj.org/adhesion.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/notice-adhesion.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/cotisations.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
@@ -108,28 +113,28 @@
   <!-- Pratique -->
   <url>
     <loc>https://osd9tdj.org/contact.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/faq.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.76</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/boutique.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.74</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/menu.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.70</priority>
   </url>
@@ -137,35 +142,35 @@
   <!-- Administratif -->
   <url>
     <loc>https://osd9tdj.org/administration.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.68</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/statuts.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.66</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/assurance.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.64</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/dg-associa-pro.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.62</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/documents-internes.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.60</priority>
   </url>
@@ -173,14 +178,14 @@
   <!-- Annexes -->
   <url>
     <loc>https://osd9tdj.org/Wikipedia.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.58</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/Utilisateur_Wikipedia.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.50</priority>
   </url>
@@ -188,14 +193,14 @@
   <!-- Légal -->
   <url>
     <loc>https://osd9tdj.org/mentions.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.35</priority>
   </url>
 
   <url>
     <loc>https://osd9tdj.org/cookies.html</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.30</priority>
   </url>
